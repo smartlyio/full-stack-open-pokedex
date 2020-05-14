@@ -1,9 +1,0 @@
-import React from 'react';
-
-const App = () => {
-	return (
-		<h1>Full Stack Open CI/CD</h1>
-	);
-};
-
-export default App;
