@@ -2,7 +2,10 @@ import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import LoadingSpinner from './LoadingSpinner'
 import { useApi } from './useApi'
+import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
+
+const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
 const PokemonPage = ({ pokemonList }) => {
   const { name } = useParams()
@@ -17,7 +20,7 @@ const PokemonPage = ({ pokemonList }) => {
 
   const { type } = pokemon.types.find((type) => type.slot === 1)
   const stats = pokemon.stats.map((stat) => ({
-    name: stat.stat.name.replace('-', ' '),
+    name: formatName(stat.stat.name),
     value: stat.base_stat
   })).reverse()
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
@@ -49,22 +52,8 @@ const PokemonPage = ({ pokemonList }) => {
             </table>
           </div>
           <div className="pokemon-abilities">
-            {normalAbility && (
-              <div className="pokemon-ability">
-                <div className="pokemon-ability-type">Ability</div>
-                <div className="pokemon-ability-name">
-                  {normalAbility.ability.name.replace('-', ' ')}
-                </div>
-              </div>
-            )}
-            {hiddenAbility && (
-              <div className="pokemon-ability">
-                <div className="pokemon-ability-type">Hidden ability</div>
-                <div className="pokemon-ability-name">
-                  {hiddenAbility.ability.name.replace('-', ' ')}
-                </div>
-              </div>
-            )}
+            {normalAbility && <PokemonAbility abilityName={formatName(normalAbility.ability.name)} />}
+            {hiddenAbility && <PokemonAbility abilityName={formatName(hiddenAbility.ability.name)} />}
           </div>
         </div>
       </div>
