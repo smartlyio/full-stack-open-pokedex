@@ -20,6 +20,7 @@ describe('<App />', () => {
       render(<App />)
     })
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
+    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=784')
   })
 
   it('shows LoadingSpinner', async () => {
@@ -31,7 +32,7 @@ describe('<App />', () => {
   })
 
   it('shows error', async () => {
-    axiosMock.get.mockResolvedValueOnce(Promise.reject(new Error()))
+    axiosMock.get.mockRejectedValueOnce(new Error())
     await act(async () => {
       render(<App />)
     })
