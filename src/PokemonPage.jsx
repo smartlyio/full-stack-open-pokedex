@@ -7,7 +7,7 @@ import ErrorMessage from './ErrorMessage'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
-const PokemonPage = ({ pokemonList }) => {
+const PokemonPage = ({ previous, next }) => {
   const { name } = useParams()
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
@@ -25,8 +25,6 @@ const PokemonPage = ({ pokemonList }) => {
   })).reverse()
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
-  const previous = pokemonList.find(({ id }) => id === pokemon.id - 1)
-  const next = pokemonList.find(({ id }) => id === pokemon.id + 1)
 
   console.log('hiddenAbility=', hiddenAbility)
   return (

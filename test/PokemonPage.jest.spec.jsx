@@ -9,15 +9,16 @@ import PokemonPage from '../src/PokemonPage'
 
 jest.mock('axios')
 
-const pokemons = [{
+const previous = {
   url: 'https://pokeapi.co/api/v2/pokemon/132/',
   name: 'ditto',
   id: 132
-}, {
-  url: 'https://pokeapi.co/api/v2/pokemon/133/',
-  name: 'eevee',
-  id: 133
-}]
+}
+const next = {
+  url: 'https://pokeapi.co/api/v2/pokemon/134/',
+  name: 'vaporeon',
+  id: 134
+}
 
 const pokemonList = {
   id: 133,
@@ -83,7 +84,7 @@ describe('<PokemonPage />', () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemonList={pokemons} />
+          <PokemonPage />
         </Router>
       )
     })
@@ -98,7 +99,7 @@ describe('<PokemonPage />', () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemonList={pokemons} />
+          <PokemonPage />
         </Router>
       )
     })
@@ -106,31 +107,33 @@ describe('<PokemonPage />', () => {
     expect(screen.getByTestId('stats')).toHaveTextContent('hp55attack55')
   })
 
-  it('should render previous url if previous exists', async () => {
+  it('should render previous and next urls if they exist', async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemonList={pokemons} />
+          <PokemonPage previous={previous} next={next} />
         </Router>
       )
     })
 
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
+    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
 
-  it('should not render next url if no next exist', async () => {
+  it('should not render previous and next urls if none exist', async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemonList={pokemons} />
+          <PokemonPage />
         </Router>
       )
     })
 
+    expect(screen.queryByText('Previous')).toBeNull()
     expect(screen.queryByText('Next')).toBeNull()
   })
 })
