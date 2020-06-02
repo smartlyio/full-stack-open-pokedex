@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Loader from './Loader'
+import LoadingSpinner from './LoadingSpinner'
 import { useApi } from './useApi'
 import ErrorMessage from './ErrorMessage'
 
@@ -9,7 +9,7 @@ const PokemonPage = ({ pokemonList }) => {
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
   if (isLoading) {
-    return <Loader />
+    return <LoadingSpinner />
   }
   if (error) {
     return <ErrorMessage error={error} />

@@ -22,7 +22,7 @@ describe('<App />', () => {
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
   })
 
-  it('shows Loader', async () => {
+  it('shows LoadingSpinner', async () => {
     axiosMock.get.mockResolvedValueOnce({})
     await act(async () => {
       const { getByAltText } = render(<App />)
