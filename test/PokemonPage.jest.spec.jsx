@@ -19,7 +19,7 @@ const pokemons = [{
   id: 133
 }]
 
-const pokemon = {
+const pokemonList = {
   id: 133,
   abilities: [
     {
@@ -74,16 +74,16 @@ const history = createMemoryHistory()
 
 describe('<PokemonPage />', () => {
   beforeEach(() => {
-    history.push('/pokemons/eevee')
+    history.push('/pokemon/eevee')
   })
 
   it('should render abilities', async () => {
-    axiosMock.get.mockResolvedValueOnce({ data: pokemon })
+    axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemons={pokemons} />
+          <PokemonPage pokemonList={pokemons} />
         </Router>
       )
     })
@@ -93,12 +93,12 @@ describe('<PokemonPage />', () => {
   })
 
   it('should render stats', async () => {
-    axiosMock.get.mockResolvedValueOnce({ data: pokemon })
+    axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemons={pokemons} />
+          <PokemonPage pokemonList={pokemons} />
         </Router>
       )
     })
@@ -107,12 +107,12 @@ describe('<PokemonPage />', () => {
   })
 
   it('should render previous url if previous exists', async () => {
-    axiosMock.get.mockResolvedValueOnce({ data: pokemon })
+    axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemons={pokemons} />
+          <PokemonPage pokemonList={pokemons} />
         </Router>
       )
     })
@@ -121,12 +121,12 @@ describe('<PokemonPage />', () => {
   })
 
   it('should not render next url if no next exist', async () => {
-    axiosMock.get.mockResolvedValueOnce({ data: pokemon })
+    axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage pokemons={pokemons} />
+          <PokemonPage pokemonList={pokemons} />
         </Router>
       )
     })

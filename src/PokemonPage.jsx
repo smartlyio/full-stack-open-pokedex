@@ -4,7 +4,7 @@ import Loader from './Loader'
 import { useApi } from './useApi'
 import ErrorMessage from './ErrorMessage'
 
-const PokemonPage = ({ pokemons }) => {
+const PokemonPage = ({ pokemonList }) => {
   const { name } = useParams()
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
@@ -22,8 +22,8 @@ const PokemonPage = ({ pokemons }) => {
   })).reverse()
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
-  const previous = pokemons.find(({ id }) => id === pokemon.id - 1)
-  const next = pokemons.find(({ id }) => id === pokemon.id + 1)
+  const previous = pokemonList.find(({ id }) => id === pokemon.id - 1)
+  const next = pokemonList.find(({ id }) => id === pokemon.id + 1)
 
   return (
     <>

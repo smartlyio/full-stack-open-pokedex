@@ -5,7 +5,7 @@ import '@testing-library/jest-dom/extend-expect'
 import PokemonList from '../src/PokemonList'
 
 
-const pokemons = [{
+const pokemonList = [{
   url: 'https://pokeapi.co/api/v2/pokemon/1/',
   name: 'bulbasaur',
   id: 1
@@ -19,7 +19,7 @@ describe('<PokemonList />', () => {
   it('should render items', () => {
     render(
       <BrowserRouter>
-        <PokemonList pokemons={pokemons} />
+        <PokemonList pokemonList={pokemonList} />
       </BrowserRouter>
     )
     expect(screen.getByText('bulbasaur')).toBeVisible()

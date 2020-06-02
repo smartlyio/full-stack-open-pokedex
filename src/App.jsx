@@ -13,7 +13,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 })))
 
 const App = () => {
-  const { data: pokemons, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=784', mapResults)
+  const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=784', mapResults)
   if (isLoading) {
     return <Loader />
   }
@@ -25,10 +25,10 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <PokemonList pokemons={pokemons} />
+          <PokemonList pokemonList={pokemonList} />
         </Route>
         <Route path="/pokemon/:name">
-          <PokemonPage pokemons={pokemons} />
+          <PokemonPage pokemonList={pokemonList} />
         </Route>
       </Switch>
     </Router>
