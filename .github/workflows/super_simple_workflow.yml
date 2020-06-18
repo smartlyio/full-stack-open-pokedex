@@ -1,0 +1,14 @@
+name: Super Simple Workflow
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: lint
+      run: |
+        yarn eslint
