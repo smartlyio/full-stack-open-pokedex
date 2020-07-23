@@ -1,9 +1,14 @@
-# fullstackopen-cicd
+# Full Stack open CI/CD
+
 This repository is used for the CI/CD module of the Full stack open course
 
-## Running
+Fork the repository to complete course exercises
 
-`yarn start` to run the webpack dev server
-`yarn test` to run tests
-`yarn eslint` to run eslint
-`yarn build` to make a production build
+## Commands
+
+Start by running `npm install` inside the project folder
+
+`npm start` to run the webpack dev server
+`npm test` to run tests
+`npm run eslint` to run eslint
+`npm run build` to make a production build
