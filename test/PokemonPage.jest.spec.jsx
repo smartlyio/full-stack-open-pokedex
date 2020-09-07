@@ -118,6 +118,8 @@ describe('<PokemonPage />', () => {
       )
     })
 
+
+
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
     expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
@@ -132,6 +134,7 @@ describe('<PokemonPage />', () => {
         </Router>
       )
     })
+
 
     expect(screen.queryByText('Previous')).toBeNull()
     expect(screen.queryByText('Next')).toBeNull()
