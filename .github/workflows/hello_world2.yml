@@ -12,9 +12,24 @@ jobs:
     - name: Say hello
       run: |
         echo "Hello World!"
-    - name: Print working directorey 
+    - name: Print working director 
       run: |
         pwd
     - name: List files 
       run: |
         ls -la
+  super_simple_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm test
