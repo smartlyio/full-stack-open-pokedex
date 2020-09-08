@@ -16,7 +16,7 @@ const PokemonPage = ({ previous, next }) => {
   }
   if (error) {
     return <ErrorMessage error={error} />
-  }
+  };
 
   const { type } = pokemon.types.find((type) => type.slot === 1)
   const stats = pokemon.stats.map((stat) => ({
@@ -25,6 +25,8 @@ const PokemonPage = ({ previous, next }) => {
   })).reverse()
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
+
+  console.log("foobar")
 
   return (
     <>
