@@ -37,5 +37,5 @@ jobs:
       - name: Check production health
         uses: lakuapik/gh-actions-http-status@v1
         with:
-          sites: '[https://mycicdtestapp.herokuapp.com/", "https://mycicdtestapp.herokuapp.com/pokemon/ivysaur"]'
+          sites: '[https://mycicdtestapp.herokuapp.com/aa", "https://mycicdtestapp.herokuapp.com/pokemon/ivysaur"]'
           expected: '[200]'
