@@ -19,6 +19,14 @@ jobs:
         run: date
       - name: Directory content
         run: ls -l
+      - name: pr
+        if: ${{ github.event_name != 'push' }}
+        run: |
+          echo "PR"
+      - name: pr
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          echo "acual master"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
