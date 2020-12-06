@@ -34,8 +34,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: mycicdtestapp
           heroku_email: mluukkai@iki.fi
-    - name: Check production health
-      uses: lakuapik/gh-actions-http-status@v1
-      with:
-        sites: '[https://mycicdtestapp.herokuapp.com/", "https://mycicdtestapp.herokuapp.com/pokemon/ivysaur"]'
-        expected: '[200]'
+      - name: Check production health
+        uses: lakuapik/gh-actions-http-status@v1
+        with:
+          sites: '[https://mycicdtestapp.herokuapp.com/", "https://mycicdtestapp.herokuapp.com/pokemon/ivysaur"]'
+          expected: '[200]'
