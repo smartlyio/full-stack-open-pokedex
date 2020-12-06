@@ -35,3 +35,4 @@ jobs:
           heroku_app_name: mycicdtestapp
           heroku_email: mluukkai@iki.fi
           healthcheck: https://mycicdtestapp.herokuapp.com/health
+          checkstring: "ok"
