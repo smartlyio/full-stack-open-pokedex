@@ -28,11 +28,11 @@ jobs:
         run: |
           echo "acual master"
       - name: master2
-        if: ${{ !github.base_ref}}
+        if: ${{ !github.base_ref }}
         run: |
           echo "acual master2"
       - name: pr2
-        if: ${{ github.base_ref}}
+        if: ${{ github.base_ref }}
         run: |
           echo "PR2"
       - name: Dump GitHub context
