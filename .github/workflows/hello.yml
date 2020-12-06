@@ -16,11 +16,3 @@ jobs:
         run: date
       - name: Directory content
         run: ls -l
-      - name: Run action
-        id: myaction
-        uses: Bhupesh-V/memer-action@master
-      - name: Check outputs
-          run: |
-          echo "Outputs - ${{ steps.myaction.outputs.title }}"
-          echo "Outputs - ${{ steps.myaction.outputs.meme }}"
-          echo "Outputs - ${{ steps.myaction.outputs.source }}"
