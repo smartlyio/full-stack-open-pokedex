@@ -34,6 +34,12 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: mycicdtestapp
           heroku_email: mluukkai@iki.fi
+      - name: Check deployed site
+        uses: jtalk/url-health-check-action@v1.2
+        with:
+          url: https://lol.helsinki.fi/
+          max-attempts: 3 
+          retry-delay: 3s 
       - name: Check the site
         id: hello
         uses: srt32/uptime@master
