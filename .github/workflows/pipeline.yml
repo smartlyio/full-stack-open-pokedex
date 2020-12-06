@@ -37,12 +37,6 @@ jobs:
       - name: Check deployed site
         uses: jtalk/url-health-check-action@v1.2
         with:
-          url: https://lol.helsinki.fi/
+          url: https://mycicdtestapp.herokuapp.com/
           max-attempts: 3 
           retry-delay: 3s 
-      - name: Check the site
-        id: hello
-        uses: srt32/uptime@master
-        with:
-          url-to-hit: "https://lol.helsinki.fi/"
-          expected-statuses: "200"
