@@ -34,8 +34,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: mycicdtestapp
           heroku_email: mluukkai@iki.fi
-      - name: Check production health
-        uses: lakuapik/gh-actions-http-status@v1
+      - name: Check the site
+        id: hello
+        uses: srt32/uptime@master
         with:
-          sites: '[https://mycicdtestapp.herokuapp.com/aa", "https://mycicdtestapp.herokuapp.com/pokemon/ivysaur"]'
-          expected: '[200]'
+          url-to-hit: "https://lol.helsinki.fi/"
+          expected-statuses: "200"
