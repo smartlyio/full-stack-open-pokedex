@@ -19,6 +19,7 @@ jobs:
         run: date
       - name: Directory content
         run: ls -l
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         env:
