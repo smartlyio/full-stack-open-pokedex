@@ -15,8 +15,8 @@ jobs:
 
       - name: Now it is
         run: |
-          echo `date`
+          echo "`date`"
     
       - name: Directory content
         run: |
-          echo ls
+          echo ls -l
