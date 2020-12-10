@@ -27,7 +27,10 @@ jobs:
       - name: test
         run: npm run test
       - name: heroku-deploy
-        run:  npm run deploy:full
+        run:  |
+          git config --local user.email "seapush02@gmail.com"
+          git config --local user.name "dhakalsamundra"
+          npm run deploy:full
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
