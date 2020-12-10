@@ -16,7 +16,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokeman-samundra"
           heroku_email: "dhakalsamundra35@gmail.com"
-        with:
           node-version: '12.x'
       - name: npm install 
         run: npm install  
