@@ -11,11 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
-      - uses: dhakalsamundra/full-stack-open-pokedex@master
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokeman-samundra"
-          heroku_email: "dhakalsamundra35@gmail.com"
           node-version: '12.x'
       - name: npm install 
         run: npm install  
