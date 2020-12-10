@@ -10,11 +10,15 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - run: actions/setup-node@v1
+      - run:  |
+          git config --local user.email "seapush02@gmail.com"
+          git config --local user.name "dhakalsamundra"
+          git add .
+          git commit -m "add code"
+      - uses: dhakalsamundra/full-stack-open-pokedex@master
         with:
           node-version: '12.x'
-          repository: dhakalsamundra/full-stack-open-pokedex
-          ref: refs/heads/master
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokeman-samundra"
           heroku_email: "dhakalsamundra35@gmail.com"
