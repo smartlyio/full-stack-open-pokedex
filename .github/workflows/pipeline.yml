@@ -11,8 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - uses: dhakalsamundra/full-stack-open-pokedex@master
         with:
           node-version: '12.x'
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokeman-samundra"
+          heroku_email: "dhakalsamundra35@gmail.com"
       - name: npm install 
         run: npm install  
       - name: lint
@@ -21,6 +25,8 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: heroku-deploy
+        run:  npm run deploy:full
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
