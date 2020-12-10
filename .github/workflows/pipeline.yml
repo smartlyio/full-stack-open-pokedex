@@ -13,29 +13,29 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-          repository: dhakalsamundra/full-stack-open-pokedex
-          ref: refs/heads/master
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokeman-samundra"
-          heroku_email: "dhakalsamundra35@gmail.com"
+
       - name: npm install 
         run: npm install  
+
       - name: lint
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: test
         run: npm run test
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:8080
-      - name: heroku-deploy
-        run:  |
-          git config --local user.email "seapush02@gmail.com"
-          git config --local user.name "dhakalsamundra"
-          git add .
-          git commit -m "add file"
-          npm run deploy:full
+
+      - name: Deploy to heroku
+        uses: akhileshns/heroku-deploy@v3.7.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokeman-samundra"
+          heroku_email: "dhakalsamundra35@gmail.com"
