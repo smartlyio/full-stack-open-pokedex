@@ -26,6 +26,12 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm start
+          wait-on: http://localhost:8080
       - name: heroku-deploy
         run:  |
           git config --local user.email "seapush02@gmail.com"
@@ -33,9 +39,3 @@ jobs:
           git add .
           git commit -m "add file"
           npm run deploy:full
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm start
-          wait-on: http://localhost:8080
