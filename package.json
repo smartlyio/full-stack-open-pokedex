@@ -12,7 +12,7 @@
     "cypress:open": "cypress open",
     "test:e2e": "cypress run",
     "heroku-prebuild": "npm install -dev",
-    "heroku-postbuild":"npm run start-prod"
+    "heroku-postbuild":"npm run build && npm run start-prod"
   },
   "repository": {
     "type": "git",
