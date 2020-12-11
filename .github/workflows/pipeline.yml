@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -35,3 +38,4 @@ jobs:
             heroku_email: "elsie@iki.fi"
             healthcheck: "https://arcane-refuge-69452.herokuapp.com/version"
             checkstring: "1"
+            rollbackonhealthcheckfailed: true 
