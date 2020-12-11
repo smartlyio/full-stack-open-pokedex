@@ -9,11 +9,7 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run",
-    "build:ui": "rm -rf build && npm run build --prod",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
-    "logs:prod": "heroku logs --tail"
+    "test:e2e": "cypress run"
   },
   "repository": {
     "type": "git",
