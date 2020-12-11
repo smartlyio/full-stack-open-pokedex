@@ -1,1 +1,1 @@
-web: npm install --dev && npm run build && npm run start-prod
+worker: npm install --dev && npm run build && npm run start-prod
