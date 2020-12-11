@@ -9,8 +9,6 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build && npm run deploy",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
