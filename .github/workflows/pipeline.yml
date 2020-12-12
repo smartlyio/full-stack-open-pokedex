@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+  
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
 
 jobs:
   simple_deployment_pipeline:
@@ -34,6 +39,7 @@ jobs:
           wait-on: http://localhost:8080
 
       - name: Deploy to heroku
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.7.8
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -43,3 +49,12 @@ jobs:
           checkstring: 2
           delay: 5 #By default, the delay will be 0 if you choose to not set it
           rollbackonhealthcheckfailed: true # By default, the application will not be rolled back if the healthcheck fails. in case of failure, it load back to previous version
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: false
