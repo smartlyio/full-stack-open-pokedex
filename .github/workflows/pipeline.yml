@@ -37,8 +37,8 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.7.8
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokeman-samundra"
-          heroku_email: "dhakalsamundra35@gmail.com"
+          heroku_app_name: pokeman-samundra
+          heroku_email: dhakalsamundra35@gmail.com
           healthcheck: https://pokeman-samundra.herokuapp.com/version
           checkstring: 2
           delay: 5 #By default, the delay will be 0 if you choose to not set it
