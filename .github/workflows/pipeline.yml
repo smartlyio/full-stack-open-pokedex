@@ -39,3 +39,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokeman-samundra"
           heroku_email: "dhakalsamundra35@gmail.com"
+          healthcheck: https://pokeman-samundra.herokuapp.com/version
+          checkstring: 2
+          delay: 5 #By default, the delay will be 0 if you choose to not set it
+          rollbackonhealthcheckfailed: true # By default, the application will not be rolled back if the healthcheck fails. in case of failure, it load back to previous version
