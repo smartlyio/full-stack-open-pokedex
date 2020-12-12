@@ -53,10 +53,6 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
-          if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} # this won't add version tag if the commit message has #skip in it and if the commit doesn't happen from PR
-          uses: anothrNick/github-tag-action@1.33.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            WITH_V: true
-            DRY_RUN: false
-            DEFAULT_BUMP: patch
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
