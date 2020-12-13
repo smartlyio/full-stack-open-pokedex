@@ -49,12 +49,13 @@ jobs:
           checkstring: 2
           delay: 5 #By default, the delay will be 0 if you choose to not set it
           rollbackonhealthcheckfailed: true # By default, the application will not be rolled back if the healthcheck fails. in case of failure, it load back to previous version
+      
       - uses: actions/checkout@v2
         with:
           fetch-depth: '0'
       - name: bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: false
