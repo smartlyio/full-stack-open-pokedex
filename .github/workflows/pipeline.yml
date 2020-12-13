@@ -32,10 +32,10 @@ jobs:
             wait-on: http://localhost:5000
         - name: deploy to heroku
           if: ${{ github.event_name == 'push' }}
-          uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
+          uses: akhileshns/heroku-deploy@v3.7.8
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "arcane-refuge-69452" #Must be unique in Heroku
+            heroku_app_name: "arcane-refuge-69452"
             heroku_email: "elsie@iki.fi"
             healthcheck: "https://arcane-refuge-69452.herokuapp.com/version"
             checkstring: "1"
