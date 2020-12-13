@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --mode development --port 5000",
     "start-prod": "node app.js",
     "test": "jest",
-    "test:e2e": "cypress open",
+    "test:e2e": "cypress run",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production"
   },
@@ -49,8 +49,8 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "express": "^4.17.1",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
