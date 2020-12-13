@@ -1,4 +1,4 @@
-# This is a workflow for the excercise 11.05
+# This is a workflow for the excercise 11.05 ~ 11.09
 
 name: Deployment pipeline
 
@@ -21,3 +21,9 @@ jobs:
         run: npm run eslint
       - name: test
         run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+        command: npm run test:e2e
+        start: npm run start-prod
+        wait-on: http://localhost:5000
