@@ -60,27 +60,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
 
-      - uses: 8398a7/action-slack@v3
+      - name: On Success
+        uses: 8398a7/action-slack@v3
         with:
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took
-          custom_payload: |
-            {
-              username: 'action-slack',
-              icon_emoji: ':octocat:',
-              attachments: [{
-                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
-              }]
-            }
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: ${{ success() && github.event_name == 'push' }}
 
+      - name: On Faliure
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: ${{ success() && github.event_name == 'push' }}
 
-      # - uses: 8398a7/action-slack@v3
-      #   with:
-      #     status: ${{ job.status }}
-      #     fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-      #   if: always() # Pick up events even if the job fails or is canceled. 
