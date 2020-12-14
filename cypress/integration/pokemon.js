@@ -5,7 +5,7 @@ describe('Pokedex', () => {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
 
-  it('can navigate to ivysaur page', () => {
+  it('pokemon page can be navigated to', () => {
     cy.visit('http://localhost:5000')
     cy.get('.list-item').contains('ivysaur').click()
     cy.contains('chlorophyll')
