@@ -30,3 +30,7 @@ jobs:
         env:
           CONTAINS_JOIN_MESSAGE: ${{ contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
         run: echo "$CONTAINS_JOIN_MESSAGE"
+      - name: negation contains join mess
+        env:
+          NEG_CONTAINS_JOIN_MESSAGE: ${{ !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+        run: echo "$NEG_CONTAINS_JOIN_MESSAGE"
