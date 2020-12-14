@@ -1,7 +1,5 @@
-An application being worked on by a team of about 6 people. The application is in active development and will be released soon. The application is coded with some other language than JavaScript/TypeScript, e.g. in Python, Java, or Ruby.
+I choose a Python ecosystem. The application is a web app written with the django framework. Linting is managed through the external library Pylint and testing is done with the unittest module built-in to the Python standard library. Building is managed with the Django framework setup.
 
-### Some common steps in a CI setup include linting, testing, and building. What are the specific tools for taking care of these steps in the ecosystem of the language you picked?
+Other services for continuous integration are Circle CI, GitLab CI, TeamCity, Bamboo, Travis CI, Semaphore, Codeship, GoCD, Wercker. This is only a selection of the most popular, other services exist.
 
-### What alternatives are there to set up the CI besides Jenkins and GitHub Actions?
-
-### Would this setup be better in a self-hosted or a cloud-based environment? Why? What information would you need to make that decision?
+Based on the few information I have, the setup would be better hosted in a cloud environment, because it's size is small and it doesn't have special requirements. A cloud based environment is easier to set up and to manage, for small projects it is cheaper than setting up an own server. Moreover, if the company has a reliable self-hosted environment already set up and in-house expertise, a self-hosted solution could be preferable and cheaper (as the server is already set up). Also if the project has special requirements, a self-hosted server could be the only option.
