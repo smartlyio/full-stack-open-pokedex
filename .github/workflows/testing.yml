@@ -22,7 +22,11 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: join messages
+      - name: join message
         env:
-          JOIN_MESSAGE: ${{ join(toJson(github.event.commits.*.message), " ") }}
+          JOIN_MESSAGE: ${{ join(toJson(github.event.commits.*.message), ' ') }}
         run: echo "$JOIN_MESSAGE"
+      - name: contains join message
+        env:
+          CONTAINS_JOIN_MESSAGE: ${{ contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+        run: echo "$CONTAINS_JOIN_MESSAGE"
