@@ -7,6 +7,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
+// New comment
 app.get('/health', (_req, res) => {
   res.send('ok')
 })
