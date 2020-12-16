@@ -13,6 +13,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -24,8 +25,14 @@ jobs:
         run: npm run eslint
       - name: test
         run: npm run test
-        if: ${{ github.event_name == 'push' }}  
-      - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm start
+      #     wait-on: http://localhost:5000
+      - name: Heroku_deployment
+        uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack2020-part11" #Must be unique in Heroku
