@@ -17,3 +17,4 @@ jobs:
           heroku_email: "nicolas.valentine@helsinki.fi"
           healthcheck: "https://pokedex-fs-part11.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
