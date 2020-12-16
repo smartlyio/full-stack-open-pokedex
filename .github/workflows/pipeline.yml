@@ -31,7 +31,8 @@ jobs:
           start: npm start
           wait-on: http://localhost:5000
           
-  Heroku_deployment:  
+  deployment:
+    name: Heroku_deployment
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }} 
     steps: 
