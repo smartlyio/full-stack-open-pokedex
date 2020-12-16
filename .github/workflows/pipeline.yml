@@ -30,12 +30,8 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
-  deployment:
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}  
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
+      - name: Heroku_deployment
+        uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack2020-part11" #Must be unique in Heroku
