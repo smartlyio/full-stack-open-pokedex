@@ -9,7 +9,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -27,3 +27,9 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "fullstack2020-part11" #Must be unique in Heroku
+          heroku_email: "delphi1004@hanmail.net"
