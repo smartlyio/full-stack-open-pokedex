@@ -30,7 +30,11 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
-        if: ${{ github.event_name == 'push' }}  
+          
+  Heroku_deployment:  
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }} 
+    steps: 
       - uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
