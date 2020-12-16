@@ -5,7 +5,7 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
-//11.2
+// https://github.com/veliValentine/full-stack-open-pokedex
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
