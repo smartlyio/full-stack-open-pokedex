@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
-  console.log('server started on port 5000 , exercise 11.14 and 11.15 with conditional deployment testing')
+  console.log('server started on port 5000 , exercise 11.14 and 11.15 PR testing')
 })
 
 app.get('/health', (req, res) => {
