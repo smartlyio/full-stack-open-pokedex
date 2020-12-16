@@ -31,7 +31,7 @@ jobs:
           start: npm start
           wait-on: http://localhost:5000
       - name: Heroku_deployment
-        if: ${{ github.event_name == 'fail test' }}
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.7.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
