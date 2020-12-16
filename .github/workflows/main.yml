@@ -15,3 +15,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-fs-part11"
           heroku_email: "nicolas.valentine@helsinki.fi"
+          healthcheck: "https://pokedex-fs-part11.herokuapp.com/health"
+          checkstring: "ok"
