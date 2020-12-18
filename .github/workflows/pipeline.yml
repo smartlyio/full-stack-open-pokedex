@@ -14,7 +14,7 @@ jobs:
 
   tagging:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')"}}
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
