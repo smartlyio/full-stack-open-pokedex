@@ -32,3 +32,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "cicd-lari"
           heroku_email: "lari.lofman@gmail.com"
+          healthcheck: "https://cicd-lari.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
