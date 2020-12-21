@@ -1,4 +1,4 @@
-name: fullstack2020-Project-scheduled-health-check
+name: fullstack2020-chapter11-scheduled-health-check
 
 on:
   schedule:
