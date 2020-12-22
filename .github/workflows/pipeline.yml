@@ -35,3 +35,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: http://fs-2020-pokedex.herokuapp.com/health
           checkstring: ok
+          rollbackonhealthcheckfailed: true
