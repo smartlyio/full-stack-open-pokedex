@@ -1,0 +1,7 @@
+## Exercise 1
+
+An application implemented in Rust can be built using Cargo with a command `cargo build`. Rust has a built-in library for testing and tests can be ran using Cargo with `cargo test`. Automatic code formatting is provided by rustfmt. Clippy can be used for linting. On Github Actions, rust-toolchain action simplifies the installation of a desired Rust toolchain.
+
+CircleCI and Travis CI are two alternatives to Jenkins and Github Actions for setting up CI. CircleCI is a flexible CI/CD platform that provides both cloud and self-hosted solutions. The cloud-based option has a free plan with a limited weekly usage and no concurrency. The self-hosted solution is paid with a custom prizing. Travis CI is a cloud-based and open-source CI/CD tool that is free to use for open-source projects. The free plan is similar to the one provided by CircleCI. Travis CI also gives students one concurrent job and an ability to add an unlimited number of collaborators. The service also includes pre-installed database services.
+
+Since the team is quite small, cloud-based options are a safe bet. A self-hosted setup might not get the usage necessary to cover the costs of renting a machine. If a machine is already available then hosting Jenkins on it is probably the cheaper choice. The self-hosted setup might also be better or even necessary if the application requires specific or special hardware.
