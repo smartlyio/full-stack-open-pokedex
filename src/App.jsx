@@ -12,7 +12,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
   id: parseInt(url.match(/\/(\d+)\//)[1])
 })))
 
-const App = () => {
+const AppTest = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=784', mapResults)
   if (isLoading) {
     return <LoadingSpinner />
