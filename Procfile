@@ -1,1 +1,1 @@
-web: node ap.js
+web: start-prod
