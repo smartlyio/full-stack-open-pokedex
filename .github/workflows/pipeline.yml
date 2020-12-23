@@ -13,6 +13,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
             node-version: '12.x'
+            secret: ${{secrets.HEROKU_API_KEY}}
       - name: npm install
         run: npm install
       - name: lint
