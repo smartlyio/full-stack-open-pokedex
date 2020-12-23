@@ -11,7 +11,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('0.0.1') // change this string to ensure a new version deployed
+  res.send('0.0.5') // change this string to ensure a new version deployed
 })
 
 app.listen(PORT, () => {
