@@ -17,3 +17,4 @@ jobs:
           heroku_email: "abhishekkhale39@gmail.com"
           healthcheck: "https://pokedex-full-stack-open.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
