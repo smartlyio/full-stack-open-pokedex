@@ -13,13 +13,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install 
-        run: npm install  
+      - name: npm install
+        if: ${{ github.event_name == 'push' }}
+        run: npm install
       - name: lint
+        if: ${{ github.event_name == 'push' }}
         run: npm run eslint
       - name: build
+        if: ${{ github.event_name == 'push' }}
         run: npm run build
       - name: test
+        if: ${{ github.event_name == 'push' }}
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
