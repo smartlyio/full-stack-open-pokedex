@@ -42,6 +42,7 @@ jobs:
         #  healthcheck: 'https://fullstack-cicd.herokuapp.com/version'
         #  checkstring: '1'
         #  rollbackonhealthcheckfailed: true
+
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }} && "!contains(github.event.head_commit.message, '#skip')"
