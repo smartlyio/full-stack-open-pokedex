@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -29,6 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
+        if: ${{ github.event_name == 'push' }} # Only deploy on push
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstack-cicd' #Must be unique in Heroku
