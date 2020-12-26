@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstack-cicd' #Must be unique in Heroku
           heroku_email: 'pontus.hedlund@gmail.com'
+          healthcheck: 'https://fullstack-cicd.herokuapp.com/version'
+          checkstring: '1'
