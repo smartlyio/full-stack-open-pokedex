@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'pontus.hedlund@gmail.com'
           healthcheck: 'https://fullstack-cicd.herokuapp.com/version'
           checkstring: '1'
+          rollbackonhealthcheckfailed: true
