@@ -1,3 +1,5 @@
+![Deployment pipeline](https://github.com/pontushed/full-stack-open-pokedex/workflows/Deployment%20pipeline/badge.svg?branch=master)
+
 # Full Stack open CI/CD
 
 This repository is used for the CI/CD module of the Full stack open course
