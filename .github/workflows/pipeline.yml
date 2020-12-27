@@ -16,23 +16,23 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
+      - name: Run npm install
         run: npm install
-      - name: lint
+      - name: Lint
         run: npm run eslint
-      - name: build
+      - name: Build
         run: npm run build
-      - name: test
+      - name: Test
         run: npm run test
-      - name: e2e tests
+      - name: E2E tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy to heroku
+      - name: Deploy to heroku
         uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
-        if: ${{ github.event_name == 'push' }} # Only deploy on push
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstack-cicd' #Must be unique in Heroku
@@ -43,23 +43,32 @@ jobs:
 
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }} && ${{ !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+
       - name: Announce success on Slack
         uses: 8398a7/action-slack@v3
         with:
           status: success
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+          fields: repo, commit, author, took
+          custom_payload: |
+            {
+              attachments: [{
+                color: 'good',
+                text: `a new version deployed to Heroku (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && success() }}
+
       - name: Announce failure on Slack
         uses: 8398a7/action-slack@v3
         with:
           status: failure
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+          fields: repo, message, commit, author, action
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && failure() }}
