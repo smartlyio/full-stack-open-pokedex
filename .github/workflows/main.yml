@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits), '#skip') }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,7 +23,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   versioning:
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits), '#skip') }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
