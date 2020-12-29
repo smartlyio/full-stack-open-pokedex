@@ -35,3 +35,4 @@ jobs:
           heroku_email: "aubrey.nicoll@gmail.com"
           healthcheck: "https://mighty-escarpment-70911.herokuapp.com/healthcheck"
           checkstring: "OK"
+          rollbackonhealthcheckfailed: true
