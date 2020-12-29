@@ -33,5 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "mighty-escarpment-70911"
           heroku_email: "aubrey.nicoll@gmail.com"
-          healthcheck: "https://mighty-escarpment-70911.herokuapp.com/health"
+          healthcheck: "https://mighty-escarpment-70911.herokuapp.com/healthcheck"
           checkstring: "OK"
