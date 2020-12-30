@@ -26,3 +26,5 @@ jobs:
         env:
           SKIP_VERSION: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: echo "$SKIP_VERSION" 
+      - name: test env
+        run: echo "$SKIP_VERSION"
