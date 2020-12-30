@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -27,3 +30,51 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Deploy to Heroku
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        uses: actions/checkout@v2
+        uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokedex-full-stack-open" #Must be unique in Heroku
+          heroku_email: "abhishekkhale39@gmail.com"
+          healthcheck: "https://pokedex-full-stack-open.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - name: success notification action
+        if: ${{ success() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          channel: '#code'
+          status: custom
+          fields: workflow,job,commit,repo,author,took
+          custom_payload: | 
+            {
+              icon_emoji: ':octocat:',
+              attachments: [{
+                color: 'good',
+                text: `a new version deployed to ${process.env.AS_REPO} (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK} `
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: failure notification action
+        if: ${{ failure() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          channel: '#code'
+          status: ${{ job.status }}
+          fields: workflow,job,commit,repo,author, message, took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  versioning:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: 'patch'
