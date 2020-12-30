@@ -32,15 +32,13 @@ jobs:
           wait-on: http://localhost:5000
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}
-        if: $ {{ contains(join(github.event.commits.*.message, ' '), '#skip') == false }}
+        if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#skip') == false }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
       - name: deploy Heroku app
-        if: ${{ github.event_name == 'push' }}
-        if: $ {{ contains(join(github.event.commits.*.message, ' '), '#skip') == false }}
+        if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#skip') == false }}
         uses: akhileshns/heroku-deploy@v3.8.8
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
