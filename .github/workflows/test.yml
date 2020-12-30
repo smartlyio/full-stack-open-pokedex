@@ -25,4 +25,4 @@ jobs:
       - name: Test Boolean value
         env:
           SKIP_VERSION: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
-        run: echo "$SKIP_VERSION"
+        run: echo "$SKIP_VERSION" 
