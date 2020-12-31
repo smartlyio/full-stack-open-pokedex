@@ -47,3 +47,11 @@ jobs:
           healthcheck: "https://mighty-escarpment-70911.herokuapp.com/healthcheck"
           checkstring: "OK"
           rollbackonhealthcheckfailed: true
+      - name: Slack notification
+        if: always()
+        uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
