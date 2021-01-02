@@ -1,0 +1,14 @@
+name: Folder Content
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  print_folder_content_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Directory content
+        run: |
+         ls -l
