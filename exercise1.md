@@ -1,0 +1,7 @@
+Python would be the language of choice with Github as our hosting service and CircleCI as our external Continuous Integration service. Next the steps linting, testing and building will be discussed:
+-Linting: It works by running a program called linter to analyze code to check for potential errors, doing the same work as eslint. flake8 would be used to accomplish this step.
+-Testing: Is in charge of the unit testing, and pytest would be used to accomplish this step.
+-Building: Python is an interpreted language so its build mainly resolves around test execution rather than compilation. If it is used a library, framework or package that does not come with python, would need to be used pip or conda, and virtualenv would be used to set the environment. This step would basically run the linter and tests inside the virtual environment, and use CircleCI to configure and deploy.
+CircleCI is a good alternative for CI because is free, is cloud base CI, so is easy to use and fast to start deployment, and has github integration.
+Buddy is another good alternative than brings some of the benefits of CircleCI and some utilities and Smart change detection and monitor with real-time progress and logs.
+This setup would be better in a cloud-base environment because for 6 people without resources, a free cloud base alternative seems perfect, and the project can advance quickly without taking human resources and time to configure a self-hosted setup.
