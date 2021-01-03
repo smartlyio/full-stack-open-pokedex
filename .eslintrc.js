@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
     "indent": [
