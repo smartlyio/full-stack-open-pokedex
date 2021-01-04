@@ -11,6 +11,8 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
+    strategy:
+      max-parallel: 1 # a cleaner workaround to prevent that the versioning job gets executed before the deployment pipeline finishes.
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
@@ -45,6 +47,22 @@ jobs:
           checkstring: "ok" # look for othis specific string in the page above
           delay: 5 # a delay (in seconds) to prevent that the healtcheck is performed before the application has been set up on Heroku.
           rollbackonhealthcheckfailed: true # rollback to previous (working) version if healthcheck fails.
+      - uses: actions/checkout@v2 # a (rather dirty) workaround
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+
+      # # The following step increases the version when a pull request is merged and tag the release with a version number.
+      # - name: Bump version and push tag
+      #   uses: anothrNick/github-tag-action@1.33.0
+      #   if: ${{ github.event_name == 'push' }}
+      #   env:
+      #    # because github-tag-action is third party, we need to provide the token for authentication in the repository.
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #    DEFAULT_BUMP: patch
+
+
   versioning:
     runs-on: ubuntu-18.04
     steps:
@@ -57,18 +75,6 @@ jobs:
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
         env:
+         # because github-tag-action is third party, we need to provide the token for authentication in the repository.
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          DEFAULT_BUMP: patch
-
-
-      # - name: Bump version and push tag
-      #   uses: anothrNick/github-tag-action@1.33.0
-      #   if: ${{ github.event_name == 'push' }}
-      #   # because github-tag-action is third party, we need to provide the token for authentication in the repository.
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     DEFAULT_BUMP: patch
-      #     WITH_V: true # add v to the version name.
-      #     # DRY_RUN: true # if true the action outputs the next version number without creating or tagging the release.
-      #     # VERBOSE: true
-      #     # RELEASE_BRANCHES: master
