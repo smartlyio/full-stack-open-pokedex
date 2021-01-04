@@ -48,6 +48,10 @@ jobs:
   versioning:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
       # The following step increases the version when a pull request is merged and tag the release with a version number.
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
