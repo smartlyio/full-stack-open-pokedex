@@ -48,7 +48,7 @@ jobs:
       # The following step increases the version when a pull request is merged and tag the release with a version number.
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' && github.base_ref == 'master' }} # trigger version bump only when merging a pull request with the master branch.
+        if: ${{ github.event_name == 'push' }}
         # because github-tag-action is third party, we need to provide the token for authentication in the repository.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
