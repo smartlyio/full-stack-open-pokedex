@@ -35,3 +35,4 @@ jobs:
           heroku_email: marcel.klotz@posteo.de
           healthcheck: "https://[YOUR APP's NAME].herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
