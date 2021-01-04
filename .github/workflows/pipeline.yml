@@ -46,6 +46,14 @@ jobs:
           delay: 5 # a delay (in seconds) to prevent that the healtcheck is performed before the application has been set up on Heroku.
           rollbackonhealthcheckfailed: true # rollback to previous (working) version if healthcheck fails.
       # The following step increases the version when a pull request is merged and tag the release with a version number.
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+
+
       # - name: Bump version and push tag
       #   uses: anothrNick/github-tag-action@1.33.0
       #   if: ${{ github.event_name == 'push' }}
