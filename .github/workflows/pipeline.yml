@@ -35,3 +35,4 @@ jobs:
           heroku_email: "mandy@fonoma.com"
           healthcheck: "https://full-stack-open-pokedex-mmf.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
