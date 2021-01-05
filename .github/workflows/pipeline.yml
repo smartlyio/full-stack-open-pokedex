@@ -1,7 +1,7 @@
 name: Deployment pipeline
 
 on:
-  push: # when pushing or merging
+  push: # when pushing or merging (the name of the event is also 'push' when merging a pull request)
     branches:
       - master # ^ to the master branch
   pull_request:
@@ -9,8 +9,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  strategy:
-    max-parallel: 1 # Execute only one job at a time (workaround so that the version bump does not get executed before testing and deployment is done)
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
