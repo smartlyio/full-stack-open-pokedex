@@ -84,5 +84,6 @@ jobs:
   testing:
     runs-on: ubuntu-18.04
     steps:
-      run: |
-        echo "hello! head_ref: $(github.head_ref) - event: $(github.event)"
+      - name: console messages
+        run: |
+          echo "hello! head_ref: $(github.head_ref) - event: $(github.event)"
