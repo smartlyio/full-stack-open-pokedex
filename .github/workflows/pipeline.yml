@@ -10,6 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    if: false # DELETE!!!!!
     runs-on: ubuntu-18.04
     strategy:
       max-parallel: 1 # a cleaner workaround to prevent that the versioning job gets executed before the deployment pipeline finishes.
@@ -64,6 +65,7 @@ jobs:
 
 
   versioning:
+    if: false # DELETE!!!!!
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -78,3 +80,9 @@ jobs:
          # because github-tag-action is third party, we need to provide the token for authentication in the repository.
          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          DEFAULT_BUMP: patch
+
+  testing:
+    runs-on: ubuntu-18.04
+    steps:
+      run: |
+        echo "hello! head_ref: $(github.head_ref) - event: $(github.event)"
