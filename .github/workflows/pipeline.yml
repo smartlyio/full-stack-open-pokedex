@@ -86,4 +86,4 @@ jobs:
     steps:
       - name: console messages
         run: |
-          echo "hello! head_ref: $(github.head_ref) - event: $(github.event)"
+          echo "hello! head_ref: ${{github.head_ref}} - event: ${{github.event}}"
