@@ -84,12 +84,14 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: console messages
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "head_commit: ${{github.event.head_commit.message}}"
           echo "github.base_ref: ${{github.base_ref}}"
           echo "github.head_ref: ${{github.head_ref}}"
           echo "github.event_name: ${{github.event_name}}"
-          echo $GITHUB_CONTEXT
+          echo "complete githubcontext $GITHUB_CONTEXT"
 
 
 
