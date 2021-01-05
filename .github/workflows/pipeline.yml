@@ -46,7 +46,7 @@ jobs:
           delay: 5 # a delay (in seconds) to prevent that the healtcheck is performed before the application has been set up on Heroku.
           rollbackonhealthcheckfailed: true # rollback to previous (working) version if healthcheck fails.
       # third party notification action (action-slack: https://github.com/marketplace/actions/action-slack)
-      - uses: 8398a7/action-slack@d91d61252fb553a4101d0a60e8fe5133d305320e
+      - uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && success()}}
         with:
           status: custom
@@ -64,7 +64,7 @@ jobs:
       # failure notification (not custom):
 
 
-      # - uses: 8398a7/action-slack@d91d61252fb553a4101d0a60e8fe5133d305320e
+      # - uses: 8398a7/action-slack@b6a4c791ce0c137843eb11e038f855cf567014dc
       #   if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && (failure() || cancelled()) }}
       #   with:
       #     status: ${{ job.status }}
