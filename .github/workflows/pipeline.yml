@@ -53,17 +53,23 @@ jobs:
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message). Check https://action-slack.netlify.app/fields
           custom_payload: |
             {
-              text: "placeholder",
               attachments: [{
                 color: 'good',
                 title: 'Successful Heroku Deployment',
-                text: 'A new version deployed to https://ndeamador-fso2020-pokedex.herokuapp.com/ (${process.env.AS_JOB}) by${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK}'
+                text: `A new version deployed to https://ndeamador-fso2020-pokedex.herokuapp.com/ (${process.env.AS_JOB}) by${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK}`
               }]
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-
-
+      # failure notification (not custom):
+      - uses: 8398a7/action-slack@v3
+        if: failure() || cancelled()
+        with:
+          status: ${{ job.status }}
+          author_name: ${{process.env.AS_JOB}}
+          fields: repo,message,commit,author,took # selectable (default: repo,message). Check https://action-slack.netlify.app/fields
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
 
   versioning:
     runs-on: ubuntu-18.04
