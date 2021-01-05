@@ -86,4 +86,10 @@ jobs:
     steps:
       - name: console messages
         run: |
-          echo "hello! head_ref: ${{github.head_ref}} - event: ${{github.event}}"
+          echo "hello! head_ref: ${{github.head_ref}}" - base_ref: ${{github.base_ref}}
+        run: |
+          echo "event: name: ${{github.event.name}} - path: ${{github.event_path}}"
+        run: |
+          echo "action: name: ${{github.action}} - path: ${{github.action_path}}"
+        run: |
+          echo "testing AND: ${{github.base_ref && github.base_ref}}"
