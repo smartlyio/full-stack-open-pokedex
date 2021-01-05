@@ -62,14 +62,16 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
       # failure notification (not custom):
-      - uses: 8398a7/action-slack@v3
-        if: failure() || cancelled()
-        with:
-          status: ${{ job.status }}
-          author_name: ${{process.env.AS_JOB}}
-          fields: repo,message,commit,author,took # selectable (default: repo,message). Check https://action-slack.netlify.app/fields
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+
+
+      # - uses: 8398a7/action-slack@v3
+      #   if: failure() || cancelled()
+      #   with:
+      #     status: ${{ job.status }}
+      #     author_name: ${{process.env.AS_JOB}}
+      #     fields: repo,message,commit,author,took # selectable (default: repo,message). Check https://action-slack.netlify.app/fields
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
 
   versioning:
     runs-on: ubuntu-18.04
