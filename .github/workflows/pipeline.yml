@@ -83,9 +83,8 @@ jobs:
     if:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
       - name: console messages
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: |
           echo "head_commit: ${{github.event.head_commit.message}}"
           echo "github.base_ref: ${{github.base_ref}}"
@@ -94,31 +93,16 @@ jobs:
           echo "contains?: ${{contains('this has something', 'something')}}"
           echo "doesn't contain?: ${{contains('this has nothing', 'something')}}"
           echo "title contains ${{contains(github.event.head_commit.message, 'contain_test')}}"
-          echo "title doesn't ${{contains(github.event.head_commit.message, 'ontain_test')}}"
-
-          echo "complete githubcontext $GITHUB_CONTEXT"
-
-
-
-
-        # run: |
-        #   echo "AND: ${{(github.base_ref && github.base_ref)}}"
-        #   echo "github completo: ${{github}}"
-        #   echo "github.action: ${{github.action}}
-        #   echo "github.action_path: ${{github.action_path}}
-        #   echo "github.actor: ${{github.actor}}
-        #   echo "github.base_ref: ${{github.base_ref}}
-        #   echo "github.event: ${{github.event}}
-        #   echo "github.event_name: ${{github.event_name}}
-        #   echo "github.event_path: ${{github.event_path}}
-        #   echo "github.head_ref: ${{github.head_ref}}
-        #   echo "github.job: ${{github.job}}
-        #   echo "github.ref: ${{ github.ref}}
-        #   echo "github.repository: ${{ github.repository}}
-        #   echo "github.repository_owner: ${{ github.repository_owner}}
-        #   echo "github.run_id: ${{ github.run_id}}
-        #   echo "github.run_number: ${{ github.run_number}}
-        #   echo "github.sha: ${{ github.sha}}
-        #   echo "github.token: ${{ github.token}}
-        #   echo "github.workflow: ${{ github.workflow}}
-        #   echo "github.workspace: ${{ github.workspace}}
+          echo "title doesn't ${{contains(github.event.head_commit.message, 'nothing')}}"
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
