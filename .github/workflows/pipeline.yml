@@ -91,6 +91,11 @@ jobs:
           echo "github.base_ref: ${{github.base_ref}}"
           echo "github.head_ref: ${{github.head_ref}}"
           echo "github.event_name: ${{github.event_name}}"
+          echo "contains?: ${{contains('this has something', 'something')}}"
+          echo "doesn't contain?: ${{contains('this has nothing', 'something')}}"
+          echo "title contains ${{contains(github.event.head_commit.message, 'contain_test')}}"
+          echo "title doesn't ${{contains(github.event.head_commit.message, 'ontain_test')}}"
+
           echo "complete githubcontext $GITHUB_CONTEXT"
 
 
