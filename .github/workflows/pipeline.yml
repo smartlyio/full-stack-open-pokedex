@@ -11,8 +11,6 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
-    strategy:
-      max-parallel: 1 # a cleaner workaround to prevent that the versioning job gets executed before the deployment pipeline finishes.
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
