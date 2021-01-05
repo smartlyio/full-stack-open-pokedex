@@ -1,14 +1,16 @@
 name: Deployment pipeline
 
 on:
-  push:
+  push: # when pushing or merging
     branches:
-      - master
+      - master # ^ to the master branch
   pull_request:
     branches: [master]
     types: [opened, synchronize]
 
 jobs:
+  strategy:
+    max-parallel: 1 # Execute only one job at a time (workaround so that the version bump does not get executed before testing and deployment is done)
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
@@ -50,15 +52,6 @@ jobs:
         with:
           node-version: "12.x"
 
-      # # The following step increases the version when a pull request is merged and tag the release with a version number.
-      # - name: Bump version and push tag
-      #   uses: anothrNick/github-tag-action@1.33.0
-      #   if: ${{ github.event_name == 'push' }}
-      #   env:
-      #    # because github-tag-action is third party, we need to provide the token for authentication in the repository.
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #    DEFAULT_BUMP: patch
-
   versioning:
     runs-on: ubuntu-18.04
     steps:
@@ -75,7 +68,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
 
-  testing:
+  Some useful logs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -89,15 +82,15 @@ jobs:
           echo "github.event_name: ${{github.event_name}}"
           echo "title contains ${{contains(github.event.head_commit.message, 'contain_test')}}"
           echo "title doesn't ${{contains(github.event.head_commit.message, 'nothing')}}"
-      # - name: gihub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo "$GITHUB_CONTEXT"
-      # - name: commits
-      #   env:
-      #     COMMITS: ${{ toJson(github.event.commits) }}
-      #   run: echo "$COMMITS"
-      # - name: commit messages
-      #   env:
-      #     COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      #   run: echo "$COMMIT_MESSAGES"
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
