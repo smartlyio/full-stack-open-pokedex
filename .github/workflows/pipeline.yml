@@ -80,27 +80,37 @@ jobs:
           DEFAULT_BUMP: patch
 
   testing:
+    if:
     runs-on: ubuntu-18.04
     steps:
       - name: console messages
         run: |
-          echo "testing AND: ${{(github.base_ref && github.base_ref)}}"
-          echo "github completo: ${{github}}"
-          echo "github.action: ${{github.action}}
-          echo "github.action_path: ${{github.action_path}}
-          echo "github.actor: ${{github.actor}}
+          echo "head_commit: ${{github.event.head_commit.message}}"
           echo "github.base_ref: ${{github.base_ref}}
-          echo "github.event: ${{github.event}}
-          echo "github.event_name: ${{github.event_name}}
-          echo "github.event_path: ${{github.event_path}}
           echo "github.head_ref: ${{github.head_ref}}
-          echo "github.job: ${{github.job}}
-          echo "github.ref: ${{ github.ref}}
-          echo "github.repository: ${{ github.repository}}
-          echo "github.repository_owner: ${{ github.repository_owner}}
-          echo "github.run_id: ${{ github.run_id}}
-          echo "github.run_number: ${{ github.run_number}}
-          echo "github.sha: ${{ github.sha}}
-          echo "github.token: ${{ github.token}}
-          echo "github.workflow: ${{ github.workflow}}
-          echo "github.workspace: ${{ github.workspace}}
+          echo "github.event_name: ${{github.event_name}}
+
+
+
+
+        # run: |
+        #   echo "AND: ${{(github.base_ref && github.base_ref)}}"
+        #   echo "github completo: ${{github}}"
+        #   echo "github.action: ${{github.action}}
+        #   echo "github.action_path: ${{github.action_path}}
+        #   echo "github.actor: ${{github.actor}}
+        #   echo "github.base_ref: ${{github.base_ref}}
+        #   echo "github.event: ${{github.event}}
+        #   echo "github.event_name: ${{github.event_name}}
+        #   echo "github.event_path: ${{github.event_path}}
+        #   echo "github.head_ref: ${{github.head_ref}}
+        #   echo "github.job: ${{github.job}}
+        #   echo "github.ref: ${{ github.ref}}
+        #   echo "github.repository: ${{ github.repository}}
+        #   echo "github.repository_owner: ${{ github.repository_owner}}
+        #   echo "github.run_id: ${{ github.run_id}}
+        #   echo "github.run_number: ${{ github.run_number}}
+        #   echo "github.sha: ${{ github.sha}}
+        #   echo "github.token: ${{ github.token}}
+        #   echo "github.workflow: ${{ github.workflow}}
+        #   echo "github.workspace: ${{ github.workspace}}
