@@ -32,3 +32,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "cicd-fullstack-george"
           heroku_email: "formyowndocuments@gmail.com"
+          healthcheck: "https://cicd-fullstack-george.herokuapp.com/version"
+          checkstring: "1"
