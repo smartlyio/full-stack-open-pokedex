@@ -12,3 +12,11 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+
+      - name: print date
+        run: |
+          date
+
+      - name: print current directory content
+        run: |
+          ls
