@@ -43,3 +43,5 @@ jobs:
           heroku_email: "lewisdbentley@gmail.com"
           healthcheck: https://full-stack-open-pokedex-ci.herokuapp.com/health
           checkstring: ok
+          procfile: worker: node app.js 
+          rollbackonhealthcheckfailed: true
