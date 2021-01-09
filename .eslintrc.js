@@ -4,6 +4,7 @@ module.exports = {
     "es6": true,
     "jest/globals": true,
     "node": true,
+    "cypress/globals": true
     //"commonjs": true
   },
   "extends": [
@@ -18,7 +19,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
     "indent": [
