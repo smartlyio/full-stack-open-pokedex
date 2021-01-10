@@ -12,4 +12,4 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-          echo Date.now()
+          echo `Date.now()`
