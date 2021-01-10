@@ -40,7 +40,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: deploy to prod
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip')
         uses: akhileshns/heroku-deploy@v3.8.8 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -49,3 +49,41 @@ jobs:
           healthcheck: https://full-stack-open-pokedex-ci.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip')
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
+
+  a_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+
+      - name: join
+        env:
+          COMMIT_MESSAGES_JOINED: ${{ toJson(join(github.event.commits.*.message, ', ')) }}
+        run: echo "$COMMIT_MESSAGES_JOINED"
+
+      - name: joined contains
+        env:
+          COMMIT_MESSAGES_JOINED_CONTAINED: ${{ toJson(contains(join(github.event.commits.*.message, ', '), '#skip')) }}
+        run: echo "$COMMIT_MESSAGES_JOINED_CONTAINED"

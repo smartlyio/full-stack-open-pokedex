@@ -1,1 +1,1 @@
-new feature v.2 does not deploy to prod until merged to master
+new feature v.3 does not push tag or deploy to prod until #skip not present in commit message
