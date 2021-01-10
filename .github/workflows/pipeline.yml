@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'jouni.toni@gmail.com'
           healthcheck: 'https://jounis-pokeapp.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
