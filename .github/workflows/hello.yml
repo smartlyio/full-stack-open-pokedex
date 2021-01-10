@@ -15,4 +15,4 @@ jobs:
 
       - name: Now it is
         run: |
-          echo "Name"
+          echo `Date()`
