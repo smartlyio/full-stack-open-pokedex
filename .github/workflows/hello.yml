@@ -12,7 +12,4 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-    steps:
-      - name: Now it is
-        run: |
-          echo "Date.now()"
+          echo Date.now()
