@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Now it is
         run: |
-          echo Date.now()
+          echo "Date.now()"
