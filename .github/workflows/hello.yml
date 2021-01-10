@@ -16,3 +16,7 @@ jobs:
       - name: Now it is
         run: |
           date
+
+      - name: Content
+        run: | 
+          ls -l
