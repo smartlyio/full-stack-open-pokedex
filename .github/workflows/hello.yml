@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Now it is
         run: |
-          echo `Nasir`
+          echo "Nasir"
