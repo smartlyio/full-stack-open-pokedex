@@ -13,3 +13,18 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello!!"
+  date_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: tell time
+        run: |
+          date
+  dir_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: tell time
+        run: |
+          ls -l
+      - name: tell time a second time
+        run: |
+          ls -l
