@@ -9,8 +9,9 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: setup node
+      - name: checkout
         uses: actions/checkout@v2
+      - name: setup node
         uses: actions/setup-node@v1
         with: 
           node-version: '12.x'
