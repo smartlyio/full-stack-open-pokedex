@@ -9,14 +9,13 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - uses: akhileshns/heroku-deploy@v3.8.9
+      - name: setup node
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v1
         with: 
           node-version: '12.x'
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "stormy-plateau-59436"
-          heroku_email: "rkwei@usc.edu"
+        with: 
+          node-version: '12.x'
       - name: npm install
         run: npm install
       - name: lint
@@ -31,3 +30,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: heroku deploy
+        uses: actions/checkout@v2
+        uses: akhileshns/heroku-deploy@v3.8.9
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "stormy-plateau-59436"
+          heroku_email: "rkwei@usc.edu"
