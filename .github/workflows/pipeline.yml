@@ -24,8 +24,8 @@ jobs:
         run: npm run test
       
       - name: end2end tests
-      - uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2
         with:
-          command: npm run cypress:open
+          command: npm run cyper
           start: npm run start-prod
           wait-on: http://localhost:5000
