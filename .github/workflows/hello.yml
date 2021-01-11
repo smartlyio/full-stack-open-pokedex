@@ -22,9 +22,6 @@ jobs:
   dir_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: tell time
-        run: |
-          ls -l
-      - name: tell time a second time
+      - name: list contents of directory
         run: |
           ls -l
