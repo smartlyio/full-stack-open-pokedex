@@ -13,9 +13,19 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run lint
+
       - name: test
         run: npm run test
+      
+      - name: end2end tests
+        uses: cypress-io/github-action@v2
+        with:
+          comman: npm run cypress:open
+          start: npm run start-prod
+          wait-on: http://localhost:5000
