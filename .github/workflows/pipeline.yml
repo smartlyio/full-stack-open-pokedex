@@ -7,7 +7,6 @@ on:
 
 # jobs:
 #   deployment_method:
-#     # needs: simple_deployment_pipeline
 #     runs-on: ubuntu-18.04
 #     steps:
 #       - uses: actions/checkout@v2
@@ -41,5 +40,5 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start
-          wait-on: 'http://localhost:8080'
+          wait-on: 'http://localhost:5000'
           wait-on-timeout: 160
