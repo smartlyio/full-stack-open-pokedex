@@ -35,3 +35,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "stormy-plateau-59436"
           heroku_email: "rkwei@usc.edu"
+          healthcheck: "https://https://stormy-plateau-59436.herokuapp.com/version"
+          checkstring: "1"
