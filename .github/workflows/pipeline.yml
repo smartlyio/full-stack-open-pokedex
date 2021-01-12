@@ -5,41 +5,41 @@ on:
     branches:
       - master
 
-jobs:
-  deployment_method:
-    # needs: simple_deployment_pipeline
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.8.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fullstack-part"
-          heroku_email: "nasirlawal001@gmail.com"
-          
-
 # jobs:
-#   simple_deployment_pipeline:
+#   deployment_method:
+#     # needs: simple_deployment_pipeline
 #     runs-on: ubuntu-18.04
 #     steps:
 #       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
+#       - uses: akhileshns/heroku-deploy@v3.8.9
 #         with:
-#           node-version: '12.x'
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: "fullstack-part"
+#           heroku_email: "nasirlawal001@gmail.com"
+          
 
-#       - name: npm install
-#         run: npm install
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
 
-#       - name: lint
-#         run: npm run lint
+      - name: npm install
+        run: npm install
 
-#       - name: test
-#         run: npm run test
+      - name: lint
+        run: npm run lint
+
+      - name: test
+        run: npm run test
       
-#       # - name: e2e tests
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: 'http://localhost:5000'
-      #     wait-on-timeout: 160
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start
+          wait-on: 'http://localhost:5000'
+          wait-on-timeout: 160

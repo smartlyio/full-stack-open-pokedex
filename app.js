@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-undef */
 const express = require("express");
+require("dotenv").config();
 const app = express();
 
 // Heroku dynamically sets a port
