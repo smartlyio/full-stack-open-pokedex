@@ -1,1 +1,1 @@
-web: npm run start-prodasdfasdfasdfasdf
+web: npm run start-prod
