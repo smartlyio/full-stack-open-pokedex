@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-jobs1:
+jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
@@ -31,13 +31,13 @@ jobs1:
       #     wait-on: 'http://localhost:5000'
       #     wait-on-timeout: 160
 
-jobs2:
-  deployment_method:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.8.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fullstack-part"
-          heroku_email: "nasirlawal001@gmail.com"
+      jobs:
+        deployment_method:
+          runs-on: ubuntu-18.04
+          steps:
+            - uses: actions/checkout@v2
+            - uses: akhileshns/heroku-deploy@v3.8.9
+              with:
+                heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                heroku_app_name: "fullstack-part"
+                heroku_email: "nasirlawal001@gmail.com"
