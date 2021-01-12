@@ -6,32 +6,8 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-
-      - name: npm install
-        run: npm install
-
-      - name: lint
-        run: npm run lint
-
-      - name: test
-        run: npm run test
-      
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: 'http://localhost:5000'
-      #     wait-on-timeout: 160
-
   deployment_method:
+    # needs: simple_deployment_pipeline
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -40,3 +16,29 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack-part"
           heroku_email: "nasirlawal001@gmail.com"
+
+# jobs:
+#   simple_deployment_pipeline:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
+
+#       - name: npm install
+#         run: npm install
+
+#       - name: lint
+#         run: npm run lint
+
+#       - name: test
+#         run: npm run test
+      
+#       # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: 'http://localhost:5000'
+      #     wait-on-timeout: 160
