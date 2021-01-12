@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-jobs:
+jobs1:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
@@ -31,7 +31,7 @@ jobs:
       #     wait-on: 'http://localhost:5000'
       #     wait-on-timeout: 160
 
-jobs:
+jobs2:
   deployment_method:
     runs-on: ubuntu-18.04
     steps:
