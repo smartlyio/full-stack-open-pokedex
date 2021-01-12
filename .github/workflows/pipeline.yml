@@ -23,9 +23,9 @@ jobs:
       - name: test
         run: npm run test
       
-      - name: end2end tests
+      - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
-          command: npm run cyptest
-          start: npm run dev
+          command: npm run test:e2e
+          start: npm run start-prod
           wait-on: http://localhost:5000
