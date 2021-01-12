@@ -28,4 +28,5 @@ jobs:
         with:
           command: npm run cyper
           start: npm run start-prod
-          wait-on: 'npx wait-on --timeout 5000 http://localhost:5000'
+          wait-on: 'npx wait-on http://localhost:5000'
+          wait-on-timeout: 500
