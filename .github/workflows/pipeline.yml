@@ -32,7 +32,7 @@ jobs:
       #     wait-on-timeout: 160
 
 jobs:
-  build:
+  deployment_method:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
