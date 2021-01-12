@@ -40,3 +40,4 @@ jobs:
           healthcheck: "https://stormy-plateau-59436.herokuapp.com/version"
           checkstring: "1"
           rollbackonhealthcheckfailed: true
+        if: ${{ github.event_name == 'push' }}
