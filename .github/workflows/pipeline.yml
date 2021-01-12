@@ -37,3 +37,4 @@ jobs:
           heroku_email: "rkwei@usc.edu"
           healthcheck: "https://stormy-plateau-59436.herokuapp.com/version"
           checkstring: "1"
+          rollbackonhealthcheckfailed: true
