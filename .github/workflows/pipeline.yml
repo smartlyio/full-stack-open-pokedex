@@ -41,3 +41,4 @@ jobs:
           heroku_email: "nasirlawal001@gmail.com"
           healthcheck: "https://fullstack-part.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
