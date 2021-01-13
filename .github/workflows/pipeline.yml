@@ -58,5 +58,5 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
-          COMMITS: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
+          COMMITS: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: echo "$COMMITS"
