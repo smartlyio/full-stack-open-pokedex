@@ -8,43 +8,59 @@ on:
     branches: [master]
     types: [opened, synchronize]
 jobs:
-  simple_deployment_pipeline:
+  # simple_deployment_pipeline:
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #     - name: checkout
+  #       uses: actions/checkout@v2
+  #     - name: setup node
+  #       uses: actions/setup-node@v1
+  #       with: 
+  #         node-version: '12.x'
+  #     - name: npm install
+  #       run: npm install
+  #     - name: lint
+  #       run: npm run eslint
+  #     - name: build
+  #       run: npm run build
+  #     - name: test
+  #       run: npm run test
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
+  #     - name: heroku deploy
+  #       uses: akhileshns/heroku-deploy@v3.8.9
+  #       with:
+  #         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+  #         heroku_app_name: "stormy-plateau-59436"
+  #         heroku_email: "rkwei@usc.edu"
+  #         healthcheck: "https://stormy-plateau-59436.herokuapp.com/version"
+  #         checkstring: "1"
+  #         rollbackonhealthcheckfailed: true
+  #       if: ${{ github.event_name == 'push' }}
+  #     - uses: actions/checkout@v2
+  #     - name: Bump version and push tag
+  #       uses: anothrNick/github-tag-action@1.33.0
+  #       env:
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #         DEFAULT_BUMP: 'patch'
+  #       if: ${{ github.event_name == 'push' }}
+  a_test_job:
     runs-on: ubuntu-18.04
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
-      - name: setup node
-        uses: actions/setup-node@v1
-        with: 
-          node-version: '12.x'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: heroku deploy
-        uses: akhileshns/heroku-deploy@v3.8.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "stormy-plateau-59436"
-          heroku_email: "rkwei@usc.edu"
-          healthcheck: "https://stormy-plateau-59436.herokuapp.com/version"
-          checkstring: "1"
-          rollbackonhealthcheckfailed: true
-        if: ${{ github.event_name == 'push' }}
       - uses: actions/checkout@v2
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
+      - name: gihub context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: 'patch'
-        if: ${{ github.event_name == 'push' }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
