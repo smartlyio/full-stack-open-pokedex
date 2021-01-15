@@ -1,0 +1,22 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  simple_deployment_pipeline:
+    name: Simple Deployment Pipeline
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout 
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Npm install
+        run: npm install
+      -name: Lint
+        run: npm run eslint 
