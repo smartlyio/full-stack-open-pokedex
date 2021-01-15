@@ -10,12 +10,10 @@ jobs:
     steps:
       - name: Say hello
         run: |
-          echo "Hello World!"
-    steps:
+          echo "Hello World!"  
       - name: Print Date
         run: |
           date
-    steps:
       - name: List Directory
         run: |
           ls
