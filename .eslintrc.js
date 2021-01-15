@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
-    "browser": true,
+    'node': true,
+    'browser': true,
     "es6": true,
     "jest/globals": true
   },
@@ -8,6 +9,11 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
