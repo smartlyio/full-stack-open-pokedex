@@ -8,3 +8,5 @@ There are various CI tools to choose from:
 Many options existfor CI implementation. Some some run on-premise, some use cloud, while such as Bitbucket Pipelines, Azure Pipelines or AWS CodePipeline, others provide an choice of basement (cloud or on-premise) such as GitLab or CircleCI.
 
 A team of six people is not a large one and most probably a cloud based solution is the best option. In this case the setup is easier, meaning the team does need additional people and can easily adopt pipline of a platform they choose. Thus no additional people are needed to handle CI tasks. However if any member is experienced in self-hosted CI, it might be a better option. This is especially true in case of a complex application that requires a lot of time and resources for CI. Seems like a possibility if a team rund a sturtup developing something novel, like AI-based services.
+
+Added to test Ex.11.3 with push.
