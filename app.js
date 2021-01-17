@@ -13,8 +13,6 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  // eslint-disable-next-line no-console
-  console.log(project_version)
   res.send(project_version)
 })
 
