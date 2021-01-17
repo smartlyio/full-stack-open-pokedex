@@ -33,5 +33,5 @@ jobs:
           heroku_app_name: "pokemon-listing-rv"
           heroku_email: "roman.m.vasilyev@gmail.com"
           healthcheck: "https://pokemon-listing-rv.herokuapp.com/health"
-          checkstring: "o"
+          checkstring: "ok"
           rollbackonhealthcheckfailed: true
