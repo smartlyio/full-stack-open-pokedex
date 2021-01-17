@@ -32,4 +32,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-listing-rv"
           heroku_email: "roman.m.vasilyev@gmail.com"
-          # healthcheck: "https://pokemon-listing-rv.herokuapp.com"
+          healthcheck: "https://pokemon-listing-rv.herokuapp.com"
+          checkstring: "o"
