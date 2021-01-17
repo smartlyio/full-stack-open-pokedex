@@ -33,3 +33,4 @@ jobs:
           heroku_app_name: "pokedex-touko" #Must be unique in Heroku
           heroku_email: "touko.lonka@aalto.fi"
           healthcheck: "https://pokedex-touko.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
