@@ -25,7 +25,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
-          start: npm start
+          start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
         with:
@@ -33,5 +33,5 @@ jobs:
           heroku_app_name: "pokemon-listing-rv"
           heroku_email: "roman.m.vasilyev@gmail.com"
           healthcheck: "https://pokemon-listing-rv.herokuapp.com/health"
-          checkstring: "ok"
+          checkstring: "o"
           rollbackonhealthcheckfailed: true
