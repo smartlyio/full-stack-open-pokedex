@@ -20,5 +20,5 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        run: echo "$COMMIT_MESSAGES"
+          BOOLEAN_SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run: echo "$BOOLEAN_SKIP"
