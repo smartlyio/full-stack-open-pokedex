@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to Heroku
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-        uses: akhileshns/heroku-deploy@v3.8.9 # This is the action
+        uses: akhileshns/heroku-deploy@v3.8.9
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-touko" #Must be unique in Heroku
