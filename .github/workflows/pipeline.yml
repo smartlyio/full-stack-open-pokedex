@@ -37,3 +37,4 @@ jobs:
           heroku_email: "jirka.hartonen@gmail.com"
           healthcheck: "https://fullstack11.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
