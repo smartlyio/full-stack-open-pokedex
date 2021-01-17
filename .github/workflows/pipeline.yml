@@ -32,3 +32,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-touko" #Must be unique in Heroku
           heroku_email: "touko.lonka@aalto.fi"
+          healthcheck: "https://pokedex-touko.herokuapp.com/health"
