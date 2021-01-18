@@ -21,5 +21,5 @@ jobs:
       - name: commit messages
         env:
           MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }} 
-          TRUE_OR_NOT: ${{ contains(github.event.commits.message, 'fix') }}        
+          TRUE_OR_NOT: ${{ contains(join(toJson(github.event.commits.*.message)), 'fix') }}        
         run: echo "$MESSAGE"
