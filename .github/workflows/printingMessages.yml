@@ -20,6 +20,6 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          MESSAGE: ${{ toJson(github.event.commits.message) }} 
+          MESSAGE: ${{ toJson(github.event.commits.*.message) }} 
           TRUE_OR_NOT: ${{ contains(github.event.commits.message, 'fix') }}        
         run: echo "$MESSAGE"
