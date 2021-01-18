@@ -22,5 +22,4 @@ jobs:
         if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), '#skip') == false }}
         env:
           MESSAGE: ${{ join(github.event.commits.*.message) }} 
-          TRUE_OR_NOT: ${{ contains(join(github.event.commits.*.message), 'fix') }}        
         run: echo "$MESSAGE"
