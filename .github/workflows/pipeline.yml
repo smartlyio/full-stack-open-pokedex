@@ -39,9 +39,11 @@ jobs:
           EVENT_NAME: ${{ toJson(github.event_name) }}
         run: echo "$EVENT_NAME"
       - name: Should deploy?
-        run: echo ${{ github.event_name == 'push' || !contains(join(github.event.commits.*.message), '#skip') }}
+        run: |
+          export DEPLOY=${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
+          echo $DEPLOY
       - uses: akhileshns/heroku-deploy@v3.8.9
-        if: ${{ github.event_name == 'push' || !contains(join(github.event.commits.*.message), '#skip') }}
+        if: $DEPLOY
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-listing-rv"
@@ -50,9 +52,10 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
+        if: $DEPLOY
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.26.0
-        if: ${{ github.event_name == 'push' || !contains(join(github.event.commits.*.message), '#skip') }}
+        if: $DEPLOY
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
