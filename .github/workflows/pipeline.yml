@@ -40,7 +40,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
-      - name: Bump version and push tag
+      - name: Bump version and push tag # should not work on PR
         uses: anothrNick/github-tag-action@1.26.0
         if: ${{ github.event_name == 'push' }}
         env:
