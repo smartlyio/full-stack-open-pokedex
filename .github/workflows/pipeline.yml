@@ -30,6 +30,16 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+      - name: event name
+        env:
+          EVENT_NAME: ${{ toJson(github.event_name) }}
+        run: echo "$EVENT_NAME"
+      - name: Should deploy?
+        run: echo ${{ github.event_name == 'push' || !contains(join(github.event.commits.*.message), '#skip') }}
       - uses: akhileshns/heroku-deploy@v3.8.9
         if: ${{ github.event_name == 'push' || !contains(join(github.event.commits.*.message), '#skip') }}
         with:
