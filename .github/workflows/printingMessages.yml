@@ -20,4 +20,4 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env: TRUE_OR_NOT: ${{ contains(github.event.commits.*.message, 'fix') }}
-        run: echo TRUE_OR_NOT
+        run: echo "$TRUE_OR_NOT"
