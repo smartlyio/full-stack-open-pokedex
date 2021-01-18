@@ -39,9 +39,7 @@ jobs:
           EVENT_NAME: ${{ toJson(github.event_name) }}
         run: echo "$EVENT_NAME"
       - name: Should deploy?
-        run: |
-          export DEPLOY=${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-          echo $DEPLOY
+        run: echo ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
       - uses: akhileshns/heroku-deploy@v3.8.9
         if: $DEPLOY
         with:
@@ -52,10 +50,10 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
-        if: $DEPLOY
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.26.0
-        if: $DEPLOY
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
