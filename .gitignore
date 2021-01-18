@@ -1,3 +1,4 @@
 dist/
+.apikey
 node_modules/
 cypress/screenshots
