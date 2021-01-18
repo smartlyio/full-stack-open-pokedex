@@ -9,58 +9,41 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  a_test_job:
+  simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: commits
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - uses: akhileshns/heroku-deploy@v3.8.9
+        if: ${{ github.event_name == 'push' || contains(join(github.event.commits.*.message), '#skip') }}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokemon-listing-rv"
+          heroku_email: "roman.m.vasilyev@gmail.com"
+          healthcheck: "https://pokemon-listing-rv.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.26.0
+        if: ${{ github.event_name == 'push' || contains(join(github.event.commits.*.message), '#skip') }}
         env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: commit message includes /#skip
-        if: contains(join(github.event.commits.*.message), '#skip')
-        run: echo "contains /#skip"
-
-# jobs:
-#   simple_deployment_pipeline:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: '12.x'
-#       - name: npm install
-#         run: npm install
-#       - name: lint
-#         run: npm run eslint
-#       - name: build
-#         run: npm run build
-#       - name: test
-#         run: npm test
-#       - name: e2e tests
-#         uses: cypress-io/github-action@v2
-#         with:
-#           command: npm run test:e2e
-#           start: npm run start-prod
-#           wait-on: http://localhost:5000
-#       - uses: akhileshns/heroku-deploy@v3.8.9
-#         if: ${{ github.event_name == 'push' }}
-#         with:
-#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-#           heroku_app_name: "pokemon-listing-rv"
-#           heroku_email: "roman.m.vasilyev@gmail.com"
-#           healthcheck: "https://pokemon-listing-rv.herokuapp.com/health"
-#           checkstring: "ok"
-#           rollbackonhealthcheckfailed: true
-#       - uses: actions/checkout@v2
-#       - name: Bump version and push tag # should not work on PR
-#         uses: anothrNick/github-tag-action@1.26.0
-#         if: ${{ github.event_name == 'push' }}
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#           WITH_V: true
-#           DEFAULT_BUMP: patch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
