@@ -19,10 +19,4 @@ jobs:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
       - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: commit messages2
-        env:
-          COMMIT_MESSAGE: ${{ github.event.commits.message[0] }}
-        run: echo "$COMMIT_MESSAGE"
+        run: echo contains(github.event.commits.*.message, 'fix')
