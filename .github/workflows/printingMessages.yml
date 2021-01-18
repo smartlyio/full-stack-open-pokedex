@@ -21,6 +21,5 @@ jobs:
       - name: commit messages
         env:
           MESSAGE: ${{ github.event.commits.message }} 
-          TRUE_OR_NOT: ${{ contains(github.event.commits.message, 'fix') }}
-        run: echo "$TRUE_OR_NOT"
+          TRUE_OR_NOT: ${{ contains(github.event.commits.message, 'fix') }}        
         run: echo "$MESSAGE"
