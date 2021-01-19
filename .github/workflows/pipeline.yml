@@ -38,3 +38,6 @@ jobs:
           heroku_app_name: pirhon-pokedex
           heroku_email: "mikko.m.pirhonen@tuni.fi"
           healthcheck: "https://pirhon.pokedex.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+          
