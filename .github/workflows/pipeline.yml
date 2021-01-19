@@ -37,3 +37,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pirhon-pokedex
           heroku_email: "mikko.m.pirhonen@tuni.fi"
+          healthcheck: "https://pirhon.pokedex.herokuapp.com/health"
