@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: Test
+        env: 
+          MSG: ${{ toJson(github.event.commits.*.message) }} 
+      - name: Test2
+        if: ${{ contains(MSG, 'asd'}}
+        run: |
+          echo "It did contain asd"
       - name: gihub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
