@@ -47,4 +47,13 @@ jobs:
           healthcheck: "https://pirhon-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+  version:
+    runs-on: ubuntu-18.04
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - uses: action/checkout@v2
+      - uses: anothrNick/github-tag-action@1.34.0 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
           
