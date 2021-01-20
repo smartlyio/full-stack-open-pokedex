@@ -7,12 +7,11 @@ on:
 jobs:
   health-check:
     runs-on: ubuntu-18.04
-
-steps:
-  - name: Check health
-    uses: jtalk/url-health-check-action@v1.2
-    with:
-      url: https://pokedex-touko.herokuapp.com/health
-      follow-redirect: no 
-      max-attempts: 3
-      retry-delay: 30s
+    steps:
+      - name: Check health
+        uses: jtalk/url-health-check-action@v1.2
+        with:
+          url: https://pokedex-touko.herokuapp.com/health
+          follow-redirect: no 
+          max-attempts: 3
+          retry-delay: 30s
