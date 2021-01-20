@@ -35,6 +35,7 @@ module.exports = {
       'error',
       'never'
     ],
+    'no-unused-vars': ['error', { 'argsIgnorePattern': '^_' }],
     'eqeqeq': 'error',
     'no-trailing-spaces': 'error',
     'object-curly-spacing': [
