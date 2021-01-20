@@ -13,7 +13,6 @@ jobs:
       - name: Test
         env: 
           MSG: ${{ toJson(github.event.commits.*.message) }} 
-      - name: Test2
         if: ${{ contains(MSG, 'asd'}}
         run: |
           echo "It did contain asd"
