@@ -1,0 +1,16 @@
+name: Ping
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  ping:
+    runs-on: ubuntu-18.04
+    steps: 
+      - name: ping
+        uses: Jtalk/url-health-check-action@v1.3
+        with:
+          url: pirhon-pokedex.herokuapp.com/health
+          max_attempts: 1 
