@@ -11,9 +11,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Test
-        if: |
-          github.event_name == 'push' &&
-          !contains(join(github.event.commits.*.message, ' '), '#skip')
         run: |
           echo "It did contain asd"
       - name: gihub context
@@ -26,5 +23,5 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: "${{ toJson(join(github.event.commits.*.message, ' ') }}"
+          COMMIT_MESSAGES: "${{ toJson(join(github.event.commits.*.message, ' ')) }}"
         run: echo "$COMMIT_MESSAGES"
