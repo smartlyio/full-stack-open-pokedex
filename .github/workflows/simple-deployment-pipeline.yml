@@ -18,4 +18,5 @@ jobs:
           healthcheck: "https://pokemon-pokedex-cicd.herokuapp.com/health"
           checkstring: "ok!"
           delay: 5
+          rollbackonhealthcheckfailed: true
 
