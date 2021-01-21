@@ -10,8 +10,8 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
-app.get('/version', (req,res) => {
-  res.send('0.5')
+app.get('/version', (req, res) => {
+  res.send('1.0') 
 })
 
 app.listen(PORT, () => {
