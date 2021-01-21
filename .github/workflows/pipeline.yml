@@ -38,7 +38,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy
-        if: ${{ github.event_name == 'push' }}
+        if: "${{ github.event_name == 'push' }} && !contains(join(github.event.commits.*.message, ' '), '#skip')"
         uses: akhileshns/heroku-deploy@v3.8.9
         with: 
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
@@ -49,7 +49,7 @@ jobs:
           rollbackonhealthcheckfailed: true
   version:
     runs-on: ubuntu-18.04
-    if: ${{ github.event_name == 'push' }}
+    if: "${{ github.event_name == 'push' }} && !contains(join(github.event.commits.*.message, ' '), '#skip')"
     steps:
       - uses: actions/checkout@v2
       - uses: anothrNick/github-tag-action@1.34.0 
