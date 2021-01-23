@@ -17,12 +17,13 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
-    "no-console": 1,
-    "no-unused-vars": 0,
-    "indent": "off",
+    "indent": [
+      "error",
+        2
+      ],
     "linebreak-style": [
       "error",
       "unix"
@@ -45,11 +46,5 @@ module.exports = {
     ],
     "no-console": "error",
     "react/prop-types": 0
-  },
-  "globals": {
-    "cy": true,
-    "context": true,
-    "Cypress": true,
-    "assert": true
   }
 }

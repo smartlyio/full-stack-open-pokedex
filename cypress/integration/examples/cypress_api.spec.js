@@ -19,7 +19,6 @@ context('Cypress.Commands', () => {
 
       // log the subject to the console
       // @ts-ignore TS7017
-      // eslint-disable-next-line no-console
       console[method]('The subject is', subject)
 
       // whatever we return becomes the new subject
