@@ -20,10 +20,9 @@ module.exports = {
     "react", "jest"
   ],
   "rules": {
-    "indent": [
-      "error",
-        2
-      ],
+    "no-console": 0,
+    "no-unused-vars": 0,
+    "indent": "off",
     "linebreak-style": [
       "error",
       "unix"
@@ -49,6 +48,7 @@ module.exports = {
   },
   "globals": {
     "cy": true,
-    "context": true
+    "context": true,
+    "Cypress": true
   }
 }
