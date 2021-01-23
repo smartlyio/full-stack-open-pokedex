@@ -27,6 +27,7 @@ context('Spies, Stubs, and Clock', () => {
        * @param x {any}
       */
       foo (x) {
+        // eslint-disable-next-line no-console
         console.log('obj.foo called with', x)
       },
     }
