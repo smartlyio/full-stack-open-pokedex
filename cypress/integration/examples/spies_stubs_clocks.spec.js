@@ -34,6 +34,7 @@ context('Spies, Stubs, and Clock', () => {
     cy.spy(obj, 'foo').as('foo')
 
     setTimeout(() => {
+      // eslint-disable-next-line no-console
       obj.foo('first')
     }, 500)
 
@@ -55,6 +56,7 @@ context('Spies, Stubs, and Clock', () => {
        * @param b {string}
       */
       foo (a, b) {
+        // eslint-disable-next-line no-console
         console.log('a', a, 'b', b)
       },
     }
