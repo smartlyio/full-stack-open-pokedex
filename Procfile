@@ -1,2 +1,1 @@
-web: npm start
-# testing rollback
+web: npm run start-prod
