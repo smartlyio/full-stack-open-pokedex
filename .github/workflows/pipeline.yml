@@ -33,4 +33,4 @@ jobs:
           heroku_app_name: 'full-stack-open-pokedex-2020'
           heroku_email: 'abdulgumi77@gmail.com'         
           healthcheck: 'https://full-stack-open-pokedex-2020.herokuapp.com/health'
-           checkstring: 'ok'
+          checkstring: 'ok'
