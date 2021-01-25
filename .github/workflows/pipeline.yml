@@ -39,6 +39,7 @@ jobs:
           healthcheck: 'https://full-stack-open-pokedex-2020.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
       - name: bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
