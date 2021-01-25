@@ -27,7 +27,7 @@ jobs:
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
       - name: notification on deploy success
-        uses: 8398a7/action-slack@v3
+        uses: act10ns/slack@v1
         with:
           status: custom
           fields: commit,author,took
