@@ -70,3 +70,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+  healthy_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@2ff10af730f912a7b51f4e3868d9cb30de170a6b
+        with:
+          url: https://full-stack-open-pokedex-2020.herokuapp.com/
+          follow-redirect: no 
+          max-attempts: 3 
+          retry-delay: 5s           
