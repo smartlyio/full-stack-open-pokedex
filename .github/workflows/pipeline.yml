@@ -15,12 +15,12 @@ jobs:
           node-version: '12.x'
       - name: npm install
         run: npm install
-      - name: npm install dev
-        run: npm run heroku-prebuild
       - name: lint
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: heroku-postbuild
+        run: npm run heroku-postbuild
       - name: test
         run: npm run test
       - name: e2e tests
