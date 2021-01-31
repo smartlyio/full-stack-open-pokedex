@@ -16,7 +16,7 @@ jobs:
       - name: npm install
         run: npm install
       - name: npm install dev
-        run: npm install --dev
+        run: npm run heroku-prebuild
       - name: lint
         run: npm run eslint
       - name: build
