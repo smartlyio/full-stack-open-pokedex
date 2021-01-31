@@ -10,6 +10,7 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint": "eslint --fix --ext .js,.jsx .",
     "build": "webpack --mode production",
+    "heroku-prebuild": "npm install --dev",
     "test:e2e": "cypress run"
   },
   "repository": {
