@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "mysterious-falls-07756" #Must be unique in Heroku
           heroku_email: "sofia.bogdanova@aalto.fi"
+          healthcheck: "https://mysterious-falls-07756.herokuapp.com/health"
