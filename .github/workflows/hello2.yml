@@ -11,4 +11,6 @@ jobs:
     steps:
       - name: Say hello
         run: |
+          ls
+          date
           echo "Hello World!"
