@@ -17,3 +17,4 @@ jobs:
           heroku_email: "laura.a.byman@gmail.com"
           healthcheck: "https://mypokedex3456.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
