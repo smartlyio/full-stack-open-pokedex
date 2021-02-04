@@ -17,4 +17,4 @@ jobs:
           heroku_email: "makaidivya@gmail.com"
           dontuseforce: true 
           procfile: "web: npm start"
-          remote_branch: main
+          branch: "master"
