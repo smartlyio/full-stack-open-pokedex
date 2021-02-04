@@ -1,5 +1,11 @@
 module.exports = {
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
+    "node": true,
     "browser": true,
     "es6": true,
     "jest/globals": true
