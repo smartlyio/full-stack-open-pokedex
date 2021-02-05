@@ -10,7 +10,6 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
-    # if: ${{ github.event_name == 'push' }}
     steps: 
         - uses: actions/checkout@v2
         - uses: actions/setup-node@v1
@@ -40,12 +39,12 @@ jobs:
             healthcheck: "https://mypokedex3456.herokuapp.com/health"
             checkstring: "ok"
             rollbackonhealthcheckfailed: true
-        - name: Bump version and push tag
-          if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
-          uses: anothrNick/github-tag-action@1.33.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            DEFAULT_BUMP: patch
+        # - name: Bump version and push tag
+        #   if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        #   uses: anothrNick/github-tag-action@1.33.0
+        #   env:
+        #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #     DEFAULT_BUMP: patch
         - name: notify slack if failure
           uses: 8398a7/action-slack@v3
           if: ${{ failure() }}
