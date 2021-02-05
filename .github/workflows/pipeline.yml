@@ -52,8 +52,8 @@ jobs:
           with:
             status: failure
             fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
-            env:
-              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         - name: notify slack if success
           uses: 8398a7/action-slack@v3
           if: ${{ success() }}
@@ -66,5 +66,5 @@ jobs:
                   by ${process.env.AS_AUTHOR}, build took ${process.env.AS_TOOK}`,
                 }]
               }
-            env:
-              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          env:
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
