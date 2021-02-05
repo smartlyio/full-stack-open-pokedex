@@ -5,13 +5,14 @@ on:
     branches:
       - master
     pull_request:
-      branches: [master]
-      types: [opened, synchronize]
+       types: [opened, synchronize, reopened, ready_for_review, unlabeled, closed]
+       branches:
+        - master
 
 jobs: 
   build:
     runs-on: ubuntu-18.04
-    # if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.9.9 # This is the action
