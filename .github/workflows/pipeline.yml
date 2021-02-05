@@ -4,8 +4,9 @@ on:
     branches:
       - master
     pull_request:
-      branches: [master]
-      # types: [opened, synchronize]
+       types: [opened, synchronize, reopened, ready_for_review, unlabeled, closed]
+      branches:
+        - master
 
 jobs:
   simple_deployment_pipeline:
