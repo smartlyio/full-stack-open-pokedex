@@ -31,10 +31,34 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000
+        - name: heroku deploy
+          uses: akhileshns/heroku-deploy@v3.9.9 # This is the action
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: "mypokedex3456" #Must be unique in Heroku
+            heroku_email: "laura.a.byman@gmail.com"
+            healthcheck: "https://mypokedex3456.herokuapp.com/health"
+            checkstring: "ok"
+            rollbackonhealthcheckfailed: true
         - name: Bump version and push tag
           if: "!contains(github.event.head_commit.message, '#skip')"
           uses: anothrNick/github-tag-action@1.33.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
-          
+        # - name: notify slack if failure
+        #     - uses: 8398a7/action-slack@v3
+        #     with:
+        #     status: ${{ job.status }}
+        #     if: failure()
+        #     fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+        #     env:
+        #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        # - name: notify slack if failure
+        #     - uses: 8398a7/action-slack@v3
+        #     with:
+        #     status: ${{ job.status }}
+        #     if: failure()
+        #     fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
+        #     env:
+        #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
