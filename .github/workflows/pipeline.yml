@@ -3,10 +3,10 @@ on:
   push:
     branches:
       - master
-    pull_request:
-      branches:
-        - master
-      types: [opened, synchronize]
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - master
 
 jobs:
   simple_deployment_pipeline:
