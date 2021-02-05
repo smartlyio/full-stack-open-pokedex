@@ -51,10 +51,11 @@ jobs:
           if: ${{ failure() }}
           with:
             status: failure
-            fields: repo,message,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+            fields: repo, message, commit, author, took # selectable (default: repo,message)
           env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         - name: notify slack if success
+          if: ${{github.event_name == 'push'}}
           uses: 8398a7/action-slack@v3
           if: ${{ success() }}
           with:
