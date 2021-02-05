@@ -53,7 +53,7 @@ jobs:
             status: failure
             fields: repo,message,commit,author,action,eventName,ref,workflow # selectable (default: repo,message)
             env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         - name: notify slack if success
           uses: 8398a7/action-slack@v3
           if: ${{ success() }}
@@ -67,4 +67,4 @@ jobs:
                 }]
               }
             env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+              SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
