@@ -56,7 +56,7 @@ jobs:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         - name: notify slack if success
           uses: 8398a7/action-slack@v3
-          if: ${{ success() }} && ${{github.event_name == 'push'}}
+          if: ${{ success()  && github.event_name == 'push'}}
           with:
             status: custom
             custom_payload: |
