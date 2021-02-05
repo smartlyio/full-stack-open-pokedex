@@ -1,9 +1,9 @@
 name: Hello World!
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
