@@ -41,8 +41,8 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
-          if: ${{ github.event_name == 'push' }}
-          uses: anothrNick/github-tag-action@1.33.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
-            DEFAULT_BUMP: "patch"
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          DEFAULT_BUMP: "patch"
