@@ -33,3 +33,5 @@ jobs:
           heroku_app_name: "pokedex-ci"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           remote_branch: master
+          healthcheck: "https://pokedex-ci.herokuapp.com/health"
+          checkstring: "ok"
