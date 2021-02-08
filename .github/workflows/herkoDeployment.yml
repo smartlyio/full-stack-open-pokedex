@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.10.9
+      - uses: akhileshns/heroku-deploy@v3.7.8
         if: ${{ !contains(github.event.head_commit.message, '#skip') && github.event_name == 'push'}}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
