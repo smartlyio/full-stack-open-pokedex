@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.10.9
-      f: ${{ !contains(github.event.head_commit.message, '#skip') && github.event_name == 'push'}}
+      if: ${{ !contains(github.event.head_commit.message, '#skip') && github.event_name == 'push'}}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-pokedex-chen"
