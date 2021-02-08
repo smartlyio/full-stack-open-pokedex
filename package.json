@@ -12,6 +12,7 @@
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
+  "proxy": "http://localhost:5000",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
