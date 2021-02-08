@@ -14,5 +14,5 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-pokedex-chen"
-          heroku_email: "ting.candy.chen@gamil.com"
+          heroku_email: "ting.candy.chen@gmail.com"
           remote_branch: master # <- Include this
