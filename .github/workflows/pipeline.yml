@@ -36,3 +36,4 @@ jobs:
           remote_branch: master
           healthcheck: "https://cryptic-shelf-63653.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
