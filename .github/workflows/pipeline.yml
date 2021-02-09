@@ -34,3 +34,5 @@ jobs:
           heroku_app_name: "cryptic-shelf-63653"
           heroku_email: "pianoguitarify123@gmail.com"
           remote_branch: master
+          healthcheck: "https://cryptic-shelf-63653.herokuapp.com/health"
+          checkstring: "ok"
