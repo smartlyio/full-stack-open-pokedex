@@ -1,0 +1,16 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Hello world again!
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Say hello again
+        run: |
+          echo "Hello world again!" 
