@@ -33,5 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "dicky-pokemon-app"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: https://dicky-pokemon-app.herokuapp.com/
+          healthcheck: https://dicky-pokemon-app.herokuapp.com/health
           checkstring: ok
