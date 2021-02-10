@@ -30,6 +30,8 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokedex-app-fcole90" #Must be unique in Heroku
+          heroku_app_name: "pokedex-app-fcole90"
           heroku_email: "fabiocolella1990@gmail.com"
           remote_branch: master
+          healthcheck: "https://pokedex-app-fcole90.herokuapp.com/health"
+          checkstring: "ok"
