@@ -35,3 +35,4 @@ jobs:
           remote_branch: master
           healthcheck: "https://pokedex-app-fcole90.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
