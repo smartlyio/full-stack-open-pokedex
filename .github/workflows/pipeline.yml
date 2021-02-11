@@ -34,3 +34,6 @@ jobs:
           heroku_app_name: "moocpoke"
           heroku_email: "iko.hyppanen@gmail.com"
           remote_branch: master
+          healthcheck: "https://moocpoke.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
