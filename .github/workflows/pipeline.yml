@@ -33,4 +33,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: moocpoke
           heroku_email: iko.hyppanen@gmail.com
-          remote_branch: master #
