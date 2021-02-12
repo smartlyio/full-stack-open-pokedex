@@ -37,3 +37,4 @@ jobs:
           healthcheck: "https://moocpoke.herokuapp.com/health"
           checkstring: "ok"
           delay: 5
+          rollbackonhealthcheckfailed: true
