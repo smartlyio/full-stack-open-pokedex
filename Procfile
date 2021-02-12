@@ -1,1 +1,1 @@
-web: npm run start-pokemon
+web: npm run start-prod
