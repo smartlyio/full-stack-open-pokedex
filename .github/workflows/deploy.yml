@@ -17,3 +17,4 @@ jobs:
           heroku_email: "andreasdhanu@gmail.com"
           remote_branch: master
           healthcheck: "https://poke-weeb.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
