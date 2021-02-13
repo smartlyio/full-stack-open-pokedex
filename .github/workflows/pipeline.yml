@@ -13,17 +13,17 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install 
-        run: npm install  
+      - name: yarn install 
+        run: yarn install  
       - name: lint
-        run: npm run eslint
+        run: yarn eslint
       - name: build
-        run: npm run build
+        run: yarn build
       - name: test
-        run: npm run test
+        run: yarn test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
-          command: npm run test:e2e
-          start: npm start
-          wait-on: 'http://localhost:8080'
+          command: yarn test:e2e
+          start: yarn start-prod
+          wait-on: http://localhost:5000 
