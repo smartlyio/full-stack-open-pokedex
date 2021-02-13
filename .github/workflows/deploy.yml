@@ -16,3 +16,4 @@ jobs:
           heroku_app_name: "poke-weeb"
           heroku_email: "andreasdhanu@gmail.com"
           remote_branch: master
+          healthcheck: "https://poke-weeb.herokuapp.com/health"
