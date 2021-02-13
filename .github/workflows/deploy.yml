@@ -14,10 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.10.9
+        if: ${{ github.event_name == 'push'  }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "poke-weeb"
           heroku_email: "andreasdhanu@gmail.com"
           remote_branch: master
           healthcheck: "https://poke-weeb.herokuapp.com/health"
+          checkstring: "ok"
           rollbackonhealthcheckfailed: true
