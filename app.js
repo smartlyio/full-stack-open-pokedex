@@ -11,7 +11,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('16 feature-branch') // change this string to ensure a new version deployed
+  res.send('17 feature-branch') // change this string to ensure a new version deployed
 })
 
 app.listen(PORT, () => {
