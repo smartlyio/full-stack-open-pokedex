@@ -31,4 +31,8 @@ jobs:
         env:
           joined_messages: ${{ join(github.event.commits.*.message) }}
         run: echo "$joined_messages"
-
+      - name: not skipping
+        env:
+          no_skip: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: env.no_skip == false
+        run: echo "not skipped"
