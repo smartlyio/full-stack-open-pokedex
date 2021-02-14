@@ -42,7 +42,7 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
-  tagging_job
+  tagging_job:
     runs-on: ubuntu-18-04
     steps:
       - uses: actions/checkout@v2
