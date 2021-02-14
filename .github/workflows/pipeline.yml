@@ -43,7 +43,7 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
   tagging_job:
-    runs-on: ubuntu-18-04
+    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
