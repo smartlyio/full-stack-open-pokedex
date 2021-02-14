@@ -39,4 +39,4 @@ jobs:
       - name: test contains
         env:
           myContains: ${{ contains(join(github.events.commits.*.message), 'testaus') }}
-        run: echo "myContains"
+        run: echo "$myContains"
