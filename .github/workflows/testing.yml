@@ -29,6 +29,7 @@ jobs:
       - name: skipping
         env:
           skip: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: ${{ env.skip == true }}
         run: echo "$skip"
       - name: not skipping
         env:
