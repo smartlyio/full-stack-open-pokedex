@@ -34,7 +34,7 @@ jobs:
         env:
           EVENT_NAME: ${{ github.event_name }}
           SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        if: env.EVENT_NAME2 == 'push' && env.SKIP == 'false'
+        if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -58,6 +58,6 @@ jobs:
           WITH_V: true
           INITIAL_VERSION: 0.0.0
           DRY_RUN: false
-        if: env.EVENT_NAME2 == 'push' && env.SKIP == 'false'
+        if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
         uses: anothrNick/github-tag-action@1.33.0
           
