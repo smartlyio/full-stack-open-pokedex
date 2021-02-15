@@ -31,7 +31,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to heroku
-        if: ${{ github.event_name == 'push' }}
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: env.EVENT_NAME2 == 'push' && env.SKIP == 'false'
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -47,7 +50,10 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: env.EVENT_NAME2 == 'push' && env.SKIP == 'false'
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
