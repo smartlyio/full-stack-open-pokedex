@@ -29,13 +29,11 @@ jobs:
       - name: skipping
         env:
           skip: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        run: echo "$skip"  
         if: ${{ env.skip == true }}
         run: echo "skipped"
       - name: not skipping
         env:
           no_skip: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        run: echo "$no_skip"    
         if: env.no_skip == false
         run: echo "not skipped"
       - name: test contains
