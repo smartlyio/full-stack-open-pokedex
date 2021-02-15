@@ -28,9 +28,14 @@ jobs:
         run: echo "$joined_messages"
       - name: skipping
         env:
-          skip: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        if: ${{ env.skip == true }}
-        run: echo "$skip"
+          SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: env.SKIP == true
+        run: echo "skip"
+      - name: skipping
+        env:
+          SKIP2: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        if: env.SKIP2
+        run: echo "skip2"
       - name: not skipping
         env:
           no_skip: ${{ !contains(join(github.event.commits.*.message), '#skip') }}
