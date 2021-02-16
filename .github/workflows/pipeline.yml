@@ -11,9 +11,9 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   EVENT_NAME: ${{ github.event_name }}
   SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-
+  
 jobs:
-  install_lint_build_test_job:
+  build_job:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -26,11 +26,6 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-        if: ${{ failure() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: job
       - name: test
         run: npm run test
       - name: e2e tests
@@ -39,6 +34,12 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: slack notification on build failure
+        if: ${{ failure() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: job
 
   deploy_job:
     runs-on: ubuntu-18.04
