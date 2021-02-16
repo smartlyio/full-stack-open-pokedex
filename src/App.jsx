@@ -37,6 +37,5 @@ const App = () => {
     </Router>
   )
 }
-//Kommentti
-//Uusi kommentti
+
 export default App
