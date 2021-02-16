@@ -25,6 +25,7 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: build
+        id: build
         run: npm run build
       - name: test
         run: npm run test
@@ -35,7 +36,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: slack notification on build failure
-        if: ${{ failure() }}
+        if: ${{ jobs.steps.build.status == failure() }}
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -46,6 +47,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deploy to heroku
+        id: deploy
         if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
@@ -58,7 +60,7 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: slack notification on deploy success
-        if: ${{ success() }}
+        if: ${{ jobs.steps.deploy.status == success() }}
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
