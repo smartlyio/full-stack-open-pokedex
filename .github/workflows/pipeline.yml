@@ -26,7 +26,7 @@ jobs:
         run: npm run eslint
       - name: build
         id: build
-        run: npm run build
+        run: npm run buildfail
       - name: test
         run: npm run test
       - name: e2e tests
@@ -38,7 +38,10 @@ jobs:
       - name: slack notification on build failure
         env: 
           BUILD_STATUS:  ${{ steps.build.outcome }}
-        run: echo "$BUILD_STATUS"
+        if: env.BUILD_STATUS == 'failure'
+        run: echo "build failed"
+        
+
 
   deploy_job:
     runs-on: ubuntu-18.04
