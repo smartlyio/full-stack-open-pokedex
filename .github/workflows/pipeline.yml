@@ -36,11 +36,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: slack notification on build failure
-        if: ${{ job.steps.build.status == failure() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: job
+        env: 
+          BUILD_STATUS:  ${{ job.steps.build.outcome }}
+        run: echo "$BUILD_STATUS"
 
   deploy_job:
     runs-on: ubuntu-18.04
@@ -60,11 +58,9 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: slack notification on deploy success
-        if: ${{ job.steps.deploy.status == success() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: job
+        env:
+          DEPLOY_STATUS: ${{ steps.deploy.outcome }}
+        run: echo "$DEPLOY_STATUS"
         
   tagging_job:
     runs-on: ubuntu-18.04
