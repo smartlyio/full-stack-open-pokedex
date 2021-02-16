@@ -7,9 +7,13 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  EVENT_NAME: ${{ github.event_name }}
+  SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
+  
 jobs:
-  simple_deployment_pipeline:
+  build_job:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -30,10 +34,18 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: slack notification on build failure
+        if: ${{ failure() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: job
+
+  deploy_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
       - name: deploy to heroku
-        env:
-          EVENT_NAME: ${{ github.event_name }}
-          SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
         if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
@@ -45,14 +57,12 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
-      - name: The job has succeeded
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: slack notification on deploy success
         if: ${{ success() }}
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo
+          fields: job
         
   tagging_job:
     runs-on: ubuntu-18.04
@@ -60,8 +70,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         env:
-          EVENT_NAME: ${{ github.event_name }}
-          SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
