@@ -37,7 +37,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: slack notification on build failure
         env: 
-          BUILD_STATUS:  ${{ job.steps.build.outcome }}
+          BUILD_STATUS:  ${{ steps.build.outcome }}
         run: echo "$BUILD_STATUS"
 
   deploy_job:
