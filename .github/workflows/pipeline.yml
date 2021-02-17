@@ -59,15 +59,6 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
-      - name: slack notification on deploy success
-        env:
-          BUILD_STATUS: ${{ steps.deploy.outcome }}
-        if: env.BUILD_STATUS == 'success'
-        uses: akhileshns/heroku-deploy@v3.10.9
-        with:
-          status: ${{ job.status }}
-          fields: commit
-        
         
   tagging_job:
     runs-on: ubuntu-18.04
