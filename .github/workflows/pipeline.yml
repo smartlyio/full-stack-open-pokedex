@@ -8,6 +8,7 @@ on:
     branches: [master]
     types: [opened, synchronize]
 env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   EVENT_NAME: ${{ github.event_name }}
   SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
@@ -25,7 +26,7 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: build
-        run: npm run buildfail
+        run: npm run build
       - name: test
         run: npm run test
       - name: e2e tests
@@ -63,7 +64,13 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: job
+          fields: commit,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+              }]
+            }
         
   tagging_job:
     runs-on: ubuntu-18.04
@@ -71,7 +78,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
           INITIAL_VERSION: 0.0.0
