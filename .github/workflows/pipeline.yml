@@ -38,8 +38,9 @@ jobs:
       - name: slack notification on build failure
         env: 
           BUILD_STATUS:  ${{ steps.build.outcome }}
+          JOB_STATUS: ${{ job.status }}
         if: env.BUILD_STATUS == 'failure'
-        run: echo "build failed"
+        run: echo "$JOB_STATUS"
         
 
 
