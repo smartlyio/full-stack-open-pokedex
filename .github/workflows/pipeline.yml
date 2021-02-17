@@ -65,9 +65,15 @@ jobs:
         if: ${{ env.DEPLOY_SUCCESS == 'success' }}
         uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
-          fields: commit, took
-
+          status: custom
+          fields: commit,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: 'good',
+                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+              }]
+            }
         
   tagging_job:
     runs-on: ubuntu-18.04
