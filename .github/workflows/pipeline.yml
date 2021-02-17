@@ -63,6 +63,7 @@ jobs:
         env:
           BUILD_STATUS: ${{ steps.deploy.outcome }}
         if: env.BUILD_STATUS == 'success'
+        uses: akhileshns/heroku-deploy@v3.10.9
         with:
           status: custom
           fields: commit,author,took
