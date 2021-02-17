@@ -62,7 +62,16 @@ jobs:
       - name: slack notification on deploy success
         env:
           BUILD_STATUS: ${{ steps.deploy.outcome }}
-        run: echo "$BUILD_STATUS"
+        if: env.BUILD_STATUS == 'success'
+        with:
+          status: custom
+          fields: commit,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+              }]
+            }
         
         
   tagging_job:
