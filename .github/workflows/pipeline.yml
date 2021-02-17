@@ -60,17 +60,10 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: slack notification on deploy success
-        if: ${{ success() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: commit,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
-              }]
-            }
+        env:
+          BUILD_STATUS: ${{ steps.deploy.outcome }}
+        run: echo "$BUILD_STATUS"
+        
         
   tagging_job:
     runs-on: ubuntu-18.04
