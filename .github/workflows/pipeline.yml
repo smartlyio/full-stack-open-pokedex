@@ -25,7 +25,6 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: build
-        id: build
         run: npm run buildfail
       - name: test
         run: npm run test
@@ -36,14 +35,12 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: slack notification on build failure
-        env: 
-          BUILD_STATUS:  ${{ steps.build.outcome }}
-          JOB_STATUS: ${{ job.status }}
-        if: env.BUILD_STATUS == 'failure'
-        run: echo "$JOB_STATUS"
+        if: ${{ failure() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo, message, commit, author, took
         
-
-
   deploy_job:
     runs-on: ubuntu-18.04
     steps:
@@ -62,9 +59,11 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: slack notification on deploy success
-        env:
-          DEPLOY_STATUS: ${{ steps.deploy.outcome }}
-        run: echo "$DEPLOY_STATUS"
+        if: ${{ success() }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: job
         
   tagging_job:
     runs-on: ubuntu-18.04
