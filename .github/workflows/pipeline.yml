@@ -58,9 +58,9 @@ jobs:
           healthcheck: "https://moocpoke.herokuapp.com/health"
           checkstring: "ok"
           delay: 5
-          rollbackonhealthcheckfailed: true
+          rollbackonhealthcheckfailed: true0
       - name: slack notification on deploy success
-        if: ${{ success }}
+        if: ${{ success() }}
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
