@@ -59,6 +59,13 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
+      - name: slack notification on deploy success
+        if: ${{ success }}
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: commit, took
+
         
   tagging_job:
     runs-on: ubuntu-18.04
