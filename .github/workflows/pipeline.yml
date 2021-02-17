@@ -65,14 +65,8 @@ jobs:
         if: env.BUILD_STATUS == 'success'
         uses: akhileshns/heroku-deploy@v3.10.9
         with:
-          status: custom
-          fields: commit,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
-              }]
-            }
+          status: ${{ job.status }}
+          fields: commit
         
         
   tagging_job:
