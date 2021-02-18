@@ -20,5 +20,5 @@ jobs:
   directory_contents:
     runs-on: ubuntu-18.04
     steps:
-      - name: Show date
+      - name: Show directory contents
         run: ls -l
