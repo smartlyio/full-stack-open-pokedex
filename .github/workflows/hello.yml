@@ -7,18 +7,18 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    runs-on: macos-11.0
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
   nowItIs:
-    runs-on: ubuntu-18.04
+    runs-on: macos-11.0
     steps:
       - name: Show date
         run: date
   directory_contents:
-    runs-on: ubuntu-18.04
+    runs-on: macos-11.0
     steps:
       - name: Show directory contents
         run: ls -l
