@@ -7,18 +7,18 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
   nowItIs:
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Show date
         run: date
   directory_contents:
-    runs-on: macos-11.0
+    runs-on: macos-latest
     steps:
       - name: Show directory contents
         run: ls -l
