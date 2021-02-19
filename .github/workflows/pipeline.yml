@@ -35,4 +35,5 @@ jobs:
           heroku_email: "alluroitto@gmail.com"
           healthcheck: "https://pokedex123-fullstack.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
 
