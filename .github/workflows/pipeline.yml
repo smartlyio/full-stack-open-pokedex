@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
         uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' }} && ${{ !contains(github.event.head_commit.message, '#skip')) }} && ${{ success() }}
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
