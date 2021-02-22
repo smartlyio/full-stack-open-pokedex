@@ -8,6 +8,7 @@ describe('Pokedex', function() {
   it('navigation works from main page to pokemon page', function() {
     cy.visit('http://localhost:5000')
 
-    
+    cy.contains('kakuna').click();
+    cy.contains('shed skin')
   })
 })
