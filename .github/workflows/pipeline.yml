@@ -31,6 +31,6 @@ jobs:
         uses: AkhileshNS/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "dry-coast-48973" #Must be unique in Heroku
+          heroku_app_name: "chiranjeevvonnthomaswatson" #Must be unique in Heroku
           heroku_email: "vonnaden@gmail.com"
-          healthcheck: "https://dry-coast-48973.herokuapp.com/health"
+          healthcheck: "https://chiranjeevvonnthomaswatson.herokuapp.com/health"
