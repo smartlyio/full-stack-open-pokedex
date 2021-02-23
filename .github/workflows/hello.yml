@@ -15,8 +15,8 @@ jobs:
 
       - name: Not it is
         run: |
-          echo date
+          --date
 
       - name: Directory content
         run: |
-          ls -1
+          ls -l
