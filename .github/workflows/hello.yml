@@ -17,10 +17,10 @@ jobs:
     steps:
       - name: Now it is
         run | 
-          date
+          echo date
   directory_content:
     runs-on: ubunto-18.04
     steps: 
       - name: Directory content
         run |
-          ls -l
+          echo ls -l
