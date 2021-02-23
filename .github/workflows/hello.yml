@@ -14,8 +14,9 @@ jobs:
           echo "Hello World!"
 
       - name: Not it is
-        run: date
+        run: |
           echo date
 
       - name: Directory content
-        run: ls -1
+        run: |
+          ls -1
