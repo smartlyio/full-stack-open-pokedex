@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "maebius-fso2020-pokedex"
           heroku_email: "markus.erapolku@gmail.com"
+          healthcheck: "https://maebius-fso2020-pokedex.herokuapp.com/health"
+          checkstring: "ok"
