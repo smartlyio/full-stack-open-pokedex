@@ -7,7 +7,7 @@ import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
 
 /*
-The ci environment should be as close to the _production environment_ as possible. 
+The ci environment should be as close to the _production environment_ as possible.
 You can run actions locally with act: https://github.com/nektos/act
 
 You can check the available
