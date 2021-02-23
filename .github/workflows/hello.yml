@@ -15,7 +15,7 @@ jobs:
 
       - name: Not it is
         run: |
-          --date
+          -date
 
       - name: Directory content
         run: |
