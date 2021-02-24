@@ -13,8 +13,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-        steps:
-          - name: npm install
-            run: npm install
-          - name: lint
-            run: npm run eslint
+
+      - name: npm install
+        run: npm install
+
+      - name: lint
+        run: npm run eslint
