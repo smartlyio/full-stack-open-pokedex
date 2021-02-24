@@ -35,3 +35,4 @@ jobs:
           heroku_email: mnajarian@gmail.com
           healthcheck: https://my-fullstackopen.herokuapp.com/health
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
