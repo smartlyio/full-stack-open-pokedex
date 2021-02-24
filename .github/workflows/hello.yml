@@ -32,4 +32,4 @@ jobs:
     steps:
       - name: Directory name
         run: |
-          getwd()
+          echo getwd()
