@@ -64,10 +64,10 @@ jobs:
           custom_payload: |
             {
               username: 'github-action',
-              icon_emoji: ':100:',
+              icon_emoji: ':59:',
               attachments: [{
                 color: 'good',
-                text: `a new version deployed to http://fs-2020-pokedex.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+                text: `a new version deployed to https://dicky-pokemon-app.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
               }]
             }
         env:
