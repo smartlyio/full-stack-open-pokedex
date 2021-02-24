@@ -25,4 +25,4 @@ jobs:
     steps:
       - name: Directory content
         run: |
-          echo "$(ls -l)"
+          $(ls -l)
