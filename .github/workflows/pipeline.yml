@@ -35,7 +35,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.7.8 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fs-2020-pokedex"
+          heroku_app_name: "dicky-pokemon-app"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: https://dicky-pokemon-app.herokuapp.com/health
           checkstring: ok
