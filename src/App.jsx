@@ -19,7 +19,7 @@ const App = () => {
     mapResults
   )
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner />
   }
   if (error) {
     return <ErrorMessage error={error} />
@@ -45,12 +45,12 @@ const App = () => {
                 previous={previous}
                 next={next}
               />
-            );
+            )
           }}
         />
       </Switch>
     </Router>
-  );
-};
+  )
+}
 
 export default App
