@@ -18,11 +18,11 @@ jobs:
     steps:
       - name: Now it is
         run: |
-          echo "Hello World!"
+          date
 
   directory_content:
     runs-on: ubuntu-18.04
     steps:
       - name: Directory content
         run: |
-          echo "Hello World!"
+          ls -l
