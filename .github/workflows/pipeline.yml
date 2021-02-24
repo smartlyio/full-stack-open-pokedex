@@ -29,6 +29,7 @@ jobs:
       #     wait-on: http://localhost:5000
       - name: Deploy
       - uses: akhileshns/heroku-deploy@v3
-        with: heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-              heroku_app_name: my-fullstackopen
-              heroku_email: mnajarian@gmail.com
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: my-fullstackopen
+          heroku_email: mnajarian@gmail.com
