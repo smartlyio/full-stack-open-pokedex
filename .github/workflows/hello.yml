@@ -17,12 +17,12 @@ jobs:
     # runs-on: ubuntu-18.04
     steps:
       - name: Now it is
-        run | 
+        run: |
           echo "Hello World!"
 
   directory_content:
     # runs-on: ubuntu-18.04
-    steps: 
+    steps:
       - name: Directory content
-        run |
+        run: |
           echo "Hello World!"
