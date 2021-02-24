@@ -26,10 +26,3 @@ jobs:
       - name: Directory content
         run: |
           ls -l
-
-  directory_c:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Directory name
-        run: |
-          echo getwd()
