@@ -19,3 +19,10 @@ jobs:
       - name: Now it is
         run: |
           echo "Today is $(date)"
+
+  ls:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Directory content
+        run: |
+          echo "$(ls)"
