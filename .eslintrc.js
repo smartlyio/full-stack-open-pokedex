@@ -11,7 +11,8 @@ module.exports = {
     "plugin:cypress/recommended"
   ],
   'globals': {
-    'process': true
+    'process': true,
+    'module': true
   },
   "parserOptions": {
     "ecmaFeatures": {
