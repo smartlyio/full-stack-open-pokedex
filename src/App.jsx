@@ -17,6 +17,7 @@ const App = () => {
   if (isLoading) {
     return <LoadingSpinner />
   }
+
   if (error) {
     return <ErrorMessage error={error} />
   }
