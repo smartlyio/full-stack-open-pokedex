@@ -18,4 +18,4 @@ jobs:
     steps:
       - name: Now it is
         run: |
-          echo date()
+          echo date
