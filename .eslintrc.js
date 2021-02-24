@@ -6,8 +6,7 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended",
-    "plugin:cypress/recommended"
+    "plugin:react/recommended"
   ],
   'globals': {
     'process': true
