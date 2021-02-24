@@ -11,7 +11,7 @@
     "build": "webpack --mode production",
     "start:test": "cross-env NODE_ENV=test node index.js",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress run"
   },
   "repository": {
     "type": "git",
