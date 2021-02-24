@@ -8,6 +8,5 @@ app.use(express.static('dist'))
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
-  // eslint-disable-next-line no-undef
   console.log('server started on port 5000')
 })
