@@ -40,7 +40,6 @@ jobs:
           healthcheck: https://dicky-pokemon-app.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
-        if: ${{ github.event_name == 'push' }}
         - uses: "actions/checkout@v2"
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.34.0
