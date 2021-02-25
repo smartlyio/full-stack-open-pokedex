@@ -34,6 +34,7 @@ const PokemonPage = ({ previous, next }) => {
 
   // eslint-disable-next-line no-console
   console.log('hiddenAbility=', hiddenAbility)
+  // puutaheinää
   return (
     <>
       <div className='links'>
