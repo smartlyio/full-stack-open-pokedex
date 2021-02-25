@@ -10,7 +10,7 @@ describe('Navigation', function() {
   it('navigates from main page to particular page', function() {
     cy.visit('http://localhost:5000')
     cy.contains('ivysaur')
-    cy.get('#2').click()
+    cy.get('.list-item-name').contains('Ivysaur').click()
     cy.contains('Chlorophyll')
     cy.contains('Ivysaur')
     cy.contains('Overgrow')
