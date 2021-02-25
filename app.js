@@ -11,7 +11,7 @@ app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
 
-app.get('/heal', (_req, res) => {
+app.get('/health', (_req, res) => {
   res.send('ok')
 })
 
