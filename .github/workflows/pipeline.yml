@@ -33,3 +33,4 @@ jobs:
           heroku_app_name: "thatmdee-pokedex"
           heroku_email: ${{secrets.EMAIL}}
           healthcheck: "https://thatmdee-pokedex.herokuapp.com/health"
+          checkstring: "ok"
