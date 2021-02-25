@@ -24,6 +24,9 @@ const App = () => {
   return (
     <Router>
       <Switch>
+        <Route path="/health">
+          <h3>Hey There!!! The App is Healthy</h3>
+        </Route>
         <Route exact path="/">
           <PokemonList pokemonList={pokemonList} />
         </Route>
