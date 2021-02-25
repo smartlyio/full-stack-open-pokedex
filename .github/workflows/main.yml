@@ -16,3 +16,4 @@ jobs:
           heroku_app_name: "cdci-bry23" #Must be unique in Heroku
           heroku_email: "bryantt23@gmail.com"
           healthcheck: "https://cdci-bry23.herokuapp.com/health"
+          checkstring: "ok"
