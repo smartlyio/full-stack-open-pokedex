@@ -12,7 +12,7 @@ describe('Navigation', function() {
     // cy.contains('ivysaur')
     cy.contains('ivysaur').click()
     cy.contains('ivysaur')
-    cy.contains('xhlorophyll')
+    cy.contains('hlorophyll')
     cy.contains('vergrow')
   })
 })
