@@ -15,3 +15,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "cdci-bry23" #Must be unique in Heroku
           heroku_email: "bryantt23@gmail.com"
+          healthcheck: "https://cdci-bry23.herokuapp.com/health"
