@@ -33,3 +33,5 @@ jobs:
           heroku_app_name: "morning-shore-02726"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://morning-shore-02726.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
