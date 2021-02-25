@@ -29,6 +29,6 @@ jobs:
           wait-on: http://localhost:5000
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: 116ca8b4-304e-42e5-bd33-8dc27d19f5b2
           heroku_app_name: paco-pokedex-app #Must be unique in Heroku
           heroku_email: sirpaquillo1@yahoo.com.mx
