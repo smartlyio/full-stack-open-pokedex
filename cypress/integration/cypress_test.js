@@ -9,10 +9,10 @@ describe('Pokedex', function() {
 describe('Navigation', function() {
   it('navigates from main page to particular page', function() {
     cy.visit('http://localhost:5000')
-    cy.contains('ivysaur')
-    cy.contains('Ivysaur').click()
+    // cy.contains('ivysaur')
+    cy.contains('ivysaur').click()
     cy.contains('Chlorophyll')
-    cy.contains('Ivysaur')
+    cy.contains('ivysaur')
     cy.contains('Overgrow')
   })
 })
