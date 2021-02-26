@@ -45,5 +45,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.34.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+          DEFAULT_BUMP: none
           REPO_OWNER: mnajjarian
