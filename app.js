@@ -16,5 +16,6 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('1')
+  console.log(process.env);
+  res.send(process.env.npm_package_version)
 })
