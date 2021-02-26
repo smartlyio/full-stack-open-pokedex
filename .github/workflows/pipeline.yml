@@ -29,7 +29,7 @@ jobs:
           wait-on: http://localhost:5000
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_app_name: paco-pokedex-app #Must be unique in Heroku
+          heroku_app_name: "paco-pokedex-app" #Must be unique in Heroku
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_email: sirpaquillo1@yahoo.com.mx
-          healthcheck: https://paco-pokedex-app.herokuapp.com/health
+          heroku_email: "sirpaquillo1@yahoo.com.mx"
+          healthcheck: "https://paco-pokedex-app.herokuapp.com/health"
