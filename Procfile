@@ -1,1 +1,1 @@
-web: npm run start-prod-testi
+web: npm run start-prod
