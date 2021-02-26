@@ -16,6 +16,6 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  console.log(process.env);
+// eslint-disable-next-line no-undef
   res.send(process.env.npm_package_version)
 })
