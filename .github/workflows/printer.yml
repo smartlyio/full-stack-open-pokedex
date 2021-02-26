@@ -26,10 +26,5 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-        if: ${{  toJson(github.event.commits.*.message).includes("heyo") }}
-      - name: test the if version two (as list)
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-        if: ${{  toJson(github.event.commits.*.message)[0].includes("heyo") }}
+        if: "!contains(github.event.head_commit.message, 'heyo')"
         
