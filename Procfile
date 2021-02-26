@@ -1,1 +1,1 @@
-web: npm run start-prod-testivirhe
+web: npm run start-prod
