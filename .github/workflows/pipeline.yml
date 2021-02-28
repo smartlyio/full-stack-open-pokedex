@@ -40,9 +40,11 @@ jobs:
           healthcheck: "https://fullstackopenpokedexmatti.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: truev
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        # if: github.event_name == 'push' # Means merge or push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # DEFAULT_BUMP: patch
+          DEFAULT_BUMP: patch
+        # if: github.event_name == 'push' # Means merge or push
+        
