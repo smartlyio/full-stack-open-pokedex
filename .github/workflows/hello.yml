@@ -20,9 +20,9 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        # if: "$COMMIT_MESSAGES".contains('joopas1') 
-        run: echo "$COMMIT_MESSAGES".contains('joopas1')
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message.join()) }}
+        # if: "$COMMIT_MESSAGES".contains('joopas2') 
+        run: echo "$COMMIT_MESSAGES"
 
 # jobs:
 #   hello_world_job:
