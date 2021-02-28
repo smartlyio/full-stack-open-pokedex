@@ -3,7 +3,7 @@ name: Hello World!
 on:
   push:
     branches:
-      - master
+      - joopas
 
 jobs:
   a_test_job:
@@ -19,8 +19,9 @@ jobs:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
       - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        # env:
+        # COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        if ${{ toJson(github.event.commits.*.message) }}.includes('#skip') 
         run: echo "$COMMIT_MESSAGES"
 
 # jobs:
