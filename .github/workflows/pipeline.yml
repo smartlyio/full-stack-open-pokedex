@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: truev
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: github.event_name == 'push' # Means merge or push
+        # if: github.event_name == 'push' # Means merge or push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+          # DEFAULT_BUMP: patch
