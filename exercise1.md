@@ -1,0 +1,9 @@
+- language: Rust https://www.rust-lang.org/
+- tools
+  - lint: cargo check, cargo clippy https://github.com/rust-lang/rust-clippy
+  - test: rustc --test,  cargo test
+  - build: cargo build
+- alternative CI
+  - CircleCI https://circleci.com/ (cloud)
+  - TeamCity https://www.jetbrains.com/teamcity/ (self-hosted)
+  - Travis CI https://travis-ci.com/ (cloud)
