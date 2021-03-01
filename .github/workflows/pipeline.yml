@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - master
+      - pokedex-branch1
     pull_request:
       branches: [master]
       types: [opened, synchronize]
