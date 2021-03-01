@@ -7,14 +7,15 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   'globals': {
     'process': true,
     'module': true
   },
   "parserOptions": {
-    "ecmaFeatures": { 
+    "ecmaFeatures": {
       "jsx": true
     },
     "ecmaVersion": 2018,
