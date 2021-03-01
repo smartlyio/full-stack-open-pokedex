@@ -27,13 +27,12 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Deploying to Heroku
-        run: git pull origin master
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "paco-pokedex-app" #Must be unique in Heroku
           heroku_email: "sirpaquillo1@yahoo.com.mx"
+          dontuseforce: false
           procfile: "web: npm run start-prod"
           healthcheck: "https://paco-pokedex-app.herokuapp.com/health"
           checkstring: "ok"
