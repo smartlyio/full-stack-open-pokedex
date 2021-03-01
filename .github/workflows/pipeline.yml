@@ -32,7 +32,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "paco-pokedex-app" #Must be unique in Heroku
           heroku_email: "sirpaquillo1@yahoo.com.mx"
-          dontuseforce: false
+          dontuseforce: true
           procfile: "web: npm run start-prod"
           healthcheck: "https://paco-pokedex-app.herokuapp.com/health"
           checkstring: "ok"
