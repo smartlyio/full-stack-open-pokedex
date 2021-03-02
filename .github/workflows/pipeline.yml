@@ -35,10 +35,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          if: ${{ github.event_name == 'push' }}
           DEFAULT_BUMP: '#minor'
-          if: ${{ github.event_name == 'pull_request' }}
-          DEFAULT_BUMP: '#major'
+            if: ${{ github.event_name == 'pull_request' }}
+            '#major'
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
