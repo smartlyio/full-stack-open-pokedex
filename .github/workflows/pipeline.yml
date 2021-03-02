@@ -34,10 +34,9 @@ jobs:
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP:
-            if: ${{ github.event_name == 'pull_request' }}
-            #major
-          #patch
+          if: ${{ github.event_name == 'pull_request' }}
+            BUMP: major
+          BUMP: patch          
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
