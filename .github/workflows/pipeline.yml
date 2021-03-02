@@ -30,11 +30,18 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
+          if: ${{ github.event_name == 'pull_request' }}
+          DEFAULT_BUMP: 'major'
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "paco-pokedex-app" #Must be unique in Heroku
+          heroku_app_name: "paco-pokedex-app" # Must be unique in Heroku
           heroku_email: "sirpaquillo1@yahoo.com.mx"
           dontuseforce: false
           procfile: "web: npm run start-prod"
