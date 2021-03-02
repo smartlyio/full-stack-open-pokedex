@@ -32,9 +32,16 @@ jobs:
           wait-on: http://localhost:5000
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BUMP: '#minor'
+          DEFAULT_BUMP: '#minor'
+          WITH_V: true
+        if: ${{ github.event_name == 'pull_request' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: '#major'
+          WITH_V: true
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
