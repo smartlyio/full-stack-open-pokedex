@@ -35,9 +35,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          DEFAULT_BUMP: '#minor'
-            if: ${{ github.event_name == 'pull_request' }}
-            '#major'
+          DEFAULT_BUMP: '#patch'
+          DRY_RUN: true
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
