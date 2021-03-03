@@ -31,8 +31,8 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy
+        if: github.event_name == 'push' && !(contains(github.event.commits.*.message, '#skip')) # Means merge or push
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: github.event_name == 'push' && ${{ !(contains(github.event.commits.*.message, '#skip')) }} # Means merge or push
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstackopenpokedexmatti" #Must be unique in Heroku
@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: truev
       - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: github.event_name == 'push' && ${{ !(contains(github.event.commits.*.message, '#skip')) }}  # Means merge or push (and no #skip)
+        if: github.event_name == 'push' && !(contains(github.event.commits.*.message, '#skip'))  # Means merge or push (and no #skip)
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
