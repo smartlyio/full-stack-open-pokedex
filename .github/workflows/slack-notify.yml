@@ -7,12 +7,12 @@ jobs:
     steps:
       - uses: 8398a7/action-slack@v3
         with:
-          github_base_url: https://your.ghe.com # Specify your GHE
+          github_base_url: https://github.com/PacoZG # Specify your GHE
           status: ${{ job.status }}
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      - name: The job has succeeded
+        - name: The job has succeeded
         if: ${{ success() }}
-      - name: The job has failed
+        - name: The job has failed
         if: ${{ failure() }}
