@@ -35,3 +35,4 @@ jobs:
           heroku_email: "markku.kolkka@iki.fi"
           healthcheck: "https://markku63-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
