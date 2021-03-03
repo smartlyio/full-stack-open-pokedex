@@ -39,7 +39,6 @@ jobs:
           DEFAULT_BUMP: '#patch'
           if: ${{ github.event_name == 'pull_request' }}
           BUMP: '#major'
-          DRY_RUN: true
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
