@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy on Heroku
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-        uses: akhileshns/heroku-deploy@v3.12.12
+        uses: akhileshns/heroku-deploy@79ef2ae4ff9b897010907016b268fd0f88561820
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "markku63-pokedex"
@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-        uses: anothrNick/github-tag-action@1.34.0
+        uses: anothrNick/github-tag-action@18284c78f6ac68868d5341f57c4f971fb5b7605c
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
