@@ -18,15 +18,21 @@ jobs:
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
-      - name: meessage
-        env:
-          MESSAGE: ${{ toJson(github.event.commits[0].message) }}
-        run: echo "$MESSAGE"
+      # - name: meessage
+      #   env:
+      #     MESSAGE: ${{ toJson(github.event.commits[0].message) }}
+      #   run: echo "$MESSAGE"
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        # if: "$COMMIT_MESSAGES".contains("joopas2") 
         run: echo "$COMMIT_MESSAGES"
+      - name: onkoskippi
+        env:
+          MESSAGEX: ${{ toJson(github.event.commits[0].message) }}
+        if: "$MESSAGEX" == "joopas2"
+        run: echo "$MESSAGEX"
+        
+      
 
 # jobs:
 #   hello_world_job:
