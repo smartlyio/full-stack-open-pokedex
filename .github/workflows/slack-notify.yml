@@ -11,8 +11,8 @@ jobs:
       env:
         SLACK_CHANNEL: general
         SLACK_COLOR: '#3278BD'
-        SLACK_ICON: https://github.com/rtCamp.png?size=48
-        SLACK_MESSAGE: 'Post Content :rocket:'
-        SLACK_TITLE: Post Title
-        SLACK_USERNAME: rtCamp
+        SLACK_ICON: https://avatars.githubusercontent.com/u/64326252?s=60&v=4
+        SLACK_MESSAGE: 'Pull request to deploy the :rocket:'
+        SLACK_TITLE: Notification
+        SLACK_USERNAME: PacoZG
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
