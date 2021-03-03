@@ -3,7 +3,7 @@ name: Hello World!
 on:
   push:
     branches:
-      - master
+      - joopas
 
 jobs:
   a_test_job:
@@ -18,10 +18,25 @@ jobs:
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
+      # - name: meessage
+      #   env:
+      #     MESSAGE: ${{ toJson(github.event.commits[0].message) }}
+      #   run: echo "$MESSAGE"
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: onkoskippi
+        env:
+          MESSAGEX: ${{ toJson(github.event.commits.*.message) }}
+        # if: ${{ toJson(github.event.commits[0].message) }} != "joopas2"
+        if: ${{ contains(github.event.commits.*.message, '#skip') }} 
+        run: echo "$MESSAGEX"
+      # - name: commit messages contains?
+      #   env:
+      #     COMMIT_MESSAGES_contains: ${{ toJson(github.event.commits.*.message.contains("joopas") == true) }}
+      #   run: echo "$COMMIT_MESSAGES_contains"  
+      
 
 # jobs:
 #   hello_world_job:
