@@ -35,6 +35,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
         env:
+          if: ${{ github.event_name == 'pull_request' }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: "#patch"
