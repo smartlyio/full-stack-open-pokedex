@@ -29,7 +29,7 @@ jobs:
       - name: onkoskippi
         env:
           MESSAGEX: ${{ toJson(github.event.commits[0].message) }}
-        if: toJson(github.event.commits[0].message) != "joopas2"
+        if: github.event.commits[0].message.toString() != "joopas2"
         run: echo "$MESSAGEX"
         
       
