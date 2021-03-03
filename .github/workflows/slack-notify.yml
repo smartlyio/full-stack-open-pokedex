@@ -3,7 +3,7 @@ name: Slack Notification Demo
 jobs:
   slackNotification:
     name: Slack Notification
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-18.04
     steps:
       - uses: 8398a7/action-slack@v3
         with:

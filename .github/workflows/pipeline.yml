@@ -10,6 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    name: Deployment
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -51,7 +52,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - uses: 8398a7/action-slack@v3
         with:
-          job_name: Deployment pipeline
+          job_name: Deployment
           icon_url: https://avatars.githubusercontent.com/u/64326252?s=60&v=4
           github_base_url: https://github.com/PacoZG # Specify your GHE
           status: ${{ job.status }}
