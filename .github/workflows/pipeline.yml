@@ -32,7 +32,11 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+<<<<<<< HEAD
         # if: github.event_name == 'push' # Means merge or push
+=======
+        if: github.event_name == 'push' && ${{ !(contains(github.event.commits.*.message, '#skip')) }} # Means merge or push
+>>>>>>> origin/master
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstackopenpokedexmatti" #Must be unique in Heroku
@@ -40,6 +44,7 @@ jobs:
           healthcheck: "https://fullstackopenpokedexmatti.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: truev
+<<<<<<< HEAD
       # - uses: actions/checkout@v2
       # - name: Bump version and push tag
       #   uses: anothrNick/github-tag-action@1.33.0
@@ -48,3 +53,22 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     DEFAULT_BUMP: patch
         
+=======
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: github.event_name == 'push' && ${{ !(contains(github.event.commits.*.message, '#skip')) }}  # Means merge or push (and no #skip)
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+      - name: onkoskippivaiei
+        env:
+          MESSAGEX:  ${{ !(contains(github.event.commits.*.message, '#skip')) }}
+        if: ${{ !(contains(github.event.commits.*.message, '#skip')) }}
+        run: echo "$MESSAGEX"
+
+>>>>>>> origin/master
