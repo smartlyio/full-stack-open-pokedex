@@ -30,7 +30,7 @@ jobs:
         env:
           MESSAGEX: ${{ toJson(github.event.commits.*.message) }}
         # if: ${{ toJson(github.event.commits[0].message) }} != "joopas2"
-        if: ${{ contains(github.event.commits.*.message, '#skip') }} 
+        if: ${{ contains(github.event.commits.*.message, 'skip') }} 
         run: echo "$MESSAGEX"
       # - name: commit messages contains?
       #   env:
