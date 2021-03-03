@@ -29,9 +29,12 @@ jobs:
       - name: onkoskippi
         env:
           MESSAGEX: ${{ toJson(github.event.commits[0].message) }}
-        if: github.event.commits[0].message.toString() != "joopas2"
+        if: ${{ toJson(github.event.commits[0].message) }} != "joopas2"
         run: echo "$MESSAGEX"
-        
+      - name: commit messages contains?
+        env:
+          COMMIT_MESSAGES_contains: ${{ toJson(github.event.commits.*.message.contains("joopas")) }}
+        run: echo "$COMMIT_MESSAGES_contains"  
       
 
 # jobs:
