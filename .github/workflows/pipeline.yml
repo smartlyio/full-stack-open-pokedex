@@ -53,7 +53,7 @@ jobs:
       - uses: 8398a7/action-slack@v3
         with:
           job_name: Deployment pipeline
-          icon_url: https://avatars.githubusercontent.com/u/64326252?s=60&v=4
+          icon_url: https://images.app.goo.gl/5BH63jmVpaF9Z24o7
           github_base_url: https://github.com/PacoZG # Specify your GHE
           status: ${{ job.status }}
           fields: repo,message,commit,author,took
