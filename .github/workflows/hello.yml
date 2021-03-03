@@ -29,9 +29,9 @@ jobs:
       - name: onkoskippi
         env:
           MESSAGEX: ${{ toJson(github.event.commits.*.message) }}
-        if: ${{ contains(github.event.commits.*.message, '#skip') }} 
+        if: ${{ !(contains(github.event.commits.*.message, '#skip')) }}
         run: echo "$MESSAGEX"
-      - name: commit messages contains? JOO
+      - name: commit messages not skip? JOO
         env:
           COMMIT_MESSAGES_contains: ${{ !(contains(github.event.commits.*.message, '#skip')) }} 
         run: echo "$COMMIT_MESSAGES_contains"  
