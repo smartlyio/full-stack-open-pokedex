@@ -24,7 +24,7 @@ jobs:
         run: echo "$MESSAGE"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message[0]) }}
         # if: "$COMMIT_MESSAGES".contains("joopas2") 
         run: echo "$COMMIT_MESSAGES"
 
