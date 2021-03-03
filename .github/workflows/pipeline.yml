@@ -42,9 +42,13 @@ jobs:
           rollbackonhealthcheckfailed: truev
       - uses: actions/checkout@v2
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
         if: github.event_name == 'push' && ${{ !(contains(github.event.commits.*.message, '#skip')) }}  # Means merge or push (and no #skip)
+        uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-        
+      - name: onkoskippivaiei
+        env:
+          MESSAGEX:  ${{ !(contains(github.event.commits.*.message, '#skip')) }}
+        if: ${{ !(contains(github.event.commits.*.message, '#skip')) }}
+        run: echo "$MESSAGEX"
