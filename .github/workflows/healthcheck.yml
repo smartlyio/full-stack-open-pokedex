@@ -1,5 +1,9 @@
 name: Deployment pipeline healthcheck
 
+on:
+  schedule:
+    - cron:  '* * * * *'
+
 jobs:
   healthcheck:
     runs-on: ubuntu-18.04
