@@ -58,11 +58,11 @@ jobs:
           fields: commit,author,took
           custom_payload: |
             {
-              username: 'action-slack',
-              icon_emoji: ":package:",
+              username: 'Paco Zavala',
+              icon_emoji: ":white_check_mark:",
               attachments: [{
               color: 'good',
-                text: `A new version deployed to https://paco-pokedex-app.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} deployment process took ${process.env.AS_TOOK}`,
+                text: `A new version deployed to ${process.env.AS_REPO} (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} deployment process took ${process.env.AS_TOOK}`,
               }]
             }
         env:
@@ -72,7 +72,7 @@ jobs:
       - name: Build failure notification action
         uses: 8398a7/action-slack@v3
         with:
-          icon_emoji: ":disappointed:"
+          icon_emoji: ":no_entry:"
           status: ${{ job.status }}
           job_name: Deployment pipeline
           fields: repo,commit,took,message,author,job,workflow
