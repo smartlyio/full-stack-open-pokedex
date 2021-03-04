@@ -61,8 +61,8 @@ jobs:
               username: 'Deployment Notification',
               icon_emoji: ':white_check_mark:',
               attachments: [{
-              color: 'good',
-              text: `${process.env.AS_WORKFLOW}\nA new version of https://paco-pokedex-app.herokuapp.com/ deployed to ${process.env.AS_REPO}@${process.env.AS_REF}, commit ref:(${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} deployment process took ${process.env.AS_TOOK}`,
+                color: 'good',
+                text: `${process.env.AS_WORKFLOW}\nA new version of https://paco-pokedex-app.herokuapp.com/ deployed to ${process.env.AS_REPO}@${process.env.AS_REF}, commit ref:(${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} deployment process took ${process.env.AS_TOOK}`,
               }]
             }
         env:
