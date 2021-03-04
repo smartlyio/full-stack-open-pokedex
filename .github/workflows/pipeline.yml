@@ -29,7 +29,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
-          start: npm run start-prod
+          start: npm start-prod
           wait-on: http://localhost:5000
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
@@ -79,16 +79,4 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && failure() }}
-      # - uses: 8398a7/action-slack@v3
-      #   if: ${{ always() }}
-      #   with:
-      #     status: ${{ job.status }}
-      #     job_name: Deployment pipeline
-      #     icon_emoji: ":smile:"
-      #     github_base_url: https://github.com/PacoZG # Specify your GHE
-      #     fields: repo,message,commit,author,took,icon_url,workflow
-      #     mention: here
-      #     if_mention: failure,cancelled
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           
