@@ -11,7 +11,7 @@ jobs:
           icon_url: https://avatars.githubusercontent.com/u/64326252?s=60&v=4
           github_base_url: https://github.com/PacoZG # Specify your GHE
           status: ${{ job.status }}
-          fields: repo,message,commit,author,took
+          fields: repo,message,commit,author,took,workflow
           mention: here
           if_mention: failure,cancelled
         env:
