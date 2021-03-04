@@ -50,16 +50,43 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
-      - uses: 8398a7/action-slack@v3
+      - name: Build success notification action
+        uses: 8398a7/action-slack@v3
         with:
-          job_name: Deployment pipeline
-          icon_url: https://icons.iconarchive.com/icons/arrioch/senary/256/Internet-url-icon.png
-          github_base_url: https://github.com/PacoZG # Specify your GHE
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,took,icon_url,workflow
-          mention: here
-          if_mention: failure,cancelled
+          status: custom
+          fields: commit,author,took
+          custom_payload: |
+            {
+              username: 'action-slack',
+              icon_emoji: ':octocat:',
+              attachments: [{
+              color: 'good',
+                text: `A new version deployed to https://paco-pokedex-app.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        if: ${{ always() }}
+        if:  ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && success() }}
+      - name: Build failure notification action
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: all
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && failure() }}
+      # - uses: 8398a7/action-slack@v3
+      #   if: ${{ always() }}
+      #   with:
+      #     status: ${{ job.status }}
+      #     job_name: Deployment pipeline
+      #     icon_emoji: ":smile:"
+      #     github_base_url: https://github.com/PacoZG # Specify your GHE
+      #     fields: repo,message,commit,author,took,icon_url,workflow
+      #     mention: here
+      #     if_mention: failure,cancelled
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          
