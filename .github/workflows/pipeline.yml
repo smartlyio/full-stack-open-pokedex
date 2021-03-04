@@ -54,11 +54,12 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: custom
+          job_name: Deployment pipeline
           fields: commit,author,took
           custom_payload: |
             {
               username: 'action-slack',
-              icon_emoji: ':octocat:',
+              icon_emoji: ':smile:',
               attachments: [{
               color: 'good',
                 text: `A new version deployed to https://paco-pokedex-app.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
@@ -66,14 +67,17 @@ jobs:
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
         if:  ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && success() }}
       - name: Build failure notification action
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
+          job_name: Deployment pipeline
           fields: all
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && failure() }}
       # - uses: 8398a7/action-slack@v3
       #   if: ${{ always() }}
