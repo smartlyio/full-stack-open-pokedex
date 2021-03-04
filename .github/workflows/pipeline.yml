@@ -75,7 +75,7 @@ jobs:
           icon_emoji: ":disappointed:"
           status: ${{ job.status }}
           job_name: Deployment pipeline
-          fields: all
+          fields: repo,commit,took,message,author,job,workflow
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
