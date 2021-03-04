@@ -2,7 +2,7 @@ name: Deployment pipeline healthcheck
 
 on:
   schedule:
-    - cron:  '* * * * *'
+    - cron:  '00 00 * * 1-5/2' # At 00:00 on every 2nd day-of-week from Monday through Friday.”
 
 jobs:
   healthcheck:
