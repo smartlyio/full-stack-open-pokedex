@@ -59,7 +59,7 @@ jobs:
           custom_payload: |
             {
               username: 'action-slack',
-              icon_emoji: ':smile:',
+              icon_emoji: ":package:",
               attachments: [{
               color: 'good',
                 text: `A new version deployed to https://paco-pokedex-app.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} succeeded in ${process.env.AS_TOOK}`,
@@ -72,6 +72,7 @@ jobs:
       - name: Build failure notification action
         uses: 8398a7/action-slack@v3
         with:
+          icon_emoji: ":disappointed:"
           status: ${{ job.status }}
           job_name: Deployment pipeline
           fields: all
