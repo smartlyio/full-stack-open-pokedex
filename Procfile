@@ -1,1 +1,1 @@
-web: npm run inuyasha
+web: npm run start-prod
