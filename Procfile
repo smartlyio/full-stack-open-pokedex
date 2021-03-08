@@ -1,1 +1,1 @@
-web: for liberty
+web: npm run start-prod
