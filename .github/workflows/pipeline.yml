@@ -39,3 +39,4 @@ jobs:
           healthcheck: "https://full-stack-open-2020-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+        if: ${{ github.event_name == "push" }}
