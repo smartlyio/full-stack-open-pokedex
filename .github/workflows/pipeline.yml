@@ -35,3 +35,4 @@ jobs:
           heroku_email: "son.trung.to@gmail.com"
           healthcheck: "https://full-stack-open-2020-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
