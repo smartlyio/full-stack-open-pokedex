@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /// <reference types="cypress" />
 // ***********************************************************
@@ -16,7 +17,7 @@
 /**
  * @type {Cypress.PluginConfig}
  */
-export default (on, config) => {
+module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
 }
