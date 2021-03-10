@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "thawing-ocean-77154"
           heroku_email: "mtuomikoski@gmail.com"
+          healthcheck: "https://thawing-ocean-77154.herokuapp.com/health"
+          checkstring: "ok"
