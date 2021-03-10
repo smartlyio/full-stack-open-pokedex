@@ -35,3 +35,4 @@ jobs:
           heroku_email: "mtuomikoski@gmail.com"
           healthcheck: "https://thawing-ocean-77154.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
