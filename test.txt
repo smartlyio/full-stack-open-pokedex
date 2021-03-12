@@ -1,1 +1,2 @@
 test new
+merge should fail again!!!
