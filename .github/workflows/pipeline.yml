@@ -34,3 +34,5 @@ jobs:
           heroku_app_name: "fullstack-pokemon"
           heroku_email: "tero.salomaki@live.fi"
           branch: "master"
+          healthcheck: "https://fullstack-pokemon.herokuapp.com/health"
+          checkstring: "ok"
