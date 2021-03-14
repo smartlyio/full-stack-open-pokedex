@@ -36,3 +36,4 @@ jobs:
           branch: "master"
           healthcheck: "https://fullstack-pokemon.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
