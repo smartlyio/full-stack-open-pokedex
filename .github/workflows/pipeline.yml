@@ -40,7 +40,7 @@ jobs:
           healthcheck: "https://guarded-ridge-80603.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - name: Github Tag Bump
+      - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.34.0
         env:
