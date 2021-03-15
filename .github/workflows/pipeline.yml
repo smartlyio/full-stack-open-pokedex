@@ -35,3 +35,4 @@ jobs:
           heroku_email: "leaf@cateaf.com"
           healthcheck: "https://guarded-ridge-80603.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
