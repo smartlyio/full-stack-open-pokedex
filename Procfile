@@ -1,1 +1,1 @@
-web: npm run start-prodpete
+web: npm run start-prod
