@@ -35,3 +35,4 @@ jobs:
             heroku_email: "petrimus76@gmail.com"
             healthcheck: "https://petrimuspokedex.herokuapp.com/health"
             checkstring: "ok"
+            rollbackonhealthcheckfailed: true
