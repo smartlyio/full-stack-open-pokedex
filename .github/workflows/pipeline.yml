@@ -18,6 +18,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-pokedex-mickos"
           heroku_email: "roy.mickos@vincit.fi"
+          healthcheck: true
+          checkstring: "ok"
       - name: install dependencies
         run: npm install
       - name: lint
