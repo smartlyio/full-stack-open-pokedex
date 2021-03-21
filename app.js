@@ -14,10 +14,6 @@ app.get('/version', (req, res) => {
   res.send('1.1') // change this string to ensure a new version deployed
 })
 
-app.get('/hello', (req, res) => {
-  res.send('hllo') // change this string to ensure a new version deployed
-})
-
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log('server started on port 5000')
