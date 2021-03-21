@@ -13,6 +13,8 @@ jobs:
       runs-on: ubuntu-18.04
       steps:
         - uses: actions/checkout@v2
+          with:
+            fetch-depth: '0'
         - uses: actions/setup-node@v1
           with:
             node-version: '12.x'
@@ -29,9 +31,9 @@ jobs:
           with:
             command: npm run test:e2e
             start: npm run start-prod
-            wait-on: http://localhost:5000 
+            wait-on: http://localhost:5000           
         - name: deploy to heroku
-          if: ${{ github.event_name == 'push' }}
+          if: ${{ github.event_name == 'push' }}         
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -39,4 +41,12 @@ jobs:
             heroku_email: "petrimus76@gmail.com"
             healthcheck: "https://petrimuspokedex.herokuapp.com/health"
             checkstring: "ok"
-            rollbackonhealthcheckfailed: true
+            rollbackonhealthcheckfailed: true         
+        - uses: actions/checkout@v2      
+        - name: Bump version and push tag
+          if: ${{ github.event_name == 'push' }} 
+          uses: anothrNick/github-tag-action@1.26.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+            DEFAULT_BUMP: patch
