@@ -41,6 +41,7 @@ jobs:
           healthcheck: "https://fullstack-pokemon.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: anothrNick/github-tag-action@1.33.0
