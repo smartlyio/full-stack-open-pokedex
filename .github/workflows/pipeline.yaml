@@ -28,8 +28,8 @@ jobs:
             COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           run: echo "$COMMIT_MESSAGES"
         - if: contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
-            name: testing
-              run: echo "Tata ei pida tulla"
+          name: testing
+            run: echo "Tata ei pida tulla"
         - uses: actions/setup-node@v1
           with:
             node-version: '12.x'
