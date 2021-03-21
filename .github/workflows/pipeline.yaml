@@ -44,8 +44,9 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000 
-        - if: ${{ github.event_name == 'push' }}
-          if: !contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
+        - if: | 
+            ${{ github.event_name == 'push' }} ||
+            !contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
           name: deploy to heroku        
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
@@ -56,8 +57,9 @@ jobs:
             checkstring: "ok"
             rollbackonhealthcheckfailed: true         
         - uses: actions/checkout@v2 
-        - if: ${{ github.event_name == 'push' }}
-          if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
+        - if: |
+            ${{ github.event_name == 'push' }} ||
+            false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
           name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.26.0
           env:
