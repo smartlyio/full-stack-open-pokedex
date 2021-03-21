@@ -1,0 +1,14 @@
+I will choose Java as the language of this exercise.
+
+Regarding linting tools, based on a quick Google search, e.g. the following linting tools were mentioned: Checkstyle, Spotbgus, Sonarlint, Spotless. Most IDE's also have built-in formatting standards so you might not need a separate tool at all - at least for local development. Spring framework also seems to have a tool called spring-java-format. 
+
+Regarding testing tools e.g. the following tools were commonly mentioned: JUnit, Selenium, REST-Assured, Spock framework. JUnit seems to kind of a standard. Most IDE's have JUnit integrations so you can write and run unit tests right from the IDE. Selenium is especially useful with UI testing. And REST Assured - as the name says - in testing of REST services.
+
+The three most popular build tools in Java include 1) Ant, 2) Maven and 3) Gradle. Out of these Ant appears to be most flexible with least conventions. Maven has more conventions for placing the source code, compiled code and packages. Maven seems to be more extensive framework with also other features than just pure building. According to one source Gradle is the most modern (?) of the three.
+
+Regarding the CI tools I stumbled e.g. upon the following.
+-Jenkins: Open source tool discussed also in the course material.
+-Travis: Tightly integrated with Github. Supports multiple languages.
+-Circle CI: Tightly integrated with Github. Supports multiple languages.
+
+Regarding the choice of self-hosted vs. cloud-based environment, my spontaneous preference would be a cloud based solution. That's because the team is still relatively small so a cloud based solution should be easier to setup and maintain. It's most likely also more cost effective.
