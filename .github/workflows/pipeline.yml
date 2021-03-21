@@ -16,14 +16,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "full-stack-open-pokedex-mickos"
-          heroku_email: "roy.mickos@vincit.fi"
-          healthcheck: true
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
       - name: install dependencies
         run: npm install
       - name: lint
@@ -38,4 +30,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: deployment
+        if: ${{ github_event_name == "push" }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "full-stack-open-pokedex-mickos"
+          heroku_email: "roy.mickos@vincit.fi"
+          healthcheck: true
+          checkstring: "ok"
 
