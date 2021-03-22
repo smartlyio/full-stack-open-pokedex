@@ -9,6 +9,7 @@
     "test": "eslint",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
+    "start:test": "cross-env NODE_ENV=test node app.js",
     "test:e2e": "cypress run"
   },
   "repository": {
