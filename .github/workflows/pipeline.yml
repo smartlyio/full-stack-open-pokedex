@@ -39,4 +39,6 @@ jobs:
           heroku_email: saska.rauhala@icloud.com
           healthcheck: "https://mysterious-brushlands-23967.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+
 
