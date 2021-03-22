@@ -35,5 +35,8 @@ jobs:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: pokedex12345 #Must be unique in Heroku
+          heroku_app_name: mysterious-brushlands-23967 #Must be unique in Heroku
           heroku_email: saska.rauhala@icloud.com
+          healthcheck: "https://mysterious-brushlands-23967.herokuapp.com/health"
+          checkstring: "ok"
+
