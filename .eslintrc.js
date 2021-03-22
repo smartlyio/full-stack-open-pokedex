@@ -2,6 +2,7 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
+    "commonjs": true,
     "jest/globals": true,
     "node": true
   },
@@ -37,13 +38,6 @@ module.exports = {
       "never"
     ],
     "no-console": "off",
-    "no-restricted-syntax": [
-          "error",
-          {
-              "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
-              "message": "Unexpected property on console object was called"
-          }
-    ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
     "object-curly-spacing": [
