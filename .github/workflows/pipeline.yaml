@@ -38,25 +38,23 @@ jobs:
           run: npm run test
         - name: build
           run: npm run build       
-        - if: | 
-            ${{ github.event_name == 'push' }} &&
-            !contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
-          name: deploy to heroku        
-          uses: akhileshns/heroku-deploy@v3.12.12 
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "petrimuspokedex" 
-            heroku_email: "petrimus76@gmail.com"
-            healthcheck: "https://petrimuspokedex.herokuapp.com/health"
-            checkstring: "ok"
-            rollbackonhealthcheckfailed: true         
+        - if: ${{ github.event_name == 'push' }} 
+          name: deploy to heroku       
+          !contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')          
+            uses: akhileshns/heroku-deploy@v3.12.12 
+            with:
+              heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+              heroku_app_name: "petrimuspokedex" 
+              heroku_email: "petrimus76@gmail.com"
+              healthcheck: "https://petrimuspokedex.herokuapp.com/health"
+              checkstring: "ok"
+              rollbackonhealthcheckfailed: true         
         - uses: actions/checkout@v2 
-        - if: |
-            ${{ github.event_name == 'push' }} &&
-            false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
+        - if: ${{ github.event_name == 'push' }}           
           name: Bump version and push tag
-          uses: anothrNick/github-tag-action@1.26.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            WITH_V: true
-            DEFAULT_BUMP: patch
+          if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
+            uses: anothrNick/github-tag-action@1.26.0
+            env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              WITH_V: true
+              DEFAULT_BUMP: patch
