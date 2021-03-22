@@ -39,8 +39,7 @@ jobs:
         - name: build
           run: npm run build       
         - if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), 'skip')}} 
-          name: deploy to heroku       
-          if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')          
+          name: deploy to heroku          
           uses: akhileshns/heroku-deploy@v3.12.12 
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -50,9 +49,8 @@ jobs:
             checkstring: "ok"
             rollbackonhealthcheckfailed: true         
         - uses: actions/checkout@v2 
-        - if: ${{ github.event_name == 'push' }}           
-          name: Bump version and push tag
-          if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')
+        - if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')   
+          name: Bump version and push tag          
           uses: anothrNick/github-tag-action@1.26.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
