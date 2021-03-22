@@ -12,6 +12,7 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!!!"
+          echo "moi taas"
       - name: Now it is
         run: |
           date
