@@ -9,7 +9,10 @@
     "test": "eslint",
     "eslint": "eslint './**/*.jest.spec.{js,jsx}'",
     "build": "webpack --mode production",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "deploy": "git push heroku main",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
+    "logs:prod": "heroku logs --tail"
   },
   "repository": {
     "type": "git",
