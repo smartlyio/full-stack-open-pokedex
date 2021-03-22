@@ -4,13 +4,13 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "npm start",
+    "start": "node app.js",
     "start-prod": "node app.js",
     "test": "eslint",
     "eslint": "eslint './**/*.jest.spec.{js,jsx}'",
     "build": "webpack --mode production",
     "test:e2e": "cypress run",
-    "deploy": "git push heroku main",
+    "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   },
