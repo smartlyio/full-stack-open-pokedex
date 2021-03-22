@@ -38,7 +38,7 @@ jobs:
           run: npm run test
         - name: build
           run: npm run build       
-        - if: ${{ github.event_name == 'push' }} 
+        - if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), 'skip')}} 
           name: deploy to heroku       
           if: false == contains(join( ${{ toJson(github.event.commits.*.message) }}), 'skip')          
           uses: akhileshns/heroku-deploy@v3.12.12 
