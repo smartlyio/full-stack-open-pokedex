@@ -35,4 +35,5 @@ jobs:
           heroku_email: "puro.touko2@gmail.com"
           healthcheck: "https://toxpuropokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
 
