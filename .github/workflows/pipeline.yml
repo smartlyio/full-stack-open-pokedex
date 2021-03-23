@@ -34,7 +34,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-        if: "contains("COMMIT_MESSAGES", '#skip')"
+        if: "contains(github.event.head_commit.message, '#skip')"
         if: ${{ github.event_name == 'push' }}
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
