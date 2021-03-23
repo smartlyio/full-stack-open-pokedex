@@ -31,9 +31,9 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "ramin-pokemon-app-2" #Must be unique in Heroku
+          heroku_app_name: "ramin-pokemon-app-3" #Must be unique in Heroku
           heroku_email: "rami.piik@gmail.com"
-          healthcheck: "https://ramin-pokemon-app-2.herokuapp.com/health"
+          healthcheck: "https://ramin-pokemon-app-3.herokuapp.com/health"
           checkstring: "ok"
           
           
