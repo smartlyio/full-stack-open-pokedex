@@ -21,10 +21,11 @@ const App = () => {
     return <ErrorMessage error={error} />
   }
 
+
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/pokemonlist">
           <PokemonList pokemonList={pokemonList} />
         </Route>
         <Route path="/pokemon/:name" render={(routeParams) => {
