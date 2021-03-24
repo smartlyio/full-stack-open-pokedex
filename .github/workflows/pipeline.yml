@@ -35,6 +35,7 @@ jobs:
           heroku_email: "rami.piik@gmail.com"
           healthcheck: "https://ramin-pokemon-app-3.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
           
           
         
