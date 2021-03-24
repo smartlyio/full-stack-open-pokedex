@@ -31,13 +31,13 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: build
-        if ${{ github.event_name=='push'}}
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "toxpuropokedex"
-          heroku_email: "puro.touko2@gmail.com"
-          healthcheck: "https://toxpuropokedex.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+      if ${{ github.event_name=='push'}}
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "toxpuropokedex"
+        heroku_email: "puro.touko2@gmail.com"
+        healthcheck: "https://toxpuropokedex.herokuapp.com/health"
+        checkstring: "ok"
+        rollbackonhealthcheckfailed: true
 
