@@ -34,20 +34,19 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-        if: "!contains(github.event.head_commit.message, '#skip')"
-          if: ${{ github.event_name == 'push' }}
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: mysterious-brushlands-23967 #Must be unique in Heroku
-            heroku_email: saska.rauhala@icloud.com
-            healthcheck: "https://mysterious-brushlands-23967.herokuapp.com/health"
-            checkstring: "ok"
-            rollbackonhealthcheckfailed: true
-        - name: Bump version and push tag
-          if: ${{ github.event_name == 'push' }}
-          uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        if: ${{ github.event_name == 'push' }}
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: mysterious-brushlands-23967 #Must be unique in Heroku
+          heroku_email: saska.rauhala@icloud.com
+          healthcheck: "https://mysterious-brushlands-23967.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
