@@ -1,0 +1,12 @@
+For a hypothetical application written in Python, there are many tools available for development. First for linting, there is an extensive list of linters here: https://code.visualstudio.com/docs/python/linting#_specific-linters
+and a general rule I follow in these situations is go for the package with most stars in Github, in this case is mypy, which coincidentally also been supported by the official Python foundation, so I think that's the go-to linter.
+It also enables type-checking for Python which is nice. For testing there are unittest, nose and pytest. In this case as well I would go with unittest that is been supported by the official Pythono foundation, having such a support
+is a good sign that bugs will be fixed and the package will continue to work along with Python updates. Finally for building, there is not much to do here in comparison to other languages such as Java or C, or even Typescript since
+it is an interpreted language, but here's a good guide on how to package your source code, make it distributable and deploying it to pypi: https://packaging.python.org/tutorials/packaging-projects/.
+
+There are currently plenty of CI/CD tools apart from Jenkis and Github. There are some open source tools like Travis CI or Go Continuous Delivery. Some proprietary tools as well like TeamCity from JetBrains and also the popular GitLab
+which has been getting a lot of popularity in the last years. Choosing a CI/CD framework will highly depend on your needs and for starters, it is a good idea to begin with something we are comfortable working with such as Github.
+
+About the hosting of this setup, the first question to ask ourselves is if any of us have any experience in terms of architecture, hardware, networking, etc. In my experience, having inexperienced developers working in this area will
+result in many delays to the development of the project. In my opinion, having an additional bill each month will be rewarded with better and faster development and also cheaper in the long run. Having said that, if the requierements
+(such testing on a GPU, building a large program many times a day, etc) are met, the additional resources like the time to learn, configure and maintain the setup must be taken into account.
