@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: akiratoma-pokedex
           heroku_email: akira_toma94@hotmail.com
+          healthcheck: "https://akiratoma-pokedex.herokuapp.com/health"
+          checkstring: "ok"
