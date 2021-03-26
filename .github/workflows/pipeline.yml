@@ -35,3 +35,4 @@ jobs:
           heroku_email: akira_toma94@hotmail.com
           healthcheck: "https://akiratoma-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
