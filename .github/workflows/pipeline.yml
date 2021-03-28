@@ -12,7 +12,7 @@ env:
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
   EVENT_NAME: ${{ github.event_name }}
   SKIP: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-  
+
 jobs:
   build_job:
     runs-on: ubuntu-18.04
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
+          node-version: "12.x"
       - name: npm install
         run: npm install
       - name: lint
@@ -35,13 +35,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: slack notification on build failure
-        if: ${{ failure() }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo, message, commit, author, took
-        
+      # comment out slack notifications
+      # - name: slack notification on build failure
+      # if: ${{ failure() }}
+      #  uses: 8398a7/action-slack@v3
+      #  with:
+      #    status: ${{ job.status }}
+      #    fields: repo, message, commit, author, took
+
   deploy_job:
     runs-on: ubuntu-18.04
     steps:
@@ -59,22 +60,23 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true0
-      - name: slack notification on deploy success
-        env:
-          DEPLOY_SUCCESS: ${{ steps.deploy.outcome }}
-        if: ${{ env.DEPLOY_SUCCESS == 'success' }}
-        uses: 8398a7/action-slack@v3
-        with:
-          status: custom
-          fields: commit,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                color: 'good',
-                text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
-              }]
-            }
-        
+      # comment out slack notifications
+      #- name: slack notification on deploy success
+      #  env:
+      #    DEPLOY_SUCCESS: ${{ steps.deploy.outcome }}
+      #  if: ${{ env.DEPLOY_SUCCESS == 'success' }}
+      #  uses: 8398a7/action-slack@v3
+      #  with:
+      #    status: custom
+      #    fields: commit,author,took
+      #    custom_payload: |
+      #      {
+      #        attachments: [{
+      #          color: 'good',
+      #          text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+      #        }]
+      #      }
+
   tagging_job:
     runs-on: ubuntu-18.04
     steps:
@@ -87,4 +89,3 @@ jobs:
           DRY_RUN: false
         if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
-          
