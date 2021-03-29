@@ -1,4 +1,5 @@
 dist/
 node_modules/
 authorization.txt
-codeceptjs
+codeceptjs/output
+codeceptjs/.ui
