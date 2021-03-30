@@ -48,14 +48,6 @@ jobs:
           WITH_V: true
           DEFAULT_BUMP: patch
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' ,'), '#skip') }}
-      - name: Check the deployed service URL
-        uses: jtalk/url-health-check-action@v1.5
-        with:
-          url: https://full-stack-open-2020-pokedex.herokuapp.com
-          follow-redirect: no
-          max-attempts: 3
-          retry-delay: 5s
-          retry-all: no
       - name: Build success/failure notification action
         uses: 8398a7/action-slack@v3
         with:
