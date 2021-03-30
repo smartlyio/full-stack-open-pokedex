@@ -34,10 +34,10 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: fustop11 #Must be unique in Heroku
-            heroku_email: ${{secrets.HEROKU_EMAIL}}
-            healthcheck: https://fustop11.herokuapp.com/health
-            checkstring: ok
-            rollbackonhealthcheckfailed: true
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: fustop11 #Must be unique in Heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: https://fustop11.herokuapp.com/health
+          checkstring: ok
+          rollbackonhealthcheckfailed: true
 
