@@ -35,4 +35,5 @@ jobs:
             heroku_email: ${{secrets.HEROKU_EMAIL}}
             healthcheck: https://fustop11.herokuapp.com/health
             checkstring: ok
+            rollbackonhealthcheckfailed: true
 
