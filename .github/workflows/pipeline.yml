@@ -33,4 +33,6 @@ jobs:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
             heroku_app_name: fustop11 #Must be unique in Heroku
             heroku_email: ${{secrets.HEROKU_EMAIL}}
+            healthcheck: https://fustop11.herokuapp.com/health
+            checkstring: ok
 
