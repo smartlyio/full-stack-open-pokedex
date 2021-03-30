@@ -11,7 +11,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  Scheduled checking of urls health:
+  scheduled_checking_of_urls_health:
     runs-on: ubuntu-18.04
     steps:
       - name: Check the deployed service URL
