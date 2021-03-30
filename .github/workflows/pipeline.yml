@@ -60,8 +60,7 @@ jobs:
         uses: jtalk/url-health-check-action@v1.5
         with:
           url: https://full-stack-open-2020-pokedex.herokuapp.com
-          follow-redirect: no
+          follow-redirect: true
           max-attempts: 3
           retry-delay: 5s
-          retry-all: no
 
