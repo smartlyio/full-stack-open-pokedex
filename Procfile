@@ -1,1 +1,1 @@
-web: npm run duh
+web: npm run start-prod
