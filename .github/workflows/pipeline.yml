@@ -9,51 +9,19 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  a_test_job:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: npm install
-        if: ${{ github.event_name == 'pull_request' }}
-        run: npm install
-      - name: lint
-        if: ${{ github.event_name == 'pull_request' }}
-        run: npm run eslint
-      - name: build
-        if: ${{ github.event_name == 'pull_request' }}
-        run: npm run build
-      - name: test
-        if: ${{ github.event_name == 'pull_request' }}
-        run: npm test
-      - name: e2e tests
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: Deploy to Heroku
-        if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokemon-index-application"
-          heroku_email: "bgg300@myy.haaga-helia.fi"
-          healthcheck: "https://pokemon-index-application.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-
-  version_bumper:
-    runs-on: ubuntu-18.04
-    if: ${{ github.event_name == 'push' }}
-    steps:
-      - uses: actions/checkout@v2
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
+      - name: gihub context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DEFAULT_BUMP: patch
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
