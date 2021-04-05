@@ -3,6 +3,7 @@ module.exports = {
     "commonjs": true,
     "es6": true,
     "node": true,
+    "browser": true,
     "jest/globals": true
   },
   "extends": [
@@ -45,5 +46,8 @@ module.exports = {
     ],
     "no-console": 0,
     "react/prop-types": 0
+  },
+  "globals": {
+    "document": false
   }
 }
