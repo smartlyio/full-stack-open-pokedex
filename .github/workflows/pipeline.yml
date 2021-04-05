@@ -21,6 +21,7 @@ jobs:
           heroku_email: "bgg300@myy.haaga-helia.fi"
           healthcheck: "https://pokemon-index-application.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - name: npm install
         run: npm install
       - name: lint
