@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstack11-pokedex-cicd'
           heroku_email: 'giogibelli@icloud.com'
+          healthcheck: 'https://fullstack11-pokedex-cicd.herokuapp.com/health'
+          checkstring: 'ok'
