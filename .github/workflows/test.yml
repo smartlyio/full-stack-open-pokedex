@@ -35,4 +35,4 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(contains('#skip', join(github.event.commits.*.message))) }}
           CONTAINS: ${{ toJson(contains('#skip', '#skip asdf hahaha')) }}
-        run: echo "$COMMIT_MESSAGES" && echo
+        run: echo "$COMMIT_MESSAGES" && echo "$CONTAINS"
