@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - sub
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -12,8 +13,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: checkout
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
       - name: deploy
         if: github.event_name == 'push'
@@ -49,10 +49,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
+      uses: actions/checkout@v2
       - name: Bump version and push tag
         if: github.event_name == 'push'
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: true
