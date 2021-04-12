@@ -12,32 +12,43 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: 'hsy-fullstack-pokemon' #Must be unique in Heroku
-            heroku_email: 'markusvk@protonmail.com'
-            healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
-            checkstring: 'ok'
-            rollbackonhealthcheckfailed: true
+      - name: checkout
+        uses: actions/checkout@v2
+
+      - name: deploy
+        if: github.event_name == 'push'
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'hsy-fullstack-pokemon' #Must be unique in Heroku
+          heroku_email: 'markusvk@protonmail.com'
+          healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
+
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: test
         run: npm run test
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
       - name: Bump version and push tag
         if: github.event_name == 'push'
         uses: anothrNick/github-tag-action@1.33.0
