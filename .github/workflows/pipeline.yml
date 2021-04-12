@@ -15,7 +15,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'hsy-fullstack-pokedex' #Must be unique in Heroku
           heroku_email: 'markusvk@protonmail.com'
-          healthcheck: 'https://hsy-fullstack-pokedex.herokuapp.com/health'
+          healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
           checkstring: 'ok'
       - uses: actions/setup-node@v1
         with:
