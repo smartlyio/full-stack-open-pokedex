@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -17,6 +20,7 @@ jobs:
           heroku_email: 'markusvk@protonmail.com'
           healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
