@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - sub
 
 jobs:
   a_test_job:
@@ -27,10 +28,9 @@ jobs:
 
       - name: joined messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(join(github.event.commits.*.message)) }}
+          COMMIT_MESSAGES: ${{ toJson(join(github.event.commits.*.message, ' ')) }}
         run: echo "$COMMIT_MESSAGES"
 
-      - name: contains messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(contains("#skip", join(github.event.commits.*.message))) }}
-        run: echo "$COMMIT_MESSAGES"
+      - name: ONLY DOES IF SKIP
+        if: "contains(join(github.event.commits.*.message, ' '), '#skip')"
+        run: echo "yes, it contains skip"

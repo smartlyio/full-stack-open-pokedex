@@ -15,17 +15,6 @@ jobs:
       - name: checkout1
         uses: actions/checkout@v2
 
-      - name: deploy
-        if: github.event_name == 'push'
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'hsy-fullstack-pokemon' #Must be unique in Heroku
-          heroku_email: 'markusvk@protonmail.com'
-          healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
-          checkstring: 'ok'
-          rollbackonhealthcheckfailed: true
-
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -49,12 +38,41 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
+      - name: deploy
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'hsy-fullstack-pokemon' #Must be unique in Heroku
+          heroku_email: 'markusvk@protonmail.com'
+          healthcheck: 'https://hsy-fullstack-pokemon.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
+
       - name: checkout2
         uses: actions/checkout@v2
 
       - name: Bump version and push tag
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+
+      - name: New deploy
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: success()
+
+      - name: Fail deploy
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: failure()
