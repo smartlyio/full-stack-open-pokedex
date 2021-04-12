@@ -13,7 +13,8 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      uses: actions/checkout@v2
+      - name: checkout1
+        uses: actions/checkout@v2
 
       - name: deploy
         if: github.event_name == 'push'
@@ -49,7 +50,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      uses: actions/checkout@v2
+      - name: checkout2
+        uses: actions/checkout@v2
+
       - name: Bump version and push tag
         if: github.event_name == 'push'
         uses: anothrNick/github-tag-action@1.33.0
