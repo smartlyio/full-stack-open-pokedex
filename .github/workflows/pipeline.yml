@@ -10,6 +10,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'hsy-fullstack-pokedex' #Must be unique in Heroku
+          heroku_email: 'markusvk@protonmail.com'
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
