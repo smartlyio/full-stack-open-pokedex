@@ -31,8 +31,6 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(join(github.event.commits.*.message, ' ')) }}
         run: echo "$COMMIT_MESSAGES"
 
-      - name: contains messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(contains('#skip', join(github.event.commits.*.message))) }}
-          CONTAINS: ${{ toJson(contains('#skip', "toJson(join(github.event.commits.*.message, ' '))")) }}
-        run: echo "$COMMIT_MESSAGES" && echo "$CONTAINS"
+      - name: ONLY DOES IF SKIP
+        if: "contains(join(github.event.commits.*.message, ' '), '#skip')"
+        run: echo "yes, it contains skip"
