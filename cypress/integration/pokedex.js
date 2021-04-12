@@ -6,8 +6,8 @@ describe('Pokedex', function () {
 	})
 	it('can navigate back to home from pokemon page', function () {
 		cy.visit('http://localhost:5000/')
-		cy.contains('Ivysaur').click()
-		cy.contains('Chlorophyll')
+		cy.contains('ivysaur').click()
+		cy.contains('chlorophyll')
 		cy.contains('Home').click()
 		cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
 	})
