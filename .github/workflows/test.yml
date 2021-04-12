@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - sub
 
 jobs:
   a_test_job:
@@ -32,5 +33,5 @@ jobs:
 
       - name: contains messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(contains("#skip", join(github.event.commits.*.message))) }}
+          COMMIT_MESSAGES: ${{ toJson(contains('#skip', join(github.event.commits.*.message))) }}
         run: echo "$COMMIT_MESSAGES"
