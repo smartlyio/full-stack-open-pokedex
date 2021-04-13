@@ -35,5 +35,6 @@ jobs:
             heroku_email: "yogho@hotmail.com"
             healthcheck: "https://pokedex-yogho358.herokuapp.com/health"
             checkstring: "ok"
+            rollbackonhealthcheckfailed: true
 
 
