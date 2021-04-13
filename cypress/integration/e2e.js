@@ -5,9 +5,9 @@ describe('Pokedex', function() {
     cy.contains('ivysaur')
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
-  it('link can be navgated',function(){
-    cy.visit('http://lacalhost:5000')
+  it('link can be navigated',function(){
+    cy.visit('http://localhost:5000')
     cy.contains('ivysaur').click()
-    cy.containd('chlorophyll')
+    cy.contains('chlorophyll')
   })
 })
