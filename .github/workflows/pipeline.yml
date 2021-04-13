@@ -31,7 +31,7 @@ jobs:
           uses: akhileshns/heroku-deploy@v3.12.12
           with: 
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "pokedex-Yogho358"
+            heroku_app_name: "pokedex-yogho358"
             heroku_email: "yogho@hotmail.com"
 
 
