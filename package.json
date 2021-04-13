@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     
-    "start": "node app.js",
+    "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
