@@ -1,0 +1,19 @@
+name: Periodic health check
+
+on:
+  schedule:
+    
+    - cron: '*/30 20,21,22 * * *'
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check app in prod
+        uses: jtalk/url-health-check-action@v1.5
+        with:
+          url: https://blogsmono.herokuapp.com/health
+          max-attempts: 3
+          retry-delay: 5s
+
+
