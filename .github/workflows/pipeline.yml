@@ -48,19 +48,14 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
 
-        - uses: actions/checkout@v2
-        - name: gihub context
+        - name: Slack notification
+          uses: 8398a7/action-slack@v3
+          with:
+            status: ${{ job.status }}
+            fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
           env:
-            GITHUB_CONTEXT: ${{ toJson(github) }}
-          run: echo "$GITHUB_CONTEXT"
-        - name: commits
-          env:
-            COMMITS: ${{ toJson(github.event.commits) }}
-          run: echo "$COMMITS"
-        - name: commit messages
-          env:
-            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          run: echo "$COMMIT_MESSAGES"
+            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} 
+          if: always() 
             
 
 
