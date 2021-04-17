@@ -5,3 +5,4 @@ describe('Ivysaur page', function() {
     cy.contains('chlorophyll')
   })
 })
+// Did not inform that you cannot access the dynamic route through url
