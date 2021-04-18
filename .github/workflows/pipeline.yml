@@ -30,7 +30,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "cakecrusher-pokedex"
           heroku_email: "1sebastiansosa1@gmail.com"
-          healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
+          # healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
 
 
 
