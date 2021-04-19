@@ -35,9 +35,9 @@ jobs:
       #     heroku_email: "1sebastiansosa1@gmail.com"
       #     healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
       #     rollbackonhealthcheckfailed: true
-      
 
 
 
-# Did not suggest to build as one of the steps
+
+# Did not suggest to build as one of the steps.
         
