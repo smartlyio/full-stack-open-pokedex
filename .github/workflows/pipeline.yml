@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull-request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -17,21 +20,22 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000/
-      - uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "cakecrusher-pokedex"
-          heroku_email: "1sebastiansosa1@gmail.com"
-          healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
-          rollbackonhealthcheckfailed: true
+      # - name: build
+      #   run: npm run build
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5000/
+      # - uses: akhileshns/heroku-deploy@v3.12.12
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: "cakecrusher-pokedex"
+      #     heroku_email: "1sebastiansosa1@gmail.com"
+      #     healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
+      #     rollbackonhealthcheckfailed: true
+      
 
 
 
