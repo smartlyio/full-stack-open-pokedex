@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull-request:
+  pull_request:
     branches: [master]
     types: [opened, synchronize]
 
@@ -39,5 +39,5 @@ jobs:
 
 
 
-# Did not suggest to build as one of the steps.
+# Did not suggest to build as one of the steps
         
