@@ -8,7 +8,7 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
-jobs:
+jobs:  
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
@@ -20,8 +20,9 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
-      # - name: build
-      #   run: npm run build
+      - name: build
+        if: ${{ github.event_name == 'push' }}
+        run: npm run build
       # - name: e2e tests
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -29,6 +30,7 @@ jobs:
       #     start: npm run start-prod
       #     wait-on: http://localhost:5000/
       # - uses: akhileshns/heroku-deploy@v3.12.12
+      #   if: ${{ github.event_name == 'push' }}
       #   with:
       #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
       #     heroku_app_name: "cakecrusher-pokedex"
