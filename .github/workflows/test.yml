@@ -16,7 +16,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
-          COMMITS: ${{ github.event.commits.message }}
+          COMMITS: ${{ toJson(github.event.commits.message) }}
         run: echo "$COMMITS"
       - name: commit messages
         env:
