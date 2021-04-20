@@ -18,24 +18,30 @@ jobs:
           node-version: '12.x'
       - name: npm install
         run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000/
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      # - name: lint
+      #   run: npm run eslint
+      # - name: build
+      #   run: npm run build
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5000/
+      # - uses: akhileshns/heroku-deploy@v3.12.12
+      #   if: ${{ github.event_name == 'push' }}
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: "cakecrusher-pokedex"
+      #     heroku_email: "1sebastiansosa1@gmail.com"
+      #     healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
+      #     rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "cakecrusher-pokedex"
-          heroku_email: "1sebastiansosa1@gmail.com"
-          healthcheck: "https://cakecrusher-pokedex.herokuapp.com/health"
-          rollbackonhealthcheckfailed: true
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
 
 
 
