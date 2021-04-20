@@ -35,3 +35,4 @@ jobs:
           heroku_email: lauri.kyttala@gmail.com
           healthcheck: https://lassen-pokemon.herokuapp.com/health
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
