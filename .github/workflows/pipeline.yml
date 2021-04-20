@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: lassen-pokemon
           heroku_email: lauri.kyttala@gmail.com
           healthcheck: https://lassen-pokemon.herokuapp.com/health
-          checkstring: 'ok'
+          checkstring: 'success - onnistui'
