@@ -12,6 +12,7 @@ app.get('/health', (req, res) => {
 
 app.get('/version', (req, res) => {
   res.send('new release v9') // change this string to ensure a new version deployed
+  // some commets to test thet only master branch will deploy
 })
 
 app.listen(PORT, () => {
