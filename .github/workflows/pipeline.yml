@@ -30,6 +30,6 @@ jobs:
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: ${{secrets.HEROKU_API_SECRET}}
           heroku_app_name: "full-stack-open-pokedex-anar" 
           heroku_email: "anar_ansarova@epam.com"
