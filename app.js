@@ -12,7 +12,7 @@ app.get('/health', (req, res) => {
 
 app.get('/version', (req, res) => {
   res.send('new release v9') // change this string to ensure a new version deployed
-  // another comment for ex 11.17 try b
+  // another comment for ex 11.17 try c without skip in commit clause
 })
 
 app.listen(PORT, () => {
