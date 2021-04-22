@@ -8,7 +8,8 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -26,8 +27,8 @@ module.exports = {
         2
       ],
     "linebreak-style": [
-      "error",
-      "unix"
+      "error",    
+      "windows" 
     ],
     "quotes": [
       "error",
