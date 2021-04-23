@@ -12,7 +12,9 @@ jobs:
       - name: be astonished
         run: |
           echo language env is $LANG
+      - name: check current directory files
         run: |
           ls -la
+      - name: print date
         run: |
           date
