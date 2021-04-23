@@ -34,3 +34,4 @@ jobs:
           heroku_email: "tommi.teetee@hotmail.com"
           healthcheck: "https://poketommi.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true

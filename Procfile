@@ -1,1 +1,1 @@
-web: node app.jsio
+web: node app.js
