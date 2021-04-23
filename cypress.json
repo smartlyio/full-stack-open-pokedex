@@ -1,1 +1,3 @@
-{}
+{
+	"pageLoadTimeout": 60000
+}
