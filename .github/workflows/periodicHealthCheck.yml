@@ -1,14 +1,14 @@
 
 name: Periodic Health Check
 
-on:
-  schedule:
-    - cron: 30 * * * *
-
 # on:
-#   push:
-#     branches:
-#       - master
+#   schedule:
+#     - cron: * 24 * * *
+
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   periodic-health-check:
