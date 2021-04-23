@@ -30,12 +30,12 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      if: ${{ github.event_name == 'push' }}
-        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "poketommi" #Must be unique in Heroku
-            heroku_email: "tommi.teetee@hotmail.com"
-            healthcheck: "https://poketommi.herokuapp.com/health"
-            checkstring: "ok"
-            rollbackonhealthcheckfailed: true
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "poketommi" #Must be unique in Heroku
+          heroku_email: "tommi.teetee@hotmail.com"
+          healthcheck: "https://poketommi.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+        if: ${{ github.event_name == 'push' }}
