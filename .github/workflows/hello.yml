@@ -10,5 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: be astonished
-      run: |
+        run: |
         echo language env is $LANG
