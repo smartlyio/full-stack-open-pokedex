@@ -17,3 +17,4 @@ jobs:
           heroku_email: 'vu.nguyen101@gmail.com'
           healthcheck: 'https://pokemondex9.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
