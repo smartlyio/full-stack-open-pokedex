@@ -9,6 +9,6 @@ jobs:
   jepjob:
     runs-on: ubuntu-latest
     steps:
-      name: be astonished
+      - name: be astonished
       run: |
         echo language env is $LANG
