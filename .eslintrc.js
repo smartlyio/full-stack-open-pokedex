@@ -3,8 +3,9 @@ module.exports = {
     browser: true,
     es6: true,
     "jest/globals": true,
+    "node": true,
   },
-  extends: ["eslint:recommended", "plugin:react/recommended"],
+  extends: ["eslint:recommended", "plugin:react/recommended", "plugin:cypress/recommended"],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
