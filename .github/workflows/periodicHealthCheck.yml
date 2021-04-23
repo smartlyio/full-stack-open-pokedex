@@ -1,9 +1,9 @@
 
 name: Periodic Health Check
 
-on:
-  schedule:
-    - cron: 30 * * * *
+# on:
+#   schedule:
+#     - cron: 30 * * * *
 
 on:
   push:
