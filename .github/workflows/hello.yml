@@ -12,3 +12,7 @@ jobs:
       - name: be astonished
         run: |
           echo language env is $LANG
+        run: |
+          ls -la
+        run: |
+          date
