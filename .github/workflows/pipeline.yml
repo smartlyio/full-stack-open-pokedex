@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "veras-full-stack-open-pokedex" 
           heroku_email: ${{secrets.USER_EMAIL}}
+          healthcheck: "https://veras-full-stack-open-pokedex.herokuapp.com/health"
+          checkstring: "ok"
