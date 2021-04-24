@@ -1,1 +1,1 @@
-web: test failure
+web: npm run start-prod
