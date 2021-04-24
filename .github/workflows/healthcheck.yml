@@ -3,7 +3,11 @@ name: Health check
 on:
   push:
     branches:
-      - master # Changing the branch here would also work
+      - master
+
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   build:
