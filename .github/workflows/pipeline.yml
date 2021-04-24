@@ -26,3 +26,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstack-part11'
           heroku_email: 'k.kelolov@gmail.com'
+          healthcheck: 'https://fullstack-part11.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 30
