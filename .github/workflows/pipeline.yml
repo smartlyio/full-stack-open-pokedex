@@ -14,8 +14,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     env:
-      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      SKIP_COMMITS: ${{ !contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
+      SKIP_COMMITS: ${{ !contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
 
     steps:
       - uses: actions/checkout@v2
