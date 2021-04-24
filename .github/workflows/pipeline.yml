@@ -11,30 +11,24 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    env:
+      GITHUB_CONTEXT: ${{ toJson(github) }}
+      COMMITS: ${{ toJson(github.event.commits) }}
+      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+      SKIP_COMMITS: ${{ !contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
+
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
 
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
       - name: npm install
         run: npm install
+
+      - name: test env
+        echo: '$SKIP_COMMITS'
 
       - name: lint
         run: npm run eslint
@@ -54,7 +48,7 @@ jobs:
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' && contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
@@ -64,7 +58,7 @@ jobs:
           rollbackonhealthcheckfailed: true
 
       - uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
