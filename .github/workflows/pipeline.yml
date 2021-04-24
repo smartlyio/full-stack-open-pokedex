@@ -11,13 +11,13 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       COMMITS: ${{ toJson(github.event.commits) }}
       COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
       SKIP_COMMITS: ${{ !contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
 
-    runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
 
