@@ -29,3 +29,4 @@ jobs:
           healthcheck: 'https://fullstack-part11.herokuapp.com/health'
           checkstring: 'ok'
           delay: 30
+          rollbackonhealthcheckfailed: true
