@@ -16,7 +16,7 @@ jobs:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       COMMITS: ${{ toJson(github.event.commits) }}
       COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      SKIP_COMMITS: ${{ !contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
+      SKIP_COMMITS: ${{ contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
 
     steps:
       - uses: actions/checkout@v2
@@ -48,7 +48,7 @@ jobs:
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS == 'false' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
@@ -58,7 +58,7 @@ jobs:
           rollbackonhealthcheckfailed: true
 
       - uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS == 'false' }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
