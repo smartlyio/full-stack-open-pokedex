@@ -12,6 +12,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
+
     env:
       GITHUB_CONTEXT: ${{ toJson(github) }}
       COMMITS: ${{ toJson(github.event.commits) }}
@@ -24,6 +25,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+
       - name: npm install
         run: npm install
 
@@ -48,7 +50,7 @@ jobs:
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS  }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
@@ -58,7 +60,7 @@ jobs:
           rollbackonhealthcheckfailed: true
 
       - uses: actions/checkout@v2
-        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS  }}
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
