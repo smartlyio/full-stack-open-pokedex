@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
@@ -33,7 +37,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
