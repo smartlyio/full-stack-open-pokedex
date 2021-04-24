@@ -1,1 +1,1 @@
-web: test rollback of failure
+web: npm run start-prod
