@@ -15,6 +15,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -39,7 +54,7 @@ jobs:
 
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains(join(env.COMMIT_MESSAGES, ', '), '#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
@@ -56,9 +71,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: true
-          WITH_V: false
-          INITIAL_VERSION: 0.0.0
+          DRY_RUN: false
+          WITH_V: true
+          INITIAL_VERSION: 0.1.0
           TAG_CONTEXT: repo
           RELEASE_BRANCHES: master
           SOURCE: .
