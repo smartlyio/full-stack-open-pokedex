@@ -1,0 +1,72 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+
+    env:
+      SKIP_COMMITS: ${{ !contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+
+      - name: test env
+        run: echo "$SKIP_COMMITS"
+
+      - name: lint
+        run: npm run eslint
+
+      - name: build
+        run: npm run build
+
+      - name: test
+        run: npm run test
+
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+
+      - name: deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'pokemondex9' #Must be unique in Heroku
+          heroku_email: 'vu.nguyen101@gmail.com'
+          healthcheck: 'https://pokemondex9.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
+
+      - uses: actions/checkout@v2
+        if: ${{ github.event_name == 'push' }}
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' && env.SKIP_COMMITS }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: false
+          WITH_V: true
+          INITIAL_VERSION: 0.1.0
+          TAG_CONTEXT: repo
+          RELEASE_BRANCHES: master
+          SOURCE: .
+          VERBOSE: true
