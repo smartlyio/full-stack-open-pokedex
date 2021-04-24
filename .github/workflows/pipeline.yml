@@ -35,3 +35,5 @@ jobs:
           heroku_email: ${{secrets.USER_EMAIL}}
           healthcheck: "https://veras-full-stack-open-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+
