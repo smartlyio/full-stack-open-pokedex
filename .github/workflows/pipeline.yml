@@ -44,3 +44,15 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokemondex9' #Must be unique in Heroku
           heroku_email: 'vu.nguyen101@gmail.com'
+          healthcheck: 'https://pokemondex9.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
+
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
