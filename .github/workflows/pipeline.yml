@@ -11,7 +11,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: windows-latest
+    runs-on: ubuntu-18.04
 
     env:
       SKIP_COMMITS: ${{ !contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
