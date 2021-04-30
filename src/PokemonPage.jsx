@@ -10,7 +10,6 @@ const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 const PokemonPage = ({ previous, next }) => {
   const { name } = useParams()
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
-
   if (isLoading) {
     return <LoadingSpinner />
   }
@@ -32,7 +31,7 @@ const PokemonPage = ({ previous, next }) => {
       <div className="links">
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to="/">Home</Link>
-        {next && <Link to={`/pokemon/${previous.name}`}>Next</Link>}
+        {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div className="pokemon-image" style={{ backgroundImage: `url(${pokemon.sprites.front_default})` }} />
