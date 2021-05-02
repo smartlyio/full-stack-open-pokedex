@@ -1,5 +1,9 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+} from 'react-router-dom'
 import { useApi } from './useApi'
 import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
@@ -37,8 +41,12 @@ const App = () => {
 						const pokemonId = pokemonList.find(
 							({ name }) => name === routeParams.match.params.name,
 						).id
-						const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
-						const next = pokemonList.find(({ id }) => id === pokemonId + 1)
+						const previous = pokemonList.find(
+							({ id }) => id === pokemonId - 1,
+						)
+						const next = pokemonList.find(
+							({ id }) => id === pokemonId + 1,
+						)
 						return (
 							<PokemonPage
 								pokemonList={pokemonList}
