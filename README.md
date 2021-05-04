@@ -1,8 +1,8 @@
-# Full Stack open CI/CD
+# Full Stack open CI/CD part 2
 
-This repository is used for the CI/CD module of the Full stack open course
+## Exercises 11.21-11.22
 
-Fork the repository to complete course exercises
+[https://github.com/ndkv9/phonebook-cicd](https://github.com/ndkv9/phonebook-cicd)
 
 ## Commands
 
