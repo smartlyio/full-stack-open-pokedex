@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d7c894c-fd3e-45dd-b912-e09a7d7aef6d" name="Default Changelist" comment="" />
+    <list default="true" id="0d7c894c-fd3e-45dd-b912-e09a7d7aef6d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/cypress/integration/Pokedex/Poxedex.js" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/integration/Pokedex/Poxedex.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +34,7 @@
       <workItem from="1620051981269" duration="13000" />
       <workItem from="1620053325502" duration="24000" />
       <workItem from="1620054504971" duration="43000" />
+      <workItem from="1620215998218" duration="37000" />
     </task>
     <servers />
   </component>
