@@ -5,8 +5,32 @@ on:
     branches:
       - master
 
+# jobs:
+#   simple_deployment_pipeline:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
+#       - name: npm install
+#         run: npm install
+#       - name: lint
+#         run: npm run eslint
+#       - name: test
+#         run: npm run test
+#       - name: build
+#         run: npm build
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v2
+#         with:
+#           command: npm run test:e2e
+#           start: npm run start-prod
+#           wait-on: http://localhost:5000
+
 jobs:
   simple_deployment_pipeline:
+    name: Deployment pipeline
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -17,10 +41,10 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
-      - name: test
+      - name: npm run build
+        run: npm run build
+      - name: npm run test
         run: npm run test
-      - name: build
-        run: npm build
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
