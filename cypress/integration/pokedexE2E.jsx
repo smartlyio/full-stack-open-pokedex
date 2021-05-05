@@ -4,4 +4,9 @@ describe('Pokedex', function() {
       cy.contains('ivysaur')
       cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
     })
+    it('can go to a pokemon page', function() {
+      cy.get('#charmander').click()
+      cy.contains('charmander')
+      cy.contains('solar power')
+    })
 })
