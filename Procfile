@@ -1,1 +1,1 @@
-web: npm run break-procfile
+web: npm run start-prod
