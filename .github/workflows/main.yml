@@ -16,3 +16,5 @@ jobs:
           heroku_app_name: "part11fso" 
           heroku_email: "atukadagio123@gmail.com"
           healthcheck: "https://part11fso.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
