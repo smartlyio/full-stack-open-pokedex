@@ -17,4 +17,4 @@ jobs:
           echo "Current date:" && date
       - name: Echo ls
         run: |
-          echo "Directory contents:" && ls                    
+          echo "Directory contents:" && ls -l                 
