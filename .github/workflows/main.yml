@@ -9,6 +9,7 @@ on:
       [main]
     types: 
       [opened, synchronize]
+      
 jobs:
   build:
     runs-on: ubuntu-latest
