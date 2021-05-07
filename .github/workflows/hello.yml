@@ -5,5 +5,5 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Hello world job
-      run: |
-        echo "Hello, World!"
+        run: |
+          echo "Hello, World!"
