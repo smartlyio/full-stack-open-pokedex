@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "finnish-pokedex-test"
           heroku_email: "nishnat.rishi@gmail.com"
+          healthcheck: "https://finnish-pokedex-test.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
