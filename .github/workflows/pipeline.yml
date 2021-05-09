@@ -6,6 +6,7 @@ on:
       - master
 
 # name and trigger not shown anymore...
+# why...
 
 jobs:
   simple_deployment_pipeline:    
