@@ -5,7 +5,7 @@ on:
     branches:
       - master
   pull_request:    
-    branches: [main]
+    branches: [master]
     types: [opened, synchronize]
 
 # name and trigger not shown anymore...
