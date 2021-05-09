@@ -38,3 +38,4 @@ jobs:
           heroku_email: "juhku@elisanet.fi"
           healthcheck: "https://pokedex-funnicus.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
