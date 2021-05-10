@@ -16,7 +16,7 @@ app.listen(PORT, () => {
 
 // endpoint for application health check
 app.get("/health", (req, res) => {
-  res.send("ok");
+  res.send("Health status 👍🏾");
 });
 
 // endpoint to keep track of application versioning
