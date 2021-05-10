@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemonaction"
           heroku_email: "codebook.ng@gmail.com"
+          healthcheck: "https://pokemonaction.herokuapp.com/health"
+          checkstring: "ok"

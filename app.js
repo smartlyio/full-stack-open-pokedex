@@ -13,3 +13,13 @@ app.use(express.static("dist"));
 app.listen(PORT, () => {
   console.log("server started on port 5000");
 });
+
+// endpoint for application health check
+app.get("/health", (req, res) => {
+  res.send("ok");
+});
+
+// endpoint to keep track of application versioning
+app.get("/version", (req, res) => {
+  res.send("1");
+});
