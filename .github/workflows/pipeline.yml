@@ -34,7 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: heroku deploy
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'), '#skip')}}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -67,5 +67,5 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: test
-          if: ${{ github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip')}}
-          run: echo "Toimii :p"
+          if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
+          run: echo "Ei toimi :p"
