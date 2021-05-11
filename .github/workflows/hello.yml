@@ -18,3 +18,5 @@ jobs:
       - name: Print current directory
         run: |
           ls -l
+      - name: commits
+        if: ${{ contains(github.event.commits.*.message, '#skip') }}
