@@ -19,4 +19,6 @@ jobs:
         run: |
           ls -l
       - name: commits
-        if: ${{ contains(github.event.commits.*.message, '#skip') }}
+        env:
+          COMMIT_MESSAGES: contains(github.event.commits.*.message, '#skip')
+        run: echo "$COMMIT_MESSAGES"
