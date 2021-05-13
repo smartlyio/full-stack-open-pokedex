@@ -27,3 +27,20 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Deploy
+
+          on:
+            push:
+              branches:
+                - master
+
+          jobs:
+            build:
+              runs-on: ubuntu-latest
+              steps:
+                - uses: actions/checkout@v2
+                - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+                  with:
+                    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                    heroku_app_name: "pokedex-hejoel" #Must be unique in Heroku
+                    heroku_email: "joel.heusala@gmail.com"
