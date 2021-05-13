@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-hejoel" #Must be unique in Heroku
           heroku_email: "joel.heusala@gmail.com"
+          healthcheck: "https://pokedex-hejoel.herokuapp.com/health"
+          checkstring: "ok"
