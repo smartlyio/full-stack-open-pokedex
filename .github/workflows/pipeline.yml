@@ -62,7 +62,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: ${{ failure() }}
-      - name: job success
+      - name: job successful
         uses: 8398a7/action-slack@v3
         with:
           status: custom
