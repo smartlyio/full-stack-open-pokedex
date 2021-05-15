@@ -1,8 +1,11 @@
 name: Health check
 
 on:
+  push:
+    branches:
+      - master 
   schedule:
-    - cron: '5 * * * *'
+    - cron: '* * * * *'
 
 jobs:
   health_check:
