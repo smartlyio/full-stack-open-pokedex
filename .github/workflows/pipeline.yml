@@ -33,4 +33,5 @@ jobs:
           heroku_app_name: "full-stack-part-eleven"
           heroku_email: "okko.ojala@gmail.com"   
           healthcheck: "https://full-stack-part-eleven.herokuapp.com/health"                   
-          checkstring: "ok"          
+          checkstring: "ok"     
+          rollbackonhealthcheckfailed: true     
