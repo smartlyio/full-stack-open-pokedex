@@ -1,5 +1,6 @@
 name: Scheduled Health Check
 
+# as indicated in the material, this workflow has been disabled (in Github).
 on:
   schedule:
     - cron: '*/15 * * * *' # https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events
