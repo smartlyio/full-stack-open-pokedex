@@ -27,8 +27,10 @@ jobs:
           start: npm run start-prod          
           wait-on: http://localhost:5000              
           command: npm run test:e2e
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-part-eleven"
-          heroku_email: "okko.ojala@gmail.com"            
+          heroku_email: "okko.ojala@gmail.com"   
+          healthcheck: "https://full-stack-part-eleven.herokuapp.com/health"                   
+          checkstring: "ok"          
