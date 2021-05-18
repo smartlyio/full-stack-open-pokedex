@@ -5,7 +5,7 @@ on:
     branches:
       - master
   pull_request:
-    branches: [main]
+    branches: [master]
     types: [opened, synchronize]      
 
 jobs:
@@ -38,4 +38,3 @@ jobs:
           healthcheck: "https://full-stack-part-eleven.herokuapp.com/health"                   
           checkstring: "ok"     
           rollbackonhealthcheckfailed: true     
-          
