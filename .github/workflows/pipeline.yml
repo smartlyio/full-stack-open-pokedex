@@ -38,3 +38,4 @@ jobs:
           healthcheck: "https://full-stack-part-eleven.herokuapp.com/health"                   
           checkstring: "ok"     
           rollbackonhealthcheckfailed: true     
+          
