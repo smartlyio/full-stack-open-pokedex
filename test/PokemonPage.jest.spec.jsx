@@ -110,6 +110,8 @@ describe('<PokemonPage />', () => {
   it('should render previous and next urls if they exist', async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
+
+
     await act(async () => {
       render(
         <Router history={history}>
