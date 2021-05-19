@@ -1,0 +1,23 @@
+name: telegram message
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+   build:
+    name: Build
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@master
+      - name: send default message
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+      - name: send to user
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO_ME }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
