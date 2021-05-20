@@ -35,3 +35,4 @@ jobs:
           heroku_email: "ishmamchowdhurygp@gmail.com"
           healthcheck: "https://pokedex-cdci.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
