@@ -8,6 +8,6 @@ describe('Pokedex', function() {
   it('can navigate to Ninetales page and see Drought', function() {
     cy.visit('http://localhost:5000')
     cy.contains('ninetales').click()
-    cy.contains('Drought')
+    cy.contains('drought')
   })
 })
