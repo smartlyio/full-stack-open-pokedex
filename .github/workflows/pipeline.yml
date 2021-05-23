@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'ccfu@kth.se' 
           healthcheck: 'https://pokedexcicd0917.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
