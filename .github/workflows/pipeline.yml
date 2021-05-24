@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: '12.x'
       - name: npm install
         run: npm install
       - name: lint
@@ -43,39 +43,40 @@ jobs:
       #    status: ${{ job.status }}
       #    fields: repo, message, commit, author, took
 
-  deploy_job:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: deploy to heroku
-        id: deploy
-        if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
-        uses: akhileshns/heroku-deploy@v3.10.9
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "moocpoke"
-          heroku_email: "iko.hyppanen@gmail.com"
-          remote_branch: master
-          healthcheck: "https://moocpoke.herokuapp.com/health"
-          checkstring: "ok"
-          delay: 5
-          rollbackonhealthcheckfailed: true0
-      # comment out slack notifications
-      #- name: slack notification on deploy success
-      #  env:
-      #    DEPLOY_SUCCESS: ${{ steps.deploy.outcome }}
-      #  if: ${{ env.DEPLOY_SUCCESS == 'success' }}
-      #  uses: 8398a7/action-slack@v3
-      #  with:
-      #    status: custom
-      #    fields: commit,author,took
-      #    custom_payload: |
-      #      {
-      #        attachments: [{
-      #          color: 'good',
-      #          text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
-      #        }]
-      #      }
+  # commment out deploy job because app is removed from Heroku
+  #deploy_job:
+  #runs-on: ubuntu-18.04
+  #steps:
+  #- uses: actions/checkout@v2
+  #- name: deploy to heroku
+  #id: deploy
+  #if: env.EVENT_NAME == 'push' && env.SKIP == 'false'
+  #uses: akhileshns/heroku-deploy@v3.10.9
+  #with:
+  #heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+  #heroku_app_name: "moocpoke"
+  #heroku_email: "iko.hyppanen@gmail.com"
+  #remote_branch: master
+  #healthcheck: "https://moocpoke.herokuapp.com/health"
+  #checkstring: "ok"
+  #delay: 5
+  #rollbackonhealthcheckfailed: true0
+  # comment out slack notifications
+  #- name: slack notification on deploy success
+  #  env:
+  #    DEPLOY_SUCCESS: ${{ steps.deploy.outcome }}
+  #  if: ${{ env.DEPLOY_SUCCESS == 'success' }}
+  #  uses: 8398a7/action-slack@v3
+  #  with:
+  #    status: custom
+  #    fields: commit,author,took
+  #    custom_payload: |
+  #      {
+  #        attachments: [{
+  #          color: 'good',
+  #          text: `a new version deployed to https://moocpoke.herokuapp.com/ (${process.env.AS_COMMIT})\nby ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+  #        }]
+  #      }
 
   tagging_job:
     runs-on: ubuntu-18.04
