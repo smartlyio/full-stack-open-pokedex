@@ -9,8 +9,9 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+// Check app version
 app.get('/version', (req, res) => {
-  res.send('5')
+  res.send('7')
 })
 
 app.use(express.static('dist'))
