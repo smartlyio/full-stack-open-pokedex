@@ -4,6 +4,15 @@ const app = express()
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5000
 
+// Health check to confirm if the app is running
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+app.get('/version', (req, res) => {
+  res.send('5')
+})
+
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
