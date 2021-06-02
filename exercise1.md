@@ -1,0 +1,7 @@
+If I was working in a python app, all dependencies would be stored in my requirements.txt/Pipfile (like in package.json for node.js). Since python is an interpreted language the build can/should be skipped, but it is approved through linting and testing. As a linter I'd use flake8 since it can recognize both stylistic and logical errors, and the testing library I found is called pytest, which supports unit, functional and API testing. 
+
+CI can be managed by CircleCI, GitLabs, TeamCity, CodeShip, Integrity and many others. The workflow would be configured to match the production environment as close as possible. That way we can know for sure that whatever we have in our repository will definitely run and it also makes it easier to debug the code. 
+
+So the pipeline would use the repository in a virtual environment, install dependencies and run linter and tests. Now whenever we push to the master branch the workflow would be triggered. Any new functions/features should have their own tests to avoid introducing bugs. 
+
+This setup would be better in a cloud-based environment because I'm imagining a relatively simple app. I guess testing would be pretty straight forward and it wouldn't be resource intensive. 
