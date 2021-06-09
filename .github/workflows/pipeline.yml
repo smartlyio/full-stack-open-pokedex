@@ -32,4 +32,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "arden-pokedex"
           heroku_email: "ignomagames@gmail.com"
-          
+          healthcheck: "https://arden-pokedex.herokuapp.com/health"         
+          checkstring: "ok"
