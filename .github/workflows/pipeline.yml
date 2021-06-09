@@ -19,8 +19,6 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: run production
-        run: npm run start-prod
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
