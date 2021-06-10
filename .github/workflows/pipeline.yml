@@ -4,11 +4,14 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
-    timeout-minutes: 5 
+    timeout-minutes: 6 
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
