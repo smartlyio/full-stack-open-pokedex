@@ -45,9 +45,9 @@ jobs:
           healthcheck: "http://pokedex-rndmz.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
 
+      - uses: actions/checkout@v2
       - if: ${{ github.event_name == 'push' }}
         name: Bump version and tag test
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          DRY_RUN: true
