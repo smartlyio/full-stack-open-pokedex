@@ -38,3 +38,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-rndmz"
           heroku_email: "a.nogales.cs@gmail.com"
+          healthcheck: "http://pokedex-rndmz.herokuapp.com/health"
