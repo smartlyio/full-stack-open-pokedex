@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-vm" 
           heroku_email: "victorgmp@gmail.com"
+          healthcheck: "https://pokedex-vm.herokuapp.com/health"
+          checkstring: "ok"
