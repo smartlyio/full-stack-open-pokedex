@@ -35,3 +35,4 @@ jobs:
           heroku_email: "victorgmp@gmail.com"
           healthcheck: "https://pokedex-vm.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
