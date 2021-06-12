@@ -5,7 +5,7 @@ on:
     branches:
       - master
   pull_request:
-    branches: [crazy-experiment, main]
+    branches: [crazy-experiment, master]
     types: [opened, synchronize]
 
 jobs:
