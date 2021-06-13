@@ -30,6 +30,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.7.8
