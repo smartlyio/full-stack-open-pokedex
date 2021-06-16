@@ -13,6 +13,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: "12.x"
+      - uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
       - name: npm install
         run: npm install
       - name: lint
@@ -23,8 +28,3 @@ jobs:
         run: npm run test
       - name: e2e tests
         run: npm run test:e2e
-      - uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
