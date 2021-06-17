@@ -35,3 +35,4 @@ jobs:
           heroku_email: "natasa_sladojevic@yahoo.com"
           healthcheck: "https://natasharp-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
