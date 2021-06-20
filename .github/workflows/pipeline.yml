@@ -32,7 +32,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-55555" #Must be unique in Heroku
           heroku_email: "joakim.riistaniemi@windowslive.com"
-          healthcheck: "http://localhost:5000/health"
+          healthcheck: "https://pokedex-55555.herokuapp.com/health"
           checkstring: "ok"
-          procfile: "web: npm run start-prod"
+          procfile: "web: npm run test"
           rollbackonhealthcheckfailed: true
