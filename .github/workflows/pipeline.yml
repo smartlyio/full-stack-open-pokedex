@@ -34,5 +34,5 @@ jobs:
           heroku_email: "joakim.riistaniemi@windowslive.com"
           healthcheck: "http://localhost:5000/health"
           checkstring: "ok"
-          profile: "web: npm run start-prod"
+          procfile: "web: npm run start-prod"
           rollbackonhealthcheckfailed: true
