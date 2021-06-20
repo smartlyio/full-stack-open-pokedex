@@ -33,3 +33,6 @@ jobs:
           heroku_app_name: "pokedex-55555" #Must be unique in Heroku
           heroku_email: "joakim.riistaniemi@windowslive.com"
           healthcheck: "http://localhost:5000/health"
+          checkstring: "ok"
+          profile: "web: npm run start-prod"
+          rollbackonhealthcheckfailed: true
