@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fullstackopen-part11'
           heroku_email: 'gotcha5009@hotmail.com'
+          healthcheck: "https://fullstackopen-part11.herokuapp.com/health"
+          checkstring: "ok"
