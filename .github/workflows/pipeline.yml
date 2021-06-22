@@ -36,5 +36,6 @@ jobs:
           healthcheck: 'https://cicdsampleapp.herokuapp.com/health'
           checkstring: 'ok'
           delay: 5
+          rollbackonhealthcheckfailed: true
         
          
