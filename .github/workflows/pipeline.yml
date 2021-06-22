@@ -40,3 +40,13 @@ jobs:
           healthcheck: "https://natasharp-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+  tagging:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: true
+          DEFAULT_BUMP: patch
