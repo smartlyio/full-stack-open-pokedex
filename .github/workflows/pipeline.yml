@@ -31,6 +31,10 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with: 
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "cicdsampleapp"
-          heroku_email: "jeewanbhusal@gmail.com"
+          heroku_app_name: 'cicdsampleapp'
+          heroku_email: 'jeewanbhusal@gmail.com'
+          healthcheck: 'https://cicdsampleapp.herokuapp.com/health',
+          checkstring: 'ok'
+          delay: 5
+        
          
