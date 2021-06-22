@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'gotcha5009@hotmail.com'
           healthcheck: "https://fullstackopen-part11.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
