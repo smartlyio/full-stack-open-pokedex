@@ -1,1 +1,1 @@
-web: npm run start-prodf
+web: npm run start-prod
