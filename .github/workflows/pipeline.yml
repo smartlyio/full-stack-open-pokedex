@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'salty-reef-93891'
           heroku_email: 'joona00ramo@gmail.com'
+          healthcheck: 'https://salty-reef-93891.herokuapp.com/ping'
+          checkstring: 'pong'
