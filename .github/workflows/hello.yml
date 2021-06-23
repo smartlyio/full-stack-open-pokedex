@@ -9,6 +9,6 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-18.04
     steps:
-      - name: Say hello
+      - name: Say hello world
         run: |
           echo "Hello World!"
