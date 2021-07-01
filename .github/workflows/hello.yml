@@ -11,3 +11,11 @@ jobs:
       - name: Say Hello
         run: |
           echo "Hello World!"
+
+      - name: Now it is
+        run: |
+          data
+
+      -name: Directory Content
+        run: |
+          ls -l
