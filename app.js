@@ -10,6 +10,10 @@ app.get('/health', (req, res) => {
   res.send('healthy')
 })
 
+app.get('/hello/:name', (req, res) => {
+  res.send(`Hello ${req.params.name}.`)
+})
+
 app.get('/version', (req, res) => {
   res.send('2')
 })
