@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: 'pokedox-fsopen' #Must be unique in Heroku
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           healthcheck: https://pokedox-fsopen.herokuapp.com/health"
-          checkstring: 'ok'
+          checkstring: ok
