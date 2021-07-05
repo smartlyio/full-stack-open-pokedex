@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Deployment pipeline
 
 on:
   push:
@@ -10,8 +10,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: Print Github Workspace
-        run: |
-          echo $GITHUB_WORKSPACE;
-          git status;
-          git branch;
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '12'
+      - name: Install node (npm) dependencies
+        run: npm install
+      - name: Lint
+        run: npm run eslint
