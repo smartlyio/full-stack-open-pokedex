@@ -9,6 +9,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout:@v2
       - name: Print Github Workspace
         run: |
           echo $GITHUB_WORKSPACE;
