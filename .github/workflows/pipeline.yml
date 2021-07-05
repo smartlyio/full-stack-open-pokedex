@@ -11,4 +11,6 @@ jobs:
     steps:
       - name: Print Github Workspace
         run: |
-          echo $GITHUB_WORKSPACE
+          echo $GITHUB_WORKSPACE;
+          git status;
+          git branch;
