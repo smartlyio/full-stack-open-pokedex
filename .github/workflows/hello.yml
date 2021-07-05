@@ -13,6 +13,6 @@ jobs:
         run: |
           echo "hello world!"
       - name: Print Date
-        run: ls
+        run: date
       - name: Print Current Directory
         run: pwd
