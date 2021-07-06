@@ -8,6 +8,19 @@ import { useApi } from './useApi'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
+const buttonStyles = {
+  textDecoration: 'none',
+  padding: '16px 32px',
+  background: '#845EC2',
+  color: '#fff',
+  borderRadius: 4,
+  marginRight: 16,
+}
+
+const container = {
+  padding: 40,
+}
+
 const PokemonPage = ({ previous, next }) => {
   const { name } = useParams()
   const {
@@ -38,11 +51,21 @@ const PokemonPage = ({ previous, next }) => {
   // eslint-disable-next-line no-console
   console.log('hiddenAbility=', hiddenAbility)
   return (
-    <>
+    <div style={container}>
       <div className="links">
-        {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
-        <Link to="/">Home</Link>
-        {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
+        {previous && (
+          <Link to={`/pokemon/${previous.name}`} style={buttonStyles}>
+            Previous
+          </Link>
+        )}
+        <Link to="/" style={buttonStyles}>
+          Home
+        </Link>
+        {next && (
+          <Link to={`/pokemon/${next.name}`} style={buttonStyles}>
+            Next
+          </Link>
+        )}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div
@@ -77,7 +100,7 @@ const PokemonPage = ({ previous, next }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
