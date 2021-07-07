@@ -26,6 +26,7 @@ jobs:
       - name: test
         run: npm run test
       - name: e2e tests
+        if: ${{ false }}
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
