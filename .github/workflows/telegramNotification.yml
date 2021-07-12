@@ -1,6 +1,6 @@
 name: Telegram notifications!
 
-on: [push]
+on: [deployment]
 
 jobs:
   build:
