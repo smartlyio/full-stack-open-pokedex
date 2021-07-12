@@ -1,0 +1,19 @@
+name: lint
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deployment_pipeline_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.17.1'
+      - name: install npm dependencies
+        run: npm install
+      - name: lint js files
+        run: npm run eslint
