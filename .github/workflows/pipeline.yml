@@ -18,10 +18,6 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: build
-<<<<<<< HEAD
         run: npm run build
-=======
-        run: np run build
->>>>>>> 342b2c3cd9a5b40c8bcd0e3cda476db0c35a0a33
       - name: test
         run: npm run test
