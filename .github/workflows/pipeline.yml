@@ -1,6 +1,9 @@
 name: Deployment pipeline!
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -29,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }} && !contains(${{ toJson(github.event.commits.*.message) }}, '#skip')
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "natasharp-pokedex"
@@ -40,7 +43,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }} && !contains(${{ toJson(github.event.commits.*.message) }}, '#skip')
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         env: 
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
