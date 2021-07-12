@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -40,6 +40,9 @@ jobs:
           healthcheck: "https://natasharp-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+  push_tag:
+    runs-on: ubuntu-18.04
+    steps:
       - uses: actions/checkout@v2
       - name: bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
