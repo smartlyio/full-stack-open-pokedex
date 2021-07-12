@@ -1,7 +1,8 @@
 name: Periodic Health Check!
 
 on: 
-  push
+  schedule:
+    - cron:  '* * 13 * *'
 
 jobs:
   health_check:
