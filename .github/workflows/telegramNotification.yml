@@ -1,6 +1,9 @@
 name: Telegram notifications!
 
-on: [deployment]
+on: 
+  pull_request:
+      branches: [master]
+      types: [opened, synchronize]
 
 jobs:
   build:
@@ -8,12 +11,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: send default message
+    - name: send default message to telegram group
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO }}
         token: ${{ secrets.TELEGRAM_TOKEN }}
-    - name: send custom message with args
+    - name: send default message to me
       uses: appleboy/telegram-action@master
       with:
         to: ${{ secrets.TELEGRAM_TO_ME }}
