@@ -22,3 +22,15 @@ jobs:
       - name: Output hello
         run: |
           echo "Hello World!"
+  date_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Output date command
+        run: |
+          date
+  dir_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Output dir contents
+        run: |
+          ls -l
