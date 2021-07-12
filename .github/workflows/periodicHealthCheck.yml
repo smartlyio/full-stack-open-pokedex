@@ -4,7 +4,7 @@ on:
   push
 
 jobs:
-  checkhealt:
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: URL Health Check
