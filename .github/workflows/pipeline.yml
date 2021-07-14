@@ -34,3 +34,4 @@ jobs:
           heroku_email: "ericmiranda7@gmail.com"
           healthcheck: "https://fstack-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
