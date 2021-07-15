@@ -35,6 +35,7 @@ jobs:
           heroku_email: ville.turku99@gmail.com
           healthcheck: "https://eveningdew214.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
 
           
         
