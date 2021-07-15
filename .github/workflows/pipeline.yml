@@ -33,7 +33,3 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokedex-gvirinko
           heroku_email: irina.gnativ@gmail.com
-          #healthcheck: "https://pokedex-gvirinko.herokuapp.com/health"
-          #checkstring: "ok"
-          #delay: 5
-          #rollbackonhealthcheckfailed: true
