@@ -43,6 +43,7 @@ jobs:
           healthcheck: "https://fstack-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
       - name: Bump version and tag release
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.26.0
