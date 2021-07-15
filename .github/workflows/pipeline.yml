@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: pokedex-gvirinko
           heroku_email: irina.gnativ@gmail.com
           healthcheck: "https://pokedex-gvirinko.herokuapp.com/health"
-          checkstring: "oki"
+          checkstring: "ok"
