@@ -15,10 +15,10 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
         with:
-          fetch-depth: '0'
+          fetch-depth: "0"
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.17.1'
+          node-version: "14.17.1"
       - name: install npm dependencies
         run: npm install
       - name: lint js files
@@ -45,9 +45,10 @@ jobs:
           rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
       - name: Bump version and tag release
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(COMMITS_STRING, '#skip') }}
         uses: anothrNick/github-tag-action@1.26.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
+          COMMITS_STRING: ${{ join(github.event.commits) }}
