@@ -5,6 +5,7 @@ const app = express()
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000
 
+// testt
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
