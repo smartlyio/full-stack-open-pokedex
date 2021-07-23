@@ -32,4 +32,5 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-app-testing"
+          heroku_email: "web0testing0et@protonmail.com"
           branch: "master"
