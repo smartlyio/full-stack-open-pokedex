@@ -34,3 +34,4 @@ jobs:
           heroku_app_name: "pokedex-app-testing"
           heroku_email: "web0testing0et@protonmail.com"
           branch: "master"
+          healthcheck: "https://pokedex-app-testing.herokuapp.com/health"
