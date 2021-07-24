@@ -35,3 +35,4 @@ jobs:
           heroku_email: "web0testing0et@protonmail.com"
           branch: "master"
           healthcheck: "https://pokedex-app-testing.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
