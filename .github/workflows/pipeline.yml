@@ -10,11 +10,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - uses: actions/setup-node@v1
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "zx-test-app"
-          heroku_email: "zhixiankwok@gmail.com"
+          node-version: '12.x'
 
       - name: npm install
         run: npm install
@@ -31,9 +29,15 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      
-      - name: deploy
-        run: npm run deploy:full
+            
+      - name: Deploy to heroku
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: akhileshns/heroku-deploy@v3.6.8      
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: zx-test-app
+          heroku_email: zhixiankwok@gmail.com
+  
 
 
 
