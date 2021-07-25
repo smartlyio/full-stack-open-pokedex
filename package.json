@@ -10,6 +10,8 @@
     "test:e2e": "cypress run",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
+    "deploy": "git push heroku main",
+    "deploy:full": "npm run build && git add . && git commit -m uibuild && git push && npm run deploy",
     "cypress:open": "cypress open"
   },
   "repository": {

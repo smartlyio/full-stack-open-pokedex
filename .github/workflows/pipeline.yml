@@ -11,8 +11,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           node-version: "12.x"
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "full-stack-open-pokedex"
+          heroku_email: "zhixiankwok@gmail.com"
 
       - name: npm install
         run: npm install
@@ -29,3 +33,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      
+      - name: deploy
+        run: npm run deploy:full
+
+
+
+         
