@@ -10,12 +10,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          node-version: "12.x"
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "full-stack-open-pokedex"
+          heroku_app_name: "zx-test-app"
           heroku_email: "zhixiankwok@gmail.com"
 
       - name: npm install
