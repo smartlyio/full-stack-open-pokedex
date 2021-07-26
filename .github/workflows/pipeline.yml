@@ -30,12 +30,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deployToHeroku
-        uses: akhileshns/heroku-deploy@v3.12.12 
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokedex-app-testing"
-          heroku_email: "web0testing0et@protonmail.com"
-          branch: "master"
-          healthcheck: "https://pokedex-app-testing.herokuapp.com/health"
-          rollbackonhealthcheckfailed: true
+      if: ${{ github.event_name == 'push' }}
+        - name: deployToHeroku
+          uses: akhileshns/heroku-deploy@v3.12.12 
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: "pokedex-app-testing"
+            heroku_email: "web0testing0et@protonmail.com"
+            branch: "master"
+            healthcheck: "https://pokedex-app-testing.herokuapp.com/health"
+            rollbackonhealthcheckfailed: true
