@@ -6,7 +6,7 @@ const version = uuid.v4()
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000
 
-// testt2345
+// testt23456
 app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
