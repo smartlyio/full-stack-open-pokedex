@@ -41,8 +41,8 @@ jobs:
           healthcheck: "https://pokedex-app-testing.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message)),'#skip') }}
+        if: ${{ github.event_name == 'push' && contains(github.event.commits.*.message),'#skip') }}
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEAULT_BUMP: "patch"
+          DEAULT_BUMP: "#patch"
