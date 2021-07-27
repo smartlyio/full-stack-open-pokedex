@@ -34,3 +34,4 @@ jobs:
             heroku_app_name: "pokepokeapp"
             heroku_email: ${{secrets.HEROKU_EMAIL}}
             healthcheck: "https://pokepokeapp.herokuapp.com/health"
+            rollbackonhealthcheckfailed: true
