@@ -2,6 +2,8 @@ name: Deployment pipeline
 
 on:
   push:
+    branches:
+      - master
 
 jobs:
   simple_deployment_pipeline:
@@ -15,3 +17,7 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
