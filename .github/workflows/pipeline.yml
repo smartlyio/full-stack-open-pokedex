@@ -34,6 +34,6 @@ jobs:
           heroku_app_name: "tranquil-fortress-61120" #Must be unique in Heroku
           heroku_email: "samuelthien@yahoo.com"
           healthcheck: "https://tranquil-fortress-61120.herokuapp.com/health"
-          checkstring: "ok"
+          checkstring: "okok"
           delay: 5
           rollbackonhealthcheckfailed: true
