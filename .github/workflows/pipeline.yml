@@ -23,12 +23,12 @@ jobs:
           run: npm run build
         - name : test
           run: npm run test
-        - name : e2e tests
-          uses: cypress-io/github-action@v2
-          with:
-            command: npm run test:e2e
-            start: npm run start-prod
-            wait-on: http://localhost:5000
+        - name: Bump version and push tag
+          if: ${{ github.event_name == 'push' }}
+          uses: anothrNick/github-tag-action@1.33.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: truncate
         - name : deplly
           if: ${{ github.event_name == 'push' }}
           uses:  akhileshns/heroku-deploy@v3.12.12 
@@ -38,3 +38,4 @@ jobs:
             heroku_email: ${{secrets.HEROKU_EMAIL}}
             healthcheck: "https://pokepokeapp.herokuapp.com/health"
             rollbackonhealthcheckfailed: true
+        
