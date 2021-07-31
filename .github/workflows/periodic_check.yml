@@ -1,5 +1,13 @@
 name: Periodic checks
 
+on:
+  push:
+    branches:
+      - master
+    pull_request:
+      brances: [master]
+      types: [opened, synchronize]
+
 jobs:
   periodic_health_check:
     runs-on: ubuntu-18.04
