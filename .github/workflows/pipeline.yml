@@ -35,3 +35,4 @@ jobs:
           heroku_email: "joonas.vanhalakka@helsinki.fi"
           healthcheck: "https://calm-thicket-66229.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
