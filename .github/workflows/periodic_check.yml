@@ -1,0 +1,11 @@
+name: Periodic checks
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v1.5
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://pokedex-app-testing.herokuapp.com/health
