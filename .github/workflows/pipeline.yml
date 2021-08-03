@@ -27,3 +27,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 705d0334-02c5-4654-b9e4-1d50427a0eb4
+          heroku_app_name: full-stack-open-pokedex-caruy
+          heroku_email: caruychen@gmail.com
+        
