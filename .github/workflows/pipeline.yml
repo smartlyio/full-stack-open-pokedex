@@ -33,4 +33,6 @@ jobs:
           heroku_app_name: full-stack-open-pokedex-caruy
           heroku_email: caruychen@gmail.com
           healthcheck: https://full-stack-open-pokedex-caruy.herokuapp.com/health
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
         
