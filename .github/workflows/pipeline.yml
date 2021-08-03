@@ -32,4 +32,5 @@ jobs:
           heroku_api_key: 705d0334-02c5-4654-b9e4-1d50427a0eb4
           heroku_app_name: full-stack-open-pokedex-caruy
           heroku_email: caruychen@gmail.com
+          healthcheck: https://full-stack-open-pokedex-caruy.herokuapp.com/health
         
