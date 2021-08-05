@@ -64,5 +64,5 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: commit skip
         env:
-          COMMIT_SKIP: ${{ toJson(github.event.commits.*.message[1]) }}
-        run: echo "$COMMIT_SKIP"
+          COMMIT_JOIN: ${{ join(toJson(github.event.commits.*.message)) }}
+        run: echo "$COMMIT_JOIN"
