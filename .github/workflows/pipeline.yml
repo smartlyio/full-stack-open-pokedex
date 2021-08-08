@@ -23,9 +23,8 @@ jobs:
         run: npx browserslist@latest --update-db
       - name: test
         run: npm run test
-      - name: add eslint plugin for cypress
-        run: npm install eslint-plugin-cypress --save-dev
       - name: e2e tests
+        run: npm install eslint-plugin-cypress
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
