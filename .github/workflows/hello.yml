@@ -15,4 +15,4 @@ jobs:
       - name: Print date
         run: date
       - name:  Directory content
-        run: ls
+        run: ls -l
