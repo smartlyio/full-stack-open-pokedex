@@ -1,13 +1,13 @@
 module.exports = {
     'env': {
         'commonjs': true,
-        'es2021': true,
+        'es6': true,
         'node': true,
         "jest/globals": true
     },
     'extends': ['plugin:react/recommended', 'plugin:jest/recommended', 'eslint:recommended'],
     'parserOptions': {
-        'ecmaVersion': 12,
+        'ecmaVersion': 2018,
         'ecmaFeatures': {
             'jsx': true
         },
