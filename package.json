@@ -11,6 +11,11 @@
     "build": "webpack --mode production",
     "test:e2e": "cypress open"
   },
+  "eslintConfig": {
+    "extends": [
+      "plugin:cypress/recommended"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
