@@ -19,7 +19,7 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "plugin:cypress/recommended" 
+      "plugin:cypress/recommended"
     ]
   },
   "keywords": [
