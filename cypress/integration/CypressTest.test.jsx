@@ -1,6 +1,3 @@
-/* eslint-disable jest/expect-expect */
-/* eslint-disable linebreak-style */
-/* eslint-disable no-undef */
 describe('Pokedex', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:5000')
