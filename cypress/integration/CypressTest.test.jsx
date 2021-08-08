@@ -8,6 +8,6 @@ describe('Pokedex', function() {
   it('information of particular pokemons are reachable', function() {
     cy.visit('http://localhost:5000')
     cy.contains('ivysaur').click()
-    cy.contains('60')
+    cy.contains('chlorophyll')
   })
 })
