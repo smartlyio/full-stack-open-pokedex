@@ -15,6 +15,13 @@
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest",
+      "plugin:cypress/recommended" 
+    ]
+  },
   "keywords": [
     "fullstack-open"
   ],
