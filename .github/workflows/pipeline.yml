@@ -20,5 +20,6 @@ jobs:
       - name: build
         run: npm run build
       - name: test
+        run: npx browserslist@latest --update-db
         run: npm run test
       
