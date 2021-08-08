@@ -1,4 +1,3 @@
-import cy from 'cypress'
 /* eslint-disable jest/expect-expect */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
