@@ -25,6 +25,8 @@ jobs:
         run: npm run test
       - name: add eslint plugin for cypress
         run: npm install eslint-plugin-cypress
+      - name: install cypress
+        run: npm install cypress --save-dev
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
