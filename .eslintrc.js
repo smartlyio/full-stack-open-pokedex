@@ -7,7 +7,7 @@ module.exports = {
     "es2021": true,
     "commonjs": true
   },
-  'extends': 'eslint:recommended',
+  'extends': ['eslint:recommended', "plugin:jest/recommended"],
   'parserOptions': {
       'ecmaVersion': 12
   },
