@@ -3,9 +3,10 @@ module.exports = {
         'commonjs': true,
         'es6': true,
         'node': true,
-        "jest/globals": true
+        "jest/globals": true,
+        'cypress/globals': true
     },
-    'extends': ['plugin:react/recommended', 'plugin:jest/recommended', 'eslint:recommended'],
+    'extends': ['plugin:react/recommended', 'plugin:jest/recommended', 'eslint:recommended', 'plugin:cypress/recommended'],
     'parserOptions': {
         'ecmaVersion': 2018,
         'ecmaFeatures': {
