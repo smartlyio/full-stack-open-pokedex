@@ -5,6 +5,6 @@ describe('Pokedex', function() {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
     cy.request('pokemon/charmeleon')
     cy.contains('charmeleon')
-    
+
   })
 })
