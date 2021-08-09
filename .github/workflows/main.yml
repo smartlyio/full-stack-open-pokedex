@@ -36,3 +36,4 @@ jobs:
           heroku_email: "olli.glorioso@gmail.com"
           healthcheck: "https://pokedexisuomi.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
