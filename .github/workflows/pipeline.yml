@@ -47,7 +47,6 @@ jobs:
                 checkstring: "ok"
                 rollbackonhealthcheckfailed: true
             - name: action-slack success
-              if: success()
               uses: 8398a7/action-slack@v3.9.2
               with: 
                 status: custom
