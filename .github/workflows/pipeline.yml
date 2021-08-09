@@ -35,4 +35,5 @@ jobs:
                 heroku_email: "ruusukivi@gmail.com"
                 healthcheck: "https://floating-crag-00302.herokuapp.com/health"
                 checkstring: "ok"
+                rollbackonhealthcheckfailed: true
                 
