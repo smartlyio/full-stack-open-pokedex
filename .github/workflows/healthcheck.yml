@@ -3,15 +3,15 @@ name: scheduled healthcheck
 on:
     schedule:
       # * is a special character in YAML so you have to quote this string
-      - cron:  '15 * * * *'
+      - cron:  '18 * * * *'
 
 jobs:
     simple_deployment_pipeline:
         runs-on: ubuntu-18.04
-            steps:
-                - name: Check the deployed service URL
-                  uses: jtalk/url-health-check-action@v1.5
-                  with:
+        steps:
+            - name: Check the deployed service URL
+              uses: jtalk/url-health-check-action@v1.5
+              with:
                   # Check the following URLs one by one sequentially
                   url: https://example.com|http://example.com
                   # Follow redirects, or just report success on 3xx status codes
