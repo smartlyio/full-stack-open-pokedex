@@ -1,12 +1,12 @@
 name: HealthCheck
 
 on:
-    schedule:
+    #schedule:
       # * is a special character in YAML so you have to quote this string
-      - cron:  '45 * * * *'
-    #pull_request:
-       # branches: [master]
-       # types: [opened, synchronize]
+      #- cron:  '45 * * * *'
+    pull_request:
+       branches: [master]
+       types: [opened, synchronize]
 
 jobs:
     check_health:
