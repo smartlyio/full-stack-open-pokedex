@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: "damp-coast-83169" 
           heroku_email: "rjpalt@gmail.com"
           healthcheck: "https://damp-coast-83169.herokuapp.com/health"
-          checkstring: "New version deployed"
+          checkstring: "Pulse found"
