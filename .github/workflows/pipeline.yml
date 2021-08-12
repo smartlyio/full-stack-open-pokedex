@@ -35,3 +35,4 @@ jobs:
           heroku_email: "rjpalt@gmail.com"
           healthcheck: "https://damp-coast-83169.herokuapp.com/health"
           checkstring: "Pulse found"
+          rollbackonhealthcheckfailed: true
