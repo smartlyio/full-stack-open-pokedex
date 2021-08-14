@@ -34,3 +34,5 @@ jobs:
           heroku_app_name: "pokemon-app-47" #Must be unique in Heroku
           heroku_email: "conorladrigan95@gmail.com"
           healthcheck : "https://pokemon-app-47.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed : true
