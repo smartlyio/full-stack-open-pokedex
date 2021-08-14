@@ -40,3 +40,4 @@ jobs:
           healthcheck : "https://pokemon-app-47.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed : true
+        
