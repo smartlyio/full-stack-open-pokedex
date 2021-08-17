@@ -18,9 +18,9 @@ jobs:
       - name: lint code
         run: npm run eslint
       - name: build code
-        run: npm build
+        run: npm run build
       - name: test code
-        run: npm test
+        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
