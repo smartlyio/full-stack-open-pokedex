@@ -12,7 +12,7 @@
     "cypress:open": "cypress open",
     "start:test": "cross-env NODE_ENV=test node app.js",
     "test:e2e": "cypress run",
-    "deploy": "git push heroku main"
+    "deploy": "git push heroku master"
   },
   "repository": {
     "type": "git",
