@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:    
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -35,27 +38,27 @@ jobs:
           healthcheck: "https://serene-wave-32671.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,action,eventName,workflow,job,took
-          channel: '#code'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: ${{ failure() }}
-
-      - uses: 8398a7/action-slack@v3
-        with:
-          status: custom
-          fields: workflow,job,commit,repo,ref,author,took
-          custom_payload: |
-            {
-              attachments: [{
-                color: 'success',
-                text: `A new version deployed to ${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} ${{ job.status }} in ${process.env.AS_TOOK}`,
-              }]
-            }
-          channel: '#code'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: ${{ success() }}
+#      - uses: 8398a7/action-slack@v3
+#        with:
+#          status: ${{ job.status }}
+#          fields: repo,message,commit,action,eventName,workflow,job,took
+#          channel: '#code'
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#        if: ${{ failure() }}
+#
+#      - uses: 8398a7/action-slack@v3
+#        with:
+#          status: custom
+#          fields: workflow,job,commit,repo,ref,author,took
+#          custom_payload: |
+#            {
+#              attachments: [{
+#                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+#                text: `A new version deployed to ${process.env.AS_WORKFLOW}\n${process.env.AS_JOB} (${process.env.AS_COMMIT}) of ${process.env.AS_REPO}@${process.env.AS_REF} ${{ job.status }} in ${process.env.AS_TOOK}`,
+#              }]
+#            }
+#          channel: '#code'
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+#        if: ${{ success() }}
