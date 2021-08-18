@@ -35,3 +35,4 @@ jobs:
           heroku_email: saku.myyrylainen@gmail.com
           healthcheck: "https://pacific-everglades-48882.herokuapp.com/version"
           checkstring: "1"
+          rollbackonhealthcheckfailed: true
