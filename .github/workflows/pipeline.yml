@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-    
+
 jobs: 
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
@@ -32,10 +32,11 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' }}
         with: 
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pacific-everglades-48882
           heroku_email: saku.myyrylainen@gmail.com
           healthcheck: "https://pacific-everglades-48882.herokuapp.com/version"
-          checkstring: "2"
+          checkstring: "3"
           rollbackonhealthcheckfailed: true
