@@ -32,3 +32,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'mooc-part11'
           heroku_email: 'jukkaa@live.com'
+          healthcheck: 'https://mooc-part11.herokuapp.com/health'
+          checkstring: 'ok'
+          healthcheck: 'https://mooc-part11.herokuapp.com/version'
+          checkstring: 'v1.0'
