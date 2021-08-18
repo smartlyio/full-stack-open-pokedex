@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pacific-everglades-48882
           heroku_email: saku.myyrylainen@gmail.com
+          healthcheck: "https://pacific-everglades-48882.herokuapp.com/version"
+          checkstring: "1"
