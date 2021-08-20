@@ -15,5 +15,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "salty-journey-10005" #Must be unique in Heroku
           heroku_email: "A01634505@itesm.mx"
-          healthcheck: '["https://salty-journey-10005.herokuapp.com/health","https://salty-journey-10005.herokuapp.com/version"]'
-          checkstring: '["ok","1"]'
+          healthcheck: "https://salty-journey-10005.herokuapp.com/health"
+          checkstring: "ok"
