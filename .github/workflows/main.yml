@@ -17,3 +17,4 @@ jobs:
           heroku_email: "A01634505@itesm.mx"
           healthcheck: "https://salty-journey-10005.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
