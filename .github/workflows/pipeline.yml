@@ -12,9 +12,9 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v2
-      - name: Set Node.js up
+      - name: set node.js up
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
