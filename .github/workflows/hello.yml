@@ -24,3 +24,11 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+      
+      # Runs a set of commands using the runners shell
+      - name: Now it is
+        run: date
+        
+              # Runs a set of commands using the runners shell
+      - name: Directory content
+        run: ls -l
