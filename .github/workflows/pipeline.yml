@@ -36,4 +36,4 @@ jobs:
           healthcheck: "https://pokedex-jiit2020.herokuapp.com/health"
           checkstring: "ok"
           delay: 2
-          healthcheck: "pokedex-jiit2020.herokuapp.com/version"
+          versioncheck: "pokedex-jiit2020.herokuapp.com/version"
