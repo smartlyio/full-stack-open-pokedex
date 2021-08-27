@@ -32,3 +32,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'tuke-pokedex' #Must be unique in Heroku
           heroku_email: 'petuukka@gmail.com'
+          healthcheck: "https://tuke-pokedex.herokuapp.com/health"
