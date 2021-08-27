@@ -38,4 +38,3 @@ jobs:
           rollbackonhealthcheckfailed: true
           delay: 2
           versioncheck: "pokedex-jiit2020.herokuapp.com/version"
-          checkstring: "4"
