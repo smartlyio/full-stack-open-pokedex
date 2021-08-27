@@ -1,1 +1,1 @@
-web: fail
+web: node app.js
