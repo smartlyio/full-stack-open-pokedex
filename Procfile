@@ -1,1 +1,1 @@
-web: virhe
+web: node app.js
