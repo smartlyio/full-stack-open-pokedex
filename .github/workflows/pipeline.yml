@@ -35,5 +35,6 @@ jobs:
           heroku_email: "jtenhun@gmail.com"
           healthcheck: "https://pokedex-jiit2020.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
           delay: 2
           versioncheck: "pokedex-jiit2020.herokuapp.com/version"
