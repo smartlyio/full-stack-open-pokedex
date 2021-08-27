@@ -33,6 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_POKEDEX}}
           heroku_app_name: "pokedex-jiit2020" #Must be unique in Heroku
           heroku_email: "jtenhun@gmail.com"
-          healthcheck: "https://[YOUR APP's NAME].herokuapp.com/health"
+          healthcheck: "https://pokedex-jiit2020.herokuapp.com/health"
           checkstring: "ok"
-          
+
