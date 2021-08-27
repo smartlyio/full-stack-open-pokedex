@@ -15,5 +15,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('part D Tämä on poke-haara -versio!') // change this string to ensure a new version deployed
+  res.send('part D Tämä on uusi poke-haara 11.15-versio!') // change this string to ensure a new version deployed
 })
