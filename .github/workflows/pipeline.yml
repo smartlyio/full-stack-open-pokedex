@@ -31,13 +31,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_POKEDEX}}
-          heroku_app_name: "pokedex-jiit2020" #Must be unique in Heroku
-          heroku_email: "jtenhun@gmail.com"
-          healthcheck: "https://pokedex-jiit2020.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-          delay: 2
-          versioncheck: "pokedex-jiit2020.herokuapp.com/version"
+      if: ${{ github.event_name == 'push' }}
+        - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+          with:
+            heroku_api_key: ${{secrets.HEROKU_POKEDEX}}
+            heroku_app_name: "pokedex-jiit2020" #Must be unique in Heroku
+            heroku_email: "jtenhun@gmail.com"
+            healthcheck: "https://pokedex-jiit2020.herokuapp.com/health"
+            checkstring: "ok"
+            rollbackonhealthcheckfailed: true
+            delay: 2
+            versioncheck: "pokedex-jiit2020.herokuapp.com/version"
