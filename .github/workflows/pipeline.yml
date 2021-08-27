@@ -33,3 +33,6 @@ jobs:
           heroku_app_name: 'tuke-pokedex' #Must be unique in Heroku
           heroku_email: 'petuukka@gmail.com'
           healthcheck: "https://tuke-pokedex.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
