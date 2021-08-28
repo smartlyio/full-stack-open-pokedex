@@ -30,7 +30,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'tuke-pokedex' #Must be unique in Heroku
@@ -40,3 +41,16 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
         if: ${{ github.event_name == 'push' }}
+  versioning:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.33.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
+
