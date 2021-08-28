@@ -39,3 +39,4 @@ jobs:
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+          if: ${{ github.event_name == 'push' }}
