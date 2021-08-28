@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -32,7 +35,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'tuke-pokedex' #Must be unique in Heroku
           heroku_email: 'petuukka@gmail.com'
-          healthcheck: "https://tuke-pokedex.herokuapp.com/health"
-          checkstring: "ok"
+          healthcheck: 'https://tuke-pokedex.herokuapp.com/health'
+          checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+        if: ${{ github.event_name == 'push' }}
