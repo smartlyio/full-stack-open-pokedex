@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fast-thicket-25502"
           heroku_email: "dmkk1@outlook.com" 
+          healthcheck: "https://fast-thicket-25502.herokuapp.com/health"
