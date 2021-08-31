@@ -1,7 +1,7 @@
 jobs:
-simple_deployment_pipeline:
-  runs-on: windows-latest
-  steps:
+  simple_deployment_pipeline:
+    runs-on: windows-latest
+    steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
