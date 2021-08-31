@@ -26,10 +26,13 @@ jobs:
       - uses: actions/checkout@v2
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: say hello
         run: echo Hello, world!
 
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo "hello world!"
+      - name: get the date
+        run: date
+      
+      - name: get the environment
+        run: dir
+
