@@ -45,8 +45,7 @@ jobs:
           delay: 2
           versioncheck: "pokedex-jiit2020.herokuapp.com/version"
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        if: ${{ contains(github.event.commits.*.message, '!#skip') }}
+        if: ${{ contains(join([github.event_name, github.event.commits.*.message], ','), '!push,#skip') }}
         uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
