@@ -1,0 +1,6 @@
+Client:      <none>
+ID:          4a0825dd-043c-4a4d-a844-73029ee55bf5
+Description: Long-lived user authorization
+Scope:       global
+Token:       74bd60ee-28dd-498d-9ef4-7dd046fd0ff6
+Updated at:  Wed Sep 01 2021 00:25:20 GMT-0500 (Central Daylight Time) (less than a minute ago)
