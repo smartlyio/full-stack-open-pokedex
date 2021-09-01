@@ -22,6 +22,14 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: notify build failure
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: failure()
       - name: test
         run: npm run test
       - name: e2e tests
@@ -46,3 +54,11 @@ jobs:
           healthcheck: "https://pacific-everglades-48882.herokuapp.com/version"
           checkstring: "3"
           rollbackonhealthcheckfailed: true
+      - name: notify success
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,job,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: success() # Pick up events even if the job fails or is canceled.
