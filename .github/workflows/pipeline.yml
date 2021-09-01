@@ -33,6 +33,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to heroku
         if: ${{ github.event_name == 'push' }}
+        if: ${{ contains(github.event.commits.*.message, '!#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_POKEDEX}}
@@ -45,6 +46,7 @@ jobs:
           versioncheck: "pokedex-jiit2020.herokuapp.com/version"
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
+        if: ${{ contains(github.event.commits.*.message, '!#skip') }}
         uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
