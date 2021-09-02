@@ -32,7 +32,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to heroku
-        if: ${{ contains(join([github.event_name, github.event.commits.*.message], ','), '!push,#skip') }}
+        if: ${{ contains(join((github.event_name, github.event.commits.*.message), ','), '!push,#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_POKEDEX}}
@@ -44,7 +44,7 @@ jobs:
           delay: 2
           versioncheck: "pokedex-jiit2020.herokuapp.com/version"
       - name: Bump version and push tag
-        if: ${{ contains(join([github.event_name, github.event.commits.*.message], ','), '!push,#skip') }}
+        if: ${{ contains(join((github.event_name, github.event.commits.*.message), ','), '!push,#skip') }}
         uses: anothrNick/github-tag-action@1.35.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
