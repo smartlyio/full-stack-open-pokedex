@@ -1,0 +1,21 @@
+name: Hello-World-Action
+
+on:
+  push:
+    branches: [mster]
+
+  workflow_dispatch:
+
+
+jobs:
+  say_hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo Hello World!
+
+      - name: date & ls
+        run: |
+          date
+          ls -l
