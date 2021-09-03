@@ -18,7 +18,6 @@ jobs:
       - name: date
         run: |
           date
-          ls -l
 
       - name: ls
         run: |
