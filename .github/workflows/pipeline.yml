@@ -35,5 +35,6 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: ${{secrets.HEROKU_HEALTHCHECK}}
           checkstring: "ok"
+          procfile: "web: npm start"
           delay: 5
           rollbackonhealthcheckfailed: true
