@@ -31,9 +31,9 @@ jobs:
         uses: AkhileshNS/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "myappabn04092021"
-          heroku_email: "abnmaster@gmail.com"
-          healthcheck: "https://myappabn04092021.herokuapp.com/health"
+          heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: ${{secrets.HEROKU_HEALTHCHECK}}
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
