@@ -1,1 +1,1 @@
-web: wrong
+web: npm run start
