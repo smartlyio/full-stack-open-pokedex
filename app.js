@@ -11,7 +11,7 @@ app.get('/healthcheck', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('1.5')
+  res.send('1.6')
 })
 
 app.listen(PORT, () => {
