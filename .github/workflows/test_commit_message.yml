@@ -17,5 +17,5 @@ jobs:
         run: echo "$COMMIT_MESSAGE"
 
       - name: Commit message has skip
-        if: ${{ contains(github.event.commits[0].message, '#skip') }}
+        if: ${{ contains(github.event.commits[0].message, '#skip') || 1 == 0 }}
         run: echo "Contains skip"
