@@ -1,0 +1,23 @@
+name: Testing commit messages
+
+on:
+  push:
+    branches: [test_branch]
+
+jobs:
+  test_commits:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Echo commit message
+        env:
+          COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGE"
+
+      - name: Commit message has skip
+        env:
+          COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.message) }}
+        if: ${{ contains(COMMIT_MESSAGE, '#skip') }}
+        run: echo "Contains #skip"
