@@ -9,6 +9,8 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/setup-node@v1
+        with: node-version: '12.x'
       - name: Say hello
         run: echo "Hello World!"
       - name: Now it is
