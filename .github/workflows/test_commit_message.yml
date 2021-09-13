@@ -13,9 +13,9 @@ jobs:
           node-version: '12.x'
       - name: Echo commit message
         env:
-          COMMIT_MESSAGE: ${{github.event.commits[0].message }}
+          COMMIT_MESSAGE: ${{ github.event.commits[0].message, github.event.head_commit.message }}
         run: echo "$COMMIT_MESSAGE"
 
       - name: Commit message has skip
-        if: ${{ contains(github.event.commits[0].message, '#skip') }}
+        if: ${{ !contains(github.event.commits[0].message, '#skip') || !contains(github.event.head_commit.message, '#skip') }}
         run: echo "Contains #skip"
