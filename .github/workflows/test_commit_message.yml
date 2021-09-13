@@ -13,7 +13,7 @@ jobs:
           node-version: '12.x'
       - name: Echo commit message
         env:
-          COMMIT_MESSAGE: ${{ ${{ github.event.commits[0].message }} }}
+          COMMIT_MESSAGE: ${{github.event.commits[0].message }}
         run: echo "$COMMIT_MESSAGE"
 
       - name: Commit message has skip
