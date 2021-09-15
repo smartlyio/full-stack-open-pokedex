@@ -16,4 +16,5 @@ jobs:
           heroku_app_name: 'sheltered-harbor-54755' #Must be unique in Heroku
           heroku_email: 'dan.khalid3@gmail.com'
           healthcheck: 'https://sheltered-harbor-54755.herokuapp.com/health'
-          checkstring: 'ok'
+          checkstring: 'okfail'
+          rollbackonhealthcheckfailed: true
