@@ -7,8 +7,14 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory Content
+        run: |
+          ls -l
