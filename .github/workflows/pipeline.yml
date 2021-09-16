@@ -15,11 +15,11 @@ jobs:
           node-version: '12.x'
       - name: npm install
         run: npm install
-      - name: lint
+      - name: run lint
         run: npm run eslint
-      - name: build
-        run: npm build
-      - name: test
+      - name: run build
+        run: npm run build
+      - name: run test
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
