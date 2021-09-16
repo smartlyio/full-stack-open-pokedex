@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'crafernandezbe@unal.edu.co'
           healthcheck: 'https://pokedex-cicd-app.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
