@@ -15,3 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'nameless-shelf-65181'
           heroku_email: 'surfwave@gmail.com'
+          healthcheck: 'https://nameless-shelf-65181.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: '10'
