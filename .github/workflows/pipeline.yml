@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   simple_deployment_pipeline:
@@ -22,9 +22,9 @@ jobs:
         run: yarn build
       - name: test
         run: yarn test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: yarn test:e2e
-          start: yarn start-prod
-          wait-on: http://localhost:5000
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: yarn test:e2e
+      #     start: yarn start-prod
+      #     wait-on: http://localhost:5000

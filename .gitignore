@@ -2,3 +2,5 @@ dist/
 node_modules/
 oAuth
 cypress/videos/
+.DS_Store
+*/.DS_Store
