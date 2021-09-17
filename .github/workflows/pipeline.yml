@@ -27,4 +27,4 @@ jobs:
         with:
           command: yarn test:e2e
           start: yarn start-prod
-          wait-on: http://localhost:8080
+          wait-on: http://localhost:5000
