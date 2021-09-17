@@ -6,10 +6,10 @@ Fork the repository to complete course exercises
 
 ## Commands
 
-Start by running `npm install` inside the project folder
+Start by running `yarn install` inside the project folder
 
-`npm start` to run the webpack dev server
-`npm test` to run tests
-`npm run eslint` to run eslint
-`npm run build` to make a production build
-`npm run start-prod` to run your production build
+`yarn start` to run the webpack dev server
+`yarn test` to run tests
+`yarn eslint` to run eslint
+`yarn build` to make a production build
+`yarn start-prod` to run your production build
