@@ -18,3 +18,4 @@ jobs:
           healthcheck: 'https://nameless-shelf-65181.herokuapp.com/health'
           checkstring: 'ok'
           delay: '10'
+          rollbackonhealthcheckfailed: 'true'
