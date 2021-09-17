@@ -12,3 +12,10 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World! This was started by a commit to master"
+      - name: Show the date
+        run: |
+          date
+      - name: Show directory contents
+        run: |
+          ls
+          
