@@ -33,4 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: still-scrubland-68469
           heroku_email: inkloud3@gmail.com
-        
+          healthcheck: "https://still-scrubland-68469.herokuapp.com/health"
+          checkstring: "ok"
