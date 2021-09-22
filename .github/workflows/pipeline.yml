@@ -35,3 +35,4 @@ jobs:
           heroku_email: inkloud3@gmail.com
           healthcheck: "https://still-scrubland-68469.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
