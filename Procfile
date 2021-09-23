@@ -1,1 +1,1 @@
-web: yaga yeet
+web: npm run start-prod
