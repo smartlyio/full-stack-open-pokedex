@@ -24,5 +24,5 @@ jobs:
               }]
             }
         env:
-          SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: always()
