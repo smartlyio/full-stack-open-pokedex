@@ -17,4 +17,4 @@ jobs:
         SLACK_USERNAME: crystal
         SLACK_MSG_AUTHOR: $GITHUB_ACTOR
         SLACK_FOOTER: ''
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
