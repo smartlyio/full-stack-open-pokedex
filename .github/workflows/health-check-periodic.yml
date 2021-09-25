@@ -1,17 +1,17 @@
 on:
   schedule:
     - cron: '2,10 4,5 * * *'
-steps:
-  - name: Check the deployed service URL
-    uses: jtalk/url-health-check-action@v2
-    with:
-      # Check the following URLs one by one sequentially
-      url: https://example.com|http://example.com
-      # Follow redirects, or just report success on 3xx status codes
-      follow-redirect: no # Optional, defaults to "no"
-      # Fail this action after this many failed attempts
-      max-attempts: 3 # Optional, defaults to 1
-      # Delay between retries
-      retry-delay: 5s # Optional, only applicable to max-attempts > 1
-      # Retry all errors, including 404. This option might trigger curl upgrade.
-      retry-all: no # Optional, defaults to "no"
+name: Periodic Health check
+jobs:
+  heatlcheck:
+    name: Periodic Health check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Periodic Health check
+      uses: jtalk/url-health-check-action@v2
+      with:
+        url: https://still-scrubland-68469.herokuapp.com/health
+        follow-redirect: no
+        max-attempts: 3
+        retry-delay: 5s
+        retry-all: no
