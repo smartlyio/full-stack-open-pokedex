@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '2,10 4,5 * * *'
+    - cron: '* * * * *'
 name: Periodic Health check
 jobs:
   heatlcheck:
