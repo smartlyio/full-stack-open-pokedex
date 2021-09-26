@@ -1,6 +1,9 @@
 on:
   schedule:
     - cron: '5 * * * *'
+  push:
+    branches:
+      - master
 name: Periodic Health check
 jobs:
   heatlcheck:
