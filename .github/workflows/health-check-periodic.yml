@@ -1,0 +1,16 @@
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  push:
+    branches:
+      - master
+name: Periodic Health check
+jobs:
+  heatlcheck:
+    name: Periodic Health check
+    runs-on: ubuntu-latest
+    steps:
+    - name: Periodic Health check
+      uses: jtalk/url-health-check-action@v2
+      with:
+        url: https://still-scrubland-68469.herokuapp.com/health
