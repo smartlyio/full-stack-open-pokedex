@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  build-step:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -31,8 +31,14 @@ jobs:
       #     start: npm run start-prod
       #     wait-on: http://localhost:5000
 
+  staging-step:
+    needs: build-step
+    runs-on: ubuntu-18.04
+    environment: staging
+    steps:
+      - uses: actions/checkout@v2
       - name: deploy
-        if: ${{ github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip') }}
+        if: ${{ github.event_name == 'push'  }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -40,9 +46,9 @@ jobs:
           heroku_email: "codebook.ng@gmail.com"
           healthcheck: "https://pokemonaction.herokuapp.com/health"
           checkstring: "ok"
-      - uses: actions/checkout@v2
+      # - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(github.event.commits.*.message, '#skip') }}
+        if: ${{ github.event_name == 'push'  }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.TAG_KEY }}
