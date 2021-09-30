@@ -32,7 +32,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: deploy
-        if: ${{ github.event_name == 'push'  }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -42,7 +41,6 @@ jobs:
           checkstring: "ok"
       # - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push'  }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.TAG_KEY }}
