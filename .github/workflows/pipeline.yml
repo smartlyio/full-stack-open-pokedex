@@ -52,4 +52,4 @@ jobs:
           DEFAULT_BUMP: patch
           # dry_run doesn't actually add versioning tags 
           # to your project. It just prints it out.
-          DRY_RUN: true
+          DRY_RUN: false
