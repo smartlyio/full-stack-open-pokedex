@@ -7,11 +7,11 @@ const PORT = process.env.PORT || 5000 // eslint-disable-line
 app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.send('nokey')
 })
 
 app.get('/version', (req, res) => {
-  res.send('1')
+  res.send('wrong version')
 })
 
 app.listen(PORT, () => {
