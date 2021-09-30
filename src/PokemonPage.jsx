@@ -12,7 +12,7 @@ const PokemonPage = ({ previous, next }) => {
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <>Loading...<br /><LoadingSpinner /></>
   }
   if (error) {
     return <ErrorMessage error={error} />
