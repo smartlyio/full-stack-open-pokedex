@@ -33,3 +33,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fusto-pokedex
           heroku_email: tonghe84@gmail.com
+          healthcheck: "https://fusto-pokedex.herokuapp.com/health/"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
