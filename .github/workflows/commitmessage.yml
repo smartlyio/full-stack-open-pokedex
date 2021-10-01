@@ -1,0 +1,14 @@
+name: Printing out commit message
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: if commit messages contain #skip
+        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        run: echo 'true'
