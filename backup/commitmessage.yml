@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  a_test_job:
+  if_commit_message_contains_skip:
     runs-on: ubuntu-18.04
     steps:
       - name: if commit messages contain #skip
