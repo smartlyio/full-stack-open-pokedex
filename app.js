@@ -11,11 +11,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('17:00')
-})
-
-app.get('/sup', (req, res) => {
-  res.send('Let\'s see.')
+  res.send('17:12 — This commit will be deployed version number will increase by one.')
 })
 
 app.listen(PORT, () => {
