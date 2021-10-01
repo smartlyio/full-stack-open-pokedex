@@ -5,8 +5,7 @@ on:
     branches:
       - trigger_health_check
   schedule:
-    - cron: "*/3 * * * *"
-  
+    - cron: "*/3 * * * *"  
 jobs:
   healthcheck:
     runs-on: ubuntu-18.04
