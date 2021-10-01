@@ -11,7 +11,9 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('17:12 — This commit will be deployed version number will increase by one.')
+  // Let's create a linting error
+  // by adding a semicolon
+  res.send('17:12 — This commit will be deployed version number will increase by one.');
 })
 
 app.listen(PORT, () => {
