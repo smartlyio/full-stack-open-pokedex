@@ -35,3 +35,4 @@ jobs:
           heroku_email: "mpampols@gmail.com"
           healthcheck: "https://fullstackopen-pokedex-mpampols.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
