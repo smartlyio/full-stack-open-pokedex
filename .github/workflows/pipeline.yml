@@ -39,3 +39,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-2021-pokedex"
           heroku_email: ${{secrets.EMAIL}}
+          healthcheck: "https://fso-2021-pokedex.herokuapp.com/"
