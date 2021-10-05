@@ -50,11 +50,13 @@ jobs:
           rollbackonhealthcheckfailed: true
 
       - name: bump version and push tag
+        if: ${{ github.event_name == 'push' }}
         id: tag_version
         uses: mathieudutour/github-tag-action@v5.6
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: create a GitHub release
+        if: ${{ github.event_name == 'push' }}
         uses: ncipollo/release-action@v1
         with:
           tag: ${{ steps.tag_version.outputs.new_tag }}
