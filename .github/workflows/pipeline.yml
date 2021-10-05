@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  tests:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -36,7 +36,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      if: ${{ github.event_name == 'push' }}
+  deployment:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-18.04
+    steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
