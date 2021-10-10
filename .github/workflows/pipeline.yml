@@ -40,6 +40,22 @@ jobs:
           healthcheck: 'https://pokedex-fso.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - name: send message if deployed successfully
+        uses: actions/checkout@v2
+        if: ${{ success() }}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ github.event_name }} was done sucessfully
+      - name: send message if failure
+        uses: actions/checkout@v2
+        if: ${{ failure() }}
+        uses: appleboy/telegram-action@v0.1.1
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ github.event_name }} was failed
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains( toJSON(github.event.commits.*.message) , '#skip') }}
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
