@@ -1,7 +1,13 @@
 name: Periodic Health Check
 
+on: 
+  schedule:
+    - cron: '30 14 * * *'
+
 jobs:
   periodic_health_check:
     steps:
       - name: Check deployment
         uses: jtalk/url-health-check-action@v2 
+        with: 
+          url: https://pokedex-fso.herokuapp.com/
