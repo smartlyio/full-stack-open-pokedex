@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - master
-
+      
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    runs-on: windows-latest
     steps:
       - name: Say hello
         run: |
