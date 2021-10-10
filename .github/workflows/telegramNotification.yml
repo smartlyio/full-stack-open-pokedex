@@ -1,6 +1,6 @@
 name: Telegram Notification
 
-on: [deployment]
+on: deployment
 
 jobs:
   telegram_notification_pipeline:
