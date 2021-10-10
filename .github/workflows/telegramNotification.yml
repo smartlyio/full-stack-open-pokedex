@@ -7,7 +7,12 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - name: send default message
+    - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+    - name: send message if deployed successfully
+      # if: ${{ github.event.deployment_status}}
       uses: appleboy/telegram-action@v0.1.1
       with:
         to: ${{ secrets.TELEGRAM_TO }}
