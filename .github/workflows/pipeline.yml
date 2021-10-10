@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: send message if deployed successfully
         uses: actions/checkout@v2
-          if: ${{ sucess() }}
+          if: ${{ success() }}
           uses: appleboy/telegram-action@v0.1.1
           with:
             to: ${{ secrets.TELEGRAM_TO }}
