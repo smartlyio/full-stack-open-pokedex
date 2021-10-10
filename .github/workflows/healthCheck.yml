@@ -1,0 +1,7 @@
+name: Periodic Health Check
+
+jobs:
+  periodic_health_check:
+    steps:
+      - name: Check deployment
+        uses: jtalk/url-health-check-action@v2 
