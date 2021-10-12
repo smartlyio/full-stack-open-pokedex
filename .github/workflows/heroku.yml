@@ -1,0 +1,17 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: 8ba254fb-16bb-43c4-9b57-12ddf7e8ff4b
+          heroku_app_name: "murmuring-earth-02114"
+          heroku_email: "xerolry@gmail.com"
