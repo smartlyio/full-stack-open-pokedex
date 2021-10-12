@@ -17,5 +17,3 @@ jobs:
         run: npm install  
       - name: lint
         run: npm run eslint
-      - name: deploy
-        run: git push heroku master
