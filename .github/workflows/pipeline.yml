@@ -18,4 +18,4 @@ jobs:
       - name: lint
         run: npm run eslint
       - name: deploy
-        run: git push heroku main
+        run: git push heroku master
