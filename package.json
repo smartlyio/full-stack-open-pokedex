@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
-    "test": "jest",
+    "test": "jest ./test/*",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
     "test:e2e": "cypress open"
