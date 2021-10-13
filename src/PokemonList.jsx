@@ -11,6 +11,7 @@ const PokemonList = ({ pokemonList }) => {
           className="list-item"
           style={{
             backgroundImage: `url(${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`})`,
+            backgroundColor: "#4CD4D0",
           }}
         >
           <div className="list-item-name">{name}</div>
