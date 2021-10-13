@@ -35,14 +35,13 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
     steps:
-      - name: deploy
+      - name: Deploy
+        uses: actions/checkout@v2
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokemon-app-jonas" #Must be unique in Heroku
-          heroku_email: "youneslamkhanter02@gmail.com"
+          heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+          heroku_email: "YOUR EMAIL"
           healthcheck: "https://pokemon-app-jonas.herokuapp.com/version"
           checkString: "1.1.0"
+
