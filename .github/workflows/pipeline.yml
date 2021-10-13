@@ -37,8 +37,9 @@ jobs:
     steps:
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-app-jonas" #Must be unique in Heroku
