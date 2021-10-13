@@ -4,16 +4,6 @@ on:
       - master
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-18.04
-    steps:
-      - name: Say hello
-        run: |
-          echo "Hello world!"
-      - name: Now it is
-        run: date
-      - name: Directory content
-        run: ls
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
