@@ -18,7 +18,7 @@ const App = () => {
     data: pokemonList,
     error,
     isLoading,
-  } = useApi("https://pokeapi.co/api/v2/pokemon/?limit=20", mapResults);
+  } = useApi("https://pokeapi.co/api/v2/pokemon/?limit=784", mapResults);
   if (isLoading) {
     return <LoadingSpinner />;
   }
