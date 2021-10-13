@@ -19,6 +19,9 @@ const App = () => {
     error,
     isLoading,
   } = useApi("https://pokeapi.co/api/v2/pokemon/?limit=784", mapResults);
+  const style = {
+    backgroundColor: "#104F55",
+  };
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -30,7 +33,9 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
-          <PokemonList pokemonList={pokemonList} />
+          <div style={style}>
+            <PokemonList pokemonList={pokemonList} />
+          </div>
         </Route>
         <Route
           path="/pokemon/:name"
