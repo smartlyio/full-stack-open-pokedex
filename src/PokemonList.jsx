@@ -14,7 +14,14 @@ const PokemonList = ({ pokemonList }) => {
             backgroundColor: "#4CD4D0",
           }}
         >
-          <div className="list-item-name">{name}</div>
+          <div
+            className="list-item-name"
+            style={{
+              color: "#961D4E",
+            }}
+          >
+            {name}
+          </div>
         </Link>
       ))}
     </div>
