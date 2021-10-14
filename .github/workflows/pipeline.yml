@@ -51,6 +51,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: gihub context
+        if: ${{ toJson(github.event.commits.*.message).contains("#skip") }}
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
