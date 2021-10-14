@@ -30,3 +30,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'lbotano-fso-pokedex'
           heroku_email: 'otanolautarob@gmail'
+          healthcheck: 'https://lbotano-fso-pokedex.herokuapp.com/health'
