@@ -46,13 +46,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-      - name: Notification
-        uses: 8398a7/action-slack@v3
+      # - name: Notification
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     author_name: Jonas # default: 8398a7@action-slack
+      #     fields: repo,message,commit,author,action,workflow # default: repo,commit
+      #     mention: here
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+      #   if: always() # Pick up events even if the job fails or is canceled.
+      - name: send custom message with args
+        uses: appleboy/telegram-action@master
         with:
-          status: ${{ job.status }}
-          author_name: Jonas # default: 8398a7@action-slack
-          fields: repo,message,commit,author,action,workflow # default: repo,commit
-          mention: here
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: always() # Pick up events even if the job fails or is canceled.
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          args: The ${{ github.event_name }} event triggered first step.
