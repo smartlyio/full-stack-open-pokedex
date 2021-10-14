@@ -11,7 +11,9 @@ describe("Pokedex", function () {
 
   it("Pokemon Page can be navigated to", function () {
     cy.visit("http://localhost:5000/");
-    cy.contains("ivysaur").click();
-    cy.contains("chlorophyll");
+    cy.contains("charizard").click();
+    cy.contains("solar power");
+    cy.contains("Next").click();
+    cy.contains("charmeleon");
   });
 });
