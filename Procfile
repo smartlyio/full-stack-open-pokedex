@@ -1,1 +1,1 @@
-web: echo 'dummy'
+web: npm run start-prod
