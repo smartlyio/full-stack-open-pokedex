@@ -11,37 +11,52 @@ on:
 jobs:
   build_test_pipeline:
     runs-on: ubuntu-18.04
+    # steps:
+    #   - uses: actions/checkout@v2
+    #   - uses: actions/setup-node@v1
+    #     with:
+    #       node-version: "12.x"
+    #   - name: npm install
+    #     run: npm install
+    #   - name: lint
+    #     run: npm run eslint
+    #   - name: build
+    #     run: npm run build
+    #   - name: test
+    #     run: npm run test
+    #   # ****End to end Testing***** #
+    #   - name: e2e tests
+    #     uses: cypress-io/github-action@v2
+    #     with:
+    #       command: npm run test:e2e
+    #       start: npm run start-prod
+    #       wait-on: http://localhost:5000
+    #   - name: Deploy
+    #     if: ${{ github.event_name == 'push' }}
+    #     uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+    #     with:
+    #       heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #       heroku_app_name: "pokemon-app-jonas" #Must be unique in Heroku
+    #       heroku_email: "youneslamkhanter02@gmail.com"
+    #       healthcheck: "https://pokemon-app-jonas.herokuapp.com/version"
+    #       checkString: "1.1.0"
+    #   - name: Bump version and push tag
+    #     if: ${{ github.event_name == 'push' }}
+    #     uses: anothrNick/github-tag-action@1.33.0
+    #     env:
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #       WITH_V: true
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: "12.x"
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      # ****End to end Testing***** #
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: Deploy
-        if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokemon-app-jonas" #Must be unique in Heroku
-          heroku_email: "youneslamkhanter02@gmail.com"
-          healthcheck: "https://pokemon-app-jonas.herokuapp.com/version"
-          checkString: "1.1.0"
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.33.0
+      - name: gihub context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
