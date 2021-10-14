@@ -47,7 +47,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
       - name: Notification
-        if: ${{ job.status=='success' }}
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
