@@ -12,5 +12,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: New push event occured
-          GITHUB_REPOSITORY: repo
+          message: New push event occured ${{ github.repository	 }}.
