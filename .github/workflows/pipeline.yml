@@ -28,7 +28,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{github.event_name == 'push'}}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -37,3 +38,9 @@ jobs:
           healthcheck: 'https://lbotano-fso-pokedex.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{github.event_name == 'push'}}
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DEFAULT_BUMP: 'minor'
