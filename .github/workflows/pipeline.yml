@@ -38,6 +38,10 @@ jobs:
           healthcheck: 'https://lbotano-fso-pokedex.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+  auto_tagging:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{github.event_name == 'push'}}
