@@ -38,6 +38,11 @@ jobs:
           healthcheck: 'https://lbotano-fso-pokedex.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - name: Notify to Slack
+        uses: slackapi/slack-github-action@v1.14.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        
   auto_tagging:
     runs-on: ubuntu-18.04
     steps:
