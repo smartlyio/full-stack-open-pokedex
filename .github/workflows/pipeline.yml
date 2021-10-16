@@ -1,4 +1,10 @@
-obs:
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - master
+jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
