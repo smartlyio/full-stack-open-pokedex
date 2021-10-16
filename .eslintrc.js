@@ -21,7 +21,7 @@ module.exports = {
     'react', 'jest'
   ],
   'rules': {
-    "no-console": "off",
+    "no-console": 0,
     'indent': [
       'error',
       2
