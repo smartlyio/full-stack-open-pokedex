@@ -7,7 +7,7 @@ describe('Pokedex', function() {
 })
 
 describe('Ivysaur', function() {
-  it('ivysaur page can be opened', function() { 
+  it('ivysaur page can be opened', function() {
     cy.visit('./pokemon/ivysaur')
     cy.wait(500)
     cy.contains('ivysaur')
