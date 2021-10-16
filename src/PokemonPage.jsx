@@ -7,7 +7,6 @@ import ErrorMessage from './ErrorMessage'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
-/* eslint-disable no-console */
 const PokemonPage = ({ previous, next }) => {
   const { name } = useParams()
   const { data: pokemon, error, isLoading } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
@@ -27,6 +26,7 @@ const PokemonPage = ({ previous, next }) => {
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
 
+  /* eslint-disable-next-line no-console */
   console.log('hiddenAbility=', hiddenAbility)
   
   return (
