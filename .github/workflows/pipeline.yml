@@ -35,3 +35,4 @@ jobs:
           heroku_email: "riku.sarlin@gmail.com"
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
