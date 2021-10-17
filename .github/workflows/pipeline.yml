@@ -26,3 +26,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+     - name: deploy to heroku
+        uses: akhileshns/heroku-deploy@master
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "full-stack-open-pokedex-kh"
+          heroku_email: "kari.a.heiskanen@gmail.com" 
+          healthcheck: "https://full-stack-open-pokedex-kh.herokuapp.com/"
+          env_file: ".env"
+        env:
+          HD_CHECK: "true" 
