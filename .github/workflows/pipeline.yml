@@ -31,6 +31,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-pokedex-kh"
           heroku_email: "kari.a.heiskanen@gmail.com" 
-          healthcheck: "https://full-stack-open-pokedex-kh.herokuapp.com/"
-          env_file: ".env" 
+          healthcheck: "https://full-stack-open-pokedex-kh.herokuapp.com/" 
 
