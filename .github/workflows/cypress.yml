@@ -1,5 +1,8 @@
 name: End-to-end tests
-on: [push]
+on:
+  push:
+    branches:
+      - master
 jobs:
   cypress-run:
     runs-on: ubuntu-20.04
@@ -9,5 +12,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
+            command: npm run cypress:open
             start: npm run start-prod
+            wait-on: http://localhost:5000
 
