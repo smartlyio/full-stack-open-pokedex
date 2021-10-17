@@ -26,6 +26,10 @@
   },
   "homepage": "https://github.com/smartlyio/fullstackopen-cicd#readme",
   "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
     "babel-jest": "^27.2.5",
     "@testing-library/jest-dom": "^5.8.0",
     "@testing-library/react": "^10.0.4",
@@ -33,19 +37,7 @@
     "eslint": "^8.0.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
-    "jest": "^27.2.5"
-  },
-  "dependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/plugin-transform-runtime": "^7.10.0",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-react": "^7.9.4",
-    "axios": "^0.23.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0",
+    "jest": "^27.2.5",
     "webpack-dev-server": "^4.3.1",
     "webpack-cli": "^4.9.0",
     "webpack": "^5.58.2",
@@ -54,5 +46,13 @@
     "style-loader": "^1.2.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3"
+  },
+  "dependencies": {
+    "axios": "^0.23.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0"
   }
 }
