@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sirr-pokedex"
           heroku_email: "riku.sarlin@gmail.com"
+          healthcheck: "https://sirr-pokedex.herokuapp.com/health"
