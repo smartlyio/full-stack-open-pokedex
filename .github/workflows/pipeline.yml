@@ -34,3 +34,4 @@ jobs:
           heroku_app_name: "sirr-pokedex"
           heroku_email: "riku.sarlin@gmail.com"
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
+          checkstring: "ok"
