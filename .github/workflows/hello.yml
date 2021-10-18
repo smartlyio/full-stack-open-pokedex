@@ -17,5 +17,5 @@ jobs:
           date
       - name: directory content
         run: |
-          ls  
+          ls -l 
   
