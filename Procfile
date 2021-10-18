@@ -1,1 +1,1 @@
-web: npm run start-prod-fails
+web: npm run start-prod
