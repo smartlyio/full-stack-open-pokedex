@@ -35,3 +35,4 @@ jobs:
           heroku_email: "jaakko.mainosposti@gmail.com"
           healthcheck: "https://pokedex-jasumoi.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
