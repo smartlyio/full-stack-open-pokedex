@@ -12,8 +12,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Setup Node
+        uses: actions/setup-node@v2
         with:
           node-version: '14'
       - name: npm install 
@@ -31,7 +33,8 @@ jobs:
 #          start: npm run start-prod
 #          wait-on: http://localhost:5000
 #          env: PORT=5000
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Install to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sirr-pokedex"
@@ -39,4 +42,11 @@ jobs:
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+        if: ${{ github.event_name == 'push' }}
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INITIAL_VERSION: "0.0.4"
+          DEFAULT_BUMP: "patch"
         if: ${{ github.event_name == 'push' }}

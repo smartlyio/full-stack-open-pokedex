@@ -18,5 +18,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('4-test')
+  res.send('0.0.5')
 })
