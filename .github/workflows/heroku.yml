@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push'  && !contains(join(github.event.commits.*.message, ''), '#skip')}}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "aaltopart11" #Must be unique in Heroku
@@ -23,8 +23,8 @@ jobs:
           checkstring: 'ok' 
           rollbackonhealthcheckfailed: true
       - name: bump version and push tag
-        uses: anothrNick/github-tag-action@1.33.0
+        uses: anothrNick/github-tag-action@1.36.0
         if: ${{ github.event_name == 'push' }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN  && !contains(join(github.event.commits.*.message, ''), '#skip') }}
           DEFAULT_BUMP: patch
