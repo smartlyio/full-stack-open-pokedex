@@ -12,7 +12,6 @@ jobs:
       - name: Say Hello
         run: |
           echo "${{secrets.HEROKU_LOGIN_TOKEN}}"
-    steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
