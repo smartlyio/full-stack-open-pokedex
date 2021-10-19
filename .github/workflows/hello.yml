@@ -7,7 +7,7 @@ on:
 
 jobs:
   hello_world_jobs:
-    runs-on: latest-ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: Say Hello
         run: |
