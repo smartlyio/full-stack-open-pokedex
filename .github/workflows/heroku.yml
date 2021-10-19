@@ -8,11 +8,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-     steps:
+    steps:
       - name: Say Hello
         run: |
           echo "${{secrets.HEROKU_LOGIN_TOKEN}}"
-     steps:
+    steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
