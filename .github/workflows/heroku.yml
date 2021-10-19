@@ -9,12 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: |
-          echo "secret: ${{secrets.HEROKU_LOGIN_TOKEN}}"
+      - name: Deploy
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{secrets.HEROKU_LOGIN_TOKEN}}
-          heroku_app_name: "aaltopart11" #Must be unique in Heroku
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'aaltopart11' #Must be unique in Heroku
           heroku_email: "massimo.bertocchi@aalto.fi"
