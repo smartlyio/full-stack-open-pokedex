@@ -15,3 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "aaltopart11" #Must be unique in Heroku
           heroku_email: "massimo.bertocchi@aalto.fi"
+          healthcheck: 'https://aaltopart11.herokuapp.com/health'
+          checkstring: 'ok' 
+          rollbackonhealthcheckfailed: true
