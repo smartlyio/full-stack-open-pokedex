@@ -14,7 +14,7 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Log gihub context
+      - name: Log github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
@@ -54,7 +54,7 @@ jobs:
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ ((github.event_name == 'push') && (!contains(join($COMMIT_MESSAGES), "#skip")}}
       - name: Another checkout for tagging to work
         uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -62,4 +62,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ ((github.event_name == 'push') && (!contains(join($COMMIT_MESSAGES), "#skip")}}
