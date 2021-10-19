@@ -14,6 +14,18 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
+      - name: Log github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Log commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: Log commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -42,7 +54,7 @@ jobs:
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), '#skip')))}}
       - name: Another checkout for tagging to work
         uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -50,4 +62,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), '#skip')))}}
