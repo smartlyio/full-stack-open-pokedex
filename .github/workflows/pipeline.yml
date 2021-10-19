@@ -54,7 +54,7 @@ jobs:
           healthcheck: "https://sirr-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), "#skip")}}
+        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), '#skip')}}
       - name: Another checkout for tagging to work
         uses: actions/checkout@v2
       - name: Bump version and push tag
@@ -62,4 +62,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
-        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), "#skip")}}
+        if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), "'#skip')}}
