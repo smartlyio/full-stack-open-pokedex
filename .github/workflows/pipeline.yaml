@@ -40,13 +40,13 @@ jobs:
           healthcheck: "https://radiant-stream-72335.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-
   versioning:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
