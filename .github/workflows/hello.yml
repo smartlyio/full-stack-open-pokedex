@@ -45,5 +45,5 @@ jobs:
         with:
           # spec: cypress/integration/api.cypress.js
           command: npm run test:e2e
-          start: npm run start
+          start: npm start
 
