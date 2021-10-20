@@ -64,15 +64,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
         if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), '#skip')))}}
-      - name: Slack Success Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status }}
-        if: ${{ ((job.status == 'success') && (github.event_name == 'push'))}}
-      - name: Slack Failure Notification
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_COLOR: ${{ job.status }}
-        if: ${{ ((job.status != 'success') && (github.event_name == 'push'))}}
+#      - name: Slack Success Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          SLACK_COLOR: ${{ job.status }}
+#        if: ${{ ((job.status == 'success') && (github.event_name == 'push'))}}
+#      - name: Slack Failure Notification
+#        uses: rtCamp/action-slack-notify@v2
+#        env:
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#          SLACK_COLOR: ${{ job.status }}
+#        if: ${{ ((job.status != 'success') && (github.event_name == 'push'))}}
