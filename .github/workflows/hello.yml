@@ -45,7 +45,5 @@ jobs:
         with:
           # spec: cypress/integration/api.cypress.js
           command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: 'http://localhost:5000'
-          wait-on-timeout: 180
+          start: npm run start
 
