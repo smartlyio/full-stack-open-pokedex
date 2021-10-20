@@ -14,18 +14,18 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-      - name: Log github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Log commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: Log commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+#      - name: Log github context
+#        env:
+#          GITHUB_CONTEXT: ${{ toJson(github) }}
+#        run: echo "$GITHUB_CONTEXT"
+#      - name: Log commits
+#        env:
+#          COMMITS: ${{ toJson(github.event.commits) }}
+#        run: echo "$COMMITS"
+#      - name: Log commit messages
+#        env:
+#          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+#        run: echo "$COMMIT_MESSAGES"
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -38,13 +38,13 @@ jobs:
         run: npm run test
       - name: run build
         run: npm run 
-#      - name: e2e tests
-#        uses: cypress-io/github-action@v2
-#        with:
-#          command: npm run test:e2e
-#          start: npm run start-prod
-#          wait-on: http://localhost:5000
-#          env: PORT=5000
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+          env: PORT=5000
       - name: Install to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -63,3 +63,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
         if: ${{ ((github.event_name == 'push') && (!contains(join(github.event.commits.*.message), '#skip')))}}
+      - name: Slack Success Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status }}
+        if: ${{ ((job.status == 'success') && (github.event_name == 'push'))}}
+      - name: Slack Failure Notification
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_COLOR: ${{ job.status }}
+        if: ${{ ((job.status != 'success') && (github.event_name == 'push'))}}
