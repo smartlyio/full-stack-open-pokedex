@@ -33,5 +33,4 @@ jobs:
           heroku_email: "kari.a.heiskanen@gmail.com" 
           healthcheck: "https://full-stack-open-pokedex-kh.herokuapp.com/health"  
           checkstring: "ok"
-          rollbackonhealthcheckfailed: true
 
