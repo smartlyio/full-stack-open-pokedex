@@ -1,1 +1,1 @@
-web: npm run start-prod-not-working
+web: npm run start-prod
