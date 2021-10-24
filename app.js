@@ -11,10 +11,12 @@ app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
 
+//health
 app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+//version
 app.get('/version', (req, res) => {
   res.send('1.1') // change this string to ensure a new version deployed
 })
