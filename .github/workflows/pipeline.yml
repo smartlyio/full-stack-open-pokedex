@@ -47,9 +47,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: Notify
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
-        - uses: 8398a7/action-slack@v3
+      - name: Notify success
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && job.status == 'success'}}
+        uses: 8398a7/action-slack@v3
+        with:
           status: custom
           fields: commit,author,took
           custom_payload: |
@@ -59,12 +60,13 @@ jobs:
                 text: `A new version deployed to https://calm-thicket-66229.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR}. \nBuild took ${process.env.AS_TOOK}.`
               }]
             }
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          if: ${{ job.status == 'success'}}
-        - uses: 8398a7/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      - name: Notify failure
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') && job.status != 'success'}}
+        uses: 8398a7/action-slack@v3
+        with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,took
-          env:
-            SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          if: ${{ job.status != 'success'}}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
