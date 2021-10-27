@@ -6,7 +6,17 @@ on:
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
-
     steps:
       - name: Say Hello
         run: echo "Hello World. So, gentlemen, let's discuss the prospect of ending the war tonight."
+
+  date_and_directory_job:
+      runs-on: ubuntu-latest
+      steps:
+        - name: Show date and directory contents
+          run: |
+            echo 'date: '
+            date
+            echo '-----'
+            echo 'directory contents: '
+            ls
