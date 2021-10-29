@@ -3,7 +3,10 @@ on:
     branches:
       - master
 
+
+
 jobs:
+
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
@@ -19,3 +22,14 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+
+        
+  e2e_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: cypress-io/github-action@v2
+      - name: e2e tests
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:8080
