@@ -55,6 +55,6 @@
     "react-router-dom": "^5.2.0"
   },
   "jest": {
-    "testRegex": "(/__tests__/.*|(\\.|/)(test))\\.[jt]sx?$"
+    "testRegex": "(/__tests__/.*|(\\.|/)(spec))\\.[jt]sx?$"
   }
 }
