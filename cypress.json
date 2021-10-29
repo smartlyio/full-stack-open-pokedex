@@ -1,5 +1,3 @@
 {
-  "testFiles": [
-    "demo.test.js"
-  ]
+  "testFiles": "*.test.js"
 }
