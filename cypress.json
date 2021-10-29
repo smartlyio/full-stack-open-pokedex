@@ -1,3 +1,5 @@
 {
-  "testFiles": "(/__tests__/.*|(\\.|/)(test))\\.[jt]sx?$"
+  "testFiles": [
+    "./cypress/integration/*.test.js"
+  ]
 }
