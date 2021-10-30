@@ -36,3 +36,4 @@ jobs:
           healthcheck: "https://powerful-falls-19301.herokuapp.com/health"
           checkstring: "ok"
           delay: 3
+          rollbackonhealthcheckfailed: true
