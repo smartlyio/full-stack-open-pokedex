@@ -31,6 +31,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: actions/checkout@v2
+      - name: echo commit message
+        env:
+          COMMIT_MSG: ${{ github.event.commits.message }}
+        run: echo "$COMMIT_MSG"
       - name: Deploy to Heroku
         if: github.event_name == 'push' && !contains(github.event.commits.message, '#skip')
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action        
