@@ -12,6 +12,8 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
+  // eslint-disable-next-line
+  console.log(process.env.VERSION)
   res.send(process.env.VERSION)
 })
 
