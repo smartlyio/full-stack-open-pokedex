@@ -10,21 +10,33 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v1
         with: 
           node-version: '12.x'
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: test
         run: npm test
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokedexxx_ash" #Must be unique in Heroku
+          heroku_email: "teemu.varsala@hotmail.com"
+          procfile: true
           
