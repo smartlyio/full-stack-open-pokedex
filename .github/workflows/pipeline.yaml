@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -40,6 +43,7 @@ jobs:
           heroku_email: "teemu.varsala@hotmail.com"
           procfile: "web: node app.js"
           branch: "master"
+          rollbackonhealthcheckfailed: true
           healthcheck: "https://pokedexxx-ash.herokuapp.com/health"
         env:
           VERSION: ${{ github.run_number}} # just to make sure a new version did actually get deployed
