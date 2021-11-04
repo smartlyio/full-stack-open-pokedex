@@ -40,6 +40,7 @@ jobs:
           heroku_email: "teemu.varsala@hotmail.com"
           procfile: "web: node app.js"
           branch: "master"
+          healthcheck: "https://pokedexxx-ash.herokuapp.com/health"
         env:
           VERSION: ${{ github.run_number}} # just to make sure a new version did actually get deployed
           
