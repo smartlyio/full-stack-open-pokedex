@@ -38,5 +38,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedexxx-ash" #Must be unique in Heroku
           heroku_email: "teemu.varsala@hotmail.com"
-          procfile: true
+          procfile: "web: node app.js"
           
