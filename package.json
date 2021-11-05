@@ -10,7 +10,12 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run e2e.js"
+    "test:e2e": "cypress run e2e.js",
+
+    "add-changes": "git add .",
+    "git-commit": "git commit -m 'test commit'",
+    "github-push": "git push origin master",
+    "deploy": "npm run add-changes && npm run git-commit && npm run github-push"
   },
   "repository": {
     "type": "git",
