@@ -1,1 +1,1 @@
-web: npm run start-prod-pineapple
+web: npm run start-prod
