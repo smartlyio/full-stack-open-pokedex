@@ -36,3 +36,4 @@ jobs:
           healthcheck: "https://am-thedev-pokedex.herokuapp.com/health"
           checkstring: "ok"
           delay: 5
+          rollbackonhealthcheckfailed: true
