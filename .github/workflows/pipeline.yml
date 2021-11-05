@@ -33,5 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "am-thedev-pokedex"
           heroku_email: "austincmckee@gmail.com"
-          healthcheck: "https://am-thedev-pokedex.herokuapp.com/"
+          healthcheck: "https://am-thedev-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          delay: 5
