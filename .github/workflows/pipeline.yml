@@ -33,3 +33,4 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: http://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health
+          rollbackonhealthcheckfailed: true
