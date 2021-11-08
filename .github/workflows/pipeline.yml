@@ -38,5 +38,5 @@ jobs:
           heroku_email: "austincmckee@gmail.com"
           healthcheck: "https://am-thedev-pokedex.herokuapp.com/health"
           checkstring: "ok"
-          delay: 3
+          delay: 5
           rollbackonhealthcheckfailed: true
