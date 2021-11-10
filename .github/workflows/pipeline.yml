@@ -22,7 +22,7 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: success on deploy
+      - name: failure on build
         if: ${{ failure() }}
         uses: 8398a7/action-slack@v3
         with:
