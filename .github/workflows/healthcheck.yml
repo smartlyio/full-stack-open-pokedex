@@ -14,6 +14,3 @@ jobs:
         with:
           url: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health|https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com
           follow-redirect: no
-          max-attempts: 3
-          retry-delay: 5s
-          retry-all: no
