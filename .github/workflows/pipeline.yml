@@ -57,7 +57,7 @@ jobs:
             {
               attachments: [{
                 color: 'good',
-                text: `a new version deployed to https://am-thedev-pokedex.herokuapp.com/ (${process.env.AS_COMMIT})\nBy ${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK},
+                text: `a new version deployed to https://am-thedev-pokedex.herokuapp.com/ (${process.env.AS_COMMIT})\nBy ${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK}`,
               }]
             }
         env:
