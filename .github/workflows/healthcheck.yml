@@ -12,4 +12,4 @@ jobs:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v2
         with:
-          url: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health|https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com
+          url: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/heap|https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com
