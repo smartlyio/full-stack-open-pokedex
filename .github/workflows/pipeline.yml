@@ -57,17 +57,17 @@ jobs:
             {
               attachments: [{
                 color: 'good',
-                text: `a new version deployed to https://am-thedev-pokedex.herokuapp.com/ (${process.env.AS_COMMIT})\nBy ${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK}`,
+                text: `A new version deployed to Heroku: https://am-thedev-pokedex.herokuapp.com/ (${process.env.AS_COMMIT})\nBy ${process.env.AS_AUTHOR}\nBuild took ${process.env.AS_TOOK}`,
               }]
             }
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-        if: success()
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: ${{ github.event_name == 'push' && success() }} # only deploys on a push
       - name: Slack failure report
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
           fields: repo,message,commit,author,took
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         if: failure()
