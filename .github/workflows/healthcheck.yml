@@ -12,7 +12,7 @@ jobs:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v2
         with:
-          url: http://still-meadow-94022.herokuapp.com|http://still-meadow-94022.herokuapp.com
+          url: https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health|https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com
           follow-redirect: no
           max-attempts: 3
           retry-delay: 5s
