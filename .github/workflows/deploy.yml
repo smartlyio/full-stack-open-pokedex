@@ -26,10 +26,15 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+
+  versioning:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2  
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
         if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          DEFAULT_BUMP: 'patch'
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
