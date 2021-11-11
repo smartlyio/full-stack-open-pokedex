@@ -16,4 +16,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "polar-harbor-58989" #Must be unique in Heroku
           heroku_email: "jomilojuajibola@gmail.com"
-          health_check: " https://polar-harbor-58989.herokuapp.com/health"
+          healthcheck: " https://polar-harbor-58989.herokuapp.com/health"
