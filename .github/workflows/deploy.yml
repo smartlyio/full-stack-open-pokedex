@@ -17,3 +17,5 @@ jobs:
           heroku_app_name: "polar-harbor-58989" #Must be unique in Heroku
           heroku_email: "jomilojuajibola@gmail.com"
           healthcheck: " https://polar-harbor-58989.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
