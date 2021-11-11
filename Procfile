@@ -1,1 +1,1 @@
-web: npm run fake
+web: npm start-prod
