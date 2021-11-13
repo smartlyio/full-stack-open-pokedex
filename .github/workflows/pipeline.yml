@@ -15,10 +15,6 @@ jobs:
           node-version: '12.x'
       - name: npm install 
         run: npm install  
-      - name: lint
-        run: npm run eslint
-      - name: run test
-        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
