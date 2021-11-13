@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Pipeline
 
 on:
   push:
@@ -6,12 +6,12 @@ on:
       - master
 
 jobs:
-  deployment_pipeline:
-    runs-on: ubuntu-20.04
+  building_pipeline:
+    runs-on: ubuntu-18.04
     steps:
-      - name: checkout
+      - name: checkout repo
         uses: actions/checkout@v2
-      - name: setup NodeJS runtime
+      - name: setup node
         uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -21,7 +21,7 @@ jobs:
         run: npm run lint
       - name: build
         run: npm run build
-      - name: unit test
+      - name: test
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
