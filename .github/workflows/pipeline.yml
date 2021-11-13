@@ -1,0 +1,21 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup NodeJS runtime
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: install dependencies
+        run: npm install
+      - name: lint
+        run: npm run lint
