@@ -1,1 +1,1 @@
-web: npm ruan start-prod
+web: npm run start-prod
