@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
     'jest/globals': true,
+    'cypress/globals': true,
     commonjs: true,
     node: true,
   },
@@ -14,7 +15,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest'],
+  plugins: ['react', 'jest', 'cypress'],
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -27,4 +28,4 @@ module.exports = {
     'no-console': 'error',
     'react/prop-types': 0,
   },
-};
+}
