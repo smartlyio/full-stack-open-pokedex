@@ -35,3 +35,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokedex9' #Must be unique in Heroku
           heroku_email: 'vu.nguyen101@gmail.com'
+          healthcheck: 'https://pokedex9.herokuapp.com/health'
+          checkstring: 'ok'
