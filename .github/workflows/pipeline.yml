@@ -3,7 +3,7 @@ name: Pipeline
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   building_pipeline:
