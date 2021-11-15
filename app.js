@@ -9,8 +9,9 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+const randomString = (Math.random() + 1).toString(36).substring(5)
 app.get('/version', (req, res) => {
-  res.send('1') // change this string to ensure a new version deployed
+  res.send(randomString)
 })
 
 app.use(express.static('dist'))
