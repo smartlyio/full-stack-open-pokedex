@@ -1,0 +1,45 @@
+name: Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  building_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: install dependencies
+        run: npm install
+      - name: lint
+        run: npm run lint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: deploy to Heroku server
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'pokedex9'
+          heroku_email: 'vu.nguyen101@gmail.com'
+          healthcheck: 'https://pokedex9.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 5
+          rollbackonhealthcheckfailed: true
