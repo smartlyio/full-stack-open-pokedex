@@ -37,4 +37,5 @@ jobs:
           heroku_email: 'vu.nguyen101@gmail.com'
           healthcheck: 'https://pokedex9.herokuapp.com/health'
           checkstring: 'ok'
-          delay: 7
+          delay: 3
+          rollbackonhealthcheckfailed: true
