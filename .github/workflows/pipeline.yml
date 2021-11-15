@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'sundesz@gmail.com'
           healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
