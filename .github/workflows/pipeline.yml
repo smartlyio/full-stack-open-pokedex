@@ -34,4 +34,5 @@ jobs:
           heroku_app_name: 'shielded-dusk-66164'
           heroku_email: 'ville.l.alatalo@gmail.com'
           healthcheck: 'https://shielded-dusk-66164.herokuapp.com/health'
-          checkstring: 'healthcheck ok'
+          checkstring: 'healthcheck o'
+          rollbackonhealthcheckfailed: true
