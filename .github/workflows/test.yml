@@ -22,4 +22,10 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-        if: ${{ COMMIT_MESSAGES.includes('#skip') }}
+      - name: head commit message
+        env:
+          HEAD_COMMIT_MESSAGES: ${{ toJson(github.event.head_commit.message) }}
+        run: echo "$HEAD_COMMIT_MESSAGES"
+      - name: Logging
+        run: |
+          echo "${{toJSON(github.event)}}"
