@@ -40,7 +40,7 @@ jobs:
           branch: 'master'
           # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
           # checkstring: 'ok'
-          # rollbackonhealthcheckfailed: true
+          ## rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
