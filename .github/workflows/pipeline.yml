@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: '12.x'
       - name: npm install
         run: npm install
       - name: lint
@@ -35,9 +35,17 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_TOKEN}}
-          heroku_app_name: "pokedex-pp" #Must be unique in Heroku
-          heroku_email: "pashov@ymail.com"
-          healthcheck: "https://pokedex-pp.herokuapp.com/health"
-          checkstring: "ok"
+          heroku_app_name: 'pokedex-pp' #Must be unique in Heroku
+          heroku_email: 'pashov@ymail.com'
+          healthcheck: 'https://pokedex-pp.herokuapp.com/health'
+          checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: patch
