@@ -2,7 +2,7 @@ name: Periodid Healthcheck
 
 on:
   schedule:
-    - cron: '15 12 * * 3'
+    - cron: '16 28 * * *'
 
 jobs:
   periodic_healthcheck:
@@ -12,6 +12,5 @@ jobs:
         uses: jtalk/url-health-check-action@v2
         with:
           url: https://pokedexxx-ash.herokuapp.com/health
-          follow-redirect: no # Optional, defaults to "no"
           max-attempts: 3 # Optional, defaults to 1
           retry-delay: 60s # Optional, only applicable to max-attempts > 1
