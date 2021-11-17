@@ -64,7 +64,7 @@ jobs:
           status: ${{ job.status }}
           fields: repo,commit,job,eventName,workflow,author,took
         
-        if: ${{ job.status === 'success' || job.status === 'fail' }}
+        if: ${{ job.status == 'success' || job.status == 'fail' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
