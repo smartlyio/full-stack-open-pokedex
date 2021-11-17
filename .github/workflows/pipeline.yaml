@@ -36,6 +36,16 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
+      - name: Slack failure notification    
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,commit,job
+        
+        if: ${{ failure() }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
         
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
@@ -64,7 +74,7 @@ jobs:
           status: ${{ job.status }}
           fields: repo,commit,job,eventName,workflow,author,took
         
-        if: ${{ job.status == 'success' || job.status == 'fail' }}
+        if: ${{ success() }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
