@@ -37,7 +37,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'sandesh-pokemon'
           heroku_email: 'sundesz@gmail.com'
-          dontuseforce: 1
+          branch: 'master'
           # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
           # checkstring: 'ok'
           # rollbackonhealthcheckfailed: true
