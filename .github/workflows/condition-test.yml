@@ -1,0 +1,45 @@
+name: condition-tests
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: test1
+        run: echo hoge
+        if: ( 'a' == 'a' )
+
+      - name: test2
+        run: echo hoge
+        if: ( 'a' == 'b' )
+
+      - name: test3
+        run: echo hoge
+        if: >
+          'a' == 'a'
+
+      - name: test4
+        run: echo hoge
+        if: >
+          'a' == 'b'
+
+      - name: test5
+        run: echo hoge
+        if: >
+          ${{ 'a' == 'a' }}
+
+      - name: test6
+        run: echo hoge
+        if: >
+          ${{ 'a' == 'b' }}
+
+      - name: multiline condition
+        run: echo testing multiline condition
+        if: |
+          github.event_name == 'push' ||
+          (github.event_name == 'pull_request' && github.head_ref == 'master')
