@@ -58,3 +58,13 @@ jobs:
         env:
           VERSION: ${{ github.run_number}} # just to make sure a new version did actually get deployed
           
+      - name: Slack notification    
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,commit,job,eventName,workflow,author,took
+        
+        if: ${{ job.status === 'success' || job.status === 'fail' }}
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
