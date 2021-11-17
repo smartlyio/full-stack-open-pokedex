@@ -42,7 +42,7 @@ jobs:
           status: ${{ job.status }}
           fields: repo,commit,job
         
-        if: ${{ failure() }}
+        if: ${{ failure() && github.event_name == 'push' }}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
@@ -74,7 +74,7 @@ jobs:
           status: ${{ job.status }}
           fields: repo,commit,job,eventName,workflow,author,took
         
-        if: ${{ success() }}
+        if: ${{ success() && github.event_name == 'push'}}
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           MATRIX_CONTEXT: ${{ toJson(matrix) }}
