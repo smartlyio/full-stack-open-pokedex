@@ -34,4 +34,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://peaceful-inlet-15469.herokuapp.com/health"
           checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+ 
