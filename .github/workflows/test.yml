@@ -28,4 +28,4 @@ jobs:
         run: echo "$HEAD_COMMIT_MESSAGES"
       - name: Logging
         run: |
-          echo "${{toJSON(github.event)}}"
+          echo "${{ toJSON(github.event) }}"
