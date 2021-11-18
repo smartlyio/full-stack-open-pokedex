@@ -42,6 +42,7 @@ jobs:
           # checkstring: 'ok'
           ## rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
+        if: ${{ github.event_name == 'push' }}
       - name: Bump version and push tag
         # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
