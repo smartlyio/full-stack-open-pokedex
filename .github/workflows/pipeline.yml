@@ -38,9 +38,10 @@ jobs:
           heroku_app_name: 'sandesh-pokemon'
           heroku_email: 'sundesz@gmail.com'
           branch: 'master'
+          # procfile: 'web: npm start'
           # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
           # checkstring: 'ok'
-          ## rollbackonhealthcheckfailed: true
+          # rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
         if: ${{ github.event_name == 'push' }}
       - name: Bump version and push tag
