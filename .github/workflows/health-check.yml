@@ -17,7 +17,7 @@ jobs:
           # Check the following URLs one by one sequentially
           url: https://sandesh-pokemon.herokuapp.com/health
           # Follow redirects, or just report success on 3xx status codes
-          follow-redirect: no # Optional, defaults to "no"
+          follow-redirect: false # Optional, defaults to "no"
           # Fail this action after this many failed attempts
           max-attempts: 3 # Optional, defaults to 1
           # Delay between retries
