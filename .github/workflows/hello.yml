@@ -3,7 +3,7 @@ name: Hello World!
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   hello_world_job:
@@ -15,6 +15,6 @@ jobs:
 
       - name: Now it is
         run: date
-        
+
       - name: Directory Content
         run: ls -l
