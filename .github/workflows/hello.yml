@@ -6,7 +6,7 @@ on:
       - master
 
 permissions:
-  actions: read|write
+  actions: read-all|write-all
 
 jobs:
   hello_world_job:
