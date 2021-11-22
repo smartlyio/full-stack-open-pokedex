@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-permissions:
-  actions: read-all|write-all
-
 jobs:
   hello_world_job:
     runs-on: ubuntu-18.04
