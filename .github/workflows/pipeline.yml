@@ -32,3 +32,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-poledex"
           heroku_email: "olli.j.porvari@utu.fi"
+          healthcheck: "https://full-stack-open-poledex.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
