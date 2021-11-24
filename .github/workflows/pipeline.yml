@@ -10,6 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
@@ -38,3 +39,9 @@ jobs:
           healthcheck: "https://full-stack-open-poledex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
