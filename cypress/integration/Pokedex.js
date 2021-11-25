@@ -5,4 +5,10 @@ describe('Pokedex', function() {
     cy.contains('ivysaur')
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
+  it('can navigate from main page to specific pokemon page', function() {
+    cy.visit('http://localhost:5000')
+    cy.contains('ivysaur').click()
+    cy.contains('Hidden ability')
+    cy.contains('overgrow')
+  })
 })
