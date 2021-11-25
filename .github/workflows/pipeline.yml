@@ -27,3 +27,8 @@ jobs:
           command: npm run tests:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000/
+      - uses: akhileshns/heroku-deploy@v3.12.12
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "evening-ravine-96779" #Must be unique in Heroku
+          heroku_email: "indeterm@protonmail.com"
+          
