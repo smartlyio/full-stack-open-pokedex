@@ -1,4 +1,4 @@
-name: Hello World!
+name: 11.5 Linting workflow!
 
 on:
   push:
