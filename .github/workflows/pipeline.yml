@@ -34,4 +34,5 @@ jobs:
           heroku_email: "indeterm@protonmail.com"
           healthcheck: "https://evening-ravine-96779.herokuapp.com/version"
           checkstring: '4'
+          rollbackonhealthcheckfailed: true
           
