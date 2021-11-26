@@ -8,7 +8,7 @@ app.use(express.static('dist'))
 
 
 app.get('/version', (req, res) => {
-  res.send('2')
+  res.send('4')
 })
 
 app.listen(PORT, () => {

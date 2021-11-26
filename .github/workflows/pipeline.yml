@@ -33,5 +33,5 @@ jobs:
           heroku_app_name: "evening-ravine-96779" #Must be unique in Heroku
           heroku_email: "indeterm@protonmail.com"
           healthcheck: "https://evening-ravine-96779.herokuapp.com/version"
-          checkstring: '3'
+          checkstring: '4'
           
