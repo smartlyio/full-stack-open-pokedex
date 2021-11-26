@@ -14,6 +14,7 @@ const previous = {
   name: 'ditto',
   id: 132
 }
+
 const next = {
   url: 'https://pokeapi.co/api/v2/pokemon/134/',
   name: 'vaporeon',
@@ -119,7 +120,7 @@ describe('<PokemonPage />', () => {
     })
 
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
-    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/ditto')
+    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
 
   it('should not render previous and next urls if none exist', async () => {
