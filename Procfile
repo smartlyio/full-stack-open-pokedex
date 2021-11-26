@@ -1,1 +1,1 @@
-web: npm run start-prod
+web: uzmk run start-prod
