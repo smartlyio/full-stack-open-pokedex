@@ -35,3 +35,4 @@ jobs:
           heroku_email: "douglasdscplay@gmail.com"
           healthcheck: "https://pokedex-fullstack-douglas.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
