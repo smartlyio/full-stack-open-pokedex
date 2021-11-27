@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku deployment
         if: ${{ github.event_name == 'push' }} #Pull request/mergeä varten, jotta ajaa kaikki stepit vain pushatessa-ei enää mergetettäessä
-        uses: akhileshns/heroku-deploy@v3.12.12
+        uses: akhileshns/heroku-deploy@v3.12.12 #Valmis API heroku deploymentiin Githupissa
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokemonnikortit
