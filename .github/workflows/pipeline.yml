@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: pokemonnikortit
           heroku_email: asturune@hotmail.com
           healthcheck: https://pokemonnikortit.herokuapp.com/health #ks. endpoint app.js filestä
-          rollbackonhealthcheckfailed: true #tekee rollbackin, jos deployment feilaa Herokuunff
+          rollbackonhealthcheckfailed: true #tekee rollbackin, jos deployment feilaa Herokuunffdd
