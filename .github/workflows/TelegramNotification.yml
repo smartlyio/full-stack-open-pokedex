@@ -1,0 +1,22 @@
+name: telegram message
+on: [push]
+
+jobs:
+  build:
+    name: Push notification
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: send custom message with args
+        uses: appleboy/telegram-action@master
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          # disable_web_page_preview: true
+      - name: Discord Commits
+        uses: Sniddl/discord-commits@v1.3
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}
+          message: "Successful commit to https://github.com/{{ github.context.payload.repository.owner.name }}/{{ github.context.payload.repository.name}}.\n Diff: {{ github.context.payload.compare }}"
+          embed: '{ "title": "{{ commit.title }}", "description": "{{ commit.description }}", "url": "{{ commit.url }}", "author": { "name": "{{ commit.author.name }} ({{ commit.author.username }})", "icon_url": "https://avatars.io/gravatar/{{ commit.author.email }}"} }'
+          last-commit-only: false
