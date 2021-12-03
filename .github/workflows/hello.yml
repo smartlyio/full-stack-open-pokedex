@@ -1,20 +1,20 @@
 name: Hello!
 
 on:
-        push:
-                branches:
-                - master
+  push:
+          branches:
+          - master
 
 jobs:
-        hello_job:
-                runs-on: ubuntu-18.04
-                steps:
-                - name: Say hello
-                  run: |
-                        echo "Hello CI!"
-                - name: Now it is
-                  run: |
-                        date
-                - name: Directory content
-                  run: |
-                        ls - l
+  hello_job:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Say hello
+      run: |
+        echo "Hello CI!"
+    - name: Now it is
+      run: |
+        date
+    - name: Directory content
+      run: |
+        ls -l
