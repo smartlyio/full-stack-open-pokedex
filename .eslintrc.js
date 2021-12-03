@@ -5,7 +5,12 @@ module.exports = {
 		es6: true,
 		jest: true,
 	},
-	extends: ["eslint:recommended", "plugin:react/recommended", "prettier"],
+	extends: [
+		"eslint:recommended",
+		"plugin:react/recommended",
+		"prettier",
+		"plugin:cypress/recommended",
+	],
 	globals: {
 		Atomics: "readonly",
 		SharedArrayBuffer: "readonly",
@@ -17,8 +22,13 @@ module.exports = {
 		ecmaVersion: 2018,
 		sourceType: "module",
 	},
-	plugins: ["react", "jest"],
+	plugins: ["react", "jest", "cypress"],
 	rules: {
 		"react/prop-types": 0,
+	},
+	settings: {
+		react: {
+			version: "detect",
+		},
 	},
 };
