@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: agile-escarpment-20043
           heroku_email: aapo.leppanen@gmail.com
+          healthcheck: "https://agile-escarpment-20043.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
