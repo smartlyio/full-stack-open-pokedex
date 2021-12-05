@@ -40,8 +40,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-app-jonas" #Must be unique in Heroku
           heroku_email: "youneslamkhanter02@gmail.com"
-          healthcheck: "https://pokemon-app-jonas.herokuapp.com/version"
-          checkString: "1.1.0"
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.33.0
