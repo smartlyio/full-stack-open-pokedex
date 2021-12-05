@@ -53,19 +53,19 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: check message
-        env:
-          COMMIT_MESSAGES: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: more messages
-        env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+      # - name: commits
+      #   env:
+      #     COMMITS: ${{ toJson(github.event.commits) }}
+      #   run: echo "$COMMITS"
+      # - name: commit messages
+      #   env:
+      #     COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+      #   run: echo "$COMMIT_MESSAGES"
+      # - name: check message
+      #   env:
+      #     COMMIT_MESSAGES: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
+      #   run: echo "$COMMIT_MESSAGES"
+      # - name: more messages
+      #   env:
+      #     COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+      #   run: echo "$COMMIT_MESSAGES"
