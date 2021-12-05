@@ -31,6 +31,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Print release branch
+        run: echo ${{ github.base_ref }}
       - name: Deploy
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
