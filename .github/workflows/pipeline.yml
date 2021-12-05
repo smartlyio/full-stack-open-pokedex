@@ -39,6 +39,10 @@ jobs:
           heroku_email: aapo.leppanen@gmail.com
           healthcheck: "https://agile-escarpment-20043.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+  taggin_pipleline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.36.0
