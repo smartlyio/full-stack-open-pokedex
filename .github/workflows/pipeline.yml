@@ -49,10 +49,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      - name: gihub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      # - name: gihub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
       # - name: commits
       #   env:
       #     COMMITS: ${{ toJson(github.event.commits) }}
@@ -75,18 +75,18 @@ jobs:
     - name: Succesfull Deployment
       uses: 8398a7/action-slack@v3
       with:
-        status: custom
+        status: ${{ job.status }}
         fields: workflow,job,commit,repo,ref,author,took
         custom_payload: |
           {
             attachments: [{
-              color: 'good,
+              color: 'good',
               text: `a new version has been deployed to https://agile-escarpment-20043.herokuapp.com (${process.env.AS_COMMIT}) of by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
             }]
           }
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: success()
+      if: ${{ success() && github.event_name == 'push' }}
   unsuccesfull_notification_pipelin:
     runs-on: ubuntu-latest
     steps:
