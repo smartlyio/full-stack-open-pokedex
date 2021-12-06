@@ -69,3 +69,30 @@ jobs:
       #   env:
       #     COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
       #   run: echo "$COMMIT_MESSAGES"
+  notification_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: 8398a7/action-slack@v3
+    - name: Failed Deployment
+      if: ${{ failure() }}
+      with:
+        status: ${{ failure }}
+        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+    - uses: 8398a7/action-slack@v3
+    - name: Succesfull Deployment
+      if: ${{ success() }}
+      with:
+        status: custom
+        fields: workflow,job,commit,repo,ref,author,took
+        custom_payload: |
+          {
+            attachments: [{
+              color: 'good,
+              text: `a new version has been deployed to https://agile-escarpment-20043.herokuapp.com (${process.env.AS_COMMIT}) of by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+            }]
+          }
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
