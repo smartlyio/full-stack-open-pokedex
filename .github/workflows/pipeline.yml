@@ -39,6 +39,29 @@ jobs:
           heroku_email: aapo.leppanen@gmail.com
           healthcheck: "https://agile-escarpment-20043.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+      - name: Succesfull Deployment
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: 'good',
+                text: `a new version has been deployed to https://agile-escarpment-20043.herokuapp.com (${process.env.AS_COMMIT}) of by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: ${{ success() && github.event_name == 'push' }}
+      - name: Failed Deployment
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: failure()
   taggin_pipleline:
     runs-on: ubuntu-latest
     steps:
@@ -49,53 +72,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      # - name: gihub context
-      #   env:
-      #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo "$GITHUB_CONTEXT"
-      # - name: commits
-      #   env:
-      #     COMMITS: ${{ toJson(github.event.commits) }}
-      #   run: echo "$COMMITS"
-      # - name: commit messages
-      #   env:
-      #     COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      #   run: echo "$COMMIT_MESSAGES"
-      # - name: check message
-      #   env:
-      #     COMMIT_MESSAGES: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
-      #   run: echo "$COMMIT_MESSAGES"
-      # - name: more messages
-      #   env:
-      #     COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-      #   run: echo "$COMMIT_MESSAGES"
-  succesfull_notification_pipeline:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Succesfull Deployment
-      uses: 8398a7/action-slack@v3
-      with:
-        status: custom
-        fields: workflow,job,commit,repo,ref,author,took
-        custom_payload: |
-          {
-            attachments: [{
-              color: 'good',
-              text: `a new version has been deployed to https://agile-escarpment-20043.herokuapp.com (${process.env.AS_COMMIT}) of by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
-            }]
-          }
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      if: ${{ success() && github.event_name == 'push' }}
-  unsuccesfull_notification_pipelin:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Failed Deployment
-      uses: 8398a7/action-slack@v3
-      with:
-        status: ${{ job.status }}
-        fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
-      env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
-      if: failure()
 
