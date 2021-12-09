@@ -35,3 +35,4 @@ jobs:
           heroku_email: "eerojmk@gmail.com"
           healthcheck: "https://quiet-waters-89802.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
