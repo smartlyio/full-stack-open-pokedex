@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "quiet-waters-89802"
           heroku_email: "eerojmk@gmail.com"
+           healthcheck: "https://quiet-waters-89802.herokuapp.com/health"
