@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "mysterious-basin-81409" #Must be unique in Heroku
           heroku_email: "aaro.luo@gmail.com"
+          healthcheck: "https://mysterious-basin-81409.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
