@@ -1,43 +1,43 @@
-name: Deployment pipeline
+# name: Deployment pipeline
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches: [master]
+#     types: [opened, synchronize]
 
 
-jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '16'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: deploy to heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }}
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "mysterious-basin-81409" #Must be unique in Heroku
-          heroku_email: "aaro.luo@gmail.com"
-          healthcheck: "https://mysterious-basin-81409.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+# jobs:
+#   simple_deployment_pipeline:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '16'
+#       - name: npm install
+#         run: npm install
+#       - name: lint
+#         run: npm run eslint
+#       - name: build
+#         run: npm run build
+#       - name: test
+#         run: npm test
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v2
+#         with:
+#           command: npm run test:e2e
+#           start: npm run start-prod
+#           wait-on: http://localhost:5000
+#       - name: deploy to heroku
+#         uses: akhileshns/heroku-deploy@v3.12.12
+#         if: ${{ github.event_name == 'push' }}
+#         with:
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: "mysterious-basin-81409" #Must be unique in Heroku
+#           heroku_email: "aaro.luo@gmail.com"
+#           healthcheck: "https://mysterious-basin-81409.herokuapp.com/health"
+#           checkstring: "ok"
+#           rollbackonhealthcheckfailed: true
