@@ -14,24 +14,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - uses: actions/setup-node@v1
         with:
           node-version: '16'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: test
         run: npm test
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy to heroku
+          headless: true
+
+      - uses: actions/checkout@v2 # Can't tag without checking out again
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        default_bump: patch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' }}
         with:
