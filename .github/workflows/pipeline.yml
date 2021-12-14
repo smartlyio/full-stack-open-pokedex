@@ -42,3 +42,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "quiet-shore-77013"
           heroku_email: "vkoskela@gmail.com"
+          healthcheck: "https://quiet-shore-77013.herokuapp.com/version"
+          checkstring: "1"
+          rollbackonhealthcheckfailed: true
