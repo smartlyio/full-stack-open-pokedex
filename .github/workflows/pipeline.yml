@@ -30,9 +30,15 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
-     - name: Deploy
-       uses: akhileshns/heroku-deploy@v3.12.12
+
+# https://wsd.cs.aalto.fi/19-continuous-integration-and-deployment/2-continuous-deployment/
+  deploy: 
+    runs-on: ubuntu-18.04
+    needs: test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
          with: 
            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-           heroku_app_name: quiet-shore-77013
+           heroku_app_name: "quiet-shore-77013"
            heroku_email: "vkoskela@gmail.com"
