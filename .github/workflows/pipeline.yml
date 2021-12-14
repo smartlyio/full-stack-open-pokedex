@@ -43,5 +43,5 @@ jobs:
           heroku_app_name: "quiet-shore-77013"
           heroku_email: "vkoskela@gmail.com"
           healthcheck: "https://quiet-shore-77013.herokuapp.com/version"
-          checkstring: "1"
+          checkstring: "2"
           rollbackonhealthcheckfailed: true
