@@ -15,7 +15,7 @@ jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
-     - uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33
+     - uses: act10ns/slack@f912ccbb827031665f34ea44a362999062d946b1
        with: 
          status: starting
          channel: '@Ville'
@@ -42,7 +42,7 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
-     - uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33
+     - uses: act10ns/slack@f912ccbb827031665f34ea44a362999062d946b1
        with: 
          status: ${{ job.status }}
          steps: ${{ toJson(steps) }}
