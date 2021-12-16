@@ -33,12 +33,25 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
+# Only bump version on pull to master
+  tag:
+   if: ${{ github.event_name == 'push' }}
+   runs-on: ubuntu-18.04
+   needs: test
+   steps:
+   - uses: actions/checkout@v2
+   - name: Bump version and push tag
+     uses: anothrNick/github-tag-action@1.33.0
+     env:
+       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+       DEFAULT_BUMP: "patch"
+
 
 # https://wsd.cs.aalto.fi/19-continuous-integration-and-deployment/2-continuous-deployment/
   deploy: 
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
-    needs: test
+    needs: [test, tag]
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
@@ -47,5 +60,5 @@ jobs:
           heroku_app_name: "quiet-shore-77013"
           heroku_email: "vkoskela@gmail.com"
           healthcheck: "https://quiet-shore-77013.herokuapp.com/version"
-          checkstring: "3"
+          checkstring: "4"
           rollbackonhealthcheckfailed: true
