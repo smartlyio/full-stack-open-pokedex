@@ -15,11 +15,11 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-     - uses: act10ns/slack@v1
+     - uses: 8398a7/action-slack@v3
        with: 
-         status: starting
+         status: ${{ job.status }}
+         fields: all
          channel: '@Ville'
-         message: Starting tests
        if: always()
      - uses: actions/checkout@v2
      - uses: actions/setup-node@v1
