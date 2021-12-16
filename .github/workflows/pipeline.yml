@@ -8,12 +8,12 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
-env:
-  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
 jobs:
   test:
     runs-on: ubuntu-18.04
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
      - uses: act10ns/slack@f912ccbb827031665f34ea44a362999062d946b1
        with: 
