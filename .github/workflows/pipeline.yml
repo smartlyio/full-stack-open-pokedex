@@ -15,7 +15,7 @@ jobs:
     env:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
-     - uses: act10ns/slack@f912ccbb827031665f34ea44a362999062d946b1
+     - uses: act10ns/slack@v1
        with: 
          status: starting
          channel: '@Ville'
