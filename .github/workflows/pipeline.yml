@@ -8,10 +8,19 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
 jobs:
   test:
     runs-on: ubuntu-18.04
     steps:
+     - uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33
+       with: 
+         status: starting
+         channel: '@Ville'
+         message: Starting tests
+       if: always()
      - uses: actions/checkout@v2
      - uses: actions/setup-node@v1
        with:
@@ -33,6 +42,13 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
+     - uses: act10ns/slack@da3191ebe2e67f49b46880b4633f5591a96d1d33
+       with: 
+         status: ${{ job.status }}
+         steps: ${{ toJson(steps) }}
+         channel: '@Ville'
+       if: success()
+
 # Only bump version on pull to master
   tag:
    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
