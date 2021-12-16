@@ -49,7 +49,7 @@ jobs:
 
 # https://wsd.cs.aalto.fi/19-continuous-integration-and-deployment/2-continuous-deployment/
   deploy: 
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     runs-on: ubuntu-18.04
     needs: [test, tag]
     steps:
@@ -60,5 +60,5 @@ jobs:
           heroku_app_name: "quiet-shore-77013"
           heroku_email: "vkoskela@gmail.com"
           healthcheck: "https://quiet-shore-77013.herokuapp.com/version"
-          checkstring: "4"
+          checkstring: "5"
           rollbackonhealthcheckfailed: true
