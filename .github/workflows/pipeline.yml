@@ -19,10 +19,6 @@ jobs:
      - uses: actions/setup-node@v1
        with:
          node-version: '12.x'
-     - uses: 8398a7/action-slack@v3
-       with: 
-         status: ${{ job.status }}
-         fields: all
      - name: npm install
        run: npm install
      - name: lint
@@ -40,12 +36,6 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
-     - uses: act10ns/slack@f912ccbb827031665f34ea44a362999062d946b1
-       with: 
-         status: ${{ job.status }}
-         steps: ${{ toJson(steps) }}
-         channel: '@Ville'
-       if: success()
 
 # Only bump version on pull to master
   tag:
