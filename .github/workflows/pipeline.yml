@@ -17,14 +17,6 @@ jobs:
      - uses: actions/setup-node@v1
        with:
          node-version: '12.x'
-     - name: Dump Github context
-       env:
-         GITHUB_CONTEXT: ${{ toJSON(github) }}
-       run: echo "$GITHUB_CONTEXT"
-     - name: Dump Runner context
-       env:
-         RUNNER_CONTEXT: ${{ toJSON(runner) }}
-       run: echo "$RUNNER_CONTEXT"
      - name: npm install
        run: npm install
      - name: lint
