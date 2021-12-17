@@ -12,8 +12,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
-    env:
-      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
     steps:
      - uses: actions/checkout@v2
      - uses: actions/setup-node@v1
@@ -36,6 +34,12 @@ jobs:
          command: npm run test:e2e
          start: npm run start-prod
          wait-on: http://localhost:5000
+     - name: telegram failure
+       uses: appleboy/telegram-action@2efd23283ae25229a0b4d315d5d33f73b346ef99
+       with:
+         to: ${{ secrets.TELEGRAM_TO_ME }}
+         token: ${{ secrets.TELEGRAM_TOKEN }}
+       if: failure()
 
 # Only bump version on pull to master
   tag:
