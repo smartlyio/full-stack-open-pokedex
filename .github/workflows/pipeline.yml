@@ -39,6 +39,11 @@ jobs:
        with:
          to: ${{ secrets.TELEGRAM_TO_ME }}
          token: ${{ secrets.TELEGRAM_TOKEN }}
+         message: |
+           ${{ github.actor }} created commit: 
+           Commit message: ${{ github.event.head_commit.message }}
+           Repository: ${{ github.repository }}
+           See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
        if: failure()
 
 # Only bump version on pull to master
