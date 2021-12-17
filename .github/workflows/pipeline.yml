@@ -21,6 +21,10 @@ jobs:
        env:
          GITHUB_CONTEXT: ${{ toJSON(github) }}
        run: echo "$GITHUB_CONTEXT"
+     - name: Dump Runner context
+       env:
+         RUNNER_CONTEXT: ${{ toJSON(runner) }}
+       run: echo "$RUNNER_CONTEXT"
      - name: npm install
        run: npm install
      - name: lint
@@ -45,7 +49,8 @@ jobs:
          token: ${{ secrets.TELEGRAM_TOKEN }}
          message: |
            ${{ github.actor }} created ${{ github.event_name }}
-           Event message: ${{ github.event.pull_request.title }}
+           PR message: ${{ github.event.pull_request.title }}
+           Commit message: ${{ github.event.head_commit.message }}
            Repository: ${{ github.repository }}
            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
        if: failure()
