@@ -43,10 +43,9 @@ jobs:
        with:
          to: ${{ secrets.TELEGRAM_TO_ME }}
          token: ${{ secrets.TELEGRAM_TOKEN }}
-         photo: ${{ github.event.head.user.avatar_url }}
          message: |
            ${{ github.actor }} created ${{ github.event_name }}
-           Event message: ${{ github.event.title }}
+           Event message: ${{ github.event.pull_request.title }}
            Repository: ${{ github.repository }}
            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
        if: failure()
