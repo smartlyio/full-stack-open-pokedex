@@ -1,9 +1,8 @@
 name: HealthCheck
 
 on:
-  push: 
-    branches:
-      - health_check
+  schedule: 
+    - cron: '5 11 * * *'
 
 jobs:
   health_check:
@@ -11,7 +10,7 @@ jobs:
     steps:
       - uses: jtalk/url-health-check-action@v2
         with: 
-          url: https://quiet-shore-77013.herokuapp.com/healthy
+          url: https://quiet-shore-77013.herokuapp.com/health
       - name: Telegram on failure
         uses: appleboy/telegram-action@2efd23283ae25229a0b4d315d5d33f73b346ef99
         with: 
@@ -20,7 +19,7 @@ jobs:
           message: |
             Server at: 
 
-            https://quiet-shore-77013.herokuapp.com/healthy
+            https://quiet-shore-77013.herokuapp.com/health
 
             does not respond. 
         if: failure()
