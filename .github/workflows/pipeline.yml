@@ -40,8 +40,8 @@ jobs:
          to: ${{ secrets.TELEGRAM_TO_ME }}
          token: ${{ secrets.TELEGRAM_TOKEN }}
          message: |
-           ${{ github.actor }} created ${{ github.action }}
-           Commit message: ${{ github.event.commits[0].message }}
+           ${{ github.actor }} created ${{ github.event_name }}
+           Commit message: ${{ github.event.commits }}
            Repository: ${{ github.repository }}
            See changes: https://github.com/${{ github.repository }}/commit/${{ github.sha }}
        if: failure()
