@@ -1,0 +1,14 @@
+name: HealthCheck
+
+on:
+  push: 
+    branches:
+      - health_check
+
+jobs:
+  health_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: jtalk/url-health-check-action@v2
+        with: 
+          url: https://quiet-shore-77013.herokuapp.com/health
