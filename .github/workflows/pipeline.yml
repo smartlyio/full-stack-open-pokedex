@@ -78,7 +78,7 @@ jobs:
           heroku_app_name: "quiet-shore-77013"
           heroku_email: "vkoskela@gmail.com"
           healthcheck: "https://quiet-shore-77013.herokuapp.com/version"
-          checkstring: "5"
+          checkstring: "6"
           rollbackonhealthcheckfailed: true
       - name: 
         uses: appleboy/telegram-action@2efd23283ae25229a0b4d315d5d33f73b346ef99
