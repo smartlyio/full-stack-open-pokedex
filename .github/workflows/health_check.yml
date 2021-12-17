@@ -12,3 +12,15 @@ jobs:
       - uses: jtalk/url-health-check-action@v2
         with: 
           url: https://quiet-shore-77013.herokuapp.com/healthy
+      - name: Telegram on failure
+        uses: appleboy/telegram-action@2efd23283ae25229a0b4d315d5d33f73b346ef99
+        with: 
+          to: ${{ secrets.TELEGRAM_TO_ME }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: |
+            Server at: 
+
+            https://quiet-shore-77013.herokuapp.com/healthy
+
+            does not respond. 
+        if: failure()
