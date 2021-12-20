@@ -34,3 +34,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-kenny"
           heroku_email: "rkb479@gmail.com"
+          healthcheck: "https://pokedex-kenny.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
