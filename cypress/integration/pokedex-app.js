@@ -15,6 +15,6 @@ describe('Pokedex', function() {
   })
   it('check that pokemonpage renders hidden ability', function() {
     cy.contains('ivysaur').click()
-    cy.contains('Chlorophyll')
+    cy.contains('chlorophyll')
   })
 })
