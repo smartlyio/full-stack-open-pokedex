@@ -36,3 +36,4 @@ jobs:
           heroku_email: "rkb479@gmail.com"
           healthcheck: "https://pokedex-kenny.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
