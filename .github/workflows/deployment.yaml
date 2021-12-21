@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstack-deployment-test" #Must be unique in Heroku
           heroku_email: "valtsujt@gmail.com"
+          healthcheck: "https://fullstack-deployment-test.herokuapp.com/health"
