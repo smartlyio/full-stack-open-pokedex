@@ -23,5 +23,5 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: skipper
-        if: ${{ toJson(github.event.commits.*.message) == ['#skip'] }}
+        if: ${{ toJson(github.event.commits.*.message) == '#skip' }}
         run: echo "skip detected"
