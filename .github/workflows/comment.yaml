@@ -24,4 +24,4 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: skipper
         if: ${{ contains(join(toJson(github.event.commits.*.message), ', '), '#skip') }}
-        run: echo "skip detected!1"
+        run: echo "skip detected!"
