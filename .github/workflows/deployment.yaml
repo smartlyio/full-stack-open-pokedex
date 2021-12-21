@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
   tag:
     runs-on: ubuntu-18.04
-      steps:
+    steps:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
           if: ${{ github.event_name == 'push' }}
