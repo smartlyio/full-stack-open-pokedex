@@ -15,7 +15,7 @@ jobs:
             {
               attachments: [{
                 color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-                text: `${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? '${{job.status}}' : 'warning'`,
+                text: ${{ job.status }},
               }]
             }
         env:
