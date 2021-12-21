@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-
+    pull_request:
+      branches: [master]
+      types: [opened, synchronzie]
 
 jobs:
   simple_deployment_pipeline:
