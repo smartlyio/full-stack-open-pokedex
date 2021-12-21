@@ -35,3 +35,4 @@ jobs:
           heroku_email: "valtsujt@gmail.com"
           healthcheck: "https://fullstack-deployment-test.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
