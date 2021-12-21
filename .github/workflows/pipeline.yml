@@ -6,7 +6,7 @@ on:
       - master
     pull_request:
       branches: [master]
-      types: [opened, synchronzie]
+      types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
