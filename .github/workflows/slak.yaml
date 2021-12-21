@@ -9,8 +9,15 @@ jobs:
     steps:
       - uses: 8398a7/action-slack@v3
         with:
-          status: ${{ job.status }}
+          status: custom
           fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest # selectable (default: repo,message)
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? '${{job.status}}' : 'warning'`,
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
         if: always() # Pick up events even if the job fails or is canceled.
