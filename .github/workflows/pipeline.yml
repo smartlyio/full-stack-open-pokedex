@@ -32,6 +32,11 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy heroku
         uses: akhileshns/heroku-deploy@v3.12.12
+        run: |
+          echo "BEFORE IF"
+        if: ${{ github.event_name == 'push' }}
+        run: |
+          echo "AFTER IF"
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-kenny"
