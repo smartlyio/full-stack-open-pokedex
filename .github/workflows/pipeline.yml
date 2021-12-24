@@ -46,3 +46,4 @@ jobs:
           heroku_email: "emil.selroos@gamil.com"
           healthcheck: "https://emiselro-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
