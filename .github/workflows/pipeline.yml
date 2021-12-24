@@ -33,6 +33,7 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
           record: true
+          quiet: false
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
