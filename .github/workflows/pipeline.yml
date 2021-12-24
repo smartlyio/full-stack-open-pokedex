@@ -44,3 +44,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "emiselro-pokedex"
           heroku_email: "emil.selroos@gamil.com"
+          healthcheck: "https://emiselro-pokedex.herokuapp.com/health"
+          checkstring: "ok"
