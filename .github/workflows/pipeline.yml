@@ -14,6 +14,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch' # major.minor.patch
+          WITH_V: true
       
       - name: Setup Node
         uses: actions/setup-node@v1
