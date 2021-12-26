@@ -15,3 +15,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: shrouded-stream-54830
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: "https://shrouded-stream-54830.herokuapp.com/health"
