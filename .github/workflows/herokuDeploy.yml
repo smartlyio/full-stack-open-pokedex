@@ -16,3 +16,4 @@ jobs:
           heroku_app_name: shrouded-stream-54830
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://shrouded-stream-54830.herokuapp.com/health"
+          checkstring: "ok"
