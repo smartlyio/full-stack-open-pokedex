@@ -17,7 +17,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://shrouded-stream-54830.herokuapp.com/health"
           checkstring: "ok"
-          healthcheck2: "https://shrouded-stream-54830.herokuapp.com/version"
-          checkstring2: "1"
           rollbackonhealthcheckfailed: true
-
