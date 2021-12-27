@@ -25,8 +25,7 @@ jobs:
       - name: test
         run: npm run test
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        #if: ${{ !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        if: ${{ github.event_name == 'push' }} and ${{ !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
