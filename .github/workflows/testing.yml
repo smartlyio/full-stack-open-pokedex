@@ -28,6 +28,8 @@ jobs:
           COMMIT_JOIN: ${{ join(github.event.commits.*.message, ', ') }}
         run: echo "$COMMIT_JOIN"
       - name: testing cointains
+        if: ${{ contains(join(github.event.commits.*.message, ', '), 'testing') }}
+        if: ${{ contains(join(github.event.commits.*.message, ', '), 'contains') }}
         env:
           COMMIT_CONTAINS: ${{ !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         run: echo "$COMMIT_CONTAINS"
