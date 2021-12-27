@@ -1,0 +1,32 @@
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+      - name: testing joins
+        env:
+          COMMIT_JOIN: ${{ join(toJson(github.event.commits.*.message) ,) }}
+        run: echo "$COMMIT_JOIN"
+      - name: testing cointains
+        env:
+          COMMIT_CONTAINS: ${{ contains(join(toJson(github.event.commits.*.message),), '#skip') }}
+        run: echo "$COMMIT_CONTAINS"
