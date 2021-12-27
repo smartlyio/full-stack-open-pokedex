@@ -6,7 +6,7 @@ on:
       - master
       - pingtest
 jobs:
-  simple_deployment_pipeline:
+  urlPingTest:
     runs-on: ubuntu-latest
     steps:
       - name: Check the deployed service URL
