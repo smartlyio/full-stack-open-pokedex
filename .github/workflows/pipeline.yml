@@ -56,7 +56,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "emiselro-pokedexx"
+          heroku_app_name: "emiselro-pokedex"
           heroku_email: "emil.selroos@gamil.com"
           healthcheck: "https://emiselro-pokedex.herokuapp.com/health"
           checkstring: "ok"
@@ -71,11 +71,34 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK 
 
-      - name: Build Failed
-        if: ${{ job.status != 'success' }}
-        uses: slackapi/slack-github-action@v1.16.0
+      - name: Successful Deployment!
+        uses: 8398a7/action-slack@v3
         with:
-          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Build Failed!\"}}]}"
+          status: custom
+          fields: commit,author,took
+          channel: '#code'
+          custom_payload: |
+            {
+              icon_emoji: ':white_check_mark:',
+              attachments: [{
+                color: 'good',
+                text: `Something deployed to https://github.com/emilselroos/FullStackOpen-pokedex/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} \n Build took ${process.env.AS_TOOK}`,
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        if: ${{ success() }}
+
+      - name: Failure on Deployment!
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,took
+          icon_emoji: ':no_entry:'
+          channel: '#code'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+        if: ${{ failure() }}
+          
