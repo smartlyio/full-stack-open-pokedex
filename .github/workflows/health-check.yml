@@ -1,4 +1,4 @@
-name: Url ping test to Heroku
+name: Ping Heroku
 
 on:
   schedule:
