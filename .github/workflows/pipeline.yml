@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches: [ master ]
-    types: [ opened, syncronize ]
+  #pull_request:
+  #  branches: [ master ]
+  #  types: [ opened, syncronize ]
+  # Actually we could separate deployment step to get this working (not making double messages to Slack), but we are just lazy.
 
 jobs:
   simple_deployment_pipeline:
@@ -36,7 +37,7 @@ jobs:
         run: npm run eslint
 
       - name: build
-        run: npm run build
+        run: npm run buil
 
       - name: Build Failed
         if: ${{ job.status == 'failure' }}
