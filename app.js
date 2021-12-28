@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-import { PORT } from './utils';
+const PORT = require('./utils').PORT;
 
 app.use(express.static('dist'));
 
