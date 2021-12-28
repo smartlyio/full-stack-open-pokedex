@@ -12,6 +12,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -37,6 +38,15 @@ jobs:
       - name: build
         run: npm run build
 
+      - name: Build Failed
+        if: ${{ job.status == 'failure' }}
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Build Failed!\"}}]}"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
       - name: test
         run: npm run test
 
@@ -60,7 +70,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
-      - name: On Success
+      - name: On Successful Deployment
         if: ${{ job.status == 'success' }}
         uses: slackapi/slack-github-action@v1.16.0
         with:
@@ -68,14 +78,5 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK 
-        
-      - name: On Failure
-        if: ${{ job.status == 'failure' }}
-        uses: slackapi/slack-github-action@v1.16.0
-        with:
-          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Failure!\"}}]}"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
 
