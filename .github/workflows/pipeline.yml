@@ -67,7 +67,7 @@ jobs:
           payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Success! New deployment from https://github.com/emilselroos/FullStackOpen-pokedex/ to https://emiselro-pokedex.herokuapp.com/\"}}]}"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK 
         
       - name: On Failure
         if: ${{ job.status == 'failure' }}
