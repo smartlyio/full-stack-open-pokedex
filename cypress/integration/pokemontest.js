@@ -1,4 +1,4 @@
-import { PORT } from '../../utils';
+//import { PORT } from '../../utils';
 
 describe('Pokedex', function() {
 	it('front page can be opened', function() {
