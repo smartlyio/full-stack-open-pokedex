@@ -27,3 +27,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3003
+      - name: deploy
+        uses: akhileshns/heroku-deploy
+        with: 
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: vast-springs-05175
+          heroku_email: parkpatrick1@gmail.com
