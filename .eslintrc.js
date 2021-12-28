@@ -25,7 +25,7 @@ module.exports = {
   "rules": {
     "indent": [
       "error",
-        2
+        "tab"
       ],
     "linebreak-style": [
       0,
@@ -36,8 +36,7 @@ module.exports = {
       "single"
     ],
     "semi": [
-      "error",
-      "never"
+      "error"
     ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
@@ -49,5 +48,10 @@ module.exports = {
     ],
     "no-console": 0,
     "react/prop-types": 0
-  }
+  },
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
 }

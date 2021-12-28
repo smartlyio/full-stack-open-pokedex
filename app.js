@@ -1,11 +1,9 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+import { PORT } from './utils';
 
-// Heroku dynamically sets a port
-const PORT = process.env.PORT || 3003
-
-app.use(express.static('dist'))
+app.use(express.static('dist'));
 
 app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`)
-})
+	console.log(`server started on port ${PORT}`);
+});
