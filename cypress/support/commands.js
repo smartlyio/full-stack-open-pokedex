@@ -26,5 +26,5 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 Cypress.Commands.add('interrupt', () => {
-	eval('window.top.document.body.querySelector(\'header button.stop\').click()')
+	eval('window.top.document.body.querySelector(\'header button.stop\').click()');
 });
