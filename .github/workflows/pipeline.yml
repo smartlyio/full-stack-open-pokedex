@@ -39,15 +39,6 @@ jobs:
       - name: build
         run: npm run build
 
-      - name: Build Failed
-        if: ${{ job.status == 'failure' }}
-        uses: slackapi/slack-github-action@v1.16.0
-        with:
-          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Build Failed!\"}}]}"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
       - name: test
         run: npm run test
 
@@ -65,7 +56,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "emiselro-pokedex"
+          heroku_app_name: "emiselro-pokedexx"
           heroku_email: "emil.selroos@gamil.com"
           healthcheck: "https://emiselro-pokedex.herokuapp.com/health"
           checkstring: "ok"
@@ -80,4 +71,11 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK 
 
-
+      - name: Build Failed
+        if: ${{ job.status != 'success' }}
+        uses: slackapi/slack-github-action@v1.16.0
+        with:
+          payload: "{\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"Build Failed!\"}}]}"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
