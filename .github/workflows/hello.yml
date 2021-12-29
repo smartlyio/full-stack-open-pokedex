@@ -3,7 +3,8 @@ name: Hello World!
 on:
   push:
     branches:
-      - master
+      - ununsed_branch #avoid triggering this useless action every time when pushing the code
+      #- master
 
 jobs:
   hello_world_job:
