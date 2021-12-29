@@ -15,4 +15,4 @@ Start by running `npm install` inside the project folder
 `npm run start-prod` to run your production build
 
 ## Exercises
-[exercise 1](https://github.com/yumoL/full-stack-open-pokedex/blob/master/exercise1.md)
+[exercise 11.1](https://github.com/yumoL/full-stack-open-pokedex/blob/master/exercise1.md)
