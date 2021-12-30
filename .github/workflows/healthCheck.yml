@@ -1,14 +1,14 @@
 name: Periodic health check
 
-# on:
-#   schedule:
-#     - cron:  '0 22 * * *'
-
 on:
-  push:
-    branches:
-      - master
-      - branch1 
+  schedule:
+    - cron:  '0 23 * * *'
+
+# on:
+#   push:
+#     branches:
+#       - master
+#       - branch1 
 
 jobs:
   health_check:
