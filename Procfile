@@ -1,1 +1,1 @@
-web: npm run start-prodlala
+web: npm run start-prod
