@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "whispering-waters-52105" #Must be unique in Heroku
           heroku_email: "yumo.luo@hotmail.com"
+          healthcheck: "https://whispering-waters-52105.herokuapp.com/health"
+          checkstring: "ok"
