@@ -7,6 +7,7 @@ describe('Pokedex', function () {
 		cy.contains('ivysaur');
 		cy.contains('nidoran-f');
 		cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.');
+		//
 
 		// eslint-disable-next-line no-unused-vars
 		function abortEarly() {
