@@ -36,4 +36,4 @@ jobs:
           heroku_app_name: vast-springs-05175
           heroku_email: parkpatrick1@gmail.com
           healthcheck: https://vast.springs-05175.herokuapp.com/health
-          checkstring: "ok"
+          checkstring: ok
