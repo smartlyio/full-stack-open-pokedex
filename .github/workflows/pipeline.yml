@@ -7,11 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-<<<<<<< HEAD
     if: ${{ github.event.pull_request.merged == 'true' }}
-=======
-    if: ${{ github.event_name == 'push' }}
->>>>>>> 74bc8357fef8a2d8240512ea730b2a8f4a9fb783
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
