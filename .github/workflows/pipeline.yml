@@ -38,3 +38,4 @@ jobs:
           healthcheck: https://vast-springs-05175.herokuapp.com/health
           checkstring: ok
           procfile: "web: node app.js"
+          rollbackonhealthcheckfailed: true
