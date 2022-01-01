@@ -6,8 +6,8 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  if: ${{ github.event.pull_request.merged == 'true' }}
   simple_deployment_pipeline:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
