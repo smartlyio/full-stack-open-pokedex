@@ -8,6 +8,10 @@ app.listen(PORT, () => {
 	console.log(`server started on port ${PORT}`);
 });
 
+app.get('/test', (_req, res) => {
+	res.send('test');
+});
+
 app.get('/health', (_req, res) => {
 	res.send('ok');
 });
