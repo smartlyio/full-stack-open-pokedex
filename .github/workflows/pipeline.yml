@@ -37,4 +37,4 @@ jobs:
           heroku_email: parkpatrick1@gmail.com
           healthcheck: https://vast-springs-05175.herokuapp.com/health
           checkstring: ok
-          procfile: "start: npm start-prod"
+          procfile: "web: npm start-prod"
