@@ -27,8 +27,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:8080
-       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: f14dc41c-b9e1-4cb8-9b9c-017eda32aab6
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokedex-app-openstack #Must be unique in Heroku
           heroku_email: santiagobn1@gmail.com
