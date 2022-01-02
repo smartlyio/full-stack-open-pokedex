@@ -15,4 +15,4 @@ jobs:
       - name: npm install
         run: npm install
       - name: lint the code
-        run: npm run eslint
+        run: npm run eslint --fix
