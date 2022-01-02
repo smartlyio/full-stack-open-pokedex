@@ -36,6 +36,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    port: 5000,
   },
   plugins: [
     new HtmlWebPackPlugin({
