@@ -9,7 +9,7 @@ app.listen(PORT, () => {
 });
 
 app.get('/test', (_req, res) => {
-	res.send('gd,rpoh');
+	res.send('rgrskgpioerjfgop');
 });
 
 app.get('/health', (_req, res) => {
