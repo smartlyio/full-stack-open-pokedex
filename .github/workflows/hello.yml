@@ -9,4 +9,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: print hello
-        run:  echo "Hello World!"
+        run: echo "Hello World!"
+      - name: show me le date!
+        run: date
+      - name: show me le files
+        run: ls -l
