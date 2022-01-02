@@ -5,12 +5,14 @@ on:
     branches:
       - master
 jobs: 
-  hello-world:
+  deployment pipeline:
     runs-on: ubuntu-18.04
     steps:
-      - name: print hello
-        run: echo "Hello World!"
-      - name: show me le date!
-        run: date
-      - name: show me le files
-        run: ls -l
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+        node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint the code
+        run: npm run eslint
