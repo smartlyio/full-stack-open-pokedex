@@ -7,50 +7,49 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    name: build
-      if: github.event.pull_request.merged == true
-      runs-on: ubuntu-18.04
-      steps:
-        - uses: actions/checkout@v2
-        - name: commit messages
-          env:
-            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-            COMMIT_MESSAGES_STRING: join(env.COMMIT_MESSAGES)
-          run: echo "$COMMIT_MESSAGES"
-        - uses: actions/setup-node@v1
-          with:
-            node-version: '12.x'
-        - name: npm install
-          run: npm install
-        - name: lint
-          run: npm run eslint
-        - name: build
-          run: npm run build
-        - name: test
-          run: npm run test
-        - name: e2e tests
-          uses: cypress-io/github-action@v2
-          with:
-            run: | 
-              npx cypress cache path
-              npm run test:e2e
-            start: npm run start-prod
-            wait-on: http://localhost:3003
-        - name: deploy
-          if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
-          uses: akhileshns/heroku-deploy@v3.12.12
-          with: 
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: vast-springs-05175
-            heroku_email: parkpatrick1@gmail.com
-            healthcheck: https://vast-springs-05175.herokuapp.com/health
-            checkstring: ok
-            procfile: "web: node app.js"
-            rollbackonhealthcheckfailed: true
-        - uses: actions/checkout@v2
-        - name: Bump version and push tag
-          if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
-          uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
-          env:
-            DEFAULT_BUMP: patch
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES_STRING: join(env.COMMIT_MESSAGES)
+        run: echo "$COMMIT_MESSAGES"
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          run: | 
+            npx cypress cache path
+            npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:3003
+      - name: deploy
+        if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with: 
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: vast-springs-05175
+          heroku_email: parkpatrick1@gmail.com
+          healthcheck: https://vast-springs-05175.herokuapp.com/health
+          checkstring: ok
+          procfile: "web: node app.js"
+          rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          DEFAULT_BUMP: patch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
