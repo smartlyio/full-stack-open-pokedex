@@ -3,7 +3,7 @@ name: Deployment pipeline
 on:
   pull_request:
     branches: [master]
-    types: [opened, synchronize, closed]
+    types: [closed]
 
 jobs:
   simple_deployment_pipeline:
