@@ -8,7 +8,7 @@
     "start-prod": "node app.js",
     "test": "jest",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run",
+    "test:e2e": "cypress run --project cypress",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production"
   },
