@@ -35,3 +35,4 @@ jobs:
           heroku_email: santiagobn1@gmail.com
           healthcheck: "https://pokedex-app-openstack.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
