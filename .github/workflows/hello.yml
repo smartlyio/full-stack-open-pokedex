@@ -5,7 +5,7 @@ on:
     branches:
       - master
 jobs: 
-  deployment pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
