@@ -46,10 +46,10 @@ jobs:
           checkstring: ok
           procfile: "web: node app.js"
           rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         if: ${{ contains(env.COMMIT_MESSAGES_STRING, '\#skip') == false }}
         uses: anothrNick/github-tag-action@1.33.0
         env:
           DEFAULT_BUMP: patch
-          DRY_RUN: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
