@@ -49,14 +49,17 @@ jobs:
       - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.33.0
-        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: true
+          COMMIT_CONTAINS_SKIP_STRING: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        if: ${{ github.event_name == 'push' && !env.COMMIT_CONTAINS_SKIP_STRING }}
       - name: heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        if: ${{ github.event_name == 'push' }}
+        env:
+          COMMIT_CONTAINS_SKIP_STRING: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        if: ${{ github.event_name == 'push' && !env.COMMIT_CONTAINS_SKIP_STRING }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokedex-app-openstack #Must be unique in Heroku
