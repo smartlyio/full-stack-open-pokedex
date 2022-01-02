@@ -11,6 +11,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -31,6 +35,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:3003
       - name: deploy
+        if: "!contains(join($COMMIT_MESSAGES), "#skip")"
         uses: akhileshns/heroku-deploy@v3.12.12
         with: 
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -40,3 +45,10 @@ jobs:
           checkstring: ok
           procfile: "web: node app.js"
           rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        if: "!contains(join($COMMIT_MESSAGES), "#skip")"
+        uses: anothrNick/github-tag-action@1.33.0
+        DEFAULT_BUMP: patch
+        DRY_RUN: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
