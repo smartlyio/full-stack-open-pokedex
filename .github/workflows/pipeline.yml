@@ -23,9 +23,9 @@ jobs:
       #     COMMITS: ${{ toJson(github.event.commits) }}
       #   run: echo "$COMMITS"
       - name: print env variable
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$env.COMMIT_NOT_CONTAINS_SKIP_STRING"
+        # env:
+        #   COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo We use env variable $COMMIT_NOT_CONTAINS_SKIP_STRING
       - name: joined commit message
         env:
           CHECKED_JOINED_COMMIT_MESSAGE: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
