@@ -38,10 +38,10 @@ const PokemonPage = ({ previous, next }) => {
         <div className="pokemon-info">
           <div className="pokemon-name">{pokemon.name}</div>
           <div className="pokemon-stats" data-testid="stats">
-            <table>
+            <table data-testid="pokemon-stats-table">
               <tbody>
                 {stats.map(({ name, value }) => (
-                  <tr key={name}>
+                  <tr key={name} >
                     <td className="pokemon-stats-name">{name}</td>
                     <td className="pokemon-stats-value">{value}</td>
                   </tr>
