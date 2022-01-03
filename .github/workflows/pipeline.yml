@@ -17,7 +17,7 @@ jobs:
       # - name: gihub context
       #   env:
       #     GITHUB_CONTEXT: ${{ toJson(github) }}
-      #   run: echo $GITHUB_CONTEXT. GLobal env variable $COMMIT_NOT_CONTAINS_SKIP_STRING
+      #   run: echo $GITHUB_CONTEXT. GLobal env variablee $COMMIT_NOT_CONTAINS_SKIP_STRING
       # - name: commits
       #   env:
       #     COMMITS: ${{ toJson(github.event.commits) }}
