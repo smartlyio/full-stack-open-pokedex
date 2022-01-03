@@ -1,0 +1,29 @@
+Exercise 11.1
+Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit on what we have read.
+
+11.1 Warming up
+Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
+
+Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in Python, Java, or Ruby. You can freely pick the language. This might even be a language you do not know much yourself.
+
+Write a short text, say 200-300 words, where you answer or discuss some of the points below. You can check the length with https://wordcounter.net/. Save your answer to the file named exercise1.md in the root of the repository that you shall create in exercise 11.2.
+
+The points to discuss:
+
+Some common steps in a CI setup include linting, testing, and building. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search for the answers by google.
+What alternatives are there to set up the CI besides Jenkins and GitHub Actions? Again, you can ask google!
+Would this setup be better in a self-hosted or a cloud-based environment? Why? What information would you need to make that decision?
+Remember that there are no 'right' answers to the above!
+
+Solution Exercise 11.1:
+- Python app. Linting will be done with pylint or flake8. Testing will be done with pytest. Only after linting and testing success, the branch can be merged to the main branch. Then the project will be packaged and deploy using for example GitHub Actions.
+- Alternatives to set up the CI besides Jenkins and GitHub Actions: 
++ GitLab
++ Atlassian Bamboo
++ CircleCI
++ TeamCity
++ Travis CI
++ BuildMaster
+- To choose between a self-hosted and a cloud-based environment, In general, if you have a small to medium software project that doesn't have any special requirements (e.g. a need for a graphics card to run tests), a cloud-based solution is probably best. The configuration is simple and you don't need to go to the hassle or expense of setting up your own system. For smaller projects especially, this should be cheaper.
+For larger projects where more resources are needed or in larger companies where there are multiple teams and projects to take advantage of it, a self-hosted CI setup is probably the way to go.Also, With self-hosted options, the billing is usually based on the hardware; Cloud-based options are also usually billed by build time which is something to consider.
+-> For my project, it's a small project being worked on by a team of 6 people so we choose GitHubActions - a cloud-based environment.
