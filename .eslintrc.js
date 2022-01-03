@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "jest/globals": true
   },
@@ -18,6 +19,13 @@ module.exports = {
   "plugins": [
     "react", "jest"
   ],
+  "settings": {
+    "react": {
+      "version": "detect", // React version. "detect" automatically picks the version you have installed.
+      // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
+      // default to latest and warns if missing
+      // It will default to "detect" in the future
+    }  },
   "rules": {
     "indent": [
       "error",
@@ -25,7 +33,7 @@ module.exports = {
       ],
     "linebreak-style": [
       "error",
-      "unix"
+      "windows"
     ],
     "quotes": [
       "error",
@@ -43,7 +51,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    'no-console': 0
   }
 }
