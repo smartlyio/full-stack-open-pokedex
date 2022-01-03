@@ -11,11 +11,13 @@ on:
 jobs:
   set_up_job:
     runs-on: ubuntu-18.04
+    env:
+      COMMIT_NOT_CONTAINS_SKIP_STRING: ${{ !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     steps:
       - name: gihub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo "$GITHUB_CONTEXT. GLobal env variable $COMMIT_NOT_CONTAINS_SKIP_STRING"
       - name: commits
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
@@ -57,8 +59,7 @@ jobs:
         if: ${{ github.event_name == 'push' && !env.COMMIT_CONTAINS_SKIP_STRING }}
       - name: heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        env:
-          COMMIT_CONTAINS_SKIP_STRING: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        
         if: ${{ github.event_name == 'push' && !env.COMMIT_CONTAINS_SKIP_STRING }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
