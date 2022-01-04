@@ -35,3 +35,4 @@ jobs:
           heroku_email: "nguyenhanh1074@gmail.com"
           healthcheck: "https://fullstackopen-tam-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
