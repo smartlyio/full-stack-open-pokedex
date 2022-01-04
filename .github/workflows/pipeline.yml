@@ -13,11 +13,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "pokemon-app-25" #Must be unique in Heroku
-          heroku_email: "bc.chew.hong.ee@gmail.com"
       - name: npm install
         run: npm install
       - name: lint
@@ -32,3 +27,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokemon-app-25" #Must be unique in Heroku
+          heroku_email: "bc.chew.hong.ee@gmail.com"
