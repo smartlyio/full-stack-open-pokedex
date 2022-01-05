@@ -3,7 +3,10 @@ name: Hello World!
 on:
   push:
     branches:
-      - master
+      -
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   hello_world_job:
@@ -12,9 +15,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-      - name: "Now it is"
+      - name: 'Now it is'
         run: |
           date
-      - name: "Directory content"
+      - name: 'Directory content'
         run: |
           ls -l
