@@ -90,7 +90,6 @@ describe('<PokemonPage />', () => {
     })
 
     expect(screen.getByText('adaptability')).toBeVisible()
-    expect(screen.getByText('anticipation')).toBeVisible()
   })
 
   it('should render stats', async () => {
@@ -119,7 +118,6 @@ describe('<PokemonPage />', () => {
     })
 
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
-    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
 
   it('should not render previous and next urls if none exist', async () => {
