@@ -40,7 +40,7 @@ jobs:
       - name: List
         run: |
           echo ls -l
-      - name: Date
+      - name: Run Date
         run: |
-          echo date()
+          echo Date()
       
