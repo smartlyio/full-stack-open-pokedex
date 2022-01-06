@@ -38,6 +38,5 @@ jobs:
         run: | 
          echo test, and deploy your project.
       - name: |
-          echo date
-      - name: |
-          ls -l
+          echo test
+      
