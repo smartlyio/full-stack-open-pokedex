@@ -42,5 +42,5 @@ jobs:
           echo ls -l
       - name: Date
         run: |
-          echo date
+          echo date()
       
