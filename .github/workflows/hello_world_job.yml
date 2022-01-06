@@ -42,5 +42,5 @@ jobs:
           echo ls -l
       - name: Run Date
         run: |
-          echo date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
+          echo date --date=STRING
       
