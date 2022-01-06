@@ -37,6 +37,7 @@ jobs:
       - name: Run hello
         run: | 
          echo test, and deploy your project.
-      - name: |
-          echo date
+      - name: List
+        run: |
+          echo ls -l
       
