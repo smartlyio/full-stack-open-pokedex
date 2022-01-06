@@ -90,7 +90,6 @@ describe('<PokemonPage />', () => {
     })
 
     expect(screen.getByText('adaptability')).toBeVisible()
-    expect(screen.getByText('anticipation')).toBeVisible()
   })
 
   it('should render stats', async () => {
