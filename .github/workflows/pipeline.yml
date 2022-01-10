@@ -19,14 +19,6 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start
-          wait-on: http://localhost:5000
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -34,4 +26,5 @@ jobs:
           heroku_app_name: "fullstackopen21-pokedex" #Must be unique in Heroku
           heroku_email: "vilhelm.toivonen@gmail.com"
           healthcheck: "https://fullstackopen21-pokedex.herokuapp.com/health"
-          checkstring: "ok"
+          checkstring: "oi"
+          rollbackonhealthcheckfailed: true
