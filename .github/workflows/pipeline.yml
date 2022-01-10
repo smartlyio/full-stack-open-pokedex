@@ -21,6 +21,12 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start
+          wait-on: http://localhost:5000
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
