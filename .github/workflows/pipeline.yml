@@ -34,3 +34,4 @@ jobs:
           heroku_app_name: "fullstackopen21-pokedex" #Must be unique in Heroku
           heroku_email: "vilhelm.toivonen@gmail.com"
           healthcheck: "https://fullstackopen21-pokedex.herokuapp.com/health"
+          checkstring: "ok"
