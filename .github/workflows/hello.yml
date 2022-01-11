@@ -27,3 +27,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: 'https://pokemon-devops.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
