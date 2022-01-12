@@ -35,3 +35,4 @@ jobs:
           heroku_email: edimitrov1@gmail.com
           healthcheck: https://infinite-fjord-60355.herokuapp.com/health
           checkstring: ok
+          rollbackonhealthcheckfailed: true
