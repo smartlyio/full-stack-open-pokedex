@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: infinite-fjord-60355
           heroku_email: edimitrov1@gmail.com
+          healthcheck: https://infinite-fjord-60355.herokuapp.com/health
+          checkstring: ok
