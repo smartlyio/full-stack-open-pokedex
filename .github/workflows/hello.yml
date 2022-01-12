@@ -32,3 +32,8 @@ jobs:
           healthcheck: 'https://pokemon-devops.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
