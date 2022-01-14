@@ -40,6 +40,28 @@ jobs:
           healthcheck: "https://jjaine-fullstackopen-pokedex.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - uses: 8398a7/action-slack@v3
+        if: ${{ job.status === 'success' }}
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              attachments: [{
+                color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
+                text: `a new version deployed to https://jjaine-fullstackopen-pokedex.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+      - uses: 8398a7/action-slack@v3
+        if: ${{ job.status === 'failure' }}
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,took
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
 
   bump_and_tag_pipeline:
     runs-on: ubuntu-18.04
