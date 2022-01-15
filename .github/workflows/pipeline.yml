@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+        with: 
+          fetch-depth: 0
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
@@ -40,3 +42,10 @@ jobs:
           healthcheck: https://infinite-fjord-60355.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+      - name: bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
