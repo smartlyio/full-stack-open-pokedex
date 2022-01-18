@@ -1,2 +1,2 @@
 web: npm build
-web: npm run start-prod
+web: npm run start-prodn
