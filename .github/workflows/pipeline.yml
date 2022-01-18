@@ -33,3 +33,5 @@ jobs:
           heroku_app_name: 'arcane-shore-84681'
           heroku_email: 'abdalmajeed718@gmail.com'
           healthcheck: 'https://arcane-shore-84681.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
