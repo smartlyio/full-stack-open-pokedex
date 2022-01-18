@@ -7,9 +7,12 @@ describe('Pokedex', function() {
 })
 
 describe('Navigate', function() {
-  it('to view more details', function() {
+  beforeEach(() => {
+
     cy.visit('http://localhost:5000/')
     cy.contains('ivysaur').click()
-    cy.contains('Chlorophyll')
+  })
+  it('to view more details', function() {
+    cy.get('.pokemon-ability-name')
   })
 })
