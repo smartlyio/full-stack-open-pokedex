@@ -35,6 +35,3 @@ jobs:
           heroku_email: "rytilanoora@gmail.com"
           # healthcheck: "https://pokedex-app-noora.herokuapp.com/health"
           # checkstring: "ok"
-      - run: |
-          git remote add heroku git@heroku.com:pokedex.app.git
-          git push heroku master
