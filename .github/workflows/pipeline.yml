@@ -33,5 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-app-noora"
           heroku_email: "rytilanoora@gmail.com"
-          # healthcheck: "https://pokedex-app-noora.herokuapp.com/health"
-          # checkstring: "ok"
+          healthcheck: "https://pokedex-app-noora.herokuapp.com/health"
+          checkstring: "ok"
