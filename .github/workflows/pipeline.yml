@@ -28,9 +28,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy
-      - run: |
-          git remote add heroku git@heroku.com:pokedex.app.git
-          git push heroku master
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -38,3 +35,6 @@ jobs:
           heroku_email: "rytilanoora@gmail.com"
           # healthcheck: "https://pokedex-app-noora.herokuapp.com/health"
           # checkstring: "ok"
+      - run: |
+          git remote add heroku git@heroku.com:pokedex.app.git
+          git push heroku master
