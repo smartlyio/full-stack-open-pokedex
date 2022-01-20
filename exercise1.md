@@ -1,0 +1,7 @@
+### Exercise 1: Warming up
+
+For this hypothetical situation I chose C# for the programming language in question. 
+
+An alternative solution for setting up CI for this project is Azure DevOps. Azure DevOps might be a good solution especially in organisations of companies that use other Microsoft services, e.g. some Azure Cloud services. Azure DevOps offers both a cloud-based environment (Azure DevOps Services) and self-hosted environment (Azure DevOps Server). Both offer the same basic functionalities. When choosing one over the other there are few things to take into account, like scoping and scaling, authentication, security and data protection. Referring to Microsoft’s guide, the cloud-based environment has added benefits. Organisations can choose a self-hosted environment if they need their data to stay within their network. Assuming that this hypothetical project doesn’t handle very sensitive data and is semi small, a cloud-based environment would be the best choice. 
+
+What comes to the specific tools, linting C# code in the CI setup can be done with SonarLint. There are other tools, but the development community seems to value this one over the others. For unit testing NUnit is a great tool and it goes hand in hand with setting up the pipeline in Azure DevOps. When hosting CI pipeline in Azure DevOps, building can be done with the help of Microsoft-hosted agents. Building can be also done with specific tool like NAnt. 
