@@ -26,3 +26,7 @@ jobs:
         env:
           CONTAINS: ${{ contains(toJson(github.event.commits.*.message), '#skip') }}
         run: echo "$CONTAINS"
+      - name: maybe join
+        env:
+          JOIN: ${{ join(toJson(github.event.commits.*.message), ']') }}
+        run: echo "$JOIN"
