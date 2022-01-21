@@ -32,3 +32,4 @@ jobs:
       - name: contains
         env:
           CONTAINS: ${{ contains(github.event.commits.*.message, 'test')}}
+        run: echo "$CONTAINS"
