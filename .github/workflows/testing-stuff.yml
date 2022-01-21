@@ -20,16 +20,5 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ github.event.commits.*.message }}
         run: echo "$COMMIT_MESSAGES"
-      - name: without json
-        env:
-          COMMIT_MESSAGES2: ${{ github.event.commits.*.message}}
-        run: echo "$COMMIT_MESSAGES2"
-      # - name: join
-      #   env:
-      #     JOINED: ${{ join(github.event.commits.*.message) }}
-      - name: contains
-        env:
-          CONTAINS: ${{ contains(github.event.commits.*.message, 'test')}}
-        run: echo "$CONTAINS"
