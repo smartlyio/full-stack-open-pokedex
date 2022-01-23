@@ -1,11 +1,21 @@
-const express = require("express");
+const express = require('express');
 const app = express();
+const PORT = require('./utils').PORT;
 
-// Heroku dynamically sets a port
-const PORT = process.env.PORT || 5000;
-
-app.use(express.static("dist"));
+app.use(express.static('dist'));
 
 app.listen(PORT, () => {
-  console.log("server started on port 5000");
+	console.log(`server started on port ${PORT}`);
+});
+
+app.get('/test', (_req, res) => {
+	res.send('test!');
+});
+
+app.get('/health', (_req, res) => {
+	res.send('ok');
+});
+
+app.get('version', (_req, res) => {
+	res.send('1');
 });
