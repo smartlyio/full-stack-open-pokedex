@@ -1,56 +1,73 @@
-name: Deployment pipeline
+# name: Deployment pipeline
+
+# on:
+#   push:
+#     branches:
+#       - master
+#   pull_request:
+#     branches: [master]
+#     types: [opened, synchronize]
+
+# jobs:
+#   simple_deployment_pipeline:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
+#       - name: npm install
+#         run: npm install
+#       - name: lint
+#         run: npm run eslint
+#       - name: build
+#         run: npm run build
+#       - name: test
+#         run: npm run test
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v2
+#         with:
+#           start: npm run start-prod
+#           command: npm run test:e2e
+#           wait-on: http://localhost:5000
+#       - name: heroku deployment
+#         if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
+#         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+#         with:
+#           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+#           heroku_app_name: "rogers-pokedex" #Must be unique in Heroku
+#           heroku_email: "rogelio.camargo2016@gmail.com"
+#           healthcheck: "https://rogers-pokedex.herokuapp.com/health"
+#           checkstring: "ok"
+#           rollbackonhealthcheckfailed: true
+#       - name: bump version and push tag
+#         if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
+#         uses: anothrNick/github-tag-action@1.33.0
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#           DEFAULT_BUMP: patch
+
+name: Testing stuff
 
 on:
   push:
     branches:
       - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  a_test_job:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.33.0
+      - name: gihub context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          INITIAL_VERSION: 0.0.1-beta.1
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run start-prod
-          command: npm run test:e2e
-          wait-on: http://localhost:5000
-      - name: heroku deployment
-        if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "rogers-pokedex" #Must be unique in Heroku
-          heroku_email: "rogelio.camargo2016@gmail.com"
-          healthcheck: "https://rogers-pokedex.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-      # - name: bump version and push tag
-      #   if: ${{ github.event_name == 'push' }}
-      #   uses: anothrNick/github-tag-action@1.33.0
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     DEFAULT_BUMP: patch
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
