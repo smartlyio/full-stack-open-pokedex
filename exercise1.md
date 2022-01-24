@@ -1,0 +1,9 @@
+In my hypothetical scenario are working on an iOS app developed with Swift. For linting, there is a linter called SwiftLint, developed by Realm. For testing Xcode comes with a built-in testing framework called XCTest For building Xcode comes with a built in compiler that builds your code to different iOS devices.
+
+There seems to be quite a lot of different setups to choose from, at least from a quick google search for "ci/cd swift apps". Among cloud-based services there are Bitrise, CircleCI, TeamCity, and Semaphore. Apple themselves even have a cloud-based CI/CD called Xcode Cloud that's currently in beta. For self-hosted options the only one I can really find is one by Apple called Xcode Server. In terms of self-hosted options it seems to me like the most commonly used one is Jenkins, hooking up Mac Minis as nodes and then using Fastlane for pipe lining the deployment.
+
+Generally this seems to me a small to medium sized project seeing as we only have one team, and 6 people working on the application, although it's unclear whether it's 6 developers coding together or if a few of those 6 people have other roles than developers. This speaks for using a setup host on the cloud.
+
+However, after having read a few articles on compromising cloud-based CI's it seems that if you're not working in a very small team or with someone who knows how to set up a secure system, a self-hosted option is the way to go. In this case, since we've stated that the team is fairly small and the application will be released soon, the cloud-based option seems to be the way forward.
+
+I assume that changing from a cloud-based CI to a self-hosted one is not outrageously complicated and it seems that if the team grows or the application becomes very popular it may be an option to switch over to a self-hosted system.
