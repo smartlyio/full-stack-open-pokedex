@@ -36,3 +36,4 @@ jobs:
           procfile: 'web: npm run start-prod'
           healthcheck: 'https://${{secrets.HEROKU_APP_NAME}}.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
