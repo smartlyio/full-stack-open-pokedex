@@ -27,3 +27,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: deploy to heroku
+        uses: AkhileshNS/heroku-deploy@v.3.6.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          procfile: "web: npm run start-prod"
