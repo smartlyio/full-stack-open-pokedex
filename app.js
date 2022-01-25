@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
+// I made a new branch on github! :)
+
 app.get('/health', (req, res) => {
   res.send('ok')
 })
