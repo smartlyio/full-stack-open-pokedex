@@ -9,9 +9,9 @@ app.use(express.static('dist'))
 app.get('/health', (req, res) => {
   res.send('ok')
 })
-
+// Making changes...
 app.get('/version', (req, res) => {
-  res.send('2')
+  res.send('3')
 })
 
 app.listen(PORT, () => {
