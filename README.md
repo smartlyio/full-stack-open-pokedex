@@ -22,7 +22,6 @@ Start by running `npm install` inside the project folder
 * [Continuous Delivery](https://martinfowler.com/bliki/ContinuousDelivery.html)
 * [The Role of Continuous Delivery in IT and Organizational Performance](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909)
 * [Workflows](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#workflows)
-* [GitHub Context](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context)
 * []()
 * []()
 
@@ -30,5 +29,9 @@ Start by running `npm install` inside the project folder
 * [Jobs](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#jobs)
 * [Steps](https://docs.github.com/en/actions/learn-github-actions/understanding-github-actions#steps)
 * [Create Actions](https://docs.github.com/en/actions/creating-actions)
+* [GitHub Context](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context)
 * []()* []()
 
+## Actions
+* [Heroku deploy](https://github.com/AkhileshNS/heroku-deploy)
+* [Versioning](https://github.com/anothrNick/github-tag-action)
