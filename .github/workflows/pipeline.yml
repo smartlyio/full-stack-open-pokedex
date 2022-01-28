@@ -33,3 +33,5 @@ jobs:
           heroku_app_name: "full-stack-open-pokedex-flavio"
           heroku_email: "ing.flaviogarrido@gmail.com"
           healthcheck: "https://full-stack-open-pokedex-flavio.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
