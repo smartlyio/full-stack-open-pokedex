@@ -14,6 +14,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "cicd-fullstackopen"
+          heroku_email: "fuad.kalhori@gmail.com"
       - name: npm install
         run: npm install
       - name: lint
@@ -28,3 +33,5 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:4000
+      - name: Deploy heroku
+        uses:
