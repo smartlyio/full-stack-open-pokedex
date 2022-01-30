@@ -21,6 +21,7 @@ jobs:
           heroku_email: "fuad.kalhori@gmail.com"
           healthcheck: "https://cicd-fullstackopen.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - name: npm install
         run: npm install
       - name: lint
