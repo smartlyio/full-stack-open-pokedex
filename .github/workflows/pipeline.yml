@@ -19,6 +19,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "cicd-fullstackopen"
           heroku_email: "fuad.kalhori@gmail.com"
+          healthcheck: "https://cicd-fullstackopen.herokuapp.com/health"
+          checkstring: "ok"
       - name: npm install
         run: npm install
       - name: lint
