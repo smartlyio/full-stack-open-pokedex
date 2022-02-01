@@ -34,6 +34,7 @@ const PokemonPage = ({ previous, next }) => {
     (ability) => ability.is_hidden === true
   );
 
+  // eslint-disable-next-line no-console
   console.log("hiddenAbility=", hiddenAbility);
   return (
     <>
