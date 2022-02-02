@@ -27,3 +27,4 @@ jobs:
           command: yarn run test:e2e
           start: yarn run start-prod
           wait-on: http://localhost:5000
+          broswer: chrome
