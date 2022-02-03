@@ -28,8 +28,6 @@ jobs:
           start: yarn run start-prod
           wait-on: http://localhost:5000
           browser: chrome
-      - name: install dev dependencies
-        run: yarn install -production=false
       - name: deploy-to-heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
