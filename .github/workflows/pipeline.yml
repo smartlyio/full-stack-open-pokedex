@@ -28,8 +28,9 @@ jobs:
           start: yarn run start-prod
           wait-on: http://localhost:5000
           browser: chrome
-      - name: deploy-to-heroku
+      - name: install dev dependencies
         run: yarn install --dev
+      - name: deploy-to-heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
