@@ -8,3 +8,7 @@ jobs:
     steps:
       - name: Say hello
         run: echo "Hello World!"
+      - name: Show current date
+        run: date
+      - name: Show directory content
+        run: ls -l
