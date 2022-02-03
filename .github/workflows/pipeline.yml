@@ -38,4 +38,3 @@ jobs:
           heroku_email: maitran.ln99@gmail.com
           healthcheck: https://infinite-ridge-75598.herokuapp.com/health
           checkstring: "ok"
-          rollbackonhealthcheckfailed: true
