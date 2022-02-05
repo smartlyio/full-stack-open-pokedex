@@ -33,5 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_TOKEN}}
           heroku_app_name: another-fso-pokedex
           heroku_email: sngmanhim@hotmail.com
-          healthcheck: https://another-fso-pokedex.herokuapp.com/
+          healthcheck: https://another-fso-pokedex.herokuapp.com/health
           checkstring: "ok"
