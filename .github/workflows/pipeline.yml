@@ -35,4 +35,3 @@ jobs:
           heroku_email: sngmanhim@hotmail.com
           healthcheck: https://another-fso-pokedex.herokuapp.com/health
           checkstring: "ok"
-          rollbackonhealthcheckfailed: true
