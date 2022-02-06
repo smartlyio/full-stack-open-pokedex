@@ -39,9 +39,16 @@ jobs:
           heroku_email: sngmanhim@hotmail.com
           healthcheck: https://another-fso-pokedex.herokuapp.com/health
           checkstring: "ok"
-      - name: Github Tag Bump
-        if: ${{ github.event_name == 'push' }}
+          
+  semantic_versioning:
+    runs-on: ubuntu-18.04
+    needs: [simple_deployment_pipeline]
+    if: {{ github.event_name == 'push' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+
