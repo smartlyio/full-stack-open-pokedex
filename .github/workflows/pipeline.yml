@@ -32,6 +32,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       # Increase the version when a pull request is merged into the main branch
       - name: Bump version and push tag
+        # Commit with hash -> uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         uses: anothrNick/github-tag-action@1.33.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
