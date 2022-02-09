@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+console.log('test-skip-deployment-on-merge')
+
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 4000
 
