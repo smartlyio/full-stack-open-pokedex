@@ -28,6 +28,12 @@ jobs:
           healthcheck: "https://cicd-fullstackopen.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      # Increase the version when a pull request is merged into the main branch
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: "patch"
       - name: npm install
         run: npm install
       - name: lint
