@@ -11,15 +11,15 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
-    # if check ensures that the step is executed only
-    # when the code is being merged or pushed to the main branch
-    if: ${{ github.event_name == 'push' }}
     steps:
       # The uses keyword tells the workflow to run a specific action
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
+      # if check ensures that the step is executed only
+      # when the code is being merged or pushed to the main branch
+      if: ${{ github.event_name == 'push' }}
       - uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
