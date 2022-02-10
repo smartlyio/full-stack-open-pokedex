@@ -9,3 +9,7 @@ jobs:
     steps:
       - name: Say hello
         run: echo "Hello World!"
+      - name: it is now
+        run: date
+      - name: current directory
+        run: ls
