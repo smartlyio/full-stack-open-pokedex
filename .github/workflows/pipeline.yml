@@ -32,4 +32,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "safe-harbor-99423"
           heroku_email: "a.mckendry2@gmail.com"
+          healthcheck: "https://safe-harbor-99423.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       
