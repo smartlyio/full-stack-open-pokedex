@@ -43,14 +43,30 @@ jobs:
           healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - name: post to slack
+      - name: post job failure/cancellation to slack
+        if: job.status == 'failure || job.status == 'cancelled
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+          fields: repo,message,commit,author,took
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        if: always()
+      - name: post job success to slack
+        if: job.status == 'success'
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: workflow,job,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              attachments: [{
+              color: 'good'
+              text: `A new version deployed',
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        
 
   version_update:
     if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
