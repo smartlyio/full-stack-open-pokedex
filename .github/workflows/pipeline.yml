@@ -13,44 +13,44 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: npm install 
-        run: npm install  
-      - name: lint
-        run: |
-          npm run eslint
-      - name: build
-        run: |
-          npm run build
-      - name: test
-        run: |
-          npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: run akhileshns/heroku-deploy@v3.12.12
-        if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "sheltered-mountain-75670"
-          heroku_email: "tom.green83@protonmail.com"
-          healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
-      - name: post job failure/cancellation to slack
-        if: job.status == 'failure' || job.status == 'cancelled'
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,took
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: '12.x'
+      # - name: npm install 
+      #   run: npm install  
+      # - name: lint
+      #   run: |
+      #     npm run eslint
+      # - name: build
+      #   run: |
+      #     npm run build
+      # - name: test
+      #   run: |
+      #     npm run test
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5000
+      # - name: run akhileshns/heroku-deploy@v3.12.12
+      #   if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
+      #   uses: akhileshns/heroku-deploy@v3.12.12
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: "sheltered-mountain-75670"
+      #     heroku_email: "tom.green83@protonmail.com"
+      #     healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
+      #     checkstring: "ok"
+      #     rollbackonhealthcheckfailed: true
+      # - name: post job failure/cancellation to slack
+      #   if: job.status == 'failure' || job.status == 'cancelled'
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     fields: repo,message,commit,author,took
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: post job success to slack
         if: job.status == 'success'
         uses: 8398a7/action-slack@v3
@@ -61,7 +61,7 @@ jobs:
             {
               attachments: [{
                 color: 'good',
-                text: `A new version deployed to "https://sheltered-mountain-75670.herokuapp.com" (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR}` build took ${process.env.AS_TOOK},
+                text: `A new version deployed to "https://sheltered-mountain-75670.herokuapp.com" (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`,
               }]
             }
         env:
