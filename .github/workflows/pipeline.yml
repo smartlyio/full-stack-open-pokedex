@@ -44,7 +44,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: post job failure/cancellation to slack
-        if: job.status == 'failure || job.status == 'cancelled'
+        if: job.status == 'failure' || job.status == 'cancelled'
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -57,11 +57,11 @@ jobs:
         with:
           status: custom
           fields: workflow,job,commit,repo,ref,author,took
-          custom_payload:
+          custom_payload: |
           {
             attachments: [{
-            color: 'good',
-            text: 'A new version deployed'
+              color: 'good',
+              text: `A new version deployed`,
             }]
           }
         env:
