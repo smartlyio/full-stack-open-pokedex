@@ -23,11 +23,11 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: skip commit?
-        if: contains(toJson(github.event.commits.*.message), '#skip') && ${{ github.event_name == 'push' }}
+        if: contains(toJson(github.event.commits.*.message), '#skip') && github.event_name == 'push'
         run: echo "Skipped"
       - name: don't skip commit?
-        if: (!contains(toJson(github.event.commits.*.message), '#skip')) && ${{ github.event_name == 'push' }}
+        if: (!contains(toJson(github.event.commits.*.message), '#skip')) && $github.event_name == 'push'
         run: echo "Not skipped"
       - name: commit message contains '#skip' and '#ignore'
-        if: contains(toJson(github.event.commits.*.message), '#skip') && contains(toJson(github.event.commits.*.message), '#ignore') && ${{ github.event_name == 'push' }}
+        if: contains(toJson(github.event.commits.*.message), '#skip') && contains(toJson(github.event.commits.*.message), '#ignore') && github.event_name == 'push'
         run: echo "Skipped and ignored"
