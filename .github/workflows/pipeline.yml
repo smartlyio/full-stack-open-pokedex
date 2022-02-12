@@ -58,12 +58,12 @@ jobs:
           status: custom
           fields: workflow,job,commit,repo,ref,author,took
           custom_payload: |
-          {
-            attachments: [{
-              color: 'good',
-              text: `A new version deployed`,
-            }]
-          }
+            {
+              attachments: [{
+                color: 'good',
+                text: `A new version deployed`,
+              }]
+            }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
         
