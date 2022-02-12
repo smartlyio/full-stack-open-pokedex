@@ -43,6 +43,14 @@ jobs:
           healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: post to slack
+      uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: always()
 
   version_update:
     if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
