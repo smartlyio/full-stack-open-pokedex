@@ -13,20 +13,20 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      # - uses: actions/setup-node@v1
-      #   with:
-      #     node-version: '12.x'
-      # - name: npm install 
-      #   run: npm install  
-      # - name: lint
-      #   run: |
-      #     npm run eslint
-      # - name: build
-      #   run: |
-      #     npm run build
-      # - name: test
-      #   run: |
-      #     npm run test
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install 
+        run: npm install  
+      - name: lint
+        run: |
+          npm run eslint
+      - name: build
+        run: |
+          npm run build
+      - name: test
+        run: |
+          npm run test
       # - name: e2e tests
       #   uses: cypress-io/github-action@v2
       #   with:
@@ -43,8 +43,8 @@ jobs:
       #     healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
       #     checkstring: "ok"
       #     rollbackonhealthcheckfailed: true
-      - name: post job failure/cancellation to slack
-        if: job.status == 'failure' || job.status == 'cancelled' || job.status == 'success'
+      - name: post job failure to slack
+        if: job.status == 'failure'
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
