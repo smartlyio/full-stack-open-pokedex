@@ -27,22 +27,22 @@ jobs:
       - name: test
         run: |
           npm run test
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v2
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: http://localhost:5000
-      # - name: run akhileshns/heroku-deploy@v3.12.12
-      #   if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
-      #   uses: akhileshns/heroku-deploy@v3.12.12
-      #   with:
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: "sheltered-mountain-75670"
-      #     heroku_email: "tom.green83@protonmail.com"
-      #     healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
-      #     checkstring: "ok"
-      #     rollbackonhealthcheckfailed: true
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: run akhileshns/heroku-deploy@v3.12.12
+        if: github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "sheltered-mountain-75670"
+          heroku_email: "tom.green83@protonmail.com"
+          healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - name: post job failure to slack
         if: failure()
         uses: 8398a7/action-slack@v3
