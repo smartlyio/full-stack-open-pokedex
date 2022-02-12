@@ -26,8 +26,8 @@ jobs:
         if: contains(toJson(github.event.commits.*.message), '#skip')
         run: echo "Skipped"
       - name: don't skip commit?
-        if: (!contains(github.event.commits.*.message, '#skip'))
+        if: (!contains(toJson(github.event.commits.*.message), '#skip'))
         run: echo "Not skipped"
       - name: commit message contains '#skip' and '#ignore'
-        if: contains(github.event.commits.*.message, '#skip') && contains(github.event.commits.*.message, '#ignore')
+        if: contains(toJson(github.event.commits.*.message), '#skip') && contains(toJson(github.event.commits.*.message), '#ignore')
         run: echo "Skipped and ignored"
