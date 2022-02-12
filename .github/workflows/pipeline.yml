@@ -61,7 +61,7 @@ jobs:
           {
             attachments: [{
             color: 'good',
-            text: `A new version deployed`,
+            text: 'A new version deployed'
             }]
           }
         env:
