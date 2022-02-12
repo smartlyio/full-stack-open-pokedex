@@ -20,6 +20,7 @@ jobs:
           heroku_email: "granholm.mats@gmail.com"
           healthcheck: "https://sheltered-sea-46348.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - name: npm install
         run: npm install
       - name: lint
