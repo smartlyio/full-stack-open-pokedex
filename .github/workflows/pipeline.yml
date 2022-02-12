@@ -38,3 +38,4 @@ jobs:
           heroku_email: "tom.green83@protonmail.com"
           healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
