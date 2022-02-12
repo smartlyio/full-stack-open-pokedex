@@ -44,7 +44,7 @@ jobs:
       #     checkstring: "ok"
       #     rollbackonhealthcheckfailed: true
       - name: post job failure to slack
-        if: always()
+        if: failure()
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
@@ -52,7 +52,7 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: post job success to slack
-        if: job.status == 'success'
+        if: sucess()
         uses: 8398a7/action-slack@v3
         with:
           status: custom
