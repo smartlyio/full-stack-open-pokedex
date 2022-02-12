@@ -18,6 +18,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sheltered-sea-46348"
           heroku_email: "granholm.mats@gmail.com"
+          healthcheck: "https://sheltered-sea-46348.herokuapp.com/health"
       - name: npm install
         run: npm install
       - name: lint
