@@ -43,14 +43,14 @@ jobs:
       #     healthcheck: "https://sheltered-mountain-75670.herokuapp.com/health"
       #     checkstring: "ok"
       #     rollbackonhealthcheckfailed: true
-      - name: post job failure to slack
-        if: job.status == 'failure'
-        uses: 8398a7/action-slack@v3
-        with:
-          status: ${{ job.status }}
-          fields: repo,message,commit,author,took
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      # - name: post job failure to slack
+      #   if: job.status == 'failure'
+      #   uses: 8398a7/action-slack@v3
+      #   with:
+      #     status: ${{ job.status }}
+      #     fields: repo,message,commit,author,took
+      #   env:
+      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       - name: post job success to slack
         if: job.status == 'success'
         uses: 8398a7/action-slack@v3
@@ -78,3 +78,13 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
+
+
+  post job failure to slack:
+    if: job.status == 'failure'
+    uses: 8398a7/action-slack@v3
+    with:
+      status: ${{ job.status }}
+      fields: repo,message,commit,author,took
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
