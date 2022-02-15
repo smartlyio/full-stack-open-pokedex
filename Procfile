@@ -1,1 +1,1 @@
-web: npm run breakthis_for_rollback_test_start-prod
+web: npm run start-prod
