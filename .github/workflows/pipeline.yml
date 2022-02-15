@@ -35,3 +35,4 @@ jobs:
           heroku_email: "basisti@gmail.com"
           healthcheck: "https://pokedex-fullstack-open.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
