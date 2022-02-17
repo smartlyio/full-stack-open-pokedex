@@ -1,9 +1,9 @@
 name: Deployment pipeline
 
 on:
-#  push:
-#    branches:
-#      - master
+  push:
+    branches:
+      - master
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anotrNick/github-tab-action@1.33.0
+        uses: anotrNick/github-tab-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUP: patch
