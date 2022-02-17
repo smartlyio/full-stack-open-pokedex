@@ -12,7 +12,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send(`1.0.3 - shouldn't ${1+2} deploy!`) // change this string to ensure a new version deployed
+  res.send('added uses: actions/checkout@v2 to pipeline before tagging') // change this string to ensure a new version deployed
 })
 
 app.listen(PORT, () => {
