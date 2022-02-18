@@ -26,3 +26,4 @@ jobs:
           heroku_email: "minuthprom321@gmail.com"
           healthcheck: "https:///mighty-badlands-74018.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
