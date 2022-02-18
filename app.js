@@ -10,4 +10,9 @@ app.get('/health', (req, res) => {
   res.send('ok')
 })
 
+app.get('/test', (req, res) => {
+  res.send('test')
+})
+
+
 app.listen(PORT)
