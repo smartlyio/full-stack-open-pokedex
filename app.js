@@ -14,5 +14,9 @@ app.get('/test', (req, res) => {
   res.send('test')
 })
 
+app.get('/test2', (req, res) => {
+  res.send('test2')
+})
+
 
 app.listen(PORT)
