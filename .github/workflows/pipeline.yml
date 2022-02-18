@@ -17,13 +17,14 @@ jobs:
         with:
           node-version: '12.x'
       - name: yarn install
-        run: yarn
+        run: yarna
       - name: lint
         run: yarn eslint
       - name: test
         run: yarn test
 
   deploy_to_heroku:
+    needs: simple_deployment_pipeline #required "simple_deployment_pipeline" to completed successfully
     runs-on: ubuntu-18.04
     if: ${{github.event_name == 'push'}}
     steps:
