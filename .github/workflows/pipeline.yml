@@ -13,12 +13,12 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
-        run: npm install
+      - name: yarn install
+        run: yarn
       - name: lint
-        run: npm run eslint
+        run: yarn eslint
       - name: test
-        run: npm run test
+        run: yarn test
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
