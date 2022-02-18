@@ -24,5 +24,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "mighty-badlands-74018" #Must be unique in Heroku
           heroku_email: "minuthprom321@gmail.com"
-          healthcheck: "https:///mighty-badlands-74018..herokuapp.com/health"
+          healthcheck: "https:///mighty-badlands-74018.herokuapp.com/health"
           checkstring: "ok"
