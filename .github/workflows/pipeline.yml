@@ -22,7 +22,11 @@ jobs:
         run: yarn eslint
       - name: test
         run: yarn test
-      if: ${{github.event_name == 'push'}}
+
+  deploy_to_heroku:
+    runs-on: ubuntu-18.04
+    if: ${{github.event_name == 'push'}}
+    steps:
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -31,3 +35,6 @@ jobs:
           healthcheck: "https:///mighty-badlands-74018.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+
+
+  
