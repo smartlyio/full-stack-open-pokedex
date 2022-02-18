@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize] #opened: PR is opened, synchronize: PR is updated
 
 jobs:
   simple_deployment_pipeline:
