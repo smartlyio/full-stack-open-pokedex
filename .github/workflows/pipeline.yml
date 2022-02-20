@@ -21,13 +21,17 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      - name: e2e tests
+      - name: e2e tests info
         uses: cypress-io/github-action@v2.11.7
         with:
           build: npx cypress info
+      - name: e2e tests
+        uses: cypress-io/github-action@v2.11.7
+        with:
+          browser: chrome
+          headless: true
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:5000
       # - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       #   with:
       #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
