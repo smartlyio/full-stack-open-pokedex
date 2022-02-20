@@ -1,0 +1,7 @@
+I have chosen Python and Flask as the web framework because it provides useful tools and features that make creating web applications in Python easier.
+In Flask testing is done using pytest with extra features from the Flask library, linting is performed using pylint and building for production can be done using wheel and flaskr or waitress depending on the production environment.
+
+There are multiple continuous integration providers apart from Jenkins and GitHub Action. CircleCi is a popular choice as well as semaphore as well as GitLab's CI/CD which is a direct competitor to GitHub Actions.
+
+Cloud-based CI/CD environments are great for smaller teams as they allow for quick setup at a relatively low cost. In this situation, it would be good to know if the application is standalone or if the team working with more teams externally to integrate the application into a wider program. If so a self-hosted solution could be better as a cloud-based CI/CD solution might not meet the demands of a more fractured build process.
+Something to note is that if the application requires specific features that cloud-based CI/CD might not offer such as a need for a GPU during testing then a self-hosted solution might be the only option.
