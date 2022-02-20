@@ -22,8 +22,14 @@ jobs:
       - name: test
         run: npm run test
       - name: e2e tests
-        uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v2.11.7
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      # - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
+      #     heroku_email: "YOUR EMAIL"
+      #     healthcheck: "https://[YOUR APP's NAME].herokuapp.com/health"
