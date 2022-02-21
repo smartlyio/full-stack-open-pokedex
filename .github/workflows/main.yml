@@ -9,6 +9,8 @@ on:
     types: [open,synchronize]
 jobs:
   build:
+    #name event for pull request
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

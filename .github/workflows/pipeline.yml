@@ -6,7 +6,6 @@ on:
       - master
 jobs:
   simple_deployment_pipeline:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
