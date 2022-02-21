@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [open,synchronize]
 jobs:
   hello_world_job:
     runs-on: ubuntu-18.04
