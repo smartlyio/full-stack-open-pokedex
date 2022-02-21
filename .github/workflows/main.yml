@@ -22,3 +22,15 @@ jobs:
           healthcheck: "https://pokedex-fullstack-rafxar.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+  #   - name: Bump version and push tag
+  # uses: anothrNick/github-tag-action@1.33.0
+  # env:
+  #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Bump_version_tag:
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
