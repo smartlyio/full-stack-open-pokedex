@@ -9,7 +9,7 @@ app.use(express.static('dist'))
 app.get('/health', (req, res) => {
   res.send('ok')
 })
-app.get('/version', (req, res) => {
+pp.get('/version', (req, res) => {
   res.send('1') // change this string to ensure a new version deployed
 })
 app.listen(PORT, () => {
