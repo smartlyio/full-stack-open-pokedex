@@ -15,6 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-fullstack-rafxar" #Must be unique in Heroku
           heroku_email: "rafael.cano@ucsp.edu.pe"
-          health_check: "https://pokedex-fullstack-rafxar.herokuapp.com/health"
+          healthcheck: "https://pokedex-fullstack-rafxar.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
