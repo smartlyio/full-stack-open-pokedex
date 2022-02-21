@@ -16,3 +16,5 @@ jobs:
           heroku_app_name: "pokedex-fullstack-rafxar" #Must be unique in Heroku
           heroku_email: "rafael.cano@ucsp.edu.pe"
           health_check: "https://pokedex-fullstack-rafxar.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
