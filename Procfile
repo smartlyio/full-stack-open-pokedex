@@ -1,1 +1,1 @@
-web: npm run lint
+web: npm run start-prod
