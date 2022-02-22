@@ -35,3 +35,4 @@ jobs:
           heroku_email: "malcolm@macleodhome.com"
           healthcheck: "https://pokedex-app-myg.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
