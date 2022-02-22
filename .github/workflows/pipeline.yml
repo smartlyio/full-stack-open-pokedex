@@ -35,3 +35,5 @@ jobs:
           heroku_app_name: "ci-cd-fullstack-2021" #Must be unique in Heroku
           heroku_email: "czuper1997@gmail.com"
           healthcheck: "https://ci-cd-fullstack-2021.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
