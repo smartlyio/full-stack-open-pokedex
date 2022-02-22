@@ -29,9 +29,9 @@ jobs:
           start: npm run start-prod
           command: npm run test:e2e
           wait-on: 'http://localhost:5000'
-      # - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      #   with:
-      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-      #     heroku_app_name: "YOUR APP's NAME" #Must be unique in Heroku
-      #     heroku_email: "YOUR EMAIL"
-      #     healthcheck: "https://[YOUR APP's NAME].herokuapp.com/health"
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "ci-cd-fullstack-2021" #Must be unique in Heroku
+          heroku_email: "czuper1997@gmail.com"
+          healthcheck: "https://ci-cd-fullstack-2021.herokuapp.com/health"
