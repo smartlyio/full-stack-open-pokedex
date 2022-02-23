@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-fs"
           heroku_email: "mariamdesouky97@gmail.com"
+          healthcheck: "https://pokemon-fs.herokuapp.com/health"
+          checkstring: "ok"
