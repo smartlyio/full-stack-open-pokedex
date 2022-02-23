@@ -35,3 +35,4 @@ jobs:
           heroku_email: "mariamdesouky97@gmail.com"
           healthcheck: "https://pokemon-fs.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
