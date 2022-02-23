@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull-requestL:
+  pull-request:
     branches: [master]
     types: [opened, synchronize]
 
