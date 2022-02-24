@@ -10,3 +10,7 @@ of the hardware and CI tool should be taken into consideration as a team might n
 maintaining the pipeline. Also the programming language or technology stack is a factor because while most CI tools support a large amount of languages,
 the application language might not be one of them. Therefore, some application specific configuration might be required. 
 Buddy would be better in cloud-based environments as it is a web-based and self-hosted CI tool designed for Git users.
+
+
+
+changing part of the code and not deploying
