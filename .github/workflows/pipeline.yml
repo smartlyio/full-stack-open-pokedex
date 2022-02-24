@@ -22,6 +22,14 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: build failed slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took,pullRequest
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: ${{ failure() }}
       - name: test
         run: npm run test
       - name: e2e tests
@@ -47,3 +55,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      - name: deploy success slack notification
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          fields: commit,author,took
+          custom_payload: |
+            {
+              username: 'github_action',
+              attachments: [{
+                color: 'good',
+                text: `A new version deployed to https://pokemon-fs.herokuapp.com/ (${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} build took ${process.env.AS_TOOK}`
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        if: ${{ success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip')}}
