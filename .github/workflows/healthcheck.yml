@@ -1,9 +1,7 @@
 name: Health check
 on:
-  push:
-    branches:
-      - master
-      - ex11.20
+  schedule:
+    - cron: '2 * * * *'
 jobs:
     check_health:
       runs-on: ubuntu-18.04
