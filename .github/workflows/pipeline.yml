@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'calm-wildwood-40210'
           heroku_email: 'mluukkai@iki.fi'
+          healthcheck: 'calm-wildwood-40210.herokuapp.com/version'
+          checkstring: 'ok'
