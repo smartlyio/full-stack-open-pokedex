@@ -34,4 +34,5 @@ jobs:
           heroku_app_name: 'calm-wildwood-40210'
           heroku_email: 'mluukkai@iki.fi'
           healthcheck: 'https://calm-wildwood-40210.herokuapp.com/version'
-          checkstring: '2'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
