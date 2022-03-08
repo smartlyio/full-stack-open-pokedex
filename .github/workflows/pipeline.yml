@@ -31,7 +31,10 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku
         if: ${{ github.event_name == 'push' }}
+            ${{ !contains(COMMIT_MESSAGES, '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
+        env: 
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "morning-reef-61807"
@@ -43,6 +46,9 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
+        ${{ !contains(COMMIT_MESSAGES, '#skip') }}
+    env: 
+      COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
     steps:
       - uses: actions/checkout@v3
         with:
