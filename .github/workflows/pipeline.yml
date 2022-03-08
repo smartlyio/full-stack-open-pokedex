@@ -34,3 +34,4 @@ jobs:
           heroku_email: "barrettpyke@gmail.com"
           healthcheck: "https://morning-reef-61807.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
