@@ -33,7 +33,7 @@ jobs:
         env: 
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
         if: ${{ github.event_name == 'push' }}
-            ${{ !contains(COMMIT_MESSAGES, '#skip') }}
+            ${{ !contains($COMMIT_MESSAGES, '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -48,7 +48,7 @@ jobs:
       COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
-        ${{ !contains(COMMIT_MESSAGES, '#skip') }}
+        ${{ !contains($COMMIT_MESSAGES, '#skip') }}
     steps:
       - uses: actions/checkout@v3
         with:
