@@ -18,4 +18,4 @@ jobs:
       - name: install packages
         run: yarn install
       - name: lint
-        run: yarn lint
+        run: yarn eslint
