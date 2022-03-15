@@ -29,11 +29,11 @@ module.exports = {
     ],
     "quotes": [
       "error",
-      "double"
+      "single"
     ],
     "semi": [
       "error",
-      "always"
+      "never"
     ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
