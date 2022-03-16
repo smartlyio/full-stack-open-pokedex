@@ -35,3 +35,9 @@ jobs:
           command: yarn test:e2e
           start: yarn start-prod
           wait-on: http://localhost:5000
+      - name: Heroku deployment
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "shrouded-peak-78795" #Must be unique in Heroku
+          heroku_email: "odunsi7069@run.edu.ng"
