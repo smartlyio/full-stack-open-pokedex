@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     branches: [master]
-    types: [opened, synchronized]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -66,4 +66,4 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: "patch"
+          DEFAULT_BUMP: patch
