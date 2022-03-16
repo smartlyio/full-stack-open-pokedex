@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react", "jest"],
+  plugins: ["react", "jest", "eslint-plugin-cypress"],
   rules: {
     indent: ["error", 2],
     "linebreak-style": ["error", "unix"],
