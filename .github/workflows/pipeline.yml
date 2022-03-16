@@ -45,6 +45,7 @@ jobs:
           start: yarn start-prod
           wait-on: http://localhost:5000
           
+      if: ${{ github.event_name == 'push' }}
       - name: Heroku deployment
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
