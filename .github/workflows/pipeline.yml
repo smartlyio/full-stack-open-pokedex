@@ -25,5 +25,5 @@ jobs:
         uses: cypress-io/github-action@v2
         with:
          command: npm run test:e2e
-         start: npm run start-prod
+         start-windows: npm run start-prod:windows:server
          wait-on: http://localhost:5000
