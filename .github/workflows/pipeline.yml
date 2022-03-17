@@ -56,6 +56,23 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+      - name: Discord success  notification
+        if: ${{ success() }}
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: "dhatGuy's bot"
+        with:
+          args: "New version of {{ EVENT_PAYLOAD.repository.full_name }} has been deployed."
+
+      - name: Discord failure notification
+        if: ${{ failure() }}
+        uses: Ilshidur/action-discord@master
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          DISCORD_USERNAME: "dhatGuy's bot"
+        with:
+          args: "Deployment of {{ EVENT_PAYLOAD.repository.full_name }} wasn't successful."
 
   tag_release:
     needs: [simple_deployment_pipeline]
