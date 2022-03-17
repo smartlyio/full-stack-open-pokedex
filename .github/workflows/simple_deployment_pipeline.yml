@@ -17,3 +17,4 @@ jobs:
           heroku_email: "li.andr1771@gmail.com"
           healthcheck: "https://pokedex-liandrey.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
