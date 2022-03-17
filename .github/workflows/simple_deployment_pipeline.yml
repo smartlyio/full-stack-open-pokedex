@@ -15,6 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-liandrey" #Must be unique in Heroku
           heroku_email: "li.andr1771@gmail.com"
-          healthcheck: "https://pokedex-liandrey.herokuapp.com/health"
-          checkstring: "ok"
+          healthcheck: "https://pokedex-liandrey.herokuapp.com/version"
+          checkstring: "2"
           rollbackonhealthcheckfailed: true
