@@ -19,5 +19,5 @@ jobs:
           heroku_app_name: "pokedex-liandrey" #Must be unique in Heroku
           heroku_email: "li.andr1771@gmail.com"
           healthcheck: "https://pokedex-liandrey.herokuapp.com/health"
-          checkstring: "okey1"
+          checkstring: "okey"
           rollbackonhealthcheckfailed: true
