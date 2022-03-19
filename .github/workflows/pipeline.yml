@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'karatuomas@gmail.com'
           healthcheck: 'https://calm-castle-06567.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
