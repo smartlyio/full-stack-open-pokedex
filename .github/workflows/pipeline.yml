@@ -21,3 +21,17 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: 'deploy to heroku'
+        uses: 'AkhileshNS/heroku-deploy'
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'calm-castle-06567'
+          heroku_email: 'karatuomas@gmail.com'
+          healthcheck: 'https://calm-castle-06567.herokuapp.com/health'
+          checkstring: 'ok'
