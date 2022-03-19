@@ -14,5 +14,5 @@ jobs:
         echo "Hello World!"
       - name: Now it is
         run: |
-        echo "%D"
+        echo '`r format(Sys.Date(), "%B %d, %Y")`'
 
