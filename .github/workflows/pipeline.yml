@@ -31,8 +31,7 @@ jobs:
       #     start: npm run start-prod
       #     wait-on: http://localhost:5000
       - name: 'deploy to heroku'
-        if: ${{ github.event_name == 'push' }}
-        if: ${{ !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
