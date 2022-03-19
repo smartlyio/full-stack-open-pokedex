@@ -2,7 +2,9 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "node": true,
+    "commonjs": true
   },
   "extends": [
     "eslint:recommended",
@@ -43,7 +45,12 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": "off",
     "react/prop-types": 0
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    }
   }
 }
