@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const PokemonList = ({ pokemonList }) => {
   return (
-    <div className="list-container" style={{ backgroundColor: 'red' }}>
+    <div className="list-container">
       {pokemonList.map(({ id, name }) => (
         <Link
           key={id}
