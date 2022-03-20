@@ -20,3 +20,7 @@ jobs:
           heroku_app_name: 'calm-eyrie-69060' #Must be unique in Heroku
           heroku_email: 'davitge303@gmail.com'
           healthcheck: 'https://calm-eyrie-69060.herokuapp.com/health'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
