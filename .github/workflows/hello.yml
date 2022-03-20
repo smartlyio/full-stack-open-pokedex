@@ -11,4 +11,8 @@ jobs:
     steps:
       - name: Say hello
         run: |
-          echo '`r format(Sys.Date(), "%B %d, %Y")`'
+          echo "Hello World!"
+    steps:
+      - name: Date
+        run: |
+          echo "Hello World!2"
