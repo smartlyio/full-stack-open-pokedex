@@ -14,5 +14,4 @@ jobs:
           echo "Hello World!"
       - name: Date
         run: |
-          $ TZ='America/Los_Angeles' date
-          echo `${TZ}`
+          echo $ TZ='America/Los_Angeles' date
