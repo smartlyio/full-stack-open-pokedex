@@ -23,15 +23,3 @@ jobs:
     - name: Prints directory contents
       run: | 
         ls
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: builds production software
-      run: | 
-        npm run build
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - name: runs all tests
-      run: | 
-        npm test
