@@ -3,7 +3,7 @@ name: Hello World
 on:
   push:
     branches: [ master ]
- 
+
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
@@ -11,3 +11,15 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World"
+  date:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Prints date
+      run: | 
+        date
+  directory_contents:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Prints directory contents
+      run: | 
+        ls
