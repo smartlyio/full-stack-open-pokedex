@@ -30,18 +30,18 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: heroku deployment
-        uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }}
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'sandesh-pokemon'
-          heroku_email: 'sundesz@gmail.com'
-          branch: 'master'
-          # procfile: 'web: npm start'
-          # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
-          # checkstring: 'ok'
-          # rollbackonhealthcheckfailed: true
+      # - name: heroku deployment
+      #   uses: akhileshns/heroku-deploy@v3.12.12
+      #   if: ${{ github.event_name == 'push' }}
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: 'sandesh-pokemon'
+      #     heroku_email: 'sundesz@gmail.com'
+      #     branch: 'master'
+      # procfile: 'web: npm start'
+      # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
+      # checkstring: 'ok'
+      # rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v3
         if: ${{ github.event_name == 'push' }}
       - name: Bump version and push tag
