@@ -9,6 +9,7 @@ describe('Pokedex', function () {
 
   it('pokemon page can be navigated to', function () {
     cy.visit('http://localhost:5000')
-    cy.get('.list-item-name').contains('ivysaur').click().contains('ivysaur')
+    cy.get('.list-item-name').contains('ivysaur').click()
+    cy.contains('ivysaur')
   })
 })
