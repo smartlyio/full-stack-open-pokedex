@@ -10,12 +10,12 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: npm install
         run: npm install
       - name: lint
@@ -42,7 +42,7 @@ jobs:
           # healthcheck: 'https://sandesh-pokemon.herokuapp.com/health'
           # checkstring: 'ok'
           # rollbackonhealthcheckfailed: true
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         if: ${{ github.event_name == 'push' }}
       - name: Bump version and push tag
         # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
