@@ -20,3 +20,5 @@ jobs:
           heroku_app_name: 'learning-cicd-fullstack'
           heroku_email: 'sundesz@gmail.com'
           branch: 'master'
+          healthcheck: 'https://learning-cicd-fullstack.herokuapp.com/health'
+          checkstring: 'ok'
