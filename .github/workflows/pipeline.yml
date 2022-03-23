@@ -76,10 +76,10 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v3
-    - name: Bump version and push tag
-        # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
-        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+          # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+          if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
+          uses: anothrNick/github-tag-action@1.36.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
