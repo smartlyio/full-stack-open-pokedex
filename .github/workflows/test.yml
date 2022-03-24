@@ -7,10 +7,10 @@ on:
 
 jobs:
   a_test_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - name: gihub context
+      - uses: actions/checkout@v3
+      - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
