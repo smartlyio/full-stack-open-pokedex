@@ -71,6 +71,6 @@ jobs:
         if: failure() && ${{ github.event_name == 'push' }}
         with:
           severity: error
-          text: Build failed
+          text: Build failed testing
           description: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
