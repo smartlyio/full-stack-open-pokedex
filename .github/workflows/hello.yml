@@ -32,11 +32,11 @@ jobs:
           
       - name: Returh the date
         run: | 
-          echo date
+          date
           
       - name: Returh the directory content
         run: | 
-          echo ls
+          ls
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
