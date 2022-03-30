@@ -23,7 +23,9 @@ jobs:
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
+        env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         with:
-          command: npm run test:e2e
+          command: npm run cy:run
           start: npm run start-prod
           wait-on: http://localhost:5000
