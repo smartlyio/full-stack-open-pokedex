@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -34,3 +34,9 @@ jobs:
       run: npm run build
     - name: test
       run: npm run test
+    - name: e2e tests
+      uses: cypress-io/github-action@v2.9.7
+      with:
+        command: npm run cypress:run
+        start: npm run start-prod
+        wait-on: http://localhost:5000
