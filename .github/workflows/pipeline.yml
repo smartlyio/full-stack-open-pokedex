@@ -40,6 +40,14 @@ jobs:
           healthcheck: 'https://learning-cicd-fullstack.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+      - name: Deployment Error
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Build failed
+          description: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -52,6 +60,13 @@ jobs:
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tag release error Error
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Tag release failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   discord_notification:
     needs: [tag_release]
@@ -65,12 +80,4 @@ jobs:
           severity: info
           text: A new version of Pokedex is deployed!
           description: to ${{ secrets.HEROKU_APPLICATION_LINK }} by ${{ github.event.pusher.name }}.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deployment Error
-        uses: rjstone/discord-webhook-notify@v1
-        if: failure() && github.event_name == 'push'
-        with:
-          severity: error
-          text: Build failed
-          description: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
