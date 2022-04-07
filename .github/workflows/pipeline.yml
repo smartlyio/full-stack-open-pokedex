@@ -27,7 +27,7 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:4000
-      - name:
+      - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
