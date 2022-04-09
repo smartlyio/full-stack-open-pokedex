@@ -36,3 +36,4 @@ jobs:
           heroku_email: "pablo.maff.076@gmail.com"
           healthcheck: "https://fso-cicd-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
