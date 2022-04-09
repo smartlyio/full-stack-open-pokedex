@@ -34,5 +34,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fso-cicd-pokedex"
           heroku_email: "pablo.maff.076@gmail.com"
-          healthcheck: "https://https://fso-cicd-pokedex.herokuapp.com/health"
+          healthcheck: "https://fso-cicd-pokedex.herokuapp.com/health"
           checkstring: "ok"
