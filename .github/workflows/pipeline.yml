@@ -37,6 +37,7 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: deployment
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -52,7 +53,6 @@ jobs:
         with:
           severity: error
           username: ${{ github.actor }}
-          avatarUrl: https://avatars.githubusercontent.com/u/92764736?s=400&u=3196da6dd7888e6c949a71f0967a1d7f0c8325d4&v=4
           description: ${{ github.action }}
           details: Build error.
           footer: ${{ github.repository }}
@@ -77,7 +77,6 @@ jobs:
         with:
           severity: info
           username: ${{ github.actor }}
-          avatarUrl: https://avatars.githubusercontent.com/u/92764736?s=400&u=3196da6dd7888e6c949a71f0967a1d7f0c8325d4&v=4
           description: ${{ github.action }}
           details: A new version has been released!
           footer: ${{ github.repository }}
