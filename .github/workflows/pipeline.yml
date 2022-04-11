@@ -47,16 +47,16 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: Build failed
-          uses: rjstone/discord-webhook-notify@v1
-          if: failure()
-          with:
-            severity: error
-            username: ${{ github.actor }}
-            avatarUrl: https://avatars.githubusercontent.com/u/92764736?s=400&u=3196da6dd7888e6c949a71f0967a1d7f0c8325d4&v=4
-            description: ${{ github.action }}
-            details: Build error.
-            footer: ${{ github.repository }}
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          username: ${{ github.actor }}
+          avatarUrl: https://avatars.githubusercontent.com/u/92764736?s=400&u=3196da6dd7888e6c949a71f0967a1d7f0c8325d4&v=4
+          description: ${{ github.action }}
+          details: Build error.
+          footer: ${{ github.repository }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ (github.event_name == 'push') && (!contains(join(github.event.commits.*.message, ', '), '#skip')) }}
     needs: [simple_deployment_pipeline, run_deployment]
