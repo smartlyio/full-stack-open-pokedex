@@ -38,3 +38,4 @@ jobs:
           heroku_email: tapani.vaskisalo@outlook.com
           healthcheck: "https://limitless-bayou-39628.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
