@@ -23,6 +23,7 @@ module.exports = {
       "error",
         2
       ],
+      //Removed the check for line-break due to working with two different OS
     "quotes": [
       "error",
       "single"
