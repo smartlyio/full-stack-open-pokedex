@@ -36,3 +36,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: limitless-bayou-39628 #Must be unique in Heroku
           heroku_email: tapani.vaskisalo@outlook.com
+          healthcheck: "https://limitless-bayou-39628.herokuapp.com/health"
+          checkstring: "ok"
