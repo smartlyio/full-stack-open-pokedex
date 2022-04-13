@@ -34,4 +34,4 @@ jobs:
           heroku_app_name: 'pokedex-fso-cicd-practice-1110' #Must be unique in Heroku
           heroku_email: 'yumohuakai@gmail.com'
           healthcheck: 'https://pokedex-fso-cicd-practice-1110.herokuapp.com/health'
-          checkstring: 'Moi, ok'
+          checkstring: 'Hei, ok'
