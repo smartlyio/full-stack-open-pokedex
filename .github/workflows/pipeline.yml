@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'yumohuakai@gmail.com'
           healthcheck: 'https://pokedex-fso-cicd-practice-1110.herokuapp.com/health'
           checkstring: 'Hei, ok'
+          rollbackonhealthcheckfailed: true
