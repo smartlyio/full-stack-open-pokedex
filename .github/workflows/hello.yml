@@ -15,5 +15,3 @@ jobs:
         run:  echo  date
       - name: Current Directory
         run: ls -l
-
-
