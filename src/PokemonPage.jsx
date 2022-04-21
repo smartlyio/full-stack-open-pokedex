@@ -1,9 +1,8 @@
-import React from 'react'
 import { Link, useParams } from 'react-router-dom'
-import LoadingSpinner from './LoadingSpinner'
-import { useApi } from './useApi'
-import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
+import LoadingSpinner from './LoadingSpinner'
+import PokemonAbility from './PokemonAbility'
+import { useApi } from './useApi'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
@@ -26,7 +25,6 @@ const PokemonPage = ({ previous, next }) => {
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
 
-  console.log('hiddenAbility=', hiddenAbility)
   return (
     <>
       <div className="links">
