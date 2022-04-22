@@ -1,3 +1,1 @@
-module.exports = {
-  testPathIgnorePatterns: ['<rootDir>/cypress/'],
-}
+export const testPathIgnorePatterns = ['<rootDir>/cypress/']
