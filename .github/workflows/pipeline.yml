@@ -35,3 +35,4 @@ jobs:
           heroku_email: "grazvydas.untulis@gmail.com"
           healthcheck: "https://infinite-anchorage-41335.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
