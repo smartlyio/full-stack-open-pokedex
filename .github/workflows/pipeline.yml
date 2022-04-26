@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "infinite-anchorage-41335" 
           heroku_email: "grazvydas.untulis@gmail.com"
+          healthcheck: "https://infinite-anchorage-41335.herokuapp.com/health"
+          checkstring: "ok"
