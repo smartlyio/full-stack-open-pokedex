@@ -27,10 +27,9 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
-          browser: firefox
-          headless: true
+          browser: chrome
           command: npm run test:e2e
-          start: npm run start-prod
+          start: npm run start
           wait-on: http://localhost:5000
       - name: Heroku deploy
         if: ${{ github.event_name == 'push' }}
