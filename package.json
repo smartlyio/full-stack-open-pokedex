@@ -6,8 +6,8 @@
   "scripts": {
     "test:e2e": "cypress run",
     "lintFix": "eslint './**/*.{js,jsx}' --fix",
-    "start": "webpack-dev-server --open --mode development",
-    "start-prod": "node app.js",
+    "dev": "webpack-dev-server --open --mode development",
+    "start": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production"
