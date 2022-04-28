@@ -13,7 +13,10 @@ jobs:
         run: |
           echo "Hello World!"
           
-           - name: Time Now
-             run: |
-          date
+          steps:
+             - name: Time Now
+               run: |
+                date
+          
+           
         
