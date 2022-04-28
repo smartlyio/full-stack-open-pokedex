@@ -2,7 +2,9 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "amd": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -19,7 +21,6 @@ module.exports = {
     "react", "jest", "cypress"
   ],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "indent": "off",
     "linebreak-style": [
       "error",
