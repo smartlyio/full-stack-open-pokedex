@@ -19,16 +19,12 @@ module.exports = {
     "react", "jest", "cypress"
   ],
   "rules": {
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "indent": "off",
     "linebreak-style": [
       "error",
       "unix"
     ],
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
-    },
     // "quotes": [
     //   "error",
     //   "single"
