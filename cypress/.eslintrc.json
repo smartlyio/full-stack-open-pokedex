@@ -8,5 +8,9 @@
   "root": true,
   "env": {
     "cypress/globals": true
+  },
+  "plugins": ["cypress"],
+  "rules": {
+      "jest/expect-expect": "off"
   }
 }
