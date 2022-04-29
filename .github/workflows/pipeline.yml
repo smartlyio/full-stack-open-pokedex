@@ -39,7 +39,7 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP}}
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
-          rollbackonhealtcheckfailed: true
+          rollbackonhealthcheckfailed: true
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
