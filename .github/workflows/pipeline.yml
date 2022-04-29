@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  checkout:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -20,6 +20,10 @@ jobs:
         run: npm install
       - name: lint
         run: npm run eslint
+  test:
+    runs-on: ubuntu-20.04
+    needs: [checkout]
+    steps:
       - name: build
         run: npm run build
       - name: test
@@ -31,6 +35,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start
           wait-on: http://localhost:5000
+  deployment:
+    needs: [tests]
+    if: ${{ github.event_name == 'pull_request' && !contains(github.event.commits.*.message,'#skip')}}
+    runs-on: ubuntu-20.04
+    steps:
       - name: Heroku deploy
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -41,15 +50,11 @@ jobs:
           healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
   tag_release:
-    if: ${{github.event_name == 'push' && !contains(github.event.commits.*.message,'#skip')}}
-    needs: [simple_deployment_pipeline]
+    needs: [deployment]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.36.0
-        env:
-          DEFAULT_BUMP: "#patch"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.36.0
+          env:
+            DEFAULT_BUMP: "#patch"
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
