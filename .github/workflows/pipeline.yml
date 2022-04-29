@@ -37,7 +37,7 @@ jobs:
           wait-on: http://localhost:5000
   deployment:
     needs: [tests]
-    if: ${{ github.event_name == 'pull_request' && !contains(github.event.commits.*.message,'#skip')}}
+    if: ${{ !(github.event_name == 'pull_request' && contains(github.event.commits.*.message,'#skip'))}}
     runs-on: ubuntu-20.04
     steps:
       - name: Heroku deploy
