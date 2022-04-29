@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-
+ 
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -38,6 +38,7 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         if: ${{ github.event_name == 'push' }}
