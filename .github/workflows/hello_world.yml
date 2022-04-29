@@ -12,11 +12,3 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-          
-          steps:
-             - name: Time Now
-               run: |
-                date
-          
-           
-        
