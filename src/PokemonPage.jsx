@@ -27,7 +27,7 @@ const PokemonPage = ({ previous, next }) => {
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
 
   // eslint-disable-line no-use-before-define
-  console.log('hiddenAbility=', hiddenAbility) 
+  console.log('hiddenAbility=', hiddenAbility)
   return (
     <>
       <div className="links">
