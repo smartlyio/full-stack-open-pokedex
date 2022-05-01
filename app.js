@@ -7,9 +7,9 @@ const PORT = 5000
 
 app.use(express.static('dist'))
 
-app.get("/hello", (req, res) => {
-  res.status(200).send("Hello i am akash")
-})
+// app.get("/hello", (req, res) => {
+//   res.status(200).send("Hello i am akash")
+// })
 
 app.listen(PORT, () => {
   console.log('server started on port 5000')
