@@ -107,10 +107,13 @@ describe('<PokemonPage />', () => {
     expect(screen.getByTestId('stats')).toHaveTextContent('hp55attack55')
   })
 
+
   it('should render previous and next urls if they exist', async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
+      console.log('Previous: ', previous)
+      console.log('Next: ',next)
       render(
         <Router history={history}>
           <PokemonPage previous={previous} next={next} />
@@ -120,6 +123,8 @@ describe('<PokemonPage />', () => {
 
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
     expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
+    // /pokemon/vaporeon
+    // /pokemon/ditto
   })
 
   it('should not render previous and next urls if none exist', async () => {
