@@ -27,7 +27,7 @@ jobs:
         run: npm run test
 
 
-  End-to-end tests:
+  End_to_end tests:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
