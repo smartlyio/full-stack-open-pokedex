@@ -7,7 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: windows-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -26,11 +26,15 @@ jobs:
       - name: Test
         run: npm run test
 
+
+  End-to-end tests:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-          browser: chrome
-          headless: true
