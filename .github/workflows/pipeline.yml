@@ -26,14 +26,10 @@ jobs:
       - name: Test
         run: npm run test
 
-
-  end_to_end_tests:
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
       - name: e2e tests
-        uses: cypress-io/github-action@v2.9.7
+        uses: cypress-io/github-action@v2
         with:
           start: npm run start-prod
           command: npm run test:e2e
-
+          wait-on: http://localhost:5000
+          browser: chrome
