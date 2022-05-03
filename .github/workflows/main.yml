@@ -18,3 +18,4 @@ jobs:
           healthcheck: "https://blooming-citadel-90467.herokuapp.com/health"
           checkstrings: "ok"
           delay: 5
+          rollbackonhealthcheckfailed: true
