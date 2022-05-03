@@ -11,7 +11,6 @@ app.get('/health', (req, res) => {
 })
 
 // random comment
-// branch test
 
 app.get('/version', (req, res) => {
   res.send('1') // change this string to ensure a new version deployed
