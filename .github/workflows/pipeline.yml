@@ -42,7 +42,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Build failed
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: ${{ (github.event_name == 'push') && ( ! contains(join(toJSON(github.event.commits.*.message)), '#skip')) && failure() }}
         with:
           text: Build failed 
           avatarUrl: https://github.com/Grazvis1988.png
@@ -51,7 +51,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build succeeded
         uses: rjstone/discord-webhook-notify@v1
-        if: failure()
+        if: ${{ (github.event_name == 'push') && ( ! contains(join(toJSON(github.event.commits.*.message)), '#skip')) && success() }}
         with:
           text: A new version of Podkedex deployed
           severity: info
