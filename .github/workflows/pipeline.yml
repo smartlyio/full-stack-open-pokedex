@@ -40,10 +40,9 @@ jobs:
           healthcheck: "https://infinite-anchorage-41335.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - run: echo "DEPLOYED=0" >> $GITHUB_ENV
       - name: Build failed
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ env.DEPLOYED != 0 }}
+        if: ${{ (github.event_name == 'push') && ( ! contains(join(toJSON(github.event.commits.*.message)), '#skip')) && failure() }}
         with:
           text: Build failed 
           avatarUrl: https://github.com/Grazvis1988.png
@@ -52,7 +51,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build succeeded
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ env.DEPLOYED == 0 }}
+        if: ${{ (github.event_name == 'push') && ( ! contains(join(toJSON(github.event.commits.*.message)), '#skip')) && success() }}
         with:
           text: A new version of Podkedex deployed
           severity: info
