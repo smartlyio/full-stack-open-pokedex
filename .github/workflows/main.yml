@@ -15,3 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "blooming-citadel-90467" #Must be unique in Heroku
           heroku_email: "svoglimacci@tuta.io"
+          healthcheck: "https://blooming-citadel-90467.herokuapp.com/health"
+          checkstrings: "ok"
+          delay: 5
