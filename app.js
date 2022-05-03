@@ -8,5 +8,5 @@ app.use(express.static('dist'))
 
 app.listen(PORT, () => {
   // eslint-disable-line no-use-before-define
-  //console.log('server started on port 5000')
+  console.log('server started on port 5000')
 })
