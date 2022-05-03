@@ -40,7 +40,7 @@ jobs:
           healthcheck: "https://infinite-anchorage-41335.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-        run: echo "DEPLOYED=0" >> $GITHUB_ENV
+      - run: echo "DEPLOYED=0" >> $GITHUB_ENV
       - name: Build failed
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ env.DEPLOYED != 0 }}
