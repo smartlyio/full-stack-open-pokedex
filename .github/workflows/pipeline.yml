@@ -40,6 +40,24 @@ jobs:
           healthcheck: "https://infinite-anchorage-41335.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Build failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          text: Build failed 
+          avatarUrl: https://github.com/Grazvis1988.png
+          description: Commit
+          details: https://github.com/Grazvis1988/full-stack-open-pokedex/commit/${{ github.sha }} by Grazvis1988 broke the build
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Build succeeded
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          text: A new version of Podkedex deployed
+          severity: info
+          avatarUrl: https://github.com/Grazvis1988.png
+          details: to https://infinite-anchorage-41335.herokuapp.com by Grazvis1988
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -53,5 +71,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "#patch"
-
 
