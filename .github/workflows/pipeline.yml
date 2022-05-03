@@ -36,10 +36,10 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: heroku deploy
         if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "blooming-citadel-90467" #Must be unique in Heroku
+          heroku_app_name: "blooming-citadel-90467"
           heroku_email: "svoglimacci@tuta.io"
           healthcheck: "https://blooming-citadel-90467.herokuapp.com/health"
           checkstrings: "ok"
