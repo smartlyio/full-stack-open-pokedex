@@ -26,12 +26,15 @@ jobs:
       - name: Test
         run: npm run test
 
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with: 
           start: npm run start-prod
-        
+
+    steps:   
       - name: Deploy to Heroku
+        uses: actions/checkout@v2
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
