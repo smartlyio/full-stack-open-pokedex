@@ -38,3 +38,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-plains-04636" #Must be unique in Heroku
           heroku_email: "g_hworth@yahoo.ca"
+          healthcheck: "https://nameless-plains-04636.herokuapp.com/health"
+          checkstring: "ok"
