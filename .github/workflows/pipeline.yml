@@ -32,8 +32,8 @@ jobs:
         with: 
           start: npm run start-prod
 
-    steps:   
-      - name: Deploy to Heroku
+    steps:
+      - name: Deploy to Heroku  
         uses: actions/checkout@v2
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
