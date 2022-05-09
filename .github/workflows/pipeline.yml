@@ -40,3 +40,4 @@ jobs:
           heroku_email: "g_hworth@yahoo.ca"
           healthcheck: "https://nameless-plains-04636.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
