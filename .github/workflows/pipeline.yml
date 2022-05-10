@@ -25,6 +25,7 @@ jobs:
         - name: test
           run: npm run test
         - name: Deploy to Heroku
+          if: ${{ github.event_name == 'push' }}
           uses: AkhileshNS/heroku-deploy@v3.12.12
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
