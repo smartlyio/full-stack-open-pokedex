@@ -17,7 +17,7 @@ body > div {
 }
 
 footer {
-  color: #888;
+  color: rgb(70, 153, 142);
   font-size: 12px;
   flex-shrink: 0;
 }
@@ -44,7 +44,7 @@ footer {
 .list-item {
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #eee;
+  background-color: rgb(146, 74, 74);
   margin: 10px;
   height: 150px;
   width: 150px;
