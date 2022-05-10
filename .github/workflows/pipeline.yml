@@ -28,3 +28,4 @@ jobs:
             heroku_app_name: "pacific-depths-19456" #Must be unique in Heroku
             heroku_email: "test@email.com"
             healthcheck: "https://pacific-depths-19456.herokuapp.com/health"
+            rollbackonhealthcheckfailed: true
