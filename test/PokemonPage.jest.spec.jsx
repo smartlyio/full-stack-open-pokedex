@@ -122,7 +122,7 @@ describe('<PokemonPage />', () => {
     expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
 
-  it('should not render previous and next urls if none exist', async () => {
+  it('should not render previous and next urls if none exist ', async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
