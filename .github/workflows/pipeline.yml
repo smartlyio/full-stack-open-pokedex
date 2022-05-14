@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+    env:
+      PORT: 5000
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
