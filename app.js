@@ -12,7 +12,7 @@ app.listen(PORT, () => {
   /* eslint-enable no-console */
 })
 
-app.get('/health_WRONG', (req, res) => {
+app.get('/health', (req, res) => {
   res.send('ok')
 })
 
