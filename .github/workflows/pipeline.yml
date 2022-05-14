@@ -33,3 +33,4 @@ jobs:
           heroku_app_name: "calm-tundra-84343"
           heroku_email: "eucjerie@gmail.com"
           healthcheck: "https://calm-tundra-84343.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
