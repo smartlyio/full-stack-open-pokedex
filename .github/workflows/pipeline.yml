@@ -7,8 +7,12 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu
+    runs-on: ubuntu-latest
     steps:
       - name: print hello
         run: echo "Hello World!"
+      - name: print date
+        run: date
+      - name: print folder
+        run: ls
 
