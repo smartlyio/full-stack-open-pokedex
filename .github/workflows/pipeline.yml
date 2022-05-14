@@ -21,11 +21,11 @@ jobs:
         run: npm run eslint
       - name: unit test
         run: npm test
-      - name: integration test
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
+#      - name: integration test
+#        uses: cypress-io/github-action@v2
+#        with:
+#          command: npm run test:e2e
+#          start: npm run start-prod
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
