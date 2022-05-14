@@ -26,7 +26,7 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: 'npx wait-on --timeout 5000 http://localhost:5000'
+          wait-on: 'npx wait-on --timeout 12000 http://localhost:5000'
           headless: true
       - name: deploy
         uses: akhileshns/heroku-deploy@v3.12.12
