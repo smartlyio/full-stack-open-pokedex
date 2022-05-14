@@ -37,3 +37,7 @@ jobs:
           heroku_email: "eucjerie@gmail.com"
           healthcheck: "https://calm-tundra-84343.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
