@@ -1,25 +1,4 @@
-# name: Hello World!
-
-# on:
-#   push:
-#     branches:
-#       - master
-
-# jobs:
-#   hello_world_job:
-#     runs-on: ubuntu-18.04
-#     steps:
-#       - name: Say hello
-#         run: |
-#           echo "Hello World!"
-#       - name: Now it is
-#         run: |
-#           date
-#       - name: Directory content
-#         run: |
-#           ls -l
-
-name: Deployment pipeline
+name: Hello World!
 
 on:
   push:
@@ -27,23 +6,44 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline:
+  hello_world_job:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.x'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: npm run test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          # spec: cypress/integration/api.cypress.js
-          command: npm run test:e2e
-          start: npm start
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
+
+# name: Deployment pipeline
+
+# on:
+#   push:
+#     branches:
+#       - master
+
+# jobs:
+#   simple_deployment_pipeline:
+#     runs-on: ubuntu-18.04
+#     steps:
+#       - uses: actions/checkout@v2
+#       - uses: actions/setup-node@v1
+#         with:
+#           node-version: '12.x'
+#       - name: npm install
+#         run: npm install
+#       - name: lint
+#         run: npm run eslint
+#       - name: npm run test
+#         run: npm run test
+#       - name: e2e tests
+#         uses: cypress-io/github-action@v2
+#         with:
+#           # spec: cypress/integration/api.cypress.js
+#           command: npm run test:e2e
+#           start: npm start
 
