@@ -3,7 +3,7 @@ describe('Pokedex', function () {
     cy.on('uncaught:exception', error => {
       console.error(error)
     })
-    cy.visit('http://localhost:8080')
+    cy.visit('http://localhost:8081')
     cy.contains('ivysaur')
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
