@@ -40,6 +40,7 @@ jobs:
           rollbackonhealthcheckfailed: true
   tag_release:
     runs-on: ubuntu-20.04
+    if: github.event_name == 'push' && github.ref_name == 'master'
     permissions:
       contents: write
     steps:
