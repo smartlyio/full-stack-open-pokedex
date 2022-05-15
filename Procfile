@@ -1,1 +1,1 @@
-web: npm jfkj
+web: npm run start-prod
