@@ -7,9 +7,9 @@ describe('Pokedex', function() {
 })
 
 describe('Pokedex', function() {
-    it('navigation from frontpage to specific pokemon works', function() {
-      cy.visit('http://localhost:5000')
-      cy.contains('diglett').click()
-      cy.contains('sand veil')
-    })
+  it('navigation from frontpage to specific pokemon works', function() {
+    cy.visit('http://localhost:5000')
+    cy.contains('diglett').click()
+    cy.contains('sand veil')
   })
+})
