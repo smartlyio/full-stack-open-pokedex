@@ -17,17 +17,15 @@ const App = () => {
   if (isLoading) {
     return <LoadingSpinner />
   }
-  if (error) {
-    return <ErrorMessage error={error} />
-  }
+  if (error) return <ErrorMessage error={error} />
 
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
+        <Route exact path='/'>
           <PokemonList pokemonList={pokemonList} />
         </Route>
-        <Route path="/pokemon/:name" render={(routeParams) => {
+        <Route path='/pokemon/:name' render={(routeParams) => {
           const pokemonId = pokemonList.find(({ name }) => name === routeParams.match.params.name).id
           const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
           const next = pokemonList.find(({ id }) => id === pokemonId + 1)
