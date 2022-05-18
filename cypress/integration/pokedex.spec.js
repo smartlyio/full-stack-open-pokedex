@@ -1,6 +1,6 @@
 describe("Pokedex", function () {
     beforeEach(function () {
-        cy.visit("http://localhost:8080");
+        cy.visit("http://localhost:5000");
     });
 
     it("front page can be opened", function () {
