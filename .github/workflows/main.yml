@@ -17,3 +17,4 @@ jobs:
           heroku_email: "suovuori.joni@gmail.com"
           healthcheck: "https://pokedex-fullstack2022.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
