@@ -17,8 +17,9 @@ module.exports = {
         indent: ["error", "tab"],
         "linebreak-style": [
             "error",
-            process.platform === "win32" ? "windows" : "unix",
-        ],
+            // process.platform === "win32" ? "windows" : "unix",
+			"unix"
+		],
         quotes: ["error", "double"],
         semi: ["error", "always"],
         eqeqeq: "error",
