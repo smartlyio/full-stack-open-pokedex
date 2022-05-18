@@ -14,7 +14,7 @@ module.exports = {
     },
     plugins: ["react", "jest"],
     rules: {
-        indent: ["error", "tab"],
+        indent: ["error", 4],
         "linebreak-style": [
             "error",
             // process.platform === "win32" ? "windows" : "unix",
