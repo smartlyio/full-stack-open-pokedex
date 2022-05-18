@@ -1,11 +1,14 @@
 module.exports = {
     env: {
-		browser: true,
+        browser: true,
         node: true,
         es6: true,
         "jest/globals": true,
     },
-    extends: ["eslint:recommended", "plugin:react/recommended"],
+    extends: [
+        "eslint:recommended",
+        "plugin:react/recommended",
+    ],
     parserOptions: {
         ecmaFeatures: {
             jsx: true,
@@ -14,13 +17,16 @@ module.exports = {
         sourceType: "module",
     },
     plugins: ["react", "jest"],
+	globals: {
+		"cy": true
+	},
     rules: {
         indent: ["error", 4],
         "linebreak-style": [
             "error",
             // process.platform === "win32" ? "windows" : "unix",
-			"unix"
-		],
+            "unix",
+        ],
         quotes: ["error", "double"],
         semi: ["error", "always"],
         eqeqeq: "error",
