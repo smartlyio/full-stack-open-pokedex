@@ -33,6 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "thawing-everglades-99553"
           heroku_email: "danielchettiar07@gmail.com"
-          healthcheck: "https://thawing-everglades-99553.herokuapp.com"
+          healthcheck: "https://thawing-everglades-99553.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
