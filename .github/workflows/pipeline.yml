@@ -35,3 +35,4 @@ jobs:
           heroku_email: "minhtri1911931@gmail.com"
           healthcheck: "https://full-stack-open-pokedex-elliot.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
