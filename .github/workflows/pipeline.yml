@@ -31,5 +31,5 @@ jobs:
         uses: akhileshns/heroku-deploy@3.12.12
           with:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: thawing-everglades-99553
-            heroku_email: danielchettiar07@gmail.com
+            heroku_app_name: "thawing-everglades-99553"
+            heroku_email: "danielchettiar07@gmail.com"
