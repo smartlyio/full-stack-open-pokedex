@@ -6,7 +6,7 @@ on:
       - main
   pull_request:
     branches: [main]
-    types: [opened, synchronized]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
