@@ -36,3 +36,4 @@ jobs:
           heroku_email: "erichrkeil@gmail.com"
           healthcheck: "http://fsopdcicd.heroku.app/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true

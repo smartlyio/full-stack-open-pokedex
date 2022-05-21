@@ -1,1 +1,1 @@
-web: npm run start-prod-wrong-test
+web: npm run start-prod
