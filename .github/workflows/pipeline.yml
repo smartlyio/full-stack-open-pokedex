@@ -34,6 +34,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fsopdcicd"
           heroku_email: "erichrkeil@gmail.com"
-          healthcheck: "http://fsopdcicd.heroku.app/health"
+          healthcheck: "https://fsopdcicd.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
