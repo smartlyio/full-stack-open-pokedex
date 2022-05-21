@@ -17,4 +17,4 @@ jobs:
           date
       - name: dir-contents
         run: |
-          echo ls
+          ls
