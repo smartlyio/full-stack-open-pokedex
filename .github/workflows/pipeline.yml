@@ -46,7 +46,7 @@ jobs:
     if: ${{github.event_name == 'push'}}
     env:
       COMMIT_MESSAGES: {{github.event.commits.*.message)}}
-    if: ${{contains(env.COMMIT_MESSAGES, '#skip') == false}}
+    if: ${{ !contains(env.COMMIT_MESSAGES, '#skip') }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps: 
