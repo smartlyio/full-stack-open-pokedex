@@ -52,5 +52,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env: 
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-          release_branches: [main]
+          release_branches: main
           tag_context: branch
