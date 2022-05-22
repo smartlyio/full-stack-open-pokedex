@@ -28,11 +28,12 @@ jobs:
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
       - name: heroku deployment
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        uses: akhileshns/heroku-deploy@v3.12.12 
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "fspok" #Must be unique in Heroku
+          heroku_app_name: "fspok" 
           heroku_email: ${{secrets.HEROKU_MAIL}}
           healthcheck: 'https://fspok.herokuapp.com/health'
           checkstring: 'ok'
           delay: 5
+          rollbackonhealthcheckfailed: true
