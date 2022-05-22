@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fspok" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_MAIL}}
+          healthcheck: 'https://fspok.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 5
