@@ -44,9 +44,7 @@ jobs:
   
   tag_release:
     if: ${{github.event_name == 'push'}}
-    env:
-      COMMIT_MESSAGES: {{github.event.commits.*.message)}}
-    if: ${{ !contains(env.COMMIT_MESSAGES, '#skip') }}
+    if: {{ !contains(github.event.head_commit.message, '#skip' ) }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps: 
