@@ -43,7 +43,8 @@ jobs:
           rollbackonhealthcheckfailed: true
   
   tag_release:
-    if: ${{github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
+    # if: ${{github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')}}
+    if: ${{github.event_name == 'push'}}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps: 
