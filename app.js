@@ -5,7 +5,7 @@ const app = express()
 // Heroku dynamically sets a port
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000
-const APPVERSION = '3' // change this string to ensure a new version deployed
+const APPVERSION = '4' // change this string to ensure a new version deployed
 const EXPERIMENT = 'creating new branch and testing pull request'
 
 app.use(express.static('dist'))
