@@ -32,11 +32,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
-    production_deployment:
-      runs-on: ubuntu-20.04
-      permissions: write-all
-      if: ${{ github.event_name == 'push' }}
-      steps:
+  production_deployment:
+    runs-on: ubuntu-20.04
+    permissions: write-all
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
