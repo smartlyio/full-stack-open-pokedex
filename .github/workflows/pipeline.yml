@@ -11,6 +11,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -30,7 +31,6 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
-      if: ${{ github.event_name == 'push' }}
       - name: heroku deployment
         uses: akhileshns/heroku-deploy@v3.12.12 
         with:
@@ -41,3 +41,7 @@ jobs:
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+        - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.36.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
