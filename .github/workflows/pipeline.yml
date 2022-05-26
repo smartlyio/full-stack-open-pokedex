@@ -11,9 +11,32 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    permissions: write-all
-    if: ${{ github.event_name == 'push' }}
     steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: npm install
+        run: npm install
+      - name: build
+        run: npm run build
+      - name: lint
+        run: npm run eslint
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: 'http://localhost:5000'
+    production_deployment:
+      runs-on: ubuntu-20.04
+      permissions: write-all
+      if: ${{ github.event_name == 'push' }}
+      steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
@@ -28,16 +51,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: lint
-        run: npm run eslint
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: 'http://localhost:5000'
+          DEFAULT_BUMP: patch
       - name: heroku deployment
         uses: akhileshns/heroku-deploy@v3.12.12 
         with:
@@ -48,3 +62,4 @@ jobs:
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+    
