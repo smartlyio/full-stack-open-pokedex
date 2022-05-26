@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  test_pipeline:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'pull_request' }}
     steps:
@@ -33,6 +33,27 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Test Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: Test Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   production_deployment:
     runs-on: ubuntu-20.04
     permissions: write-all
@@ -63,4 +84,25 @@ jobs:
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+      - name: Production deployment success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Production deployment success
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Production deployment Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Production deployment Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Production deployment Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: Production deployment Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     
