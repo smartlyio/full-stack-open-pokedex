@@ -38,4 +38,5 @@ jobs:
           heroku_email: "alexander.sodergard@gmail.com" 
           healthcheck: "https://fullstack-pokedex-alsoderg.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
       - uses: actions/checkout@v2
