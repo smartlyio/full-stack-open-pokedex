@@ -36,3 +36,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "sleepy-savannah-25178"
           heroku_email: "aliinsti@keemail.me"
+          healthcheck: "https://sleepy-savannah-25178.heroku.com/version"
+          checkstring: "11.11"
+          delay: 30
+
