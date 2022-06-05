@@ -39,4 +39,5 @@ jobs:
           healthcheck: "https://sleepy-savannah-25178.herokuapp.com/version"
           checkstring: "11.11"
           delay: 30
+          rollbackonhealthcheckfailed: true
 
