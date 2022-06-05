@@ -37,7 +37,7 @@ jobs:
           heroku_app_name: "sleepy-savannah-25178"
           heroku_email: "aliinsti@keemail.me"
           healthcheck: "https://sleepy-savannah-25178.herokuapp.com/version"
-          checkstring: "11.11"
+          checkstring: "11.12"
           delay: 30
           rollbackonhealthcheckfailed: true
 
