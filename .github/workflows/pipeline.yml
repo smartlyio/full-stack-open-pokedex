@@ -47,7 +47,6 @@ jobs:
           WITH_V: true
           INITIAL_VERSION: '11.13.0'
           WITH_V: true
-      - name:
   heroku_deployment_pipeline:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
