@@ -8,7 +8,6 @@ on:
     branches: [master]
     types: [opened, syncronize]
 
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -31,6 +30,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      if: ${{ github.event_name == 'push' }}
       - name: deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
