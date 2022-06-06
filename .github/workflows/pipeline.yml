@@ -35,3 +35,4 @@ jobs:
           heroku_email: hellsten.antti@gmail.com
           healthcheck: https://fso2022-part11-depl-exercise.herokuapp.com/health
           checkstring: ok
+          rollbackhealthcheckfailed: true
