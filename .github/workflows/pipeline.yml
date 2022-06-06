@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fso2022-part11-depl-exercise
           heroku_email: hellsten.antti@gmail.com
+          healthcheck: https://fso2022-part11-depl-exercise.herokuapp.com/health
+          checkstring: ok
