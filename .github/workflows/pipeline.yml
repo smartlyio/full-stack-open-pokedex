@@ -46,7 +46,6 @@ jobs:
           healthcheck: https://fso2022-part11-depl-exercise.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
-        run: echo "Task is skipped if commit message contains '#skip'"
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
