@@ -5,6 +5,9 @@ module.exports = {
     node: true,
     "jest/globals": true,
   },
+  global: {
+    cy: true,
+  },
   extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
     ecmaFeatures: {
