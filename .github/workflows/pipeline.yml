@@ -34,6 +34,8 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: info message
+        run: echo "'deploy to Heroku' task is skipped if commit message contains '#skip'"
       - name: deploy to Heroku
         if: ${{ (!contains(toJson(github.event.commits.*.message), '#skip')) && (github.event_name == 'push') }}
         uses: akhileshns/heroku-deploy@v3.12.12
@@ -44,6 +46,7 @@ jobs:
           healthcheck: https://fso2022-part11-depl-exercise.herokuapp.com/health
           checkstring: ok
           rollbackonhealthcheckfailed: true
+        run: echo "Task is skipped if commit message contains '#skip'"
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -51,23 +54,16 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: Bump version and push tag
+      - name: info message
+        run: echo "'Bump version and push tag' task is skipped if commit message contains '#skip'"
+      - name: bump version and push tag
         if: ${{ (!contains(toJson(github.event.commits.*.message), '#skip')) && (github.event_name == 'push') }}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           With_V: true
           DEFAULT_BUMP: patch
-
