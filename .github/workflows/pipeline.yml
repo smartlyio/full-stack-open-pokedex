@@ -35,7 +35,7 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
       - name: deploy to Heroku. Skip if "#skip" in commit message
-        if: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }} && ${{ github.event_name == 'push' }}
+        if: ${{ (!contains(toJson(github.event.commits.*.message), '#skip')) && (github.event_name == 'push') }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
