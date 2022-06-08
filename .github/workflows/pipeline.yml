@@ -70,3 +70,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           With_V: true
           DEFAULT_BUMP: patch
+
+          
