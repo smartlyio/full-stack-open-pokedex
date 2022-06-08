@@ -51,6 +51,18 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       - name: Bump version and push tag. Skip if "#skip" in commit message
         if: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }} && ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.36.0
