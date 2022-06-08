@@ -34,7 +34,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: deploy to Heroku. Skip if "#skip" in commit message
+      - name: deploy to Heroku
         if: ${{ (!contains(toJson(github.event.commits.*.message), '#skip')) && (github.event_name == 'push') }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
@@ -63,12 +63,11 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: Bump version and push tag. Skip if "#skip" in commit message
-        if: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }} && ${{ github.event_name == 'push' }}
+      - name: Bump version and push tag
+        if: ${{ (!contains(toJson(github.event.commits.*.message), '#skip')) && (github.event_name == 'push') }}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           With_V: true
           DEFAULT_BUMP: patch
 
-          
