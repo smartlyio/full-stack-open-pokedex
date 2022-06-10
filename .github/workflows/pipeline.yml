@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: npm install 
-        run: npm install  
+      - name: npm install
+        run: npm install
       - name: lint
         run: npm run eslint
       - name: e2e tests
@@ -24,3 +24,11 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'full-stack-open-pokedex-yves' #Must be unique in Heroku
+          heroku_email: 'yalikalfic@yahoo.com'
+          healthcheck: 'https://full-stack-open-pokedex-yves.herokuapp.com/health'
+          healthcheck: 'https://full-stack-open-pokedex-yves.herokuapp.com/version'
