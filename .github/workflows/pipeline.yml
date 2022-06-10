@@ -31,4 +31,3 @@ jobs:
           heroku_app_name: 'full-stack-open-pokedex-yves' #Must be unique in Heroku
           heroku_email: 'yalikalfic@yahoo.com'
           healthcheck: 'https://full-stack-open-pokedex-yves.herokuapp.com/health'
-          healthcheck: 'https://full-stack-open-pokedex-yves.herokuapp.com/version'
