@@ -15,7 +15,8 @@ jobs:
           node-version: '16'
       - name: npm install 
         run: npm install  
-      - name: lint        
-        run: npm run eslint
-      - name: build
-        run npm build
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: 'quiet-fortress-08698'
+            heroku_email: 'ali.zoubair@outlook.com'
