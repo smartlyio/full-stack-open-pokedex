@@ -34,3 +34,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'full-stack-open-pokedex-jordi' #Must be unique in Heroku
           heroku_email: 'sangalesbenes@uoc.edu'
+          healthcheck: 'https://full-stack-open-pokedex-jordi.herokuapp.com/health'
+          checkstring: 'ok'
