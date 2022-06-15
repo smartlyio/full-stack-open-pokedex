@@ -31,8 +31,8 @@ jobs:
           # quote the url to be safe against YML parsing surprises
           wait-on: 'http://localhost:5000'
           wait-on-timeout: 30
-      if: ${{ github.event_name == 'push' }} 
       - name: Deploy to heroku
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
