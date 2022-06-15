@@ -11,7 +11,8 @@ module.exports = {
     },
     'extends': [
         'eslint:recommended',
-        'plugin:react/recommended'
+        'plugin:react/recommended',
+        'plugin:cypress/recommended'
     ],
     'globals': {
         'Atomics': 'readonly',
@@ -25,7 +26,9 @@ module.exports = {
         'sourceType': 'module'
     },
     'plugins': [
-        'react'
+        'react',
+        'jest',
+        'cypress'
     ],
     'rules': {
         'indent': [
@@ -43,6 +46,17 @@ module.exports = {
         'semi': [
             'error',
             'never'
-        ]
+        ],
+        "jest/no-disabled-tests": "warn",
+        "jest/no-focused-tests": "error",
+        "jest/no-identical-title": "error",
+        "jest/prefer-to-have-length": "warn",
+        "jest/valid-expect": "error",
+        "cypress/no-assigning-return-values": "error",
+        "cypress/no-unnecessary-waiting": "error",
+        "cypress/assertion-before-screenshot": "warn",
+        "cypress/no-force": "warn",
+        "cypress/no-async-tests": "error",
+        "cypress/no-pause": "error"
     }
 }
