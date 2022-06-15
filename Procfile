@@ -1,1 +1,1 @@
-web: npm run start-prod-force-error
+web: npm run start-prod
