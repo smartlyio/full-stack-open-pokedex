@@ -17,4 +17,4 @@ jobs:
       - name: npm install
         run: npm install
       - name: lint
-        run: npm run eslint
+        run: npm run eslint src/App.jsx
