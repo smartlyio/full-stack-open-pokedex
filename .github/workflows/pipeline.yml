@@ -36,3 +36,4 @@ jobs:
           heroku_email: 'sangalesbenes@uoc.edu'
           healthcheck: 'https://full-stack-open-pokedex-jordi.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
