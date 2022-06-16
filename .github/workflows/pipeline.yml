@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-fortress-57133"
           heroku_email: "capture13806680065@gmail.com"
+          healthcheck: "https://nameless-fortress-57133.herokuapp.com/health"
+          checkstring: "ok"
