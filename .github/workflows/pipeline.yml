@@ -55,12 +55,12 @@ jobs:
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
         with:
-            severity: info
-            details: A new version of Pokedex deployed.
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          details: A new version of Pokedex deployed.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Error
-          uses: rjstone/discord-webhook-notify@v1
-          with:
-              severity: error
-              details: Build failed
-              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
