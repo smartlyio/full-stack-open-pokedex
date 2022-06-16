@@ -1,3 +1,5 @@
+name: test scheduled task
+
 on:
   schedule:
     - cron: '* * * * *'
