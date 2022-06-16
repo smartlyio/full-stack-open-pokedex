@@ -11,10 +11,12 @@ app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
 
+const test = 'fail'
+
 app.get('/health', (req, res) => {
   res.send('ok')
 })
 
 app.get('/version', (req, res) => {
-  res.send('notify test failed') // change this string to ensure a new version deployed
+  res.send('notify test builded') // change this string to ensure a new version deployed
 })
