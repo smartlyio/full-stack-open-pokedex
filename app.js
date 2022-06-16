@@ -1,6 +1,5 @@
 const express = require('express')
-//pretend its not working
-//const app = express()
+const app = express()
 
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5000
@@ -17,5 +16,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('notify test builded') // change this string to ensure a new version deployed
+  res.send('v11') // change this string to ensure a new version deployed
 })

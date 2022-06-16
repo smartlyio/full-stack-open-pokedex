@@ -1,4 +1,8 @@
+name: test scheduled task
+
 on:
+  push:
+    branches: [master, fix-but-dont-deploy]
   schedule:
     - cron: '* * * * *'
 
