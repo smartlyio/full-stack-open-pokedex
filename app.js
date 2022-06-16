@@ -16,5 +16,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('this should not be deployed, fix syntax') // change this string to ensure a new version deployed
+  res.send('notify test failed') // change this string to ensure a new version deployed
 })

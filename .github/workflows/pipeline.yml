@@ -52,3 +52,15 @@ jobs:
         env:
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: info
+            details: A new version of Pokedex deployed.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Error
+          uses: rjstone/discord-webhook-notify@v1
+          with:
+              severity: error
+              details: Build failed
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
