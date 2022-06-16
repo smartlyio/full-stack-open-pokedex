@@ -35,3 +35,4 @@ jobs:
           heroku_email: "capture13806680065@gmail.com"
           healthcheck: "https://nameless-fortress-57133.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
