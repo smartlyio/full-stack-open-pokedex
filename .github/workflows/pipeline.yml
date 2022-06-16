@@ -40,6 +40,30 @@ jobs:
           healthcheck: "https://nameless-fortress-57133.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Discord notification on success
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: info
+            username: Github
+            color: '#00FF00'
+            description: to https://nameless-fortress-57133.herokuapp.com by ${{github.actor}}           
+            footer: 'Severity: Informational'
+            text: A new version of Pokedex deployed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Discord notification on failure
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: info
+            username: Github
+            color: '#FF0000'
+            description: commit
+            details: "${{github.server_url}}/${{github.repository}}/commit/${{github.sha}} 
+                      by ${{github.actor}} broke the build"
+            footer: 'Severity: Error'
+            text: Build failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
