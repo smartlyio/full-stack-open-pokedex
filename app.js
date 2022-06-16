@@ -11,8 +11,6 @@ app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
 
-const test = 'fail'
-
 app.get('/health', (req, res) => {
   res.send('ok')
 })
