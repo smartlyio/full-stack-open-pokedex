@@ -22,6 +22,13 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: Test Error
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test
       - name: Cypress run
@@ -52,3 +59,10 @@ jobs:
         env:
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Test Info
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: A new version of Pokedex deployed.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
