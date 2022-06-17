@@ -34,3 +34,4 @@ jobs:
           heroku_app_name: "quiet-springs-62533" #Must be unique in Heroku
           heroku_email: "bgp002@myy.haaga-helia.fi"
           healthcheck: "https://quiet-springs-62533.herokuapp.com/health"
+          checkstring: "ok"
