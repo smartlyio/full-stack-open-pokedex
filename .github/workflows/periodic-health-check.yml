@@ -1,0 +1,21 @@
+name: Periodic Health Check
+
+on:
+  # schedule:
+  #   # * is a special character in YAML so you have to quote this string
+  #   - cron:  '*/15 * * * *'
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: URL Health Check
+        uses: Jtalk/url-health-check-action@v2.2
+        with:
+          url: https://nameless-fortress-57133.herokuapp.com
+          # Follow redirects, or just report success on 3xx status codes
+          follow-redirect: no   # Optional, defaults to "no"
+          # Fail this action after this many failed attempts
+          max-attempts: 2       # Optional, defaults to 1
+          # Delay between retries
+          retry-delay: 5s       # Optional, only applicable to max-attempts > 1
