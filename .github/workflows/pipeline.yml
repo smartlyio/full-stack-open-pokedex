@@ -35,3 +35,4 @@ jobs:
           heroku_email: "bgp002@myy.haaga-helia.fi"
           healthcheck: "https://quiet-springs-62533.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
