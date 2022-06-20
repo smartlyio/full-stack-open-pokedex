@@ -13,6 +13,7 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 })))
 
 //just comment
+//another comment
 
 const App = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=784', mapResults)
