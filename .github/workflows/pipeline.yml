@@ -32,8 +32,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deployment
-        if: ${{ github.event_name == 'push' }}
+
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "quiet-springs-62533" #Must be unique in Heroku
@@ -47,8 +48,9 @@ jobs:
     runs-on: ubuntu-20.04 
     steps:
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+
         uses: anothrNick/github-tag-action@1.36.0
+        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: "#patch"
+          DEFAULT_BUMP: 'patch'
