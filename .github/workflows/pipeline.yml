@@ -32,7 +32,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deployment
-
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         if: ${{ github.event_name == 'push' }}
         with:
@@ -42,6 +41,22 @@ jobs:
           healthcheck: "https://quiet-springs-62533.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: build success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')
+        with:
+          severity: info
+          details: New version deployed successfully!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: build failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: failure()
+      with: 
+        severity: error
+        details: Build failed for commit $GITHUB_SHA
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          
+
           
   tag_release:
     needs: [simple_deployment_pipeline]
