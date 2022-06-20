@@ -52,7 +52,7 @@ jobs:
         if: failure()
         with: 
           severity: error
-          details: Build failed for commit $GITHUB_SHA
+          details: Build failed for commit https://github.com/smartlyio/full-stack-open-pokedex/commit/$GITHUB_SHA
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           
 
