@@ -41,19 +41,19 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: build success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')
         with:
           severity: info
           details: New version deployed successfully!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: build failure
-      uses: rjstone/discord-webhook-notify@v1
-      if: failure()
-      with: 
-        severity: error
-        details: Build failed for commit $GITHUB_SHA
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with: 
+          severity: error
+          details: Build failed for commit $GITHUB_SHA
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           
 
           
