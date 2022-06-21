@@ -1,4 +1,4 @@
-name: Hello World!
+name: Date and dir
 
 on:
   push:
@@ -11,5 +11,4 @@ jobs:
     steps:
       - name: Say hello
         run: |
-          date
           ls -l
