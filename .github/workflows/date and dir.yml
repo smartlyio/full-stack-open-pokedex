@@ -6,9 +6,10 @@ on:
       - master
 
 jobs:
-  hello_world_job:
+  date_and_dir_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
+      - name: DateAndDir
         run: |
+          date
           ls -l
