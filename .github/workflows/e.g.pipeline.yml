@@ -14,9 +14,6 @@ jobs:
         with:
           node-version: '16'
       - name: npm install
-        run: |
-          echo "Hello World!"
-      - name: Now it is
         run: npm install
       - name: lint
         run: npm run eslint
