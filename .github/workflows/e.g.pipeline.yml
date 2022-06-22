@@ -15,5 +15,7 @@ jobs:
           node-version: '16'
       - name: npm install
         run: npm install
+      - name: create env
+        run: touch .env
       - name: lint
         run: npm run eslint --fix
