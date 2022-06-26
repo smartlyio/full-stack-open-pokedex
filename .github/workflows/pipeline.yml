@@ -1,3 +1,10 @@
+name: Deployment pipeline
+
+on:
+    push:
+        branches:
+            - master
+
 jobs:
     deployment_pipeline:
         runs-on: ubuntu-latest
