@@ -10,3 +10,7 @@ jobs:
         steps:
             - name: hello world
               run: echo "Hello World"
+            - name: give the time
+              run: date
+            - name: print directory
+              run: ls -l
