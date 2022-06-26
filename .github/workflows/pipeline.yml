@@ -33,7 +33,4 @@ jobs:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                   heroku_app_name: "hidden-waters-12808"
                   heroku_email: ${{secrets.HEROKU_EMAIL}}
-            - name: health check
-              uses: akhileshns/heroku-deploy@v3.12.12
-              with:
                   healthcheck: "hidden-waters-12808.herokuapp.com"
