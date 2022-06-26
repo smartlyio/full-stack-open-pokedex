@@ -33,4 +33,4 @@ jobs:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                   heroku_app_name: "hidden-waters-12808"
                   heroku_email: ${{secrets.HEROKU_EMAIL}}
-                  healthcheck: "hidden-waters-12808.herokuapp.com"
+                  healthcheck: "hidden-waters-12808.herokuapp.com/health"
