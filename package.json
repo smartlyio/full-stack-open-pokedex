@@ -7,6 +7,7 @@
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
+    "lint": "eslint .",
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
     "build": "webpack --mode production"
