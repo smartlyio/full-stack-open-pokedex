@@ -7,7 +7,7 @@ on:
 
 jobs:
   deplayment pipe:
-    runs on: Ubuntu-20.4
+    runs-on: Ubuntu-20.4
     steps:
       - uses: action/checkout@v3
       - uses: action/setup-node@v2
