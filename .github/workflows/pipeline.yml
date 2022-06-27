@@ -1,4 +1,3 @@
-
 name: Hello World!
 
 on:
@@ -7,22 +6,14 @@ on:
       - master
 
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Say hello
-        run: |
-          echo "Hello World!"
-          
-jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
         with:
-          node-version: '16'
-      - name: npm install 
-        run: npm install  
+          node-version: "16"
+      - name: npm install
+        run: npm install
       - name: lint
         run: npm run eslint
