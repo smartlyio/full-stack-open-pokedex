@@ -1,4 +1,7 @@
-import { useEffect, useState } from 'react'
+import {
+  useEffect,
+  useState
+} from 'react'
 import axios from 'axios'
 
 const useApi = (url, mapResults = (result) => result) => {
@@ -14,7 +17,13 @@ const useApi = (url, mapResults = (result) => result) => {
       .finally(() => setIsLoading(false))
   }, [url])
 
-  return { data, isLoading, error }
+  return {
+    data,
+    isLoading,
+    error
+  }
 }
 
-export { useApi }
+export {
+  useApi
+}
