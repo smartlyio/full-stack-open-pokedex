@@ -17,4 +17,4 @@ jobs:
           echo "It is $(date)"
       - name: Directory content
         run: |
-          ls -la
+          ls -l
