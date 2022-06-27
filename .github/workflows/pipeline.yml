@@ -36,3 +36,4 @@ jobs:
           heroku_email: 'juansechavero@gmail.com'
           healthcheck: 'http://localhost:5000/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
