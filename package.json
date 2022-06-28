@@ -10,7 +10,9 @@
     "lint": "eslint .",
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint:fix": "eslint --fix --ext .js,.jsx .",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "test:e2e": "cypress run --spec cypress/e2e/pokedex_e2e.cy.js",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -35,6 +37,7 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^10.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
