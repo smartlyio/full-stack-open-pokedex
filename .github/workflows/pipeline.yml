@@ -41,15 +41,15 @@ jobs:
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
   tag_release:
+    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-      - if: ${{ github.event_name == 'push' }}
-        name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.39.0
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@ce4b5ffa38e072fa7a901e417253c438fcc2ccce
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
