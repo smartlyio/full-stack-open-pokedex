@@ -13,6 +13,11 @@
     "cypress:open": "cypress open",
     "test:e2e": "cypress run -spec cypress/component/note_app.cy.js"
   },
+  "eslintConfig": {
+    "extends": [
+      "plugin:cypress/recommended"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
@@ -37,6 +42,7 @@
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
