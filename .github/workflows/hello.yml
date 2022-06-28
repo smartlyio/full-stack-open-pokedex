@@ -14,3 +14,10 @@ jobs:
           echo "Hello World!"
           date
           ls
+      - name: Now it is
+        run: |
+          date
+      - name: directory content
+        run: |
+          ls -l
+    
