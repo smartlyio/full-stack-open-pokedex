@@ -9,7 +9,9 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run -spec cypress/component/note_app.cy.js"
   },
   "repository": {
     "type": "git",
@@ -47,6 +49,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "cypress": "^10.2.0",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
