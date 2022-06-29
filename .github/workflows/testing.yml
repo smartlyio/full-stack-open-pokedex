@@ -7,10 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      with:
-        node-version: 16
-        cache: 'npm'
-    - run: npm ci
-    - run: npm test
-    - name: Cypress run
-      uses: cypress-io/github-action@v4
+        with:
+          node-version: 16
+          cache: 'npm'
+      
+      - name: Cypress run
+        uses: cypress-io/github-action@v4
