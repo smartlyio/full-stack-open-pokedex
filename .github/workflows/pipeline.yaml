@@ -48,5 +48,5 @@ jobs:
         if: ${{ github.event_name == 'push' }} 
         uses: anothrNick/github-tag-action@1.36.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
           DEFAULT_BUMP: minor
