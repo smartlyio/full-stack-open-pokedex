@@ -6,11 +6,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
-        with:
-          node-version: "16"
-      - name: npm install
-        uses: npm install
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
+      - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        cache: 'npm'
+    - run: npm ci
+    - run: npm test
+    - name: Cypress run
+      uses: cypress-io/github-action@v4
