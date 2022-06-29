@@ -15,14 +15,5 @@ jobs:
           node-version: "16"
       - name: npm install
         run: npm install
-      - name: cypress
-        run: npm install cypress --save-dev
       - name: lint
         run: npm run lint
-
-      - uses: cypress-io/github-action@v2
-
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:8080
