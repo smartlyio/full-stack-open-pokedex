@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-jhiekkap"
           heroku_email: "jari.hiekkapelto@gmail.com"
+          healthcheck: "https://pokedex-jhiekkap.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
