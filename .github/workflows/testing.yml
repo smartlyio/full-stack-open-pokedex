@@ -11,6 +11,9 @@ jobs:
         node-version: 16
         cache: 'npm'
     - run: npm ci
-    - run: npm test
-    - name: Cypress run
-      uses: cypress-io/github-action@v4
+    - name: e2e tests
+      uses: cypress-io/github-action@v2
+      with:
+        command: npm run test:e2e
+        start: npm run start-prod
+        wait-on: http://localhost:8081
