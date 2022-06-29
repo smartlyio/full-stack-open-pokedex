@@ -10,6 +10,7 @@ jobs:
         with:
           node-version: "16"
       - name: npm install
-        run: npm install
+        uses: npm install
+
       - name: Cypress run
         uses: cypress-io/github-action@v4
