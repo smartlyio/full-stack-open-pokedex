@@ -1,5 +1,6 @@
-//testing using cypress pipeline yml
+
 name: End-to-end tests
+
 on: [push]
 jobs:
   cypress-run:
