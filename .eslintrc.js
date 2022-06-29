@@ -18,7 +18,7 @@ module.exports = {
     indent: ['error', 2],
     'linebreak-style': [
       'error',
-      process.env.NODE_ENV === 'prod' ? 'unix' : 'windows',
+      require('os').EOL === '\r\n' ? 'windows' : 'unix',
     ],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
