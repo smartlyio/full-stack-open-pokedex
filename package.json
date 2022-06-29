@@ -1,9 +1,6 @@
 {
   "name": "fullstackopen-cicd",
   "version": "1.0.0",
-  "engines": {
-    "node": "17.x"
-  },
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
