@@ -45,12 +45,14 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
-    needs: [deployment_pipeline]
+    needs: [deployment_pipeline, build]
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
-          GITHUB_TOKEN: ${{secrets.HEROKU_API_KEY}}
-          DEFAULT_BUMP: patch
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+        run: |
+          echo $GITHUB_TOKEN
