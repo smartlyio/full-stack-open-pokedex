@@ -6,4 +6,9 @@ describe('Pokedex', function () {
       'Pokémon and Pokémon character names are trademarks of Nintendo.'
     )
   })
+
+  it('get to venusaur page', () => {
+    cy.get('[href="/pokemon/venusaur"]').click()
+    cy.location('pathname').should('equal', '/pokemon/venusaur')
+  })
 })
