@@ -10,7 +10,7 @@ on:
 
 jobs:
   deployment_pipeline:
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -33,7 +33,7 @@ jobs:
           wait-on: http://localhost:5000
   build:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -45,9 +45,9 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
-    needs: [deployment_pipeline]
+    needs: deployment_pipeline
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'pull_request' }}
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
