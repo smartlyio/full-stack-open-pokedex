@@ -45,13 +45,11 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
-    needs: [deployment_pipeline, build]
+    needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'pull_request' }}
     steps:
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.36.0
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          RELEASE_BRANCHES: master, builds
