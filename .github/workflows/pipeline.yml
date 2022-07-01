@@ -38,3 +38,4 @@ jobs:
           heroku_email: "kaimhall@gmail.com"
           healthcheck: "https://pokedox2022.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
