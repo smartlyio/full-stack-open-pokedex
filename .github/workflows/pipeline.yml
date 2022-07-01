@@ -10,6 +10,7 @@ on:
 
 jobs:
   deployment_pipeline:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -32,6 +33,7 @@ jobs:
           wait-on: http://localhost:5000
   build:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
