@@ -31,12 +31,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  build:
-    runs-on: ubuntu-latest
-    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: build
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedox2022" #Must be unique in Heroku
@@ -49,6 +47,7 @@ jobs:
     runs-on: ubuntu-20.04
     if: ${{ !contains(github.event.head_commit.message, '#skip') }}
     steps:
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
