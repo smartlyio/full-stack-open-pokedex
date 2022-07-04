@@ -40,3 +40,5 @@ jobs:
           heroku_app_name: "marvelous-crater-lake-02747" #Must be unique in Heroku
           heroku_email: "atte.laakso91@gmail.com"
           healthcheck: "https://marvelous-crater-lake-02747.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
