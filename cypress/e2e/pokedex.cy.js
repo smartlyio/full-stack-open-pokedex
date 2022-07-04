@@ -1,4 +1,5 @@
-describe('Pokedex', function() {
+describe('Pokedex', function () {
+  Cypress.config('pageLoadTimeout', 180000)
   it('front page can be opened', function() {
     cy.visit('http://localhost:5000')
     cy.contains('ivysaur')
