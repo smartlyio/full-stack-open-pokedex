@@ -33,7 +33,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  heroku deployment:
+  heroku_deployment:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
