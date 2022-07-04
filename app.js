@@ -10,7 +10,7 @@ app.listen(PORT, () => {
   console.log('server started on port 5000') // eslint-disable-line no-console
 })
 
-app.get('/heath', (req, res) => {
+app.get('/health', (req, res) => {
   res.send('ok')
 })
 
