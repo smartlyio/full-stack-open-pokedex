@@ -20,7 +20,7 @@ describe('<App />', () => {
       render(<App />)
     })
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
-    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=10')//limit used to be 784
+    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=784')//limit used to be 784
   })
 
   it('shows LoadingSpinner', async () => {
