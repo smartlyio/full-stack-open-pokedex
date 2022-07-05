@@ -50,6 +50,10 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
+      - name: commit messages to variable
+        env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
