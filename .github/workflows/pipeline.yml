@@ -53,7 +53,7 @@ jobs:
       - name: commit messages to variable
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        if: false == contains(env.COMMIT_MESSAGES, '#SKIP')
+        if: contains(env.COMMIT_MESSAGES, '#SKIP')
         run: |
           - uses: actions/setup-node@v2
             with:
