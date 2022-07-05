@@ -53,19 +53,18 @@ jobs:
       - name: commit messages to variable
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        if: contains(env.COMMIT_MESSAGES, '#SKIP')
-        run: |
-          - uses: actions/setup-node@v2
-            with:
-              node-version: '16'
-          - uses: akhileshns/heroku-deploy@v3.12.12
-            with:
-              heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-              heroku_app_name: "marvelous-crater-lake-02747" #Must be unique in Heroku
-              heroku_email: "atte.laakso91@gmail.com"
-              healthcheck: "https://marvelous-crater-lake-02747.herokuapp.com/health"
-              checkstring: "ok"
-              rollbackonhealthcheckfailed: true
+        run: echo "$COMMIT_MESSAGES"
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "marvelous-crater-lake-02747" #Must be unique in Heroku
+          heroku_email: "atte.laakso91@gmail.com"
+          healthcheck: "https://marvelous-crater-lake-02747.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
   a_test_job:
     runs-on: ubuntu-20.04
     steps:
