@@ -33,6 +33,7 @@ jobs:
           wait-on: http://localhost:5000
   heroku_deployment:
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
