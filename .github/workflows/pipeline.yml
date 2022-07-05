@@ -48,6 +48,7 @@ jobs:
   heroku_deployment:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
+    if: ${{ contains(join(github.event.commits), '#SKIP') }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
