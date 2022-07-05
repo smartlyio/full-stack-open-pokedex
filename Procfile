@@ -1,1 +1,1 @@
-web: npm run heroku-prebuild && npm run start-prod && node app.js
+web: npm run heroku-prebuild && npm run build && npm run start-prod
