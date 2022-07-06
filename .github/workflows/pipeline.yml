@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request: 
+  pull_request:
     branches: [master]
     types: [opened, synchronize]
 
@@ -31,3 +31,13 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: full-stack-pokedex-jorgeii
           heroku_email: jorgemendozaiidev@gmail.com
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anotherNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+          DEFAULT_BUMP: patch
