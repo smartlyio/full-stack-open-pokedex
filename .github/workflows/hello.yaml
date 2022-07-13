@@ -1,3 +1,6 @@
 name: hello world
 jobs:
-  run: "echo hello world!""
+  steps:
+    name: Say hello
+    run: |
+      echo "hello world!"
