@@ -1,0 +1,4 @@
+name: hello world
+jobs:
+  name: hello world
+  run: hello world!
