@@ -1,4 +1,10 @@
 name: hello world
+
+on:
+  push:
+    branches:
+      - master
+      
 jobs:
   steps:
     name: Say hello
