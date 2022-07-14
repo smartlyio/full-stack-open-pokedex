@@ -34,11 +34,20 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: 'pokedex-fso-veggie'
           heroku_email: 'sirveggie@hotmail.com'
           healthcheck: 'https://pokedex-fso-veggie.herokuapp.com/health'
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
-          
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [simple_dep_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothr/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
