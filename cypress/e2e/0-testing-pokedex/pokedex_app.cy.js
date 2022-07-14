@@ -3,6 +3,7 @@ describe('Pokedex', function() {
     cy.visit('http://localhost:3001', { timeout: 100000 })
     cy.contains('ivysaur')
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
+    cy.contains('arbok')
   })
 
   it('viewing a pokemon and its attributes', function() {
