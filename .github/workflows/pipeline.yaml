@@ -26,4 +26,4 @@ jobs:
         with:
           command: npx cypress run
           start: npm run start-prod
-          wait-on: http://localhost:5000
+          wait-on: 'npx wait-on --timeout 100000 http://localhost:5000'
