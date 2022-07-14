@@ -1,9 +1,12 @@
-name: Deploy
+name: Deploy and check
 
 on:
   push:
     branches:
       - master
+    pull_request:
+      branches: [master]
+      types: [opened, synchronize]
 
 jobs:
   build:
