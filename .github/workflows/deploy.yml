@@ -9,6 +9,19 @@ on:
     types: [opened, synchronize]
 
 jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
+          
   simple_dep_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -41,6 +54,7 @@ jobs:
           checkstring: 'ok'
           delay: 5
           rollbackonhealthcheckfailed: true
+          
   tag_release:
     if: ${{ github.event_name == 'push' }}
     needs: [simple_dep_pipeline]
