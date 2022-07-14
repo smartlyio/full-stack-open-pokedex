@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'sirveggie@hotmail.com'
           healthcheck: 'https://pokedex-fso-veggie.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
