@@ -14,4 +14,4 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "vibrant-gerard-06294" #Must be unique in Heroku
-          heroku_email: "acm.holmes@gmail.com
+          heroku_email: "acm.holmes@gmail.com"
