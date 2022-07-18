@@ -14,4 +14,4 @@ jobs:
           echo "Hello World!"
       - name: Now it is
         run: |
-          echo "Run date"
+          "date"
