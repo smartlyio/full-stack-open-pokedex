@@ -26,4 +26,7 @@ module.exports = {
     "no-console": "error",
     "react/prop-types": 0,
   },
+  globals: {
+    cy: true,
+  },
 };
