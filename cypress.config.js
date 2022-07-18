@@ -8,5 +8,4 @@ module.exports = defineConfig({
     },
   },
   video: false,
-  pageLoadTimeout: 20000,
 })
