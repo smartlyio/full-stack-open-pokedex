@@ -33,4 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ancient-fortress-86203
           heroku_email: 16guitar@gmail.com
-          healthcheck: "https://ancient-fortress-86203.herokuapp.com/healthh"
+          healthcheck: "https://ancient-fortress-86203.herokuapp.com/health"
