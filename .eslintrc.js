@@ -34,7 +34,7 @@ module.exports = {
       "single"
     ],
     "semi": [
-      "error",
+      2,
       "never"
     ],
     "eqeqeq": "error",
