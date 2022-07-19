@@ -18,6 +18,8 @@ jobs:
             heroku_api_key: ${{secrets.HEROKU_API_KEY}}
             heroku_app_name: "pokedex-open" 
             heroku_email: "shevkunovnikita97@gmail.com"
+            branch: main
+            dontuseforce
         - name: npm install
           run: npm install
         - name: lint
