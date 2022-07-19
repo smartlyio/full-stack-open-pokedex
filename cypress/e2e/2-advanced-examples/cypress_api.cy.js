@@ -32,7 +32,7 @@ context('Cypress.Commands', () => {
 
     cy.get('button')
       .console('info')
-      .then(($button) => {
+      .then(() => {
         // subject is still $button
       });
   });

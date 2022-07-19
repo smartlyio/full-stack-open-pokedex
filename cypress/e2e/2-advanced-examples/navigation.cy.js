@@ -7,7 +7,7 @@ context('Navigation', () => {
     cy.get('.dropdown-menu').contains('Navigation').click();
   });
 
-  it("cy.go() - go back or forward in the browser's history", () => {
+  it('cy.go() - go back or forward in the browser\'\ s history', () => {
     // https://on.cypress.io/go
 
     cy.location('pathname').should('include', 'navigation');
