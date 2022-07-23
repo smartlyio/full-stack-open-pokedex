@@ -14,6 +14,7 @@ jobs:
       - name: npm install
         run: npm install
       - uses: cypress-io/github-action@v2
+        timeout-minutes: 10
         with:
           command: npm run test:e2e
           start: npm run start-prod
