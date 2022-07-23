@@ -3,8 +3,12 @@ on:
   push:
     branches:
       - master
-uses: cypress-io/github-action@v2
-with:
-  command: npm run test:e2e
-  start: npm run start-prod
-  wait-on: http://localhost:5000
+jobs:
+  E2E_TESTS:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: cypress-io/github-action@v2
+      - with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
