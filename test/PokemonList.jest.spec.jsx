@@ -1,8 +1,8 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
-import '@testing-library/jest-dom/extend-expect'
-import PokemonList from '../src/PokemonList'
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import '@testing-library/jest-dom/extend-expect';
+import PokemonList from '../src/PokemonList';
 
 
 const pokemonList = [{
@@ -13,7 +13,7 @@ const pokemonList = [{
   url: 'https://pokeapi.co/api/v2/pokemon/133/',
   name: 'eevee',
   id: 133
-}]
+}];
 
 describe('<PokemonList />', () => {
   it('should render items', () => {
@@ -21,8 +21,8 @@ describe('<PokemonList />', () => {
       <BrowserRouter>
         <PokemonList pokemonList={pokemonList} />
       </BrowserRouter>
-    )
-    expect(screen.getByText('bulbasaur')).toBeVisible()
-    expect(screen.getByText('eevee')).toBeVisible()
-  })
-})
+    );
+    expect(screen.getByText('bulbasaur')).toBeVisible();
+    expect(screen.getByText('eevee')).toBeVisible();
+  });
+});
