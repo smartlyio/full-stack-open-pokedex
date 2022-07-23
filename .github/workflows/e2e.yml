@@ -1,4 +1,8 @@
 name: e2e tests
+on:
+  push:
+    branches:
+      - master
 uses: cypress-io/github-action@v2
 with:
   command: npm run test:e2e
