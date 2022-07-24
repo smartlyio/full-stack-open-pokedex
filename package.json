@@ -12,6 +12,8 @@
     "cypress:open": "cypress open",
     "cy:run": "$(npm bin)/cypress run"
     
+
+    
   },
   "repository": {
     "type": "git",
