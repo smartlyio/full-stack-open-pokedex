@@ -20,17 +20,10 @@ jobs:
          node-version: ${{ matrix.node-version }}
       - name: npm install
         run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm test
-      - run: npm ci
       - name: cypress-test
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v2
         with:
-          command: npx cypress run
+          command: npm run cy:run
           start: npm run start-prod
           wait-on: http://localhost:5000
 
