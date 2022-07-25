@@ -41,3 +41,12 @@ jobs:
            heroku_email: "mieyle@protonmail.com"
            healthcheck: "https://pokedexy-app.herokuapp.com/health"
            rollbackonhealthcheckfailed: true
+      
+        tag_release:
+          needs: [simple_deployment_pipeline]
+          runs-on: ubuntu-20.04
+          steps:
+            - name: Bump version and push tag
+              uses: anothrNick/github-tag-action@1.36.0
+              env:
+                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
