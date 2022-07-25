@@ -28,7 +28,7 @@ jobs:
         run: npm test
       - run: npm ci
       - name: cypress-test
-        uses:  cypress-io/github-action@v[4]
+        uses: cypress-io/github-action@v4
         with:
           command: npm run cy:run
           command-prefix: "--"
