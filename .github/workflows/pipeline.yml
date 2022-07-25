@@ -24,7 +24,6 @@ jobs:
       - name: cypress-test
         uses: cypress-io/github-action@v2
         with:
-          - useLockFile: false
-          command: npm run cy:run
+          command: npx run cy:run
           start: npm run start-prod
           wait-on: http://localhost:5000
