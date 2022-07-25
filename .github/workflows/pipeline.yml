@@ -1,29 +1,17 @@
-name: Deployment pipeline
-
-on:
+name: Deploy to Firebase Hosting on merge
+'on':
   push:
     branches:
-      - master
-
+      - main
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+  cypress-run:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - run: CI=false
-        with:
-          node-version: "16"
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm test
       - name: Cypress run
         uses: cypress-io/github-action@v2
         with:
-          command: npm cypress run
-          wait-on: 'http://localhost:3000'
+          start: npm run cypress run
+          wait-on: 'http://localhost:5000'
