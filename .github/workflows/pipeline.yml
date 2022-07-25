@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-  pull_request:    
-    branches: [master] 
+  pull_request:
+    branches: [master]
     types: [opened, synchronize]
 
 jobs:
@@ -15,15 +15,15 @@ jobs:
       matrix:
         node-version: [14.x]
 
-    steps: 
+    steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-         node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
       - name: npm install
         run: npm install
-      - run: ls 
+      - run: ls
       - name: cypress-test
         uses: cypress-io/github-action@v2
         with:
@@ -32,21 +32,21 @@ jobs:
           wait-on: http://localhost:5000
           browser: firefox
           wait-on-timeout: 120
-      - name: deploy 
+      - name: deploy
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
-           heroku_api_key: ${{secrets.HEROKU_KEY}}
-           heroku_app_name: "pokedexy-app"
-           heroku_email: "mieyle@protonmail.com"
-           healthcheck: "https://pokedexy-app.herokuapp.com/health"
-           rollbackonhealthcheckfailed: true
-      
-        tag_release:
-          needs: [simple_deployment_pipeline]
-          runs-on: ubuntu-20.04
-          steps:
-            - name: Bump version and push tag
-              uses: anothrNick/github-tag-action@1.36.0
-              env:
-                GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          heroku_api_key: ${{secrets.HEROKU_KEY}}
+          heroku_app_name: "pokedexy-app"
+          heroku_email: "mieyle@protonmail.com"
+          healthcheck: "https://pokedexy-app.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
+
+    tag_release:
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.36.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
