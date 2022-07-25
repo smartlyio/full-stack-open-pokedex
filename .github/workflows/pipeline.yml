@@ -27,5 +27,6 @@ jobs:
           start: npm run start-prod
           command: npm run cy:run
           wait-on: http://localhost:5000
+          browser: firefox
           wait-on-timeout: 120
 
