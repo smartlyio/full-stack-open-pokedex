@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
           browser: firefox
           wait-on-timeout: 120
-      - run: heroku restart
+      - run: heroku restart -a
       - name: deploy 
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
