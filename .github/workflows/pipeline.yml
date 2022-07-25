@@ -20,6 +20,7 @@ jobs:
          node-version: ${{ matrix.node-version }}
       - name: npm install
         run: npm install
+      - run: ls 
       - name: cypress-test
         uses: cypress-io/github-action@v2
         with:
@@ -27,5 +28,4 @@ jobs:
           command: npm run cy:run
           wait-on: http://localhost:5000
           wait-on-timeout: 120
-      - run: ls 
 
