@@ -31,10 +31,9 @@ jobs:
           wait-on-timeout: 120
       - name: deploy 
         uses: akhileshns/heroku-deploy@v3.12.12
-        run: heroku releases
         with:
            heroku_api_key: ${{secrets.HEROKU_KEY}}
            heroku_app_name: "pokedexy-app"
            heroku_email: "mieyle@protonmail.com"
            healthcheck: "https://pokedexy-app.herokuapp.com/health"
-
+      - run : heroku releases
