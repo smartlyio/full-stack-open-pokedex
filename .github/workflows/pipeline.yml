@@ -30,8 +30,7 @@ jobs:
       - name: cypress-test
         uses: cypress-io/github-action@v4
         with:
-          command: npm run cy:run
-          command-prefix: "--"
+          command: npm cypress run
           start: npm run start-prod
           wait-on: http://localhost:5000
 
