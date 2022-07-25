@@ -12,12 +12,13 @@ jobs:
       matrix:
         node-version: [16.x, 17.x]
 
-    steps:
+    steps:you
+    
       - uses: actions/checkout@v3
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-        node-version: ${{ matrix.node-version }}
+          node-version: ${{ matrix.node-version }}
       - name: npm install
         run: npm install
       - name: lint
