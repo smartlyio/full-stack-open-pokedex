@@ -17,7 +17,7 @@ jobs:
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
-         node-version: ${{ matrix.node-version }}
+         node-version: node-version: '16'
       - name: npm install
         run: npm install
       - name: cypress-test
@@ -26,6 +26,8 @@ jobs:
           start: npm run start-prod
           command: npm run cy:run
           wait-on: http://localhost:5000
+          browser: firefox
+          headless: true
           wait-on-timeout: 120
 
 
