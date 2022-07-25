@@ -36,4 +36,4 @@ jobs:
            heroku_app_name: "pokedexy-app"
            heroku_email: "mieyle@protonmail.com"
            healthcheck: "https://pokedexy-app.herokuapp.com/health"
-      - run : heroku releases
+           rollbackonhealthcheckfailed: true
