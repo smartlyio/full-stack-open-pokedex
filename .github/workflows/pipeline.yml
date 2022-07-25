@@ -33,5 +33,5 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
            heroku_api_key: ${{secrets.HEROKU_KEY}}
-           heroku_app_name: "https://pokedexy-app.herokuapp.com/"
+           heroku_app_name: "pokedexy-app"
            heroku_email: "mieyle@protonmail.com"
