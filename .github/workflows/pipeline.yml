@@ -15,8 +15,6 @@ jobs:
           node-version: "16"
       - name: npm install
         run: npm install
-      - name: CI
-        run: CI=false
       - name: lint
         run: npm run eslint
       - name: build
@@ -29,3 +27,5 @@ jobs:
           command: npm run cy:run
           start: npm run start-prod
           wait-on: http://localhost:5000
+
+
