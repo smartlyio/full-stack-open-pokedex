@@ -35,4 +35,4 @@ jobs:
            heroku_api_key: ${{secrets.HEROKU_KEY}}
            heroku_app_name: "pokedexy-app"
            heroku_email: "mieyle@protonmail.com"
-           healthcheck: "https://[pokedexy-app].herokuapp.com/health"
+           healthcheck: "https://pokedexy-app.herokuapp.com/health"
