@@ -26,5 +26,6 @@ jobs:
           start: npm run start-prod
           command: npm run cy:run
           wait-on: http://localhost:5000
+          wait-on-timeout: 120
 
 
