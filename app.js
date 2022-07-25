@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
   res.send("success");
 });
 app.get("/health", (req, res) => {
-  res.send("ok");
+  res.send("ok ok");
 });
 
 app.listen(PORT, () => {});
