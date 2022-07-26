@@ -33,3 +33,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "thawing-retreat-21942"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: "https://thawing-retreat-21942.herokuapp.com/health"
+          delay: 5
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true

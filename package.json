@@ -8,7 +8,7 @@
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production",
+    "build": "npx auto-version && webpack --mode production",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
@@ -32,6 +32,7 @@
     "@babel/preset-react": "^7.9.4",
     "@testing-library/jest-dom": "^5.8.0",
     "@testing-library/react": "^10.0.4",
+    "auto-version-js": "^0.3.10",
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
