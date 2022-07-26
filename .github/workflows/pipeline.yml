@@ -43,6 +43,7 @@ jobs:
           rollbackonhealthcheckfailed: true
   tag_release:
     runs-on: ubuntu-20.04
+    needs: simple_deployment_pipeline
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
