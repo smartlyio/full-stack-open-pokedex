@@ -15,6 +15,8 @@ app.listen(PORT, () => {
 app.get('/health', (req, res) => {
   res.send('ok')
 })
+
+const version = /(.*(\.)){2}/
 app.get('/version', (req, res) => {
-  res.send(pjson.version)
+  res.send((pjson.version).replace(version, ''))
 })
