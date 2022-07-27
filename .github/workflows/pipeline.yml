@@ -34,6 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'shielded-woodland-56383'
