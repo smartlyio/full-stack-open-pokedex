@@ -43,15 +43,22 @@ jobs:
           delay: 5
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - name: Success
+      - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
-        if: success()
+        if: ${{ ( github.event_name == 'push' ) && success() }}
         with:
           severity: info
           description: to https://thawing-retreat-21942.herokuapp.com/ by ${{ github.actor }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://cdn-icons-png.flaticon.com/512/845/845646.png
           Text: A new version of Pokedex deployed
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ ( github.event_name != 'push' ) && success() }}
+        with:
+          severity: info
+          details: Build Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure
         uses: rjstone/discord-webhook-notify@master
         if: failure()
