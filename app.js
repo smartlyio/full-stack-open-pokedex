@@ -18,5 +18,7 @@ app.get('/health', (req, res) => {
 
 const version = /(.*(\.)){2}/
 app.get('/version', (req, res) => {
-  res.send((pjson.version).replace(version, ''))
+  if (Math.random() < 0.5) {
+    res.send((pjson.version).replace(version, ''))
+  }
 })
