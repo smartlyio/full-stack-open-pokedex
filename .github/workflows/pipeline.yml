@@ -82,7 +82,7 @@ jobs:
         with:
           fetch-depth: "0"
       - name: Prepare
-        uses: "srt32/git-actions@v0.0.3"
+        uses: "srt32/git-actions@2b4ed07ef2eadea5fcaeb11677d105b7dc342862"
         with:
           args: "git config --global --add safe.directory /github/workspace"
       - name: Bump version and push tag
