@@ -13,6 +13,4 @@ jobs:
         with:
           url: https://thawing-retreat-21942.herokuapp.com/health
           follow-redirect: false
-          max-attempts: 2
-          retry-delay: 5s
-          retry-all: true
+          max-attempts: 1
