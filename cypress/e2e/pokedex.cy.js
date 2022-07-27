@@ -12,6 +12,6 @@ describe('Pokedex', function () {
   it('invidulal page can be opened', function () {
     cy.contains('charmander').click()
     cy.contains('blaze')
-    cy.contains('solar power')
+    cy.contains('solar power');
   })
 })
