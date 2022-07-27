@@ -45,7 +45,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ ( github.event_name == 'push' ) && success() }}
+        if: ${{ ( github.event_name == 'push' ) && success() && (github.actor != "dependabot") }}
         with:
           severity: info
           description: to https://thawing-retreat-21942.herokuapp.com/ by ${{ github.actor }}
@@ -54,14 +54,14 @@ jobs:
           Text: A new version of Pokedex deployed
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ ( github.event_name != 'push' ) && success() }}
+        if: ${{ ( github.event_name != 'push' ) && success() && (github.actor != "dependabot")}}
         with:
           severity: info
           details: Build Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure
         uses: rjstone/discord-webhook-notify@master
-        if: failure()
+        if: ${{ failure() && (github.actor != "dependabot") }}
         with:
           text: Build failed
           severity: error
