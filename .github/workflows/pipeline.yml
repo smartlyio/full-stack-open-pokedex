@@ -32,4 +32,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'shielded-woodland-56383'
           heroku_email: ${{secrets.EMAIL}}
-          healthcheck: "https://shielded-woodland-56383.herokuapp.com/health"
+          healthcheck: 'https://shielded-woodland-56383.herokuapp.com/health'
+          checkstring: 'ok'
