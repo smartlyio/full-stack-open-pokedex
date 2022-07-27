@@ -20,5 +20,7 @@ const version = /(.*(\.)){2}/
 app.get('/version', (req, res) => {
   if (Math.random() < 0.5) {
     res.send((pjson.version).replace(version, ''))
+  } else {
+    res.status(500).send('error')
   }
 })
