@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+        with:
+          length: 7
       - uses: actions/setup-node@v2
         with:
           node-version: "16"
@@ -41,6 +43,29 @@ jobs:
           delay: 5
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Test Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1658857713~hmac=199381e6efc2826ebd8d8b77c49146bd
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@master
+        if: failure()
+        with:
+          severity: error
+          details: Test error.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          avatarUrl: https://cdn-icons-png.flaticon.com/512/1828/1828843.png
+      - name: Test Cancelled
+        uses: rjstone/discord-webhook-notify@v1
+        if: cancelled()
+        with:
+          severity: warn
+          details: Test Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
@@ -50,7 +75,7 @@ jobs:
           fetch-depth: "0"
       - name: Bump version and push tag
         if: ${{ ( github.event_name == 'push' ) && (!contains(github.event.head_commit.message, '#skip')) }}
-        uses: anothrNick/github-tag-action@1.36.0
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
