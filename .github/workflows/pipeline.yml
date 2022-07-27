@@ -40,4 +40,4 @@ jobs:
           heroku_email: ${{secrets.EMAIL}}
           healthcheck: 'https://shielded-woodland-56383.herokuapp.com/health'
           checkstring: 'ok'
-          # rollbackonhealthcheckfailed: true
+          rollbackonhealthcheckfailed: true
