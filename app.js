@@ -7,14 +7,8 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
-let random
 app.get('/health', (req, res) => {
-  random = Math.random()
-  if (random < 0.5) {
-    res.send('ok')
-  } else {
-    res.status(500).send('error')
-  }
+  res.send('ok')
 })
 
 const version = /(.*(\.)){2}/
