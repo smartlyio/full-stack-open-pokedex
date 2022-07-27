@@ -43,28 +43,29 @@ jobs:
           delay: 5
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - name: Test Success
+      - name: Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          description: to https://thawing-retreat-21942.herokuapp.com/ by ${{ github.actor }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          avatarUrl: https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1658857713~hmac=199381e6efc2826ebd8d8b77c49146bd
-      - name: Test Failure
+          avatarUrl: https://cdn-icons-png.flaticon.com/512/845/845646.png
+          Text: A new version of Pokedex deployed
+      - name: Failure
         uses: rjstone/discord-webhook-notify@master
         if: failure()
         with:
+          text: Build failed
           severity: error
-          details: Test error.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           avatarUrl: https://cdn-icons-png.flaticon.com/512/1828/1828843.png
-      - name: Test Cancelled
+      - name: Workflow Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
         with:
           severity: warn
-          details: Test Cancelled!
+          details: Workflow Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     runs-on: ubuntu-20.04
