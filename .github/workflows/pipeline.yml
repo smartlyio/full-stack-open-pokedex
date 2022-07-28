@@ -7,7 +7,7 @@ on:
   pull_request:
     branches:
       - master
-    types: 
+    types:
       - opened
       - synchronize
 
@@ -15,8 +15,10 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - name: checkout code
+        uses: actions/checkout@v3
+      - name: set up Node
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
       - name: npm install
@@ -33,7 +35,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - uses: akhileshns/heroku-deploy@v3.12.12
+      - name: deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -42,3 +45,14 @@ jobs:
           healthcheck: 'https://shielded-woodland-56383.herokuapp.com/health'
           checkstring: 'ok'
           rollbackonhealthcheckfailed: true
+  tag_release:
+    needs:
+      - simple_deployment_pipeline
+    runs-on: ubuntu-20.04
+    steps:
+      - name: bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
