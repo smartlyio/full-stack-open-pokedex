@@ -30,9 +30,9 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: joined messages
         env:
-          JOINED_MESSAGES: ${{ join(toJson(github.event.commits.*.message), " ... " }}
+          JOINED_MESSAGES: ${{ join(toJson(github.event.commits.*.message), ' / ' }}
         run: echo "$JOINED_MESSAGES"
       - name: check for skip
         env:
-          CONTAINS_SKIP: ${{ contains($JOINED_MESSAGES, "#skip")}}
+          CONTAINS_SKIP: ${{ contains(env.JOINED_MESSAGES, "#skip")}}
         run: echo "$CONTAINS_SKIP"
