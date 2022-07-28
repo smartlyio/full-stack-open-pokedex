@@ -42,7 +42,7 @@ jobs:
           healthcheck: "https://thawing-retreat-21942.herokuapp.com/health"
           delay: 5
           checkstring: "ok"
-          rollbackonhealthcheckfailed: false #TEMPORARY FOR TESTING, SHOULD BE TRUE!!!!!!!!!!!!!!!!!!
+          rollbackonhealthcheckfailed: true
       - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ ( github.event_name == 'push' ) && success() && (github.actor != 'dependabot[bot]') }}
