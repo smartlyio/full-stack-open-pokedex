@@ -35,3 +35,4 @@ jobs:
       - name: check for skip
         env:
           CONTAINS_SKIP: ${{ contains($JOINED_MESSAGES, "#skip")}}
+        run: echo "$CONTAINS_SKIP"
