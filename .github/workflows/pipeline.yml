@@ -27,6 +27,8 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+        env:
+          SKIP: contains(join(github.event.commits.*.message, ' / '), '#skip')
       - name: test
         run: npm run test
       - name: e2e tests
@@ -37,8 +39,6 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
-        env:
-          SKIP: contains(join(github.event.commits.*.message, ' / '), '#skip')
         if: ${{ github.event_name == 'push' || env.SKIP }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
