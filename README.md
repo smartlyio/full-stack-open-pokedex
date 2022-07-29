@@ -15,4 +15,4 @@ Start by running `npm install` inside the project folder
 - `npm run start-prod` to run your production build
 
 ## Repository for exercise 11.20:
-[Insert URL here]
+https://github.com/Ma100Dev/anecdotes-cicd
