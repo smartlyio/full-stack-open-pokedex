@@ -25,7 +25,7 @@ module.exports = {
       ],
     "linebreak-style": [
       "error",
-      "unix"
+      process.platform === "win32" ? "windows" : "unix"
     ],
     "quotes": [
       "error",
@@ -43,7 +43,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": 0,
     "react/prop-types": 0
   }
 }
