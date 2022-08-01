@@ -1,1 +1,1 @@
-web: node failtest
+web: node app.js
