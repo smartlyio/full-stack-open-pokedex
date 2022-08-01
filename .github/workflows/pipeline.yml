@@ -33,3 +33,5 @@ jobs:
           heroku_app_name: fsopipelinetests
           heroku_email: adrian@adrianserbanescu.com
           healthcheck: "https://fsopipelinetests.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
