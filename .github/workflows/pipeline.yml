@@ -35,3 +35,4 @@ jobs:
           healthcheck: "https://fsopipelinetests.herokuapp.com/health"
           checkstring: "ok"
           delay: 5
+          rollbackonhealthcheckfailed: true
