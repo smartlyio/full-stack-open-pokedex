@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ci-cd-akllu
           heroku_email: a.kalliokoski@hotmail.com
+          healthcheck: "https://ci-cd-akllu.herokuapp.com/health"
+          checkstring: "ok"
