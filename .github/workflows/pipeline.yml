@@ -22,12 +22,17 @@ jobs:
       - name: test
         run: npm run test
 
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-          browser: chrome
-          headless: true
      
+cypress-run:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: cypressTests
+        uses: actions/checkout@v2
+        with:
+          node-version: '16'
+        - name: npm install
+        run: npm install
+     
+      - name: test
+        uses: cypress-io/github-action@v4
+        run  npm run test:e2e
