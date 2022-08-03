@@ -26,13 +26,15 @@ jobs:
 cypress-run:
     runs-on: ubuntu-20.04
     steps:
+     uses: cypress-io/github-action@v4
+             uses: actions/checkout@v2
+
       - name: cypressTests
-        uses: actions/checkout@v2
         with:
           node-version: '16'
         - name: npm install
         run: npm install
      
       - name: test
-        uses: cypress-io/github-action@v4
+       
         run:  npm run test:e2e
