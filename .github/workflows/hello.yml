@@ -19,4 +19,4 @@ jobs:
       
       - name: Show contents
         run: |
-            ls
+            ls -l
