@@ -35,4 +35,4 @@ cypress-run:
      
       - name: test
         uses: cypress-io/github-action@v4
-        run  npm run test:e2e
+        run:  npm run test:e2e
