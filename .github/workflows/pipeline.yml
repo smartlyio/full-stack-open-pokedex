@@ -17,5 +17,10 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: test
-        run: npm run test
+      # - name: test
+      #   run: npm run test
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "mariosegpokedex" #Must be unique in Heroku
+          heroku_email: "marioseg_02@hotmail.com"
