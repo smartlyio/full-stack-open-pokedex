@@ -18,7 +18,10 @@ jobs:
       - name: npm install 
         run: npm install
       - uses: cypress-io/github-action@v2
-         command: npm run test:e2e
+        with:  
+         browser: chrome
+         headless: true
+         command: npx cypress run
          start: npm run start-prod
          wait-on: http://localhost:5000
               
