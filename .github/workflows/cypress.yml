@@ -10,7 +10,7 @@ jobs:
   tests:
       tests:
      runs-on: ubuntu-20.04
-     needs: [build,lint]
+    
      steps:
       - uses: actions/checkout@v3
         with: 
