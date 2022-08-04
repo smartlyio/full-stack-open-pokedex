@@ -8,15 +8,23 @@ on:
 jobs:
       
   tests:
+      tests:
      runs-on: ubuntu-20.04
-     
+     needs: [build,lint]
      steps:
       - uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
+          cache: 'npm'
           node-version: '16'
       - name: npm install 
-        run: npm install
+        run: npm ci
+      - uses: actions/download-artifact@v2
+        with: 
+          name: dist
+          path: dist
       - uses: cypress-io/github-action@v2
         with:  
          browser: chrome
@@ -24,6 +32,4 @@ jobs:
          command: npx cypress run
          start: npm run start-prod
          wait-on: http://localhost:5000
-         
-              
   
