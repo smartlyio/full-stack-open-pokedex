@@ -12,4 +12,4 @@ Among a lot of good alternative varieties out there, I would suggest GitLab, AWS
 
 For this simple set up, I believe cloud-based environment would suit better. Self hosted environment often require too much of knowledge about setting up our own server from scratch, how to set up configuration and other overhead issues and costs. Cloud-based often include everything we need for a small production, we can cast aside the worries of setting up our own server, which enhance productivity. And with its convenience of a cloud-based hosting, we can save our resources to focus on our main production.
 
-Of course we need to take our production into considerations, such as how big it is, how much resources it would take up, and how much money we can save between different hosting environments.
+Of course we need to take our production into considerations, such as how big it is, how much resources it would take up, and how much money we can save between different hosting environments. However as time goes by and our production grows up, we can totally modify our hosting environment.
