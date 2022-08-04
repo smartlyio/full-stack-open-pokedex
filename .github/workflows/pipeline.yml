@@ -23,18 +23,3 @@ jobs:
         run: npm run test
 
      
-cypress-run:
-    runs-on: ubuntu-20.04
-    steps:
-     -uses: cypress-io/github-action@v4
-      -uses: actions/checkout@v2
-      with:
-          node-version: '16'
-      - name: cypressTests
-        
-        - name: npm install
-        run: npm install
-     
-      - name: test
-       
-        run:  npm run test:e2e
