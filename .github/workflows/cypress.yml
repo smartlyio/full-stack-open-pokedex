@@ -21,10 +21,7 @@ jobs:
       - name: npm install 
         run: npm install
       
-      - uses: actions/download-artifact@v2
-        with: 
-          name: dist
-          path: dist
+      
       - uses: cypress-io/github-action@v2
         with:  
          browser: chrome
