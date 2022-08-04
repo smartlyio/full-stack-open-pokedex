@@ -8,9 +8,8 @@ on:
 jobs:
       
   tests:
-      tests:
      runs-on: ubuntu-20.04
-    
+     
      steps:
       - uses: actions/checkout@v3
         with: 
@@ -20,7 +19,8 @@ jobs:
           cache: 'npm'
           node-version: '16'
       - name: npm install 
-        run: npm ci
+        run: npm install
+      
       - uses: actions/download-artifact@v2
         with: 
           name: dist
@@ -32,4 +32,6 @@ jobs:
          command: npx cypress run
          start: npm run start-prod
          wait-on: http://localhost:5000
+         
+              
   
