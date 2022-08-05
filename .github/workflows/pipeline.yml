@@ -33,15 +33,14 @@ jobs:
              
     steps:
       - uses: actions/checkout@v3
-        
       - name: Install dependencies
-          run: npm install
+        run: npm install
       - name: build
-          run: npm run build
+        run: npm run build
            
-        - uses: akhileshns/heroku-deploy@v3.12.12 
-          with:
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "stormy-tundra-98703"
-            heroku_email: "matias.himanen@helsinki.fi"
+      - uses: akhileshns/heroku-deploy@v3.12.12 
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "stormy-tundra-98703"
+          heroku_email: "matias.himanen@helsinki.fi"
     
