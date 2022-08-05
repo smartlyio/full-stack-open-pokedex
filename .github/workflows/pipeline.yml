@@ -34,9 +34,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Install dev dependencies
-        run: npm install --dev
+        run: npm ci --dev
       - name: build
         run: npm run build
            
