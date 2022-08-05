@@ -1,1 +1,1 @@
-web: node index.jsx
+web: npm run start-prod
