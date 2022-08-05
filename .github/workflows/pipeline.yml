@@ -44,6 +44,8 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "stormy-tundra-98703"
-
           heroku_email: "matias.himanen@helsinki.fi"
+          healthCheck: "https://stormy-tundra-98703.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 1
     
