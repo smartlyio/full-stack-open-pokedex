@@ -16,3 +16,5 @@ jobs:
           heroku_app_name: 'cicdlearnpurpose'
           heroku_email: 'baluszynskidawid@gmail.com'
           healthcheck: 'https://cicdlearnpurpose.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
