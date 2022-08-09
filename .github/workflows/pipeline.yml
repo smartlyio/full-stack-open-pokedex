@@ -34,3 +34,6 @@ jobs:
         heroku_app_name: "testing-deployments" #Must be unique in Heroku
         heroku_email: "kardamitsis.e@gmail.com"
         procfile: "web: npm start"
+        healthcheck: "https://testing-deployments.herokuapp.com/health"
+        checkstring: "ok"
+        rollbackonactionfailed: true
