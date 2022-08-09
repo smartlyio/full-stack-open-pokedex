@@ -18,4 +18,4 @@ jobs:
     - name: npm install 
       run: npm install  
     - name: lint
-      run: stall eslint eslint-plugin-react --save-dev && npm run eslint
+      run: npm install eslint eslint-plugin-react --save-dev && npm run eslint
