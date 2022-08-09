@@ -17,5 +17,5 @@ jobs:
         node-version: '16'
     - name: npm install 
       run: npm install  
-    - name: lint
-      run: npm install eslint eslint-plugin-react --save-dev && npm run eslint
+    - name: npm start
+      run: npm start
