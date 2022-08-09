@@ -36,4 +36,4 @@ jobs:
         procfile: "web: npm start"
         healthcheck: "https://testing-deployments.herokuapp.com/health"
         checkstring: "ok"
-        rollbackonactionfailed: true
+        rollbackonhealthcheckfailed: true
