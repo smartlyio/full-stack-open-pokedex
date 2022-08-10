@@ -49,6 +49,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@watfiree/mq": "^1.0.2",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "react": "^16.13.1",
