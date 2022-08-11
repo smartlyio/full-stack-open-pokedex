@@ -35,3 +35,4 @@ jobs:
           heroku_email: 'luka.dimnik88@gmail.com'
           healthcheck: 'https://pokedex-dimnik.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
