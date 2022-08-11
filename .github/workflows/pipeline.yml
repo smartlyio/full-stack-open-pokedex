@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'pokedex-dimnik'
           heroku_email: 'luka.dimnik88@gmail.com'
+          healthcheck: 'https://pokedex-dimnik.herokuapp.com/health'
+          checkstring: 'ok'
