@@ -21,7 +21,9 @@ jobs:
         run: npm run build
       - name: test
         run: npm test
-      - name: e2e tests
+  e2a_job:
+    runs-on: ubuntu-20.04
+    steps:
       - uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
