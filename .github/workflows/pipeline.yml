@@ -15,7 +15,7 @@ jobs:
           node-version: '16'
       - name: npm install
         run: npm install
-      - name: npm install eslint
-        run: npm install eslint
+      - name: lint configuration
+        run: npx eslint --init
       - name: lint
         run: npm run eslint
