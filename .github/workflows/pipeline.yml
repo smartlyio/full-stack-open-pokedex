@@ -28,7 +28,7 @@ jobs:
       - name: build
         run: npm run build
         env:
-          SKIP: contains(join(github.event.commits.*.message, ' / '), '#skip')
+          SKIP: ${{ contains(join(github.event.commits.*.message, ' / '), '#skip') }}
       - name: test
         run: npm run test
       - name: e2e tests

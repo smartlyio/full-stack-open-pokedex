@@ -36,3 +36,7 @@ jobs:
         env:
           CONTAINS_SKIP: ${{ contains(env.JOINED_MESSAGES, '#skip') }}
         run: echo "$CONTAINS_SKIP"
+      - name: full if condition
+        env:
+          FULL_IF: ${{ github.event_name == 'push' && !env.SKIP }}
+        echo "$FULL_IF"
