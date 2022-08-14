@@ -9,7 +9,7 @@
         "test": "jest",
         "eslint": "eslint './**/*.{js,jsx}'",
         "build": "webpack --mode production",
-        "test:e2e": "cypress run --chrome",
+        "test:e2e": "cypress run --browser chrome",
         "cypress:open": "cypress open"
     },
     "repository": {
