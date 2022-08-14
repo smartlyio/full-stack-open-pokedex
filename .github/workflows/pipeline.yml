@@ -39,7 +39,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' || env.SKIP }}
+        if: ${{ github.event_name == 'push' && !env.SKIP }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'shielded-woodland-56383'
@@ -54,7 +54,7 @@ jobs:
     steps:
       - name: bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
-        if: ${{ github.event_name == 'push' || env.SKIP }}
+        if: ${{ github.event_name == 'push' && !env.SKIP }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
