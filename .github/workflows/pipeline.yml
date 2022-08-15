@@ -34,3 +34,4 @@ jobs:
             heroku_email: "ziquan.li@helsinki.fi"
             healthcheck: "https://fullstack11liam.herokuapp.com/health"
             checkstring: "ok"
+            rollbackonhealthcheckfailed: true
