@@ -1,1 +1,1 @@
-web: npm run start-prodvcv
+web: npm run start-prod
