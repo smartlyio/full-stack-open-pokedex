@@ -15,4 +15,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "my-some-random-deploy-app"
           heroku_email: ${{secrets.EMAIL_ADDRESS}}
-          procfile: "web: npm start"
+          procfile: "web: npm start-prod"
