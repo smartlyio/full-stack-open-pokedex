@@ -1,1 +1,1 @@
-web: npm run Hellostart-prod
+web: npm run start-prod
