@@ -40,7 +40,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
       - name: Build Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.0
         if: success()
         with:
           severity: info
@@ -49,7 +49,7 @@ jobs:
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build Failure
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.0
         if: failure()
         with:
           severity: error
