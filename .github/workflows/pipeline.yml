@@ -14,8 +14,6 @@ jobs:
     if: ${{ github.event_name == 'push' && !contains(join( toJson(github.event.commits.*.message)),'#skip') }}  
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: '0'
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
@@ -46,9 +44,11 @@ jobs:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
     steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'      
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          WITH_V: true 
