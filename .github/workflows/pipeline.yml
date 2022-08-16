@@ -42,7 +42,7 @@ jobs:
       - name: Build Success
         uses: rjstone/discord-webhook-notify@v1.0.0
         if: success()
-        with:
+        with: 
           severity: info
           color: 00ff00
           description: to "https://fullstack11liam.herokuapp.com" by LiamLi \:)
@@ -51,7 +51,7 @@ jobs:
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1.0.0
         if: failure()
-        with:
+        with: 
           severity: error
           color: ff0000
           description: commit
