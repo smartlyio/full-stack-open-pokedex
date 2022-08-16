@@ -13,7 +13,7 @@ const PokemonPage = ({ pokemonId, previous, next }) => {
   console.log('POKEMON ID', pokemonId)
 
   if (isLoading) {
-    return (<View><LoadingSpinner /></View>)
+    return (<view><LoadingSpinner /></view>)
   }
   if (error) {
     return <ErrorMessage error={error} />
