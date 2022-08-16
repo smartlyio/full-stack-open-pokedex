@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import LoadingSpinner from './LoadingSpinner'
 import { useApi } from './useApi'
 import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
@@ -13,7 +12,7 @@ const PokemonPage = ({ pokemonId, previous, next }) => {
   console.log('POKEMON ID', pokemonId)
 
   if (isLoading) {
-    return <LoadingSpinner />
+    return <Text> Loading... </Text>
   }
   if (error) {
     return <ErrorMessage error={error} />
