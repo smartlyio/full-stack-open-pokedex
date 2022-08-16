@@ -38,3 +38,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemonsapplication351" #Must be unique in Heroku
           heroku_email: "niko.tiaksorpi@gmail.com"
+          procfile: "web: npm start"
+          healthcheck: "https://pokemonsapplication351.herokuapp.com/health"
