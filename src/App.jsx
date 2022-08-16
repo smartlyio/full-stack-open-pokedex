@@ -14,14 +14,14 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 
 const App = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=784', mapResults)
+
   if (isLoading) {
     return <LoadingSpinner />
   }
   if (error) {
+    console.log(error)
     return <ErrorMessage error={error} />
   }
-
-
 
   return (
     <Router>
@@ -30,12 +30,11 @@ const App = () => {
           <PokemonList pokemonList={pokemonList} />
         </Route>
         <Route path='/pokemon/:name' render={(routeParams) => {
+          console.log("ROUTEPARAMS", routeParams)
           const pokemonId = pokemonList.find(({ name }) => name === routeParams.match.params.name).id
           const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
           const next = pokemonList.find(({ id }) => {return id === pokemonId + 1})
-          console.log('PREVIOUS: ', previous)
-          console.log('Next: ', next)
-          return <PokemonPage pokemonList={pokemonList} previous={previous} next={next} />
+          return <PokemonPage pokemonId={pokemonId} previous={previous} next={next} />
         }} />
       </Switch>
     </Router>
