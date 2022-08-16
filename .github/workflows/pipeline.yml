@@ -22,6 +22,12 @@ jobs:
               run: npm run eslint
             - name: build
               run: npm run build
+              - uses: rjstone/discord-webhook-notify@v1
+                if: ${{ failure() }}
+                with:
+                    severity: error
+                    text: Build failed
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: test
               run: npm run test
             - name: e2e tests
@@ -37,6 +43,13 @@ jobs:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                   heroku_app_name: "fullstack-open-part11"
                   heroku_email: "tompiw99@gmail.com"
+            - name: Success
+              uses: rjstone/discord-webhook-notify@v1
+              if: ${{ success() }}
+              with:
+                severity: info
+                details: New version of https://fullstack-open-part11.herokuapp.com/ deployment succeeded
+                webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: health check
               uses: akhileshns/heroku-deploy@v3.12.12
               with:
@@ -52,7 +65,7 @@ jobs:
         runs-on: ubuntu-20.04
         steps:
             - name: Bump version and push tag
-              uses: anothrNick/github-tag-action@1.36.0
+              uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   DEFAULT_BUMP: "patch"
