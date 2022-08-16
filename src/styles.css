@@ -44,7 +44,7 @@ footer {
 .list-item {
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #eee;
+  background-color: rgb(228, 5, 5);
   margin: 10px;
   height: 150px;
   width: 150px;
