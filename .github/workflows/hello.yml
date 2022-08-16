@@ -19,4 +19,4 @@ jobs:
 
       - name: Directory contents
         run: |
-          ls
+          ls -l
