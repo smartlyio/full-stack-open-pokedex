@@ -39,15 +39,6 @@ jobs:
           healthcheck: "https://fullstack11liam.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-      - name: Build Success
-        uses: rjstone/discord-webhook-notify@v1.0.0
-        if: ${{ success() }}
-        with: 
-          severity: info
-          color: 00ff00
-          description: to "https://fullstack11liam.herokuapp.com" by LiamLi \:)
-          text: A new version of Pokedex deployed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -61,3 +52,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+      - name: Build Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ success() }}
+        with: 
+          severity: info
+          color: 00ff00
+          description: to "https://fullstack11liam.herokuapp.com" by LiamLi :)
+          text: A new version of Pokedex deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
