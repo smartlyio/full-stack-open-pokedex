@@ -34,13 +34,27 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
-          
-        if: ${{ github.event_name == 'push' }}
-      - name: deployt to heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+
+  build:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemonsapplication351" #Must be unique in Heroku
-          heroku_email: "niko.tiaksorpi@gmail.com"
+          heroku_email: "niko.tiaskorpi@gmail.com"
           procfile: "web: npm run start-prod"
           healthcheck: "https://pokemonsapplication351.herokuapp.com/health"
+
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [build]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
