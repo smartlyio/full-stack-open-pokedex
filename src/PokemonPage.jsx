@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useApi } from './useApi'
 import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
+import LoadingSpinner from './LoadingSpinner'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
@@ -12,7 +13,7 @@ const PokemonPage = ({ pokemonId, previous, next }) => {
   console.log('POKEMON ID', pokemonId)
 
   if (isLoading) {
-    return <Text> Loading... </Text>
+    return <LoadingSpinner />
   }
   if (error) {
     return <ErrorMessage error={error} />
