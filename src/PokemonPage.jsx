@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import LoadingSpinner from './LoadingSpinner'
 import { useApi } from './useApi'
 import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
+import LoadingSpinner from './LoadingSpinner'
 
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
