@@ -35,7 +35,7 @@ jobs:
           start: npm start
           wait-on: http://localhost:5000
 
-    if: ${{ github.event_name == 'push' }}
+      if: ${{ github.event_name == 'push' }}
       - name: deployt to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
