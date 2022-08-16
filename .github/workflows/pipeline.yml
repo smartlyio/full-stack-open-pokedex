@@ -35,3 +35,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "nameless-retreat-52999"
           heroku_email: "mcguirk.eric@gmail.com"
+          healthcheck: "https://nameless-retreat-52999.herokuapp.com/health"
