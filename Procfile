@@ -1,1 +1,1 @@
-web: npm run srt-prod
+web: npm run start-prod
