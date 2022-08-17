@@ -58,6 +58,6 @@ jobs:
         with: 
           severity: info
           color: 00ff00
-          description: to "https://fullstack11liam.herokuapp.com" by LiamLi :)
+          description: "to https://fullstack11liam.herokuapp.com by LiamLi :)"
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
