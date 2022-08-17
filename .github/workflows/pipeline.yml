@@ -68,6 +68,6 @@ jobs:
           severity: error
           color: '#ff0000'
           description: commit
-          details: "${{join([github.server_url,github.repository,'commit',github.sha],'/')}} by LiamLi broke the build :("
+          details: "${{github.server_url}}/${{github.repository}}/commit/${{github.sha}} by LiamLi broke the build :("
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
