@@ -1,0 +1,5 @@
+The application is coded with Java. Thereare a lot of available linters, such as Checkstyle, Lightrun, PMD and so on.For testing, JUnit, TestNG, Selenium are really common. When it mentions tobuilding, Apache Maven, Ant with ivy, Gradle and SBT are 4 popular open sourceJava build tools.
+
+There are a lot of alternatives of Jenkinsand GitHub Actions, such as GitLab CI/CD, Atlassian Bamboo, CircleCI. GitLabCI/CD, as a powerful tool, is a part of GitLab. Bamboo is a product ofAtlassian. You must have heard of CircleCI, which always is advertised inYoutube. TeamCity is also a famous tool, which is a product of Jet Brains. 
+
+It may be better if a cloud-basedenvironment is used. The team only consists of 6 people, which means it is nota big team. The configuration of a cloud-based solution is simple, which canhelp team members focus on the application itself. Usually, the size ofapplication is relevant to the size of team. It may indicate the size ofapplication is not big here. It will be cheaper to use a cloud-based solution.Another factor is special requirements. If there are some special requirementsin this app, a self-hosted environment will be considered.
