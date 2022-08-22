@@ -1,22 +1,22 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import { Router } from 'react-router-dom'
-import { createMemoryHistory } from 'history'
-import axiosMock from 'axios'
-import { act } from 'react-dom/test-utils'
-import '@testing-library/jest-dom/extend-expect'
-import PokemonPage from '../src/PokemonPage'
+import React from "react"
+import { render, screen } from "@testing-library/react"
+import { Router } from "react-router-dom"
+import { createMemoryHistory } from "history"
+import axiosMock from "axios"
+import { act } from "react-dom/test-utils"
+import "@testing-library/jest-dom/extend-expect"
+import PokemonPage from "../src/PokemonPage"
 
-jest.mock('axios')
+jest.mock("axios")
 
 const previous = {
-  url: 'https://pokeapi.co/api/v2/pokemon/132/',
-  name: 'ditto',
+  url: "https://pokeapi.co/api/v2/pokemon/132/",
+  name: "ditto",
   id: 132
 }
 const next = {
-  url: 'https://pokeapi.co/api/v2/pokemon/134/',
-  name: 'vaporeon',
+  url: "https://pokeapi.co/api/v2/pokemon/134/",
+  name: "vaporeon",
   id: 134
 }
 
@@ -25,37 +25,37 @@ const pokemonList = {
   abilities: [
     {
       ability: {
-        name: 'anticipation',
-        url: 'https://pokeapi.co/api/v2/ability/107/'
+        name: "anticipation",
+        url: "https://pokeapi.co/api/v2/ability/107/"
       },
       is_hidden: true,
       slot: 3
     },
     {
       ability: {
-        name: 'adaptability',
-        url: 'https://pokeapi.co/api/v2/ability/91/'
+        name: "adaptability",
+        url: "https://pokeapi.co/api/v2/ability/91/"
       },
       is_hidden: false,
       slot: 2
     }
   ],
-  name: 'eevee',
+  name: "eevee",
   stats: [
     {
       base_stat: 55,
       effort: 0,
       stat: {
-        name: 'attack',
-        url: 'https://pokeapi.co/api/v2/stat/2/'
+        name: "attack",
+        url: "https://pokeapi.co/api/v2/stat/2/"
       }
     },
     {
       base_stat: 55,
       effort: 0,
       stat: {
-        name: 'hp',
-        url: 'https://pokeapi.co/api/v2/stat/1/'
+        name: "hp",
+        url: "https://pokeapi.co/api/v2/stat/1/"
       }
     }
   ],
@@ -63,22 +63,22 @@ const pokemonList = {
     {
       slot: 1,
       type: {
-        name: 'normal',
-        url: 'https://pokeapi.co/api/v2/type/1/'
+        name: "normal",
+        url: "https://pokeapi.co/api/v2/type/1/"
       }
     }
   ],
-  sprites: { front_default: 'URL' }
+  sprites: { front_default: "URL" }
 }
 
 const history = createMemoryHistory()
 
-describe('<PokemonPage />', () => {
+describe("<PokemonPage />", () => {
   beforeEach(() => {
-    history.push('/pokemon/eevee')
+    history.push("/pokemon/eevee")
   })
 
-  it('should render abilities', async () => {
+  it("should render abilities", async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
@@ -89,11 +89,11 @@ describe('<PokemonPage />', () => {
       )
     })
 
-    expect(screen.getByText('adaptability')).toBeVisible()
-    expect(screen.getByText('anticipation')).toBeVisible()
+    expect(screen.getByText("adaptability")).toBeVisible()
+    expect(screen.getByText("anticipation")).toBeVisible()
   })
 
-  it('should render stats', async () => {
+  it("should render stats", async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
@@ -104,10 +104,10 @@ describe('<PokemonPage />', () => {
       )
     })
 
-    expect(screen.getByTestId('stats')).toHaveTextContent('hp55attack55')
+    expect(screen.getByTestId("stats")).toHaveTextContent("hp55attack55")
   })
 
-  it('should render previous and next urls if they exist', async () => {
+  it("should render previous and next urls if they exist", async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
@@ -118,11 +118,11 @@ describe('<PokemonPage />', () => {
       )
     })
 
-    expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
-    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
+    expect(screen.getByText("Previous")).toHaveAttribute("href", "/pokemon/ditto")
+    expect(screen.getByText("Next")).toHaveAttribute("href", "/pokemon/vaporeon")
   })
 
-  it('should not render previous and next urls if none exist', async () => {
+  it("should not render previous and next urls if none exist", async () => {
     axiosMock.get.mockResolvedValueOnce({ data: pokemonList })
 
     await act(async () => {
@@ -133,7 +133,7 @@ describe('<PokemonPage />', () => {
       )
     })
 
-    expect(screen.queryByText('Previous')).toBeNull()
-    expect(screen.queryByText('Next')).toBeNull()
+    expect(screen.queryByText("Previous")).toBeNull()
+    expect(screen.queryByText("Next")).toBeNull()
   })
 })
