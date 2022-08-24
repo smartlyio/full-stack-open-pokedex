@@ -5,16 +5,15 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 app.get("/version", (req, res) => {
-  res.send("1")
+  let v = 0
+  res.send("v+=1")
 })
 
 app.get("/health", (req, res) => {
   res.send("ok")
 })
 
-app.post("/version", (req, res) => {
-  res.send("2")
-})
+
 
 
 app.use(express.static("dist"))
