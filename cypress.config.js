@@ -1,4 +1,4 @@
-/*global module, a*/
+/*global module*/
 /*eslint no-undef: "error"*/
 /* eslint-disable no-unused-vars */
 

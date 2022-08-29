@@ -1,4 +1,4 @@
-/*global cy, a*/
+/*global cy*/
 /*eslint no-undef: "error"*/
 describe('Pokedex', function() {
   it('front page can be opened', function() {
