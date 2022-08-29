@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -35,3 +38,5 @@ jobs:
           heroku_app_name: "arcane-forest-73347" #Must be unique in Heroku
           heroku_email: "anttihalmetoja@gmail.com"
           healthcheck: "https://arcane-forest-73347.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
