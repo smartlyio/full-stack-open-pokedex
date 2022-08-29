@@ -34,3 +34,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "arcane-forest-73347" #Must be unique in Heroku
           heroku_email: "anttihalmetoja@gmail.com"
+          healthcheck: "https://arcane-forest-73347.herokuapp.com/health"
