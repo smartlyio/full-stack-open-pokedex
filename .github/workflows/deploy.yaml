@@ -21,5 +21,5 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-      - name: Run npm test
+      - name: Test
         run: npm run test
