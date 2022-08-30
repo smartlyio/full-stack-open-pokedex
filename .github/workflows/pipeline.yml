@@ -6,22 +6,6 @@ on:
       - master
 
 jobs:
-  skip_merge_tag:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: github context
-        env: 
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(githubevent.commits) }}
-        run: echo "$COMMITS"
-      - name: commit message
-        env: 
-          COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.meesage) }}
-        run: echo "$COMMIT_MESSAGE"
   simple_deployment_pipeline:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
@@ -62,8 +46,23 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
-
+          DRY_RUN: true
+  skip_merge_tag:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(githubevent.commits) }}
+        run: echo "$COMMITS"
+      - name: commit message
+        env: 
+          COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.meesage) }}
+        run: echo "$COMMIT_MESSAGE"
 
    
         
