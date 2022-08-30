@@ -7,7 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ github.event_name == 'push'}}
+    if: ${{ contains(fromJson('["push", "pull_request"]'), github.event_name)) && join(toJson(github.event.commits.*.message)) == '#skip' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -37,15 +37,29 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
-    if: ${{ github.event_name == "push" }}
+    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
           DRY_RUN: true
-
-        
+  skip_merge_tag:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env: 
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit message
+        env: 
+          COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGE"
