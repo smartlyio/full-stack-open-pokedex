@@ -37,7 +37,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ contains(fromJson('["push", "pull_request"]'), github.event_name) && join(toJson(github.event.commits.*.message)) == '#skip' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
@@ -46,7 +46,6 @@ jobs:
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DRY_RUN: true
   skip_merge_tag:
     runs-on: ubuntu-20.04
     steps:
