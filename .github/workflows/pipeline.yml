@@ -20,7 +20,8 @@ jobs:
       - name: build
         id: build
         run: npm run build
-
+      - name: test
+        run: npm test
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
