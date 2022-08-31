@@ -32,3 +32,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "walther-pokedex"
           heroku_email: "veeti.haapsamo@gmail.com"
+          healthcheck: "https://walther-pokedex.herokuapp.com/health"
