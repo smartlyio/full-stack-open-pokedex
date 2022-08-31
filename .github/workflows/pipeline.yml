@@ -33,5 +33,5 @@ jobs:
           heroku_app_name: "walther-pokedex"
           heroku_email: "veeti.haapsamo@gmail.com"
           healthcheck: "https://walther-pokedex.herokuapp.com/health"
-          checkstring: "not ok"
+          checkstring: "ok"
           rollbackonhealthcheckfailed: true
