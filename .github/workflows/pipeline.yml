@@ -30,7 +30,7 @@ jobs:
           wait-on-timeout: 120
 
       - name: deploy
-      - uses: akhileshns/heroku-deploy@v3.12.12 # Deploy to heroku action
+        uses: akhileshns/heroku-deploy@v3.12.12 # Deploy to heroku action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "actions-pokedex-app"
