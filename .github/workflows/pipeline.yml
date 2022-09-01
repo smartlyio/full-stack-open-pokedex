@@ -20,6 +20,13 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - name: Build failure
+        uses: rjstone/discord-webhook-notify@v1
+        if : ${{ failure() }}
+        with:
+          severity: error
+          details: Build failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK}}
       - name: test
         run: npm run 
       - name: e2e tests
@@ -36,6 +43,14 @@ jobs:
           healthcheck: "https://pokedex-fullstackopen-2022.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: New version deployment success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() }}
+        with:
+          severity: info
+          details: Deployment successful!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        
   tag_release:
     if: ${{ contains(fromJson('["push", "pull_request"]'), github.event_name) && join(toJson(github.event.commits.*.message)) == '#skip' }}
     needs: [simple_deployment_pipeline]
@@ -43,7 +58,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.36.0
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   skip_merge_tag:
