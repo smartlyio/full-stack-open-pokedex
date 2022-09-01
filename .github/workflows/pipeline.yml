@@ -7,7 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ contains(fromJson('["push", "pull_request"]'), github.event_name) join(toJson(github.event.commits.*.message)) != '#skip' }}
+    if: ${{ contains(fromJson('["pull_request"]'), github.event_name) && join(toJson(github.event.commits.*.message)) != '#skip' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
           details: Deployment successful!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
-    if: ${{ contains(fromJson('["push", "pull_request"]'), github.event_name) join(toJson(github.event.commits.*.message)) != '#skip' }}
+    if: ${{ contains(fromJson('["pull_request"]'), github.event_name) && join(toJson(github.event.commits.*.message)) != '#skip' }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
