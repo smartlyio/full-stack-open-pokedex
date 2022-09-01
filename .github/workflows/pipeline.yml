@@ -42,3 +42,15 @@ jobs:
           healthcheck: "https://actions-pokedex-app.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+  
+  tag_release:
+    needs: simple_deployment_pipeline
+    if: ${{ github.event_name == 'push' && !contains(join(github.commits.*.message, ' '), '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
