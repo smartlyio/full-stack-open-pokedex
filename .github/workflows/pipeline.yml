@@ -20,7 +20,6 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-        run: npm build
       - name: Build failure
         uses: rjstone/discord-webhook-notify@v1
         if : ${{ failure() }}
@@ -77,3 +76,6 @@ jobs:
         env: 
           COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGE"
+          COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
+        run: echo "$COMMIT_MESSAGE"
+
