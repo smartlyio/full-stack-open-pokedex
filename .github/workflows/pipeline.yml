@@ -7,7 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ github.event_name == "push" && !contains(join(github.event.commits.*.message, ','),  '#skip')  }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','),  '#skip')  }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -51,7 +51,7 @@ jobs:
           details: Deployment successful!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
-    if: ${{ github.event_name == "push" && !contains(join(github.event.commits.*.message, ','),  '#skip')  }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','),  '#skip')  }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
@@ -74,7 +74,7 @@ jobs:
         run: echo "$COMMITS"
       - name: commit message
         env: 
-          COMMIT_MESSAGE: ${{ join(github.event.commits.*.message) }}
+          COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGE"
 
 
