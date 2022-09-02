@@ -74,7 +74,7 @@ jobs:
         run: echo "$COMMITS"
       - name: commit message
         env: 
-          COMMIT_MESSAGE: ${{ joinEdited if condition(github.event.commits.*.message) }}
+          COMMIT_MESSAGE: ${{ join(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGE"
 
 
