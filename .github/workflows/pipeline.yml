@@ -7,7 +7,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ contains(fromJson('["push"]'), github.event_name) && !contains(join(toJson(github.event.commits.*.message, ',')),  '#skip')  }}
+    if: ${{ contains(fromJson('["push"]'), github.event_name) && !contains(join(github.event.commits.*.message, ','),  '#skip')  }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -76,6 +76,5 @@ jobs:
         env: 
           COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGE"
-          COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-        run: echo "$COMMIT_MESSAGE"
+
 
