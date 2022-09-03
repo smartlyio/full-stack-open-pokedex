@@ -2,7 +2,7 @@ name: Periodic Health Check
 
 on:
   schedule:
-    - cron: '55 19 * * 0-6'
+    - cron: '57 19 * * 0-6'
    
 
 jobs:
@@ -10,8 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Check the deployed service URL
-        if: github.event.schedule == '55 19 * * 0-6'
-        run: echo "The check will run daily at 7.55pm"
+        if: github.event.schedule == '57 19 * * 0-6'
         uses: jtalk/url-health-check-action@v2
         with:
           url: https://pokedex-fullstackopen-2022.herokuapp.com/
