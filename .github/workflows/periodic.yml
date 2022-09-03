@@ -1,0 +1,19 @@
+name: Periodic Health Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  periodic_health_check:
+    if: ${{ github.event_name == 'push'}}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://pokedex-fullstackopen-2022.herokuapp.com/
+          max-attempts: 3
+          retry-delay: 5s
+
