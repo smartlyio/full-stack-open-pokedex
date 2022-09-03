@@ -24,7 +24,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
-          start: npm run start-prod
+          start: npm run start
           wait-on: http://localhost:5000
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
