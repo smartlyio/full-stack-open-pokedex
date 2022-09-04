@@ -40,3 +40,13 @@ jobs:
           heroku_email: "jorge.balibrea1@gmail.com"
           healthcheck: "https://fullstackopen-pokedex-2022.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
