@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -28,10 +31,22 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           wait-on-timeout: 120
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - name: deploy to heroku
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fullstackopen-pokedex-2022" #Must be unique in Heroku
           heroku_email: "jorge.balibrea1@gmail.com"
           healthcheck: "https://fullstackopen-pokedex-2022.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
