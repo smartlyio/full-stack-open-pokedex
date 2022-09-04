@@ -34,4 +34,5 @@ jobs:
           heroku_email: "aliadadehmav@gmail.com"
           healthcheck: "https://fsopokedexaas.herokuapp.com/health"
           checkstring: "ok"
-          rollbackonhealthcheckfailed: false
+          delay: 5
+          rollbackonhealthcheckfailed: true
