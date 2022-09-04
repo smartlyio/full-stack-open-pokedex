@@ -8,30 +8,97 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+  
+  avoid_reduncy:
+    runs-on: ubuntu-22.04
     steps:
       - name: Cancel previous redundant builds
         uses: styfle/cancel-workflow-action@0.10.0
         with: 
           access_token: ${{ github.token }}
+
+  lint:
+    runs-on: ubuntu-22.04
+    steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: npm install
+      - name: Install dependencies
         run: npm install
-      - name: lint
+      - name: Lint
         run: npm run eslint
-      - name: build
+
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
         run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist
+
+
+  test:
+    needs: [lint, build]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
       - name: test
         run: npm run test
+
+  e2e:
+    needs: [lint, build]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
           start: npm run start
           wait-on: http://localhost:5000
+
+
+  simple_deployment_pipeline:
+    needs: [test, e2e]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.12
