@@ -17,3 +17,4 @@ jobs:
           heroku_email: "uvzumaya@gmail.com"
           healthcheck: "https://young-fortress-04595.herokuapp.com/health"
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
