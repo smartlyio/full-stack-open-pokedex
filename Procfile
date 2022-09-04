@@ -1,1 +1,1 @@
-web: node app.jssdsdcs
+web: node app.js
