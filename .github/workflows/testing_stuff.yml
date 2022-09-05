@@ -13,7 +13,7 @@ jobs:
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "JORGE1233 $GITHUB_CONTEXT"
+        run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
