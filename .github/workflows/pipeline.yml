@@ -56,9 +56,9 @@ jobs:
           rollbackonhealthcheckfailed: true
   
   versioning:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04  
     needs: deploy 
-    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v2
         with:
