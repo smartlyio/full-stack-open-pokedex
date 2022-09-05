@@ -20,7 +20,7 @@ jobs:
           node-version: '16'
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.url) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.url) }}
         run: echo "$COMMIT_MESSAGES"
       - name: npm install
         run: npm install
@@ -69,7 +69,7 @@ jobs:
           avatarUrl: https://avatars.githubusercontent.com/u/100881203?v=4
           text: A new version of Pokedex deployed
           description: to https://fullstackopen-pokedex-2022.herokuapp.com/ by jbalibrea1
-          details: 'NOT CORRECT HERE ${{(github.event.commits.url)}}'
+          details: 'NOT CORRECT HERE ${{(github.event.commits.*.url)}}'
           footer: 'Severity: Informational'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Failure  alert discord
@@ -81,6 +81,6 @@ jobs:
           avatarUrl: https://avatars.githubusercontent.com/u/100881203?v=4
           text: Build failed
           description: commit
-          details: ${{(github.event.commits.url)}} by jbalibrea1 broke the build
+          details: ${{(github.event.commits.*.url)}} by jbalibrea1 broke the build
           footer: 'Severity: Informational'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
