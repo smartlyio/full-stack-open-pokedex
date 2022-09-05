@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -29,6 +33,7 @@ jobs:
           wait-on: 'http://localhost:5000'
 
   deploy:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
              
     steps:
@@ -49,4 +54,21 @@ jobs:
           checkstring: "ok"
           delay: 1
           rollbackonhealthcheckfailed: true
+  
+  versioning:
+    runs-on: ubuntu-20.04  
+    needs: deploy 
+    if: ${{ github.event_name == 'push' }}
+    steps:
+     - uses: actions/checkout@v2
+       with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: patch
+        DRY_RUN: true
+
     
