@@ -18,10 +18,14 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: commit messages
+      - name: array0
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.url) }}
-        run: echo "$COMMIT_MESSAGES"
+          ARRAY0: ${{ (github.event.commits.*.url[0]) }}
+        run: echo "$ARRAY0"
+      - name: array
+        env:
+          text: ${{ (github.event.commits.*.url) }}
+        run: echo "$text"
       - name: npm install
         run: npm install
       - name: lint
