@@ -22,12 +22,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: commit 0messages
+      - name: commit messages [0]
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits[0]message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: commit messages-0
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message[0]) }}
-        run: echo "$COMMIT_MESSAGES"
-        
+          COMMIT_MESSAGES0: ${{ toJson(github.event.commits.message[0]) }}
+        run: echo "$COMMIT_MESSAGES0"
