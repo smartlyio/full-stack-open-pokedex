@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       if: ${{ github.event_name == 'push' }}:
-      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action trial
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "young-fortress-04595"
