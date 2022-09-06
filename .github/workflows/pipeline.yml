@@ -29,6 +29,7 @@ jobs:
       - name: test
         run: npm test
   tag_release:
+    if: ${{ !contains(github.event.commits.*.message, '#skip')}}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
