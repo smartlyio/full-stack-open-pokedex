@@ -38,3 +38,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fullstack-11
           heroku_email: 8mixu8@gmail.com
+          healthcheck: https://fullstack-11.herokuapp.com/health
