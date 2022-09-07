@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Now it
         run: |
-          data
+          echo 'Hello World!'
   
