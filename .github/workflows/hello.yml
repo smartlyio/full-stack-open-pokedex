@@ -11,8 +11,7 @@ jobs:
     steps:
       - name: Say hello
         run: |
-          echo 'Hello World!'
-    
+          echo 'Hello World!'    
     steps:
       - name: Now it
         run: |
