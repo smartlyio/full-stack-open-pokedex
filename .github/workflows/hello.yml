@@ -12,3 +12,9 @@ jobs:
       - name: Say hello
         run: |
           echo 'Hello World!'
+    
+    steps:
+      - name: Now it
+        run: |
+          echo Date()
+  
