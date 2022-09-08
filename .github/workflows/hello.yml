@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-20.04       
     steps:
       - name: Now it
-        run: |
+      - run: |
           echo 'Hello World!'
+    steps:
+      - name: Not it 2
+      - run: echo 'Hello World!2'
   
