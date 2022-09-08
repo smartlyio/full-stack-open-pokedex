@@ -9,10 +9,11 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-20.04       
     steps:
-      - name: Now it
-      - run: |
-          echo 'Hello World!'
-    steps:
-      - name: Not it 2
-      - run: echo 'Hello World!2'
+      - name: Say Hello
+        run: |
+          echo 'Hello World!'   
+      - name: Not it is
+        run: date
+      - name: Directory content
+        run: ls -l
   
