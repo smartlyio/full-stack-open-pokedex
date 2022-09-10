@@ -1,0 +1,14 @@
+name: Hellow orld!
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  first_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Saying hello
+        run: |
+          echo "Hello there!"
