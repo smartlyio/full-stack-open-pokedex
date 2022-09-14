@@ -14,7 +14,7 @@ jobs:
         with:
           node-version: "16"
       - name: npm install
-        run: npm install
+        run: npm ci
       - name: run linting
         run: npm run eslint
       - name: run build
