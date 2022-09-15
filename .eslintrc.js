@@ -12,7 +12,8 @@ module.exports = {
   //     "cy": true
   //   }
   // } ,
-  "plugin:react/recommended"],
+  "plugin:react/recommended","plugin:cypress/recommended"],
+  
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
