@@ -10,4 +10,4 @@ describe('Pokedex', function() {
     cy
     cy.contains('chlorophyll')
   })
-  })
+})
