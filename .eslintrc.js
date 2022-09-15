@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     "jest/globals": true,
     node: true,
-    'cypress/globals': true
+    'cypress/globals': false
   },
   extends: ["eslint:recommended",
   // {
