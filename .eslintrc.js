@@ -12,7 +12,7 @@ module.exports = {
   //     "cy": true
   //   }
   // } ,
-  "plugin:react/recommended","plugin:cypress/recommended"],
+  "plugin:react/recommended"],
   
   parserOptions: {
     ecmaFeatures: {
@@ -21,7 +21,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react", "jest"],
+  plugins: ["react", "jest","cypress"],
   rules: {
     indent: ["error", 2],
     "linebreak-style": 0,
