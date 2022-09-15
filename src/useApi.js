@@ -13,7 +13,13 @@ const useApi = (url, mapResults = (result) => result) => {
       .catch(setError)
       .finally(() => setIsLoading(false))
   }, [url])
+  axios.get('/health', (req, res) => {
+    res.send('ok')
+  })
 
+  axios.get('/version', (req, res) => {
+    res.send('1') // change this string to ensure a new version deployed
+  })
   return { data, isLoading, error }
 }
 
