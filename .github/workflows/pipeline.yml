@@ -28,6 +28,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12 
+        uses: actions/checkout@v3
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedexsand" 
