@@ -4,12 +4,13 @@ on:
   push:
     branches:
       - master
-  # pull_request:
-  #   branches: [master]
-  #   types: [opened, synchronize]
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push'}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -31,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12 
-        if: ${{ github.event_name == 'push'}}
+       
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedexsand" 
