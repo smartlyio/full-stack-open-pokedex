@@ -33,4 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedexsand" 
           heroku_email: "sunsetsin1.sy@gmail.com"
-      
+          healthcheck: "https://pokedexsand.herokuapp.com/health"
+          checkstring: "ok"
