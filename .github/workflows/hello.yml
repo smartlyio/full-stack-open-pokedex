@@ -11,5 +11,5 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-      - run: ls
+      - run: ls -l
       - run: date
