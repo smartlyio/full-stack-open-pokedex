@@ -1,9 +1,9 @@
 name: Hello World!
 
 on:
-    push:
-      branches:
-        - master
+  push:
+    branches:
+      - master
 jobs:
   hello_world_job:
     runs-on: ubuntu-latest
@@ -11,6 +11,5 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-      - run: | ls
-      - run: | date
-        
+      - run: ls
+      - run: date
