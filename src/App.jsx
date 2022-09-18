@@ -14,8 +14,6 @@ const mapResults = ({ results }) =>
   }))
 
 const App = () => {
-  console.log('Sanity check for cicd')
-
   const {
     data: pokemonList,
     error,
