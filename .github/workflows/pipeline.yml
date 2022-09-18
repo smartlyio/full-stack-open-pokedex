@@ -50,7 +50,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           default: patch
-
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
