@@ -1,14 +1,18 @@
-# fly.toml file generated for cicd-fso11 on 2022-09-18T11:50:57+02:00
+# fly.toml file generated for young-frost-5915 on 2022-09-18T16:41:29+02:00
 
-app = "cicd-fso11"
+app = "young-frost-5915"
 kill_signal = "SIGINT"
 kill_timeout = 5
-
-[build]
-  builder = "heroku/buildpacks:20"
+processes = []
 
 [deploy]
   release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  builder = "heroku/buildpacks:20"
 
 [env]
   PORT = "8080"
@@ -16,9 +20,6 @@ kill_timeout = 5
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
-
-[processes]
-  app = "node app.js"
 
 [[services]]
   http_checks = []
