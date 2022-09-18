@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3 # Checksout the latest commit in your repo.
       - uses: actions/setup-node@v3
         with:
-          node_version: "16"
+          node-version: "16"
       - name: npm install
         run: npm install
       - name: lint
