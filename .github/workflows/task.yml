@@ -1,0 +1,21 @@
+name: Show Date
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  show_date_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: list directory contents
+        run: |
+          echo date 
+  list_directory_contents_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: list directory contents
+        run: |
+          echo ls  
