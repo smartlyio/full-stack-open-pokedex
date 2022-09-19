@@ -1,12 +1,12 @@
 #!/bin/bash
 
-res=$(curl -s https://young-frost-5915.fly.dev/health)
+# res=$(curl -s https://young-frost-5915.fly.dev/health)
 
-if [ "$res" == "ok" ]; then
-  echo "Succeeded curl to /health"
-  exit 0
-  fi
+# if [ "$res" == "ok" ]; then
+#   echo "Succeeded curl to /health"
+#   exit 0
+#   fi
 
-echo "Failed curl to /health"
+echo "Zy El Ful"
 # 1: Failed, 0: Succeeded.
 exit 0
