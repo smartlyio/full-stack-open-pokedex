@@ -1,4 +1,3 @@
-#!/bin/bash
 
 res=$(curl -s https://young-frost-5915.fly.dev/health)
 
@@ -7,5 +6,6 @@ if [ "$res" == "ok" ]; then
   exit 0
   fi
 
+echo "Failed curl to /health"
 # 1: Failed, 0: Succeeded.
 exit 1
