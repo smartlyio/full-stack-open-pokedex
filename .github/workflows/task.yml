@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: list directory contents
         run: |
-          echo date 
+          date 
   list_directory_contents_job:
     runs-on: ubuntu-20.04
     steps:
       - name: list directory contents
         run: |
-          echo ls  
+          ls  
