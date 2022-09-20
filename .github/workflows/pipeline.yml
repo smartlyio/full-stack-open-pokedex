@@ -37,6 +37,8 @@ jobs:
           wait-on: http://localhost:5000
   DelpoyToFlyio:
     if: ${{ github.event_name == 'push' }}
+    needs: PreDeploymentChecks
+    runs-on: ubuntu-20.04
     steps:  
       - uses: superfly/flyctl-actions/setup-flyctl@master # Need to checkout repo before this.
       - run: flyctl deploy --remote-only
