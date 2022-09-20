@@ -1,15 +1,24 @@
-name: Hello World!
+name: Testing stuff
 
 on:
   push:
     branches:
-      - master
+      - main
+
 jobs:
-  hello_world_job:
-    runs-on: ubuntu-latest
+  a_test_job:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
-        run: |
-          echo "Hello World!"
-      - run: ls -l
-      - run: date
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
