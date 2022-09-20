@@ -8,5 +8,4 @@ if [ "$res" == "ok" ]; then
   fi
 
 echo "Failed curl to /health"
-# 1: Failed, 0: Succeeded.
 exit 1
