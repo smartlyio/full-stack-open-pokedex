@@ -36,7 +36,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   DelpoyToFlyio:
-    steps:
-      if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' }}
+    steps:  
       - uses: superfly/flyctl-actions/setup-flyctl@master # Need to checkout repo before this.
       - run: flyctl deploy --remote-only
