@@ -39,6 +39,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     needs: PreDeploymentChecks
     runs-on: ubuntu-20.04
-    steps:  
-      - uses: superfly/flyctl-actions/setup-flyctl@master # Need to checkout repo before this.
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
