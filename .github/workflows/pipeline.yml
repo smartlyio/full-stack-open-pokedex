@@ -50,6 +50,6 @@ jobs:
         uses: anothrNick/github-tag-action@1.40.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: "patch"
+          DEFAULT_BUMP: "patch" # hmm...
           WITH_V: true
 
