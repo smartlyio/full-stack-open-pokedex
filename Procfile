@@ -1,1 +1,1 @@
-web: lode sapp.js
+web: node app.js
