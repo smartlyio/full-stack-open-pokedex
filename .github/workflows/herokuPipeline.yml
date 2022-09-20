@@ -15,4 +15,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokemonaupli
           heroku_email: aupli16@freeuni.edu.ge
+          healthcheck: "https://pokemonaupli.herokuapp.com/health"
+
  
