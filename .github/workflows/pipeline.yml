@@ -18,6 +18,8 @@ jobs:
         run: npm install  
       - name: lints
         run: npm run eslint
+      - name: npm install cypress
+        run: npm install cypress --save-dev
       - name: create build
         run: npm run build
       - name: run tests
@@ -25,7 +27,6 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
-          working-directory: client
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
