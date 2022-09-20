@@ -25,7 +25,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v4
         with:
+          working-directory: client
           build: npm run build
           start: npm run start-prod
-          command-prefix: yarn dlx
           wait-on: http://localhost:5000
