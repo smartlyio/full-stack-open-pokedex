@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 
+// change3...
+
 // Preferably response with release number?
 app.get('/health', (req, res) => {
   res.send('ok')
