@@ -1,3 +1,4 @@
+#!/bin/bash
 
 res=$(curl -s https://young-frost-5915.fly.dev/health)
 
