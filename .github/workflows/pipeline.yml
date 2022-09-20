@@ -3,12 +3,12 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - master
+      - main # Change to master when done testing
       # note that your "main" branch might be called main instead of master
-  pull_request:
-    branches: [master]
-    # sync = update
-    types: [opened, synchronize] 
+  # pull_request:
+  #   branches: [master]
+  #   # sync = update
+  #   types: [opened, synchronize] 
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
