@@ -33,3 +33,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - run: echo "Does not contain"
+  it_does_contain_skip:
+    if: ${{ contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "Does contain skip"
