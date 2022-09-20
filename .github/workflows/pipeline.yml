@@ -27,4 +27,5 @@ jobs:
         with:
           build: npm run build
           start: npm run start-prod
+          command-prefix: yarn dlx
           wait-on: http://localhost:5000
