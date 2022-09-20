@@ -40,10 +40,10 @@ jobs:
     # needs: [PreDeploymentChecks]
     runs-on: ubuntu-20.04
     steps:
-      # - name: Deployment
-      #   uses: actions/checkout@v3
-      #   with:
-      #     fetch-depth: '0'
+      - name: Deployment
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
       # - uses: superfly/flyctl-actions/setup-flyctl@master
       # - run: flyctl deploy --remote-only
       - name: Bump version and push tag
