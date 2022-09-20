@@ -38,4 +38,4 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       - name: Deploy app to flyio
         uses: superfly/flyctl-actions/setup-flyctl@master # Need to checkout repo before this.
-        run: flyctl deploy --remote-only
+      - run: flyctl deploy --remote-only
