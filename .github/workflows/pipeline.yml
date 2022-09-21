@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           node-version: '16'
       - name: npm install
@@ -30,5 +31,4 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5001
       - name: deploy to prod
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
+        run: flyctl deploy --remote-only
