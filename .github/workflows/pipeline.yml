@@ -33,3 +33,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "boiling-springs-43350"
           heroku_email: "niklas.mettala@hotmail.com"
+          healthcheck: "https://boiling-springs-43350.herokuapp.com/health"
