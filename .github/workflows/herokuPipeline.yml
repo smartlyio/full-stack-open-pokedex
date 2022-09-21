@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -20,5 +21,3 @@ jobs:
           heroku_app_name: pokemonaupli
           heroku_email: aupli16@freeuni.edu.ge
           healthcheck: "https://pokemonaupli.herokuapp.com/health"
-
- 
