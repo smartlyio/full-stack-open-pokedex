@@ -15,13 +15,6 @@ app.get('/version', (req, res) => {
   res.send('v1')
 })
 
-// change1
-// change2
-// change3
-// change4
-// change5
-// change...
-
 app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
