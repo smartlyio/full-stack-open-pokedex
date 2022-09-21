@@ -25,6 +25,7 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
+      if: ${{ github.event_name == 'push' }}
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
