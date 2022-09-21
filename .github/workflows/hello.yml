@@ -24,7 +24,17 @@ jobs:
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
-      - name: commit messages
+      - name: commit messages 
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+  does_it_contain_skip: # Both of these work, need to add them to pipeline.yml
+    if: ${{ !contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "Does not contain"
+  it_does_contain_skip:
+    if: ${{ contains(join(toJson(github.event.commits.*.message), ' '), '#skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo "Does contain skip"

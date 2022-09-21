@@ -3,12 +3,10 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - main # Change to master when done testing
-      # note that your "main" branch might be called main instead of master
-  # pull_request:
-  #   branches: [master]
-  #   # sync = update
-  #   types: [opened, synchronize] 
+      - master # or main
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize] 
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -17,7 +15,7 @@ jobs:
   PreDeploymentChecks:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3 # Checksout the latest commit in your repo.
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
@@ -36,7 +34,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   DelpoyToFlyio:
-    if: ${{ github.event_name == 'push' }}
+    if: |
+      github.event_name == 'push' && 
+      contains(join(toJson(github.event.commits.*.message), ' '), '#skip') != true
     needs: [PreDeploymentChecks]
     runs-on: ubuntu-20.04
     steps:
@@ -50,6 +50,6 @@ jobs:
         uses: anothrNick/github-tag-action@1.40.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: "patch" # hmm...
+          DEFAULT_BUMP: "patch"
           WITH_V: true
 
