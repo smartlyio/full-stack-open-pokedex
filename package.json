@@ -12,6 +12,9 @@
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
+  "engines": {
+    "node": "16.17.0"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -58,6 +61,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "fly-cli": "^1.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
