@@ -18,7 +18,7 @@ const PokemonList = ({ pokemonList }) => {
           <div className="list-item-name">{name}</div>
         </Link>
       ))}
-      <h1>Pazaci Menia SSaboi</h1>
+      <h1>Heavy weight on heart</h1>
     </div>
   );
 };
