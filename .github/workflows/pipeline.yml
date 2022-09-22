@@ -13,7 +13,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ !contains(github.event.head_commit.message, 'skip') }} 
+    if:  ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -37,6 +37,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Bump version and push tag
+        if: ${{ !contains(github.event.head_commit.message, 'skip') }} 
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
