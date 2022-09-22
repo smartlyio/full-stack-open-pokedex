@@ -32,3 +32,5 @@ jobs:
           wait-on: http://localhost:5001
       - name: deploy to prod
         run: flyctl deploy --remote-only
+      - name: custom health check
+        run: /app/health_check.sh
