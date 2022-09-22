@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+      - sashasBranch
+
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -20,3 +22,16 @@ jobs:
           heroku_app_name: pokemonaupli
           heroku_email: aupli16@freeuni.edu.ge
           healthcheck: "https://pokemonaupli.herokuapp.com/health"
+      - name: Build Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Build Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Build Failure
+          uses: rjstone/discord-webhook-notify@v1
+          if: failure()
+          with:
+              severity: error
+              details: Build Failed!
