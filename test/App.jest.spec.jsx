@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import axiosMock from 'axios'
@@ -20,7 +22,7 @@ describe('<App />', () => {
       render(<App />)
     })
     expect(axiosMock.get).toHaveBeenCalledTimes(1)
-    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=50')
+    expect(axiosMock.get).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/?limit=30')
   })
 
   it('shows LoadingSpinner', async () => {

@@ -1,0 +1,44 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+
+jobs:
+  simple_deployment_pipeline:
+    if:  ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install 
+        run: npm install  
+      - name: lints
+        run: npm run eslint
+      - name: npm install cypress
+        run: npm install cypress --save-dev
+      - name: create build
+        run: npm run build
+      - name: run tests
+        run: npm test
+      - name: e2e tests
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm run build
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        if: ${{ !contains(github.event.head_commit.message, 'skip') }} 
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+    
