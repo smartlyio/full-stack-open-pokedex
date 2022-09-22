@@ -33,6 +33,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5001
       - name: deploy to prod
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
       - name: custom health check
         run: ./health_check.sh
