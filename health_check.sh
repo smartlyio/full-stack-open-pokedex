@@ -1,5 +1,12 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+if [ curl https://pokedex.fly.dev/health == 'ok' ]
+then
+    echo "Custom health check passed"
+    exit 0
+fi
 
-exit 0
+echo "Custom health check failed"
+exit 1
+
+

@@ -33,4 +33,4 @@ jobs:
       - name: deploy to prod
         run: flyctl deploy --remote-only
       - name: custom health check
-        run: /app/health_check.sh
+        run: ./health_check.sh
