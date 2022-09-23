@@ -8,30 +8,30 @@ on:
     branches: [master]
     types: [opened, synchronize]
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: e2e tests
-        uses: cypress-io/github-action@v4
-        with:
-          build: npm run build
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: deploy to heroku
-        if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_SECRET}}
-          heroku_app_name: seldom-simba
-          heroku_email: mohammadfahadamajd@gmail.com
+  # simple_deployment_pipeline:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: "16"
+  #     - name: npm install
+  #       run: npm install
+  #     - name: lint
+  #       run: npm run eslint
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v4
+  #       with:
+  #         build: npm run build
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
+  #     - name: deploy to heroku
+  #       if: ${{ github.event_name == 'push' }}
+  #       uses: akhileshns/heroku-deploy@v3.12.12
+  #       with:
+  #         heroku_api_key: ${{secrets.HEROKU_API_SECRET}}
+  #         heroku_app_name: seldom-simba
+  #         heroku_email: mohammadfahadamajd@gmail.com
   tag_release:
     # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -51,5 +51,6 @@ jobs:
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
         SKIP: ${{ contains('$COMMIT_MESSAGE', '#skip') }}
-      run: echo "$SKIP"
+        SMN: ${{ '$COMMIT_MESSAGE' }}
+      run: echo "$SMN"
 
