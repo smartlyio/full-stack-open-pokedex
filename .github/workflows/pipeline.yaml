@@ -58,4 +58,18 @@ jobs:
         severity: info
         details: Deployement Successfull!
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: ${{ failure() }}
+      with:
+        severity: error
+        details: Deployment Failed!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: cancelled
+      uses: rjstone/discord-webhook-notify@v1
+      if: ${{ cancelled() }}
+      with:
+        severity: warn
+        details: Deployment Cancelled!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
