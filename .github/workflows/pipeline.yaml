@@ -35,6 +35,9 @@ jobs:
   tag_release:
     # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
+    env:
+        COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
+      if: ${{ !contains(env.COMMIT_MESSAGE, '#skip') }}
     steps:
     - uses: actions/checkout@v3
       with:
@@ -47,9 +50,9 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
         
-    - name: Testing commit message
-      env:
-        COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-      if: ${{ !contains(env.COMMIT_MESSAGE, '#skip') }}
-      run: echo "yes"
+    # - name: Testing commit message
+    #   env:
+    #     COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
+    #   if: ${{ !contains(env.COMMIT_MESSAGE, '#skip') }}
+    #   run: echo "yes"
 
