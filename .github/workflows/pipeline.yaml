@@ -33,7 +33,7 @@ jobs:
           heroku_app_name: seldom-simba
           heroku_email: mohammadfahadamajd@gmail.com
   tag_release:
-    needs: [simple_deployment_pipeline]
+    # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v3
@@ -50,6 +50,6 @@ jobs:
     - name: Testing commit message
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-        SKIP: contains("$COMMIT_MESSAGE", '#skip')
+        SKIP: ${{ contains("$COMMIT_MESSAGE", '#skip') }}
       run: echo "$SKIP"
 
