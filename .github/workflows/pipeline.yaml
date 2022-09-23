@@ -50,6 +50,6 @@ jobs:
     - name: Testing commit message
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-        PINK: ${{ env.COMMIT_MESSAGE }}
-      run: echo "$COMMIT_MESSAGE $PINK"
+      if: ${{ contains("$COMMIT_MESSAGE", '#skip') }}
+      run: echo "yes"
 
