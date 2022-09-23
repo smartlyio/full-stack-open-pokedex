@@ -32,3 +32,16 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_SECRET}}
           heroku_app_name: seldom-simba
           heroku_email: mohammadfahadamajd@gmail.com
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+       with:
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.40.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: patch
