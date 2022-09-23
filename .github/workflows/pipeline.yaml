@@ -52,14 +52,4 @@ jobs:
         WITH_V: true
         DEFAULT_BUMP: patch
 
-    - name: Noitfy Success
-      if: ${{ success() }}
-      uses: rjstone/discord-webhook-notify@v1
-      if: success()
-      with:
-        severity: info
-        details: Deployment Succeeded!
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-
 
