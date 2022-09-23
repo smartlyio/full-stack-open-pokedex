@@ -7,6 +7,8 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
+  env:
+    COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
 jobs:
   # simple_deployment_pipeline:
   #   runs-on: ubuntu-20.04
@@ -35,8 +37,7 @@ jobs:
   tag_release:
     # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    slit: ${{ join(toJson(github.event.commits.*.message)) }}
-    if: ${{ !contains(slit, '#skip') }}
+    if: ${{ !contains(env.COMMIT_MESSAGE, '#skip') }}
     steps:
     - uses: actions/checkout@v3
       with:
