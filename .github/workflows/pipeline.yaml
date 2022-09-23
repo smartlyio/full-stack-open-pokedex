@@ -35,8 +35,8 @@ jobs:
   tag_release:
     # needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-    if: ${{ !contains(COMMIT_MESSAGE, '#skip') }}
+    slit: ${{ join(toJson(github.event.commits.*.message)) }}
+    if: ${{ !contains(slit, '#skip') }}
     steps:
     - uses: actions/checkout@v3
       with:
