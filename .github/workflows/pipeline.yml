@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
 
 jobs:
   simple_deployment_pipeline:
@@ -17,3 +16,4 @@ jobs:
       - name: npm install 
         run: npm install  
       - name: lint
+        run: npm run eslint
