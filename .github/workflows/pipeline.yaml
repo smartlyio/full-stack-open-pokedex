@@ -50,6 +50,7 @@ jobs:
     - name: Testing commit message
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-        SKIP: ${{ contains('hahaha', '#skip') }}
+        SKIP: ${{ contains('$COMMIT_MESSAGE', '#skip') }}
+      if: ${{ "$SKIP" != true }}
       run: echo "$SKIP"
 
