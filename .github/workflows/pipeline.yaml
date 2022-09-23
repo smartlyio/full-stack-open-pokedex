@@ -46,5 +46,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DEFAULT_BUMP: patch
+        
+    - name: Testing commit message
+      env:
         COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.message) }}
       run: echo "$COMMIT_MESSAGE"
+
