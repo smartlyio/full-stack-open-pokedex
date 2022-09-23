@@ -50,7 +50,7 @@ jobs:
     - name: Testing commit message
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
-        SKIP: ${{ contains('$COMMIT_MESSAGE', '#skip') }}
+        SKIP: ${{ contains(env.COMMIT_MESSAGE, '#skip') }}
         SMN: ${{ env.COMMIT_MESSAGE }}
       run: echo "$SMN"
 
