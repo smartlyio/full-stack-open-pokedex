@@ -51,6 +51,6 @@ jobs:
       env:
         COMMIT_MESSAGE: ${{ join(toJson(github.event.commits.*.message)) }}
         SKIP: ${{ contains(env.COMMIT_MESSAGE, '#skip') }}
-        SMN: ${{ $COMMIT_MESSAGE }}
+        SMN: ${{ "$COMMIT_MESSAGE" }}
       run: echo "$SMN"
 
