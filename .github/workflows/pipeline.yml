@@ -6,6 +6,8 @@ on:
       - master
       # note that your "main" branch might be called main instead of master
 
+
+#note for commit in task 11.13
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
