@@ -52,6 +52,7 @@
     "react-router-dom": "^5.2.0"
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "semi": false
   }
 }
