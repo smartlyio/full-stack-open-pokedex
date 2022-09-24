@@ -34,3 +34,4 @@ jobs:
           heroku_app_name: "stormy-beyond-29800" #Must be unique in Heroku
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           healthcheck: "https://stormy-beyond-29800.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
