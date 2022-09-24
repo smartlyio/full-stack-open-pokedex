@@ -1,1 +1,1 @@
-web: npm run start-prodfdfd
+web: npm run start-prod
