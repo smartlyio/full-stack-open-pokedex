@@ -39,13 +39,17 @@ jobs:
           heroku_email: ${{secrets.HEROKU_API_EMAIL}}
           healthcheck: "https://stormy-beyond-29800.herokuapp.com/health"
           rollbackonhealthcheckfailed: true
+
   tag_release:
+      if: ${{ (github.event_name == 'push') }}
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-20.04
       steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: '0'
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.36.0
-          if: ${{ github.event_name == 'push' }}
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
