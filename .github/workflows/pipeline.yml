@@ -5,13 +5,12 @@ name: Workflow Pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     strategy:
@@ -20,41 +19,37 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: npm install
-      run: npm install  
-    - name: lint
-      run: npm run eslint
-    - name: build
-      run: npm run build
-    - name: test
-      run: npm run test
-    - name: e2e tests
-      uses: cypress-io/github-action@v2.9.7
-      with:
-        command: npm run cypress:run
-        start: npm run start-prod
-        wait-on: http://localhost:5000
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.12.12
-      with:
-        # This will be used for authentication. You can find it in your heroku homepage account settings
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        # Email that you use with heroku
-        heroku_email:  ${{secrets.HEROKU_EMAIL}}
-        # The appname to use for deploying/updating
-        heroku_app_name: bea-full-stack-open-pokedex
-        #healthcheck: "https://bea-full-stack-open-pokedex.herokuapp.com/health"
-        #checkstring: "ok"
-        # Set this to true if you don't want to automatically create the Heroku app
-        dontautocreate: true
-        # Contents of the Procfile to save and deploy
-        procfile: Procfile
-        region: eu
-
-   
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          command: npm run cypress:run
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          # This will be used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          # Email that you use with heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          # The appname to use for deploying/updating
+          heroku_app_name: bea-full-stack-open-pokedex
+          #healthcheck: "https://bea-full-stack-open-pokedex.herokuapp.com/health"
+          #checkstring: "ok"
+          # Set this to true if you don't want to automatically create the Heroku app
+          dontautocreate: true
+          region: eu
