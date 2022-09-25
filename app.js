@@ -8,7 +8,8 @@ const app = express();
 
 app.use(express.static("dist"));
 
-app.listen(5000, () => {
+// eslint-disable-next-line no-undef
+app.listen(process.env.PORT || 5000, () => {
   // eslint-disable-next-line no-console
   console.log("server started on port 5000");
 });
