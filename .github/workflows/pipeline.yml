@@ -51,8 +51,6 @@ jobs:
         heroku_app_name: bea-full-stack-open-pokedex
         # Set this to true if you don't want to automatically create the Heroku app
         dontautocreate: true
-        # An optional buildpack to use when creating the heroku application
-        branch: main
         # Contents of the Procfile to save and deploy
         procfile: Procfile
         region: eu
