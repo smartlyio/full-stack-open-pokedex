@@ -32,6 +32,12 @@ jobs:
       run: npm run eslint
     - name: build
       run: npm run build
+
+  test:
+  
+   runs-on: ubuntu-latest
+   
+   steps:
     - name: test
       run: npm run test
     - name: e2e tests
@@ -40,3 +46,25 @@ jobs:
         command: npm run cypress:run
         start: npm run start-prod
         wait-on: http://localhost:5000
+        
+  deploy:
+  
+   runs-on: ubuntu-latest
+   
+   steps:
+    - name: Deploy to Heroku
+      uses: AkhileshNS/heroku-deploy@v3.12.12.7
+      with:
+        # This will be used for authentication. You can find it in your heroku homepage account settings
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        # Email that you use with heroku
+        heroku_email:  ${{secrets.HEROKU_EMAIL}}
+        # The appname to use for deploying/updating
+        heroku_app_name: fullstack-open-pokedex
+        # An optional buildpack to use when creating the heroku application
+        branch: main
+        # Contents of the Procfile to save and deploy
+        procfile: Procfile
+        region: eu
+
+   
