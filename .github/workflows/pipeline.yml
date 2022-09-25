@@ -48,7 +48,7 @@ jobs:
         # Email that you use with heroku
         heroku_email:  ${{secrets.HEROKU_EMAIL}}
         # The appname to use for deploying/updating
-        heroku_app_name: full-stack-open-pokedex
+        heroku_app_name: bea-full-stack-open-pokedex
         # Set this to true if you don't want to automatically create the Heroku app
         dontautocreate: true
         # An optional buildpack to use when creating the heroku application
