@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku deploy
         uses: akhileshns/heroku-deploy@v3.12.12
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "stormy-beyond-29800" #Must be unique in Heroku
@@ -41,7 +41,7 @@ jobs:
           rollbackonhealthcheckfailed: true
 
   tag_release:
-      if: ${{ (github.event_name == 'push') }}
+      if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-20.04
       steps:
