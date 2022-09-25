@@ -1,10 +1,10 @@
-import process from "node:process";
+//import process from "node:process";
 
 const express = require("express");
 const app = express();
 
 // Heroku dynamically sets a port
-const PORT = 5000; //process.env.PORT ||
+//const PORT = 5000; //process.env.PORT ||
 
 app.use(express.static("dist"));
 
