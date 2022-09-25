@@ -32,23 +32,6 @@ jobs:
       run: npm run eslint
     - name: build
       run: npm run build
-
-  test:
-  
-   runs-on: ubuntu-latest
-   
-   strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-   
-   steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
     - name: test
       run: npm run test
     - name: e2e tests
@@ -57,13 +40,6 @@ jobs:
         command: npm run cypress:run
         start: npm run start-prod
         wait-on: http://localhost:5000
-        
-  deploy:
-  
-   runs-on: ubuntu-latest
-   
-   steps:
-    - uses: actions/checkout@v3
     - name: Deploy to Heroku
       uses: AkhileshNS/heroku-deploy@v3.12.12
       with:
@@ -73,6 +49,8 @@ jobs:
         heroku_email:  ${{secrets.HEROKU_EMAIL}}
         # The appname to use for deploying/updating
         heroku_app_name: fullstack-open-pokedex
+        # Set this to true if you don't want to automatically create the Heroku app
+        dontautocreate: true
         # An optional buildpack to use when creating the heroku application
         branch: main
         # Contents of the Procfile to save and deploy
