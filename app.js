@@ -1,3 +1,5 @@
+import process from "node:process";
+
 const express = require("express");
 const app = express();
 
@@ -6,7 +8,7 @@ const PORT = 5000; //process.env.PORT ||
 
 app.use(express.static("dist"));
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   // eslint-disable-next-line no-console
   console.log("server started on port 5000");
 });
