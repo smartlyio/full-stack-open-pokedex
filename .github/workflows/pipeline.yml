@@ -50,6 +50,7 @@ jobs:
           heroku_app_name: bea-full-stack-open-pokedex
           healthcheck: "https://bea-full-stack-open-pokedex.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
           # Set this to true if you don't want to automatically create the Heroku app
           dontautocreate: true
           region: eu
