@@ -11,11 +11,11 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/miguel', (req, res) => {
-  res.send('12')
+  res.send('12 years old')
 })
 
 app.get('/marco', (req, res) => {
-  res.send('polo')
+  res.send('polo!!')
 })
 
 app.listen(PORT, () => {
