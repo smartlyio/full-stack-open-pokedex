@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: ["error", { "args": "none" }]*/
 const { defineConfig } = require('cypress')
 
 module.exports = defineConfig({
