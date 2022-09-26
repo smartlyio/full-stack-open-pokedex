@@ -33,18 +33,8 @@ const App = () => {
           if (!(pokemonId)) {
             return (<></>)
           }
-          //const lastpokemonId = pokemonList[pokemonList.length-1].id
-
-          let prevId = pokemonId-1
-          let nextId = pokemonId+1
-          /*if (pokemonId === 1) {
-            prevId = lastpokemonId
-          }
-          if (pokemonId === lastpokemonId) {
-            nextId = 1
-          }*/
-          const previous = pokemonList.find(({ id }) => id === prevId)
-          const nextpokemon = pokemonList.find(({ id }) => id === nextId)
+          const previous = pokemonList.find(({ id }) => id === pokemonId-1)
+          const nextpokemon = pokemonList.find(({ id }) => id === pokemonId+1)
 
           return <PokemonPage pokemonList={pokemonList} previous={previous} next={nextpokemon} />
         }} />
