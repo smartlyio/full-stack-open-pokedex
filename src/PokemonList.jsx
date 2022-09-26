@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const PokemonList = ({ pokemonList }) => {
+  // eslint-disable-next-line no-console
+  console.log(pokemonList)
   return (
     <div className="list-container">
       {pokemonList.map(({ id, name }) => (
