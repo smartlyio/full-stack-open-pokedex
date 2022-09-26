@@ -14,7 +14,6 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
 
 const App = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
-  
   if (isLoading) {
     return <LoadingSpinner />
   }
@@ -34,7 +33,7 @@ const App = () => {
           if (!(pokemonId)) {
             return (<></>)
           }
-          const lastpokemonId = pokemonList[pokemonList.length-1].id
+          //const lastpokemonId = pokemonList[pokemonList.length-1].id
 
           let prevId = pokemonId-1
           let nextId = pokemonId+1
