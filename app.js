@@ -11,7 +11,7 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/miguel', (req, res) => {
-  res.send('is a snake')
+  res.send('is a snake!')
 })
 
 app.get('/marco', (req, res) => {
