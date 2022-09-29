@@ -35,7 +35,7 @@ jobs:
       - name: deploy app
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        if: ${{!contains(join(env.COMMIT_MESSAGES, ' '), '#skip')}}
+        if: ${{github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGES, ' '), '#skip')}}
         run: flyctl deploy --remote-only
   tag_release:
     if: ${{ github.event_name == 'push' }}
