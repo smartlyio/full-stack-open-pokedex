@@ -4,10 +4,10 @@ on:
   push:
     branches:
       - main
-env:
-  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
 jobs:
   a_test_job:
+    env:
+      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
     if: ${{!COMMIT_MESSAGES.join('').contains("#skip")}}
     runs-on: ubuntu-20.04
     steps:
