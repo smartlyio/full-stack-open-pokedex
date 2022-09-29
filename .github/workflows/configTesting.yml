@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - main
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
 jobs:
   a_test_job:
+    if: ${{!contains(join(env.COMMIT_MESSAGES, ' '), '#skip')}}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
