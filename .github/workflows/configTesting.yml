@@ -6,9 +6,6 @@ on:
       - main
 jobs:
   a_test_job:
-    env:
-      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-    if: ${{!COMMIT_MESSAGES.join('').contains("#skip")}}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -23,4 +20,5 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        if: ${{!COMMIT_MESSAGES.join('').contains("#skip")}}
         run: echo "$COMMIT_MESSAGES"
