@@ -36,12 +36,14 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
   tag_release:
-    if: ${{ github.event_name == 'push' }}
+    env:
+      COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
+        if: ${{!contains(join(env.COMMIT_MESSAGES, ' '), '#skip')}}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
