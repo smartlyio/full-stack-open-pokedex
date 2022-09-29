@@ -1,0 +1,10 @@
+on:
+  schedule:
+    - cron: '30 23,0,1,2 * * *'
+
+jobs:
+  periodic_healthcheck:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Custom health check
+        run: ./health_check.sh
