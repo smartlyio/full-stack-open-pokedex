@@ -5,6 +5,12 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
 
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
 [build]
   builder = "heroku/buildpacks:20"
 
