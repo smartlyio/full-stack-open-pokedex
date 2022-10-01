@@ -1,5 +1,11 @@
 name: Periodic health check
 
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
 jobs:
   periodic_health_check:
     runs-on: ubuntu-18.04
