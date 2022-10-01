@@ -1,10 +1,8 @@
 name: Periodic health check
 
 on:
-  push:
-    branches:
-      - master
-      # note that your "main" branch might be called main instead of master
+  schedule:
+    - cron: '10 * * * *'
 
 jobs:
   periodic_health_check:
