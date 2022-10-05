@@ -53,6 +53,10 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
+      - name: get commit messages
+        env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        run: echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
