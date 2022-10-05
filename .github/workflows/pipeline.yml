@@ -46,9 +46,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
-        if: ${{ github.event_name == 'push' && !contains(${{COMMIT_MESSAGES}},'#skip')}}
+        if: ${{ github.event_name == 'push' && !contains({COMMIT_MESSAGES},'#skip')}}
       - run: flyctl deploy --remote-only
-        if: ${{ github.event_name == 'push' && !contains(${{COMMIT_MESSAGES}},'#skip')}}
+        if: ${{ github.event_name == 'push' && !contains({COMMIT_MESSAGES},'#skip')}}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -58,5 +58,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: true
-        if: ${{ github.event_name == 'push' && !contains(${{COMMIT_MESSAGES}},'#skip')}}
+        if: ${{ github.event_name == 'push' && !contains({COMMIT_MESSAGES},'#skip')}}
         uses: anothrNick/github-tag-action@1.36.0
