@@ -16,7 +16,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: echo "${{ toJson(github) }}"
       - run: echo "${{ toJson(github.event.commits) }}"
       - name: print commit messages
         env:
