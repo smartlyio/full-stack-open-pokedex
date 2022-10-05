@@ -59,6 +59,6 @@ jobs:
           DEFAULT_BUMP: patch
           DRY_RUN: true
           COMMIT_MESSAGES: ${{ join(toJson(github.event.commits.*.message)) }}
-        if: ${{ github.event_name == 'push' && !contains($COMMIT_MESSAGES,"#skip") }} 
+        if: ${{ github.event_name == 'push' && !contains("$COMMIT_MESSAGES","#skip") }} 
         uses: anothrNick/github-tag-action@1.36.0
 
