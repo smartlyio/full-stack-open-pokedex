@@ -26,7 +26,7 @@ jobs:
         run: echo "$COMMITS"
       - name: print commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ join(toJson(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGES"
       - uses: actions/setup-node@v3
         with:
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(join($COMMITS),"#skip") }} 
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
