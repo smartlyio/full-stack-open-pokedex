@@ -26,7 +26,7 @@ jobs:
         run: echo "$COMMITS"
       - name: print commit messages
         env:
-          COMMIT_MESSAGES: ${{ join(toJson(github.event.commits.*.message)) }}
+          COMMIT_MESSAGES: ${{ toJson(join(github.event.commits.*.message)) }}
         run: echo "$COMMIT_MESSAGES"
       - uses: actions/setup-node@v3
         with:
