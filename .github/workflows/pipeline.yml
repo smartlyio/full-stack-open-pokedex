@@ -64,6 +64,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: true
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
         uses: anothrNick/github-tag-action@1.36.0
