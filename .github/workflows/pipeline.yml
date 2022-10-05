@@ -16,14 +16,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: print github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: print commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
+      - run: echo "${{ toJson(github) }}"
+      - run: echo "${{ toJson(github.event.commits) }}"
       - name: print commit messages
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
@@ -31,14 +25,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
+      - run: npm install
+      - run: npm run eslint
+      - run: npm run build
+      - run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
