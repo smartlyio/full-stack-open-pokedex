@@ -16,12 +16,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - name: print event 
+        run: echo "${{ toJson(github.event) }}"
       - name: print commits 
         run: echo "${{ toJson(github.event.commits) }}"
       - name: print commit messages
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        run: echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -54,7 +55,7 @@ jobs:
       - run: flyctl deploy --remote-only
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
   tag_release:
-    needs: [tests]
+    needs: [tests, deploy]
     runs-on: ubuntu-20.04
     steps:
       - name: get commit messages
