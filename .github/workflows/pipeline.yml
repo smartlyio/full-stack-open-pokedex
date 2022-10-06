@@ -45,7 +45,7 @@ jobs:
         with:
           severity: error
           text: Tests failed
-          description: Commits in ${{ github.event.pull_request.html.href }} broke some test.
+          description: Recent [PR] (${{ github.event.pull_request.html_url }}) broke some test.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
