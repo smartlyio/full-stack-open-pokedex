@@ -54,7 +54,7 @@ jobs:
       - run: flyctl deploy --remote-only
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
   tag_release:
-    needs: [simple_deployment_pipeline]
+    needs: [tests]
     runs-on: ubuntu-20.04
     steps:
       - name: get commit messages
