@@ -4,10 +4,7 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
@@ -39,13 +36,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: failed tests
+      - name: test failed
         if: ${{ failure() }}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
           text: Tests failed
-          description: Recent [PR] (${{ github.event.pull_request.html_url }}) broke some test.
+          description: Recent changes ${{ github.event.pull_request.html_url }} broke some test.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -54,9 +51,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-        if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
       - run: flyctl deploy --remote-only
-        if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
+      - name: deploy failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Tests failed
+          description: Recent changes ${{ github.event.pull_request.html_url }} broke deploy.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [tests, deploy]
     runs-on: ubuntu-20.04
@@ -72,5 +75,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-        if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
         uses: anothrNick/github-tag-action@1.36.0
+      - name: deploy success
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          text: New version of poke-app deployed
+          description:  at 'https://fullstackopen-pokeapp.fly.dev/'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

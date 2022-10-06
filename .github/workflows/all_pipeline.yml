@@ -1,0 +1,81 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: print event 
+        run: echo "${{ toJson(github.event) }}"
+      - name: print PR URL
+        run: echo "${{ toJson(github.event.pull_request.html_url) }}"
+      - name: print commits 
+        run: echo "${{ toJson(github.event.commits) }}"
+      - name: print commit messages
+        env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        run: echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: npm install
+      - run: npm run eslint
+      - run: npm run build
+      - run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: test failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Tests failed
+          description: Recent PR ${{ github.event.pull_request.html_url }} broke some test.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  deploy:
+    needs: [tests]
+    if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+      - name: deploy failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Tests failed
+          description: Recent PR ${{ github.event.pull_request.html_url }} broke deploy.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  tag_release:
+    needs: [tests, deploy]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: get commit messages
+        env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        run: echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+        uses: anothrNick/github-tag-action@1.36.0
