@@ -19,6 +19,8 @@ jobs:
       - name: print event 
         run: echo "${{ toJson(github.event) }}"
       - name: print commits 
+        run: echo "${{ toJson(github.event.pull_request) }}"
+      - name: print PR URL 
         run: echo "${{ toJson(github.event.commits) }}"
       - name: print commit messages
         env:
