@@ -12,18 +12,12 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
-  simple_deployment_pipeline:
+  tests:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: print github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: print commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
+      - name: print commits 
+        run: echo "${{ toJson(github.event.commits) }}"
       - name: print commit messages
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
@@ -31,20 +25,30 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
+      - run: npm install
+      - run: npm run eslint
+      - run: npm run build
+      - run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: failed tests
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Tests failed
+          description: Commits in ${{ github.event.pull_request.html.href }} broke some test.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  deploy:
+    needs: [tests]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES,'#skip')}}
       - run: flyctl deploy --remote-only
