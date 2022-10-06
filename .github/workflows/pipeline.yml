@@ -23,6 +23,7 @@ jobs:
       - name: print commit messages
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        run: echo "COMMIT_MESSAGES=$COMMIT_MESSAGES" >> $GITHUB_ENV
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
