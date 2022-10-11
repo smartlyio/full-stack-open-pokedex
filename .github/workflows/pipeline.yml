@@ -1,0 +1,66 @@
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+        with:
+          node-version: '16'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v4
+        with:
+          build: npm run build
+          start: npm run start-prod
+          wait-on: http://localhost:5001
+      - name: deploy to prod
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), 'skip') }}
+        run: flyctl deploy --remote-only
+      - name: custom health check
+        run: ./health_check.sh
+      - name: Deployment Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: Deployment Successful!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Deployment Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: The commit ${{ github.event.head_commit.sha }} broke the build
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), 'skip') }}
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@43ed073f5c1445ca8b80d920ce2f8fa550ae4e8d
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
