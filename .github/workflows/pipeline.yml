@@ -33,4 +33,5 @@ jobs:
           heroku_app_name: fspart11
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: https://fspart11.herokuapp.com/health
+          rollbackonhealthcheckfailed: true
 
