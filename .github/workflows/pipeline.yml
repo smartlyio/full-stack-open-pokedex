@@ -32,4 +32,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fspart11
           heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: https://fspart11.herokuapp.com/health
 
