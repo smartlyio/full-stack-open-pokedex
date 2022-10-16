@@ -1,4 +1,4 @@
-name: simple_deployment_pipeline
+name: Deployment Pipeline
 
 on:
   push:
@@ -6,13 +6,14 @@ on:
       - master
 
 jobs:
-  runs-on: ubuntu-20.04
-  steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: npm install
-      run: npm install
-    - name: lint
-      run: npm run eslint
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
