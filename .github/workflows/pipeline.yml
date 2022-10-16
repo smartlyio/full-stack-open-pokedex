@@ -31,4 +31,4 @@ jobs:
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: fspart11
-          heroku_mail: ${{secrets.HEROKU_MAIL}}
+          heroku_mail: ${{secrets.HEROKU_EMAIL}}
