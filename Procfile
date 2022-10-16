@@ -1,1 +1,1 @@
-web: npm run eslint
+web: npm run start-prod
