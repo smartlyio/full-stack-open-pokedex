@@ -1,0 +1,21 @@
+name: URL health check
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0 0 1 * *'
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://learning-cicd-fullstack.herokuapp.com/health
+          follow-redirect: false # Optional, defaults to "no"
+          max-attempts: 3 # Optional, defaults to 1
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+          retry-all: false # Optional, defaults to "no"

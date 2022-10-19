@@ -1,0 +1,83 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'learning-cicd-fullstack'
+          heroku_email: 'sundesz@gmail.com'
+          branch: 'master'
+          healthcheck: 'https://learning-cicd-fullstack.herokuapp.com/health'
+          checkstring: 'ok'
+          rollbackonhealthcheckfailed: true
+      - name: Deployment Error
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Build failed
+          description: commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.username }} broke the build :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#push
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Tag release error Error
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Tag release failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  discord_notification:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deployment success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success() && github.event_name == 'push'
+        with:
+          severity: info
+          text: A new version of Pokedex is deployed!
+          description: to ${{ secrets.HEROKU_APPLICATION_LINK }} by ${{ github.event.pusher.name }}.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
