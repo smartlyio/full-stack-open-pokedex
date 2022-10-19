@@ -1,0 +1,22 @@
+name: Deploy and check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "vibrant-gerard-06294" #Must be unique in Heroku
+          heroku_email: "acm.holmes@gmail.com"
+          healthcheck: "https://vibrant-gerard-06294.herokuapp.com/health"
+          checkstring: "ok"
