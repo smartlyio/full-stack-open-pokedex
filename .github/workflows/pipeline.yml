@@ -35,3 +35,5 @@ jobs:
           heroku_email: ottojuho@hotmail.fi
           healthcheck: https://pokemon-app-heroku.herokuapp.com/health
           checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
