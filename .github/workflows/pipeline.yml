@@ -1,0 +1,44 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14.19.0'
+      - name: npm install
+        run: npm install
+      - name: Fix 'make' error
+        run: sudo apt-get install build-essential
+      - name: npm ci
+        run: npm ci
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm test
+  tag_release:
+    if: ${{ !contains(github.event.commits.*.message, '#skip')}}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with: 
+        fetch-depth: '0'
+    - name: Bump version and push tag
+      if: ${{ github.event_name == 'push' }}
+      uses: anothrNick/github-tag-action@1.36.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
