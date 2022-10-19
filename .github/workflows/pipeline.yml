@@ -1,0 +1,52 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+      branches: [master]
+      types: [opened, synchronize]
+jobs:
+  simple_deployment_pipeline:   
+    runs-on: ubuntu-20.04    
+    steps:      
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:          
+          node-version: '16'     
+      - name: npm install
+        run: npm install
+      - name: lint        
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        env:
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        with:
+          command: npm run cy:run
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Deploying to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        if:  ${{github.event_name == 'push' && !contains(join(github.event.commits.*.message,' '), '#skip')}}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "fullstack-pokedex-alsoderg" #Must be unique in Heroku
+          heroku_email: "alexander.sodergard@gmail.com" 
+          healthcheck: "https://fullstack-pokedex-alsoderg.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+      - uses: actions/checkout@v2
+  tag_release:
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-20.04
+      steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
