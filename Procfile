@@ -1,1 +1,1 @@
-asd
+web: node app.js
