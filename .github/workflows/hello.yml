@@ -18,7 +18,7 @@ jobs:
       - name: Now it is
         run: |
           date
-    list_directory_content:
+  list_directory_content:
     runs-on: ubuntu-20.04
     steps:
       - name: Directory content
