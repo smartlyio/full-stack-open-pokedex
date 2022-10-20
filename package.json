@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Full Stack Open",
   "main": "src/index.js",
+    "engines" : { 
+    "node" : "14"
+  },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
@@ -51,6 +54,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
