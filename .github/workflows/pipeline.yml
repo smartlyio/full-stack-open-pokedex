@@ -14,8 +14,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
-      - name: directory contents
-        run : ls -l
       - name: npm install
         run: npm install
       - name: lint
@@ -24,6 +22,8 @@ jobs:
         run : npm test
       - name : build
         run : npm run build
+      - name: directory contents
+        run : ls -l
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
