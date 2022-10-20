@@ -14,6 +14,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
+      - name: directory contents
+        run : ls -l
       - name: npm install
         run: npm install
       - name: lint
