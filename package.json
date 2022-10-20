@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "Full Stack Open",
   "main": "src/index.js",
-    "engines" : { 
-    "node" : "14"
+  "engines": {
+    "node": "14",
+    "npm": "6"
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",

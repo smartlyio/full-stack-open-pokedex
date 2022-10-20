@@ -28,7 +28,7 @@ jobs:
 
       - name: directory contents
         run : ls -l
-        
+
       - name: e2e tests
         uses: cypress-io/github-action@v2
         with:
