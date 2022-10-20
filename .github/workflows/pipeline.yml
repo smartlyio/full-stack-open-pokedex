@@ -1,0 +1,13 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
