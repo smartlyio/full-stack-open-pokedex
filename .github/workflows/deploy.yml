@@ -5,6 +5,7 @@ env:
 jobs:
   deploy:
       name: Deploy app
+      if: ${{ github.event_name == 'push' }}
       runs-on: ubuntu-latest
       steps: 
         - uses: actions/checkout@v2
