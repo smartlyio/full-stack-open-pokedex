@@ -13,7 +13,7 @@ app.listen(PORT, () => {
 
 // eslint-disable-next-line no-unused-vars
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.send('healthy')
 })
 
 app.get('/version', (req, res) => {
