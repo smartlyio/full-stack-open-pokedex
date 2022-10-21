@@ -5,14 +5,15 @@ on:
     branches:
       - master
 
-jobs: simple_deployment_pipeline:
-  runs-on: unbuntu-20.04
-  steps: 
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: '16'
-    - name: npm install
-      runs: npm install
-    - name: lint
-      run: npm run eslint
+jobs: 
+  simple_deployment_pipeline:
+    runs-on: unbuntu-20.04
+    steps: 
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install
+        runs: npm install
+      - name: lint
+        run: npm run eslint
