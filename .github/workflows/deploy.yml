@@ -15,3 +15,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "serene-escarpment-63358"
           heroku_email: "1michaelohayon@gmail.com"
+          healthcheck: "https://serene-escarpment-63358.herokuapp.com/health"
+          checkstring: "ok"
