@@ -1,6 +1,6 @@
-# fly.toml file generated for cd-ci on 2022-10-21T00:23:26+05:30
+# fly.toml file generated for young-butterfly-7999 on 2022-10-21T12:34:26+05:30
 
-app = "cd-ci"
+app = "young-butterfly-7999"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
@@ -40,3 +40,9 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
