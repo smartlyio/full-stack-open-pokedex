@@ -5,6 +5,9 @@ on:
     branches:
       - master
       # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   hello_world_job:
