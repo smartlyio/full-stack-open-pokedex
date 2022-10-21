@@ -1,0 +1,15 @@
+# fly.toml file generated for still-sun-302 on 2022-10-21T12:29:58+03:00
+
+app = "still-sun-302"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[deploy]
+  release_command = "npm run build"
+
+[env]
+  PORT = "5000"
+
+[processes]
+  app = "node app.js"
