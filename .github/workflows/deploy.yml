@@ -1,12 +1,17 @@
-name: Fly Deploy
-on: [push]
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
-  deploy:
-      name: Deploy app
-      runs-on: ubuntu-20.04
-      steps:
-        - uses: actions/checkout@v2
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "serene-escarpment-63358"
+          heroku_email: "1michaelohayon@gmail.com"
