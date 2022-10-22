@@ -13,3 +13,15 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+  content_listing:
+    runs-on: windows-latest
+    steps:
+      - name: print folder content
+        run: |
+          ls
+  date:
+    runs-on: windows-latest
+    steps:
+      - name: print date
+        run: |
+          date
