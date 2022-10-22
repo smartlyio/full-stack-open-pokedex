@@ -1,0 +1,14 @@
+name: folder content
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+  content:
+    runs-on: windows-latest
+    steps:
+      - name: print folder content
+        run: |
+          ls
