@@ -1,0 +1,19 @@
+name: Development Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  simple_debelopment_pipeline:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
