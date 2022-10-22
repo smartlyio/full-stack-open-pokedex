@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   build:
@@ -16,5 +19,5 @@ jobs:
           heroku_app_name: "serene-escarpment-63358"
           heroku_email: "1michaelohayon@gmail.com"
           healthcheck: "https://serene-escarpment-63358.herokuapp.com/health"
-          checkstring: "fail"
+          checkstring: "ok"
           rollbackonhealthcheckfailed: true
