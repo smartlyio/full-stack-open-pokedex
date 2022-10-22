@@ -16,4 +16,5 @@ jobs:
           heroku_app_name: "serene-escarpment-63358"
           heroku_email: "1michaelohayon@gmail.com"
           healthcheck: "https://serene-escarpment-63358.herokuapp.com/health"
-          checkstring: "ok"
+          checkstring: "fail"
+          rollbackonhealthcheckfailed: true
