@@ -6,6 +6,7 @@ on:
       - master
       # note that your "main" branch might be called main instead of master
 
+jobs:
   content:
     runs-on: windows-latest
     steps:
