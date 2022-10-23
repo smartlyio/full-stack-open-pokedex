@@ -6,7 +6,7 @@ const app = express();
 const PORT = config.PORT || 5001;
 
 app.get("/health", (req, res) => {
-  res.send("okk");
+  res.send("ok");
 });
 app.use(express.static("dist"));
 
