@@ -1,10 +1,12 @@
 name: Testing stuff
 
-
 on:
   push:
     branches:
-      - main
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   a_test_job:
