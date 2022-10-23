@@ -13,7 +13,7 @@ const PokemonList = ({ pokemonList }) => {
             backgroundImage: `url(${`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`})`,
           }}
         >
-          <div className="list-item-name">{name}</div>
+          <div className="list-item-name">_{name}_</div>
         </Link>
       ))}
     </div>
