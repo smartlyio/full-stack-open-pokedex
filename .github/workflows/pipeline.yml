@@ -10,6 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    needs: [carry_out]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3

@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    needs: [carry_out]
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     steps:

@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  a_test_job:
+  carry_out:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
@@ -25,3 +25,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+        if: (!contains($COMMIT_MESSAGES, '#skip'))
+        run: echo "carrying out..."
+         
