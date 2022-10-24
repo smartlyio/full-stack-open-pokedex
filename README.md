@@ -18,7 +18,7 @@ Start by running `npm install` inside the project folder
 
 
 `BY RAHUL`
-### WORKFLOW BASICS>
+### WORKFLOW BASICS
 
 - name
 - (on) /Triggers
