@@ -6,6 +6,10 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
-  // eslint-disable-next-line no-console
+  /* eslint-disable no-console */
   console.log('server started on port 5000')
+  /* eslint-enable no-console */
+
+  //* window.console.log(someThing); .. this should work too
+  // ? https://github.com/susanBuck/e28-fall19/issues/141
 })
