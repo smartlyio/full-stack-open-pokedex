@@ -32,6 +32,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy app
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        with:
+          run: flyctl deploy --remote-only
     
