@@ -8,6 +8,7 @@ const PORT = config.PORT || 5001;
 app.get("/health", (req, res) => {
   res.send("ok");
 });
+
 app.use(express.static("dist"));
 
 app.listen(PORT, () => {
