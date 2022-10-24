@@ -33,4 +33,4 @@ jobs:
           wait-on: http://localhost:5000
       - name: Deploy app on heroku
         uses: superfly/flyctl-actions/setup-flyctl@master
-        run: flyctl deploy --remote-only
+          run: flyctl deploy --remote-only
