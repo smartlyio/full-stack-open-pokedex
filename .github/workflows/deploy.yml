@@ -27,3 +27,4 @@ jobs:
           heroku_email: 'utkuzun50@gmail.com'
           healthcheck: 'https://fs-open-cdci.herokuapp.com/health'
           checkstring: 'ok'
+          rollbackonhealthcheckfailed: true

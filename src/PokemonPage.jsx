@@ -41,7 +41,6 @@ const PokemonPage = ({ previous, next }) => {
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to='/'>Home</Link>
         {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
-        <p>{process.env.HEROKU_RELEASE_VERSION || 'deployment'}</p>
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div
