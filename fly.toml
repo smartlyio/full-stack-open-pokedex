@@ -57,7 +57,8 @@ processes = []
     [services.http_checks.headers]
   
   [[services.script_checks]]
-    command = "./health_check.sh"
+    command = "/app/health_check.sh"
+    args = []
     grace_period = "5s"
     interval = 10000
     restart_limit = 0
