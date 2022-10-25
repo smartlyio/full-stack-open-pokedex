@@ -3,7 +3,6 @@
 app = "paraspokedex"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
 
 [build]
   builder = "heroku/buildpacks:20"
@@ -58,7 +57,6 @@ processes = []
   
   [[services.script_checks]]
     command = "/app/health_check.sh"
-    args = []
     grace_period = "5s"
     interval = 10000
     restart_limit = 0
