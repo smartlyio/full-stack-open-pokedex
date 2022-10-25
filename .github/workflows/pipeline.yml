@@ -6,23 +6,33 @@ on:
       - master
 
 jobs:
-  simple_debelopment_pipeline:
-    runs-on: windows-latest
+  # simple_development_pipeline:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #     - name: npm install
+  #       run: npm install
+  #     - name: lint
+  #       run: npm run eslint
+  #     - name: unit tests
+  #       run: npm test
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v4
+  #       with:
+  #         build: npm run build
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
+  #         command: npm run testcy
+
+  build:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          node-version: '16'
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: unit tests
-        run: npm test
-      - name: e2e tests
-        uses: cypress-io/github-action@v4
-        with:
-          build: npm run build
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-          command: npm run testcy
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'fs-open-cdci' #Must be unique in Heroku
+          heroku_email: 'utkuzun50@gmail.com'
