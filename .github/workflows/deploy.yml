@@ -25,3 +25,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'fs-open-cdci'
           heroku_email: 'utkuzun50@gmail.com'
+          healthcheck: 'https://fs-open-cdci.herokuapp.com/health'
+          checkstring: 'ok'
