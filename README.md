@@ -25,3 +25,19 @@ Start by running `npm install` inside the project folder
 - jobs
 
 
+
+### git pull basics 
+
+`git branch <branch_name>` create new branch
+
+`git branch` list all of the branches in your repo. Same as `git branch --list`
+
+`git branch -a` list all remote branches.
+
+`git branch -d <branch_name>` delete the specified branch . `SAFE` because git prevents you from removing the unmerged branch
+
+`git branch -D <branch_name>` FORCE delete the specified branch. `UNSAFE`, branch will be removed even if it has unmerged changes.
+
+`git branch -m <new_branch_name>` Rename the current branch to <new_branch_name>
+
+
