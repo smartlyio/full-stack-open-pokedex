@@ -18,4 +18,4 @@ jobs:
           date
       - name: Derictory content
         run: |
-          ls -t
+          ls
