@@ -38,3 +38,5 @@ jobs:
          heroku_app_name: 'test-deploy-githubaction'
          heroku_email: '2751vikassing@gmail.com'
          healthcheck: "https://test-deploy-githubaction.herokuapp.com/health"
+         checkstring: "ok"
+         rollbackonhealthcheckfailed: true
