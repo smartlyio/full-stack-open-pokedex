@@ -5,11 +5,12 @@ on:
     branches:
       - master
 
-needs: Deployment pipeline
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    needs: Deployment pipeline
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12
