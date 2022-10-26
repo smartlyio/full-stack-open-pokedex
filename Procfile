@@ -1,1 +1,1 @@
-web: npm start
+web: webpack-dev-server --open --mode development
