@@ -27,13 +27,13 @@ jobs:
            build: npm run build
            start: npm run start-prod
            wait-on: http://localhost:5000 
-    build:
-      runs-on: ubuntu-latest
-      needs: simple-deployment_pipeline
-      steps:
-        - uses: actions/checkout@v2
-        - uses: akhileshns/heroku-deploy@v3.12.12
-          with: 
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: 'test-deploy-githubaction'
-            heroku_email: '2751vikassing@gmail.com'
+   build:
+     runs-on: ubuntu-latest
+     needs: simple-deployment_pipeline
+     steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with: 
+         heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+         heroku_app_name: 'test-deploy-githubaction'
+         heroku_email: '2751vikassing@gmail.com'
