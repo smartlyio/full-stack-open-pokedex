@@ -9,9 +9,8 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
-    "cypress:open": "cypress open",
-    "start:test": "cross-env NODE_ENV=test node index.js"
-  },
+    "cypress:open": "cypress open"
+      },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
