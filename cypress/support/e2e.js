@@ -25,4 +25,9 @@ describe('Pokedex', () => {
       cy.contains('ivysaur')
       cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
     })
+    
+    it('checking card open after click', () => {
+        cy.contains('ivysaur').click()
+        cy.contains('chlorophyll')
+    })
   })
