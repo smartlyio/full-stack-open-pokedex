@@ -5,6 +5,8 @@ on:
     branches:
       - master
 
+needs: Deployment pipeline
+
 jobs:
   build:
     runs-on: ubuntu-latest
