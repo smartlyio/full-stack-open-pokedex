@@ -1,1 +1,1 @@
-web: webpack-dev-server --open --mode development
+web: npm run start-prod
