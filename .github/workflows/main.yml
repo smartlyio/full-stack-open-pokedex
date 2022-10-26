@@ -37,6 +37,6 @@ jobs:
          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
          heroku_app_name: 'test-deploy-githubaction'
          heroku_email: '2751vikassing@gmail.com'
-         healthcheck: "https://test-deploy-githubaction.herokuapp.com/health"
+         healthcheck: "https://test-deploy-githubaction.herokuapp.com/king"
          checkstring: "ok"
          rollbackonhealthcheckfailed: true
