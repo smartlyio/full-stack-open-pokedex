@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
 jobs:
   simple_development_pipeline:
     runs-on: windows-latest
