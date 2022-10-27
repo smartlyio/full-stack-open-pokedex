@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
       - name: read context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
           COMMITS: ${{ toJson(github.event.commits) }}
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES" ; echo "$COMMIT" ;  echo "$GITHUB_CONTEXT" ;
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
       - name: npm install
