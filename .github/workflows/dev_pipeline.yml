@@ -34,9 +34,9 @@ jobs:
     needs: [simple_development_pipeline]
     runs-on: windows-latest
     steps:
-      uses: anothrNick/github-tag-action@1.36.0
-      if: ${{ github.event_name == 'push' }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BUMP: 'patch'
-        DRY_RUN: true
+      - uses: anothrNick/github-tag-action@1.36.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
+          DRY_RUN: true
