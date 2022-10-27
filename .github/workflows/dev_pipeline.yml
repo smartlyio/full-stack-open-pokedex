@@ -19,7 +19,6 @@ jobs:
           COMMITS: ${{ toJson(github.event.commits) }}
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES" ; echo "$COMMIT" ;  echo "$GITHUB_CONTEXT" ;
-
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
