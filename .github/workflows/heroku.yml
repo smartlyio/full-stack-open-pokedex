@@ -15,3 +15,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "fsopen-dex" #Must be unique in Heroku
           heroku_email: "erkkalaukkanen@gmail.com"
+          healthcheck: "https://fsopen-dex.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
