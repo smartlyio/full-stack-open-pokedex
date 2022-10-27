@@ -1,0 +1,27 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  hello_world_job:
+    runs-on: windows-latest
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+  content_listing:
+    runs-on: windows-latest
+    steps:
+      - name: print folder content
+        run: |
+          ls
+  date:
+    runs-on: windows-latest
+    steps:
+      - name: print date
+        run: |
+          date
