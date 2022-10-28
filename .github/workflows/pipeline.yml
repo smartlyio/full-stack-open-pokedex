@@ -51,10 +51,12 @@ jobs:
           fetch-depth: 0
       - name: Add version and push tag
         uses: anothrNick/github-tag-action@1.36.0
+        if: ${{contains(fromJson('["#skip"]'), github.event.commits.*.message) != true }}
         # if: ${{ steps.deployment.outcome == 'success' && contains(fromJson('["#skip"]'), github.event.commits.*.message) != true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
-          RELEASE_BRANCHES: master
+          RELEASE_BRANCHES: dev
+          # RELEASE_BRANCHES: master
           DRY_RUN: true
           DEFAULT_BUMP: patch
