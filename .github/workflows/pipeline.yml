@@ -55,6 +55,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
+          RELEASE_BRANCHES: master
           # RELEASE_BRANCHES: dev
-          # RELEASE_BRANCHES: master
           # DRY_RUN: true
