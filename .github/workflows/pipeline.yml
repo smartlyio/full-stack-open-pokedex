@@ -55,5 +55,3 @@ jobs:
           DEFAULT_BUMP: patch
           WITH_V: true
           RELEASE_BRANCHES: master
-          # RELEASE_BRANCHES: dev
-          # DRY_RUN: true
