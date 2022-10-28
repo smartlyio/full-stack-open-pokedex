@@ -40,9 +40,9 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "actions-pokedex-app"
           heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: "https://actions-pokedex-app.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+          #healthcheck: "https://actions-pokedex-app.herokuapp.com/health"
+          #checkstring: "ok"
+          #rollbackonhealthcheckfailed: true
 
   tag_release:
     needs: simple_deployment_pipeline
