@@ -27,3 +27,10 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:8080
+      - name: Heroku deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: full-stack-open-pokedex-234635
+          heroku_email: vladimir.shakhov.tomsk@gmail.com
+
