@@ -2,7 +2,8 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "node": true
   },
   "extends": [
     "eslint:recommended",
@@ -33,7 +34,7 @@ module.exports = {
     ],
     "semi": [
       "error",
-      "never"
+      "always"
     ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
