@@ -34,7 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:8080
       - name: Heroku deploy
-        if: $Deploy
+        if: ${{ env.Deploy }}
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -46,7 +46,7 @@ jobs:
           rollbackonhealthcheckfailed: true
       - name: Discord message on deploy
         uses: rjstone/discord-webhook-notify@v1
-        if: $Deploy
+        if: ${{ env.Deploy }}
         with:
           severity: info
           text: A new version of Pokedex deployed
@@ -69,7 +69,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
-        if: $Deploy
+        if: ${{ env.Deploy }}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
