@@ -45,21 +45,21 @@ jobs:
           delay: 5
           rollbackonhealthcheckfailed: true
       - name: Discord message on deploy
-          uses: rjstone/discord-webhook-notify@v1
-          if: $Deploy
-          with:
-            severity: info
-            text: A new version of Pokedex deployed
-            description: to https://full-stack-open-pokedex-234635.herokuapp.com/
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        if: $Deploy
+        with:
+          severity: info
+          text: A new version of Pokedex deployed
+          description: to https://full-stack-open-pokedex-234635.herokuapp.com/
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Discord message on failure
-          uses: rjstone/discord-webhook-notify@v1
-          if: failure()
-          with:
-            severity: error
-            text: Build failed
-            description: commit ${{ github.event.head_commit.url }} broke the build
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          text: Build failed
+          description: commit ${{ github.event.head_commit.url }} broke the build
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
