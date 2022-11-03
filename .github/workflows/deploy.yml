@@ -8,6 +8,9 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  Deploy: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -31,7 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:8080
       - name: Heroku deploy
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
+        if: $Deploy
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -41,6 +44,23 @@ jobs:
           checkstring: ok
           delay: 5
           rollbackonhealthcheckfailed: true
+      - name: Discord message on deploy
+          uses: rjstone/discord-webhook-notify@v1
+          if: $Deploy
+          with:
+            severity: info
+            text: A new version of Pokedex deployed
+            description: to https://full-stack-open-pokedex-234635.herokuapp.com/
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Discord message on failure
+          uses: rjstone/discord-webhook-notify@v1
+          if: failure()
+          with:
+            severity: error
+            text: Build failed
+            description: commit ${{ github.event.head_commit.url }} broke the build
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -49,7 +69,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ','), '#skip') }}
+        if: $Deploy
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
