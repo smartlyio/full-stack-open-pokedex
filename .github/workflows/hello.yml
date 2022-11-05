@@ -11,13 +11,7 @@ jobs:
         steps:
             - name: Say Hello
               run: echo "Hello World!"
-    NowItIs:
-        runs-on: ubuntu-latest
-        steps:
             - name: Run Date
               run: date
-    DirectoryContent:
-        runs-on: ubuntu-latest
-        steps:
             - name: Run ls -l
               run: ls -l
