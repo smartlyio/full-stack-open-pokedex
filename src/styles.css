@@ -204,7 +204,7 @@ footer {
 }
 
 .pokemon-type-rock {
-	--pokemon-type-color: #ba3;
+	--pokemon-type-color: rgb(11, 0, 159);
 }
 
 .pokemon-type-steel {
