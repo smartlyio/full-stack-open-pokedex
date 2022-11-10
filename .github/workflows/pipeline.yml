@@ -15,14 +15,7 @@ jobs:
         with:
           node-version: '16'
       - name: Install Dependencies
-        run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
+        run: npm i
       - name: Lint
         run: npm run eslint
       - name: Build
