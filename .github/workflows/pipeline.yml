@@ -8,10 +8,12 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - uses: action/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2.5.0
         with:
           fetch-depth: 0
-      - uses: action/setup-node@v2
+      - name: NodeJs
+        uses: action/setup-node@v2
         with:
           node-version: '16'
       - name: Install Dependencies
