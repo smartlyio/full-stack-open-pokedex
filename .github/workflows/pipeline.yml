@@ -8,15 +8,17 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2.5.0
+      - uses: actions/checkout@v2.5.0
         with:
           fetch-depth: 0
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v3.5.1
+      - uses: actions/setup-node@v3.5.1
         with:
           node-version: '16'
       - name: Install Dependencies
-        run: npm install
+        run: npm install --no-audit --no-fund --no-optional
       - name: Lint
         run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
