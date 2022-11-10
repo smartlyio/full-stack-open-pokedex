@@ -2,7 +2,8 @@ name: Say hello
 
 on:
   push:
-    branches: [ "master" ]
+    branches: 
+      - master
 
 jobs: 
   hello_world: 
