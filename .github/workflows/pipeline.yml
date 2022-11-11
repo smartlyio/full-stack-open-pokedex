@@ -13,9 +13,9 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@v3.5.1
         with:
-          node-version: '16'
+          node-version: '16.13.0'
       - name: Install Dependencies
-        run: npm install --no-audit --no-fund --no-optional
+        run: npm ci
       - name: Lint
         run: npm run eslint
       - name: Build
