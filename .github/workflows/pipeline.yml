@@ -1,0 +1,108 @@
+name: Deployment Pipeline
+
+on: 
+  push:
+    branches: ['main']
+  pull_request: 
+    branches: ['main']
+    types: [opened, synchronize]
+
+jobs:
+
+  avoid_redundancy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Cancel Previous Redundant Builds
+        uses: styfle/cancel-workflow-action@0.11.0
+        with:
+          access_token: ${{ github.token }}
+  lint:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '16.13.0'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run eslint
+  
+  build:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '16.13.0'
+      - name: Install Dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-artifact@v3.1.1
+        with:
+          name: dist
+          path: dist
+  
+  test:
+    needs: [lint, build]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '16.13.0'
+      - name: Install Dependencies
+        run: npm ci
+      - uses: actions/download-artifact@v3.0.1
+        with:
+          name: dist
+          path: dist
+      - name: Test
+        run: npm test
+  
+  e2e:
+    needs: [lint, build]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3.5.1
+        with:
+          node-version: '16.13.0'
+      - name: Install Dependencies
+        run: npm ci
+      - uses: actions/download-artifact@v3.0.1
+        with:
+          name: dist
+          path: dist
+      - name: E2E Test
+        uses: cypress-io/github-action@v4.2.0
+        with:
+          start: npm run start-test
+          wait-on: http://localhost:5000/
+          command: npm run test:e2e
+
+  deploy:
+    needs: [test, e2e]
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2.5.0
+        with:
+          fetch-depth: 0
+      - name: Deploy to Heroku
+        if: ${{ github.event_name == 'push' }}
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: ${{secrets.HEROKU_APP}}
+          heroku_email: ${{secrets.HEROKU_API_EMAIL}}
+          healthcheck: "https://${{secrets.HEROKU_APP}}.herokuapp.com/health"
+          rollbackonhealthcheckfailed: true
