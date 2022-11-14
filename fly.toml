@@ -1,19 +1,23 @@
-# fly.toml file generated for stefanpokedex on 2022-11-14T15:54:11+02:00
+# fly.toml file generated for stefanpokedex on 2022-11-14T21:10:04+02:00
 
 app = "stefanpokedex"
 kill_signal = "SIGINT"
 kill_timeout = 5
+processes = []
 
 [deploy]
   release_command = "npm run build"
 
 [processes]
-  app = "node app.js" 
+  app = "node app.js"
 
-[build]
-  build-target = "production"
-  image = "flyio/hellofly:latest"
-  
+[env]
+  PORT = "8080"
+
+[experimental]
+  allowed_public_ports = []
+  auto_rollback = true
+
 [[services]]
   http_checks = []
   internal_port = 8080
@@ -39,5 +43,3 @@ kill_timeout = 5
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-
-
