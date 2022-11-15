@@ -13,7 +13,8 @@
     "build": "webpack --mode production",
     "fly": "flyctl",
     "cypress:open": "cypress open",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "healthcheck": "bash health_check.sh"
   },
   "repository": {
     "type": "git",
