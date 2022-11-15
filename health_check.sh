@@ -1,6 +1,8 @@
 #!/bin/bash
 
-res=$(curl -s https://stefanpokedex.fly.dev//health)
+res=$(curl -s https://stefanpokedex.fly.dev/health)
+
+echo $res
 
 if [ "$res" == "ok" ]; then
   echo "Succeeded curl to /health"
