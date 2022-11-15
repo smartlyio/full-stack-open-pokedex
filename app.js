@@ -16,7 +16,7 @@ app.get('/health', (req, res) => {
 app.get('/version', (req, res) => {
   // eslint-disable-next-line no-console
   console.log('/version')
-  res.send('3') // change this string to ensure a new version deployed
+  res.send('4') // change this string to ensure a new version deployed
 })
 
 app.listen(port, () => {
