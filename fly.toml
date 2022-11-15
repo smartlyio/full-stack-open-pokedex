@@ -1,15 +1,9 @@
-# fly.toml file generated for stefanpokedex on 2022-11-14T21:10:04+02:00
+# fly.toml file generated for stefanpokedex on 2022-11-15T09:03:43+02:00
 
 app = "stefanpokedex"
 kill_signal = "SIGINT"
 kill_timeout = 5
 processes = []
-
-[deploy]
-  release_command = "npm run build"
-
-[processes]
-  app = "node app.js"
 
 [env]
   PORT = "8080"
