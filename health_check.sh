@@ -5,7 +5,7 @@ echo "Hello from shell script"
 
 content=$(curl -sLI https:stefanpokedex.fly.dev/health)
 
-if [ "$res" == "ok" ] 
+if [ "$content" == "ok" ] 
 then
     echo "/healt returned ok"
     exit 0
