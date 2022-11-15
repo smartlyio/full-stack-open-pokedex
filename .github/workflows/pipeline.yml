@@ -30,7 +30,7 @@ jobs:
         with:
           build: npm run build
           start: npm run start-prod
-          wait-on: http://localhost:5000
+          wait-on: http://localhost:8080
       - name: flyctl
         run: flyctl deploy --remote-only
 
