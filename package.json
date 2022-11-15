@@ -1,6 +1,6 @@
 {
-  "engines" : { 
-    "node" : "16.14.2" 
+  "engines": {
+    "node": "16.14.2"
   },
   "name": "fullstackopen-cicd",
   "version": "1.0.0",
@@ -40,6 +40,7 @@
     "css-loader": "^3.5.3",
     "cypress": "^6.6.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
