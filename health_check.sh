@@ -1,15 +1,12 @@
 #!/bin/bash
-# exit status 0 means that the script "succeeds"
 
-echo "Hello from shell script"
+res=$(curl -s https://stefanpokedex.fly.dev//health)
 
-content=$(curl -s https://stefanpokedex.fly.dev/health)
+if [ "$res" == "ok" ]; then
+  echo "Succeeded curl to /health"
+  exit 0
+  fi
 
-echo $content
-
-if [ "$content" == "ok" ] 
-then
-    exit 0
-else
-    exit 1
-fi 
+echo "Failed curl to /health"
+# 0: OK, 1: Bad.
+exit 1
