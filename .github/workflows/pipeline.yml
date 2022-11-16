@@ -12,6 +12,22 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
      
 jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
   build_lint_test:
     runs-on: ubuntu-20.04
     steps:
@@ -33,6 +49,13 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:8080
+      - name: The job has failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        with: 
+          severity: error
+          details: build_lint_test failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   deploy_tag:
     needs: [build_lint_test]
     runs-on: ubuntu-20.04
@@ -41,18 +64,6 @@ jobs:
         with:
           node-version: '16'
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
         if: ${{ github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ' '), '#skip') == false }}
       - name: flyctl
         if: ${{ github.event_name == 'push' }}
@@ -65,3 +76,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
           WITH_V: true
+      - name: The Deploy was successful
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() }}
+        with: 
+          severity: info
+          details: deploy_tag succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
