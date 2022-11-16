@@ -17,7 +17,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           node-version: '16'
       - name: npm install
@@ -38,7 +37,10 @@ jobs:
     needs: [build_lint_test]
     runs-on: ubuntu-20.04
     steps:
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+        with:
+          node-version: '16'
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
