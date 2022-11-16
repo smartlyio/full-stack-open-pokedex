@@ -34,12 +34,24 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:8080
-      
   deploy_tag:
-    needs: [simple_deployment_pipeline]
+    needs: [build_lint_test]
     runs-on: ubuntu-20.04
     steps:
-      if: ${{ github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ' '), '#skip') == false }}
+        uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+        if: ${{ github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ' '), '#skip') == false }}
       - name: flyctl
         if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
@@ -51,7 +63,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: "patch"
           WITH_V: true
-          
+
 
 
 
