@@ -35,6 +35,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:8080
       - name: flyctl
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
 
 
