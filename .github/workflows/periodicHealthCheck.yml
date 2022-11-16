@@ -1,0 +1,16 @@
+name: Periodic Healt Check
+
+on: 
+  schedule: 
+  - cron: 15 * * * *
+
+jobs: 
+  periodic_healt_check:
+    runs-on: ubuntu-20.04
+    steps: 
+    - name: Check the url
+      uses: jtalk/url-health-check-action@v3
+      with: 
+        url: https://stefanpokedex.fly.dev/
+        max-attempts: 5
+        retry-delay: 5s
