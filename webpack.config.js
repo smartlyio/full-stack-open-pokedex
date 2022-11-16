@@ -8,9 +8,6 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/',
   },
-  experiments: {
-    futureDefaults: true
-  },
   module: {
     rules: [
       {

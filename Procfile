@@ -1,1 +1,1 @@
-web: node app.js
+web: node app.js NODE_OPTIONS=--openssl-legacy-provider
