@@ -36,4 +36,4 @@ jobs:
           healthcheck: "https://stormy-cliffs-30272.herokuapp.com/health"
           checkstring: "ok"
           healthcheck: "https://stormy-cliffs-30272.herokuapp.com/version"
-          checkstring: "3"
+          checkstring: "1"
