@@ -35,3 +35,4 @@ jobs:
           heroku_email: "baxterjimuk@gmail.com"
           healthcheck: "https://stormy-cliffs-30272.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
