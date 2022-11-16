@@ -8,7 +8,8 @@ module.exports = {
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:cypress/recommended"
   ],
   "settings": {
     "react": {
@@ -23,7 +24,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest", "cypress"
+    "react", "jest"
   ],
   "rules": {
     "indent": [
