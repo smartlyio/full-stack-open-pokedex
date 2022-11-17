@@ -39,11 +39,11 @@ jobs:
     needs: [simple_deployment_pipeline]
     name: Bump version and push tag
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
-      uses: anothrNick/github-tag-action@v1.52.0
-      if: ${{ github.event_name == 'push' }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BUMP: patch
-        DRY_RUN: true
+      - uses: anothrNick/github-tag-action@v1.52.0
+      - env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DRY_RUN: true
       
