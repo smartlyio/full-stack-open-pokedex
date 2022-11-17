@@ -42,7 +42,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     steps:
       - uses: anothrNick/github-tag-action@v1.52.0
-      - env:
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: true
