@@ -37,10 +37,10 @@ jobs:
       - run: flyctl deploy --remote-only
   tag-release:
     needs: [simple_deployment_pipeline]
-    name: Bump version and push tag
-    uses: anothrNick/github-tag-action@v1
-    if: ${{ github.event_name == 'push' }}
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      DEFAULT_BUMP: patch
-      DRY_RUN: true
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@v1
+      if: ${{ github.event_name == 'push' }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
+        DRY_RUN: true
