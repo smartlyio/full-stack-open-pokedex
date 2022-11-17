@@ -38,7 +38,7 @@ jobs:
   tag-release:
     needs: [simple_deployment_pipeline]
     name: Bump version and push tag
-    uses: anothrNick/github-tag-action@1.36.0
+    uses: anothrNick/github-tag-action@v1
     if: ${{ github.event_name == 'push' }}
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
