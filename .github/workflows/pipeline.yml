@@ -36,12 +36,13 @@ jobs:
         - uses: superfly/flyctl-actions/setup-flyctl@master
         - run: flyctl deploy --remote-only
   bump_version:
+    name: bump_version
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: '0'
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: '0'
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@v1
