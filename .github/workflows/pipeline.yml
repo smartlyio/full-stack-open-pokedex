@@ -30,4 +30,4 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy app
         uses: superfly/flyctl-actions/setup-flyctl@master
-        run: flyctl deploy --remote-only
+        - run: flyctl deploy --remote-only
