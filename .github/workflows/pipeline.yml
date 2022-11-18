@@ -36,6 +36,7 @@ jobs:
         - uses: superfly/flyctl-actions/setup-flyctl@master
         - run: flyctl deploy --remote-only
   build:
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
     if: ${{ github.event_name == 'push' }}
     steps:
