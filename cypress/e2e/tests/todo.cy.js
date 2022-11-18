@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 /// <reference types="cypress" />
 
 // Welcome to Cypress!
@@ -18,3 +20,4 @@ describe('Pokedex', function() {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
 })
+/* eslint-enable no-undef */
