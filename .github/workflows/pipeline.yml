@@ -9,6 +9,8 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -25,16 +27,6 @@ jobs:
           build: npm  run build
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy
-        build:
-          runs-on: ubuntu-latest
-          steps:
-            - uses: actions/checkout@v2
-            - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-              with:
-                heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-                heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
-                heroku_email: ${{secrets.HEROKU_EMAIL}}
       name: Deploy
       on:
         push:
@@ -44,8 +36,6 @@ jobs:
         build:
           runs-on: ubuntu-latest
           steps:
-            - uses: actions/checkout@v2
-            - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
               with:
                 heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                 heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
