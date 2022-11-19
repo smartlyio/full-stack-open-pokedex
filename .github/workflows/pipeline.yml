@@ -27,16 +27,4 @@ jobs:
           build: npm  run build
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Deploy
-      on:
-        push:
-          branches:
-            - master
-      jobs:
-        build:
-          runs-on: ubuntu-latest
-          steps:
-              with:
-                heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-                heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
-                heroku_email: ${{secrets.HEROKU_EMAIL}}
+      
