@@ -21,7 +21,7 @@ ENV NODE_ENV production
 
 COPY . .
 
-RUN npm install --dev
+RUN npm install --include=dev
 RUN npm run build
 FROM debian:bullseye
 

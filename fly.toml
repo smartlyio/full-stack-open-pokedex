@@ -18,11 +18,9 @@ kill_timeout = 5
   auto_rollback = true
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -42,3 +40,21 @@ kill_timeout = 5
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+
+  # Gets stuck whether it returns 0 or 1
+  #[[services.script_checks]]
+  #  command       = "/app/health_check.sh"
+  #  grace_period  = "5s"
+  #  interval      = 10000
+  #  restart_limit = 0
+  #  timeout       = 2000
