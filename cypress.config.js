@@ -7,6 +7,6 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
-  }, 
+  },
 })
 /* eslint-enable no-unused-vars */
