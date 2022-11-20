@@ -55,9 +55,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
         DEFAULT_BUMP: patch
-  notify:
-    needs: [build]
-    runs-on: ubuntu-22.04
+
     - name: Test Success
       uses: rjstone/discord-webhook-notify@v1.0.4
       with: 
