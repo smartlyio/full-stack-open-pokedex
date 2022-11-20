@@ -5,10 +5,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
-    if: ${{ github.event_name == 'push' }}
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
