@@ -22,6 +22,9 @@ const App = () => {
   }
 
   return (
+
+    <>
+    <h1>بسم الله الرحمن الرحيم</h1>
     <Router>
       <Switch>
         <Route exact path="/">
@@ -35,6 +38,8 @@ const App = () => {
         }} />
       </Switch>
     </Router>
+    </>
+
   )
 }
 
