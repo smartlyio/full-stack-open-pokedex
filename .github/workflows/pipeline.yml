@@ -33,3 +33,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
