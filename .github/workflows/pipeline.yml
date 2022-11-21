@@ -39,20 +39,8 @@ jobs:
           healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-    
-name: Bump version
-on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - master
-jobs:
-  build:
-    runs-on: ubuntu-22.04
-    steps:
-    - uses: actions/checkout@v3
-      with:
+  taging_releases:
+    with:
         ref: ${{ github.event.pull_request.head.sha }}
         fetch-depth: '0'
     needs: [simple_deployment_pipeline]
@@ -64,4 +52,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DRY_RUN: true
+          
       
