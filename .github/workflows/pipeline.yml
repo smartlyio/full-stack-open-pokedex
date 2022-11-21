@@ -39,7 +39,7 @@ jobs:
           healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
-  taging_releases
+  taging_releases:
     - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
