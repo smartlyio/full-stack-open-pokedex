@@ -5,7 +5,10 @@ on:
   push:
     branches:
       - master
-
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+    if: ${{ github.event_name == 'push' }}
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -35,3 +38,9 @@ jobs:
           healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DRY_RUN: true
