@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize]
     
 jobs:
-  deployment_pipeline:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
     steps:
@@ -40,7 +40,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   taging_releases:
-      needs: [deployment_pipeline]
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag

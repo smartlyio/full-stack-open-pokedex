@@ -1,4 +1,4 @@
-name: Hello World!
+name: Initialize pipeline
 on:
   push:
     branches:
