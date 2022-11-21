@@ -40,6 +40,15 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   taging_releases:
+    on:
+      pull_request:
+        types:
+          - closed
+        branches:
+          - master
+    with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: '0'
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
