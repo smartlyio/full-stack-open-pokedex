@@ -33,7 +33,16 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:8080
+  deployment:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    if: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') == 'false' && github.event_name == 'push' }}
+    steps:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
         run: flyctl deploy --remote-only
-        if: ${{ github.event_name == 'push' }}
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
