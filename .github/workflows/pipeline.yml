@@ -54,6 +54,8 @@ jobs:
         run: echo ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') == true }}
       - name: testttt 6
         run: echo ${{ !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+      - name: testttt 7
+        run: echo ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
 
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
