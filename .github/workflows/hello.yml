@@ -4,12 +4,12 @@ on:
     branches:
       - master
 jobs:
-  hello_world_job:
+  init_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: say Hello
+      - name: initial
         run: |
-          echo "Hello World!"
+          echo "initial !"
       - name: Now it is
         run: |
           date
