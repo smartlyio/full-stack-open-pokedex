@@ -32,9 +32,6 @@ jobs:
           wait-on: http://localhost:5000
       - name: deploy to heroku
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES[0]"
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
@@ -73,4 +70,4 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+        run: echo "$COMMIT_MESSAGES[0]"
