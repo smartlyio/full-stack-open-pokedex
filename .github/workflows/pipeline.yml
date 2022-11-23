@@ -12,7 +12,6 @@ on:
 jobs:
   init_deployment_pipeline:
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -31,14 +30,14 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Test Failure
-          uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ failure() }}
         with:
           severity: error
           details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Aborted
-          uses: rjstone/discord-webhook-notify@v1.0.4
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: ${{ cancelled() }}
         with:
           severity: error
@@ -48,6 +47,7 @@ jobs:
   deployment:
     needs: [init_deployment_pipeline]
     runs-on: ubuntu-22.04
+    if: ${{ github.event_name == 'push' }}
     steps:
     - uses: actions/setup-node@v3
     - uses: actions/checkout@v3
@@ -69,21 +69,21 @@ jobs:
         WITH_V: true
         DRY_RUN: true
     - name: Deployment 
-        uses: rjstone/discord-webhook-notify@v1.0.4
+      uses: rjstone/discord-webhook-notify@v1.0.4
       if: ${{ success() }}
       with:
         severity: info
         details: deployed
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     - name: Deployment Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
+      uses: rjstone/discord-webhook-notify@v1.0.4
       if: ${{ failure()}}
       with:
         severity: error
         details: deplyment failed 
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     - name: Aborted
-        uses: rjstone/discord-webhook-notify@v1.0.4
+      uses: rjstone/discord-webhook-notify@v1.0.4
       if: ${{ cancelled()}}
       with:
         severity: error
