@@ -47,14 +47,14 @@ jobs:
       with:
         fetch-depth: '0'
     - name: deploy to heroku
-        uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
-          checkstring: "ok"
-          rollbackonhealthcheckfailed: true
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "open-pokedex-nader" #Must be unique in Heroku
+        heroku_email: ${{secrets.HEROKU_EMAIL}}
+        healthcheck: "https://open-pokedex-nader.herokuapp.com/health"
+        checkstring: "ok"
+        rollbackonhealthcheckfailed: true
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@v1
       env:
