@@ -57,4 +57,29 @@ jobs:
       uses: anothrNick/github-tag-action@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        WITH_V: true
+  discord_notify:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
+    - uses: rjstone/discord-webhook-notify@v1    
+    - name: Test Success
+      if: ${{ success() }}
+      with:
+        severity: info
+        details: Test Succeeded!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Test Failure
+      if: ${{ failure() }}
+      with:
+        severity: error
+        details: Test Failed!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Test Cancelled
+      if: ${{ cancelled() }}
+      with:
+        severity: warn
+        details: Test Cancelled!
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        
