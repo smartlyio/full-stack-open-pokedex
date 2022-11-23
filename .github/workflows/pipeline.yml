@@ -42,6 +42,7 @@ jobs:
     needs: [init_deployment_pipeline]
     runs-on: ubuntu-22.04
     steps:
+    - uses: actions/setup-node@v3
     - uses: actions/checkout@v3
       with:
         fetch-depth: '0'
