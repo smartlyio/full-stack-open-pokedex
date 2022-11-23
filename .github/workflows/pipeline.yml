@@ -55,6 +55,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
   notifications:
+    runs-on: ubuntu-22.04
+    steps:
+    - uses: actions/checkout@v3
     - name: Test Success
       uses: rjstone/discord-webhook-notify@v1
       if: success()
