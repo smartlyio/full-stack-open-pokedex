@@ -37,8 +37,15 @@ jobs:
           severity: error
           details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Aborted
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ cancelled() }}
+        with:
+          severity: error
+          details: aborted
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   # ##########    
-  deploy_and_tag:
+  deployment:
     needs: [init_deployment_pipeline]
     runs-on: ubuntu-22.04
     steps:
@@ -60,12 +67,27 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: true
-    - name: Test Success
+        DRY_RUN: true
+    - name: Deployment 
       uses: rjstone/discord-webhook-notify@v1
       if: ${{ success() }}
       with:
         severity: info
-        details: Test Succeeded!
+        details: deployed
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Deployment Failure
+      uses: rjstone/discord-webhook-notify@v1
+      if: ${{ failure()}}
+      with:
+        severity: error
+        details: deplyment failed 
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Aborted
+      uses: rjstone/discord-webhook-notify@v1
+      if: ${{ cancelled()}}
+      with:
+        severity: error
+        details: aborted 
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   
         
