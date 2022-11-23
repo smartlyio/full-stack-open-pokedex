@@ -54,7 +54,7 @@ jobs:
         WITH_V: true
   # ##########
   discord_notify:
-    needs: [simple_deployment_pipeline]
+    needs: [taging_releases]
     runs-on: ubuntu-22.04
     steps:
     - uses: actions/checkout@v3
