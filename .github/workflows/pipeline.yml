@@ -1,0 +1,85 @@
+# example 2: on merge to master
+name: Deployment pipeline
+on:
+  push:
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install 
+        run: npm install  
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: Testing / linting failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with: 
+          severity: error
+          details: Error in simple deployment pipeline.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  deploy:
+      needs: [simple_deployment_pipeline]
+      name: Deploy app
+      runs-on: ubuntu-latest
+      if: |
+        github.event_name == 'pull_request'
+          && !contains(join(github.event.commits.*.message), '#skip')
+      steps:
+        - uses: actions/checkout@v3
+        - uses: superfly/flyctl-actions/setup-flyctl@master
+        - run: flyctl deploy --remote-only
+        - name: Deploy Failed
+          if: ${{ failure() }}
+          uses: rjstone/discord-webhook-notify@v1.0.4
+          with: 
+            severity: error
+            details: Deploy to Fly.io failed.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  build:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-22.04
+    if: |
+      github.event_name == 'pull_request'
+        && !contains(join(github.event.commits.*.message), '#skip')
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+        fetch-depth: '0'
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: patch
+
+    - name: Test Success
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      with: 
+        severity: info
+        details: New version deployed successfully.
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+    - name: Test Failed
+      if: ${{ failure() }}
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      with: 
+        severity: error
+        details: Error in bumping version and adding tag.
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
