@@ -25,7 +25,15 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
+      - name: Testing / linting failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with: 
+          severity: error
+          details: Error in simple deployment pipeline.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   deploy:
+      needs: [simple_deployment_pipeline]
       name: Deploy app
       runs-on: ubuntu-latest
       if: |
@@ -35,6 +43,13 @@ jobs:
         - uses: actions/checkout@v3
         - uses: superfly/flyctl-actions/setup-flyctl@master
         - run: flyctl deploy --remote-only
+        - name: Deploy Failed
+          if: ${{ failure() }}
+          uses: rjstone/discord-webhook-notify@v1.0.4
+          with: 
+            severity: error
+            details: Deploy to Fly.io failed.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   build:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-22.04
@@ -58,5 +73,13 @@ jobs:
       uses: rjstone/discord-webhook-notify@v1.0.4
       with: 
         severity: info
-        details: Test succeeded.
+        details: New version deployed successfully.
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+    - name: Test Failed
+      if: ${{ failure() }}
+      uses: rjstone/discord-webhook-notify@v1.0.4
+      with: 
+        severity: error
+        details: Error in bumping version and adding tag.
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
