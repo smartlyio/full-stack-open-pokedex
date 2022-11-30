@@ -1,0 +1,24 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Print date
+        run: |
+          date
+      - name: Print current directory
+        run: |
+          ls -l
+      - name: commits
+        env:
+          COMMIT_MESSAGES: ${{ contains(github.event.commits.*.message, '#skip') }}
+        run: echo "$COMMIT_MESSAGES"

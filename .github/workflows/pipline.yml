@@ -1,0 +1,68 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  build-step:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+
+  staging-step:
+    needs: build-step
+    runs-on: ubuntu-18.04
+    environment: staging
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokemonaction"
+          heroku_email: "codebook.ng@gmail.com"
+          healthcheck: "https://pokemonaction.herokuapp.com/health"
+          checkstring: "ok"
+      # - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.TAG_KEY }}
+
+  prod-step:
+    needs: staging-step
+    runs-on: ubuntu-18.04
+    environment: prod
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy
+        if: ${{ github.event_name == 'push'  }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokemonaction"
+          heroku_email: "codebook.ng@gmail.com"
+          healthcheck: "https://pokemonaction.herokuapp.com/health"
+          checkstring: "ok"
+      # - uses: actions/checkout@v2
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push'  }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.TAG_KEY }}
