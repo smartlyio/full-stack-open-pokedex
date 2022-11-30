@@ -1,2 +1,6 @@
+cypress/videos
 dist/
 node_modules/
+
+.env
+.authorizations
