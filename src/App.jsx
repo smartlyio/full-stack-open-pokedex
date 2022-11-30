@@ -12,6 +12,8 @@ const mapResults = (({ results }) => results.map(({ url, name }) => ({
   id: parseInt(url.match(/\/(\d+)\//)[1])
 })))
 
+
+// This change wont be in production
 const App = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
   if (isLoading) {

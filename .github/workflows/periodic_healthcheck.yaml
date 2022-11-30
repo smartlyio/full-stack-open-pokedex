@@ -1,0 +1,16 @@
+name: Periodid Healthcheck
+
+on:
+  schedule:
+    - cron: '16 28 * * *'
+
+jobs:
+  periodic_healthcheck:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://pokedexxx-ash.herokuapp.com/health
+          max-attempts: 3 # Optional, defaults to 1
+          retry-delay: 60s # Optional, only applicable to max-attempts > 1
