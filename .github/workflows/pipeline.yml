@@ -1,0 +1,42 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install 
+        run: npm install  
+      - name: lint
+        run: npm run eslint
+      - name: run test
+        run: npm run test
+      - name: build
+        run: npm run build
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'fullstack-2021-part11'
+          heroku_email: 'dimitris12313@hotmail.com'
+          healthcheck: 'https://fullstack-2021-part11.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 30
+          rollbackonhealthcheckfailed: true
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
+        uses: anothrNick/github-tag-action@1.33.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
