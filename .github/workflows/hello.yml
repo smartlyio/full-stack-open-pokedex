@@ -1,0 +1,21 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - ununsed_branch #avoid triggering this useless action every time when pushing the code
+      #- master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l

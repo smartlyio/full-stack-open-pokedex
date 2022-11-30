@@ -27,14 +27,14 @@ module.exports = {
       "error",
       "unix"
     ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    // "quotes": [
+    //   "error",
+    //   "single"
+    // ],
+    // "semi": [
+    //   "error",
+    //   "always"
+    // ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
     "object-curly-spacing": [

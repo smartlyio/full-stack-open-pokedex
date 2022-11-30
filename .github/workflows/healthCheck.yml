@@ -1,0 +1,22 @@
+name: Periodic health check
+
+on:
+  schedule:
+    - cron:  '0 23 1 * *'
+
+# on:
+#   push:
+#     branches:
+#       - master
+#       - branch1 
+
+jobs:
+  health_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Ping application for health check
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://whispering-waters-52105.herokuapp.com/health
+          max-attempts: 3
+          retry-delay: 5s
