@@ -2,7 +2,7 @@
 
 This repository is used for the CI/CD module of the Full stack open course
 
-Fork the repository to complete course exercises
+Solutions to exercises 11.21 and 11.22 are found here: https://github.com/Dicky59/create-app
 
 ## Commands
 
