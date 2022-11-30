@@ -2,11 +2,14 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "node": true,
+    "cypress/globals": true
   },
   "extends": [
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:codeceptjs/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -16,7 +19,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress", "codeceptjs"
   ],
   "rules": {
     "indent": [
@@ -43,7 +46,15 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
-    "react/prop-types": 0
+    "no-console": 0,
+    "react/prop-types": 0,
+    "no-unused-vars": [
+      2, { "argsIgnorePattern": "^_" }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }

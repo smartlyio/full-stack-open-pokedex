@@ -1,0 +1,24 @@
+name: Checking deployment URL health
+
+on:
+  schedule:
+    - cron: '0 5 * * *'
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  scheduled_checking_of_urls_health:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v1.5
+        with:
+          url: https://full-stack-open-2020-pokedex.herokuapp.com
+          follow-redirect: no
+          max-attempts: 3
+          retry-delay: 5s
+          retry-all: no
