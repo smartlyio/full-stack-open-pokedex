@@ -1,0 +1,80 @@
+name: simple_deployment_pipeline
+
+on:
+  push:
+    branches:
+      - master
+  
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: npm install 
+        run: npm install  
+
+      - name: lint
+        run: npm run eslint
+
+      - name: build
+        run: npm run build
+
+      - name: test
+        run: npm run test
+
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm start
+          wait-on: http://localhost:8080
+
+      - name: Deploy to heroku
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.7.8
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: pokeman-samundra
+          heroku_email: dhakalsamundra35@gmail.com
+          healthcheck: https://pokeman-samundra.herokuapp.com/version
+          checkstring: 2
+          delay: 5 #By default, the delay will be 0 if you choose to not set it
+          rollbackonhealthcheckfailed: true # By default, the application will not be rolled back if the healthcheck fails. in case of failure, it load back to previous version
+      
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+
+      - name: On Success
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: ${{ success() && github.event_name == 'push' }}
+
+      - name: On Faliure
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          fields: repo,message,commit,author,action,eventName,ref,workflow,job,took # selectable (default: repo,message)
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }} # required
+        if: ${{ success() && github.event_name == 'push' }}
+
