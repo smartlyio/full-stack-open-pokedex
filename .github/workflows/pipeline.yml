@@ -1,0 +1,76 @@
+#A useless comment here
+#Just testing the skip attribute
+
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Bump patch up one and tag it
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: anothrNick/github-tag-action@1.34.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+      - name: Heroku deployment
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "damp-coast-83169" 
+          heroku_email: "rjpalt@gmail.com"
+          healthcheck: "https://damp-coast-83169.herokuapp.com/health"
+          checkstring: "Pulse found"
+          rollbackonhealthcheckfailed: true
+      - name: Slack success message
+        uses: 8398a7/action-slack@v3.9.2
+        with:
+          status: custom
+          fields: workflow,commit,author,took
+          custom_payload: |
+            {
+              username: 'rjpalt',
+              icon_emoji: ':notes:',
+              attachments: [{
+              color: 'good',
+                text: `${process.env.AS_AUTHOR} successfully deployed a new version at htt://damp-coast-83169.herokuapp.com (${process.env.AS_COMMIT}) with the ${process.env.AS_WORKFLOW} workflow (Time used: ${process.env.AS_TOOK})`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        if:  ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && success() }}
+      - name: Slack fail message
+        uses: 8398a7/action-slack@v3.9.2
+        with:
+          status: ${{ job.status }}
+          fields: all
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }} 
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && failure() }}
