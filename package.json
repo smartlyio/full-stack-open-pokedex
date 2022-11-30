@@ -4,11 +4,15 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start": "node app.js",
     "start-prod": "node app.js",
-    "test": "jest",
-    "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "test": "eslint",
+    "eslint": "eslint './**/*.jest.spec.{js,jsx}'",
+    "build": "webpack --mode production",
+    "test:e2e": "cypress run",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
+    "logs:prod": "heroku logs --tail"
   },
   "repository": {
     "type": "git",
@@ -33,7 +37,9 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^6.8.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
@@ -50,5 +56,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }
