@@ -1,0 +1,83 @@
+name: Deployment pipeline job
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    name: Deployment pipeline
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: npm run build
+        run: npm run build
+      - name: npm run test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.33.0
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          DEFAULT_BUMP: "#patch"
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "paco-pokedex-app" # Must be unique in Heroku
+          heroku_email: "sirpaquillo1@yahoo.com.mx"
+          dontuseforce: false
+          procfile: "web: npm run start-prod"
+          healthcheck: "https://paco-pokedex-app.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
+          rollbackonhealthcheckfailed: true
+      - name: Build success notification action
+        uses: 8398a7/action-slack@v3
+        with:
+          status: custom
+          job_name: Deployment pipeline
+          fields: workflow,commit,repo,ref,author,took
+          custom_payload: |
+            {
+              username: 'Deployment Notification',
+              icon_emoji: ':white_check_mark:',
+              attachments: [{
+                color: 'good',
+                text: `${process.env.AS_WORKFLOW}\nA new version of https://paco-pokedex-app.herokuapp.com/ deployed to ${process.env.AS_REPO}@${process.env.AS_REF}, commit ref:(${process.env.AS_COMMIT}) by ${process.env.AS_AUTHOR} deployment process took ${process.env.AS_TOOK}`,
+              }]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        if:  ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && success() }}
+      - name: Build failure notification action
+        uses: 8398a7/action-slack@v3
+        with:
+          icon_emoji: ':no_entry:'
+          status: ${{ job.status }}
+          job_name: Deployment pipeline
+          fields: repo,commit,took,message,author,job
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          MATRIX_CONTEXT: ${{ toJson(matrix) }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') && failure() }}
+          

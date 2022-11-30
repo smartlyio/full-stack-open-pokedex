@@ -1,0 +1,17 @@
+name: Deployment pipeline healthcheck
+
+on:
+  schedule:
+    - cron:  '00 00 * * 1-5/2' # At 00:00 on every 2nd day-of-week from Monday through Friday.”
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Check the deployed service URL
+      uses: jtalk/url-health-check-action@v1.4
+      with:
+        url: https://paco-pokedex-app.herokuapp.com/
+        follow-redirect: no
+        max-attempts: 3 
+        retry-delay: 5s
