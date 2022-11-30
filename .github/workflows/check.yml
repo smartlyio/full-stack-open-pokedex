@@ -1,0 +1,16 @@
+name: HealthCheck
+
+on:
+  schedule:
+    - cron:  '1, 1 * * *'
+jobs:
+  simple_url_healthcheck:
+    runs-on: ubuntu:latest
+    steps:
+      - name: Check 
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: https://aaltopart11.herokuapp.com/health
+          max-attempts: 3 
+          follow-redirect: no
+          retry-delay: 5s
