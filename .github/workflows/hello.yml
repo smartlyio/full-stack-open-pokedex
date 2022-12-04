@@ -7,14 +7,12 @@ on:
 
 jobs:
   hello_world_job:
+    name: | 
+      My first action
+      script job consists
+      of three steps
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
         run: |
           echo "Hello World Copy!"
-      - name: Print date
-        run: |
-          data
-      - name: Print list
-        run: |
-          ls -l
