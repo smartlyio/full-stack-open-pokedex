@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/node
+      - uses: actions/node@v3
         with:
           node-version: '16'
-      - name: nmp install
+      - name: npm install
         run: npm install
       - name: lint
         run: npm run eslint
