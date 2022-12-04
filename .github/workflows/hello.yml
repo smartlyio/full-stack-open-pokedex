@@ -18,7 +18,7 @@ jobs:
           echo "Hello World Copy!"
       - name: Print date
         run: |
-          data
+          date
       - name: Print list
         run: |
           ls -l
