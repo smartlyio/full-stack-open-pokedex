@@ -16,4 +16,5 @@ jobs:
         run: |
           data
       - name: Print list
-        run: ls -l
+        run: |
+          ls -l
