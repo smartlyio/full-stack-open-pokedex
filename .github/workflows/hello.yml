@@ -16,3 +16,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World Copy!"
+      - name: Print date
+        run: |
+          data
+      - name: Print list
+        run: |
+          ls -l
