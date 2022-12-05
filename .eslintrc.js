@@ -3,7 +3,8 @@ module.exports = {
     "browser": true,
     "node": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "cypress": true
   },
   "extends": [
     "eslint:recommended",
