@@ -1,10 +1,9 @@
-name: Deployment pipeline
+name: Deployment pipeline 5
 
 on:
   push:
     branches:
       - master
-      - new-feature
   pull_request:
     branches:
       - master
