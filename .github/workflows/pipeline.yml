@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - new-feature
   pull_request:
     branches:
       - master

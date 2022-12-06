@@ -28,7 +28,7 @@ kill_timeout = 5
 
   [[services.script_checks]]
     command = "./app/health_check.sh"
-    args = ["Version 3"]
+    args = ["Version 4"]
     grace_period = "1s"
     interval = "5s"
     restart_limit = 0
