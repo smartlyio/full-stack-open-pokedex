@@ -1,10 +1,9 @@
-name: Testing stuff
+name: Testing and training 
 
 on:
   push:
     branches:
-      - main
-      - fix*
+      - "**"
 
 jobs:
   a_test_job:
@@ -29,8 +28,13 @@ jobs:
       - name: let's look for rats
         if: ${{ !contains(toJson(github.event.commits.*.message), '#rats') }}
         run: echo "I found no rats"
-      - name: Who is the author
+      - name: Who is the author?
         env:
           THE_AUTHOR: ${{ toJson(github.event.commits[0].author.name) }}
-          THE_URL: ${{ toJson(github.event.commits[0].url) }}
-        run: echo "$THE_AUTHOR and $THE_URL"
+        run: echo "The author is $THE_AUTHOR"
+      - name: Check the health of the app
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://mypokedex.fly.dev/health
+          max-attempts: 3
+          retry-delay: 5s
