@@ -5,7 +5,7 @@
   "engines": {
     "node": "16.x"
   },
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
