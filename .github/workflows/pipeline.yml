@@ -17,7 +17,6 @@ jobs:
     strategy:
       matrix:
         node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@v3
@@ -37,7 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-      - name: test
+      - uses: actions/checkout@v3
+      - name: unit tests
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v2.9.7
@@ -47,6 +47,7 @@ jobs:
           wait-on: http://localhost:5000
 
   deploy:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     needs: [build, tests]
     steps:
