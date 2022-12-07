@@ -76,9 +76,9 @@ jobs:
           color: '#00ffaa'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: Your build was deployed successfully
-          details: $COMMIT_AUTHOR did a great job!
+          details: ${{ env.COMMIT_AUTHOR }} did a great job!
           footer: The commit said ${{ env.COMMIT_MESSAGES }}
-          text: A notification for ${{ env.COMMIT_AUTHOR }} from your friendly Github Action
+          text: A notification from your friendly Github Action
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
       - name: Deploy Failed
         uses: rjstone/discord-webhook-notify@v1
@@ -92,9 +92,9 @@ jobs:
           color: '#ff00aa'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: Your build failed
-          details: $COMMIT_AUTHOR broke the pipeline!
+          details: ${{ env.COMMIT_AUTHOR }} broke the pipeline!
           footer: The commit said ${{ env.COMMIT_MESSAGES }}
-          text: A notification for ${{ env.COMMIT_AUTHOR }} from your friendly Github Action
+          text: A notification from your friendly Github Action
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
       - name: Deploy Canceled
         uses: rjstone/discord-webhook-notify@v1
@@ -108,7 +108,7 @@ jobs:
           color: '#00aaff'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: Your build was canceled
-          details: $COMMIT_AUTHOR canceled the build!
+          details: ${{ env.COMMIT_AUTHOR }} canceled the build!
           footer: The commit said ${{ env.COMMIT_MESSAGES }}
-          text: A notification for ${{ env.COMMIT_AUTHOR }} from your friendly Github Action
+          text: A notification from your friendly Github Action
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
