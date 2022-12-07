@@ -33,35 +33,35 @@ jobs:
       - name: build
         run: npm run build
 
-tests:
-  runs-on: ubuntu-latest
-  needs: [build]
-  steps:
-    - name: test
-      run: npm run test
-    - name: e2e tests
-      uses: cypress-io/github-action@v2.9.7
-      with:
-        command: npm run cypress:run
-        start: npm run start-prod
-        wait-on: http://localhost:5000
+  tests:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v2.9.7
+        with:
+          command: npm run cypress:run
+          start: npm run start-prod
+          wait-on: http://localhost:5000
 
-deploy:
-  runs-on: ubuntu-latest
-  needs: [build]
-  steps:
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.12.12
-      with:
-        # This will be used for authentication. You can find it in your heroku homepage account settings
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        # Email that you use with heroku
-        heroku_email: ${{secrets.HEROKU_EMAIL}}
-        # The appname to use for deploying/updating
-        heroku_app_name: bea-full-stack-open-pokedex
-        healthcheck: "https://bea-full-stack-open-pokedex.herokuapp.com/health"
-        checkstring: "ok"
-        rollbackonhealthcheckfailed: true
-        # Set this to true if you don't want to automatically create the Heroku app
-        dontautocreate: true
-        region: eu
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Deploy to Heroku
+        uses: AkhileshNS/heroku-deploy@v3.12.12
+        with:
+          # This will be used for authentication. You can find it in your heroku homepage account settings
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          # Email that you use with heroku
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          # The appname to use for deploying/updating
+          heroku_app_name: bea-full-stack-open-pokedex
+          healthcheck: "https://bea-full-stack-open-pokedex.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
+          # Set this to true if you don't want to automatically create the Heroku app
+          dontautocreate: true
+          region: eu
