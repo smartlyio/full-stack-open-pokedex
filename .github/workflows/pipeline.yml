@@ -44,6 +44,11 @@ jobs:
       - name: deploy app to fly.io
         if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
+  tag-releases:
+    needs:
+      - simple_deployment_pipeline
+    runs-on: ubuntu-20.04
+    steps:
       - name: bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.36.0
