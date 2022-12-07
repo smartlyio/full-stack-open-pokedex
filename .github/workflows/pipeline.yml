@@ -15,6 +15,45 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
+  discord_webhook_notify:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Deploy successful
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ github.event_name == 'push' && success() }}
+        with:
+          severity: info
+          username: GitActionBot
+          color: '#ff00aa'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          description: 'Your build was deployed successfully'
+          details: '${{ toJson(github.event.commits.*.author.name) }} did a great job!'
+          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          text: A notification from your friendly Github Action
+      - name: Deploy Failed
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ github.event_name == 'push' && failure() }}
+        with:
+          severity: error
+          username: GitActionBot
+          color: '#00ffaa'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          description: 'Your build failed'
+          details: '${{ toJson(github.event.commits.*.author.name) }} broke the pipeline!'
+          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          text: A notification from your friendly Github Action
+      - name: Deploy Canceled
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ github.event_name == 'push' && cancelled() }}
+        with:
+          severity: warn
+          username: GitActionBot
+          color: '#00aaff'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          description: 'Your build was canceled'
+          details: '${{ toJson(github.event.commits.*.author.name) }} canceled the build!'
+          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          text: A notification from your friendly Github Action
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
