@@ -22,6 +22,9 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: let's try this
+      - name: let's look for skip
         if: ${{ contains(toJson(github.event.commits.*.message), '#skip') }}
         run: echo "I found the skip"
+      - name: let's look for rats
+        if: ${{ !contains(toJson(github.event.commits.*.message), '#rats') }}
+        run: echo "I found no rats"
