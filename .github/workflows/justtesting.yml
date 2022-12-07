@@ -28,3 +28,8 @@ jobs:
       - name: let's look for rats
         if: ${{ !contains(toJson(github.event.commits.*.message), '#rats') }}
         run: echo "I found no rats"
+      - name: Who is the author
+        env:
+          THE_AUTHOR: ${{ toJson(github.event.commits.*.author.name) }}
+          THE_URL: ${{ toJson(github.event.commits.*.url) }}
+        run: echo "$THE_AUTHOR \n $THE_URL"

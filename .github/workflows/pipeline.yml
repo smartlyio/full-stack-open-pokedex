@@ -60,41 +60,55 @@ jobs:
           DEFAULT_BUMP: patch
           WITH_V: true
   discord_webhook_notify:
+    needs:
+        - simple_deployment_pipeline
     runs-on: ubuntu-20.04
     steps:
       - name: Deploy successful
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ github.event_name == 'push' }} && success()
+        if: ${{ github.event_name == 'push' && success() }}
+        env:
+          COMMIT_AUTHOR: ${{ toJson(github.event.commits.*.author.name) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         with:
           severity: info
           username: GitActionBot
           color: '#ff00aa'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: 'Your build was deployed successfully'
-          details: '${{ toJson(github.event.commits.*.author.name) }} did a great job!'
-          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          details: '$COMMIT_AUTHOR did a great job!'
+          footer: 'This is the commit: $COMMIT_MESSAGES'
           text: A notification from your friendly Github Action
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
       - name: Deploy Failed
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ github.event_name == 'push' }} && failure()
+        if: ${{ github.event_name == 'push' && failure() }}
+        env:
+          COMMIT_AUTHOR: ${{ toJson(github.event.commits.*.author.name) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}        
         with:
           severity: error
           username: GitActionBot
           color: '#00ffaa'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: 'Your build failed'
-          details: '${{ toJson(github.event.commits.*.author.name) }} broke the pipeline!'
-          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          details: '$COMMIT_AUTHOR broke the pipeline!'
+          footer: 'This is the commit: $COMMIT_MESSAGES'
           text: A notification from your friendly Github Action
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
       - name: Deploy Canceled
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ github.event_name == 'push' }} && cancelled()
+        if: ${{ github.event_name == 'push' && cancelled() }}
+        env:
+          COMMIT_AUTHOR: ${{ toJson(github.event.commits.*.author.name) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         with:
           severity: warn
           username: GitActionBot
           color: '#00aaff'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
           description: 'Your build was canceled'
-          details: '${{ toJson(github.event.commits.*.author.name) }} canceled the build!'
-          footer: 'See the commit: ${{ toJson(github.event.commits.*.url) }}'
+          details: '$COMMIT_AUTHOR canceled the build!'
+          footer: 'This is the commit: $COMMIT_MESSAGES'
           text: A notification from your friendly Github Action
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
