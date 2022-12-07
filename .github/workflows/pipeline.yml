@@ -3,10 +3,10 @@ name: Deployment pipeline 5
 on:
   push:
     branches:
-      - master
+      - nix
   pull_request:
     branches:
-      - master
+      - nix
     types:
       - opened
       - synchronize
