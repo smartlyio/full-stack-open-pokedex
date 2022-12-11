@@ -33,7 +33,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   deploy_application:
-    if: ${{ github.event_name == 'push' && (!contains(env.COMMIT_MESSAGE, '#skip'))}}
+    if: ${{ github.event_name == 'push' && (!contains(COMMIT_MESSAGE, '#skip'))}}
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
@@ -43,7 +43,7 @@ jobs:
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' && (!contains(env.COMMIT_MESSAGE, '#skip'))}}
+    if: ${{ github.event_name == 'push' && (!contains($COMMIT_MESSAGE, '#skip'))}}
     steps:
       - uses: actions/checkout@v3
         with:
