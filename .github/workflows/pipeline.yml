@@ -7,6 +7,7 @@ on:
 
 env:
   ARGOCD_VERSION: v2.1.6
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -29,13 +30,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  prepare:
-    name: Get ArgoCD cli
-    runs-on: ubuntu-20.04  
+  curl:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Install ArgoCD CLI
-        id: install_argocd
-        shell: bash
-        run: |
-          curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/${{ env.ARGOCD_VERSION }}/argocd-linux-amd64
-          chmod +x /usr/local/bin/argocd
+    - name: curl
+      uses: wei/curl@master
+      with:
+        args: https://httpbin.org/get
