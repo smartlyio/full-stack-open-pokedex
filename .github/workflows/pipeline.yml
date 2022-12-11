@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  ARGOCD_VERSION: v2.1.6
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -16,6 +13,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - uses: awalsh128/cache-apt-pkgs-action@latest
+        with:
+          packages: curl
+          version: 1.0
       - name: npm install
         run: npm install
       - name: lint
@@ -30,10 +31,3 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  curl:
-    runs-on: ubuntu-20.04
-    steps:
-    - name: curl
-      uses: wei/curl@master
-      with:
-        args: https://httpbin.org/get
