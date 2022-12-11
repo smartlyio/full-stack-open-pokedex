@@ -31,11 +31,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy-application
-        uses: actions/checkout@v3
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        if: ${{ github.event_name == 'push' }}
-        run: flyctl deploy --remote-only
+  deploy-application:
+    if: ${{ github.event_name == 'push' }}
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
