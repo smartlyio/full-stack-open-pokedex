@@ -31,7 +31,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  deploy-application:
+  deploy_application:
     if: ${{ github.event_name == 'push' }}
     name: Deploy app
     runs-on: ubuntu-latest
