@@ -35,7 +35,7 @@ jobs:
   deploy_application:
     if: |
       github.event_name == 'push' && 
-      contains($COMMIT_MESSAGE, '#skip') != true
+      contains("$COMMIT_MESSAGE", '#skip') != true
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
