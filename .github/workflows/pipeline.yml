@@ -13,10 +13,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - uses: awalsh128/cache-apt-pkgs-action@latest
-        with:
-          packages: curl
-          version: 1.0
       - name: npm install
         run: npm install
       - name: lint
