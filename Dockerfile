@@ -2,7 +2,7 @@ FROM debian:bullseye as builder
 
 ARG NODE_VERSION=16.14.2
 
-RUN apt-get update && apt install -y curl
+RUN apt-get update; apt install -y curl
 RUN curl https://get.volta.sh | bash
 ENV VOLTA_HOME /root/.volta
 ENV PATH /root/.volta/bin:$PATH
@@ -21,6 +21,7 @@ ENV NODE_ENV production
 COPY . .
 
 RUN npm install --production=false && npm run build
+RUN apt-get update && apt install -y curlv
 FROM debian:bullseye
 
 LABEL fly_launch_runtime="nodejs"
