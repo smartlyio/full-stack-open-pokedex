@@ -7,7 +7,6 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -35,7 +34,6 @@ jobs:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
     steps:
-      if: ${{ github.event_name == 'push' }}
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
