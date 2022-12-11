@@ -2,7 +2,7 @@ FROM debian:bullseye as builder
 
 ARG NODE_VERSION=16.14.2
 
-RUN apt-get update; apt install -y curl
+RUN apt-get update && apt install -y curl
 RUN curl https://get.volta.sh | bash
 ENV VOLTA_HOME /root/.volta
 ENV PATH /root/.volta/bin:$PATH
@@ -12,7 +12,6 @@ RUN volta install node@${NODE_VERSION}
 
 RUN mkdir /app
 WORKDIR /app
-
 # NPM will not install any package listed in "devDependencies" when NODE_ENV is set to "production",
 # to install all modules: "npm install --production=false".
 # Ref: https://docs.npmjs.com/cli/v9/commands/npm-install#description
