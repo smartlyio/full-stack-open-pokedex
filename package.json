@@ -36,6 +36,7 @@
     "css-loader": "^3.5.3",
     "cypress": "^12.1.0",
     "eslint-auto-fix": "^1.0.4",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.31.11",
     "html-loader": "^1.1.0",
