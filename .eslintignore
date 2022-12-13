@@ -5,3 +5,4 @@ exercise1.md
 package-lock.json
 package.json
 README.md
+cypress.config.js
