@@ -5,5 +5,5 @@ module.exports = defineConfig({
     baseUrl: 'http://localhost:5000',
     specPattern: 'e2e/*.cy.js',
     supportFile: false,
-    pageLoadTimeout: 6000
+    pageLoadTimeout: 12000
   }});
