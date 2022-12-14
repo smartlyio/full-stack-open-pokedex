@@ -1,5 +1,11 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+OUTPUT=$(curl https://throbbing-river-7964.fly.dev/health)
 
-exit 0
+if [ "$OUTPUT" = "ok" ]
+then
+  echo "Matches"
+  exit 0
+fi
+echo "No match"
+exit 1
