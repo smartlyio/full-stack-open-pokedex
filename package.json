@@ -49,6 +49,8 @@
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "set-value": "^4.1.0",
+    "update": "^0.7.4"
   }
 }
