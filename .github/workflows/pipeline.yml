@@ -8,9 +8,6 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
 jobs:
   pre_deployment:
     runs-on: ubuntu-20.04
@@ -39,6 +36,8 @@ jobs:
     needs: [pre_deployment]
     runs-on: ubuntu-20.04
     if: github.event_name == 'push'
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -46,3 +45,18 @@ jobs:
             node-version: '16'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+
+  tag_release:
+    needs: [deployment]
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
