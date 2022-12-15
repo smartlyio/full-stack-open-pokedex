@@ -4,12 +4,15 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
-  simple_deployment_pipeline:
+  pre_deployment:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -31,5 +34,15 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:8080
-      - name: deploy
-        run: flyctl deploy --remote-only
+        
+  deployment:
+    needs: [pre_deployment]
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+            node-version: '16'
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
