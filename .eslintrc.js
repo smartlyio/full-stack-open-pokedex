@@ -15,7 +15,7 @@ module.exports = {
   plugins: ["react", "jest"],
   rules: {
     indent: ["error", 2],
-    "linebreak-style": ["error", "windows"],
+    "linebreak-style": 0,
     quotes: ["error", "double"],
     semi: ["error", "always"],
     eqeqeq: "error",
