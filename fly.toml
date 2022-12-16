@@ -1,4 +1,4 @@
-# fly.toml file generated for fullstackopen-pokedex on 2022-12-16T09:04:02+02:00
+# fly.toml file generated for fullstackopen-pokedex on 2022-12-16T09:26:37+02:00
 
 app = "fullstackopen-pokedex"
 kill_signal = "SIGINT"
@@ -6,7 +6,6 @@ kill_timeout = 5
 processes = []
 
 [env]
-  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
