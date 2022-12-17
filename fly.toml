@@ -41,14 +41,6 @@ processes = []
     restart_limit = 0
     timeout = "2s"
 
-  [[services.script_checks]]
-    command = "/"
-    args = ["a", "b", "c"]
-    grace_period = "1s"
-    interval = "5s"
-    restart_limit = 0
-    timeout = "1s"
-
 [deploy]
   release_command = "npm run build"
 
