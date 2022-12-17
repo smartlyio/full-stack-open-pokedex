@@ -7,7 +7,7 @@ processes = []
 
 [build]
   [build.args]
-    NODE_VERSION = "16"
+    NODE_VERSION = "16.13.0"
 
 [env]
 
