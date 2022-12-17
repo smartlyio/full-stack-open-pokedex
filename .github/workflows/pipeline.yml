@@ -43,3 +43,4 @@ jobs:
           heroku_email: "janne.kalliokulju@gmail.com"
           healthcheck: "https://janne-pokedex-100.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
