@@ -4,7 +4,10 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -37,6 +40,7 @@ jobs:
 
       - name: heroku deployment
         uses: akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' }}
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "janne-pokedex-100" 
