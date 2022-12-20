@@ -50,7 +50,7 @@ jobs:
           rollbackonhealthcheckfailed: true
           
   tag_release:
-    needs: [deployment]
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     if: github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip')
     steps:
