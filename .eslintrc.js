@@ -1,7 +1,7 @@
 module.exports = {
   "env": {
     'commonjs': true,
-    'es2021': true,
+    'es6': true,
     'node': true
   },
   "extends": [
@@ -9,6 +9,7 @@ module.exports = {
     "plugin:react/recommended"
   ],
   "parserOptions": {
+    "ecmaVersion": 8,
     "ecmaFeatures": {
       "jsx": true
     },
@@ -43,7 +44,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "off",
+    "no-console": "error",
     "react/prop-types": 0
   }
 }
