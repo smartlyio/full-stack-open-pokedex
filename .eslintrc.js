@@ -1,7 +1,7 @@
 module.exports = {
   "env": {
     'commonjs': true,
-    'es6': true,
+    'es2020': true,
     'node': true
   },
   "extends": [
@@ -9,7 +9,6 @@ module.exports = {
     "plugin:react/recommended"
   ],
   "parserOptions": {
-    "ecmaVersion": 8,
     "ecmaFeatures": {
       "jsx": true
     },
