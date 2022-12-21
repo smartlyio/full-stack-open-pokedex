@@ -1,7 +1,6 @@
 module.exports = {
   "env": {
     'commonjs': true,
-    'es2020': true,
     'node': true
   },
   "extends": [
@@ -43,7 +42,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": "off",
     "react/prop-types": 0
   }
 }
