@@ -28,6 +28,9 @@ const App = () => {
           <PokemonList pokemonList={pokemonList} />
           <div>
             <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
+            <p>Hello</p>
           </div>
         </Route>
         <Route path="/pokemon/:name" render={(routeParams) => {
