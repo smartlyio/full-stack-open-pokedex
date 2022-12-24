@@ -11,7 +11,7 @@ jobs:
     - name: Check the deployed service URL
       uses: jtalk/url-health-check-action@v3
       with:
-        url: https://julius-goddard-full-stack-open-pokedex4.fly.dev/
+        url: https://julius-goddard-full-stack-open-pokedex4.fly.dev/|http://example.com
         follow-redirect: false 
         max-attempts: 3
         retry-delay: 5s
