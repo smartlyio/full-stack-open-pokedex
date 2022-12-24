@@ -1,12 +1,9 @@
 name: Ping
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+  schedule:
+    - cron: '00 14 * * *'
+    - cron: '00 15 * * *'
 
 jobs:
   test_schedule:
