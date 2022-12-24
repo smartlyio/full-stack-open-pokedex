@@ -2,6 +2,7 @@ name: Ping
 on:
   schedule:
     - cron: '1 11 * * * *'
+    
 jobs:
   test_schedule:
     runs-on: ubuntu-latest
