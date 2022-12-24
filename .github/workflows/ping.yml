@@ -2,15 +2,15 @@ name: Ping
 
 on:
   schedule:
-    - cron: '1 11 * * * *'  
+    - cron: '1 12 * * * *'  
 
 jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
-  - name: Check the deployed service URL
-    uses: jtalk/url-health-check-action@v3
-    with:
+    - name: Check the deployed service URL
+      uses: jtalk/url-health-check-action@v3
+      with:
       url: https://julius-goddard-full-stack-open-pokedex4.fly.dev/
       follow-redirect: false 
       max-attempts: 3
