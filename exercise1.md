@@ -1,0 +1,5 @@
+- This project is coded in Python and this would be a possible CI setup for this project. Pylint, Flake8, Autopep8 and Black are some common linting tools. Black would be the tool of choice for the project. Pytest would be used for testing the application. As Python is an interpreted language, there is not need for a build step and as such a builder tool is not necessary. 
+
+- There are many alternatives to setup the CI other than Jenkins and Github Actions. Some of them include: GitLab CI, Azure Pipelines and CircleCI. This is a small list, there are many other possible tools available on the market.
+
+- Based on the information we have: Python project, team of 6 and in active development which will be released soon. With this information, it would indicate that the project may not be super large, although it may need to be scalable as the application may be designed with the intention of growing large. However, based on the fact that the time frame seems small, as the application is to be released soon, then a cloud-based configuration may be the best path forward. This is because it is easier to setup as it doesn't require an entire system to be setup.
