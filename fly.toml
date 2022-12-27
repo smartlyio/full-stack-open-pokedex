@@ -1,29 +1,26 @@
-# fly.toml file generated for old-sunset-8207 on 2022-12-27T11:11:36+01:00
+# fly.toml file generated for little-fire-716 on 2022-12-27T11:29:37+01:00
 
-app = "old-sunset-8207"
+app = "little-fire-716"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
-
-[build]
-  image = "flyio/hellofly:latest"
-
-[env]
 
 [deploy]
   release_command = "npm run build"
 
-[processes]
-  app = "node app.js"
+[env]
+  PORT = "8080"
 
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
 
+[processes]
+  app = "node app.js"
+
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"] // highlight-line
+  processes = ["app"]
   protocol = "tcp"
   script_checks = []
   [services.concurrency]
