@@ -53,7 +53,7 @@ kill_timeout = 5
   
   [[services.script_checks]]
     command = "/app/health_check.sh"
-    grace_period = "5s"
+    grace_period = "15s"
     interval = "5s"
     restart_limit = 0
-    timeout = "1s"
+    timeout = "5s"

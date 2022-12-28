@@ -1,5 +1,8 @@
 #!/bin/bash
 
+apt-get update && apt-get install -y curl
+wait
+
 res=$(curl -s https://little-fire-716.fly.dev/health)
 
 echo $res
