@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
