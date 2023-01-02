@@ -15,6 +15,11 @@ module.exports = {
     "ecmaVersion": 2018,
     "sourceType": "module"
   },
+   "settings": {
+    "react": {
+        "version": "detect"
+    }
+  },
   "plugins": [
     "react", "jest"
   ],
@@ -43,7 +48,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": 0,
     "react/prop-types": 0
   }
 }
