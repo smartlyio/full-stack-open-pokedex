@@ -1,4 +1,4 @@
-name: Hellon World!
+name: Hello World!
 
 on:
     push:
