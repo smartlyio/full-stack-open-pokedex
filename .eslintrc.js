@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
     "indent": [
@@ -51,6 +51,7 @@ module.exports = {
       "error", { "before": true, "after": true }
     ],
     "no-console": 0,
-    "react/prop-types": 0
+    "react/prop-types": 0,
+    "no-unused-vars": "warn"
   }
 }
