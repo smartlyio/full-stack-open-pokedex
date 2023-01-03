@@ -21,6 +21,9 @@ const App = () => {
     return <ErrorMessage error={error} />
   }
 
+  let dummy = null
+  dummy
+
   return (
     <Router>
       <Switch>
