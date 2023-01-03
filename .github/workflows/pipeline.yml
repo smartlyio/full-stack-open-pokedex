@@ -43,8 +43,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Deploy app
-        
-        if: ${{ github.event_name == 'push' && contains(join(${{env.COMMIT_MESSAGES}}), '#skip') == 'false'}}
+        if: ${{ github.event_name == 'push' && contains(join(${{COMMIT_MESSAGES}}), '#skip') == 'false'}}
         run: flyctl deploy --remote-only
 
   tag_release:
@@ -55,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && contains(join(${{env.COMMIT_MESSAGES}}), '#skip') == 'false' }}
+        if: ${{ github.event_name == 'push' && contains(join(${{COMMIT_MESSAGES}}), '#skip') == 'false' }}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
