@@ -7,7 +7,7 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
-    simple_deployment_pipeline:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
