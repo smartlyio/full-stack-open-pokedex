@@ -6,8 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
-      "test": "jest",
-      "test:e2e": "cypress open",
+    "test": "jest",
+    "test:e2e": "cypress open",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production"
   },
@@ -48,6 +48,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "eslint-plugin-cypress": "^2.12.1",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
