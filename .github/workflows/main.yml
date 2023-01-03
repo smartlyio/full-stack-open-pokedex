@@ -33,3 +33,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedexpipeline"
           heroku_email: "topi.kanninen@sci.fi"
+          healthcheck: "https://pokedexpipeline.herokuapp.com/health"
+          checkstring: "ok"
