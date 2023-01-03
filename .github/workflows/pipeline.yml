@@ -15,6 +15,8 @@ env:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    env:
+        COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -41,15 +43,15 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Deploy app
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-
+        
         if: ${{ github.event_name == 'push' && contains(join(${{env.COMMIT_MESSAGES}}), '#skip') == 'false'}}
         run: flyctl deploy --remote-only
 
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
+    env:
+        COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
