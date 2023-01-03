@@ -35,3 +35,4 @@ jobs:
           heroku_email: "topi.kanninen@sci.fi"
           healthcheck: "https://pokedexpipeline.herokuapp.com/health"
           checkstring: "ok"
+          delay: 5
