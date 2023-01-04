@@ -1,8 +1,11 @@
 name: Deployment pipeline
 on:
   push:
-    branch:
+    branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
