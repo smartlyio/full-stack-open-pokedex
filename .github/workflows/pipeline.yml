@@ -32,4 +32,5 @@ jobs:
           heroku_app_name: afternoon-shelf-68870
           heroku_email: wacumbugua@gmail.com
           healthcheck: https://afternoon-shelf-68870.herokuapp.com/health
-          checkstrig: ok
+          checkstring: ok
+          rollbackonhealthcheckfailed: true
