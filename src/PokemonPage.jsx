@@ -35,6 +35,8 @@ const PokemonPage = ({ previous, next }) => {
         {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
+        <h2>{pokemon.name}</h2>
+        <br />
         <div className="pokemon-image" style={{ backgroundImage: `url(${pokemon.sprites.front_default})` }} />
         <div className="pokemon-info">
           <div className="pokemon-name">{pokemon.name}</div>
