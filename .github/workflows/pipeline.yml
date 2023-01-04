@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: npm install
         run: npm install
       - name: lint
@@ -29,7 +29,8 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: heroku deploy
-        uses:  akhileshns/heroku-deploy@v3.12.12
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: afternoon-shelf-68870
