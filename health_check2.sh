@@ -1,7 +1,9 @@
+#!/bin/bash
+
 var="$(curl "localhost:8080/health")" 
 
 if [[ $var =~ "ok" ]]; then
-    echo "1"
+    exit 0
 else
-    echo "2"
+    exit 1
 fi
