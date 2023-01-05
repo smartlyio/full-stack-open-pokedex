@@ -6,6 +6,8 @@ on:
       - master
       # note that your "main" branch might be called main instead of master
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -28,3 +30,7 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: flyio deployment
+        uses: actions/checkout@v3
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
