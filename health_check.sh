@@ -1,5 +1,9 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+var="$(curl "localhost:8080/health")" 
 
-exit 0
+if [[ $var =~ "ok" ]]; then
+    exit 0
+else
+    exit 1
+fi
