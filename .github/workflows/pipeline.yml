@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-20.04
     env:
         COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        LAST_COMMIT: ${{ toJson(github.event.commits[0]) }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -42,9 +43,27 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
+      - name: Build Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          description: commit
+          details: ${{env.LAST_COMMIT}} by hamidaebadi broke the rule :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
       - name: Deploy app
         if: ${{ github.event_name == 'push' && contains(join(env.COMMIT_MESSAGES), '#skip') == 'false'}}
         run: flyctl deploy --remote-only
+
+      - name: Successful Deployment
+          uses: rjstone/discord-webhook-notify@v1
+          if: ${{ success() }}
+          with:
+            severity: info
+            description: new deployment
+            details: A new version of Pokedex deployed to !
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
