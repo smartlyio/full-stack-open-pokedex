@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -32,3 +35,10 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:8080
+
+      name: Deploy app
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v3
+          - uses: superfly/flyctl-actions/setup-flyctl@master
+          - run: flyctl deploy --remote-only
