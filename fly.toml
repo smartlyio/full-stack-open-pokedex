@@ -42,7 +42,7 @@ kill_timeout = 5
     timeout = "2s"
   
   [[services.script_checks]]
-    command       = "/health_check.sh"
+    command       = "./health_check.sh"
     args          = []
     grace_period  = "1s"
     interval      = "5s"
