@@ -15,7 +15,7 @@ jobs:
           echo "Hello World!"
       - name: Now it is
         run: |
-          echo $(pwd)
+          echo $(date)
       - name: Directory content
         run: |
           ls -l
