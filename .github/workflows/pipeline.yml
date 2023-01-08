@@ -40,6 +40,9 @@ jobs:
           cd ..
           echo $(pwd)
           ls -al
+          cd ..
+          echo $(pwd)
+          ls -al
           ./health_check.sh
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
