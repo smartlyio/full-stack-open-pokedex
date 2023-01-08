@@ -1,0 +1,34 @@
+name: Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - main
+
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: install dependencies
+        run: npm install
+      - name: lint project
+        run: npm run eslint
+
+      - name: build project
+        run: npm run build
+      - name: run tests
+        run: npm run test
+      - name: e2e cypress test
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start:test
+          wait-on: http://localhost:5000
+
+        
