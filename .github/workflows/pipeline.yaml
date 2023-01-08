@@ -1,10 +1,10 @@
 name: Deployment Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
-      - master
       - main
+      - master
 
 
 jobs:
@@ -29,6 +29,6 @@ jobs:
         with:
           command: npm run cypress:open
           start: npm run start:test
-          wait-on: http://localhost:5000
+          wait-on: http://127.0.0.1:5000
 
         
