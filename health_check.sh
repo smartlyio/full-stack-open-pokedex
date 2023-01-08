@@ -2,7 +2,8 @@
 
 echo "Hello from shell script"
 echo "trying to install curl with 'apt update & apt install curl'"
-apt update & apt install curl
+#apt update
+#apt install curl -y
 #CURL='/usr/bin/curl'
 ##URL="/health"
 LOCAL_URL="http://localhost:8080/health"
