@@ -8,16 +8,8 @@ apt update & apt install curl
 LOCAL_URL="http://localhost:8080/health"
 URL="https://fullstack-part11.fly.dev/health"
 
-# you can store the result in a variable
-#raw="$($CURL $URL)"
-#
-#echo "raw: $raw"
-
-#result="$(curl -s 'http://localhost:8080/health')"
-result="$(curl -s $URL)"
+result="$(curl -s $LOCAL_URL)"
 echo "curl result: '$result'"
-#RESP=$(echo "$result" | grep -oP "^[^a-zA-Z0-9]")
-#echo "RESP:'$RESP'"
 
 if [ "$result" == "ok" ]; then
   echo "health check OK"
