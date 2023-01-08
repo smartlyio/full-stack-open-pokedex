@@ -13,8 +13,14 @@ jobs:
     steps:
       - name: say hello
         run: |
-          date 
-          ls
+          echo "Hello World!"
+          echo "Look at the date"
+
+      - name: display date
+        run: date
+      
+      - name: display directory
+        run: ls 
       
       
   
