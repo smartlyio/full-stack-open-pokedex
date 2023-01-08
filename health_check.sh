@@ -8,13 +8,13 @@ echo "Hello from shell script"
 LOCAL_URL="http://localhost:8080/health"
 URL="https://fullstack-part11.fly.dev/health"
 
-result=$(curl $URL)
+result=$(curl https://fullstack-part11.fly.dev/health)
 echo "curl result: '$result'"
 
 if [ "${result}" == "ok" ]; then
-  echo "health check OK"
+  echo "health check OK!"
   exit 0
 else
-  echo "Strings are not equal"
+  echo "health check FAILED!"
   exit 1
 fi
