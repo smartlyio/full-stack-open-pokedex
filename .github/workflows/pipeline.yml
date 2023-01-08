@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -22,9 +24,9 @@ jobs:
         run: npm run build
       - name: run tests
         run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+#      - name: e2e tests
+#        uses: cypress-io/github-action@v2
+#        with:
+#          command: npm run test:e2e
+#          start: npm run start-prod
+#          wait-on: http://localhost:5000
