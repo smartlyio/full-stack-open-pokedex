@@ -12,7 +12,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: say hello
-        run: date && ls
+        run: |
+          date 
+          ls
       
       
   
