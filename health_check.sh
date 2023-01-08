@@ -4,12 +4,14 @@ echo "Hello from shell script"
 echo "trying to install curl"
 apt update
 apt install -y curl
-#CURL='/usr/bin/curl'
-##URL="/health"
+
 LOCAL_URL="http://localhost:8080/health"
 URL="https://fullstack-part11.fly.dev/health"
 
-result=$(curl https://fullstack-part11.fly.dev/health)
+result_local=$(curl $LOCAL_URL)
+echo "curl localhost result: '$result_local'"
+
+result=$(curl $URL)
 echo "curl result: '$result'"
 
 if [ "${result}" == "ok" ]; then
