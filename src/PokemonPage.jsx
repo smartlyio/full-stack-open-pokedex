@@ -57,6 +57,9 @@ const PokemonPage = ({ previous, next }) => {
               New feature, hello! Edited.
           </div>
         </div>
+        <footer>
+            Footer
+        </footer>
       </div>
     </>
   )
