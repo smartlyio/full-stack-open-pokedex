@@ -40,7 +40,7 @@ jobs:
           cd ..
           echo $(pwd)
           ls -al
-          cd ..
+          cd full-stack-open-pokedex
           echo $(pwd)
           ls -al
           ./health_check.sh
