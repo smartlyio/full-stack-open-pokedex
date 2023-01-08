@@ -53,6 +53,9 @@ const PokemonPage = ({ previous, next }) => {
             {normalAbility && <PokemonAbility abilityName={formatName(normalAbility.ability.name)} />}
             {hiddenAbility && <PokemonAbility abilityName={formatName(hiddenAbility.ability.name)} />}
           </div>
+          <div>
+              New feature, hello! Edited.
+          </div>
         </div>
       </div>
     </>
