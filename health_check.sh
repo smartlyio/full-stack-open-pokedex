@@ -14,7 +14,7 @@ echo "curl localhost result: '$result_local'"
 result=$(curl $URL)
 echo "curl result: '$result'"
 
-if [ "${result}" == "ok" ]; then
+if [ "$result_local" == "ok" ]; then
   echo "health check OK!"
   exit 0
 else
