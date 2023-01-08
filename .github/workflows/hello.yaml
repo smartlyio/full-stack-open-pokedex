@@ -19,7 +19,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: say hello
-        run: echo "Hello World"
+        run: echoo "Hello World"
       
       
   
