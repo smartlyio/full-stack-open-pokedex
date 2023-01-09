@@ -9,11 +9,8 @@ on:
     branches: [ master ]
     types: [ opened, synchronize ]
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
 jobs:
-  simple_deployment_pipeline:
+  install_lint_build_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 #The uses keyword tells the workflow to run a specific action
@@ -36,10 +33,27 @@ jobs:
           wait-on: http://localhost:5000
 
   deploy:
-    name: Deploy app
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
     runs-on: ubuntu-20.04
+    needs: [install_lint_build_test]
     if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+
+  tag_release:
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO_OWNER: YouqinS
+      DEFAULT_BUMP: patch
+    runs-on: ubuntu-20.04
+    needs: [deploy]
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - uses: actions/checkout@master
+      - name: bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        with:
+          fetch-depth: '0'
