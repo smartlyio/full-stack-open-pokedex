@@ -5,7 +5,7 @@ echo "trying to install curl"
 apt update
 apt install -y curl
 
-LOCAL_URL="http://localhost:8080/health"
+LOCAL_URL="http://localhost:5000/health"
 URL="https://fullstack-part11.fly.dev/health"
 
 result_local=$(curl $LOCAL_URL)
