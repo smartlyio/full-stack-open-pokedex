@@ -6,10 +6,8 @@ const PORT = process.env.PORT || 8080
 
 app.use(express.static('dist'))
 
-// eslint-disable-next-line
 app.get('/health', (req, res) => {
-  throw 'eeeeerrr'
-  // res.send('HEALTH HAS BEEN CHECKED AND IT IS OK')
+  res.send('HEALTH HAS BEEN CHECKED AND IT IS OK')
 })
 
 app.listen(PORT, () => {
