@@ -32,5 +32,6 @@ COPY --from=builder /app /app
 WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /root/.volta/bin:$PATH
+RUN apt-get update; apt install -y curl
 
 CMD [ "npm", "run", "start" ]
