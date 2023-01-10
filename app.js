@@ -14,10 +14,6 @@ app.get("/version", (req, res) => {
   res.send("1")
 })
 
-app.get("/branch", (req, res) => {
-  res.send("test-new-branch")
-})
-
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`)
 })
