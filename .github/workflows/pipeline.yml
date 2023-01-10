@@ -26,3 +26,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokemon-cicd"
           heroku_email: "yyaustin@bu.edu"
+          healthcheck: "https://pokemon-cicd.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackhealthcheckfailed: true

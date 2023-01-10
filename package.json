@@ -4,8 +4,8 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "engines": {
-    "node": ">=0.10.3 <15",
-    "npm": "~1.0.20"
+    "node": "14.0.0",
+    "npm": "6.14.4"
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
