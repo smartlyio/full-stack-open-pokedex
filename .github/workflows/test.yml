@@ -1,0 +1,35 @@
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+      - name: join commit messages
+        env:
+          JOIN_COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+          JOIN_COMMIT_MESSAGES_CONTAINS: ${{ contains(join(github.event.commits.*.message),'#skip') }}
+          JOIN_COMMIT_MESSAGES_CONTAINS_NO: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
+        run: |
+          echo "$JOIN_COMMIT_MESSAGES"
+          echo "$JOIN_COMMIT_MESSAGES_CONTAINS"
+          echo "$JOIN_COMMIT_MESSAGES_CONTAINS_NO" 
+          echo "${{ !contains(join(github.event.commits.*.message),'#skip') }}"
