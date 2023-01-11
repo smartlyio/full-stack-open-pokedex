@@ -1,3 +1,7 @@
 webpack.config.js
 node_modules/
 dist/
+cypress.config.js
+cypress/fixtures
+cypress/support
+
