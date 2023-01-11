@@ -2,7 +2,9 @@ module.exports = {
   "env": {
     "browser": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    'node': true
+
   },
   "extends": [
     "eslint:recommended",
@@ -25,7 +27,7 @@ module.exports = {
       ],
     "linebreak-style": [
       "error",
-      "unix"
+      process.platform === 'win32' ? 'windows' : 'unix'
     ],
     "quotes": [
       "error",
