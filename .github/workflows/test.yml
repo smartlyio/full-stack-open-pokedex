@@ -29,7 +29,10 @@ jobs:
           JOIN_COMMIT_MESSAGES_CONTAINS: ${{ contains(join(github.event.commits.*.message),'#skip') }}
           JOIN_COMMIT_MESSAGES_CONTAINS_NO: ${{ !contains(join(github.event.commits.*.message),'#skip') }}
         run: |
+          echo "JOIN_COMMIT_MESSAGES:"
           echo "$JOIN_COMMIT_MESSAGES"
+          echo "JOIN_COMMIT_MESSAGES_CONTAINS:"
           echo "$JOIN_COMMIT_MESSAGES_CONTAINS"
+          echo "JOIN_COMMIT_MESSAGES_CONTAINS_NO:" 
           echo "$JOIN_COMMIT_MESSAGES_CONTAINS_NO" 
           echo "${{ !contains(join(github.event.commits.*.message),'#skip') }}"
