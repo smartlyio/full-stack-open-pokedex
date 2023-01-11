@@ -3,7 +3,7 @@ name: Testing stuff
 on:
   push:
     branches:
-      - master
+      - 11.16
 
 jobs:
   a_test_job:
