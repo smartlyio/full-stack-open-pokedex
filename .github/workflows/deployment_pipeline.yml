@@ -4,6 +4,8 @@ on:
   push:
     branches:
     - master
+    pull_request:
+      types: [opened, synchronize, reopened]
 
 jobs:
   simple_deployment_pipeline:
@@ -15,5 +17,5 @@ jobs:
         node-version: '16'
     - name: npm install
       run: npm install
-    - name: lint
-      run: npm run eslint
+    - name: lint and fix
+      run: npm run eslint:fix
