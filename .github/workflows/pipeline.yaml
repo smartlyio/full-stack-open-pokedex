@@ -35,8 +35,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:8080
       - name: flyio deployment
-        if: ${{ github.event_name == 'push' }}
-        if: ${{ !contains(join(toJson(github.event.commits.*.message)), '#skip')}}
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip')}}
         run: flyctl deploy --remote-only
   tag_release:
     if: ${{ github.event_name == 'push' }}
