@@ -36,9 +36,11 @@ jobs:
           wait-on: http://localhost:8080
       - name: flyio deployment
         if: ${{ github.event_name == 'push' }}
+        if: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') == 'false'}}
         run: flyctl deploy --remote-only
   tag_release:
     if: ${{ github.event_name == 'push' }}
+    if: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') == 'false'}}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
