@@ -5,7 +5,7 @@ apt-get update -y && apt-get install -y curl
 RES=$(curl -L https://my-pokedex.fly.dev/health)
 echo "$RES"
 
-if [ "$RES" = "ok" ]
+if [ "$RES" = "ok" ];
 then
     echo "SUCCESS"
     exit 0
