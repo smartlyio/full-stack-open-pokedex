@@ -13,7 +13,8 @@ env:
 
 jobs:
   simple_deployment_pipeline:
-    name: 
+    if: ${{ github.event_name == 'push' }}
+    name: Deployment
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
