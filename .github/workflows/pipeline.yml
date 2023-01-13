@@ -33,7 +33,6 @@ jobs:
       - name: deploy
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
-      jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-20.04
