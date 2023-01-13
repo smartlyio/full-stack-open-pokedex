@@ -45,12 +45,12 @@ processes = []
     timeout = 2000
     tls_skip_verify = false
 
-  [[services.script_checks]]
-    command       = "/app/health_check.sh"
-    grace_period  = "10s"
-    interval      = "10s"
-    restart_limit = 0
-    timeout       = "10s"
+  # [[services.script_checks]]
+  #  command       = "/app/health_check.sh"
+  #  grace_period  = "10s"
+  #  interval      = "10s"
+  #  restart_limit = 0
+  #  timeout       = "10s"
 
 [deploy]
   release_command = "npm run build"
