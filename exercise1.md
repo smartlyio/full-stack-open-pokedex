@@ -1,0 +1,7 @@
+chosen language for the exercise : Java
+
+For linting we use sonarlint and checkstyle at my workplace, and we test using Junit (4). Building is achieved using ant and the whole CI/CD workflow is embeded in a Jenkins Job that automates everything from the building procedure to the deployment on servers. All the tool used can of course be replaced by other alternatives. The tools we use are usually chosen because because of how well they fit the needs of the project, the team etc...
+
+Althouth we now use gitlab for the versioning we used to work with guerrit. Gitlab could be reagarded as the open source version of github, so strictly speaking, it is a alternative to github that you can self host on top of that. For the CD we definitely use Jenkins, however I'm aware Buildkite can be used for the exact same purposes.
+
+Seting up a self hosted solution or not is going to depends on the needs of the project. In the project I'm working in, every single tool is self hosted because the data we use is sensitive and classified so we can't use cloud solution since we need every bit of information to remain in our private network. Having a self hosted service let's you have access to the physical servers and allows greater control on the overall system.
