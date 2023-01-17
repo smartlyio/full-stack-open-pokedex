@@ -8,7 +8,7 @@
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production",
+    "build": "npm install --dev && webpack --mode production",
     "cypress:install": "cypress install",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
@@ -20,6 +20,9 @@
   "keywords": [
     "fullstack-open"
   ],
+  "engines": {
+    "node": "16.17.1"
+  },
   "author": "Smartly.io",
   "license": "ISC",
   "bugs": {
