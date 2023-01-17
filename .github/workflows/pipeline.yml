@@ -31,4 +31,4 @@ jobs:
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy to fly
-        run: flyctl deploy --remote-only
+        run: flyctl deploy -e APP_REVISION=$(git rev-parse --short HEAD) --remote-only
