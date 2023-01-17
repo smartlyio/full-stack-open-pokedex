@@ -21,7 +21,6 @@ processes = []
   internal_port = 5000
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -53,7 +52,7 @@ processes = []
     tls_skip_verify = false
   
   [[services.script_checks]]
-    command = /app/health_check.sh
+    command = "/app/health_check.sh"
     grace_period = "3s"
     interval = "15s"
     restart_limit = 0
