@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 
 env:
@@ -31,4 +34,5 @@ jobs:
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy to fly
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy -e APP_REVISION=$(git rev-parse --short HEAD) --remote-only
