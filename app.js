@@ -8,6 +8,7 @@ app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
   throw 'Health error!'
+  // eslint-disable-next-line no-unreachable
   res.send('ok')
 })
 
