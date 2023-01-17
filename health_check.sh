@@ -2,9 +2,12 @@
 
 echo "Hello from shell script"
 
-HEALTHRESPONSE=`curl http://localhost:8080/health`
+RES=$(curl -s "https://holy-frog-4862.fly.dev/health")
 
-if [ "$HEALTHRESPONSE" != "ok" ]; then
-echo "RESPONSE IS NOT OKE"
+echo "$RES"
+if [ $RES = "ok" ]
+then
+  exit 0
+fi
 
-exit 0 # exit status 0 means that the script "passes"
+exit 1 
