@@ -46,11 +46,11 @@
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,Z",
 	"workspaceFolder": "/workspace",
-	"runArgs": ["--userns=keep-id", "--init", "--shm-size=1g", "--network=full-stack-open"],
+	"runArgs": ["--userns=keep-id", "--init", "--shm-size=4g", "--network=full-stack-open"],
 	"remoteUser": "node",
 	"containerUser": "node",
 	"features": {
-		"desktop-lite": "latest"
+		"ghcr.io/devcontainers/features/desktop-lite:1": {}
 	},
 	"forwardPorts": [6080, 5901]
 }
