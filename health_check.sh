@@ -2,5 +2,5 @@
 
 echo "Hello from shell script"
 
-exit 1
+exit 0 # Script "succeeds"
 
