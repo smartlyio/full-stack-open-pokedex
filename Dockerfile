@@ -2,7 +2,7 @@ FROM debian:bullseye as builder
 
 ARG NODE_VERSION=14.17.1
 
-RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
+RUN apt-get update && apt install -y curl python-is-python3 pkg-config build-essential
 RUN curl https://get.volta.sh | bash
 ENV VOLTA_HOME /root/.volta
 ENV PATH /root/.volta/bin:$PATH
