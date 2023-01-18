@@ -34,6 +34,7 @@ jobs:
         wait-on: http://localhost:5000
     
     - name: deploy
+      if: ${{ github.event.name == 'push' }}
       run: flyctl deploy --remote-only
 
 
