@@ -33,32 +33,19 @@ jobs:
         start: npm run start-prod
         wait-on: http://localhost:5000
     
-    - name: deploy
-      if: ${{ github.event.name == 'push' }}
-      run: flyctl deploy --remote-only    
-
-  tag_release:
-    
+  deploy_and_tag_release:
     needs: [simple_deployment_pipeline]
+    if: ${{ (github.event_name == 'push') && !(contains(join(github.event.commits.*.message), 'skip')) }}
     runs-on: ubuntu-20.04
+    permissions:
+      write-all
     steps:
     - uses: actions/checkout@v3
     
-    - name: dump context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-    - name: dump commits
-      env:
-        COMMITS: ${{ toJson(github.event.commits) }}
-      run: echo "$COMMITS"
-    - name: commit messages
-      env:
-        COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      run: echo "$COMMIT_MESSAGES"
+    - name: deploy
+      run: flyctl deploy --remote-only    
     
-    - name: Bump version and push tag
-      if: ${{ github.event.name == 'push' }}
+    - name: bump version and push tag
       uses: anothrNick/github-tag-action@1.55.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
