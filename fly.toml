@@ -52,6 +52,6 @@ kill_timeout = 5
   
   [[services.script_checks]]
     interval = 10000
-    timeout = 1000
+    timeout = 2000
     command = "/app/health_check.sh"
     restart_limit = 0
