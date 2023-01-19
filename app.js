@@ -15,3 +15,7 @@ app.get('/health', (req, res) => {
   // eslint-disable-next-line no-unreachable
   res.send('ok')
 })
+
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
