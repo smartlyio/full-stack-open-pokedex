@@ -1,5 +1,5 @@
 #!/bin/bash
-response=$(curl -s http://localhost:5000/health)
+response=$(curl -s https://silent-hill-9183.fly.dev/health)
 if [[ $response == *"ok"* ]]; then
   exit 0
 else
