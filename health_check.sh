@@ -1,5 +1,7 @@
 #!/bin/bash
-
-echo "Hello from shell script"
-
-exit 0
+response=$(curl -s http://localhost:8080/health)
+if [[ $response == *"ok"* ]]; then
+  exit 0
+else
+  exit 1
+fi
