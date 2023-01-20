@@ -41,6 +41,7 @@ jobs:
           wait-on: http://localhost:8080
 
   deploy_app:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -51,4 +52,3 @@ jobs:
 
       - name: Deploy app
         run: flyctl deploy --remote-only
-        if: ${{ github.event_name == 'push' }}
