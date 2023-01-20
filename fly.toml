@@ -50,8 +50,3 @@ kill_timeout = 5
     timeout = 2000
     tls_skip_verify = false
   
-  [[services.script_checks]]
-    interval = 10000
-    timeout = 2000
-    command = "/app/health_check.sh"
-    restart_limit = 0
