@@ -42,3 +42,4 @@ jobs:
 
       - name: Deploy app
         run: flyctl deploy --remote-only
+        if: ${{ github.event_name == 'push' }}
