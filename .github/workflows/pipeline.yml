@@ -64,19 +64,19 @@ jobs:
     - name: Deploy failure
       if: failure()
       run: |
-        echo "Build of repo ${{ github.repository }} failed!" 
+        echo "Deploy of repo ${{ github.repository }} failed!" 
         echo "Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :("
         
     - name: Retrieve hosting url
       if: success()
       run: |
-        echo "https://$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_OUTPUT     
-      id: host_url
+        echo "$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_OUTPUT     
+      id: hostname
     
     - name: Deploy success
       if: success()
       run: |
-        echo "A new version from ${{ github.repository }} was deployed to ${{ steps.version.outputs.host_url }}"
+        echo "A new version from ${{ github.repository }} was deployed to https://${{ steps.version.outputs.hostname }}"
     
     # - name: deploy success
     #   uses: rjstone/discord-webhook-notify@v1
