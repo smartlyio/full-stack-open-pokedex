@@ -53,5 +53,5 @@ kill_timeout = 5
   [[services.script_checks]]
     interval = 10000
     timeout = 2000
-    command = "chmod u+x /app/health_check.sh && /app/health_check.sh"
+    command = "/app/health_check_wrapper.sh"
     restart_limit = 0
