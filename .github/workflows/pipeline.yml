@@ -70,13 +70,12 @@ jobs:
     - name: Retrieve hosting url
       if: success()
       run: |
-        echo "$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_OUTPUT     
-      id: hostname
+        echo "hostname=$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_ENV    
     
     - name: Deploy success
       if: success()
       run: |
-        echo "A new version from ${{ github.repository }} was deployed to https://${{ steps.version.outputs.hostname }}"
+        echo "A new version from ${{ github.repository }} was deployed to https://${{ env.hostname }}"
     
     # - name: deploy success
     #   uses: rjstone/discord-webhook-notify@v1
