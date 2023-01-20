@@ -1,0 +1,30 @@
+name: Periodic health check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: superfly/flyctl-actions/setup-flyctl@master
+
+    - name: Retrieve hosting url
+      if: ${{ success() }}
+      run: |
+        echo "hostname=$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_ENV    
+    
+    - name: check the deployed url
+      uses: jtalk/url-health-check-action@v3
+      with:
+        url: 'https://${{ env.hostname }}/health'
+        follow-redirect: false
+        max-attempts: 3
+        retry-delay: 5s
+        retry-all: false
+
