@@ -1,12 +1,8 @@
 name: Periodic health check
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+  schedule:
+    - cron: '10,20 * * * *'
 
 jobs:
   periodic_health_check:
@@ -20,6 +16,6 @@ jobs:
         url: 'https://fspokedex.fly.dev/health'
         follow-redirect: false
         max-attempts: 3
-        retry-delay: 5s
+        retry-delay: 10s
         retry-all: false
 
