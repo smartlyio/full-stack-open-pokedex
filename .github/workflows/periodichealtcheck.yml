@@ -15,7 +15,7 @@ jobs:
     - uses: superfly/flyctl-actions/setup-flyctl@master
 
     - name: Retrieve hosting url
-      if: ${{ success() }}
+      if: ${{ github.event_name == 'push' }}
       run: |
         echo "hostname=$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_ENV    
     
