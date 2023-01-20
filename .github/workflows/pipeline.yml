@@ -34,7 +34,7 @@ jobs:
 
     - name: build fail
       uses: rjstone/discord-webhook-notify@v1
-      if: ${{ failure() }}
+      if: ${{ (failure()) && (github.event_name == 'push') }}
       with:
         severity: error
         username: DeployPipeline 
