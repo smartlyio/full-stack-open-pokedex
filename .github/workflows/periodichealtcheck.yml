@@ -14,15 +14,12 @@ jobs:
     steps:
     - uses: superfly/flyctl-actions/setup-flyctl@master
 
-    - name: Retrieve hosting url
-      if: ${{ github.event_name == 'push' }}
-      run: |
-        echo "hostname=$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_ENV    
-    
     - name: check the deployed url
       uses: jtalk/url-health-check-action@v3
+      env:
+        HOSTNAME: "fspokedex.fly.dev"
       with:
-        url: 'https://${{ env.hostname }}/health'
+        url: 'https://${{ HOSTNAME }}/health'
         follow-redirect: false
         max-attempts: 3
         retry-delay: 5s

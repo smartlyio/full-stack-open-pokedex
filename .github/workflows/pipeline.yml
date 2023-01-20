@@ -32,16 +32,16 @@ jobs:
         start: npm run start-prod
         wait-on: http://localhost:5000
 
-    - name: build fail
-      uses: rjstone/discord-webhook-notify@v1
-      if: ${{ (failure()) && (github.event_name == 'push') }}
-      with:
-        severity: error
-        username: DeployPipeline 
-        color: '#ff1010'
-        text: Build failed
-        description: 'Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :('
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    # - name: build fail
+    #   uses: rjstone/discord-webhook-notify@v1
+    #   if: ${{ (failure()) && (github.event_name == 'push') }}
+    #   with:
+    #     severity: error
+    #     username: DeployPipeline 
+    #     color: '#ff1010'
+    #     text: Build failed
+    #     description: 'Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :('
+    #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy_and_tag_release:
     needs: [simple_build_pipeline]
@@ -62,44 +62,41 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
 
-    - name: deploy fail
-      uses: rjstone/discord-webhook-notify@v1
-      if: ${{ failure() }}
-      with:
-        severity: error
-        username: DeployPipeline 
-        color: '#ff1010'
-        text: Deploy failed
-        description: 'Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :('
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    # - name: deploy fail
+    #   uses: rjstone/discord-webhook-notify@v1
+    #   if: ${{ failure() }}
+    #   with:
+    #     severity: error
+    #     username: DeployPipeline 
+    #     color: '#ff1010'
+    #     text: Deploy failed
+    #     description: 'Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :('
+    #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
-    # - name: Deploy failure
-    #   if: failure()
-    #   run: |
-    #     echo "Deploy of repo ${{ github.repository }} failed!" 
-    #     echo "Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :("
+    - name: Deploy failure
+      if: failure()
+      run: |
+        echo "Deploy of repo ${{ github.repository }} failed!" 
+        echo "Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :("
         
     - name: Retrieve hosting url
       if: ${{ success() }}
       run: |
         echo "hostname=$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_ENV    
     
-    # - name: Deploy success
-    #   if: success()
-    #   run: |
-    #     echo "A new version from ${{ github.repository }} was deployed to https://${{ env.hostname }}"
+    - name: Deploy success
+      if: success()
+      run: |
+        echo "A new version from ${{ github.repository }} was deployed to https://${{ env.hostname }}"
     
-    - name: deploy success
-      uses: rjstone/discord-webhook-notify@v1
-      if: ${{ success() }}
-      with:
-        severity: info
-        username: DeployPipeline
-        color: '#10ff10'
-        text: A new version of Pokedex deployed
-        description: 'to https://${{ env.hostname }} by ${{ github.event.head_commit.author.name }}'
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        
+    # - name: deploy success
+    #   uses: rjstone/discord-webhook-notify@v1
+    #   if: ${{ success() }}
+    #   with:
+    #     severity: info
+    #     username: DeployPipeline
+    #     color: '#10ff10'
+    #     text: A new version of Pokedex deployed
+    #     description: 'to https://${{ env.hostname }} by ${{ github.event.head_commit.author.name }}'
+    #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       
-
-
