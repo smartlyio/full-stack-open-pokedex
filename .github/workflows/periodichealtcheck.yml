@@ -19,7 +19,7 @@ jobs:
       env:
         HOSTNAME: "fspokedex.fly.dev"
       with:
-        url: 'https://${{ HOSTNAME }}/health'
+        url: 'https://$HOSTNAME/health'
         follow-redirect: false
         max-attempts: 3
         retry-delay: 5s
