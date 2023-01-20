@@ -51,8 +51,43 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         DEFAULT_BUMP: patch
 
+    # - name: deploy fail
+    #   uses: rjstone/discord-webhook-notify@v1
+    #   if: failure()
+    #   with:
+    #     severity: error
+    #     color: '#ff1010'
+    #     details: Deploy failed
+    #     description: to ${{ github.event.head_commit.url }}
+    #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
-
+    - name: Deploy failure
+      if: failure()
+      run: |
+        echo "Build of repo ${{ github.repository }} failed!" 
+        echo "Commit ${{ github.event.head_commit.url }} by ${{ github.event.head_commit.author.name }} broke the build :("
+        
+    - name: Retrieve hosting url
+      if: success()
+      run: |
+        echo "https://$(flyctl info | grep Hostname | xargs | cut -d ' ' -f3)" >> $GITHUB_OUTPUT     
+      id: host_url
     
+    - name: Deploy success
+      if: success()
+      run: |
+        echo "A new version from ${{ github.repository }} was deployed to ${{ steps.version.outputs.host_url }}"
+    
+    # - name: deploy success
+    #   uses: rjstone/discord-webhook-notify@v1
+    #   if: success()
+    #   with:
+    #     severity: info
+    #     color: '#10ff10'
+    #     text: A new version of Pokedex deployed
+    #     description: to ${{ steps.version.outputs.host_url }}
+    #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        
+      
 
 
