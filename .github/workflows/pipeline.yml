@@ -5,8 +5,8 @@ on:
     branches:
       - master
     pull_request:
-      branches: [master]
-      types: [opened, synchronize]
+      branches: [ master ]
+      types: [ opened, synchronize ]
 
 env:
   FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
@@ -31,5 +31,7 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
+
       - name: Deploy to fly
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
