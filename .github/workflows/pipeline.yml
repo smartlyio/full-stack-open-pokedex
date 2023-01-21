@@ -59,9 +59,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
 
-      - name: Bump version and push tag
-      - uses: anothrNick/github-tag-action@1.36.0
+      - name: version-tag
+        id: tag
+        uses: anothrNick/github-tag-action@master # if we use 1 there is a too-be-fixed bug https://github.com/anothrNick/github-tag-action/actions/runs/3139501775/jobs/5099976842#step:1:35 as alternative we could use v1
         env:
+          VERBOSE: true
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
