@@ -12,3 +12,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+  print_long_format_date_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Now it is
+        run: date
+
