@@ -17,4 +17,8 @@ jobs:
     steps:
       - name: Now it is
         run: date
-
+  print_long_format_list_of_all_files_and_directories:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Directory Content
+        run: ls -la
