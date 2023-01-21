@@ -52,3 +52,15 @@ jobs:
 
       - name: Deploy app
         run: flyctl deploy --remote-only
+
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [deployment_pipeline, deploy_app]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+      - uses: actions/checkout@v3
+      - uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
