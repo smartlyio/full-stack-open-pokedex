@@ -54,6 +54,7 @@ jobs:
         run: flyctl deploy --remote-only
 
   tag_release:
+    # Not sure if commit itself shall have a #skip but it doesnt work
     if: ${{ github.event_name == 'push' && contains(github.event.commits[0].message, '#skip') != true }}
     needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
