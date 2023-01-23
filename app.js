@@ -11,7 +11,7 @@ app.listen(PORT, () => {
 })
 
 app.get('/health', (req, res) => {
-  res.send('ok')
+  res.send('ok') // health check route
 })
 
 app.get('/version', (req, res) => {
