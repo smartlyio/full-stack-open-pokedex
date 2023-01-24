@@ -42,6 +42,7 @@ jobs:
   tag_release:
     name: Tag release
     needs: [deploy]
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
     - name: Bump version and push tag
