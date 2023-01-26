@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VARIAVEL=$(curl -s -D GET http://localhost:8080/health)
+VARIAVEL=$(curl -s -D GET https://delicate-morning-8864.fly.dev/health)
 
 if [ $VARIAVEL = "ok" ]; then
     exit 0  # exit status 0 means that the script "succeeds"
