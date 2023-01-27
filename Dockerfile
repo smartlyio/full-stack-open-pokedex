@@ -23,7 +23,7 @@ COPY . .
 
 
 ENV NODE_OPTIONS=--openssl-legacy-provider
-RUN apt-get update; apt install -y
+RUN apt-get update; apt install -y curl
 
 RUN npm install --production=false && npm run build
 FROM debian:bullseye
