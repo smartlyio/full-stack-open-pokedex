@@ -32,4 +32,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only        
+      - name: deployment
+          if: ${{ github.event_name == 'push' }}
+          run: flyctl deploy --remote-only        
