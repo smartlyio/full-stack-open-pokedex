@@ -6,5 +6,6 @@ if [ $VARIAVEL = "ok" ]; then
     echo $VARIAVEL
     exit 0  # exit status 0 means that the script "succeeds"
 fi
-
+echo "Falhou"
+exit 1
 
