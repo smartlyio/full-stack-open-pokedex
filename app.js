@@ -16,5 +16,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('Test branch protections') // change this string to ensure a new version deployed
+  res.send('Build Action') // change this string to ensure a new version deployed
 })
