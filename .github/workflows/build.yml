@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]       
 jobs:
   build_status:
     runs-on: ubuntu-20.04
@@ -16,16 +19,16 @@ jobs:
             details: Build Succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
-          uses: rjstone/discord-webhook-notify@v1
-          if: ${{ failure() }}
-          with:
-            severity: error
-            details: Build Failed!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        with:
+          severity: error
+          details: Build Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
-          uses: rjstone/discord-webhook-notify@v1
-          if: ${{ cancelled() }}
-          with:
-            severity: warn
-            details: Build Cancelled!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}    
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ cancelled() }}
+        with:
+          severity: warn
+          details: Build Cancelled!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}    
