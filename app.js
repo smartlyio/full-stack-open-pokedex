@@ -16,5 +16,5 @@ app.get('/health', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('Version V4') // change this string to ensure a new version deployed
+  res.send('Deploy without skip') // change this string to ensure a new version deployed
 })
