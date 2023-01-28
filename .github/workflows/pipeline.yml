@@ -41,7 +41,7 @@ jobs:
         with:
           severity: info
           text: A new version of Pokedex deployed!
-          details: ${{to https://delicate-morning-8864.fly.dev/  by  join(toJson(github.event.commits.*.author.username),'')  }}
+          details: to https://delicate-morning-8864.fly.dev/ by ${{ join(toJson(github.event.commits.*.author.username),'')  }}
           footer: 'Severity: Informational'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build Failure
@@ -52,7 +52,7 @@ jobs:
           text: Build Failed!
           footer: 'Severity: Error'
           description: 'commit'
-          details: ${{ join(toJson(github.event.commits.*.url),'') by join(toJson(github.event.commits.*.author.username),'') broke the build :( }}
+          details: ${{ join(toJson(github.event.commits.*.url),'')}} by ${{join(toJson(github.event.commits.*.author.username),'')}} broke the build :( 
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}    
   tag_release:
     needs: simple_deployment_pipeline
