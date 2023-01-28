@@ -33,7 +33,7 @@ jobs:
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deployment
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains( join(toJson(github.event.commits.*.message),''), '#skip') == false }}
         run: flyctl deploy --remote-only    
   tag_release:
     needs: simple_deployment_pipeline
@@ -43,7 +43,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && contains( join(toJson(github.event.commits.*.message),''), '#skip') == false }}
         uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
