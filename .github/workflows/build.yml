@@ -3,10 +3,7 @@ name: Build status action
 on:
   push:
     branches:
-      - master
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]       
+      - master   
 jobs:
   build_status:
     runs-on: ubuntu-20.04
@@ -15,9 +12,9 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ success() }}
         with:
-            severity: info
-            details: Build Succeeded!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          details: Build Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ failure() }}
