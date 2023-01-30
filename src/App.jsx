@@ -6,6 +6,8 @@ import ErrorMessage from "./ErrorMessage";
 import PokemonPage from "./PokemonPage";
 import PokemonList from "./PokemonList";
 
+//test comment
+
 const mapResults = ({ results }) =>
   results.map(({ url, name }) => ({
     url,
