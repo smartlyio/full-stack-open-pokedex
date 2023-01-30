@@ -7,6 +7,7 @@ import PokemonPage from "./PokemonPage";
 import PokemonList from "./PokemonList";
 
 //test comment
+//more comment
 
 const mapResults = ({ results }) =>
   results.map(({ url, name }) => ({
