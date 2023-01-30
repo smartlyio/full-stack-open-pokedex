@@ -16,6 +16,9 @@
     "dev:cross": "cross-env NODE_ENV=development nodemon app.js",
     "test:cross": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
+  "engines": {
+    "node": "16.7.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"

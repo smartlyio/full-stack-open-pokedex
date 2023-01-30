@@ -1,0 +1,5 @@
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
