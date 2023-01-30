@@ -9,7 +9,12 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "eslint:fix": "eslint './**/*.{js,jsx}' --fix",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run",
+    "start:cross": "cross-env NODE_ENV=production node app.js",
+    "dev:cross": "cross-env NODE_ENV=development nodemon app.js",
+    "test:cross": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",
@@ -34,7 +39,9 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^12.4.1",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
