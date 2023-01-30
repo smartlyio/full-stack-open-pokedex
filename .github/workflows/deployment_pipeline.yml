@@ -5,9 +5,6 @@ on:
     branches:
       - master
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
@@ -40,8 +37,8 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:3000
           wait-on-timeout: 120s
-      - name: Deploy to production
-        - uses: actions/checkout@v3
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
-      
+      - name: Deploy to Fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: flyctl deploy --remote-only
