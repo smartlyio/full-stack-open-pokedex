@@ -14,8 +14,7 @@
     "test:e2e": "cypress run",
     "start:cross": "cross-env NODE_ENV=production node app.js",
     "dev:cross": "cross-env NODE_ENV=development nodemon app.js",
-    "test:cross": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "flyctl": "flyctl deploy --remote-only"
+    "test:cross": "cross-env NODE_ENV=test jest --verbose --runInBand"
   },
   "engines": {
     "node": "16.7.0"
