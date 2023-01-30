@@ -41,11 +41,7 @@ jobs:
           wait-on: http://localhost:3000
           wait-on-timeout: 120s
       - name: Deploy to production
-        run: echo "Working progress"
-  Flyio_Deployment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+        uses: actions/checkout@v3
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
       
