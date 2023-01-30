@@ -1,0 +1,21 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the project
+      - uses: actions/checkout@v3
+      - name: Setup the node to run commands on package.json
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        run: npm install
+      - name: Run linter
+        run: npm run eslint
