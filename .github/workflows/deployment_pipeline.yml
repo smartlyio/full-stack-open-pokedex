@@ -38,8 +38,7 @@ jobs:
           wait-on: http://localhost:3000
           wait-on-timeout: 120s
       - name: Install Flyctl
-        run: |
-          sudo curl -sL https://get.fly.io/flyctl.sh | sudo sh
+        run: curl -L https://get.fly.io/install.sh | sh
       - name: Fly Deployment
         if: success()
         env:
