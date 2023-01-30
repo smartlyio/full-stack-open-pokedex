@@ -15,8 +15,17 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
+      - name: Build application
+        run: npm run build
       - name: Lint Code
         run: npm run eslint
       - name: Run Tests
@@ -27,3 +36,6 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3000
+          timeout: 120
+      - name: Deploy to production
+        run: echo "Working progress"
