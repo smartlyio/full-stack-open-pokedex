@@ -42,7 +42,7 @@ jobs:
           wait-on-timeout: 120s
       - name: Deploy to production
         run: echo "Working progress"
-  FlyIo Deployment:
+  Flyio_Deployment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
