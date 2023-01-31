@@ -15,4 +15,4 @@ jobs:
           echo "Hello World!"
       - name: Now it is
         run: |
-          echo "Mee töihin"
+          echo date
