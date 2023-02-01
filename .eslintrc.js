@@ -33,7 +33,7 @@ module.exports = {
     ],
     "semi": [
       "error",
-      "always"
+      "never"
     ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
