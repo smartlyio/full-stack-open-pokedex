@@ -13,9 +13,6 @@ jobs:
             - uses: actions/setup-node@v3
               with:
                   node-version: '16'
-                  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-                  heroku_app_name: 'fullstack-pokedex-app'
-                  heroku_email: 'rauhamaa.tomi@gmail.com'
             - name: npm install
               run: npm install
             - name: lint
@@ -30,3 +27,9 @@ jobs:
                   command: npm run build
                   start: npm run start-prod
                   wait-on: http://localhost:5000
+            - name: heroku
+              uses: s2001055/full-stack-open-pokedex@v3.6.8
+              with:
+                  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                  heroku_app_name: 'fullstack-pokedex-app'
+                  heroku_email: 'rauhamaa.tomi@gmail.com'
