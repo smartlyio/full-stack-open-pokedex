@@ -1,0 +1,16 @@
+#name of the workflow
+name: Hello World!
+
+#trigger action of the workflow that is a push to branch master
+on:
+  push:
+    branches:
+      - master
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    #Step in the job: This one prints Hello World
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
