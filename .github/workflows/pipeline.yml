@@ -11,8 +11,12 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
+            - uses: s2001055/heroku-deploy@v3.12.12
               with:
                   node-version: '16'
+                  heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+                  heroku_app_name: 'fullstack-pokedex-app'
+                  heroku_email: 'rauhamaa.tomi@gmail.com'
             - name: npm install
               run: npm install
             - name: lint
@@ -22,7 +26,7 @@ jobs:
             - name: test
               run: npm run test
             - name: cypress tests
-              uses: cypress-io/github-action@v2
+              uses: cypress-io/github-action@v4
               with:
                   command: npm run build
                   start: npm run start-prod
