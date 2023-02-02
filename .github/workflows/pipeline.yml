@@ -1,0 +1,25 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  #Checkout code from git repository in virtaul machine using ubuntu-20.04
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      #Use public action that checkout the code in repository
+      - uses: actions/checkout@v3
+      #Use public action to setup node in virtual machine in order to use npm commands from package.json
+      - uses: actions/setup-node@v3
+        #Add parameter to action
+        with:
+          node-version: '16'
+        #Step to install npm dependencies in the enveironment
+      - name: npm install
+        run: npm install
+        #Step to lint the code
+      - name: lint
+        run: npm run eslint
