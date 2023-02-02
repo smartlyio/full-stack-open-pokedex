@@ -29,3 +29,13 @@ jobs:
         #Step to test the code
       - name: test
         run: npm run test
+      #Step to cypress tests(the app must be running first)
+      - name: e2e tests
+      uses: cypress-io/github-action@v4
+        with:
+          #build app
+          build: npm run build
+          #start app in prod
+          start: npm run start-prod
+          #wait for url be available to start cypress tests
+          wait-on: http://localhost:3001
