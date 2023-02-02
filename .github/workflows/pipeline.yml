@@ -11,7 +11,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
-            - uses: fullstack-pokedex-app/heroku-deploy@v3.12.12
+            - uses: s2001055/full-stack-open-pokedex@v3.12.12
               with:
                   node-version: '16'
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
