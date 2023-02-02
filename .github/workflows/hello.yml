@@ -14,10 +14,10 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-      - name: Print current date
+      - name: Run Date
         run: |
           echo "Current date: $(date)"
-      - name: Print current directory content
+      - name: Directory content
         run: |
           echo "Current directory content:"
-          ls -al
+          ls -l
