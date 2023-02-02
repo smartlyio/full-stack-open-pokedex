@@ -23,3 +23,9 @@ jobs:
         #Step to lint the code
       - name: lint
         run: npm run eslint
+        #Step to build the code
+      - name: build
+        run: npm run build
+        #Step to test the code
+      - name: test
+        run: npm run test
