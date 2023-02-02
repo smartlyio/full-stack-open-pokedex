@@ -14,7 +14,7 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-      - name: Run Date
+      - name: Now it is
         run: |
           echo "Current date: $(date)"
       - name: Directory content
