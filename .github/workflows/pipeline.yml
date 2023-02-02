@@ -1,12 +1,11 @@
 name: Deployment pipeline
-
 on:
   push:
     branches:
       - master
   #Get the secret auth token from Fly.io
-  env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+env:
+FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   #Checkout code from git repository in virtaul machine using ubuntu-20.04
   simple_deployment_pipeline:
