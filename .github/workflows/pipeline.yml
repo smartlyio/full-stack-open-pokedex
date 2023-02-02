@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-
+  #Get the secret auth token from Fly.io
+  env:
+    FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
   #Checkout code from git repository in virtaul machine using ubuntu-20.04
   simple_deployment_pipeline:
@@ -36,3 +38,8 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:3001
+      #Step to make deployment in Fly.io
+      - name: Deploy app
+        uses: actions/checkout@v3
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
