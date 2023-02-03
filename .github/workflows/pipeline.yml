@@ -40,3 +40,4 @@ jobs:
                   healthcheck: 'https://fullstack-pokedex-app.herokuapp.com/health'
                   checkstring: 'OK'
                   delay: 5
+                  rollbackonhealthcheckfailed: true
