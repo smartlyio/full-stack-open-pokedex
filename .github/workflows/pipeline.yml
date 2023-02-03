@@ -27,7 +27,7 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
-        - name: Set Git config
+      - name: Set Git config
         run: |
           git config --local user.email "leybanlazada@gmail.com"
           git config --local user.name "Leyban"
