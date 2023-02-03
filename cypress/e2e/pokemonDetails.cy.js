@@ -1,6 +1,6 @@
 describe('can view details of specific pokemon', () => { 
-    it('opening Ninetales', () => {
-        cy.visit("http://localhost:8080")
+    it('can navigate through details', () => {
+        cy.visit("http://localhost:5000")
         cy.contains('ninetales').click()
         cy.contains('ninetales')
         cy.contains('flash fire')
