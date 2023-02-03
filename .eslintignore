@@ -2,4 +2,5 @@ webpack.config.js
 node_modules/
 dist/
 .github
-
+cypress.config.js
+cypress/
