@@ -13,3 +13,15 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello GitHub!"
+  time_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Give time
+        run: |
+          date
+  directory_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Show directory
+        run: |
+          ls -al
