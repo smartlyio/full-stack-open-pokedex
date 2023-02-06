@@ -8,7 +8,7 @@ processes = []
 #ensures that the production built will be done before starting up the app
 [deploy]
   release_command = "npm run build"
-
+#Define the command that starts the application
 [processes]
   app = "node app.js"
 
