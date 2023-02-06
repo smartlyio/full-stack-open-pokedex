@@ -1,6 +1,7 @@
 name: Deployment pipeline
 on:
   pull_request:
+    types: [opened, closed]
     branches:
       - master
   #Get the secret auth token from Fly.io
@@ -38,7 +39,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:3001
   if_merged:
-    if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged
     runs-on: ubuntu-20.04
     steps:
       - uses: superfly/flyctl-actions/setup-flyctl@master
