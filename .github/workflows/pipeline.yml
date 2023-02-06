@@ -45,9 +45,11 @@ jobs:
       ##Deploy app only when code is merged
       - name: Deploy app
         if: ${{ github.event_name == 'push' }}
+        if: "!contains(github.event.head_commit.message, '#skip')"
         run: flyctl deploy --remote-only
   tag_release:
     if: ${{ github.event_name == 'push' }}
+    if: "!contains(github.event.head_commit.message, '#skip')"
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
