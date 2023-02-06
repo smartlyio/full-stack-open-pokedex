@@ -36,5 +36,5 @@ jobs:
                   heroku_email: 'erik.ruotsalainen1@gmail.com'
                   delay: 5
                   healthcheck: 'https://heroku-pokedex-app.herokuapp.com/health'
-                  checkstring: 'OK'
+                  checkstring: 'ok'
                   rollbackonhealthcheckfailed: true
