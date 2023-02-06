@@ -36,8 +36,8 @@ jobs:
         with:
           build: npm run build
           start: npm run start-prod
-          wait-on: http://localhost:3001
-      if: github.event.pull_request.merged    
+          wait-on: http://localhost:3001    
       - uses: superfly/flyctl-actions/setup-flyctl@master
+      if: github.event.pull_request.merged
       - name: Deploy app
         run: flyctl deploy --remote-only
