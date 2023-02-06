@@ -1,6 +1,6 @@
 name: Deployment pipeline
 on:
-  push:
+  pull-request:
     branches:
       - master
   #Get the secret auth token from Fly.io
