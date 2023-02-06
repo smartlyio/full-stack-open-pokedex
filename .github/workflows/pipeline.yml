@@ -44,10 +44,10 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       ##Deploy app only when code is merged
       - name: Deploy app
-        if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#skip') == false }}
         run: flyctl deploy --remote-only
   tag_release:
-    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
+    if: ${{ github.event_name == 'push' && contains(github.event.head_commit.message, '#skip') == false }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
