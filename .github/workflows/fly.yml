@@ -3,13 +3,16 @@ on:
 push:
 branches:
   - master
-env:
-FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 jobs:
 deploy:
 name: Deploy app
 runs-on: ubuntu-latest
 steps:
+  - name: Set up secret token
+  env:
+    FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  - name: Checkout Code
   - uses: actions/checkout@v3
+  - name: Deploy in Productin
   - uses: superfly/flyctl-actions/setup-flyctl@master
   - run: flyctl deploy --remote-only
