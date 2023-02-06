@@ -34,6 +34,4 @@ jobs:
                   heroku_api_key: ${{secrets.CICD_API_KEY}}
                   heroku_app_name: 'cicdworkflow'
                   heroku_email: 'erik.ruotsalainen1@gmail.com'
-                  healthcheck: 'https://cicdworkflow.herokuapp.com/health'
-                  checkstring: 'OK'
                   delay: 5
