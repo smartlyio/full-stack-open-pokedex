@@ -37,3 +37,10 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:3001
+  if_merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy app
+        run: flyctl deploy --remote-only
