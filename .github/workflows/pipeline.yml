@@ -37,12 +37,3 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:3001
-
-  deploy_app:
-    runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
-    steps:
-      #Make possible to use flycyl run commands
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Deploy app
-        run: flyctl deploy --remote-only
