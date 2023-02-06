@@ -34,4 +34,8 @@ jobs:
                   heroku_api_key: ${{secrets.HEROKU_API_KEY}}
                   heroku_app_name: 'heroku-pokedex-app'
                   heroku_email: 'erik.ruotsalainen1@gmail.com'
+                  delay: 5¨
+                  healthcheck: 'https://heroku-pokedex-app.herokuapp.com/health'
+                  checkstring: 'OK'
                   delay: 5
+                  rollbackonhealthcheckfailed: true
