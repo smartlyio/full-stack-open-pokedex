@@ -37,7 +37,8 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:3001
+      #Make possible to use flycyl run commands
+      uses: superfly/flyctl-actions/setup-flyctl@master
       #Step to make deployment in Fly.io
       - name: Deploy app
-        uses: superfly/flyctl-actions/setup-flyctl@master
         run: flyctl deploy --remote-only
