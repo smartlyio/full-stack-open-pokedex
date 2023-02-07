@@ -12,7 +12,6 @@ jobs:
               uses: jtalk/url-health-check-action@v3
               with:
                   url: https://fullstack-pokedex-app.herokuapp.com/
-                  follows-redirect: false
                   max-attempts: 3
                   retry-delay: 5s
                   retry-all: false
