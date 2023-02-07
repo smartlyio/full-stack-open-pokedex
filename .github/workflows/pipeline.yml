@@ -49,8 +49,10 @@ jobs:
               with:
                   fetch-depth: '0'
             - name: Bump version and push tag
-              # if: ${{ github.event_name == 'push' }}
+              if: ${{ github.event_name == 'push' }}
               uses: anothrNick/github-tag-action@1.55.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  WITH_V: true
+                  WITH_V: false
+                  DRY_RUN: true
+                  DEFAULT_BUMP: patch
