@@ -21,8 +21,8 @@ jobs:
             - name: lint
               run: npm run eslint
             - name: build
-              run: npm run build
               uses: rjstone/discord-webhook-notify@v1
+              run: npm run build
               if: failure()
               with:
                   severity: error
