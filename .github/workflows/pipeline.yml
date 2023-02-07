@@ -22,6 +22,12 @@ jobs:
               run: npm run eslint
             - name: build
               run: npm run build
+              uses: rjstone/discord-webhook-notify@v1
+              if: failure()
+              with:
+                  severity: error
+                  details: Build failed!
+                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: test
               run: npm run test
             - name: cypress tests
@@ -56,3 +62,5 @@ jobs:
                   DEFAULT_BUMP: patch
                   WITH_V: false
                   DRY_RUN: true
+    discord_webhook:
+        uses: rjstone/discord-webhook-notify@v1
