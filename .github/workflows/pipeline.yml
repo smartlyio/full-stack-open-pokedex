@@ -14,7 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
-            - uses: rjstone/discord-webhook-notify@v1.0.4
               with:
                   node-version: '16'
             - name: npm install
