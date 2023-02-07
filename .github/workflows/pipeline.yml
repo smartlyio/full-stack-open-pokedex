@@ -42,6 +42,7 @@ jobs:
           DEFAULT_BUMP: patch
   merge_to_prod:
     needs: [tag_release]
+    runs-on: ubuntu-20.04
     steps:
       - name: Set Git config
         run: |
