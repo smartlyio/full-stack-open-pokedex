@@ -47,13 +47,12 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               with:
-                  ref: ${{ github.sha }}
                   fetch-depth: '0'
             - name: Bump version and push tag
               if: ${{ github.event_name == 'push' }}
               uses: anothrNick/github-tag-action@1.55.0
               env:
                   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  DEFAULT_BUMP: patch
+                  DEFAULT_BUMP: 'patch'
                   WITH_V: false
                   DRY_RUN: true
