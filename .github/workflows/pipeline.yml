@@ -22,12 +22,12 @@ jobs:
             - name: lint
               run: npm run eslint
             - name: build
-              run: npm run build
               if: failure()
               with:
                   severity: error
                   details: Build failed!
                   webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+              run: npm run build
             - name: test
               run: npm run test
             - name: cypress tests
