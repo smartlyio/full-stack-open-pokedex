@@ -14,6 +14,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
+            - uses: rjstone/discord-webhook-notify@v1
               with:
                   node-version: '16'
             - name: npm install
@@ -25,7 +26,7 @@ jobs:
               if: failure()
               with:
                   severity: error
-                  details: Test Failed!
+                  details: Build failed!
                   webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: test
               run: npm run test
