@@ -14,7 +14,6 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
-            - uses: rjstone/discord-webhook-notify@v1
               with:
                   node-version: '16'
             - name: npm install
@@ -22,6 +21,7 @@ jobs:
             - name: lint
               run: npm run eslint
             - name: build
+              uses: rjstone/discord-webhook-notify@v1
               if: failure()
               with:
                   severity: error
