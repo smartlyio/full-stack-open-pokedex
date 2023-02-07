@@ -14,6 +14,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
+            - uses: rjstone/discord-webhook-notify@v1.0.4
               with:
                   node-version: '16'
             - name: npm install
@@ -22,13 +23,11 @@ jobs:
               run: npm run eslint
             - name: build
               run: npm run build
-            - name: build failed
-                uses: rjstone/discord-webhook-notify@v1.0.4
-                if: failure()
-                with:
-                    severity: error
-                    details: Test Failed!
-                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+              if: failure()
+              with:
+                  severity: error
+                  details: Test Failed!
+                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: test
               run: npm run test
             - name: cypress tests
