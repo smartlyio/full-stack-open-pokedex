@@ -23,11 +23,6 @@ jobs:
             - name: build
               uses: rjstone/discord-webhook-notify@v1
               run: npm run build
-              if: failure()
-              with:
-                  severity: error
-                  details: Build failed!
-                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: test
               run: npm run test
             - name: cypress tests
