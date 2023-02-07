@@ -63,3 +63,10 @@ jobs:
                   DEFAULT_BUMP: patch
                   WITH_V: false
                   DRY_RUN: true
+            - name: version deployed
+              uses: rjstone/discord-webhook-notify@v1
+              if: success()
+              with:
+                  severity: info
+                  details: Version deploy succeeded!
+                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
