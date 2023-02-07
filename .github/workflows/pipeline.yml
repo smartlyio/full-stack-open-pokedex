@@ -23,7 +23,7 @@ jobs:
             - name: build
               run: npm run build
             - name: build failed
-                uses: rjstone/discord-webhook-notify@v1
+                uses: rjstone/discord-webhook-notify@v1.0.4
                 if: failure()
                 with:
                     severity: error
