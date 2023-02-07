@@ -44,6 +44,7 @@ jobs:
     needs: [tag_release]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: Set Git config
         run: |
           git config --local user.email "leybanlazada@gmail.com"
