@@ -63,5 +63,3 @@ jobs:
                   DEFAULT_BUMP: patch
                   WITH_V: false
                   DRY_RUN: true
-    discord_webhook:
-        uses: rjstone/discord-webhook-notify@v1
