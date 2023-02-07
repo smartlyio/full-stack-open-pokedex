@@ -12,7 +12,6 @@
         "start-prod": "node app.js",
         "test": "jest",
         "eslint": "eslint './**/*.{js,jsx}'",
-        "build": "",
         "cypress:open": "cypress open"
     },
     "repository": {
