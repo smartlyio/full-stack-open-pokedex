@@ -4,12 +4,14 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
 
-jobs:
+jobs: 
   hello_world_job:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: |
-          echo "Hello World!"
+        run: echo "Hello World!"
+      - name: Get Date
+        run: date
+      - name: Get Directory Content
+        run: ls -l
