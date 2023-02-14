@@ -4,7 +4,7 @@ const axios = require('axios')
 const deployURL = process.env.RENDER_COM_DEPLOY_WEBHOOK_URL
 
 const sendDeployAction = async () => {
-  const response = await axios.get(`${deployURL}`)
+  const response = await axios.get(deployURL)
   if (response.status !== 200) throw new Error('could not connect with render.com webhook')
   // eslint-disable-next-line no-console
   else console.log('ping successful!')

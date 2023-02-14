@@ -8,6 +8,7 @@ on:
 jobs:
   deploy_this_app:
     runs-on: ubuntu-20.04
+    environment: render_deploy
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
