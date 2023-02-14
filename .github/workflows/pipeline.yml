@@ -11,6 +11,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    environment: render_deploy
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,3 +31,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: deploy_app
+        run: |
+          if [[ ${{ github.event_name }} == 'push' ]]; then
+            npm run deploy-ping
+            echo "Deploy ping sent to render.com"
+          else 
+            echo "Pull request detected"
+          fi
+        env:
+          RENDER_COM_DEPLOY_WEBHOOK_URL: ${{ secrets.RENDER_COM_DEPLOY_WEBHOOK_URL }}
