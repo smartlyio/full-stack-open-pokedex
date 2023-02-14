@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-env:
-  env_var: ${{ vars.RENDER_COM_DEPLOY_WEBHOOK_URL }}
 
 jobs:
   deploy_this_app:
@@ -19,3 +17,5 @@ jobs:
         run: npm install
       - name: deploy_app
         run: npm run deploy-ping
+        env:
+          RENDER_COM_DEPLOY_WEBHOOK_URL: ${{ secrets.RENDER_COM_DEPLOY_WEBHOOK_URL }}
