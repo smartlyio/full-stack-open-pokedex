@@ -2,8 +2,6 @@ const axios = require('axios')
 
 // eslint-disable-next-line no-undef
 const deployURL = process.env.RENDER_COM_DEPLOY_WEBHOOK_URL
-// eslint-disable-next-line no-console
-console.log(deployURL)
 
 const sendDeployAction = async () => {
   const response = await axios.get(deployURL)
