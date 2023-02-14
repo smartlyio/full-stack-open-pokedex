@@ -9,7 +9,8 @@
     "test": "jest",
     "eslint": "eslint ./**/*.{js,jsx}",
     "build": "webpack --mode production",
-    "test:e2e": "cypress run --spec cypress/e2e/pokedex.cy.js"
+    "test:e2e": "cypress run --spec cypress/e2e/pokedex.cy.js",
+    "deploy-ping": "node deploy.js"
   },
   "repository": {
     "type": "git",
