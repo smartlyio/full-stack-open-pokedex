@@ -1,6 +1,8 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const path = require('path');
 
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 module.exports = {
   entry: "./src/index.jsx",
   output: {
@@ -8,6 +10,7 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/'
   },
+  mode: isDevelopment ? 'development' : 'production',
   module: {
     rules: [
       {
