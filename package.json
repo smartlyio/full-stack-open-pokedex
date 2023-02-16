@@ -11,6 +11,7 @@
 		"cy:open": "cypress open",
 		"eslint": "eslint './**/*.{js,jsx}'",
 		"build": "webpack --mode production",
+		"git": "git add . && git commit -m",
 		"pipeline": "git push && npm run start-prod"
 	},
 	"repository": {
