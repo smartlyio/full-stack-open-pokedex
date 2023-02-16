@@ -7,10 +7,11 @@
 		"start": "webpack-dev-server --open --mode development",
 		"start-prod": "node app.js",
 		"test": "jest",
-		"test:e2e": "npm run start-prod & npx cypress run",
+		"test:e2e": "npm run start-prod && npx cypress run",
 		"cy:open": "cypress open",
 		"eslint": "eslint './**/*.{js,jsx}'",
-		"build": "webpack --mode production"
+		"build": "webpack --mode production",
+		"pipeline": "git push && npm run start-prod"
 	},
 	"repository": {
 		"type": "git",
