@@ -28,3 +28,5 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           browser: chrome
+
+          # flyauthToken: K-2eByNWpjSdiyAKy4M6Ewh2BQx3AHKm1ifrMffaUAs
