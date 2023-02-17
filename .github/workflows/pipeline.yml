@@ -35,4 +35,4 @@ jobs:
         steps:
           - uses: actions/checkout@v3
           - uses: superfly/flyctl-actions/setup-flyctl@master
-          - run: flyctl deploy --remote-only
+          - uses: flyctl deploy --remote-only
