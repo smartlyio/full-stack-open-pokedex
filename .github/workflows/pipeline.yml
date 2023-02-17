@@ -29,7 +29,8 @@ jobs:
           wait-on: http://localhost:5000
           browser: chrome
       - name: Deploy to fly.io
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') }}
         uses: superfly/flyctl-actions/setup-flyctl@master
-        run: flyctl deploy --remote-only
-        env:
+        with:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          deploy: flyctl deploy --remote-only
