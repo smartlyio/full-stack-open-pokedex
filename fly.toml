@@ -18,7 +18,6 @@ processes = []
   app = "node app.js"
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
@@ -42,3 +41,12 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+	[[services.http_checks]]
+    interval = 10s
+    grace_period = "10s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    timeout = 2s
+		[services.http_checks.headers]
