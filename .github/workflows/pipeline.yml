@@ -5,25 +5,27 @@ on:
     branches:
       - master
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
 jobs:
-  deployment_pipeline:
-    runs-on: ubuntu-20.04
+  install_build_test:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install dependencies
         run: npm install
+
       - name: Lint
         run: npm run eslint
+
       - name: Build
         run: npm run build
+
       - name: Test
         run: npm run test
+
       - name: E2E Tests
         uses: cypress-io/github-action@v4
         with:
@@ -31,7 +33,13 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           browser: chrome
-      - name: Deploy to fly.io
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') }}
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        run: 'flyctl deploy --remote-only'
+  deploy:
+    name: Deploy to fly.io
+    needs: install_build_test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
