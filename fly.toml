@@ -43,10 +43,9 @@ processes = []
     timeout = "2s"
 
 	[[services.http_checks]]
-    interval = 10s
+    interval = "10s"
     grace_period = "10s"
     method = "get"
     path = "/health"
     protocol = "http"
-    timeout = 2s
-		[services.http_checks.headers]
+    timeout = "2s"
