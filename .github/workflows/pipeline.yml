@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -28,5 +28,8 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           browser: chrome
-
-          # flyauthToken: K-2eByNWpjSdiyAKy4M6Ewh2BQx3AHKm1ifrMffaUAs
+      - name: Deploy to fly.io
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
