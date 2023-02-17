@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
   deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -29,8 +32,7 @@ jobs:
           wait-on: http://localhost:5000
           browser: chrome
       - name: Deploy to fly.io
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ''), '#skip') }}
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          deploy: flyctl deploy --remote-only
+        steps:
+          - uses: actions/checkout@v3
+          - uses: superfly/flyctl-actions/setup-flyctl@master
+          - run: flyctl deploy --remote-only
