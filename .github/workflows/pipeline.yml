@@ -38,7 +38,7 @@ jobs:
   deployment:
     needs: [pre_deployment]
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip')
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -51,11 +51,10 @@ jobs:
     permissions: write-all
     needs: [deployment]
     runs-on: ubuntu-20.04
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip')
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: '0'
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
