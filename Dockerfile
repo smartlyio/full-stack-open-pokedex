@@ -33,5 +33,6 @@ WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /root/.volta/bin:$PATH
 RUN chmod +x /app/health_check.sh
+RUN apt-get update;apt install -y curl
 
 CMD [ "npm", "run", "start" ]
