@@ -1,0 +1,89 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  pre_deployment:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: npm install 
+        run: npm install  
+      - name: lint
+        run: npm run eslint
+      - name: test
+        run: npm test
+      - name: build
+        run: npm run build
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+
+  deployment:
+    needs: [pre_deployment]
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip')
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+            node-version: '16'
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+
+  tag_release:
+    permissions: write-all
+    needs: [deployment]
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ' '), '#skip')
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+  
+  notification:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Success
+        if: success()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: All checks have succeeded.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Failure
+        if: failure()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: One or more checks failed.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Cancelled
+        if: cancelled()
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: warn
+          details: Checks were cancelled.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
