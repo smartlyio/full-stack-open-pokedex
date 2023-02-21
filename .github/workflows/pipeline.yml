@@ -62,7 +62,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
   
-    notification:
+  notification:
     needs: [tag_release]
     runs-on: ubuntu-20.04
     steps:
