@@ -1,6 +1,6 @@
 #!/bin/bash
 
-result=$(curl http://localhost:$1/health)
+result=$(curl http://localhost:$PORT/health)
 
 if [[ $result == "ok" ]]; then
     exit 0
