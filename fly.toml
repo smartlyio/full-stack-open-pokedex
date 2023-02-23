@@ -1,20 +1,20 @@
-# fly.toml file generated for villagrat-fullstack-cicd on 2023-02-23T15:18:59-03:00
+# fly.toml file generated for villagrat-pokedex-cicd on 2023-02-23T15:40:23-03:00
 
-app = "villagrat-fullstack-cicd"
+app = "villagrat-pokedex-cicd"
 kill_signal = "SIGINT"
 kill_timeout = 5
-
-[deploy]
-  release_command = "npm run build"
 
 [env]
   PORT = "8080"
 
-[experimental]
-  auto_rollback = true
+[deploy]
+  release_command = "npm run build"
 
 [processes]
   app = "node app.js"
+
+[experimental]
+  auto_rollback = true
 
 [[services]]
   http_checks = []
