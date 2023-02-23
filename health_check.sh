@@ -1,5 +1,9 @@
 #!/bin/bash
 
-echo "Hello from a shell script"
-
-exit 0 # exit status 1 means that the script "fails"
+echo "The health check script is starting on the Fly.io VM"
+apt-get update && apt-get -y install curl
+expected_response="ok"
+response=(curl --silent https://villagrat-pokedex-cicd.fly.dev/health)
+if [[ "$expected_response" == "$response" ]]
+then exit 0 # bash success status code
+else exit 1 # bash failure status code
