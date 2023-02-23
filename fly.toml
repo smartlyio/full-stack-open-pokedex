@@ -6,6 +6,7 @@ kill_timeout = 5
 # processes = []
 
 [env]
+  PORT = "8080"
 
 [experimental]
   auto_rollback = true
@@ -19,7 +20,7 @@ kill_timeout = 5
 [[services]]
   http_checks = []
   internal_port = 8080
-  processes = ["app"]
+  # processes = ["app"]
   protocol = "tcp"
   script_checks = []
   [services.concurrency]
