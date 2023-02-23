@@ -1,5 +1,11 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+result=$(curl http://localhost:$1/health)
 
-exit 0 # exit status success
+if [[ $result == "ok" ]]; then
+    echo SUCCESS
+    exit 0
+fi
+
+echo FAIL
+exit 1

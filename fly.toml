@@ -53,6 +53,7 @@ processes = []
 
   [[services.script_checks]]
     command       = "/app/health_check.sh"
+    args          = [internal_port]
     grace_period  = "1s"
     interval      = "5s"
     restart_limit = 3
