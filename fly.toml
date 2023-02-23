@@ -51,3 +51,10 @@ processes = []
     restart_limit = 3
     timeout = 2000
     tls_skip_verify = false
+
+  [[services.script_checks]]
+    command       = "/app/health_check.sh"
+    grace_period  = "1s"
+    interval      = "5s"
+    restart_limit = 3
+    timeout       = "1s"
