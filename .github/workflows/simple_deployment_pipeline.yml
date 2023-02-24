@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Simple deployment pipeline
 
 on:
   push:
@@ -8,8 +8,11 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 jobs:
-  simple_deployment_pipeline:
+  local_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -30,3 +33,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+  fly_deployment:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run:  flyctl deploy --remote-only
