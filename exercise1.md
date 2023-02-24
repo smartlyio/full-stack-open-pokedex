@@ -1,0 +1,3 @@
+my choice was the python language analyzing the first point I can see that the steps to cover the linting, testing and build phase is to use technology like Pylint for linting, Unittest for testing and Tetuptools for building.
+For the second point we can use Gitlab CI/CD apart from the Github actions and Jenkins .
+As previously said, everything depends on our needs, since both options have their advantages and disadvantages.
