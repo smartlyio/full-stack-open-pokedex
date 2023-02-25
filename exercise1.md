@@ -19,3 +19,5 @@ For small projects, a cloud-based environment is probably a better choice.
 + Every developer already uses Github anyway. Checkings can be done at the same time when PR happens.
 + Github action is not too hard to learn. 
 + No need for someone to look after Jenkins.
+
+Test versioning
