@@ -42,7 +42,7 @@ jobs:
       needs: [simple_deployment_pipeline]
       runs-on: ubuntu-20.04
       steps:
-        - name: Checkout custom action repo
+        - name: Checkout repo inside container
           uses: actions/checkout@v3
           with:
             fetch-depth: '0'
