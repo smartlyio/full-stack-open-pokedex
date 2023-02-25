@@ -20,4 +20,4 @@ For small projects, a cloud-based environment is probably a better choice.
 + Github action is not too hard to learn. 
 + No need for someone to look after Jenkins.
 
-Test version number from branch
+Test versioning
