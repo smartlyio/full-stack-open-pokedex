@@ -20,3 +20,4 @@ For small projects, a cloud-based environment is probably a better choice.
 + Github action is not too hard to learn. 
 + No need for someone to look after Jenkins.
 
+Test if I can't push to master
