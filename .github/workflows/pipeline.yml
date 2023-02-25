@@ -5,8 +5,10 @@ on:
     branches:
       - master
   pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+    types:
+      - closed
+    branches:
+      - master
 
 jobs:
   simple_deployment_pipeline:
@@ -36,10 +38,14 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-      - name: Bump version and push tag
-        # if: github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip')
-        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: false
-          DEFAULT_BUMP: patch
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.sha }}
+        fetch-depth: '0'
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.55.0 # Don't use @master unless you're happy to test the latest version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: true
+        DEFAULT_BUMP: 'patch'
