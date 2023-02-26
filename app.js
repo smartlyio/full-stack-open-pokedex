@@ -9,7 +9,7 @@ app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
   const string = `ok - version: ${version}`
-  res.send('ok')
+  res.send(string).status(200).end()
 })
 
 app.listen(PORT, () => {
