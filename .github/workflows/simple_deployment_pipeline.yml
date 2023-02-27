@@ -12,43 +12,59 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
-  simple_deployment_pipeline:
+  a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: npm install
-        run: npm install
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: fly.io deployment
-        if: ${{ github.event_name == 'push' }}
-        run: flyctl deploy --remote-only
-  tag_release:
-      if: ${{ github.event_name == 'push' }}
-      needs: [simple_deployment_pipeline]
-      runs-on: ubuntu-20.04
-      steps:
-        - name: Checkout repo inside container
-          uses: actions/checkout@v3
-          with:
-            fetch-depth: '0'
-        - name: Bump version and push tag
-          uses: anothrNick/github-tag-action@1.36.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            WITH_V: true
-            DEFAULT_BUMP: ${{ vars.DEFAULT_BUMP }}
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+  # simple_deployment_pipeline:
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
+  #     - uses: superfly/flyctl-actions/setup-flyctl@master
+  #     - name: npm install
+  #       run: npm install
+  #     - name: lint
+  #       run: npm run eslint
+  #     - name: build
+  #       run: npm run build
+  #     - name: test
+  #       run: npm run test
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
+  #     - name: fly.io deployment
+  #       if: ${{ github.event_name == 'push' }}
+  #       run: flyctl deploy --remote-only
+  # tag_release:
+  #     if: ${{ github.event_name == 'push' }}
+  #     needs: [simple_deployment_pipeline]
+  #     runs-on: ubuntu-20.04
+  #     steps:
+  #       - name: Checkout repo inside container
+  #         uses: actions/checkout@v3
+  #         with:
+  #           fetch-depth: '0'
+  #       - name: Bump version and push tag
+  #         uses: anothrNick/github-tag-action@1.36.0
+  #         env:
+  #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #           WITH_V: true
+  #           DEFAULT_BUMP: ${{ vars.DEFAULT_BUMP }}
