@@ -36,6 +36,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           browser: chrome
+
   deploy:
     name: Deploy to fly.io
     needs: install_build_test
@@ -49,9 +50,14 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
   Versioning:
-    name: Bump version and push tag
-    uses: anothrNick/github-tag-action@1.36.0
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      DEFAULT_BUMP: patch
-      WITH_V: true
+    needs: [install_build_test, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
