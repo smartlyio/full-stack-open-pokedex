@@ -135,3 +135,9 @@ Make the necessary changes to the source code so that the lint workflow passes. 
 
 **Solution:**
 The linting problems were fixed as instructed.
+
+## Exercise 11.7 Building and testing
+**Task:**
+Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test.
+
+**Solution:**
