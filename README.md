@@ -141,3 +141,4 @@ The linting problems were fixed as instructed.
 Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test.
 
 **Solution:**
+The task was completed as instructed.
