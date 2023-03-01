@@ -115,3 +115,11 @@ As the output of command `ls -l` shows, by default, the virtual environment that
 
 **Solution:**
 The task was completed as instructed.
+
+## Exercise 11.5 Linting workflow
+**Task:**
+Implement or copy-paste the "Lint" workflow and commit it to the repository. Use a new yml file for this workflow, you may call it e.g. pipeline.yml.
+
+Push your code and navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed.
+
+**Solution:**
