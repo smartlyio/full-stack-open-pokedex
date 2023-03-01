@@ -123,3 +123,4 @@ Implement or copy-paste the "Lint" workflow and commit it to the repository. Use
 Push your code and navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed.
 
 **Solution:**
+The task was completed as instructed.
