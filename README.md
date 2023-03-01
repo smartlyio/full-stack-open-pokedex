@@ -103,3 +103,4 @@ You should see the "Hello World!" message as an output. If that's the case then 
 Note that GitHub Actions also informs you on the exact environment (operating system, and its setup) where your workflow is run. This is important since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your machine!
 
 **Solution:**
+The task was completed as instructed.
