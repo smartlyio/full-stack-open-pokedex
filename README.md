@@ -150,3 +150,4 @@ Investigate which test fails and fix the issue in the code (do not change the te
 Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
 **Solution:**
+Pokemon page links were fixed in the code.
