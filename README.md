@@ -124,3 +124,13 @@ Push your code and navigate to "Actions" tab and click on your newly created wor
 
 **Solution:**
 The task was completed as instructed.
+
+## Exercise 11.6 Fix the code
+**Task:**
+There are some issues with the code that you will need to fix. Open up the workflow logs and investigate what is wrong.
+
+A couple of hints. One of the errors is best to be fixed by specifying proper env for linting, see [here](https://fullstackopen.com/en/part3/validation_and_es_lint#lint) how it can be done . One of the complaints concerning console.logstatement could be taken care of by simply silencing the rule for that specific line. Ask google how to do it.
+
+Make the necessary changes to the source code so that the lint workflow passes. Once you commit new code the workflow will run again and you will see updated output where all is green again.
+
+**Solution:**
