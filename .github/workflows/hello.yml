@@ -16,8 +16,8 @@ jobs:
 
       - name: Run date
         run: |
-          echo date 
+          date 
       
       - name: Run ls -l
         run: |
-          echo ls -l 
+          ls -l 
