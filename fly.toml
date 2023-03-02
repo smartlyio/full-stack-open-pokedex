@@ -21,7 +21,6 @@ processes = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -35,6 +34,13 @@ processes = []
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
+
+  [[services.script_checks]]
+    interval      = "5s"
+    timeout       = "5s"
+    command       = "bash health_check.sh"
+    grace_period  = "10s"
+    restart_limit = 0
 
   [[services.tcp_checks]]
     grace_period = "1s"
