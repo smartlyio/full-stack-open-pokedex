@@ -32,7 +32,7 @@ jobs:
           wait-on: http://localhost:5001
   deploy:
     name: Deploy app
-    needs: [pre_deployment_tasks]
+    needs: [deployment_prep]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }}
     steps:
