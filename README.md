@@ -151,3 +151,65 @@ Once you have fixed all the issues and the Pokedex is bug-free, the workflow run
 
 **Solution:**
 Pokemon page links were fixed in the code.
+
+## Exercise 11.9 Simple end to end -tests
+**Task:**
+The current set of tests use Jest to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](https://fullstackopen.com/en/part5/testing_react_apps) of part 5.
+
+Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the Cypress library similarly what we do in section [End to end testing](https://fullstackopen.com/en/part5/end_to_end_testing) of part 5.
+
+So, setup Cypress (you'll find [here](https://fullstackopen.com/en/part5/end_to_end_testing/) all info you need) and use this test at first:
+```
+describe('Pokedex', function() {
+it('front page can be opened', function() {
+cy.visit('http://localhost:5000')
+cy.contains('ivysaur')
+cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
+})
+})
+```
+Define a npm script `test:e2e` for running the e2e tests from the command line.
+
+Note do not include the word spec in the Cypress test file name, that would cause also Jest to run it, and it might cause problems.
+
+Note2 end to end tests are pretty slow and than can cause problems when run with the GitHub Actions. Slowness can be remedied by changing App.jsx to fetch a bit less Pokemons, eg. 50 works fine:
+```
+const {
+data: pokemonList, error, isLoading
+} = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
+```
+The same change must be done in the test file App.jest.spec.jsx
+
+The change is now (16th September 2022) done in the repository, but if you have fetched the code earlier, there might still be a bigger number.
+
+Another thing to note is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is ivysaurinstead of Ivysaur!
+
+Ensure that the test passes locally. Remember that the Cypress tests assume that the application is up and running when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](https://fullstackopen.com/en/part5/end_to_end_testing) how to get up and running with Cypress.
+
+Once the end to end test works in your machine, include it in the GitHub Action workflow. By far the easiest way to do that is to use the ready-made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits us is the following:
+```
+- name: e2e tests
+  uses: cypress-io/github-action@v2
+  with:
+  command: npm run test:e2e
+  start: npm run start-prod
+  wait-on: http://localhost:5000
+  Three options are used. command specifies how to run Cypress tests. start gives npm script that starts the server and wait-on says that before the tests are run, the server should have started in url http://localhost:5000.
+```
+If you are using Cypress 10.X, you may need to revise the steps as follows:
+```
+- name: e2e tests
+  uses: cypress-io/github-action@v4
+  with:
+  build: npm run build
+  start: npm run start-prod
+  wait-on: http://localhost:5000
+  Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. ivysaur. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string chlorophyll in the case of ivysaur.
+```
+Note also the Pokemon abilities are written with lower case letters, the capitalization is done in CSS, so do not search eg. for Chlorophyll but chlorophyll.
+
+Note2 that you should not try bulbasaur, for some reason the page of that particular Pokemon does not work properly...
+
+End to end -tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
+
+**Solution:**
