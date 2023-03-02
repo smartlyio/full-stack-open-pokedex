@@ -1,0 +1,26 @@
+name: Lint, Build & Test Pipeline 
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  simple_deployment_pipeline:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.19]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+      run: npm ci
+    - name: lint
+      run: npm run eslint
+    
