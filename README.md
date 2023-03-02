@@ -1,6 +1,6 @@
 # runic
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/hello.yml)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/all.yml)
 
 Part 11
 
