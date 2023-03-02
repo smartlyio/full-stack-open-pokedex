@@ -213,3 +213,4 @@ Note2 that you should not try bulbasaur, for some reason the page of that partic
 End to end -tests are nice since they give us confidence that software works from the end user's perspective. The price we have to pay is the slower feedback time. Now executing the whole workflow takes quite much longer.
 
 **Solution:**
+The task was done as instructed.
