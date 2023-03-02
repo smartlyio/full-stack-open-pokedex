@@ -1,4 +1,4 @@
-name: Combine All Pipeline
+name: All Pipeline 
 
 on:
   push:
@@ -27,11 +27,3 @@ jobs:
       run: npm run build
     - name: test
       run: npm run test
-    - name: Say hello
-      run: |
-        echo "Hello World!"
-    - name: Now it is
-      run: date
-    - name: Directory content
-      run: ls -l
-    

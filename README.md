@@ -1,5 +1,7 @@
 # runic
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/hello.yml)
+
 Part 11
 
 Date: 1.3.2023
