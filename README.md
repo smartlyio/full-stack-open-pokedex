@@ -12,5 +12,6 @@ Date: 1.3.2023
 
 - [Exercise 3-4](https://github.com/aiotrope/runic/tree/11.1)
 
-- [Exercise 3-4](https://github.com/aiotrope/runic/tree/11.1)
+- [Exercise 5-9](https://github.com/aiotrope/runic/tree/11.1)
+
 
