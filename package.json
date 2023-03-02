@@ -4,11 +4,11 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "start-prod": "node app.js",
-    "test": "jest",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --open --mode development",
+    "start-prod": "cross-env NODE_ENV=production node app.js",
+    "test": "cross-env NODE_ENV=test jest --verbose",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "build": "cross-env NODE_ENV=production webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "@testing-library/react": "^10.0.4",
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
+    "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "dotenv": "^16.0.3",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
