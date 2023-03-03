@@ -4,9 +4,15 @@ module.exports = {
     'commonjs': true,
     'es6': true,
     'node': true,
-    'jest/globals': true
+    'jest/globals': true,
+    'cypress/globals': true
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:react/recommended',
+    'plugin:jest/recommended',
+    'plugin:cypress/recommended'
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true
@@ -14,7 +20,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
-  plugins: ['react', 'jest'],
+  plugins: ['react', 'jest', 'cypress'],
   rules: {
     'indent': ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -25,6 +31,7 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
     'no-console': 'error',
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'jest/expect-expect': 0
   }
 }
