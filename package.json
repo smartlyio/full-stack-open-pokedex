@@ -4,11 +4,11 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack-dev-server --open --mode development",
-    "start:prod": "cross-env NODE_ENV=production node app.js",
-    "test": "cross-env NODE_ENV=test jest --verbose",
+    "start": "webpack-dev-server --open --mode development",
+    "start:prod": "node app.js",
+    "test": "jest --verbose",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "cross-env NODE_ENV=production webpack --mode production",
+    "build": "webpack --mode production",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run"
   },
@@ -34,7 +34,6 @@
     "@testing-library/react": "^10.0.4",
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
-    "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
     "cypress": "^12.7.0",
     "eslint": "^6.8.0",
