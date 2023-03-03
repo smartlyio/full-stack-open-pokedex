@@ -13,3 +13,11 @@ app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`)
   /* eslint-enable no-console */
 })
+
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
