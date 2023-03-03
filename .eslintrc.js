@@ -1,4 +1,5 @@
 module.exports = {
+	'parser': 'babel-eslint',
 	'env': {
 		'browser': true,
 		'commonjs': true,
@@ -11,8 +12,8 @@ module.exports = {
 		'SharedArrayBuffer': 'readonly'
 	},
 	'parserOptions': {
-		'ecmaVersion': 2018,
-		"sourceType": "module",
+		'ecmaVersion': 8,
+		'sourceType': 'module',
 	},
 	'rules': {
 		'no-console': 'off',
