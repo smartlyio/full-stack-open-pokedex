@@ -1,6 +1,6 @@
 # runic
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/all.yml)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/pipeline.yml)
 
 Part 11
 
