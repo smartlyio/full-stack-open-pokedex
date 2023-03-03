@@ -1,2 +1,6 @@
 dist/
 node_modules/
+#Cypress
+cypress/plugins
+cypress/support
+cypress/videos
