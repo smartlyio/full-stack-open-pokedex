@@ -52,10 +52,10 @@ jobs:
 
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
           cache: 'npm'
     - name: Pull Vercel Environment Information
       run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
