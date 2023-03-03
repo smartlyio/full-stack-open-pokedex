@@ -45,7 +45,11 @@ jobs:
         wait-on: http://localhost:3002
   deploy:
     runs-on: ubuntu-latest
-    needs: initial_pipeline
+
+    strategy:
+      matrix:
+        node-version: [16.19]
+
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v3
