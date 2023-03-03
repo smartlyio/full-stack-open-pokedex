@@ -1,15 +1,19 @@
-# Full Stack open CI/CD
+# runic
 
-This repository is used for the CI/CD module of the Full stack open course
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aiotrope/runic/all.yml)
 
-Fork the repository to complete course exercises
+Part 11
 
-## Commands
+Date: 1.3.2023
 
-Start by running `npm install` inside the project folder
+## Branches
 
-`npm start` to run the webpack dev server
-`npm test` to run tests
-`npm run eslint` to run eslint
-`npm run build` to make a production build
-`npm run start-prod` to run your production build
+- [Exercise 1](https://github.com/aiotrope/runic/tree/11.1)
+
+- [Exercise 2](https://github.com/aiotrope/runic/tree/11.1)
+
+- [Exercise 3-4](https://github.com/aiotrope/runic/tree/11.1)
+
+- [Exercise 5-9](https://github.com/aiotrope/runic/tree/11.1)
+
+

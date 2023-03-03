@@ -1,0 +1,37 @@
+name: Test, Lint & Build Pipeline
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  simple_deployment_pipeline:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [16.19]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm install
+    - name: lint
+      run: npm run eslint
+    - name: build
+      run: npm run build
+    - name: test
+      run: npm run test
+    - name: Say hello
+      run: |
+        echo "Hello World!"
+    - name: Now it is
+      run: date
+    - name: Directory content
+      run: ls -l
+    
