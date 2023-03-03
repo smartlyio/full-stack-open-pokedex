@@ -1,8 +1,14 @@
-name: All Pipeline 
+name: All Pipeline
 
 on:
   push:
     branches: [ "master" ]
+
+  workflow_dispatch:
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 jobs:
   simple_deployment_pipeline:
@@ -23,13 +29,22 @@ jobs:
     - run: npm install
     - name: lint
       run: npm run eslint
-    - name: build
+    - name: Build
       run: npm run build
-    - name: test
+    - name: Jest Test
       run: npm run test
-    - name: e2e test
+    - name: e2e Test
       uses: cypress-io/github-action@v4
       with:
         build: npm run build
         start: npm run start-prod
         wait-on: http://localhost:3001
+    - name: Install Vercel CLI
+      run: npm install --global vercel@latest
+    - name: Pull Vercel Environment Information
+      run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+    - name: Build Project Artifacts
+      run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+    - name: Deploy Project Artifacts to Vercel
+      run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
