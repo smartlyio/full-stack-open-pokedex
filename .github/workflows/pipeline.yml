@@ -1,4 +1,4 @@
-name: Combine All Pipeline
+name: Test, Lint & Build Pipeline
 
 on:
   push:
