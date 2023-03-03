@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import LoadingSpinner from './LoadingSpinner'

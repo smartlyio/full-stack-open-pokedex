@@ -6,7 +6,9 @@ module.exports = {
 		'es6': true,
 		'node': true
 	},
-	'extends': 'eslint:recommended',
+	'extends': [
+		'plugin:react/recommended'
+	],
 	'globals': {
 		'Atomics': 'readonly',
 		'SharedArrayBuffer': 'readonly'
@@ -19,8 +21,9 @@ module.exports = {
 		'no-console': 'off',
 		'indent': [
 			"error",
-    	2
+    	2,
 		],
+		'react/prop-types': 'off',
 		'linebreak-style': [
 			'error',
 			'unix'
