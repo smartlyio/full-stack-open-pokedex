@@ -12,4 +12,4 @@ Because we want to run flake8 and black every time we commit new code, we'll use
 
 ## Continuous Integration
 
-The customization possibilities for Travis-CI are very broad, it is free for open source applications, and it is simple to use. Travis allows you to perform the most basic versions of the Pytest testing suite as well as build software across multiple operating systems and automatically distribute it to a number of sources once it is complete.
+The customization possibilities for Travis-CI are very broad, it is free for open source applications, and it is simple to use. Travis allows you to perform the most basic versions of the Pytest testing suite as well as build software across multiple operating systems and automatically distribute it to a number of sources once it is complete. CI services aren’t just useful for running tests, they also provide the ability to deploy code and save you more time. 
