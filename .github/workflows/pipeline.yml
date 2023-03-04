@@ -30,6 +30,23 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000 
+
+      - name: Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ github.event_name == 'push' && success()}}
+        with:
+          severity: info
+          details: A new version of Pokedex deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ github.event_name == 'push' && failure()}}
+        with:
+            severity: error
+            details: A commit ${{ github.event.head_commit.url }} broke the build :(
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   
  
   tag_release:
