@@ -20,4 +20,4 @@ jobs:
       - name: test
         run: npm test
       - name: build
-        run: npm build
+        run: npm run build
