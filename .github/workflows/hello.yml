@@ -17,4 +17,4 @@ jobs:
           date
       - name: files
         run: |
-          ls
+          ls -a
