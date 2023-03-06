@@ -32,7 +32,10 @@ jobs:
           wait-on: http://localhost:5000
   tag_release:
     needs: [check]
-    if: ${{ github.event_name == 'push' }}
+    # Only tags when merging to the main branch
+    # Will skip version tagging if #skip is included in the commit message
+    if: |
+      github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message, ) ' '), '$skip')
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -43,7 +46,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-      
+
   deployment:
     if: ${{ github.event_name == 'push' }}
     name: Deploy app
