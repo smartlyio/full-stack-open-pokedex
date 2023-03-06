@@ -34,9 +34,14 @@ jobs:
     needs: [check]
     runs-on: ubuntu-20.04
     steps:
-      - uses: anothrNick/github-tag-action@1.36.0
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
 
   deployment:
     if: ${{ github.event_name == 'push' }}
