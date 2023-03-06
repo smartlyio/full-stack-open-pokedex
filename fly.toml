@@ -22,22 +22,10 @@ processes = []
   auto_rollback = true
 
 [[services]]
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/health"
-    protocol = "http"
-    restart_limit = 0
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]
-
 
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
 
   [services.concurrency]
     hard_limit = 25
@@ -58,3 +46,22 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
+
+  [[services.script_checks]]
+    command       = "/health_check.sh"
+    args          = ["a", "b", "c"]
+    grace_period  = "5s"
+    interval      = "5s"
+    restart_limit = 0
+    timeout       = "2000"
