@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: CI
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deployment_pipeline:
+  check:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -30,7 +30,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start:prod
           wait-on: http://localhost:5000
-  deploy:
+  deployment:
+    if: ${{ github.event_name == 'push' }}
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
