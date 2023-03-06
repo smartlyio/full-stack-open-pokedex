@@ -1,8 +1,14 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+response=$(curl -s https://bold-tree-299.fly.dev/health)
 
-exit 0 # exit status 1 means that the script "fails"
+if [ "$response" == "ok" ]; then
+    echo "Health check successful. Got OK response."
+    exit 0
+fi
+
+echo "Health check failed."
+exit 1
 
 # To run this script from the CLI
 # chmod +x ./health_check.sh
