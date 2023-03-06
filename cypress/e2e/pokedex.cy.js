@@ -7,4 +7,12 @@ describe('Pokedex', () => {
       'Pokémon and Pokémon character names are trademarks of Nintendo.'
     )
   })
+
+  it('Can visit Ivysaur', () => {
+    cy.visit('http://localhost:5001')
+    cy.get('a[href*="/pokemon/ivysaur"]').click()
+    cy.contains('ivysaur')
+    cy.contains('overgrow')
+    cy.contains('chlorophyll')
+  })
 })
