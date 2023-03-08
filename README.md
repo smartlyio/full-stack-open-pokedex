@@ -214,3 +214,49 @@ End to end -tests are nice since they give us confidence that software works fro
 
 **Solution:**
 The task was done as instructed.
+
+## Exercises 11.10-11.12. (Fly.io)
+Before going to the below exercises, you should setup your application in Fly.io hosting service like the one we did in [part 3](https://fullstackopen.com/en/part3/deploying_app_to_internet#application-to-the-internet).
+
+If you rather want to use Heroku, there is an alternative set of exercises for that.
+
+In contrast to part 3 now we do not deploy the code to Fly.io ourselves (with the command flyctl deploy), we let the GitHub Actions workflow do that for us!
+
+Create a new app in Fly.io and after that generate a Fly.io API token with command
+```
+flyctl auth token
+```
+You'll need the token soon for your deployment workflow!
+
+Before setting up the deployment pipeline let us ensure that a manual deployment with the command flyctl deploy works.
+
+You most likely need to do at least two changes. Firstly, define the Node version to use in the file package.json to match one used in your machine. For me it is 16.13.2:
+```
+{
+"engines" : {
+"node" : "16.13.2"
+},
+"name": "fullstackopen-cicd",
+"version": "1.0.0",
+"description": "Full Stack Open",
+// ...
+}
+```
+The configuration file fly.toml should also be modified to include the following:
+```
+[deploy]
+release_command = "npm run build"
+
+[processes]
+app = "node app.js"
+```
+The release_command under [deploy](https://fly.io/docs/reference/configuration/) now ensures that the production built will be done before starting up the app. In [processes](https://fly.io/docs/reference/configuration/#the-processes-section) we define the command that starts the application. Without these changes Fly.io just starts the React dev server and that causes it to shut down since the app itself does not start up.
+
+Here the app refers to the application process that is started up in the [services](https://fly.io/docs/reference/configuration/#the-services-sections) section:
+```
+[[services]]
+http_checks = []
+internal_port = 8080
+processes = ["app"]  // highlight-line
+```
+
