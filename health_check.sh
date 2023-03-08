@@ -1,10 +1,6 @@
 #!/bin/bash
 
-echo "Health Check from shell script"
-
-URL="https://throbbing-voice-8584.fly.dev/health"
-
-response=$(curl -s $URL)
+response=$(curl -s https://throbbing-voice-8584.fly.dev/health)
 
 echo $response
 
