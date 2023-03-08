@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /// <reference types="cypress" />
 
 context('Cypress.Commands', () => {
@@ -26,6 +27,7 @@ context('Cypress.Commands', () => {
       return subject
     })
 
+    // eslint-disable-next-line no-unused-vars
     cy.get('button').console('info').then(($button) => {
       // subject is still $button
     })

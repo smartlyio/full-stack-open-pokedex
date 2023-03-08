@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable indent */
 /// <reference types="cypress" />
 
 context('Utilities', () => {
