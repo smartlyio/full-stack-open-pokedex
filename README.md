@@ -363,3 +363,6 @@ v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m a
 So despite the problems in the relese, the app stays functional!
 
 Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
+
+**Solution:**
+Configured and tested as instructed.
