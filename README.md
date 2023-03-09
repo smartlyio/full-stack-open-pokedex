@@ -281,3 +281,85 @@ Remember that it is always essential to keep an eye on what is happening in serv
 
 **Solution:**
 Configured as instructed, after merge to master app deployed without any errors in logs.
+
+## Exercise 11.11 Health check and rollback
+**Task:**
+Each deployment in Fly.io creates a [release](https://fly.io/docs/flyctl/releases/). Releases can be checked from the command line:
+```
+$ flyctl releases
+VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
+v13    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	30m6s ago
+v12    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	51m30s ago
+v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s ago
+v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
+```
+It is essential to ensure that a deployment ends up to a succeeding release, where the app is in healthy functional state. Fortunately Fly.io has several configuration options that take care of the application health check.
+
+The default fly.toml has already a section [services.tcp_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks)
+```
+[[services.tcp_checks]]
+grace_period = "1s"
+interval = "15s"
+restart_limit = 0
+timeout = "2s"
+```
+This section defines a basic health check of the deployment. The TCP check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a TCP connection to the virtual machine.
+
+This check notices if something is fundamentally broken in the configurations. E.g. in my case for the app of this part, it took several trials until I got the app up and running:
+```
+$ fly releases
+VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
+v4     	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	5h39m ago
+v3     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	5h50m ago
+v2     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	5h57m ago
+v1     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h12m ago
+v0     	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	6h19m ago
+```
+So finally in the 5th deployment (version v4) I got the configuration right and that ended in a succeeding release.
+
+Besides the rudimentary TCP health check, it is extremely beneficial to have also some "application level" health checks that ensure that the app for real is in functional state. One possibility for this is a HTTP-level check defined in section [services.http_checks](https://fly.io/docs/reference/configuration/#services-tcp_checks) that can be used to ensure that the app is responding to the HTTP requests.
+
+Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
+```
+app.get('/health', (req, res) => {
+res.send('ok')
+})
+```
+Configure then a [HTTP-check](https://fly.io/docs/reference/configuration/#services-http_checks) that ensures the health of the depyments based on the HTTP request to the defined health check endpoint.
+
+Note that the default fly.toml has defined that http_checks is an empty array. You need to remove this line when you are adding a manually defined HTTP-check:
+```
+[[services]]
+http_checks = []
+```
+It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
+```
+app.get('/version', (req, res) => {
+res.send('1') // change this string to ensure a new version deployed
+})
+```
+Ensure that Actions notices if a deployment breaks your application:
+
+fullstack content
+You may simulate this e.g. as follows:
+```
+app.get('/health', (req, res) => {
+throw 'error...'
+// eslint-disable-next-line no-unreachable
+res.send('ok')
+})
+```
+As can be seen in the command line, when a deployment fails, Fly.io rolls back to the previous working release:
+```
+$ fly releases
+VERSION	STABLE	TYPE    	STATUS   	DESCRIPTION            	USER           	DATE
+v15    	true  	rollback	succeeded	Reverting to version 13	               	16m48s ago
+v14    	false 	release 	failed   	Deploy image           	mluukkai@iki.fi	21m53s ago
+v13    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	30m6s ago
+v12    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	51m30s ago
+v11    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	59m25s ago
+v10    	true  	release 	succeeded	Deploy image           	mluukkai@iki.fi	1h6m ago
+```
+So despite the problems in the relese, the app stays functional!
+
+Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
