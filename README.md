@@ -260,3 +260,24 @@ internal_port = 8080
 processes = ["app"]  // highlight-line
 ```
 
+**Solution:**
+I had to check different discussion forums, discord channels and other solutions to configure deployment to fly. There seemed to be a significant changes since I worked with fly.io last time.
+
+## Exercise 11.10 Deploying your application to Fly.io
+**Task:**
+Before starting this exercise, make sure that the manual deployment with the command flyctl deploy works!
+
+Extend the workflow with a step to deploy your application to Fly.io by following the advice given [here](https://fly.io/docs/app-guides/continuous-deployment-with-github-actions/).
+
+You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets.
+
+Now the workflow can access the token value as follows:
+```
+${{secrets.FLY_API_TOKEN}}
+```
+You can then try the app with a browser, but most likely you run into a problem. If we read carefully the section ['Application to the Internet' in part 3](https://fullstackopen.com/en/part3/deploying_app_to_internet#application-to-the-internet)
+
+Remember that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use flyctl logsearly and use it often. No, use it all the time!
+
+**Solution:**
+TODO:

@@ -1,14 +1,20 @@
-# fly.toml file generated for pokemon-fullstack-drohal3 on 2023-03-02T16:08:34+02:00
+# fly.toml file generated for muddy-thunder-3474 on 2023-03-09T14:09:12+02:00
 
-app = "pokemon-fullstack-drohal3"
+app = "muddy-thunder-3474"
 kill_signal = "SIGINT"
 kill_timeout = 5
-processes = []
+
+[deploy]
+  release_command = "npm run build"
 
 [env]
   PORT = "8080"
+
 [experimental]
   auto_rollback = true
+
+[processes]
+  app = "node app.js"
 
 [[services]]
   http_checks = []
