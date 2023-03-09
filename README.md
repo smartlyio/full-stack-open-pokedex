@@ -280,4 +280,4 @@ You can then try the app with a browser, but most likely you run into a problem.
 Remember that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use flyctl logsearly and use it often. No, use it all the time!
 
 **Solution:**
-TODO:
+Configured as instructed, after merge to master app deployed without any errors in logs.
