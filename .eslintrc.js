@@ -13,7 +13,18 @@ module.exports = {
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    settings: {
+      react: {
+        version: 'detect'
+      },
+      'import/resolver': {
+        node: {
+          paths: ['src'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx']
+        }
+      }
+    }
   },
   "plugins": [
     "react", "jest"
