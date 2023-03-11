@@ -1,0 +1,22 @@
+# Task 11.3
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Sano Terve
+        run: echo "Hello World!"
+        # Task 11.4
+      - name: T2m2nhetkinen p2iv2m2242 ja kellon aika
+        run: date
+      - name: Hakemiston sis2lt6
+        run: ls -l
