@@ -58,6 +58,7 @@ module.exports = {
     "react/prop-types": 0
   },
   "globals": {
-    "process": true
+    "process": true,
+    "cy": true
   }
 }
