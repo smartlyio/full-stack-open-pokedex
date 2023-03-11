@@ -1,4 +1,5 @@
-A little description:
+# A little description
+
 git clone <https://github.com/ivose/full-stack-open-pokedex>
 cd full-stack-open-pokedex
 npm install
