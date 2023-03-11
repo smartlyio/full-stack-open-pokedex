@@ -11,7 +11,8 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    #18.04 - deprecated
+    runs-on: ubuntu-20.04
     steps:
       - name: Sano Terve
         run: echo "Hello World!"
