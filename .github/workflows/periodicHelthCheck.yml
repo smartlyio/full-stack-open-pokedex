@@ -5,7 +5,7 @@ on:
     branches:
       - master
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 0 * 3,4 0"
 
 jobs: #Task 11.19
   health_check:
@@ -15,6 +15,5 @@ jobs: #Task 11.19
         uses: jtalk/url-health-check-action@v3
         with:
           url: https://ivospokedex.herokuapp.com/version
-          checkstring: "1.0.0"
           max-attempts: 3
           retry-delay: 15s
