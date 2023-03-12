@@ -80,7 +80,7 @@ jobs:
           fetch-depth: "0"
       - name: Success alert discord
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{ success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
+        if: ${{ success() && github.event_name == 'pull_request' && !contains(join(github.event.commits.*.message), '#skip')}}
         with:
           severity: info
           details: Test Succeeded!
