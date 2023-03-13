@@ -34,6 +34,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pokedex-deploy" #Must be unique in Heroku
           heroku_email: "maksim.ilmast@yandex.com"
-          healthcheck: "https://pokedex-deploy.herokuapp.com//health"
+          healthcheck: "https://pokedex-deploy.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
           
