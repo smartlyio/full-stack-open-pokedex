@@ -30,14 +30,14 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
-      if: ${{ github.event_name == 'push' }}
-        - name: deploy to heroku
-          uses: akhileshns/heroku-deploy@v3.12.13 # This is the action
-          with: 
-            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-            heroku_app_name: "pokedex-deploy" #Must be unique in Heroku
-            heroku_email: "maksim.ilmast@yandex.com"
-            healthcheck: "https://pokedex-deploy.herokuapp.com/health"
-            checkstring: "ok"
-            rollbackonhealthcheckfailed: true
+      - name: deploy to heroku
+        if: ${{ github.event_name == 'push' }}
+        uses: akhileshns/heroku-deploy@v3.12.13 # This is the action
+        with: 
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pokedex-deploy" #Must be unique in Heroku
+          heroku_email: "maksim.ilmast@yandex.com"
+          healthcheck: "https://pokedex-deploy.herokuapp.com/health"
+          checkstring: "ok"
+          rollbackonhealthcheckfailed: true
           
