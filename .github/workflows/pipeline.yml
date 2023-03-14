@@ -41,6 +41,7 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
   tag_release:
+    permissions: write-all
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
