@@ -40,6 +40,7 @@ jobs:
           healthcheck: "https://pokedex-deploy.herokuapp.com/health"
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
+          
   tag_release:
     permissions: write-all
     needs: [simple_deployment_pipeline]
