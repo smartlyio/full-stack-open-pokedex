@@ -1,3 +1,5 @@
+-- Exercise1 added to this repository ---
+
 I'll take a look at the JavaScript/TypeScript, Node.js ecosystem in this exercise.
 
 - Tools for taking care of common CI steps (linting, testing, and building.)
