@@ -22,13 +22,12 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      # Disable long runnin e2e tests first to get the Heroku deployment working
-      #- name: e2e tests
-      #  uses: cypress-io/github-action@v2
-      #  with:
-      #    command: npm run test:e2e
-      #    start: npm run start-prod
-      #    wait-on: http://localhost:5000
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.13 # This is the action
         with:
