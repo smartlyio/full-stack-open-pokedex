@@ -1,10 +1,8 @@
 # Copied this Workflow from the materials for 11.3
 name: Hello World!
 
-on:
-  push:
-    branches:
-      - master
+# Disable this first workflow to focus on the pipeline including cypress
+on: workflow_dispatch
 
 jobs:
   hello_world_job:
