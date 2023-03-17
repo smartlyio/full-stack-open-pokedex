@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Full Stack Open",
   "main": "src/index.js",
+  "engines": {
+    "node": "16.19.0"
+  },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
