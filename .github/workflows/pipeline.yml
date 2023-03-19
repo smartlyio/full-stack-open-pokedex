@@ -31,16 +31,17 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           command: npm run test:e2e
-      - name: Deploy to fly.io
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} ## Task 11.14
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - uses: actions/setup-node@v3
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: ivospokedex
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: https://ivospokedex.herokuapp.com/health
-          checkstring: "ok"
+
+      #- name: Deploy to fly.io
+      #  if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} ## Task 11.14
+      #- uses: superfly/flyctl-actions/setup-flyctl@master
+      #- uses: actions/setup-node@v3
+      #  with:
+      #    heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #    heroku_app_name: ivospokedex
+      #    heroku_email: ${{secrets.HEROKU_EMAIL}}
+      #    healthcheck: https://ivospokedex.herokuapp.com/health
+      #    checkstring: "ok"
 
   deploy:
     needs: [simple_deployment_pipeline]
