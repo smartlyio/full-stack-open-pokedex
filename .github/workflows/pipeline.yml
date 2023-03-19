@@ -16,15 +16,17 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
-      - name: npm install
+          node-version: "16.16.0"
+      - name: install
         run: npm install
       - name: lint
         run: npm run eslint
         # Task 11.7
+      - name: build
+        run: npm run build
       - name: test
         run: npm run test
-      - name: e2e tests
+      - name: e2e
         uses: cypress-io/github-action@v4
         with:
           build: npm run build
@@ -45,12 +47,16 @@ jobs:
 
   deploy:
     needs: [simple_deployment_pipeline]
-    name: Deploy app
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} ## Task 11.14
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.16.0"
+      - name: Deploy app
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
