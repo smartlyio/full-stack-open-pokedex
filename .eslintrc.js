@@ -13,7 +13,18 @@ module.exports = {
       "jsx": true
     },
     "ecmaVersion": 2018,
-    "sourceType": "module"
+    "sourceType": "module",
+    settings: {
+      react: {
+        version: 'detect'
+      },
+      'import/resolver': {
+        node: {
+          paths: ['src'],
+          extensions: ['.js', '.jsx', '.ts', '.tsx']
+        }
+      }
+    }
   },
   "plugins": [
     "react", "jest"
@@ -21,8 +32,8 @@ module.exports = {
   "rules": {
     "indent": [
       "error",
-        2
-      ],
+      2
+    ],
     "linebreak-style": [
       "error",
       "unix"
@@ -45,5 +56,9 @@ module.exports = {
     ],
     "no-console": "error",
     "react/prop-types": 0
+  },
+  "globals": {
+    "process": true,
+    "cy": true
   }
 }
