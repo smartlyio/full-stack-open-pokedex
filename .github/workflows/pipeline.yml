@@ -31,57 +31,70 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           command: npm run test:e2e
-      - name: Deploy to heroku
+      - name: Deploy to fly.io
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} ## Task 11.14
-        uses: akhileshns/heroku-deploy@v3.7.8
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/setup-node@v3
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ivospokedex
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: https://ivospokedex.herokuapp.com/health
           checkstring: "ok"
-      - name: Deploy failure alert discord ## here a messge to develope team discord group. Task 11.18
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() && github.event_name == 'push'}}
-        with:
-          severity: error
-          details: Test Failed!
-          description: commit
-          footer: "Severity: Error"
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-  tag_release:
+
+  deploy:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
+    name: Deploy app
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: "0"
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
-        uses: anothrNick/github-tag-action@b048302c73cfda8345e7629cc2b8889f82ee68ed
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-      - name: Versioning failure alert discord ## here a messge to develope team discord group. Task 11.18
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ failure() && github.event_name == 'push'}}
-        with:
-          severity: error
-          details: Test Failed!
-          description: commit
-          footer: "Severity: Error"
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-  discord_success:
-    needs: [tag_release] # notification to a discord group, eg such grou where to advertice a new version. Task 11.18
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: "0"
-      - name: Success alert discord
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ success() && github.event_name == 'pull_request' && !contains(join(github.event.commits.*.message), '#skip')}}
-        with:
-          severity: info
-          details: Test Succeeded!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      #- name: Deploy failure alert discord ## here a messge to develope team discord group. Task 11.18
+      #  uses: rjstone/discord-webhook-notify@v1
+      #  if: ${{ failure() && github.event_name == 'push'}}
+      #  with:
+      #    severity: error
+      #    details: Test Failed!
+      #    description: commit
+      #    footer: "Severity: Error"
+      #    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  #tag_release:
+  #  needs: [simple_deployment_pipeline]
+  #  runs-on: ubuntu-20.04
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #      with:
+  #        fetch-depth: "0"
+  #    - name: Bump version and push tag
+  #      if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+  #      uses: anothrNick/github-tag-action@b048302c73cfda8345e7629cc2b8889f82ee68ed
+  #      env:
+  #        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #        DEFAULT_BUMP: patch
+  #    - name: Versioning failure alert discord ## here a messge to develope team discord group. Task 11.18
+  #      uses: rjstone/discord-webhook-notify@v1
+  #      if: ${{ failure() && github.event_name == 'push'}}
+  #      with:
+  #        severity: error
+  #        details: Test Failed!
+  #        description: commit
+  #        footer: "Severity: Error"
+  #        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  #discord_success:
+  #  needs: [tag_release] # notification to a discord group, eg such grou where to advertice a new version. Task 11.18
+  #  runs-on: ubuntu-20.04
+  #  steps:
+  #    - uses: actions/checkout@v3
+  #      with:
+  #        fetch-depth: "0"
+  #    - name: Success alert discord
+  #      uses: rjstone/discord-webhook-notify@v1
+  #      if: ${{ success() && github.event_name == 'pull_request' && !contains(join(github.event.commits.*.message), '#skip')}}
+  #      with:
+  #        severity: info
+  #        details: Test Succeeded!
+  #        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
