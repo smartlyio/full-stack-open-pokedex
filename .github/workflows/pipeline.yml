@@ -33,3 +33,6 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "apndx-pokedex" #Must be unique in Heroku
           heroku_email: "heli.huhtilainen@helsinki.fi"
+          healthcheck: "https://apndx-pokedex.herokuapp.com/health"
+          checkstring: "ok"
+          delay: 5
