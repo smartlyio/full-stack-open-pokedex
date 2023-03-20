@@ -1,5 +1,13 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+status=$(curl -s https://ivosepokedex.fly.dev/health)
 
-exit 1
+if [[ $status == "ok" ]]; then
+  echo "OK"
+  exit 0
+else
+  echo "Error"
+  exit 1
+fi
+
+exit 0

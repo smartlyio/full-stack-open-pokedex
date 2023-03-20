@@ -26,7 +26,6 @@ primary_region = "arn"
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -46,3 +45,10 @@ primary_region = "arn"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+  [[services.script_checks]]
+    command       = "/app/health_check.sh"
+    grace_period  = "2s"
+    interval      = "10s"
+    restart_limit = 0
+    timeout       = "1s"
