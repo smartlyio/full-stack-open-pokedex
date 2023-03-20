@@ -1,0 +1,10 @@
+PS C:\ivo\fullstack\full-stack-open-pokedex> flyctl releases
+VERSION STABLE  TYPE    STATUS          DESCRIPTION     USER                    DATE       
+v5      true    release succeeded       Deploy image    iv..@gmail.com      13m22s ago
+v4    	false 	release failed   	    Deploy image    iv..@gmail.com	    34m23s ago
+v3      true    release succeeded       Deploy image    iv..@gmail.com      1h8m ago  
+v2      true    release succeeded       Deploy image    iv..@gmail.com      1h12m ago 
+v1      true    release succeeded       Deploy image    iv..@gmail.com      1h29m ago 
+v0      true    release succeeded       Deploy image    iv..@gmail.com      1h40m ago 
+
+PS C:\ivo\fullstack\full-stack-open-pokedex> git add .; git commit -m "health"; git push -u origin master
