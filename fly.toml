@@ -23,7 +23,6 @@ primary_region = "arn"
   auto_rollback = true
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
