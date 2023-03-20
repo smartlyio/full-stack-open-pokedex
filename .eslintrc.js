@@ -49,7 +49,8 @@ module.exports = {
   "globals": {//Task 11.2
     "process": true,
     "cy": true,
-    "console": true
+    "console": true,
+    "module": true
   },
   "settings": {
     "react": {
