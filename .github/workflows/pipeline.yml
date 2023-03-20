@@ -10,6 +10,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
+    if: ${{ !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -68,12 +69,12 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   tag_release:
     needs: [deploy]
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
-        env: 
+        uses: anothrNick/github-tag-action@2fa498388d20664f4474176ac45845e037377886
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
