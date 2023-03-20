@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700');
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -12,7 +13,7 @@ body {
   font-size: 18px;
 }
 
-body > div {
+body>div {
   flex: 1 0 auto;
 }
 
@@ -27,10 +28,12 @@ footer {
   margin: 120px;
   width: 80px;
 }
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }

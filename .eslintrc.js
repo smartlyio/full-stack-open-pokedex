@@ -21,8 +21,8 @@ module.exports = {
   "rules": {
     "indent": [
       "error",
-        2
-      ],
+      2
+    ],
     "linebreak-style": [
       "error",
       "unix"
@@ -45,5 +45,15 @@ module.exports = {
     ],
     "no-console": "error",
     "react/prop-types": 0
+  },
+  "globals": {//Task 11.2
+    "process": true,
+    "cy": true,
+    "console": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
