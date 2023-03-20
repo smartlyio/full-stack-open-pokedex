@@ -18,6 +18,10 @@ jobs:
         with:
           node-version: "16.16.0"
 
+      - name: Event
+        run: |
+          echo "${{ github.event_name }}"
+
       - name: Install
         run: npm install
 
@@ -62,3 +66,14 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  tag_release:
+    needs: [deploy]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+
