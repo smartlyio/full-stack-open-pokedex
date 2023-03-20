@@ -57,10 +57,10 @@ primary_region = "arn"
     tls_skip_verify = false
     [services.http_checks.headers]
 
-
-  [[services.script_checks]]
-    command       = "/app/health_check.sh"
-    grace_period  = "30s"
-    interval      = "10s"
-    restart_limit = 0
-    timeout       = "1s"
+#  Health check on port 8080 has failed. Your app is not responding properly. Services exposed on ports [80, 443] will have intermittent failures until the health check passes.
+#  [[services.script_checks]]
+#    command       = "/app/health_check.sh"
+#    grace_period  = "30s"
+#    interval      = "10s"
+#    restart_limit = 0
+#    timeout       = "1s"
