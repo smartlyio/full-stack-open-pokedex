@@ -15,5 +15,8 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm i
-      - name: Check style
+      - name: lint
         run: npm run eslint
+      - name: build
+        run: npm run build
+      - run: npm run test
