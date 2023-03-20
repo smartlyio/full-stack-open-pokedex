@@ -19,18 +19,29 @@ jobs:
       - name: Install
         run: npm install
 
-      - name: Eslint
+      - name: Eslint # Task 11.5, 11.6
         run: npm run eslint
 
-      - name: Build
+      - name: Build # Task 11.7
         run: npm run build
 
-      - name: Test
+      - name: Test #Task 11.8
         run: npm run test
 
-      - name: E2E
+      - name: E2E #Task 11.9
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
+  deploy:
+    needs: [simple_deployment_pipeline]
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

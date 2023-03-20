@@ -25,6 +25,7 @@ const App = () => {
     <Router>
       <Switch>
         <Route exact path="/">
+          <h1>Pokelist</h1>
           <PokemonList pokemonList={pokemonList} />
         </Route>
         <Route path="/pokemon/:name" render={(routeParams) => {
