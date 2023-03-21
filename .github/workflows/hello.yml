@@ -3,7 +3,7 @@ name: Hello World!
 on:
   push:
     branches:
-      - main
+      - master
       # note that your "main" branch might be called main instead of master
 
 jobs:
