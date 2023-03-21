@@ -36,23 +36,16 @@ processes = []
     restart_limit = 0
     timeout = "2s"
   
-    [[services.http_checks]]
-      interval = 10000
-      grace_period = "10s"
-      method = "get"
-      path = "/health"
-      protocol = "http"
-      restart_limit = 0
-      timeout = 2000
-      tls_skip_verify = false
-      [services.http_checks.headers]
-
-  [[services.script_checks]]
-    interval      = "5s"
-    timeout       = "1s"
-    command       = "/app/health_check.sh"
-    grace_period  = "5s"
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "10s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
     restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
 
 [deploy]
   release_command = "npm run build"
