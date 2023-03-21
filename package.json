@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
-    "eslint": "eslint './**/*.{js,jsx}'",
+    "eslint": "eslint \"./src/**/*.{ts,tsx}\"",
     "build": "webpack --mode production",
     "test:e2e": "cypress open"
   },
