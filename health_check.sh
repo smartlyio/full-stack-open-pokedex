@@ -1,6 +1,6 @@
 #!/bin/bash
 
-result="$(curl -s 'http://localhost:5000/health')"
+result="$(curl -s 'https://fullstackopen2022-pokedex.fly.dev/health')"
 
 if [ "$result" = "ok" ];
 then 
