@@ -43,7 +43,7 @@ processes = []
       method = "get"
       path = "/health/"
       protocol = "http"
-      restart_limit = 0
+      restart_limit = 3
       timeout = 2000
       tls_skip_verify = false
       [services.http_checks.headers]
