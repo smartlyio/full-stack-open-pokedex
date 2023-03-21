@@ -3,8 +3,7 @@ module.exports = {
     "browser": true,
     "es6": true,
     "jest/globals": true,
-    'node': true,
-    ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
+    'node': true
   },
   "extends": [
     "eslint:recommended",
