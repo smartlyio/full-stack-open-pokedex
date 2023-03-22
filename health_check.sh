@@ -2,7 +2,7 @@
 
 echo "Hello from shell script"
 
-resp=$(curl http://localhost:5000/health)
+resp=$(curl https://pokedexapp.fly.dev/health)
 if [ "$resp" == "ok" ]
   then
     exit 0
