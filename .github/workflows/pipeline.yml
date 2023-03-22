@@ -1,4 +1,7 @@
-name: Deployment pipeline
+name: Fly.io Deployment pipeline
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 on:
   push:
@@ -6,7 +9,7 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline:
+  fly_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -26,3 +29,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy app to fly.io
+        run: fly deploy --remote-only
+        
