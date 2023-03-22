@@ -13,8 +13,7 @@ app.listen(PORT, () => {
 })
 
 app.get('/health', (req, res) => {
-  throw 'error...'
-  // eslint-disable-next-line no-unreachable
+  //throw 'error...'
   res.send('ok')
 })
 
