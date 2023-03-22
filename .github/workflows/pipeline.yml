@@ -27,6 +27,7 @@ jobs:
         env:
             ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
         with:
+          browser: chrome
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
