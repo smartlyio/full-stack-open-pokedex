@@ -2,4 +2,10 @@
 
 echo "Hello from shell script"
 
-exit 0 # exit status 1 means that the script "fails"
+resp=$(curl http://localhost:5000/health)
+if [ "$resp" == "opk" ]
+  then
+    exit 0
+  else
+    exit 1
+fi
