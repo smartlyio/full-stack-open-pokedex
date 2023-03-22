@@ -46,4 +46,4 @@ processes = []
 
   [build]
     [build.args]
-      NODE_VERSION = "16.19.1"
+      NODE_VERSION = "18.15.0"
