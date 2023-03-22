@@ -17,6 +17,13 @@
  */
 // eslint-disable-next-line no-unused-vars
 module.exports = (on, config) => {
-  // `on` is used to hook into various events Cypress emits
-  // `config` is the resolved Cypress config
+    on('before:browser:launch', (browser = {}, launchOptions) => {
+        console.log(launchOptions.args)
+
+
+        launchOptions.args.push('--disable-gpu')
+
+
+        return launchOptions
+    })
 }
