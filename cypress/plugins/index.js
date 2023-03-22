@@ -20,9 +20,9 @@ module.exports = (on, config) => {
     on('before:browser:launch', (browser = {}, launchOptions) => {
         console.log(launchOptions.args)
 
-
-        launchOptions.args.push('--disable-gpu')
-
+        if (browser.name == 'chrome') {
+            launchOptions.args.push('--disable-gpu')
+        }
 
         return launchOptions
     })
