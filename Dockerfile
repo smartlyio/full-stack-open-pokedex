@@ -1,7 +1,5 @@
 FROM debian:bullseye as builder
 
-RUN apt-get update; apt install -y curl
-
 ARG NODE_VERSION=16.13.1
 
 RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
@@ -25,6 +23,8 @@ COPY . .
 
 RUN npm install && npm run build
 FROM debian:bullseye
+
+RUN apt-get update; apt install -y curl
 
 LABEL fly_launch_runtime="nodejs"
 
