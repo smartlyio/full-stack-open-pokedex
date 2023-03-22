@@ -48,6 +48,14 @@ processes = []
       tls_skip_verify = false
       [services.http_checks.headers]
 
+  [[services.script_checks]]
+    command       = "./health_check.sh"
+    args          = ["a", "b", "c"]
+    grace_period  = "1s"
+    interval      = "5s"
+    restart_limit = 0
+    timeout       = "1s"
+
   [deploy]
     release_command = "npm run build"
 
