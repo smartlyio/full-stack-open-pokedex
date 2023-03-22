@@ -7,7 +7,11 @@ const PORT = process.env.PORT || 8080
 app.use(express.static('dist'))
 
 app.get('/health', (_req, res) => {
-  res.statusCode('200').end()
+  try {
+    res.sendStatus('200')
+  } catch (error) {
+    res.send(error).end()
+  }
 })
 
 app.listen(PORT, () => {
