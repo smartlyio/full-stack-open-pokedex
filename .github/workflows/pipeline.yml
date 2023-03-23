@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request: // highlight-line
+    branches: [master] // highlight-line
+    types: [opened, synchronize] // highlight-line
 
 jobs:
   simple_deployment_pipeline:
