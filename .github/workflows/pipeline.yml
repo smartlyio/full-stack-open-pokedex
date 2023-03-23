@@ -4,9 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request:
-    branches: [master] // highlight-line
-    types: [opened] // highlight-line
+      # note that your "main" branch might be called main instead of master
 
 jobs:
   simple_deployment_pipeline:
