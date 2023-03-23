@@ -6,7 +6,7 @@ on:
       - master
   pull_request:
     branches: [master] // highlight-line
-    types: [opened, synchronize] // highlight-line
+    types: [opened] // highlight-line
 
 jobs:
   simple_deployment_pipeline:
