@@ -1,4 +1,4 @@
-name: Deployment to the fly.io server pipeline
+name: Deployment pipeline
 
 on:
   push:
@@ -6,11 +6,12 @@ on:
       - master
 
 jobs:
-  deployment_prep:
-    runs-on: ubuntu-latest
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/setup-node@v3
         with:
           node-version: "16"
       - name: npm install
@@ -19,13 +20,16 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-  deploy:
-    name: Deploy pokedex app
-    needs: [deployment_prep]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: test
+        run: npm run test
+      - name: e2e test
+        uses: cypress-io/github-action@v4 # v2 v4
+        with:
+          command: npm run test:e2e
+          build: npm run build
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      # - name: deploy to fly.io
+      #   run: flyctl deploy --remote-only
+      #   env:
+      #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
