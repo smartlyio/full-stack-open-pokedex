@@ -15,21 +15,21 @@ jobs:
         with:
           node-version: '16'
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - name: Install dependencies 
-        run: npm install  
+      - name: Install dependencies
+        run: npm install
       - name: Check style
         run: npm run eslint
       - name: build
         run: npm run build
       - name: test
         run: npm run test
-#      - name: e2e tests
-#        uses: cypress-io/github-action@v5
-#        with:
-#          browser: chrome
-#          command: npm run test:e2e
-#          start: npm run start-prod
-#          wait-on: http://localhost:5000
+      #      - name: e2e tests
+      #        uses: cypress-io/github-action@v5
+      #        with:
+      #          browser: chrome
+      #          command: npm run test:e2e
+      #          start: npm run start-prod
+      #          wait-on: http://localhost:5000
       - name: deploy to fly
         run: flyctl deploy --remote-only
         env:
