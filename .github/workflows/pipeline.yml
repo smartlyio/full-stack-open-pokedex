@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  pull_request: // highlight-line
+  pull_request:
     branches: [master] // highlight-line
     types: [opened, synchronize] // highlight-line
 
