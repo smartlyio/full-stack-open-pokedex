@@ -26,5 +26,7 @@ COPY --from=builder /app /app
 WORKDIR /app
 ENV NODE_ENV production
 ENV PATH /usr/local/node/bin:$PATH
+RUN apt-get update; apt install -y curl
+RUN chmod u+x /app/health_check.sh
 
 CMD [ "npm", "run", "start" ]

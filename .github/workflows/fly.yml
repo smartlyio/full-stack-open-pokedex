@@ -1,11 +1,27 @@
-name: Fly Deploy
+name: Deployment to the fly.io server pipeline
+
 on:
   push:
     branches:
       - master
+
 jobs:
+  deployment_prep:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+      - name: npm install
+        run: npm install
+      - name: lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
   deploy:
-    name: Deploy Pokedex app
+    name: Deploy pokedex app
+    needs: [deployment_prep]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
