@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "Hello from shell script"
 
 resp=$(curl https://pokedexapp.fly.dev/health)
 if [ "$resp" == "ok" ]
