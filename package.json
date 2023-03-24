@@ -10,7 +10,6 @@
     "eslint": "eslint .",
     "build": "webpack --mode production",
     "cy:open": "cypress open",
-    "prestart-prod": "npm run build",
     "test:e2e": "cypress run --headless"
   },
   "repository": {
