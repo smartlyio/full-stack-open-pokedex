@@ -1,16 +1,20 @@
-name: Fly.io Deployment pipeline
-
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+name: Fly deployment pipeline
 
 on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
   fly_deployment_pipeline:
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name === "push" }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -32,4 +36,3 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy app to fly.io
         run: flyctl deploy --remote-only
-        
