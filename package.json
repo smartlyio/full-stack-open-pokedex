@@ -4,8 +4,8 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
-    "start-prod": "node app.js",
+    "start":"node app.js",
+    "start-dev":  "webpack-dev-server --open --mode development",
     "test": "jest",
     "eslint": "eslint .",
     "build": "webpack --mode production",
@@ -53,6 +53,7 @@
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.43.0"
   }
 }
