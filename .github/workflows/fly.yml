@@ -4,10 +4,14 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   deployment_prep:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -23,9 +27,23 @@ jobs:
     name: Deploy pokedex app
     needs: [deployment_prep]
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  tag_release:
+    needs: [deploy]
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
+     - uses: actions/checkout@v3
+        with:
+          fetch-depth: "0"
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.36.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
