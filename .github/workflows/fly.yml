@@ -11,7 +11,7 @@ on:
 jobs:
   deployment_prep:
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v2
@@ -27,7 +27,7 @@ jobs:
     name: Deploy pokedex app
     needs: [deployment_prep]
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -37,7 +37,7 @@ jobs:
   tag_release:
     needs: [deploy]
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
     steps:
       - uses: actions/checkout@v3
         with:
