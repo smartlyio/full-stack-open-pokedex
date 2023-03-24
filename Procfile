@@ -1,1 +1,1 @@
-web: npm run start-rocketship
+web: npm run start-prod
