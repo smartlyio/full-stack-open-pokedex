@@ -7,7 +7,7 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
-  simple_deployment_pipeline:
+  prepare:
     runs-on: ubuntu-20.04
     steps: 
       - uses: actions/checkout@v3
@@ -28,9 +28,13 @@ jobs:
           command: npm run test:e2e
           start: npm start
           wait-on: http://localhost:5000
-      - name: Fly Deploy
-        env: 
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-20.04
+    needs: prepare
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        with: 
-          run: flyctl deploy --remote-only
