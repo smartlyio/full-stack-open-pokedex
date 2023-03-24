@@ -1,4 +1,4 @@
-name: Deployment to the fly.io server pipelin
+name: Deployment to the fly.io server pipeline
 
 on:
   push:
