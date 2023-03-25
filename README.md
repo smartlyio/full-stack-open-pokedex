@@ -16,4 +16,4 @@ Start by running `npm install` inside the project folder
 
 ## [GitHub Actions](https://github.com/apndx/full-stack-open-pokedex/actions)
 
-When using pipeline.yml, the deployment and tagging can be skipped by using `#skip` in a commit message
+When using [pipeline.yml](https://github.com/apndx/full-stack-open-pokedex/blob/master/.github/workflows/pipeline.yml), the deployment and tagging can be skipped by using `#skip` in a commit message
