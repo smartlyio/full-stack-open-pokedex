@@ -54,4 +54,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          INITIAL_VERSION: 1.0.14
+          INITIAL_VERSION: 1.0.15
