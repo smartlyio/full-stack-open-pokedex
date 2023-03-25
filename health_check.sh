@@ -1,5 +1,9 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+response=$(curl -s https://kaarlespokedex.fly.dev/health)
 
-exit 0
+if [[ "$response" == "ok" ]]; then
+  exit 0
+else
+  exit 1
+fi
