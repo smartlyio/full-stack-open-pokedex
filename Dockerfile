@@ -30,3 +30,5 @@ ENV NODE_ENV production
 ENV PATH /usr/local/node/bin:$PATH
 
 CMD [ "npm", "run", "start" ]
+
+RUN apt-get update; apt install -y curl
