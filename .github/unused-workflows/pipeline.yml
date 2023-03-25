@@ -30,6 +30,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
       - name: Heroku Deployment
         if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.13 # This is the action

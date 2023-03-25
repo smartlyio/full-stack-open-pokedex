@@ -22,3 +22,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: test conditions
+        if: ${{ toJson(github.event.commits.*.message).filter(s => s.includes('#skip')) }}
+        run: echo "Skipping the deployment and tagging"
