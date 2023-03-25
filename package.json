@@ -1,6 +1,6 @@
 {
   "name": "fullstackopen-cicd",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "Full Stack Open",
   "engines": {
     "npm": "8.1.2",
