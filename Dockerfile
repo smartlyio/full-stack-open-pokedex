@@ -15,6 +15,8 @@ COPY . .
 
 RUN npm install && npm run build
 
+RUN chmod o+x health_check.sh
+
 
 FROM debian:bullseye-slim
 
