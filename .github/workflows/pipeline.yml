@@ -36,9 +36,15 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy app to fly.io
         run: flyctl deploy --remote-only
+  tag_release:
+    needs: [fly_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump version & push tag
+        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
           WITH_V: true
-
+          DRY_RUN: true
