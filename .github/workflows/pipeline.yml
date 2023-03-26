@@ -36,3 +36,9 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy app to fly.io
         run: flyctl deploy --remote-only
+      - name: Bump version & push tag
+        uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+
