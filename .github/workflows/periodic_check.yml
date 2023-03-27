@@ -12,7 +12,7 @@ jobs:
   periodic_healthcheck:
     runs-on: ubuntu-20.04
     steps:
-      name: Check the deployed service URL
-      uses: jtalk/url-health-check-action@v3
-      with:
-        url: https://kaarlespokedex.fly.dev/
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://kaarlespokedex.fly.dev/
