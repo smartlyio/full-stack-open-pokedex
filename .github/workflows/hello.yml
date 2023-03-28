@@ -9,5 +9,5 @@ jobs:
         run: echo "Hello World!"
       - name: time
         run: date
-      - name: directory
-        run: pwd
+      - name: directory content
+        run: ls -l
