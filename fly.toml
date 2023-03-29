@@ -59,6 +59,15 @@ processes = []
     [services.http_checks.headers]
 
 
+  [[services.script_checks]]
+    command       = "app/healh_check.sh"
+    grace_period  = "1s"
+    interval      = "5s"
+    restart_limit = 0
+    timeout       = "1s"
+
+
+
 
 
 
