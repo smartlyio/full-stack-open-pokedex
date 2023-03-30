@@ -46,6 +46,7 @@ jobs:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}  
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
+            && github.event_name == 'push'
         run: echo shouldDeploy
 
   tag_release:
@@ -62,5 +63,6 @@ jobs:
           DEFAULT_BUMP: patch
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
+            && github.event_name == 'push'
         run: echo shouldDeployTagRelease
         # uses: anothrNick/github-tag-action@1.55.0
