@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - master
-  pull_request: 
-    branches: [master] 
-    types: [opened, synchronize] 
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-  
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -17,7 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: Install dependencies
         run: npm install
       - name: Check style
@@ -36,6 +36,11 @@ jobs:
       - name: deploy
         if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.55.0
