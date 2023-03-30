@@ -34,14 +34,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}  
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
-        run: echo shouldDeploy
+        uses: superfly/flyctl-actions/setup-flyctl@master
 
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -53,6 +53,7 @@ jobs:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }} 
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
