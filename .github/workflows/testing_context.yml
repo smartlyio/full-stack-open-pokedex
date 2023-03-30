@@ -21,10 +21,10 @@ jobs:
       - name: commit messages skip
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}    
-        if: ${{ contains(COMMIT_MESSAGES, '#skip') }}
+        if: ${{ contains($COMMIT_MESSAGES, '#skip') }}
         run: echo "$COMMIT_MESSAGES"
       - name: commit messages noskip
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}    
-        if: ${{ !contains(COMMIT_MESSAGES, '#skip') }}
+        if: ${{ !contains($COMMIT_MESSAGES, '#skip') }}
         run: echo "$COMMIT_MESSAGES"
