@@ -64,5 +64,5 @@ jobs:
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
-        run: echo shouldDeployTagRelease
-        # uses: anothrNick/github-tag-action@1.55.0
+        # run: echo shouldDeployTagRelease
+        uses: anothrNick/github-tag-action@1.55.0
