@@ -43,6 +43,9 @@ jobs:
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
         run: flyctl deploy --remote-only
+      - name: sendSuccessNotification
+        if: ${{success()}}
+        run: echo "it's a success"
 
   tag_release:
     needs: [simple_deployment_pipeline]
