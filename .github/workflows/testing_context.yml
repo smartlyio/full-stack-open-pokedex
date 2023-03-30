@@ -14,7 +14,11 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: commits
+      - name: committer
+        env:
+          AUTHOR: ${{ github.event.commits[0].author.name }}
+        run: echo "$AUTHOR"
+      - name: committer
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
         run: echo "$COMMITS"
