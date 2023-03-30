@@ -30,9 +30,23 @@ processes = []
     handlers = ["tls", "http"]
     port = 443
 
-  [[services.script_checks]]
-    command       = "/app/health_check.sh"
-    grace_period  = "1s"
-    interval      = "5s"
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "5s"
     restart_limit = 0
-    timeout       = "1s"
+    timeout = "2s"
+
+  [[services.script_checks]]
+    interval = 100
+    timeout = 100
+    command = "/app/health_check.sh"
+    restart_limit = 0
+
+  [[services.http_checks]]
+    interval = 100
+    grace_period = "3s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 100

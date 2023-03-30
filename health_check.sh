@@ -1,5 +1,13 @@
 #!/bin/bash
 
-echo "Hello from shell script"
+url="localhost:${PORT}/health"
+result=$(curl $url)
 
-exit 0 # exit status 0 means that the script "succeeds"
+if [ $result = "ok" ]
+then
+   echo "healthy!"
+   exit 0
+else
+  echo "problems"
+  exit 1
+fi
