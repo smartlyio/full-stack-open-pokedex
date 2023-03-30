@@ -16,6 +16,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -41,7 +42,7 @@ jobs:
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
-        uses: superfly/flyctl-actions/setup-flyctl@master
+        run: flyctl deploy --remote-only
 
   tag_release:
     needs: [simple_deployment_pipeline]
