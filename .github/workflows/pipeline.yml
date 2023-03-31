@@ -13,12 +13,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
+
       - name: npm install
         run: npm install
+
       - name: lint
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: test
         run: npm run test
 
