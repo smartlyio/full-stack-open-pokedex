@@ -51,7 +51,10 @@ jobs:
         run: flyctl deploy --remote-only
 
       - name: Deployment Success Discord Notification
-        if: ${{success()}}
+        if: |
+          success() 
+            && !contains(env.COMMIT_MESSAGES, '#skip')
+              && github.event_name == 'push'
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -59,7 +62,10 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Deployment Failure Discord Notification
-        if: ${{failure()}}
+        if: |
+          failure() 
+            && !contains(env.COMMIT_MESSAGES, '#skip')
+              && github.event_name == 'push'
         env:
           AUTHOR: ${{ github.event.commits[0].author.name }}
         uses: rjstone/discord-webhook-notify@v1
