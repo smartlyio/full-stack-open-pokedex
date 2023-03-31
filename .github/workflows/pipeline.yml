@@ -21,53 +21,62 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
+
       - name: Install dependencies
         run: npm install
+
       - name: Check style
         run: npm run eslint
+
       - name: build
         run: npm run build
+
       - name: Test
         run: npm run test
+
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
       - name: deploy
         env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}  
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         if: |
           !contains(env.COMMIT_MESSAGES, '#skip')
             && github.event_name == 'push'
         run: flyctl deploy --remote-only
-      - name: Deployment Success
+
+      - name: Deployment Success Discord Notification
         if: ${{success()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
-          details: Deployment Succeeded! User ${{ github.event.commits[0].author.name }}
+          details: A new build deployed to fly.io by ${{ github.event.commits[0].author.name }}!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deployment Failure
-        if: failure()
+
+      - name: Deployment Failure Discord Notification
+        if: ${{failure()}}
         env:
           AUTHOR: ${{ github.event.commits[0].author.name }}
         uses: rjstone/discord-webhook-notify@v1
         with:
-            severity: error
-            details: Commit by ${{ github.event.commits[0].author.name }} failed
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          details: Deployment to fly.io failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+
       - name: Bump version and push tag
         env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }} 
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
