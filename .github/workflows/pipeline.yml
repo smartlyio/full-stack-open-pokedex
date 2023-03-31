@@ -32,6 +32,7 @@ jobs:
           start: npm start
           wait-on: http://localhost:5000
   deploy:
+    if: ${{ github.event_name == 'push' }}
     name: Deploy app
     runs-on: ubuntu-20.04
     needs: prepare
