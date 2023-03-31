@@ -7,9 +7,17 @@ on:
 
 jobs:
   hello:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Say hello
       run: |
         echo "Hello World!"
+
+    - name: Print date
+      run: |
+        date
+
+    - name: Print current directory content in long format
+      run: |
+        ls -l
