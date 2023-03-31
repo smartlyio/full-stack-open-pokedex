@@ -18,6 +18,6 @@ jobs:
       run: |
         date
 
-    - name: Print current directory content in long format
+    - name: Directory content
       run: |
         ls -l
