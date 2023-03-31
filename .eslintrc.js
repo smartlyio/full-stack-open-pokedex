@@ -26,5 +26,6 @@ module.exports = {
     'arrow-spacing': ['error', { before: true, after: true }],
     'no-console': 'off',
     'react/prop-types': 0,
+    'no-unused-vars': 'off',
   },
 }
