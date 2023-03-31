@@ -2,7 +2,7 @@ describe('template spec', () => {
   it('passes', () => {
     cy.visit('https://example.cypress.io')
   })
-  
+
   it('front page can be opened', () => {
     cy.visit('http://localhost:5000')
     cy.contains('ivysaur')
