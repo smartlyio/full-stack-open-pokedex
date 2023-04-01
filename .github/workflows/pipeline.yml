@@ -40,5 +40,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           service-id: srv-cgjqpi64dad69r6pc9u0
           retries: 3
-          wait: 5000
-          sleep: 3000
+          wait: 16000
+          sleep: 10000
