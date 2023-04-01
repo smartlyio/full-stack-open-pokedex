@@ -20,3 +20,4 @@ jobs:
           heroku_email: kimmo.muli@helsinki.fi
           healthcheck: "https://full-stack-open-pokedex-prod.herokuapp.com/health"
           checkstring: "ok"
+          rollbackonhealthcheckfailed: true
