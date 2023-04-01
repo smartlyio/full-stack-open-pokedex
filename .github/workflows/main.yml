@@ -13,6 +13,7 @@ jobs:
         uses: actions/checkout@v2
       
       - name: Deploy to Heroku
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.13
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
