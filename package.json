@@ -13,8 +13,7 @@
     "test:e2e": "cypress run"
   },
   "engines": {
-    "node": "16.x",
-    "npm": "7.x"
+    "node": "16"
   },
   "repository": {
     "type": "git",
