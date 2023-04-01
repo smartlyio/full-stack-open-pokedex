@@ -30,7 +30,3 @@ jobs:
         env:
           COMMIT_URLS: ${{ toJson(github.event.commits.*.url) }}
         run: echo "$COMMIT_URLS"
-      - name: test app url
-        env:
-          APP_URL: ${{ https://apndx-pokedex.herokuapp.com/ }} 
-        run: echo To "$APP_URL" by "$ACTOR"
