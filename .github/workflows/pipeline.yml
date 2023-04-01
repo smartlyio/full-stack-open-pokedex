@@ -34,7 +34,7 @@ jobs:
       #     wait-on: http://localhost:5000
 
       - name: Wait for Render Deployment
-        uses: johnbeynon/render-deploy-action
+        uses: johnbeynon/render-deploy-action@0.08
         with:
           service-id: srv-cgjqpi64dad69r6pc9u0
           api-key: ${{ secrets.RENDER_TOKEN }}
