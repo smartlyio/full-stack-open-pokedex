@@ -1,4 +1,4 @@
-name: Deploy
+name: deploy-to-heroku
 
 on:
   push:
@@ -18,3 +18,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: full-stack-open-pokedex-prod
           heroku_email: kimmo.muli@helsinki.fi
+          healthcheck: "https://full-stack-open-pokedex-prod.herokuapp.com/health"
+          checkstring: "ok"
