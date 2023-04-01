@@ -1,0 +1,20 @@
+name: Periodic health check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://fullstackopen2022-pokedex.fly.dev/
+          max-attempts: 3
+          retry-delay: 10s
