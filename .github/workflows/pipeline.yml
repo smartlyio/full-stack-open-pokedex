@@ -37,7 +37,7 @@ jobs:
         uses: johnbeynon/render-deploy-action
         with:
           service-id: srv-cgjqpi64dad69r6pc9u0
-          api-key: ${{ secrets.GITHUB_TOKEN }}
+          api-key: ${{ secrets.RENDER_TOKEN }}
         # uses: bounceapp/render-action@0.6.0
         # with:
         #   render-token: ${{ secrets.RENDER_TOKEN }}
