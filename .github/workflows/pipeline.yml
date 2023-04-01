@@ -43,7 +43,7 @@ jobs:
           severity: error
           username: HelloThere
           text: Build failed
-          details: commit ${{github.event.commits[0].url}} by ${{github.actor}} broke the build 💀
+          description: commit ${{github.event.commits[0].url}} by ${{github.actor}} broke the build 💀
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -65,5 +65,5 @@ jobs:
           severity: info
           username: HelloThere
           text: 🔥 A new version of Pokedex deployed 🔥
-          details: To https://fullstackopen2022-pokedex.fly.dev/ by ${{github.actor}}
+          description: To https://fullstackopen2022-pokedex.fly.dev/ by ${{github.actor}}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
