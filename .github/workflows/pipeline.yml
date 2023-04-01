@@ -12,8 +12,6 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Deploy
-        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
