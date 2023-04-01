@@ -41,6 +41,23 @@ jobs:
           checkstring: "ok"
           delay: 5
           rollbackonhealthcheckfailed: true
+      - name: The build has succeeded
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          text: A new version of Pokedex deployed
+          description: To https://apndx-pokedex.herokuapp.com/ by ${{ github.actor }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: The build has failed
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: Build failed
+          description: Commits 
+          details: ${{ toJson(github.event.commits.*.url) }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
