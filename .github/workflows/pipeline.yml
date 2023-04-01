@@ -34,11 +34,15 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+        uses: johnbeynon/render-deploy-action
         with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           service-id: srv-cgjqpi64dad69r6pc9u0
-          retries: 3
-          wait: 16000
-          sleep: 10000
+          api-key: ${{ secrets.GITHUB_TOKEN }}
+        # uses: bounceapp/render-action@0.6.0
+        # with:
+        #   render-token: ${{ secrets.RENDER_TOKEN }}
+        #   github-token: ${{ secrets.GITHUB_TOKEN }}
+        #   service-id: srv-cgjqpi64dad69r6pc9u0
+        #   retries: 3
+        #   wait: 16000
+        #   sleep: 10000
