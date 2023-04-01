@@ -22,18 +22,15 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-      - name: test conditions
-        if: ${{ contains(join(github.event.commits.*.message), '#skip') }}
-        run: echo "Skipping the deployment and tagging"
       - name: test actor
         env:
           ACTOR: ${{ toJson(github.actor) }}
         run: echo "$ACTOR"  
-        - name: test commit urls
+      - name: test commit urls
         env:
           COMMIT_URLS: ${{ toJson(github.event.commits.*.url) }}
         run: echo "$COMMIT_URLS"
-        - name: test app url
+      - name: test app url
         env:
           APP_URL: ${{ https://apndx-pokedex.herokuapp.com/ }} 
         run: echo To "$APP_URL" by "$ACTOR"
