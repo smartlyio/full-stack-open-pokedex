@@ -12,6 +12,10 @@
     "test:open": "cypress open",
     "test:e2e": "cypress run"
   },
+  "engines": {
+    "node": "16.x",
+    "npm": "7.x"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
