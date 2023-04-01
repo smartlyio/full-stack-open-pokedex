@@ -41,7 +41,7 @@ jobs:
         if: success()
         with:
           severity: error
-          details: Build failed
+          details: Build failed adsf
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
