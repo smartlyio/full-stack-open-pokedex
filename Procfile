@@ -1,1 +1,1 @@
-web: npm run this-is-broken
+web: npm run start-prod
