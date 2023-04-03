@@ -51,3 +51,6 @@ jobs:
         uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+          INITIAL_VERSION: 0.0.0
+          DRY_RUN: true
+          DEFAULT_BUMP: patch
