@@ -44,7 +44,7 @@ jobs:
           severity: error
           username: Pokedex Bot
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-          description:  Build failed
+          description:  Tests failed!
           details: ${{ github.actor}} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
@@ -71,7 +71,7 @@ jobs:
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description:  Deployment succeeded!
           severity: info
-          details: A new build deployed to fly.io by ${{ github.event.commits[0].author.name }}!
+          details: A new build deployed to fly.io by ${{ github.actor}}!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
 
@@ -80,8 +80,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
-          description:  Deployment failed
-          details: Deployment to fly.io failed, ${{ github.event.commits[0].author.name }} broke something!
+          description:  Deployment failed!
+          details: Tests passed, but deployment to fly.io failed, ${{ github.actor}} broke something!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
