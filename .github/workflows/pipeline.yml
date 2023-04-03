@@ -41,12 +41,15 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: Test Failure Discord Notification
+      - name: Build Failure Discord Notification
         if: ${{failure()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
-          details: Pokedek build failure
+          username: Pokedex Bot
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description:  Deployment failed
+          details: ${{ github.event.commits[0].author.name }} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -61,6 +64,7 @@ jobs:
           node-version: "16"
       - name: deployment
         env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: flyctl deploy --remote-only
 
@@ -88,6 +92,7 @@ jobs:
 
       - name: Bump version and push tag
         env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
