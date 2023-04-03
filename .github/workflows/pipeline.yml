@@ -7,10 +7,6 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-  COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   tests:
@@ -48,8 +44,8 @@ jobs:
           severity: error
           username: Pokedex Bot
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-          description:  Deployment failed
-          details: '${{ github.event.commits[0].author.name }} broke the build'
+          description:  Build failed
+          details: ${{ github.actor}} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -77,7 +73,7 @@ jobs:
           severity: info
           details: A new build deployed to fly.io by ${{ github.event.commits[0].author.name }}!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          
+
 
       - name: Deployment Failure Discord Notification
         if: ${{failure()}}
