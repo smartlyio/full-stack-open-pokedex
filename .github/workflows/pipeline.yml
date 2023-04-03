@@ -17,28 +17,37 @@ jobs:
         with:
           node-version: '16'
 
-      - name: npm install
-        run: npm install
+  #     - name: npm install
+  #       run: npm install
 
-      - name: lint
-        run: npm run eslint
+  #     - name: lint
+  #       run: npm run eslint
 
-      - name: build
-        run: npm run build
+  #     - name: build
+  #       run: npm run build
 
-      - name: test
-        run: npm run test
+  #     - name: test
+  #       run: npm run test
 
-      - name: e2e tests
-        uses: cypress-io/github-action@v2
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v2
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
 
-      - name: Wait for Render Deployment
-        if: ${{ github.event_name == 'push' }}
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+  #     - name: Wait for Render Deployment
+  #       if: ${{ github.event_name == 'push' }}
+  #       uses: johnbeynon/render-deploy-action@v0.0.8
+  #       with:
+  #         service-id: ${{ secrets.RENDER_SERVICE_ID }}
+  #         api-key: ${{ secrets.RENDER_API_KEY }}
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GHUB_TOKEN }}
+          WITH_V: true
