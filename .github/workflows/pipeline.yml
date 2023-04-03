@@ -28,36 +28,11 @@ jobs:
       - name: Check style
         run: npm run eslint
 
-      - name: eslint Failure Discord Notification
-        if: ${{failure()}}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          details: Pokedek eslint failure
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          text: ${{ github.event.commits[0].author.name }} broke the style
-
       - name: build
         run: npm run build
 
-      - name: build Failure Discord Notification
-        if: ${{failure()}}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          details: Pokedek build failure
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
       - name: Test
         run: npm run test
-
-      - name: Test Failure Discord Notification
-        if: ${{failure()}}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          details: Pokedek test failure
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: e2e tests
         uses: cypress-io/github-action@v5
@@ -66,12 +41,15 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: e2e Test Failure Discord Notification
+      - name: Build Failure Discord Notification
         if: ${{failure()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
-          details: Pokedek e2e test failure
+          username: Pokedex Bot
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: ${{ github.event.commits[0].author.name }} broke the build :(
+          details: Pokedek build or test failure 
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -86,6 +64,7 @@ jobs:
           node-version: "16"
       - name: deployment
         env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: flyctl deploy --remote-only
 
@@ -113,6 +92,7 @@ jobs:
 
       - name: Bump version and push tag
         env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
