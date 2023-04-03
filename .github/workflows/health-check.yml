@@ -1,0 +1,16 @@
+name: Periodic health check
+
+on:
+  schedule:
+    - cron: '10 * * * *'
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://black-grass-1701.fly.dev/api/health
+          max-attempts: 3
+          retry-delay: 5s

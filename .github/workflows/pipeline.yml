@@ -13,7 +13,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  simple_deployment_pipeline:
+  tests:
     runs-on: ubuntu-20.04
     steps:
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -41,20 +41,31 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: deploy
+      - name: Test Failure Discord Notification
+        if: ${{failure()}}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Pokedek build failure
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  deploy:
+    runs-on: ubuntu-20.04
+    needs: [tests]
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+    steps:
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: deployment
         env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        if: |
-          !contains(env.COMMIT_MESSAGES, '#skip')
-            && github.event_name == 'push'
         run: flyctl deploy --remote-only
 
       - name: Deployment Success Discord Notification
-        if: |
-          success() 
-            && !contains(env.COMMIT_MESSAGES, '#skip')
-              && github.event_name == 'push'
+        if: ${{success()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -62,12 +73,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Deployment Failure Discord Notification
-        if: |
-          failure() 
-            && !contains(env.COMMIT_MESSAGES, '#skip')
-              && github.event_name == 'push'
-        env:
-          AUTHOR: ${{ github.event.commits[0].author.name }}
+        if: ${{failure()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
@@ -75,14 +81,13 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
-    needs: [simple_deployment_pipeline]
+    needs: [deploy]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
 
       - name: Bump version and push tag
         env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           DEFAULT_BUMP: patch
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
