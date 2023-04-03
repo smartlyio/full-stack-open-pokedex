@@ -16,4 +16,4 @@ describe('Pokedex', function () {
     cy.contains('Hidden ability')
     cy.contains('shield dust')
   })
-}) 
+})
