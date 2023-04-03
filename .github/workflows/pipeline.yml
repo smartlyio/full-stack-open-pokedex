@@ -71,10 +71,13 @@ jobs:
         if: ${{success()}}
         uses: rjstone/discord-webhook-notify@v1
         with:
+          username: Pokedex Bot
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description:  Deployment succeeded!
           severity: info
           details: A new build deployed to fly.io by ${{ github.event.commits[0].author.name }}!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          
 
       - name: Deployment Failure Discord Notification
         if: ${{failure()}}
