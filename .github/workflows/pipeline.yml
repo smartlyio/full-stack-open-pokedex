@@ -45,7 +45,7 @@ jobs:
           username: Pokedex Bot
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description:  Tests failed!
-          details: ${{ github.actor}} broke the build
+          details: Commit ${{github.event.pull_request.base.sha}} by ${{ github.actor}} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
