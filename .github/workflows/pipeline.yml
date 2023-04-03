@@ -45,7 +45,7 @@ jobs:
           username: Pokedex Bot
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description:  Tests failed!
-          details: ${{ github.actor}} broke the build
+          details: Commit https://github.com/bgu152/full-stack-open-pokedex/commit/${{github.event.pull_request.base.sha}} by ${{ github.actor}} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -71,9 +71,8 @@ jobs:
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description:  Deployment succeeded!
           severity: info
-          details: A new build deployed to fly.io by ${{ github.actor}}!
+          details: A new build deployed to https://fullstack-pokestuff.fly.dev by ${{ github.actor}}!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
 
       - name: Deployment Failure Discord Notification
         if: ${{failure()}}
@@ -81,7 +80,7 @@ jobs:
         with:
           severity: error
           description:  Deployment failed!
-          details: Tests passed, but deployment to fly.io failed, ${{ github.actor}} broke something!
+          details: Tests passed, but deployment to fly.io failed, commit https://github.com/bgu152/full-stack-open-pokedex/commit/${{github.event.pull_request.base.sha}} by ${{ github.actor}} broke something!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
