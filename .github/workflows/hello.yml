@@ -1,0 +1,13 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  hello_world_job:
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
