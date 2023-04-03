@@ -7,7 +7,7 @@ describe('Pokedex', function () {
 
   it('pokemon page can be navigated to', function () {
     cy.visit('http://localhost:5000')
-     cy.get('a.list-item')
+    cy.get('a.list-item')
       .contains('caterpie')
       .click()
     cy.contains('caterpie')

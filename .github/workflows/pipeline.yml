@@ -64,7 +64,6 @@ jobs:
           node-version: "16"
       - name: deployment
         env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
         run: flyctl deploy --remote-only
 
