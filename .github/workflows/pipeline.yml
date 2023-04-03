@@ -48,8 +48,8 @@ jobs:
           severity: error
           username: Pokedex Bot
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-          description: ${{ github.event.commits[0].author.name }} broke the build :(
-          details: Pokedek build or test failure 
+          description:  Deployment failed
+          details: ${{ github.event.commits[0].author.name }} broke the build
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
