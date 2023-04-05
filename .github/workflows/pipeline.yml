@@ -10,7 +10,9 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps: 
+      - run: ls
       - uses: actions/checkout@v3
+      - run: ls
       - uses: actions/setup-node@v3
         with: 
           node-version: '16'
