@@ -1,11 +1,10 @@
 {
   "name": "fullstackopen-cicd",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Full Stack Open",
   "main": "src/index.js",
-
-  "engines": { 
-    "node": "18.10.0" 
+  "engines": {
+    "node": "18.10.0"
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
@@ -13,7 +12,8 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
-    "test:e2e": "cypress run"
+    "test:e2e": "cypress run",
+    "version": "npm-version patch && git add package.json"
   },
   "repository": {
     "type": "git",
@@ -46,16 +46,17 @@
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
+    "npm-version": "^1.1.0",
     "style-loader": "^1.2.1",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "webpack": "^4.43.0",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.43.0"
   }
 }
