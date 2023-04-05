@@ -15,6 +15,9 @@ jobs:
           echo "Hello World!"
       - name: Now it is
         run: date
-        
+      - name: Directory content
+        run: ls -l
+      - name: The current Working Directory
+        run: pwd 
   
   
