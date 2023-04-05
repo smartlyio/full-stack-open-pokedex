@@ -22,6 +22,7 @@ jobs:
         run: npm run eslint
       - name: Testing
         run: npm run test
+      - run: npm run start-prod
       - run: curl http://localhost:5000
 #       - name: e2e tests
 #         uses: cypress-io/github-action@v5
