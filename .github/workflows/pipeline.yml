@@ -10,6 +10,7 @@ on:
 
 jobs:
    simple_deployment_pipeline:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
