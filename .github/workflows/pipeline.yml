@@ -17,6 +17,6 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: fix eslint
-        run: npx eslint -- --fix
+        run: npx eslint --fix
       - name: Check style
         run: npm run eslint
