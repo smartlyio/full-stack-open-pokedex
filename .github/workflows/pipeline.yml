@@ -17,9 +17,6 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-  e2e_tests:
-    runs-on: ubuntu-20.04
-    steps:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
