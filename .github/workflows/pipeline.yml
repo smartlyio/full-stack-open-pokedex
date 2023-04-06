@@ -23,4 +23,3 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000 
-        run: npm run test:e2e
