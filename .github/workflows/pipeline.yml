@@ -14,9 +14,11 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: fix eslint
-        run: npx eslint --fix
+     # - name: Install dependencies
+     #   run: npm install
+     
+      - run: eslint app.js --fix 
+      - run: eslint src/PokemonPage.jsx --fix 
+      
       - name: Check style
         run: npm run eslint
