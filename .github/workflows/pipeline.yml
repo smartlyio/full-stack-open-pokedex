@@ -19,5 +19,12 @@ jobs:
      
       - run: npm run eslint
       
+      - name: console.log to lobby
+        uses: jacobtomlinson/gha-find-replace@v2
+        with:
+         find: "console\.log\(([^)]+)\)"
+         replace: ""
+         regex: true
+      
       - name: Check style
         run: npm run eslint
