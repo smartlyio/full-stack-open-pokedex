@@ -20,6 +20,8 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
+      - name: Print runner IP address
+        run: echo ${{ github.runner.ip_address }}
       - name: Testing
         run: npm run test
       - run: npm run start-prod&
