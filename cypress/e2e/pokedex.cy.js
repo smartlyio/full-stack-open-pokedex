@@ -12,4 +12,8 @@ describe('Pokedex', function () {
     cy.contains('ivysaur').click()
     cy.contains('chlorophyll')
   })
+  it('version page returns something', () => {
+    cy.visit('http://localhost:5000/version')
+    cy.contains('1')
+  })
 })
