@@ -26,7 +26,7 @@ jobs:
         run: npm run test
       - run: npm run start-prod&
       - run: sleep 5s
-      - run: curl --fail 127.0.0.1:5000 || exit 1
+      - run: curl --fail http://127.0.0.1:5000 || exit 1
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
