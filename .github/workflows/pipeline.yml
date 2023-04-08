@@ -6,6 +6,10 @@ on:
       - master
       # note that your "main" branch might be called main instead of master
 
+  pull_request: 
+    branches: [master] 
+    types: [opened, synchronize] 
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
@@ -39,10 +43,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deployment
-        # uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
-        # with:
-        #   serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-        #   apiKey: ${{ secrets.RENDER_API_KEY }}
-        #   multipleDeployment: false #optional, default true
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
           
