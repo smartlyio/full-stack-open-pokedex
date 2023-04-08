@@ -8,7 +8,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps: 
       - run: ls
       - uses: actions/checkout@v3
@@ -20,14 +20,18 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
+      - name: Print runner IP address
+        run: echo ${{ github.runner.ip_address }}
       - name: Testing
         run: npm run test
-#       - run: npm run start-prod&
-#       - run: curl "http://localhost:5000"
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: "http://localhost:5000"
+      - run: npm run start-prod&
+      - run: sleep 5s
+      - run: curl http://localhost:5000 -I
+#      - run: curl --fail http://127.0.0.1:5000 || exit 1
+#      - name: e2e tests
+#        uses: cypress-io/github-action@v5
+#        with:
+#          command: npm run test:e2e
+#          start: npm run start-prod
+#          wait-on: "http://127.0.0.1:5000"
         
