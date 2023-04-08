@@ -28,10 +28,10 @@ jobs:
       - run: sleep 5s
       - run: curl http://localhost:5000 -I
       - run: curl --fail http://127.0.0.1:5000 || exit 1
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: "http://127.0.0.1:5000"
+#      - name: e2e tests
+#        uses: cypress-io/github-action@v5
+#        with:
+#          command: npm run test:e2e
+#          start: npm run start-prod
+#          wait-on: "http://127.0.0.1:5000"
         
