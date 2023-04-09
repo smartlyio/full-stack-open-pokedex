@@ -31,6 +31,9 @@ jobs:
       - run: npm run start-prod&
       - run: sleep 5s
       - run: curl http://localhost:5000 -I
+      - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 #      - run: curl --fail http://127.0.0.1:5000 || exit 1
 #      - name: e2e tests
 #        uses: cypress-io/github-action@v5
@@ -38,11 +41,14 @@ jobs:
 #          command: npm run test:e2e
 #          start: npm run start-prod
 #          wait-on: "http://127.0.0.1:5000"
-  main:
-    name: Deploy to Render
-    runs-on: ubuntu-latest
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
     steps:
-      - name: Trigger deployment
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
         if: ${{ github.event_name == 'push' }}
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
           
