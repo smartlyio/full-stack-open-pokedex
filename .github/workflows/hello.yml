@@ -15,4 +15,4 @@ jobs:
           echo "Hello World Again!"
       - name: Now it is
         run: |
-          echo "$(date +'%Y-%m-%d')"
+          echo "$date +'%Y-%m-%d"
