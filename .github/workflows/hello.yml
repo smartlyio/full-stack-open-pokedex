@@ -19,4 +19,4 @@ jobs:
 
       - name: Directory Content
         run: |
-          echo ls -l
+          echo "$(ls -l)"
