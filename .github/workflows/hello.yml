@@ -13,3 +13,6 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World Again!"
+      - name: Now it is
+        run: |
+          echo "$(date +'%Y-%m-%d')"
