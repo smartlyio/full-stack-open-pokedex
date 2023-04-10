@@ -39,3 +39,13 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  tag_release:
+    needs: [build-and-deploy]
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
