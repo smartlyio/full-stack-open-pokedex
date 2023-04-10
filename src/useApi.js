@@ -17,4 +17,4 @@ const useApi = (url, mapResults = (result) => result) => {
   return { data, isLoading, error };
 };
 
-export default { useApi };
+export default useApi;

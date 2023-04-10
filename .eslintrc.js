@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ["plugin:react/recommended", "airbnb"],
+  extends: ["plugin:react/recommended", "airbnb", "prettier"],
   globals: {
     Atomics: "readonly",
     SharedArrayBuffer: "readonly",
@@ -18,5 +18,11 @@ module.exports = {
   plugins: ["react"],
   rules: {
     quotes: "off",
+    "react/prop-types": 0,
+    radix: 0,
+    "react/function-component-definition": 0,
+    "no-shadow": 0,
+    "no-console": 0,
+    "arrow-body-style": 0,
   },
 };
