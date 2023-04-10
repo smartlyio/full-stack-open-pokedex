@@ -1,8 +1,10 @@
-name: Deployment pipeline
+name: simple_deployment_pipeline
 
 on:
   push:
-    branches: -master
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
   simple_deployment_pipeline:
