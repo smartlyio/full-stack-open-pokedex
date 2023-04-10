@@ -2,9 +2,8 @@ name: Deployment pipeline
 
 on:
   push:
-    branches:
-      -master
-      
+    branches: -master
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -12,8 +11,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
       - name: Install Dependencies
       - run: npm install
-      - name: Check Style
+      - name: Check Styling
       - run: npm run eslint
