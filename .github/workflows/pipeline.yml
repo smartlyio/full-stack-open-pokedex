@@ -14,5 +14,5 @@ jobs:
           node-version: "16"
       - name: Install Dependencies
       - run: npm install
-      - name: Check Styling
+      - name: Check Stylin
       - run: npm run eslint
