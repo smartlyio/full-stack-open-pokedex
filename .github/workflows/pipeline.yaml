@@ -43,6 +43,7 @@ jobs:
     needs: [build-and-deploy]
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
+    working-directory: ./
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.61.0
