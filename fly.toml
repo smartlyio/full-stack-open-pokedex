@@ -1,0 +1,56 @@
+# fly.toml file generated for fso-pokedex2 on 2023-04-05T19:49:16+03:00
+
+app = "fso-pokedex2"
+kill_signal = "SIGINT"
+kill_timeout = 5
+processes = []
+
+[env]
+ PORT = "5001"  
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  internal_port = 5001
+  processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
+  [deploy]
+  release_command = "npm run build"
+
+  [processes]
+    app = "node app.js"
+
+  [build]
+    [build.args]
+      NODE_VERSION = "18.10.0"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
