@@ -30,12 +30,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      name: Deployment on Render
-        steps:
-          - name: Wait for Render Deployment
-            uses: bounceapp/render-action@0.6.0
-            with:
-              service-id: srv-cgr3qme4dadccqr6mvv0
-              retries: 20
-              wait: 16000
-              sleep: 30000
+      - name: Wait for Render Deployment
+        uses: bounceapp/render-action@0.6.0
+        with:
+          service-id: srv-cgr3qme4dadccqr6mvv0
+          retries: 20
+          wait: 16000
+          sleep: 30000
