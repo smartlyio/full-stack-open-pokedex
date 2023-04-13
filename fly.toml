@@ -4,7 +4,7 @@ app = "myveryownpokedex"
 primary_region = "cdg"
 
 [env]
-  PORT = "8080"
+  PORT = "5001"
 
 [deploy]
   release_command = "npm run build"
