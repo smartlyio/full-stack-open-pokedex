@@ -9,16 +9,16 @@ primary_region = "cdg"
 [deploy]
   release_command = "npm run build"
 
-[processes]
-  app = "node app.js"
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  [[services.command]]
+    name = "app"
+    command = "node app.js"
 
 [build]
   [build.args]
     NODE_VERSION = "16.19.1"
-
-[[services]]
-  internal_port = 8080
-  processes = ["app"]
 
 [[services.tcp_checks]]
   grace_period = "1s"
@@ -37,20 +37,24 @@ primary_region = "cdg"
   tls_skip_verify = false
   [services.http_checks.headers]
 
-[checks]
-  [checks.version_check]
-    grace_period = "30s"
-    interval = "15s"
-    method = "get"
-    path = "/version"
-    port = 5500
-    timeout = "10s"
-    type = "http"
-  [checks.health_check]
-    grace_period = "30s"
-    interval = "15s"
-    method = "get"
-    path = "/health"
-    port = 5500
-    timeout = "10s"
-    type = "http"
+[[services.http_checks]]
+  name = "version_check"
+  interval = "15s"
+  grace_period = "30s"
+  method = "get"
+  path = "/version"
+  protocol = "http"
+  timeout = "10s"
+  restart_limit = 0
+  tls_skip_verify = false
+
+[[services.http_checks]]
+  name = "health_check"
+  interval = "15s"
+  grace_period = "30s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = "10s"
+  restart_limit = 0
+  tls_skip_verify = false
