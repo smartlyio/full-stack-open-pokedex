@@ -17,7 +17,6 @@ primary_region = "cdg"
     NODE_VERSION = "16.19.1"
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
 
@@ -26,3 +25,32 @@ primary_region = "cdg"
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/"
+  protocol = "http"
+  restart_limit = 0
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
+
+[checks]
+  [checks.version_check]
+    grace_period = "30s"
+    interval = "15s"
+    method = "get"
+    path = "/version"
+    port = 5500
+    timeout = "10s"
+    type = "http"
+  [checks.health_check]
+    grace_period = "30s"
+    interval = "15s"
+    method = "get"
+    path = "/health"
+    port = 5500
+    timeout = "10s"
+    type = "http"
