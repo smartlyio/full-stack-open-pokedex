@@ -47,3 +47,36 @@ processes = []
 [build]
   [build.args]
     NODE_VERSION = "16.19.0"
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/"
+  protocol = "http"
+  restart_limit = 0
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
+
+[[services.http_checks]]
+  name = "version_check"
+  interval = "15s"
+  grace_period = "30s"
+  method = "get"
+  path = "/version"
+  protocol = "http"
+  timeout = "10s"
+  restart_limit = 0
+  tls_skip_verify = false
+
+[[services.http_checks]]
+  name = "health_check"
+  interval = "15s"
+  grace_period = "30s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = "10s"
+  restart_limit = 0
+  tls_skip_verify = false
