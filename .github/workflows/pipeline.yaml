@@ -27,7 +27,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5001
       - name: Deployment to fly
-        uses: actions/checkout@v3
         uses: superfly/flyctl-actions/setup-flyctl@master
         run: flyctl deploy --remote-only
         env:
