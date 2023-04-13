@@ -25,7 +25,7 @@ jobs:
         with:
           build: npm run build
           start: npm run start-prod
-          wait-on: http://localhost:8080
+          wait-on: http://localhost:5001
       # Fly deployment steps
       - name: Setup Flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master

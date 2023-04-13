@@ -4,7 +4,7 @@ app = "myveryownpokedex"
 primary_region = "cdg"
 
 [env]
-  PORT = "8080"
+  PORT = "5001"
 
 [deploy]
   release_command = "npm run build"
@@ -17,7 +17,7 @@ primary_region = "cdg"
     NODE_VERSION = "16.19.0"
 
 [[services]]
-  internal_port = 8080
+  internal_port = 5001
   processes = ["app"]
 
 [[services.tcp_checks]]
