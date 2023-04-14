@@ -1,8 +1,16 @@
 #!/bin/bash
 
-response=$(curl http://localhost:5001/health)
-if [ $response == "ok" ]
-then
-    exit 0
+response=$(curl -s http://localhost:5001/health)
+
+if [ $? -ne 0 ]; then
+    echo "Error: curl command failed."
+    exit 1
 fi
-exit 1
+
+if [ "$response" == "ok" ]; then
+    echo "Health check passed."
+    exit 0
+else
+    echo "Health check failed. Received response: $response"
+    exit 1
+fi
