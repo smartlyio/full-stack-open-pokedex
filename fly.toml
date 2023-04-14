@@ -5,15 +5,15 @@ kill_signal = "SIGINT"
 kill_timeout = 5
 mounts = []
 primary_region = "arn"
-processes = []
 
 [env]
   PORT = "8080"
 
-[[services]]
-  internal_port = 8080
-  processes = ["app"]
-  protocol = "tcp"
+  [[services]]
+    internal_port = 8080
+    processes = ["app"]
+    protocol = "tcp"
+
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -28,6 +28,22 @@ processes = []
     handlers = ["tls", "http"]
     port = 443
 
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
 
   [deploy]
   release_command = "npm run build"
