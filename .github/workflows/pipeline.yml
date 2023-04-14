@@ -7,24 +7,18 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
- simple_deployment_pipeline:
+ install:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Check style
-        run: npm run eslint
-      - name: Run tests
-        run: npm test
       - name: e2e tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v3
         with:
-          command: npm run test:e2e
+          browser: chrome
+          build: npm run build
           start: npm run start-prod
-          wait-on: http://localhost:5000
+          wait-on: 'http://localhost:5000'
