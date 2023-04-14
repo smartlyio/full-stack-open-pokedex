@@ -15,6 +15,10 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - name: Check style
+        run: npm run eslint
+      - name: Run tests
+        run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
