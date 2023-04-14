@@ -1,5 +1,5 @@
 FROM debian:bullseye as builder
-
+RUN apt-get update; apt install -y curl
 ENV PATH=/usr/local/node/bin:$PATH
 ARG NODE_VERSION=16.19.0
 
