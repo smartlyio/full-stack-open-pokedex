@@ -79,3 +79,11 @@ processes = []
   timeout = "10s"
   restart_limit = 0
   tls_skip_verify = false
+
+[[sercices.script_checks]]
+  command = "/app/health_check.sh"
+  grace_period = "1s"
+  interval = "5s"
+  restart_limit = 0
+  timeout = "1s"
+  
