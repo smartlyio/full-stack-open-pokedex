@@ -1,5 +1,5 @@
 FROM debian:bullseye as builder
-RUN apt-get update; apt install -y curl
+
 ENV PATH=/usr/local/node/bin:$PATH
 ARG NODE_VERSION=16.19.0
 
@@ -15,10 +15,12 @@ COPY . .
 
 RUN npm install && npm run build
 
-
 FROM debian:bullseye-slim
 
 LABEL fly_launch_runtime="nodejs"
+
+# Install curl in the second stage
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/node /usr/local/node
 COPY --from=builder /app /app
