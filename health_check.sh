@@ -2,4 +2,4 @@
 
 echo "Hello from shelll script"
 
-exit 1
+exit 0
