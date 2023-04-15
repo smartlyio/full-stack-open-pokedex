@@ -1,6 +1,6 @@
 #!/bin/bash
 
-response=$(curl -s http://localhost:5001/health)
+response=$(curl -s http://localhost:8080/health)
 
 if [ $? -ne 0 ]; then
     echo "Error: curl command failed."
