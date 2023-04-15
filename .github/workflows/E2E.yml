@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Building and E2E testing
 
 on:
   push:
