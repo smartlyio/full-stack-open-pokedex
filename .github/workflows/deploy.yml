@@ -1,4 +1,4 @@
-name: Building and E2E testing
+name: Deployment
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
- install:
+ deploy:
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout
@@ -22,3 +22,9 @@ jobs:
           build: npm run build
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
+      - name: Deploy (render)
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+     
