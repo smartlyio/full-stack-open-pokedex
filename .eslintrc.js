@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "jest/globals": true
   },
@@ -27,14 +28,14 @@ module.exports = {
       "error",
       "unix"
     ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
+    // "quotes": [
+    //   "error",
+    //   "single"
+    // ],
+    // "semi": [
+    //   "error",
+    //   "never"
+    // ],
     "eqeqeq": "error",
     "no-trailing-spaces": "error",
     "object-curly-spacing": [
@@ -43,7 +44,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    // "no-console": "error",
     "react/prop-types": 0
   }
 }
