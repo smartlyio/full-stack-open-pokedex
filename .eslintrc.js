@@ -1,49 +1,28 @@
 module.exports = {
-  "env": {
-    "browser": true,
-    "es6": true,
-    "jest/globals": true
+  env: {
+    browser: true,
+    es6: true,
   },
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ],
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
+  extends: ["plugin:react/recommended", "airbnb", "prettier"],
+  globals: {
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    "ecmaVersion": 2018,
-    "sourceType": "module"
+    ecmaVersion: 2018,
+    sourceType: "module",
   },
-  "plugins": [
-    "react", "jest"
-  ],
-  "rules": {
-    "indent": [
-      "error",
-        2
-      ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "never"
-    ],
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-      "error", "always"
-    ],
-    "arrow-spacing": [
-      "error", { "before": true, "after": true }
-    ],
-    "no-console": "error",
-    "react/prop-types": 0
-  }
-}
+  plugins: ["react"],
+  rules: {
+    quotes: "off",
+    "react/prop-types": 0,
+    radix: 0,
+    "react/function-component-definition": 0,
+    "no-shadow": 0,
+    "no-console": 0,
+    "arrow-body-style": 0,
+  },
+};
