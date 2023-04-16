@@ -18,3 +18,5 @@ jobs:
         run: ls -l /
       - name: dir 2
         run: ls -l ./
+      - name: current dir
+        run: pwd
