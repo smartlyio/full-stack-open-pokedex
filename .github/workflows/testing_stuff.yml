@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: github context
         env:
-          GITHUB_CONTEXT: ${{ "!contains(github.event.head_commit.message, 'build')" }}
+          GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
