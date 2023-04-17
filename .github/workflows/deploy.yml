@@ -27,6 +27,7 @@ jobs:
         with:
           browser: chrome
           command: npm run test:e2e
+          build: npm run build
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy (render)
