@@ -23,12 +23,12 @@ jobs:
       - name: Test
         run: npm test
       - name: e2e tests
-          uses: cypress-io/github-action@v5
-          with:
-            browser: chrome
-            command: npm run test:e2e
-            start: npm run start-prod
-            wait-on: http://localhost:5000
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
       - name: Deploy (render)
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
