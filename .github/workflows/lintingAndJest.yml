@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+   pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
   linting_testing_pipeline:
     runs-on: ubuntu-20.04
