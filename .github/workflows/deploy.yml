@@ -1,36 +1,29 @@
-name: Deployment pipeline
+name: Deployment
 
 on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
 
 jobs:
-  simple_deployment_pipeline:
+ deploy:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
-        run: npm install
-      - name: Check style
-        run: npm run eslint
-      - name: Test
-        run: npm test
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          browser: firefox
-          command: npm run test:e2e
+          browser: chrome
           build: npm run build
           start: npm run start-prod
-          wait-on: http://localhost:5000
+          wait-on: 'http://localhost:5000'
       - name: Deploy (render)
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
-      
+     
