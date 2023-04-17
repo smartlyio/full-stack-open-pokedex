@@ -1,5 +1,4 @@
 name: Linting and jest-testing pipeline
-
 on:
   push:
     branches:
