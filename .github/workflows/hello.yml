@@ -11,3 +11,11 @@ jobs:
       - name: Say Hello
         run:
           echo "Hello World!"
+
+      - name: get date
+        run:
+          echo date
+
+      - name: directory content
+        run:
+          ls
