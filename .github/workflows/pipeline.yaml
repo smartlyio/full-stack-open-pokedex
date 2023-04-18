@@ -8,6 +8,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize] 
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -37,10 +38,14 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  
   tag_release:
     needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
-      uses: anothrNick/github-tag-action@1.61.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - uses: anothrNick/github-tag-action@1.61.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
