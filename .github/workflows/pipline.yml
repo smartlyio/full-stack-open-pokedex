@@ -20,3 +20,9 @@ jobs:
 
       - name: code linting
         run: npm run eslint
+
+      - name: testing the code
+        run: npm run test
+
+      - name: building the project
+        run: npm run build
