@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request: // highlight-line
+    branches: [master] // highlight-line
+    types: [opened, synchronise]
 
 jobs:
   simple_deployment_pipeline:
@@ -35,3 +38,5 @@ jobs:
         with:
           service-id: ${{ secrets.RENDERSERVICEID }}
           api-key: ${{ secrets.RENDERAPIKEY }}
+
+  
