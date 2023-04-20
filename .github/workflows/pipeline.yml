@@ -6,8 +6,7 @@ on:
       - master
   pull_request: // highlight-line
     branches: [master] // highlight-line
-    types: [opened, synchronise]
-
+    types: [opened, synchronize] // highlight-line
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
