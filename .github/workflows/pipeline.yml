@@ -31,11 +31,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000  
-      if: ${{ github.event_name == 'push' }}
-        - name: deploy
-          uses: johnbeynon/render-deploy-action@v0.0.8
-          with:
-            service-id: ${{ secrets.RENDERSERVICEID }}
-            api-key: ${{ secrets.RENDERAPIKEY }}
+      - name: deploy
+        if: ${{ github.event_name == 'push' }}
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDERSERVICEID }}
+          api-key: ${{ secrets.RENDERAPIKEY }}
 
   
