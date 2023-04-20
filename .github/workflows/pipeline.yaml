@@ -49,3 +49,28 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+  
+  send_discord_notification_success:
+    needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && success() }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookURL: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: info
+          username: 'Github'
+          details: 'A new deployment has been made successfully, and a new version has been tagged!'
+
+  send_discord_notification_failure:
+    needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') && failure() }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookURL: ${{ secrets.DISCORD_WEBHOOK }}
+          severity: error
+          details: 'A new deployment for the pokedex application failed!'
