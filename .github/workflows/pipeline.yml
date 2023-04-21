@@ -40,11 +40,11 @@ jobs:
           api-key: ${{ secrets.RENDERAPIKEY }} 
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.62.0
+        uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
+          DRY_RUN: true
 
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -52,7 +52,7 @@ jobs:
     steps:
       - name: ignore this
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.62.0
+        uses: anothrNick/github-tag-action@1.61.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
