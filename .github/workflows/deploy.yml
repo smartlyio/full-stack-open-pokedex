@@ -1,0 +1,16 @@
+name: Deploy pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pipeline_test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}

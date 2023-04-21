@@ -31,28 +31,21 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000  
-
-      - name: deploy
-        if: ${{ github.event_name == 'push' }}
-        uses: johnbeynon/render-deploy-action@v0.0.8
+      
+      -name: Deploy app
+       uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service-id: ${{ secrets.RENDERSERVICEID }}
-          api-key: ${{ secrets.RENDERAPIKEY }} 
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.61.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          DRY_RUN: true
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+
 
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-      - name: ignore this
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.61.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+        - if: ${{ github.event_name == 'push' }}
+          uses: anothrNick/github-tag-action@1.61.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            DEFAULT_BUMP: patch
+            DRY_RUN: true
