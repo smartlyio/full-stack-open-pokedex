@@ -32,8 +32,8 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000  
       
-      -name: Deploy app
-       uses: johnbeynon/render-deploy-action@v0.0.8
+      - name: Deploy app
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
