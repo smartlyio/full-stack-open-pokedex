@@ -1,4 +1,4 @@
-name: Hello World!
+name: Deployment Pipeline
 
 on:
   push:
