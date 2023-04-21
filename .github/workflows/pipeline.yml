@@ -18,7 +18,6 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
-            DRY_RUN: true
 
 
   simple_deployment_pipeline:
