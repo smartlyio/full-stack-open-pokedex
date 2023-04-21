@@ -8,6 +8,19 @@ on:
     branches: [master]
     types: [opened, synchronize]
 jobs:
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+        - uses: actions/checkout@v3
+        - if: ${{ github.event_name == 'push' }}
+          uses: anothrNick/github-tag-action@1.61.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            DEFAULT_BUMP: patch
+            DRY_RUN: true
+
+
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -37,14 +50,3 @@ jobs:
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
-
-  tag_release:
-    runs-on: ubuntu-20.04
-    steps:
-        - uses: actions/checkout@v3
-        - if: ${{ github.event_name == 'push' }}
-          uses: anothrNick/github-tag-action@1.61.0
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            DEFAULT_BUMP: patch
-            DRY_RUN: true
