@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
         - uses: actions/checkout@v3
-        - if: ${{ github.event_name == 'push' }}
+        - if: ${{ github.event_name == 'push' && contains( join( toJson(github.event.commits.*.message) ), '#skip' ) }}
           uses: anothrNick/github-tag-action@1.61.0
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -48,16 +48,3 @@ jobs:
         with:
           service-id: ${{ secrets.RENDERSERVICEID }}
           api-key: ${{ secrets.RENDERAPIKEY }}
-
-  a_test_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: joined commit messages
-        env:
-          COMMIT_MESSAGES: ${{ contains( join( toJson(github.event.commits.*.message) ), '#skip' )}}
-        run: echo "$COMMIT_MESSAGES"
