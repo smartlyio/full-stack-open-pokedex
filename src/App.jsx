@@ -23,9 +23,9 @@ const App = () => {
 
   return (
     <Router>
-      <h1 style={{display:'flex', justifyContent:'center', alignItems:'middle'}}>
-          Pokedex
-        </h1>
+      <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'middle' }}>
+        Pokedex
+      </h1>
       <Switch>
         <Route exact path="/">
           <PokemonList pokemonList={pokemonList} />
