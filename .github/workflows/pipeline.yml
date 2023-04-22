@@ -48,3 +48,12 @@ jobs:
         with:
           service-id: ${{ secrets.RENDERSERVICEID }}
           api-key: ${{ secrets.RENDERAPIKEY }}
+
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
