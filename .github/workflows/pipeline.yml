@@ -19,6 +19,8 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
+        - name: debug
+          run: echo ${{ github.event_name }} ${{contains(join(github.event.commits.*.message, ', ' ), '#skip' )}}
       
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
