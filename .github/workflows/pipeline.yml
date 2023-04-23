@@ -27,8 +27,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
-      - name: debug
-        run: echo  ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message, ', '), '#skip' ) == false }}
       - name: Install dependencies
         run: npm install
 
