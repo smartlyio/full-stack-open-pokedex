@@ -4,4 +4,4 @@ echo "Build script"
 
 npm install
 npm run build
-npm run test:e2e
+npm run test
