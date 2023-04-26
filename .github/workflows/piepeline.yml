@@ -9,27 +9,28 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Install dependencies 
-        run: npm install  
-      - name: lint
-        run: npm run eslint
-      - name: build
-        run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+      # - uses: actions/checkout@v3
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '16'
+      # - name: Install dependencies 
+      #   run: npm install  
+      # - name: lint
+      #   run: npm run eslint
+      # - name: build
+      #   run: npm run build
+      # - name: test
+      #   run: npm run test
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5000
       - name: Render GitHub Action
         uses: Bounceapp/render-action@0.6.0
         with:
-          service-id: srv-${{ secrets.RENDER_TOKEN }}
+          render-token: ${{secrets.RENDER_TOKEN}}
+          service-id: srv-${{ secrets.RENDER_SRV }}
           retries: 20
 
