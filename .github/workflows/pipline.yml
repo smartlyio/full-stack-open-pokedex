@@ -26,3 +26,10 @@ jobs:
 
       - name: building the project
         run: npm run build
+
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: deploy to fly.io
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
