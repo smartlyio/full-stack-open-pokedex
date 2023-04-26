@@ -27,10 +27,6 @@ jobs:
       #     command: npm run test:e2e
       #     start: npm run start-prod
       #     wait-on: http://localhost:5000
-      - name: Render GitHub Action
-        uses: bounceapp/render-action@0.6.0
-        with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          service-id: srv-${{ secrets.RENDER_SRV }}
-          retries: 20
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER.SRV }}?key=${{ secrets.RENDER_API_KEY }}
 
