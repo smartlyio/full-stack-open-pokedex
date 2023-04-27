@@ -1,6 +1,6 @@
 name: Deployment pipeline test
 
-on: workflow_dispatch
+on: workflow_dispatch # it took too long to wait for the queue on github for doing the exercises. but manual dispatch worked fine. 
 
 # on:
 #   push:
@@ -17,3 +17,5 @@ jobs:
           node-version: '16'
       - run: npm install
       - run: npm run eslint
+      - run: npm run build
+      - run: npm run test
