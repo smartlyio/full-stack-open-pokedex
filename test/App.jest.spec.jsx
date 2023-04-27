@@ -1,8 +1,8 @@
-import React from 'react'
-import { render, screen } from '@testing-library/react'
-import axiosMock from 'axios'
-import { act } from 'react-dom/test-utils'
 import '@testing-library/jest-dom/extend-expect'
+import { render, waitFor } from '@testing-library/react'
+import axiosMock from 'axios'
+import React from 'react'
+import { act } from 'react-dom/test-utils'
 import App from '../src/App'
 
 jest.mock('axios')
@@ -31,17 +31,17 @@ describe('<App />', () => {
 
   it('shows LoadingSpinner', async () => {
     axiosMock.get.mockResolvedValueOnce({})
-    await act(async () => {
-      const { getByAltText } = render(<App />)
+    const { getByAltText } = render(<App />)
+    await waitFor(() => {
       expect(getByAltText('Loading...')).toBeVisible()
     })
   })
 
   it('shows error', async () => {
     axiosMock.get.mockRejectedValueOnce(new Error())
-    await act(async () => {
-      render(<App />)
+    const { getByTestId } = render(<App />)
+    await waitFor(() => {
+      expect(getByTestId('error')).toBeVisible()
     })
-    expect(screen.getByTestId('error')).toBeVisible()
   })
 })

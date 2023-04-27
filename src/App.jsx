@@ -19,6 +19,7 @@ const App = () => {
     error,
     isLoading,
   } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
+
   if (isLoading) {
     return <LoadingSpinner />
   }

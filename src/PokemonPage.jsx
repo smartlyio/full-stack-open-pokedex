@@ -8,22 +8,28 @@ import ErrorMessage from './ErrorMessage'
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
 const PokemonPage = ({ pokemonList }) => {
-  const { name } = useParams()
+  const p = useParams()
+  const name = p.name
+
   const {
     data: pokemon,
     error,
     isLoading,
   } = useApi(`https://pokeapi.co/api/v2/pokemon/${name}`)
 
-  const pokemonId = pokemonList.find((item) => item.name === name).id
-  const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
-  const next = pokemonList.find(({ id }) => id === pokemonId + 1)
-
   if (isLoading) {
     return <LoadingSpinner />
   }
   if (error) {
     return <ErrorMessage error={error} />
+  }
+
+  let pokemonId, previous, next
+
+  if (pokemonList && pokemonList?.length > 0) {
+    pokemonId = pokemonList.find((item) => item.name === name).id
+    previous = pokemonList.find(({ id }) => id === pokemonId - 1)
+    next = pokemonList.find(({ id }) => id === pokemonId + 1)
   }
 
   const { type } = pokemon.types.find((type) => type.slot === 1)
@@ -38,13 +44,12 @@ const PokemonPage = ({ pokemonList }) => {
     (ability) => ability.is_hidden === true
   )
 
-  // console.log('hiddenAbility=', hiddenAbility)
   return (
     <>
       <div className='links'>
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to='/'>Home</Link>
-        {next && <Link to={`/pokemon/${previous.name}`}>Next</Link>}
+        {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div
