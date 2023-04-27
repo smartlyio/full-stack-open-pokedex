@@ -1,5 +1,8 @@
 name: Deployment pipeline test
 
+on: workflow_dispatch
+
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
