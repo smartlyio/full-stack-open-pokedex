@@ -1,11 +1,11 @@
 name: Deployment pipeline test
 
-on: workflow_dispatch # it took too long to wait for the queue on github for doing the exercises. but manual dispatch worked fine. 
+# on: workflow_dispatch # it took too long to wait for the queue on github for doing the exercises. but manual dispatch worked fine. 
 
-# on:
-#   push:
-#     branches:
-#     - master
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   simple_deployment_pipeline:
