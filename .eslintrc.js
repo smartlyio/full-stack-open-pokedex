@@ -3,10 +3,12 @@ module.exports = {
     browser: true,
     es6: true,
     'jest/globals': true,
+    'cypress/globals': true,
     node: true,
   },
   extends: [
     'eslint:recommended',
+    'plugin:cypress/recommended',
     'plugin:react/recommended',
     'plugin:prettier/recommended',
   ],
@@ -17,7 +19,7 @@ module.exports = {
     ecmaVersion: 2020,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest', 'prettier'],
+  plugins: ['react', 'jest', 'cypress', 'prettier'],
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],

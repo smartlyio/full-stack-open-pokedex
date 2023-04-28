@@ -20,5 +20,12 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: test
+      - name: Jest run
         run: npm run test
+      - name: Cypress run
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm run start-prod
+          wait-on: 'http://localhost:5000'
+          browser: chrome

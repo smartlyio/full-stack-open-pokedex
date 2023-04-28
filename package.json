@@ -9,15 +9,15 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "eslint-fix": "eslint './**/*.{js,jsx}' --fix",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
   },
-  "keywords": [
-    "fullstack-open"
-  ],
+  "keywords": ["fullstack-open"],
   "author": "Smartly.io",
   "license": "ISC",
   "bugs": {
@@ -42,8 +42,10 @@
     "babel-jest": "^29.5.0",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
+    "cypress": "^12.11.0",
     "eslint": "^8.39.0",
     "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jest": "^27.2.1",
     "eslint-plugin-prettier": "^4.2.1",
