@@ -1,10 +1,10 @@
 name: Fly Deploy
 
-# on:
-#   push:
-#     branches:
-#       - master
-on: workflow_dispatch # for manual dispatch
+on:
+  push:
+    branches:
+      - master
+# on: workflow_dispatch # for manual dispatch
 
 
 jobs:
