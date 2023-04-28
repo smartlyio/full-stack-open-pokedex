@@ -1,6 +1,6 @@
 name: Deployment pipeline test
 
-# on: workflow_dispatch # it took too long to wait for the queue on github for doing the exercises. but manual dispatch worked fine. 
+# on: workflow_dispatch # for manual dispatch
 
 on:
   push:
@@ -19,3 +19,9 @@ jobs:
       - run: npm run eslint
       - run: npm run build
       - run: npm run test
+      - name: e2e tests
+      uses: cypress-io/github-action@v5
+      with:
+        command: npm run test:e2e
+        start: npm run start-prod
+        wait-on: http://localhost:5000
