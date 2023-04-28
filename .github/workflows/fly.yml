@@ -1,0 +1,19 @@
+name: Fly Deploy
+
+# on:
+#   push:
+#     branches:
+#       - master
+on: workflow_dispatch # for manual dispatch
+
+
+jobs:
+  deploy:
+    name: Deploy pokedex app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
