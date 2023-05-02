@@ -1,0 +1,10 @@
+**/node_modules
+**/cypress/videos
+**/cypress/screenshots
+
+.husky/_/**/*
+fly.toml
+
+Dockerfile
+.dockerignore
+.git
