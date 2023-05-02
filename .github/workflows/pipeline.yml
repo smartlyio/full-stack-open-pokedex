@@ -28,12 +28,12 @@ jobs:
       #     start: npm run start-prod
       #     wait-on: http://localhost:5000
 
-    Deploy_pokedex_app
-      needs: simple_deployment_pipeline
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v3
-        - uses: superfly/flyctl-actions/setup-flyctl@master
-        - run: flyctl deploy --remote-only
-          env:
-            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  deploy_pokedex_app:
+    needs: simple_deployment_pipeline
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
