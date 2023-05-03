@@ -1,0 +1,18 @@
+# fly.toml app configuration file generated for full-stack-open-pokedex-43278 on 2023-05-03T23:59:29+08:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "full-stack-open-pokedex-43278"
+primary_region = "nrt"
+
+[build]
+
+[deploy]
+  release_command = "npm run build"
+
+[env]
+  PORT = "8080"
+
+[processes]
+  app = "node app.js"
