@@ -52,12 +52,12 @@ jobs:
           wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Fly
-        if: github.ref == 'refs/heads/master' && !contains(github.event.commits.title, '#skip')
+        if: github.ref == 'refs/heads/master' && !contains(toJson(github.event.commits.*.message), '#skip')
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Bump version and push tag
-        if: github.ref == 'refs/heads/master' && !contains(github.event.commits.title, '#skip')
+        if: github.ref == 'refs/heads/master' && !contains(toJson(github.event.commits.*.message), '#skip')
 
         uses: anothrNick/github-tag-action@1.61.0
         env:
