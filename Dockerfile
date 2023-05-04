@@ -37,6 +37,9 @@ RUN npm prune --production
 # Final stage for app image
 FROM base
 
+RUN apt-get update -qq && \
+    apt-get install -y curl
+
 # Copy built application
 COPY --from=build /app /app
 
