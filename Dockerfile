@@ -1,37 +1,49 @@
-# syntax = docker/dockerfile:1
-
 # Adjust NODE_VERSION as desired
 ARG NODE_VERSION=18.15.0
 FROM node:${NODE_VERSION}-slim as base
 
-LABEL fly_launch_runtime="NodeJS"
+# set for base and all layer that inherit from it
+ENV NODE_ENV production
 
-# NodeJS app lives here
-WORKDIR /app
+# Install openssl for Prisma
+RUN apt-get update && apt-get install -y curl
 
-# Set production environment
-ENV NODE_ENV=production
+# Install all node_modules, including dev dependencies
+FROM base as deps
 
+WORKDIR /myapp
 
-# Throw-away build stage to reduce size of final image
+ADD package.json package-lock.json ./
+RUN npm install --production=false
+
+# Setup production node_modules
+FROM base as production-deps
+
+WORKDIR /myapp
+
+COPY --from=deps /myapp/node_modules /myapp/node_modules
+ADD package.json package-lock.json ./
+RUN npm prune --production
+
+# Build the app
 FROM base as build
 
-# Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install -y python-is-python3 pkg-config build-essential 
+WORKDIR /myapp
 
-# Install node modules
-COPY --link package.json package-lock.json .
-RUN npm install
+COPY --from=deps /myapp/node_modules /myapp/node_modules
 
-# Copy application code
-COPY --link . .
+ADD . .
+RUN npm run build
 
-# Final stage for app image
+# # Finally, build the production image with minimal footprint
 FROM base
 
-# Copy built application
-COPY --from=build /app /app
+WORKDIR /myapp
 
-# Start the server by default, this can be overwritten at runtime
-CMD [ "npm", "run", "start-prod" ]
+COPY --from=production-deps /myapp/node_modules /myapp/node_modules
+
+COPY --from=build /myapp/dist /myapp/dist
+COPY --from=build /myapp/public /myapp/public
+ADD . .
+
+CMD ["node", "app.js"]

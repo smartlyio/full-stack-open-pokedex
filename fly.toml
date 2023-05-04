@@ -1,37 +1,26 @@
-# fly.toml app configuration file generated for fso-pokedex-ac on 2023-05-02T09:58:39+10:00
+# fly.toml app configuration file generated for brosef on 2023-05-04T10:06:20+10:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "fso-pokedex-ac"
+app = "brosef"
 kill_signal = "SIGINT"
 kill_timeout = 5
 primary_region = "syd"
 processes = []
 
-# [deploy]
-#   release_command = "npm run build"
-
-# [processes]
-#   app = "node app.js"
-
 [build]
-  # image = "flyio/hellofly:latest"
-  # [build.args]
-  #   NODE_VERSION = "18.15.0"
 
 [env]
-  PORT = "8080"
+  PORT = 8080
 
 [experimental]
   auto_rollback = true
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -51,3 +40,21 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+
+  [[services.script_checks]]
+    command       = "/myapp/health_check.sh"
+    # args          = ["a", "b", "c"]
+    grace_period  = "1s"
+    interval      = "5s"
+    restart_limit = 0
+    timeout       = "1s"

@@ -1,10 +1,17 @@
-**/node_modules
 **/cypress/videos
 **/cypress/screenshots
 
-.husky/_/**/*
-fly.toml
+/node_modules
+*.log
+.DS_Store
+.env
+/.cache
+/public/build
+/build
 
 Dockerfile
 .dockerignore
 .git
+
+.husky/_/**/*
+fly.toml
