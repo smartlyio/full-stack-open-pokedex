@@ -1,5 +1,11 @@
 #!/bin/bash
+URL="http://localhost:8080/health"
+STATUS=$(curl -s -o /dev/null -w "%{http_code}" "$URL")
+BODY=$(curl -s "$URL")
 
-echo "Hello from shell script"
-
-exit 0
+if [ "$STATUS" -eq 200 ] && [ "$BODY" == "ok" ]
+then
+  exit 0
+else
+  exit 1
+fi
