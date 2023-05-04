@@ -67,12 +67,16 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Test Succeeded!
+            description: To https://full-stack-open-pokedex-43278.fly.dev by RT.
+            # details: 'Custom details: Somebody set up us the bomb.'
+            text: A new version of Pokedex deployed
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
             severity: error
-            details: Test Failed!
+            text: Build failed
+
+            description: commit ${{ github.event.head_commit.url }} broke the build
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
