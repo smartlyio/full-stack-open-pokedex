@@ -33,6 +33,8 @@ jobs:
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
           browser: chrome
+      
+      if: ${{github.event.pull_request.merged == true || github.event_name == 'push'}}
       - name: Checkout flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to Fly.io
