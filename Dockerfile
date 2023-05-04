@@ -18,7 +18,7 @@ FROM base as build
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
-    apt-get install -y pkg-config build-essential
+    apt-get install -y pkg-config build-essential curl
 
 # Install node modules
 COPY --link package.json package-lock.json .
