@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      # - uses: actions/setup-node@v3
       #   with:
       #     node-version: '18.15.0'
       # - name: Install dependencies
@@ -38,6 +38,9 @@ jobs:
       #   run: flyctl deploy --remote-only
       #   env:
       #     FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      - run: echo "${{ toJSON(github) }}"
+
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.sha }}
@@ -46,4 +49,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.61.0 # Don't use @master unless you're happy to test the latest version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
           WITH_V: true
