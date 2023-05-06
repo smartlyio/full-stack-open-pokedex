@@ -30,6 +30,6 @@ jobs:
       - name: Deploy
         uses: bankfliptech/deploy-to-render@v1
         with:
-          serviceId: ${{ secrets.RENDER_ID }}
-          apiKey: ${{ secrets.RENDER_API }}
-          deployHookURL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          serviceId: ${{ secrets.RENDER_POKEDEX_ID }}
+          apiKey: ${{ secrets.RENDER_API_KEY }}
+          deployHookURL: ${{ secrets.RENDER_POKEDEX_DEPLOY_HOOK_URL }}
