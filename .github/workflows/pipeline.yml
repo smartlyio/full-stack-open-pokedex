@@ -32,6 +32,7 @@ jobs:
           wait-on: http://localhost:5000
       - name: Deploy
         uses: bankfliptech/deploy-to-render@v1
+      if: ${{ github.event_name == 'push' }}
         with:
           serviceId: ${{ secrets.RENDER_POKEDEX_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
