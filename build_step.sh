@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Build script"
-
-npm install -D webpack-cli
+npm install webpack-cli
 
 webpack --mode production
