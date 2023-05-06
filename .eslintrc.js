@@ -30,4 +30,11 @@ module.exports = {
     'no-console': 'error',
     'react/prop-types': 0,
   },
+  overrides: [
+    {
+      files: ['*.yaml', '*.yml'],
+      plugins: ['yaml'],
+      extends: ['plugin:yaml/recommended'],
+    },
+  ],
 }
