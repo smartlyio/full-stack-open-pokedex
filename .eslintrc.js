@@ -9,6 +9,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:cypress/recommended',
+    'plugin:yaml/recommended',
   ],
   parserOptions: {
     ecmaFeatures: {
@@ -17,7 +18,7 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'jest'],
+  plugins: ['react', 'jest', 'yaml'],
   rules: {
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
@@ -30,11 +31,4 @@ module.exports = {
     'no-console': 'error',
     'react/prop-types': 0,
   },
-  overrides: [
-    {
-      files: ['*.yaml', '*.yml'],
-      plugins: ['yaml'],
-      extends: ['plugin:yaml/recommended'],
-    },
-  ],
 }
