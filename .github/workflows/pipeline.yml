@@ -28,8 +28,8 @@ jobs:
           command: npm run test:e2e
           wait-on: http://localhost:5000
       - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
+          service-id: ${{ secrets.RENDER_ID }}
           render-token: ${{ secrets.RENDER_API }}
           github-token: ${{ secrets.GH_TOKEN_POKEDEX }}
-          service-id: ${{ secrets.RENDER_ID }}
