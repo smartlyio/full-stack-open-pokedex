@@ -31,5 +31,4 @@ jobs:
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_ID }}
-          render-token: ${{ secrets.RENDER_API }}
-          github-token: ${{ secrets.GH_TOKEN_POKEDEX }}
+          api-key: ${{ secrets.RENDER_API }}
