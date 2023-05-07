@@ -20,4 +20,4 @@ jobs:
       - name: build
         run: webpack --mode production
       - name: test
-        run: jest
+        run: test
