@@ -1,15 +1,12 @@
 name: Deploy
-
 on:
   push:
     branches:
       - master
-jobjs:
+jobs:
   deploy_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: Deploy ish
+      - name: deploy
         run:
-          echo "hi"
-      
-      
+          echo "Hello wolrd"
