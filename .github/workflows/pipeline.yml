@@ -11,8 +11,8 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
+      - uses: actions/setup-node@https://github.com/actions/setup-node/commit/64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c
         with:
           node-version: '16'
       - name: Install dependencies
@@ -24,14 +24,14 @@ jobs:
       - name: test
         run: npm test
       - name: e2e tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@dfda9365a4881a8521b8e3c3538275242aae9151
         with:
           start: npm run start-prod
           command: npm run test:e2e
           wait-on: http://localhost:5000
       - name: Deploy
-        uses: bankfliptech/deploy-to-render@v1
-        if: ${{ github.event_name == 'push' }}
+        uses: bankfliptech/deploy-to-render@e51c1879584c0d27bd916bbcb3f17e9efcacd818
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         with:
           serviceId: ${{ secrets.RENDER_POKEDEX_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
@@ -40,13 +40,13 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
         with:
           ref: ${{ github.sha }}
           fetch-depth: '0'
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.61.0
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
