@@ -7,6 +7,9 @@ jobs:
   deploy_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: deploy
-        run:
-          echo "Hello wolrd"
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
