@@ -1,0 +1,15 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - master
+jobjs:
+  deploy_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Deploy ish
+        run:
+          echo "hi"
+      
+      
