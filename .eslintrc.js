@@ -3,8 +3,7 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
-    "jest/globals": true,
-    "cypress/globals": true,
+    "jest/globals": true
   },
   extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
