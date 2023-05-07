@@ -36,3 +36,12 @@ jobs:
           serviceId: ${{ secrets.RENDER_POKEDEX_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           deployHookURL: ${{ secrets.RENDER_POKEDEX_DEPLOY_HOOK_URL }}
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.61.0
+        if: ${{ github.event_name == 'push' }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
