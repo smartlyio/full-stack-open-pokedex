@@ -1,5 +1,5 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
-const path = require('path');
+const HtmlWebPackPlugin = require("html-webpack-plugin")
+const path = require('path')
 
 module.exports = {
   entry: "./src/index.jsx",
@@ -43,4 +43,4 @@ module.exports = {
       filename: "./index.html",
     }),
   ],
-};
+}
