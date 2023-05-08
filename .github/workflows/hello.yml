@@ -10,7 +10,11 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: |
+        run:
           echo "Hello World!"
+      - name: List Directory
+        run:
           ls
+      - name: Get Date
+        run:
           date
