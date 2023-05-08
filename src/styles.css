@@ -8,7 +8,7 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
-  font-family: "Open Sans";
+  font-family: 'Open Sans';
   font-size: 18px;
 }
 
@@ -89,7 +89,7 @@ footer {
 }
 
 .pokemon-name {
-  font-family: "Open Sans Condensed", "Open Sans";
+  font-family: 'Open Sans Condensed', 'Open Sans';
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -107,7 +107,7 @@ footer {
 
 .pokemon-stats {
   flex: 1;
-  font-family: "Open Sans Condensed", "Open Sans";
+  font-family: 'Open Sans Condensed', 'Open Sans';
   padding-top: 15px;
   text-transform: capitalize;
 }
