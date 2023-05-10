@@ -2,15 +2,17 @@ name: Deployment pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
-    steps:
+    steps:   
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -29,15 +31,16 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  build:
-    if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to production
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
+  tag_release:
+    if: ${{ github.event_name == 'push' }}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:      
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.61.0
         env:
