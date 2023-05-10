@@ -25,6 +25,6 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://[::1]:3000
+          wait-on: http://[::1]:8080
           wait-on-timeout: 120
           
