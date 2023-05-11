@@ -26,6 +26,7 @@ const PokemonPage = ({ previous, next }) => {
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
 
+  // eslint-disable-next-line linebreak-style
   console.log('hiddenAbility=', hiddenAbility)
   return (
     <>
