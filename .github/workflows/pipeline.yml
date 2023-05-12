@@ -25,5 +25,6 @@ jobs:
         with:
           build: npm run build
           start: npm run start-prod
-
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-chf7hem4dad1jq9s3hl0?key=OBMB1vdrfNs
           
