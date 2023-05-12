@@ -14,6 +14,6 @@ jobs:
         with:
           node-version: '16'
       - name: Install Deps
-        run: npm -i
+        run: npm install
       - name: Lint w/ eslint
         run: npm run eslint
