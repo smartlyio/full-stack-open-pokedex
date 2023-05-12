@@ -37,8 +37,8 @@ jobs:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
   tag_release:
-    if: ${{ github.event_name == 'push' }}
     needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' }}    
     runs-on: ubuntu-20.04
     steps:      
       - name: Github Tag Bump
