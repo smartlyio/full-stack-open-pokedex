@@ -40,8 +40,11 @@ jobs:
     needs: [simple_deployment_pipeline]
     if: ${{ github.event_name == 'push' }}    
     runs-on: ubuntu-20.04
-    steps:      
-      - name: Github Tag Bump
-        uses: anothrNick/github-tag-action@1.64.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'     
+    - name: Github Tag Bump
+      uses: anothrNick/github-tag-action@1.64.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
