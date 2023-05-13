@@ -41,21 +41,22 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: https://pokedex-q7yf.onrender.com/
+          details: by ${{ github.actor }}
+          footer: Informational
+          text: A new version of Pokedex deployed to
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Cancelled
-        uses: rjstone/discord-webhook-notify@v1
-        if: cancelled()
-        with:
-          severity: warn
-          details: Test Cancelled!
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: https://github.com/lorgik/full-stack-open-pokedex/commit/${{ github.event.number }}
+          details: by ${{ github.actor }}
+          text: Build failed
+          footer: Error
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
