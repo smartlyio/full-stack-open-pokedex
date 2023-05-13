@@ -10,7 +10,6 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:   
       - uses: actions/checkout@v3
@@ -32,11 +31,12 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
-      - name: Test Success
+      - name: Discord Notification Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
@@ -47,7 +47,7 @@ jobs:
           footer: Informational
           text: A new version of Pokedex deployed to
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Failure
+      - name: Discord Notification Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
