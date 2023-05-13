@@ -1,0 +1,73 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:   
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Check style
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+      - name: Discord Notification Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{(success()) && (github.event_name == 'push')}}
+        with:
+          severity: info
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: https://pokedex-q7yf.onrender.com/
+          details: by ${{ github.actor }}
+          footer: Informational
+          text: A new version of Pokedex deployed to
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Discord Notification Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
+          description: commit
+          details: https://github.com/lorgik/full-stack-open-pokedex/commit/${{ github.sha }} by ${{ github.actor }} broke the build...
+          text: Build failed
+          footer: Error
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    if: ${{ github.event_name == 'push' }}    
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'     
+    - name: Github Tag Bump
+      uses: anothrNick/github-tag-action@1.64.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
