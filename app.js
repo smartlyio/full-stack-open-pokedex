@@ -15,8 +15,6 @@ app.get('/version', (req, res) => {
   res.send('4') // change this string to ensure a new version deployed
 })
 
-app.get('/health', (req, res) => {
-  throw new Error('error...')
-  // eslint-disable-next-line no-unreachable
+app.get('/health', (req, res) => { 
   res.send('ok')
 })
