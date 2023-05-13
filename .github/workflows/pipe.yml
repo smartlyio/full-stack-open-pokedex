@@ -22,7 +22,7 @@ jobs:
       - name: Check style
         run: npm run eslint
       - name: build
-        run: npm run build
+        run: npm build
       - name: test
         run: npm run test
       - name: e2e tests
@@ -53,8 +53,8 @@ jobs:
         with:
           severity: error
           avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
-          description: https://github.com/lorgik/full-stack-open-pokedex/commit/${{ github.event.number }}
-          details: by ${{ github.actor }}
+          description: commit
+          details: https://github.com/lorgik/full-stack-open-pokedex/commit/${{ github.event.number }} by ${{ github.actor }} broke the build...
           text: Build failed
           footer: Error
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
