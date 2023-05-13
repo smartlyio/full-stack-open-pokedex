@@ -14,10 +14,6 @@ app.get('/version', (req, res) => {
   res.send('1')
 })
 
-app.get('/hello', (req, res) => {
-  res.send('H3LL0')
-})
-
 
 app.listen(PORT, () => {
   console.log('server started on port 5000')
