@@ -18,6 +18,10 @@ app.get('/hello', (req, res) => {
   res.send('H3LL0')
 })
 
+app.get('/nohello', (req, res) => {
+  res.send('N0H3LL0')
+})
+
 app.listen(PORT, () => {
   console.log('server started on port 5000')
 })
