@@ -1,0 +1,30 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+    
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Check style
+        run: npm run eslint
+      - name: Run Tests
+        run: npm test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm run start-prod
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-chf7hem4dad1jq9s3hl0?key=OBMB1vdrfNs
+          
