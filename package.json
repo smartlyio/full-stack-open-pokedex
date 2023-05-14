@@ -5,11 +5,14 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
+    "start-local": "cross-env NODE_OPTIONS=\"--openssl-legacy-provider\" webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
+    "test:e2e": "cypress open",
+    "test:e2e-local": "cross-env  CYPRESS_RUN_BINARY=\"Z:/TEMP/Cypress/Cypress.exe\" CYPRESS_CACHE_FOLDER=\"Z:/TEMP/cypress_cache\" cypress open",
     "eslint": "cross-env eslint './**/*.{js,jsx}'",
     "build": "cross-env  webpack --mode production",
-    "build-bak": "cross-env NODE_OPTIONS=\"--openssl-legacy-provider\" webpack --mode production"
+    "build-local": "cross-env NODE_OPTIONS=\"--openssl-legacy-provider\" webpack --mode production"
   },
   "repository": {
     "type": "git",
@@ -35,6 +38,7 @@
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
+    "cypress": "^12.12.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
