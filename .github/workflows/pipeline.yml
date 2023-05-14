@@ -25,13 +25,13 @@ jobs:
         run: pnpm run test
       - name: e2e tests
         # env:
-        # ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
-        uses: cypress-io/github-action@v2
-        # uses: cypress-io/github-action@v5
+          ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
+        # uses: cypress-io/github-action@v2
+        uses: cypress-io/github-action@v5
         with:
-          # browser: chrome
-          # headed: true
-          # component: true
+          browser: chrome
+          headed: true
+          component: true
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5001
