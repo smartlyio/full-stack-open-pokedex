@@ -13,14 +13,16 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: npm install
-        run: npm install
+      - name: npm install pnpm
+        run: npm install  -g pnpm
+      - name: pnpm install
+        run: pnpm install
       - name: lint
-        run: npm run eslint
+        run: pnpm run eslint
       - name: build
-        run: npm run build
+        run: pnpm run build
       - name: test
-        run: npm run test
+        run: pnpm run test
       - name: e2e tests
         # uses: cypress-io/github-action@v2
         uses: cypress-io/github-action@v5
