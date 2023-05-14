@@ -24,7 +24,7 @@ jobs:
       - name: test
         run: pnpm run test
       - name: e2e tests
-        # env:
+        env:
           ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
         # uses: cypress-io/github-action@v2
         uses: cypress-io/github-action@v5
