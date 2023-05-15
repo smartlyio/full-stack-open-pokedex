@@ -41,9 +41,8 @@ jobs:
     runs-on: ubuntu-20.04
     if: ${{ github.event_name == 'push' }}
     steps:
-      - name: Bump version and push tag
-        uses: actions/checkout@v3
-        uses: anothrNick/github-tag-action@1.65.0
+      - name: Bump version and push tag        
+        uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
