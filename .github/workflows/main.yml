@@ -1,0 +1,12 @@
+name: Hello wolrd
+on:
+  push:
+    branches:
+      - master
+jobs:
+  hello_wolrd_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run:
+          echo "Hello wolrd"
