@@ -42,6 +42,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     steps:
       - name: Bump version and push tag
+        uses: actions/checkout@v3
         uses: anothrNick/github-tag-action@1.65.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
