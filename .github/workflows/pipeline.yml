@@ -10,27 +10,31 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Install Deps
-        run: npm install
-      - name: Lint w/ eslint
-        run: npm run eslint
-      - name: Build
-        run: npm run build
-      - name: Test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:3003
-      - name: Trigger Deployment
-        if: ${{ github.event_name == 'push' }}
-        run: curl https://api.render.com/deploy/srv-${{secrets.RENDER_SERVICE_ID}}?key=${{secrets.RENDER_API_KEY}}
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+    - name: Install Deps
+      run: npm install
+    - name: Lint w/ eslint
+      run: npm run eslint
+    - name: Build
+      run: npm run build
+    - name: Test
+      run: npm run test
+    - name: e2e tests
+      uses: cypress-io/github-action@v5
+      with:
+        command: npm run test:e2e
+        start: npm run start-prod
+        wait-on: http://localhost:3003
+    - name: Trigger Deployment
+      if: ${{ github.event_name == 'push' }}
+      run: curl https://api.render.com/deploy/srv-${{secrets.RENDER_SERVICE_ID}}?key=${{secrets.RENDER_API_KEY}}
+  tag_version:
+    needs: [simple_deployment_pipeline]      
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
