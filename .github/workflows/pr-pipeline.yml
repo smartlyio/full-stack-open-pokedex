@@ -1,4 +1,4 @@
-name: Deployment Pipeline
+name: Pull Request Deployment
 on:
     push:
         branches:
@@ -7,7 +7,7 @@ on:
         branches: [master]
         types: [opened, synchronize]
 jobs:
-  simple_deployment_pipeline:
+  pr-deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
