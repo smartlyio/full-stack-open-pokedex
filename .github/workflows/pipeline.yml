@@ -1,10 +1,11 @@
 name: Deployment Pipeline
-
 on:
-  push:
-    branches:
-      - master
-
+    push:
+        branches:
+            - master
+    pull_request:
+        branches: [master]
+        types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
