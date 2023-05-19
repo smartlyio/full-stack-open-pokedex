@@ -1,0 +1,22 @@
+name: Test example application
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  say-hello:
+    name: Say hello
+    runs-on: ubuntu-latest
+    steps: 
+    - run: 'echo "Hello World!"'
+  now-is:
+    name: Now is
+    runs-on: ubuntu-latest
+    steps:
+    - run: 'date'
+  directory-content:
+    name: Directory content
+    runs-on: ubuntu-latest
+    steps:
+    - run: 'ls -l'
