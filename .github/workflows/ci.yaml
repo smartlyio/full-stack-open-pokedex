@@ -5,18 +5,12 @@ on:
     branches:
       - master
 jobs:
-  say-hello:
-    name: Say hello
+  hello_world_job:
     runs-on: ubuntu-latest
     steps: 
-    - run: 'echo "Hello World!"'
-  now-is:
-    name: Now is
-    runs-on: ubuntu-latest
-    steps:
-    - run: 'date'
-  directory-content:
-    name: Directory content
-    runs-on: ubuntu-latest
-    steps:
-    - run: 'ls -l'
+      - name: Say hello
+      run: 'echo "Hello World!"'
+      - name: Now it is
+      run: 'date'
+      - name: Directory content
+      run: 'ls -l'
