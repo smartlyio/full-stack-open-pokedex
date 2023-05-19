@@ -3,7 +3,7 @@ name: Test example application
 on:
   push:
     branches:
-      - main
+      - master
 jobs:
   say-hello:
     name: Say hello
