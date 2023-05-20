@@ -27,9 +27,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  main:
+  Deployment_to_Render:
     name: Deploy to Render
     runs-on: ubuntu-latest
+    needs: simple_deployment_pipeline
     steps:
       - name: Trigger deployment
         uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
