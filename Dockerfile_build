@@ -1,0 +1,10 @@
+FROM node:16-bullseye-slim AS build
+WORKDIR /usr/src/app
+COPY . /usr/src/app
+RUN npm install && npm run build
+
+FROM node:16-bullseye-slim
+WORKDIR /usr/src/app
+COPY --from=build /usr/src/app/dist /usr/src/app/dist
+RUN npm i -g serve
+CMD ["npx","serve","dist"]
