@@ -6,11 +6,11 @@
 app = "dark-butterfly-3588"
 primary_region = "lax"
 
-[processes]
-app = "node app.js"
-
 [env]
   PORT = "8080"
+
+[processes]
+app = "node app.js"
 
 [deploy]
   release_command = "npm run build"
@@ -43,7 +43,6 @@ app = "node app.js"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-
   [[services.http_checks]]
     interval = 10000
     grace_period = "5s"
