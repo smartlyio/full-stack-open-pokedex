@@ -16,19 +16,17 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
+      - name: build
+        run: npm build
       - name: Check style
         run: npm run eslint
       - name: run tests
         run: npm run test
-      - name: Set production port to 5000
-        run: |
-          # Set the PORT environment variable
-          echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV  
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: 'http://localhost:5000'
+          wait-on: http://localhost:5000
           
  
