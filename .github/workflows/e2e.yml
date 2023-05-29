@@ -7,6 +7,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       # Install npm dependencies, cache them correctly
+      - name: install backend npm dependencies with caching
+        uses: bahmutov/npm-install@v1
+        with:
+          working-directory: ./
       # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v5
@@ -14,4 +18,4 @@ jobs:
           browser: chrome
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:8080
+          wait-on: http://localhost:5000
