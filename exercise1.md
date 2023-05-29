@@ -1,5 +1,3 @@
-// https://wordcounter.net/ (200-300 words)(279)
-
 1. CI practices with Python language applications
 1a. code programming and editing phase: 
   - I would select VS Studio with Pylint extension
