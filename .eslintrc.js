@@ -4,6 +4,9 @@ module.exports = {
     "es6": true,
     "jest/globals": true
   },
+  "globals": {
+    "process": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended"
@@ -19,7 +22,6 @@ module.exports = {
     "react", "jest"
   ],
   "rules": {
-    "no-console": 'off',
     "indent": [
       "error",
         2
@@ -44,7 +46,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": "off",
     "react/prop-types": 0
   }
 }
