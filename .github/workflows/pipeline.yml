@@ -19,7 +19,11 @@ jobs:
       - name: Check style
         run: npm run eslint
       - name: run tests
-        run: npm run test  
+        run: npm run test
+      - name: Set production port to 5000
+        run: |
+          # Set the PORT environment variable
+          echo "PORT=${{ secrets.PORT }}" >> $GITHUB_ENV  
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
