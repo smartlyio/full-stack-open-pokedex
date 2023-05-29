@@ -11,6 +11,7 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v5
         with:
+          browser: chrome
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
