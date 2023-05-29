@@ -14,3 +14,11 @@ jobs:
         run: |
           echo "Hello World!"
 
+jobs:
+  hello_world_job2:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello2
+        run: |
+          echo "Hello World2!"
+
