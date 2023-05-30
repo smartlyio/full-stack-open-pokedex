@@ -13,3 +13,17 @@ primary_region = "arn"
   http_checks = []
   internal_port = 5000
   protocol="tcp"
+
+  [[services.ports]]
+  handlers  = ["http"]
+  port = "80"
+
+  [[services.ports]]
+  handlers  = ["tls","http"]
+  port = "443"
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"   
