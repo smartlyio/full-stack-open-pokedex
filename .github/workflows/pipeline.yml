@@ -30,11 +30,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: Render GitHub Action
+      - name: Wait for Render Deployment
         uses: bounceapp/render-action@0.6.0
         with:
           service-id: srv-chqq667dvk4goetvmvjg
-          api-key: Lp3uKI_NpiI
           retries: 20
           wait: 16000
           sleep: 30000
