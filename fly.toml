@@ -1,14 +1,15 @@
-# fly.toml app configuration file generated for andyspoke on 2023-05-30T16:53:20+03:00
+# fly.toml app configuration file generated for perseesta on 2023-05-30T20:19:55+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "andyspoke"
+app = "perseesta"
 primary_region = "arn"
 
-[http_service]
+
+
+
+[[services]]
+  http_checks = []
   internal_port = 5000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
+  protocol="tcp"
