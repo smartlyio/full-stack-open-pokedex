@@ -8,7 +8,6 @@ on:
   pull_request: 
     branches: [master] 
     types: [opened, synchronize] 
-
   # note that your "main" branch might be called main instead of master
 
 jobs:
@@ -43,26 +42,10 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:  
-      - name: debug info
-        run: |
-          echo "Hello World!"
-          echo "jore1 - M-GH-T:"
-          echo ${{ secrets.MYGITHUB_TOKEN }}
-          echo ${{ secrets.GITHUB_TOKEN }}
-          echo "jore2 - M-GH-T:"
-          echo ${{ secrets.MYGITHUB_TOKEN }} | sed 's/./& /g'
-          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
-          echo "jore3 - R-S-ID:"
-          echo ${{ secrets.RENDER_SERVICE_ID }} | sed 's/./& /g'
-          echo "jore4"
-          echo "jore5 - event_name"
-          echo ${{ github.event_name }}
-          echo "jore6-end"
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: '0'
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.66.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BRANCH: master
