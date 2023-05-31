@@ -1,4 +1,5 @@
 name: Deployment pipeline
+# The exersices 11.1. - 11.16. implemented...
 
 on:
   push:
@@ -65,3 +66,4 @@ jobs:
           DEFAULT_BRANCH: master
           DEFAULT_BUMP: patch
           WITH_V: true
+
