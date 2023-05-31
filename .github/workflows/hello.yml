@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Now it is
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'pushh' }}
         run: |
           date
           echo "jore4 - event_name"
