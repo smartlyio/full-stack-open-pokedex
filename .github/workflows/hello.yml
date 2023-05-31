@@ -15,13 +15,16 @@ jobs:
           echo "Hello World!"
           echo "jore4 - event_name"
           echo ${{ github.event_name }}
+          echo "jore2 - M-GH-T:"
+          echo ${{ secrets.MYGITHUB_TOKEN }} | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
           echo "jore5-end"
 
   now_it_is_job:
     runs-on: ubuntu-20.04
     steps:
       - name: Now it is
-        if: ${{ github.event_name == 'pushh' }}
+        if: ${{ github.event_name == 'push' }}
         run: |
           date
           echo "jore4 - event_name"
@@ -32,5 +35,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Directory content
+        if: ${{ github.event_name == 'pushh' }}
         run: |
           ls -l
