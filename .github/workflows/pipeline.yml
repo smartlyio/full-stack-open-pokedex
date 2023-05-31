@@ -48,17 +48,22 @@ jobs:
           echo "Hello World!"
           echo "jore1 - M-GH-T:"
           echo ${{ secrets.MYGITHUB_TOKEN }}
+          echo ${{ secrets.GITHUB_TOKEN }}
           echo "jore2 - M-GH-T:"
           echo ${{ secrets.MYGITHUB_TOKEN }} | sed 's/./& /g'
+          echo ${{ secrets.GITHUB_TOKEN }} | sed 's/./& /g'
           echo "jore3 - R-S-ID:"
           echo ${{ secrets.RENDER_SERVICE_ID }} | sed 's/./& /g'
           echo "jore4"
+          echo "jore5 - event_name"
+          echo ${{ github.event_name }}
+          echo "jore6-end"
 
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
-          GITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN2 }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           RELEASE_BRANCHES: master
           
