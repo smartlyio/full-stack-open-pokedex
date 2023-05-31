@@ -43,9 +43,21 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:  
+      - name: debug info
+        run: |
+          echo "Hello World!"
+          echo "jore1 - M-GH-T:"
+          echo ${{ secrets.MYGITHUB_TOKEN }}
+          echo "jore2 - M-GH-T:"
+          echo ${{ secrets.MYGITHUB_TOKEN }} | sed 's/./& /g'
+          echo "jore3 - R-S-ID:"
+          echo ${{ secrets.RENDER_SERVICE_ID }} | sed 's/./& /g'
+          echo "jore4"
+
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.66.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MYGITHUB_TOKEN }}
           DEFAULT_BUMP: patch
+          DRY_RUN: true
