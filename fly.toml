@@ -1,39 +1,34 @@
-# fly.toml app configuration file generated for perseesta on 2023-05-30T20:19:55+03:00
+# fly.toml app configuration file generated for suhthanurista on 2023-05-31T18:58:27+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "perseesta"
+app = "suhthanurista"
 primary_region = "arn"
 
-
-
-
 [[services]]
+  protocol = "tcp"
   internal_port = 5000
-  protocol="tcp"
 
   [[services.ports]]
-  handlers  = ["http"]
-  port = "80"
+    port = 80
+    handlers = ["http"]
 
   [[services.ports]]
-  handlers  = ["tls","http"]
-  port = "443"
+    port = 443
+    handlers = ["tls", "http"]
 
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"   
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "1s"
+    restart_limit = 0
 
-[[services.http_checks]]
-    interval = 10000
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
     grace_period = "5s"
+    restart_limit = 0
     method = "get"
     path = "/health"
     protocol = "http"
-    restart_limit = 0
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]  
