@@ -32,7 +32,6 @@ jobs:
           wait-on: http://localhost:5000
       
   deploy_fly:
-    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'push' }} 
     steps:    
