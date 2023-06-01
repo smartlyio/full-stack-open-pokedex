@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize] 
       
 jobs:
-  pre_check_pipeline:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -30,14 +30,12 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-
-  deploy:
-    needs: [pre_check_pipeline]
-    runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
-    steps:
-      - name: fly_deploy
+          
+        
+      - name: fly_deploy   
+        if: ${{ github.event_name == 'push' }}    
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+        if: ${{ github.event_name == 'push' }}    
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
