@@ -3,6 +3,7 @@ name: Deployment pipeline
 on:
   push:
     branches:
+      - master
       - pullari
   pull_request: 
     branches: [master] 
