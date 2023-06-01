@@ -1,7 +1,7 @@
 #!/bin/bash
 
 res=$(curl -s https://suhthanurista.fly.dev/health)
-# this checks if the response is "ok"
+
 if [ "$res" == "ok" ]; then
   echo "Succeeded curl to /health"
   exit 0
