@@ -42,7 +42,6 @@ primary_region = "mad"
     grace_period = "5s"
     method = "get"
     path = "/health"
-    protocol = "http"
     restart_limit = 0
     timeout = 2000
     tls_skip_verify = false
