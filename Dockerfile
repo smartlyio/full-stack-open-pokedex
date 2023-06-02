@@ -4,6 +4,8 @@
 ARG NODE_VERSION=16.19.1
 FROM node:${NODE_VERSION}-slim as base
 
+RUN apt-get update; apt install -y curl
+
 LABEL fly_launch_runtime="Node.js"
 
 # Node.js app lives here
