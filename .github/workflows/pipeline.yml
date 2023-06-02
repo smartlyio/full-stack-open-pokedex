@@ -63,31 +63,12 @@ jobs:
         with:
           ref: ${{ github.sha }} # required for better experience using pre-releases
           fetch-depth: '0'
+
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: minor
-
-
-
-
-
-
-          build:
-            runs-on: ubuntu-22.04
-
-            steps:
-              - uses: actions/checkout@v3
-                with:
-                  ref: ${{ github.sha }} # required for better experience using pre-releases
-                  fetch-depth: '0'
-
-              - name: Bump version and push tag
-                uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
-                env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
-                  WITH_V: true
-                  PRERELEASE: true
+          WITH_V: true
 
