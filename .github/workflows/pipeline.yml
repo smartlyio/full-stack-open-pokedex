@@ -5,19 +5,11 @@ on:
     branches:
       - master
 
-jobs:
-#  tester:
-#    runs-on: ubuntu-20.04
-#    steps:
-#      - uses: actions/checkout@v3
-#      - uses: superfly/flyctl-actions/setup-flyctl@master
-#      - name: test
-#        shell: bash
-#        run: |
-#          .github/scripts/rollback.sh
-#        env:
-#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
+jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
