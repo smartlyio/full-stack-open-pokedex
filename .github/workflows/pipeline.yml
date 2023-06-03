@@ -1,0 +1,51 @@
+name: Setup
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sample_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: ci-cd/part11/pokedex
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            pokedex:
+              - 'ci-cd/part11/pokedex/**'
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: install dependencies
+        run: npm install
+
+      - name: lint
+        if: steps.filter.outputs.pokedex == 'true'
+        run: npm run eslint
+
+      - name: build
+        if: steps.filter.outputs.pokedex == 'true'
+        run: npm run build
+
+      - name: test
+        if: steps.filter.outputs.pokedex == 'true'
+        run: npm run test
+
+      - name: e2e tests
+        if: steps.filter.outputs.pokedex == 'true'
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+          working-directory: ci-cd/part11/pokedex
