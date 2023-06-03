@@ -16,6 +16,9 @@ primary_region = "arn"
 [env]
   PORT = "8080"
 
+[experimental]
+  auto_rollback = true
+
 [[services]]
   internal_port = 8080 
   protocol = "tcp"
