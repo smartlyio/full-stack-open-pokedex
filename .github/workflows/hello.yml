@@ -1,0 +1,24 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print date
+        run: date
+
+      - name: List directory contents in long format
+        run: ls -l
