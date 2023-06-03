@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
-  res.send('404')
+  res.status(404).send('Not found');
 })
 
 app.get('/version', (req, res) => {
