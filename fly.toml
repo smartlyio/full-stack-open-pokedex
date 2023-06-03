@@ -13,6 +13,10 @@ primary_region = "arn"
 [deploy]
   release_command = "npm run build"
 
+  [[deploy.strategy]]
+    check = "response-status = 500"
+    rollback = true
+
 [env]
   PORT = "8080"
 
@@ -31,6 +35,12 @@ primary_region = "arn"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = "443" 
+  
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
   
   [[services.http_checks]]
     interval = 10000
