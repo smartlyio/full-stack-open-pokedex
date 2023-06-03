@@ -13,6 +13,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16"
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+          env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - run: npm install
       - name: lint
         run: npm run eslint
@@ -27,8 +30,5 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to fly.io
-        uses: actions/checkout@v3
-        uses: superfly/flyctl-actions/setup-flyctl@master
         run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        
