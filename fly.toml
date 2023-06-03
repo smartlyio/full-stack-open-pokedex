@@ -1,0 +1,36 @@
+# fly.toml app configuration file generated for throbbing-leaf-6979 on 2023-06-03T14:05:37+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "throbbing-leaf-6979"
+primary_region = "arn"
+
+[build]
+  [build.args]
+    NODE_VERSION = "14.21.3"
+
+[deploy]
+  release_command = "npm run build"
+
+[env]
+  PORT = "8080"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080 
+  protocol = "tcp"
+  processes = ["app"]   
+  
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443" 
+
+[processes]
+  app = "node app.js"
+
+
