@@ -3,7 +3,7 @@ name: Setup
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   sample_deployment_pipeline:
