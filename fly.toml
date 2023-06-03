@@ -12,10 +12,7 @@ primary_region = "arn"
 
 [deploy]
   release_command = "npm run build"
-
-  [[deploy.strategy]]
-    check = "response-status = 500"
-    rollback = true
+  strategy = "canary"
 
 [env]
   PORT = "8080"
@@ -49,11 +46,9 @@ primary_region = "arn"
     path = "/health"
     protocol = "http"
     restart_limit = 0
-    timeout = 2000
+    timeout = "10s"
     tls_skip_verify = false
     [services.http_checks.headers]
 
 [processes]
   app = "node app.js"
-
-
