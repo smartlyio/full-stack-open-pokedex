@@ -4,6 +4,8 @@
 ARG NODE_VERSION=20.2.0
 FROM node:${NODE_VERSION}-slim as base
 
+RUN apt-get update; apt install -y curl
+
 LABEL fly_launch_runtime="NodeJS"
 
 # NodeJS app lives here
