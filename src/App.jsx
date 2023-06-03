@@ -21,6 +21,9 @@ const App = () => {
     return <ErrorMessage error={error} />
   }
 
+  // eslint-disable-next-line no-console
+  console.log('This is a test log')
+
   return (
     <Router>
       <Switch>
