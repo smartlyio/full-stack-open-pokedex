@@ -31,16 +31,21 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           
-        
-      - name: fly_deploy   
-        if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
-        uses: superfly/flyctl-actions/setup-flyctl@master
+  deploy:    
+    needs: [simple_deployment_pipeline]
+    name: Deploy
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
-        if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+          
+
       - name: Deploy Success
-        if: ${{ github.event_name == 'push' && success() && !contains(toJson(github.event.commits.*.message), '#skip') }}
+        if: success() 
         uses: rjstone/discord-webhook-notify@v1
         with:
             severity: info
