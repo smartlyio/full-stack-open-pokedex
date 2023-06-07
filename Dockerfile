@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=166
+ARG NODE_VERSION=16
 FROM node:${NODE_VERSION}-slim as base
 RUN apt-get update; apt install -y curl
 LABEL fly_launch_runtime="Node.js"
