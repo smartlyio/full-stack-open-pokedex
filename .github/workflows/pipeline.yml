@@ -3,10 +3,12 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - master
+      - test
+
+#TODO continue here... a new branch, test, was created to test the notifications
 
   pull_request:
-    branches: [master]
+    branches: [test]
     types: [opened, synchronize]
 
 jobs:
@@ -14,61 +16,87 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16.19.1'
+#      - uses: actions/setup-node@v3
+#        with:
+#          node-version: '16.19.1'
+#
+#      - name: Install dependencies
+#        run: npm install
+#
+#      - name: lint
+#        run: npm run eslint
+#
+#      - name: build
+#        run: npm run build
+#
+#      - name: test
+#        run: npm run test
+#
+#      - name: e2e tests
+#        uses: cypress-io/github-action@v5
+#        with:
+#          command: npm run test:e2e
+#          start: npm run start-prod
+#          wait-on: http://localhost:5000
+#
+#      - name: setup deploy
+#        uses: superfly/flyctl-actions/setup-flyctl@master
+#
+#      - name: deploy
+#        if: ${{ github.event_name == 'push' }}
+#        run: flyctl deploy --remote-only --wait-timeout 60
+#        env:
+#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+#
+#      - name: rollback
+#        if: failure()
+#        shell: bash
+#        run: .github/scripts/rollback.sh
+#        env:
+#          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
-      - name: Install dependencies
-        run: npm install
+#  tag_release:
+#    needs: [simple_deployment_pipeline]
+#    runs-on: ubuntu-20.04
+#    permissions:
+#      contents: write
+#    steps:
+#      - uses: actions/checkout@v3
+#        with:
+#          ref: ${{ github.sha }} # required for better experience using pre-releases
+#          fetch-depth: '0'
+#
+#      - name: Bump version and push tag
+#        if: ${{ github.event_name == 'push' }}
+#        uses: anothrNick/github-tag-action@1.64.0
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          DEFAULT_BUMP: minor
+#          WITH_V: true
 
-      - name: lint
-        run: npm run eslint
-
-      - name: build
-        run: npm run build
-
-      - name: test
-        run: npm run test
-
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
-
-      - name: setup deploy
-        uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: deploy
-        if: ${{ github.event_name == 'push' }}
-        run: flyctl deploy --remote-only --wait-timeout 60
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-      - name: rollback
-        if: failure()
-        shell: bash
-        run: .github/scripts/rollback.sh
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-  tag_release:
+  notify:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
+      - name: Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: success()
         with:
-          ref: ${{ github.sha }} # required for better experience using pre-releases
-          fetch-depth: '0'
+          severity: info
+          username: kikeverea
+          text: A new version of Pokedex deployed
+          description: to www.webpage.com by ${{ github.event.pull_request.user.login }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.64.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: minor
-          WITH_V: true
+      - name: Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+          severity: error
+          username: kikeverea
+          text: Build failed
+          description: commit
+          details: https://github.com/kikeverea/full-stack-open-pokedex/commit/${{ github.sha }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
 
