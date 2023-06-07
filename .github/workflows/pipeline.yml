@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   sample_deployment_pipeline:
@@ -38,7 +41,7 @@ jobs:
 
       - name: Install Railway
         run: npm i -g @railway/cli
-  
+
       - name: Deploy
         run: railway up
         env:
