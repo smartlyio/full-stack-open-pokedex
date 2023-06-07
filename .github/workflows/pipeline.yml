@@ -54,11 +54,9 @@ jobs:
         if: success() 
         uses: rjstone/discord-webhook-notify@v1
         with:
-            severity: info
-            text: Deploy succeeded!
-            description: Deploy succeeded!
-            details: New commit ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].committer.username }}
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}      
+          severity: info
+          details: New commit ${{ github.event.commits[0].url }} by ${{ github.event.commits[0].committer.username }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}      
       
   tag_release:
     needs: [deploy]
