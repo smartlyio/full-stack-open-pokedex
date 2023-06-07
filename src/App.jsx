@@ -6,6 +6,7 @@ import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
 
+// testing pipeline trigger
 const mapResults = ({ results }) =>
   results.map(({ url, name }) => ({
     url,
