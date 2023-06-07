@@ -5,8 +5,10 @@ on:
     branches:
       - test
 
+#TODO continue here... a new branch, test, was created to test the notifications
+
   pull_request:
-    branches: [master]
+    branches: [test]
     types: [opened, synchronize]
 
 jobs:
