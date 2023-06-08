@@ -15,6 +15,7 @@ primary_region = "arn"
 [[services]]
   internal_port = 8080
   protocol = "tcp"
+  auto_rollback = true
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
