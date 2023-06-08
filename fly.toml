@@ -20,7 +20,6 @@ primary_region = "arn"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
-  http_checks = ["health", "version"]
 
   [[services.tcp_checks]]
     grace_period = "1s"
