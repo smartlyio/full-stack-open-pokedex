@@ -1,19 +1,19 @@
-# fly.toml app configuration file generated for dark-butterfly-3588 on 2023-05-23T21:14:19-07:00
+# fly.toml app configuration file generated for autumn-wind-8301 on 2023-06-06T18:59:40-07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "dark-butterfly-3588"
+app = "autumn-wind-8301"
 primary_region = "lax"
 
 [env]
   PORT = "8080"
 
-[processes]
-app = "node app.js"
-
 [deploy]
   release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
 
 [build]
   [build.args]
@@ -23,7 +23,6 @@ app = "node app.js"
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
   [services.concurrency]
     hard_limit = 25
     soft_limit = 20
@@ -38,11 +37,19 @@ app = "node app.js"
     handlers = ["tls", "http"]
     port = 443
 
+  [[services.script_checks]]
+    command = "/app/health_check.sh"
+    grace_period = "2s"
+    interval = "5s"
+    restart_limit = 0
+    timeout = "1s"
+
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+  
   [[services.http_checks]]
     interval = 10000
     grace_period = "5s"
@@ -53,3 +60,4 @@ app = "node app.js"
     timeout = 2000
     tls_skip_verify = false
     [services.http_checks.headers]
+
