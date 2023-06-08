@@ -49,3 +49,4 @@ jobs:
           DEFAULT_BUMP: patch
           DRY_RUN: true
           RELEASE_BRANCHES: master
+          GIT_DISCOVERY_ACROSS_FILESYSTEM: 1
