@@ -20,6 +20,7 @@ primary_region = "arn"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+  http_checks = ["health", "version"]
 
   [[services.tcp_checks]]
     grace_period = "1s"
@@ -32,6 +33,15 @@ primary_region = "arn"
     grace_period = "5s"
     method = "get"
     path = "/health"
+    protocol = "https"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+
+  [[services.http_checks]]
+    grace_period = "5s"
+    method = "get"
+    path = "/version"
     protocol = "https"
     restart_limit = 0
     timeout = 2000
