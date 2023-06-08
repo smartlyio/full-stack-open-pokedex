@@ -7,19 +7,27 @@ app = "bitter-violet-4360"
 primary_region = "arn"
 
 [env]
-  PORT = 8080
+  PORT = "8080"
 
 [experimental]
   auto_rollback = true
 
 [[services]]
   internal_port = 8080
-  force_https = true
   protocol = "tcp"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+  
+  [[services.ports]]
+    handlers = ["http", "tls"]
+    port = 443
 
   [[services.tcp_checks]]
     grace_period = "1s"
@@ -32,7 +40,7 @@ primary_region = "arn"
     grace_period = "5s"
     method = "get"
     path = "/health"
-    protocol = "https"
+    protocol = "http"
     restart_limit = 0
     timeout = 2000
     tls_skip_verify = false
@@ -41,7 +49,7 @@ primary_region = "arn"
     grace_period = "5s"
     method = "get"
     path = "/version"
-    protocol = "https"
+    protocol = "http"
     restart_limit = 0
     timeout = 2000
     tls_skip_verify = false
