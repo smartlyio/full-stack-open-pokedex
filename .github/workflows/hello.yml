@@ -13,3 +13,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+      - name: What day is it again?
+        run: |
+          date
+      - name: What's in the box?
+        run: |
+          ls -l
