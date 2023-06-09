@@ -8,6 +8,7 @@ on:
 jobs:
   hello_world_job:
     runs-on: ubuntu-20.04
+    if: ${{contains(github.event.*.commit.message, 'hello')}}
     steps:
       - name: Say hello
         run: |
