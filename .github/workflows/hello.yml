@@ -41,5 +41,5 @@ jobs:
           " > dir_tree.py
       - name: run dir_tree.py
         run: |
-          cd ~
+          cd ..
           python3 dir_tree.py
