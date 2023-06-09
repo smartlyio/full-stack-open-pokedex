@@ -29,7 +29,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy app
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
