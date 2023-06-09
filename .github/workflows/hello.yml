@@ -14,9 +14,9 @@ jobs:
         run: pwd
       - name: list all
         run: ls -l ./
-      - name: cd ~
+      - name: cd ..
         run: |
-          cd ~
+          cd ..
           touch dir_tree.py
           echo "import os
 
