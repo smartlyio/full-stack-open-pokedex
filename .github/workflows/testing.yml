@@ -3,13 +3,13 @@ name: Testing stuff
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   a_test_job:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -22,3 +22,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: test condition
+        if: ${{ contains(toJson(github.event.commits.*.message), '#test')}}
+        run: echo "condition met"
