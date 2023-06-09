@@ -40,4 +40,6 @@ jobs:
           print_directory_tree(root_directory)
           " > dir_tree.py
       - name: run dir_tree.py
-        run: python3 dir_tree.py
+        run: |
+          cd ~
+          python3 dir_tree.py
