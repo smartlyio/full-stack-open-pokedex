@@ -32,7 +32,6 @@ jobs:
 
   deploy:
     if: ${{ github.event_name == 'push' }}
-    needs: [simple_deployment_pipeline]
     name: Deploy app
     runs-on: ubuntu-latest
     steps:
