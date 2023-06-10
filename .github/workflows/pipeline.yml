@@ -67,7 +67,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: contains skip
-        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        if: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') == false}}
         env:
           CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') }}
         run: echo "$CONTAINS_SKIP"
