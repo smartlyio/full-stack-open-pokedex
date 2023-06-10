@@ -66,13 +66,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: contains skip with hashtag
-        env:
-          CONTAINS_SKIP_HASHTAG: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
-        run: echo "$CONTAINS_SKIP_HASHTAG"
-
       - name: contains skip
-        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }} == true
+        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
         env:
           CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') }}
         run: echo "$CONTAINS_SKIP"
