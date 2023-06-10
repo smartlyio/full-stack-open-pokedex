@@ -10,65 +10,54 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  # sample_deployment_pipeline:
-  #   runs-on: ubuntu-20.04
+  sample_deployment_pipeline:
+    runs-on: ubuntu-20.04
 
-  #   steps:
-  #     - uses: actions/checkout@v3
+    steps:
+      - uses: actions/checkout@v3
 
-  #     - name: Setup node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: '16.18.1'
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.18.1'
 
-  #     - name: Install dependencies
-  #       run: npm install
+      - name: Install dependencies
+        run: npm install
 
-  #     - name: Lint
-  #       run: npm run eslint
+      - name: Lint
+        run: npm run eslint
 
-  #     - name: Build
-  #       run: npm run build
+      - name: Build
+        run: npm run build
 
-  #     - name: Test
-  #       run: npm run test
+      - name: Test
+        run: npm run test
 
-  #     - name: e2e tests
-  #       uses: cypress-io/github-action@v5
-  #       with:
-  #         command: npm run test:e2e
-  #         start: npm run start-prod
-  #         wait-on: http://localhost:5000
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
 
-  #     - name: Install Railway
-  #       if: ${{ github.event_name == 'push' }}
-  #       run: npm i -g @railway/cli
+      - name: Install Railway
+        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        run: npm i -g @railway/cli
 
-  #     - name: Deploy
-  #       if: ${{ github.event_name == 'push' }}
-  #       run: railway up
-  #       env:
-  #         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+      - name: Deploy
+        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        run: railway up
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
-  # tag_release:
-  #   needs: [sample_deployment_pipeline]
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Bump version and push tag
-  #       if: ${{ github.event_name == 'push' }}
-  #       uses: anothrNick/github-tag-action@1.64.0
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  #         DEFAULT_BUMP: patch
-
-  a_test_job:
+  tag_release:
+    needs: [sample_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: contains skip
-        if: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') == false}}
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        uses: anothrNick/github-tag-action@1.64.0
         env:
-          CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') }}
-        run: echo "$CONTAINS_SKIP"
-
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
