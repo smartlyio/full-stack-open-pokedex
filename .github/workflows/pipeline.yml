@@ -82,4 +82,13 @@ jobs:
         env:
           JOINED_MESSAGES: ${{ join(github.event.commits.*.message, ',') }}
         run: echo "$JOINED_MESSAGES"
+      - name: contains skip with hashtag
+        env:
+          CONTAINS_SKIP_HASHTAG: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
+        run: echo "$CONTAINS_SKIP_HASHTAG"
+
+      - name: contains skip
+        env:
+          CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') }}
+        run: echo "$CONTAINS_SKIP"
 
