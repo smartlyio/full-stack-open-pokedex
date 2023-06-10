@@ -76,5 +76,21 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: check for major hashtag
+        env:
+          CHECK_MAJOR: contains("$COMMIT_MESSAGES", '#major')
+        run: echo "$CHECK_MAJOR"
+      - name: check for minor hashtag
+        env:
+          CHECK_MINOR: contains("$COMMIT_MESSAGES", '#minor')
+        run: echo "$CHECK_MINOR"
+      - name: check for patch hashtag
+        env:
+          CHECK_PATCH: contains("$COMMIT_MESSAGES", '#patch')
+        run: echo "$CHECK_PATCH"
+      - name: check for minor case hashtag
+        env:
+          CHECK_MINOR_CASE: contains("$COMMIT_MESSAGES", '#MINOr')
+        run: echo "$CHECK_MINOR_CASE"
