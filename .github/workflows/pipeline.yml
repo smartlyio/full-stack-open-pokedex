@@ -66,29 +66,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
-      - name: joined messages
-        env:
-          JOINED_MESSAGES: ${{ join(github.event.commits.*.message, ',') }}
-        run: echo "$JOINED_MESSAGES"
       - name: contains skip with hashtag
         env:
-          CONTAINS_SKIP_HASHTAG: ${{ contains(github.event.commits.*.message, '#skip') }}
+          CONTAINS_SKIP_HASHTAG: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }}
         run: echo "$CONTAINS_SKIP_HASHTAG"
 
       - name: contains skip
+        if: ${{ contains(join(github.event.commits.*.message, ', '), '#skip') }} == false
         env:
-          CONTAINS_SKIP: ${{ contains(github.event.commits.*.message, 'skip') }}
+          CONTAINS_SKIP: ${{ contains(join(github.event.commits.*.message, ', '), 'skip') }}
         run: echo "$CONTAINS_SKIP"
 
