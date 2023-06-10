@@ -27,7 +27,6 @@ jobs:
         run: npm run eslint
 
       - name: Build
-        if: ${{ github.event_name == 'push'}}
         run: npm run build
 
       - name: Build Failure
