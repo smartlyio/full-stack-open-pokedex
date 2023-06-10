@@ -80,6 +80,6 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: joined messages
         env:
-          JOINED_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
+          JOINED_MESSAGES: ${{ join(github.event.commits.*.message, ',') }}
         run: echo "$JOINED_MESSAGES"
 
