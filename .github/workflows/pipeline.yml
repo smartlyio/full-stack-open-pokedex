@@ -40,11 +40,11 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Install Railway
-        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         run: npm i -g @railway/cli
 
       - name: Deploy
-        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
@@ -55,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }} &&  ${{ contains(join(github.event.commits.*.message, ', '), '#skip') == false}}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
