@@ -9,12 +9,10 @@ jobs:
   ping:
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v3
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v3
         with:
-          url: https://full-stack-open-pokedex-production.up.railway\.app/
-          max-attempts: 3 
-          retry-delay: 5s 
-          
-  
-
+          url: ${{github.event.pull_request.base.repo.homepage}}
+          max-attempts: 3
+          retry-delay: 5s
