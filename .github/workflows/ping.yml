@@ -1,9 +1,8 @@
 name: Ping
 
 on:
-  push:
-    branches:
-      - pipeline
+  schedule:
+    - cron: '30 23 * * *'
 
 jobs:
   ping:
@@ -16,3 +15,11 @@ jobs:
           url: ${{github.event.repository.homepage}}
           max-attempts: 3
           retry-delay: 5s
+      - name: Ping Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        with:
+          severity: error
+          text: ping failed
+          details: ping failed :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
