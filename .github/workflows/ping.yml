@@ -1,8 +1,11 @@
 name: Ping
 
 on:
-  schedule:
-    - cron: '52 23 * * *'
+  # schedule:
+  #   - cron: '15 * * * *'
+  push:
+    branches:
+      - pipeline
 
 jobs:
   ping:
