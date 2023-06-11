@@ -36,7 +36,7 @@ jobs:
         with:
           severity: error
           text: Build failed
-          details: commit ${{github.event.pull_request.base.repo.homepage}}commit/${{github.env.GITHUB_CONTEXT.sha}} by ${{github.triggering_actor}} broke the build :(
+          details: commit ${{github.event.pull_request.base.repo.homepage}}commit/${{github.sha}} by ${{github.triggering_actor}} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test
