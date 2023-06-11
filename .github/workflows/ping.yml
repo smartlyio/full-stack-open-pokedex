@@ -12,7 +12,7 @@ jobs:
       - name: Check the deployed service URL
         uses: jtalk/url-health-check-action@v3
         with:
-          url: https://full-stack-open-pokedex-production.up.railway.app/
+          url: https://full-stack-open-pokedex-production.up.railway\.app/
           max-attempts: 3 
           retry-delay: 5s 
           
