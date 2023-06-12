@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for wild-snowflake-4034 on 2023-06-12T16:16:55+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "wild-snowflake-4034"
+primary_region = "arn"
+
+[env]
+  PORT = "8080"
+
+[http_service]
+  http_checks = []
+  processes = ["app"]
+  internal_port = 8080
+  auto_start_machines = true
+  auto_stop_machines = true
+  min_machines_running = 0
+
+[deploy]
+  release_command = "npm run build"
+
+[experimental]
+  auto_rollback = true
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.0"
