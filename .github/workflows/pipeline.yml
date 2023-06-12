@@ -21,7 +21,7 @@ jobs:
             - name: run tests
               run: npm test
             - name: Build app
-              run: npm build
+              run: npm run build
             - name: e2e tests
               uses: cypress-io/github-action@v5
               with:
