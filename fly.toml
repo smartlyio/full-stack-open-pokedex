@@ -9,6 +9,9 @@ primary_region = "arn"
 [env]
   PORT = "8080"
 
+[experimental]
+  auto_rollback = true
+
 [deploy]
   release_command = "npm run build"
   strategy = "rolling"
