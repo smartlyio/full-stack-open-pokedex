@@ -1,9 +1,9 @@
-name: Deployment pipeline
+name: Pull Request
 
 on:
-  push:
-    branches:
-      - master
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [master]
 
 jobs:
   simple_deployement_pipeline:
