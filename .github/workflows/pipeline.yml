@@ -34,6 +34,7 @@ jobs:
     deploy: 
           name: Deploy app to fly.io
           runs-on: ubuntu-20.04
+          needs: simple_deployment_pipeline
           if: ${{ github.event_name == 'push' }}     
           steps:
               - uses: actions/checkout@v3
