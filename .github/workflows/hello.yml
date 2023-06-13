@@ -12,3 +12,9 @@ jobs:
             - name: Say Hello
               run: |
                 echo "Hello Gihub Actions"
+            - name: Now it is
+              run: |
+                echo "`Date`"
+            - name: Directory Content
+              run: |
+                echo `ls -l`
