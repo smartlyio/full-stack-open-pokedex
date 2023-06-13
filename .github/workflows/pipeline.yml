@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  setup_and_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/setup-node@v3
@@ -31,20 +31,42 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy app
-        if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
-        run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
-  tag_release:
-    needs: [simple_deployment_pipeline]
+  deploy_and_tag_release:
+    needs: [setup_and_test]
     runs-on: ubuntu-20.04
     permissions: write-all
     if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
     steps:
       - uses: actions/checkout@v3
-      - name: Bump version and push tag
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: deploy app
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: deployment succeeded
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ success() }}
+        with:
+          severity: info
+          details: App deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: deployment failed
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ failure() }}
+        with:
+          description: ${{ github.events.commits.id }} by ${{ github.events.commits.author }} broke the build :(
+          severity: error
+          details: Deployment failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: deployment cancelled
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ cancelled() }}
+        with:
+          severity: warn
+          details: Deployment cancelled
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: bump version and push tag
         uses: anothrNick/github-tag-action@72703d02f7df0cdb8f27aeb9feafeccd67b49881
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
