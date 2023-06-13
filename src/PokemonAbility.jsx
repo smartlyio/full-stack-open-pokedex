@@ -1,8 +1,8 @@
 import React from 'react'
 
-const PokemonAbility = ({ abilityName }) => (
+const PokemonAbility = ({ abilityName, abilityHidden }) => (
   <div className="pokemon-ability">
-    <div className="pokemon-ability-type">Hidden ability</div>
+    <div className="pokemon-ability-type">{abilityHidden ? 'Hidden' : 'Normal'} ability</div>
     <div className="pokemon-ability-name">
       {abilityName}
     </div>
