@@ -14,7 +14,7 @@ jobs:
                 echo "Hello Gihub Actions"
             - name: Now it is
               run: |
-                echo "`Date`"
+                echo "`date`"
             - name: Directory Content
               run: |
                 echo `ls -l`
