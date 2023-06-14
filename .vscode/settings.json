@@ -1,3 +1,12 @@
 {
-  "prettier.semi": false
+  "prettier.semi": false,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+  "editor.indentSize": "tabSize",
+  "editor.guides.indentation": true,
+  "editor.autoIndent": "full",
+  "editor.wrappingIndent": "same",
+  "workbench.tree.indent": 8,
+  "editor.formatOnSave": false
 }
