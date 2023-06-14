@@ -18,6 +18,7 @@ primary_region = "arn"
   path = "/health"
   protocol = "http"
   timeout = 2000
+  restart_limit = 3
 
 [deploy]
   release_command = "npm run build"
