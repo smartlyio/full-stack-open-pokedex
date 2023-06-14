@@ -10,8 +10,6 @@ primary_region = "arn"
   internal_port = 5000
   force_https = true
   processes = ["app"]
-  auto_stop_machines = true
-  auto_start_machines = true
 
 [[services.http_checks]]
   interval = 10000
@@ -21,8 +19,6 @@ primary_region = "arn"
   protocol = "http"
   restart_limit = 0
   timeout = 2000
-  tls_skip_verify = false
-  [services.http_checks.headers]
 
 [deploy]
   release_command = "npm run build"
