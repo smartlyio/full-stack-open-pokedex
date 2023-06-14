@@ -6,7 +6,7 @@
 app = "wispy-dust-9470"
 primary_region = "arn"
 
-[http_service]
+[[services]]
   internal_port = 5000
   force_https = true
   processes = ["app"]
