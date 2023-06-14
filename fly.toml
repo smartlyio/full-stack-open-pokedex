@@ -10,7 +10,15 @@ primary_region = "arn"
   internal_port = 5000
   force_https = true
   processes = ["app"]
-  http_checks = []
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  restart_limit = 0
+  timeout = 2000
 
 [deploy]
   release_command = "npm run build"
