@@ -1,0 +1,40 @@
+# fly.toml app configuration file generated for cilearning on 2023-06-14T15:51:33+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "cilearning"
+primary_region = "cdg"
+
+
+[env]
+  PORT = "8080"
+
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  protocol = "tcp"
+  processes = ["app"]
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = "80"
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = "443"
+
+
+
+[deploy]
+  release_command = "npm run build"
+
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.0"
+
+[processes]
+  app = "node app.js"
+

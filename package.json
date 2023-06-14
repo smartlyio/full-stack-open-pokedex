@@ -1,6 +1,7 @@
 {
   "name": "fullstackopen-cicd",
   "version": "1.0.0",
+  "engines": {     "node": "16.19.0"   },
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
@@ -44,11 +45,12 @@
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
     "style-loader": "^1.2.1",
-    "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "webpack": "^4.43.0",
+
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "react": "^16.13.1",
