@@ -8,5 +8,5 @@
   "editor.autoIndent": "full",
   "editor.wrappingIndent": "same",
   "workbench.tree.indent": 8,
-  "editor.formatOnSave": false
+  "editor.formatOnSave": true
 }
