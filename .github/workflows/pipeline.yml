@@ -32,11 +32,11 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.64.0
+        uses: anothrNick/github-tag-action@1.55.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
