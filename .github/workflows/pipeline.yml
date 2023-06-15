@@ -17,12 +17,5 @@ jobs:
               run: npm install
             - name: Check style
               run: npm run eslint
-            - name: Render GitHub Action
-              uses: Bounceapp/render-action@0.6.0
-              with:
-                render-token: rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
-                github-token: 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
-                service-id: srv-ci5ft0tph6eh6mr8bnc0?key=DEv8qapxkAE
-                retries: 20
-                wait: 16000
-                sleep: 30000
+            - name: Trigger deployment
+              run: curl https://api.render.com/deploy/srv-ci5ft0tph6eh6mr8bnc0?key=DEv8qapxkAE?key=rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
