@@ -22,7 +22,7 @@ jobs:
               with:
                 render-token: rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
                 github-token: rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
-                service-id: srv-1234
+                service-id: srv-ci5ft0tph6eh6mr8bnc0?key=DEv8qapxkAE
                 retries: 20
                 wait: 16000
                 sleep: 30000
