@@ -9,6 +9,7 @@ on:
     types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
+    name: react dev pipe
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
