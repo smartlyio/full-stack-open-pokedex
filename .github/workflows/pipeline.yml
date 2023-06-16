@@ -1,0 +1,21 @@
+name: Deployment Pipeline
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    simple_deployment_pipeline:
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with:
+                node-version: '16'
+            - name: Install dependencies
+              run: npm install
+            - name: Check style
+              run: npm run eslint
+            - name: Trigger deployment
+              run: curl https://api.render.com/deploy/srv-ci65j95ph6ekv7si5lb0?key=zHfZzITMMjQ
