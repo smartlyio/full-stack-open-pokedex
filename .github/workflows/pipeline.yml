@@ -12,7 +12,7 @@ jobs:
   simple_deployment_pipeline:
     name: react dev pipe
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push'  }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -48,5 +48,5 @@ jobs:
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PATCH_STRING_TOKEN: true
+          DEFAULT_BUMP: patch
           DRY_RUN: true
