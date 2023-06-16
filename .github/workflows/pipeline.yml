@@ -18,4 +18,4 @@ jobs:
             - name: Check style
               run: npm run eslint
             - name: Trigger deployment
-              run: curl https://api.render.com/deploy/srv-ci5ft0tph6eh6mr8bnc0?key=DEv8qapxkAE?key=rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
+              run: curl https://api.render.com/deploy/srv-1234?key=rnd_ejMELZ5QIwfnn27jBr6TBn3eNL57
