@@ -39,7 +39,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: |
+          github.event_name == 'push'
+            && !contains(github.event.head_commit.message, '#skip')
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
