@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Healthcheck
 
 on:
   push:
