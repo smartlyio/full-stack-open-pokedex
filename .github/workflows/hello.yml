@@ -14,5 +14,5 @@ jobs:
           echo "Hello World!"
       - name: Now it is
         run: |
-          ls --time-style=long-iso
-        echo date
+          ls --time-style=long-iso |
+          echo "Second"
