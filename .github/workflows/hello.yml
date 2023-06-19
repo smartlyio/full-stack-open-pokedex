@@ -1,4 +1,4 @@
-name: Hello World!
+name: Set up job
 
 on:
   push:
@@ -12,9 +12,6 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-  now_it_is:
-    runs-on: ubuntu-20.04
-    steps:
       - name: Now it is
         run: |
           ls --time-style=long-iso
