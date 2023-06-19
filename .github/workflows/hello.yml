@@ -7,7 +7,7 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-20.04
+    runs-on: Windows 11
     steps:
       - name: Say hello
         run: |
