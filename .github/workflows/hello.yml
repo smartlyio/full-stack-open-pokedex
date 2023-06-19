@@ -15,4 +15,4 @@ jobs:
       - name: Now it is
         run: |
           ls --time-style=long-iso |
-          echo "Second"
+          echo date
