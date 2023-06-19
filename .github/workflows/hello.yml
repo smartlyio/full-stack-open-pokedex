@@ -11,4 +11,4 @@ jobs:
     steps:
       - name: Say hello
         run: |
-          echo "Hello World!"
+          echo "Hello World! Run from GitHub Actions!"
