@@ -6,7 +6,9 @@ describe('Pokedex', function() {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
   })
   */
-  it('front page can be opened', function() {
+  it('pokemon page can be navigated to', function() {
     cy.visit('http://localhost:5000')
+    cy.contains('ivisaur').click()
+    cy.contains('chlorophyll')
   })
 })
