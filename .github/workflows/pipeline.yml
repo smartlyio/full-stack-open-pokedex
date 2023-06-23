@@ -37,3 +37,5 @@ jobs:
           retries: 20
           wait: 16000
           sleep: 30000
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-ciame159aq007t9u65r0?key=5sr2lIuN_dE
