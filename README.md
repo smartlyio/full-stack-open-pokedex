@@ -21,11 +21,11 @@ https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
 VSCode:
 * Create a new branch.
-* Make code changes.
-* Commit the new branch.
+* Commit your changes.
 
 GitHub
-* Compare & Create a pull request.
+* Open a pull request to your main branch (in GitHub).
+    Don't forget to select YOUR REPO.
 * Add coments and Comment.
 
 VSCode:
