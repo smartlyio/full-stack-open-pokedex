@@ -11,7 +11,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('3')
+  // Branch 11.13 second change
+  res.send('5')
 })
 
 app.get('/health', (req, res) => {
