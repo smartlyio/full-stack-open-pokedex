@@ -11,13 +11,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/version', (req, res) => {
-  res.send('2')
+  res.send('3')
 })
 
-// app.get('/health', (req, res) => {
-app.get('/health', () => {
-  throw 'THE SERVER IS ON FIRE'
-  // res.send('ok')
+app.get('/health', (req, res) => {
+// app.get('/health', () => {
+  // throw 'THE SERVER IS ON FIRE'
+  res.send('ok')
 })
 
 app.listen(PORT, () => {
