@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 
 app.get('/version', (req, res) => {
   // Branch 11.14 another change to check pull request again!
-  res.send('6')
+  res.send('7')
 })
 
 app.get('/health', (req, res) => {
