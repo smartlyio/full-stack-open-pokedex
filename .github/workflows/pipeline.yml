@@ -28,14 +28,5 @@ jobs:
           start: npm run start-prod
           command: npm run test:e2e
           wait-on: http://localhost:5000
-      - name: Render GitHub Action
-        uses: bounceapp/render-action@0.6.0
-        with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          service-id: srv-ciame159aq007t9u65r0?key=5sr2lIuN_dE
-          retries: 20
-          wait: 16000
-          sleep: 30000
       - name: Trigger deployment
         run: curl https://api.render.com/deploy/srv-ciame159aq007t9u65r0?key=5sr2lIuN_dE
