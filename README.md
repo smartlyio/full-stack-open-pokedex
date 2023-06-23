@@ -18,3 +18,16 @@ Start by running `npm install` inside the project folder
 ### GitHub Actions documentation
 https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows
 
+
+VSCode:
+* Create a new branch.
+* Make code changes.
+* Commit the new branch.
+
+GitHub
+* Compare & Create a pull request.
+* Add coments and Comment.
+
+VSCode:
+* Merge branch to master.
+* At this point, a Deploy is executed.
