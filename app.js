@@ -15,6 +15,7 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
+  throw 'THE SERVER IS ON FIRE'
   res.send('ok')
 })
 
