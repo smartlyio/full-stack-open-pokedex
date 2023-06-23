@@ -1,6 +1,14 @@
 name: Deployment pipeline
 
 on:
+  workflow_call:
+    secrets:
+      RENDER_SERVICE_ID:
+        description: 'RENDER_SERVICE_ID'
+        required: true
+      RENDER_API_KEY:
+        description: 'RENDER_API_KEY'
+        required: true
   push:
     branches:
       - master
@@ -29,4 +37,4 @@ jobs:
           command: npm run test:e2e
           wait-on: http://localhost:5000
       - name: Trigger deployment
-        run: curl https://api.render.com/deploy/srv-ciame159aq007t9u65r0?key=5sr2lIuN_dE
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
