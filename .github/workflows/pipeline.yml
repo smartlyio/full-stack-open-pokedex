@@ -14,7 +14,7 @@ on:
       - master
   pull_request:
     branches: [master]
-    types: [opened, synchronize]
+    types: [opened, synchronize, closed]
 
 jobs:
   simple_deployment_pipeline:
@@ -43,16 +43,11 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
+    if: github.event.pull_request.merged == true
     needs: [simple_deployment_pipeline]
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
-          fetch-depth: '0'
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
