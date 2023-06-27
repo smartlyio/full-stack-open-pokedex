@@ -46,10 +46,6 @@ jobs:
       contents: write
     needs: [simple_deployment_pipeline]
     steps:
-      - name: Start git repo
-        run:
-          git init
-          git rev-list --count origin/master..$(git branch --show-current)
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
