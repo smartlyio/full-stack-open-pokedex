@@ -46,9 +46,10 @@ jobs:
       contents: write
     needs: [simple_deployment_pipeline]
     steps:
+      - name: Start git repo
+        run: git init
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
-      - run: git init
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
