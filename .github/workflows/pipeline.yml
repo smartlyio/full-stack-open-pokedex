@@ -1,5 +1,4 @@
 name: Deployment pipeline
-
 on:
   workflow_call:
     secrets:
@@ -15,7 +14,6 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize, closed]
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -43,9 +41,10 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
-    if: github.event.pull_request.merged == true
-    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    needs: [simple_deployment_pipeline]
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
