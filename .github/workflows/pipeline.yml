@@ -46,6 +46,10 @@ jobs:
       contents: write
     needs: [simple_deployment_pipeline]
     steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
