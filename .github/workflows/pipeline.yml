@@ -45,7 +45,6 @@ jobs:
   tag_release:
     if: github.event.pull_request.merged == true
     needs: [simple_deployment_pipeline]
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
