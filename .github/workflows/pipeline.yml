@@ -18,3 +18,7 @@ jobs:
         run: npm update && npm update --save-dev && npm install
       - name: Check style
         run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm test
