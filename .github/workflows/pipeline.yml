@@ -59,10 +59,16 @@ jobs:
         env:
           BODY: ${{ toJson(github.event.pull_request.body) }}
         run: echo "$BODY"
-      - name: Skip (Pull Request) ***
+      - name: Check if SKIP is ok ***
         env:
-          SKIP: ${{ contains(toJson(github.event.pull_request.body), '#skip') }}
+          SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
         run: echo "$SKIP"
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          PRERELEASE: true
       - name: Commits ***
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
