@@ -41,6 +41,7 @@ jobs:
           start: npm run start-prod
           command: npm run test:e2e
           wait-on: http://localhost:5000
+      - uses: actions/checkout@v3
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }} && ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }} != true
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
@@ -83,6 +84,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         if: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }} != true
         uses: anothrNick/github-tag-action@1.67.0
