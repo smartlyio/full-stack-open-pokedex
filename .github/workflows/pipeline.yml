@@ -8,6 +8,7 @@ on:
       RENDER_API_KEY:
         description: 'RENDER_API_KEY'
         required: true
+      
   push:
     branches:
       - master
@@ -50,6 +51,18 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
+      - name: GitHub Context ***
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Commits ***
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: Commit Messages ***
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
