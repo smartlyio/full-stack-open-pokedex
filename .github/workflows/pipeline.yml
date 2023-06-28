@@ -76,6 +76,8 @@ jobs:
       contents: write
     needs: [simple_deployment_pipeline]
     steps:
+      - name: Testing github context variables
+        run: echo "$BODY"
       - uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
