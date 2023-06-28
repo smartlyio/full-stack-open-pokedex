@@ -1,9 +1,9 @@
 module.exports = {
-  'env': {
-    'commonjs': true,
-    'es2021': true,
-    'node': true
-},
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended"
@@ -25,7 +25,7 @@ module.exports = {
       ],
     "linebreak-style": [
       "error",
-      "unix"
+      "windows"
     ],
     "quotes": [
       "error",
