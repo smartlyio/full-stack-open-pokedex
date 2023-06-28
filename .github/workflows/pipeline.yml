@@ -58,7 +58,77 @@ jobs:
       - name: Body (Pull Request) ***
         env:
           BODY: ${{ toJson(github.event.pull_request.body) }}
+        run: echo "$BODY"name: Deployment pipeline
+on:
+  workflow_call:
+    secrets:
+      RENDER_SERVICE_ID:
+        description: 'RENDER_SERVICE_ID'
+        required: true
+      RENDER_API_KEY:
+        description: 'RENDER_API_KEY'
+        required: true
+      
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Check style
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm run start-prod
+          command: npm run test:e2e
+          wait-on: http://localhost:5000
+      - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+  tag_release:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    needs: [simple_deployment_pipeline]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+      - name: GitHub Context ***
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: Body (Pull Request) ***
+        env:
+          BODY: ${{ toJson(github.event.pull_request.body) }}
         run: echo "$BODY"
+      - name: SKIP ***
+        env:
+          SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
+        run: echo "$SKIP"
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          PRERELEASE: true
       - name: Commits ***
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
