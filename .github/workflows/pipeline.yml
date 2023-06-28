@@ -1,4 +1,5 @@
 name: Deployment pipeline
+
 on:
   workflow_call:
     secrets:
@@ -15,7 +16,9 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
+
 jobs:
+
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -41,16 +44,11 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-  tag_release:
+
+  git_hub_context:
     runs-on: ubuntu-20.04
-    permissions:
-      contents: write
-    needs: [simple_deployment_pipeline]
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
-          fetch-depth: '0'
       - name: GitHub Context ***
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -63,12 +61,6 @@ jobs:
         env:
           SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
         run: echo "$SKIP"
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.67.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          PRERELEASE: true
       - name: Commits ***
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
@@ -77,6 +69,17 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+
+  tag_release:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    needs: [simple_deployment_pipeline]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
