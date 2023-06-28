@@ -52,7 +52,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Skip is true?
-        run: echo "Yeah, SKIP is true - $SKIP"
+        run: echo "Yeah, SKIP is true"
 
   tag_release:
     runs-on: ubuntu-20.04
