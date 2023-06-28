@@ -53,10 +53,6 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: Body (Pull Request) ***
-        env:
-          BODY: ${{ toJson(github.event.pull_request.body) }}
-        run: echo "$BODY"
       - name: Check if SKIP is ok ***
         env:
           SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
@@ -76,6 +72,11 @@ jobs:
       contents: write
     needs: [simple_deployment_pipeline]
     steps:
+      - uses: actions/checkout@v3
+      - name: GitHub variables
+        env:
+          BODY: ${{ toJson(github.event.pull_request.body) }}
+        run: echo "$BODY"
       - name: Testing github context variables
         run: echo "$BODY"
       - uses: actions/checkout@v3
