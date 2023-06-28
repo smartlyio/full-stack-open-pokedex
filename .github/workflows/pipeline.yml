@@ -119,12 +119,10 @@ jobs:
         env:
           BODY: ${{ toJson(github.event.pull_request.body) }}
         run: echo "$BODY"
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.67.0
+      - name: Skip (Pull Request) ***
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          PRERELEASE: true
+          BODY: ${{ contains(toJson(github.event.pull_request.body), '#skip') }}
+        run: echo "$SKIP"
       - name: Commits ***
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
