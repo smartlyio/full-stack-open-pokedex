@@ -119,7 +119,7 @@ jobs:
         env:
           BODY: ${{ toJson(github.event.pull_request.body) }}
         run: echo "$BODY"
-      - name: SKIP ***
+      - name: Check if SKIP is ok ***
         env:
           SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
         run: echo "$SKIP"
