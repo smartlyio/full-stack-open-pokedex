@@ -45,7 +45,7 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
-  git_hub_context:
+  github_context:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
