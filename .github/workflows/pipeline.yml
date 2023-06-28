@@ -47,11 +47,11 @@ jobs:
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
   test_github_variables:
+    if: contains( toJson(github.event.pull_request.body), '#skip' ) == true
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Skip is true?
-        if: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }} == true
         run: echo "Yeah, SKIP is true - $SKIP"
 
   tag_release:
