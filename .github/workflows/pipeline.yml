@@ -53,7 +53,7 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: Skip ***
+      - name: Check if Skip ***
         env:
           SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
         run: echo "$SKIP"
