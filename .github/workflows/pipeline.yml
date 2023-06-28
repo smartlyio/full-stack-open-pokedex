@@ -55,10 +55,10 @@ jobs:
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: Commits *** (Pull Request)
+      - name: Body (Pull Request) ***
         env:
-          COMMITS: ${{ toJson(github.event.pull_request.commits) }}
-        run: echo "$COMMITS"
+          BODY: ${{ toJson(github.event.pull_request.body) }}
+        run: echo "$BODY"
       - name: Commits ***
         env:
           COMMITS: ${{ toJson(github.event.commits) }}
