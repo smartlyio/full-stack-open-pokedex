@@ -46,26 +46,13 @@ jobs:
         if: ${{ github.event_name == 'push' }} && ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }} != true
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
-  github_context:
+  test_github_variables:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: GitHub Context ***
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Check if Skip ***
-        env:
-          SKIP: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }}
-        run: echo "$SKIP"
-      - name: Commits ***
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: Commit Messages ***
-        env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+      - name: Skip is true?
+        if: ${{ contains( toJson(github.event.pull_request.body), '#skip' ) }} != true
+        run: echo "Yeah, SKIP is true"
 
   tag_release:
     runs-on: ubuntu-20.04
