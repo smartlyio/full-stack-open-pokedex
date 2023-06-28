@@ -121,7 +121,7 @@ jobs:
         run: echo "$BODY"
       - name: Skip (Pull Request) ***
         env:
-          BODY: ${{ contains(toJson(github.event.pull_request.body), '#skip') }}
+          SKIP: ${{ contains(toJson(github.event.pull_request.body), '#skip') }}
         run: echo "$SKIP"
       - name: Commits ***
         env:
