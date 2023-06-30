@@ -1,15 +1,15 @@
 name: Render
-on: [pull_request]:
+on: 
+    pull_request:
 jobs:
   deploy:
     name: Wait for Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+        uses: bounceapp/render-action@0.7.0
         with:
           render-token: ${{ secrets.RENDER_API_KEY }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           retries: 20
           wait: 16000
