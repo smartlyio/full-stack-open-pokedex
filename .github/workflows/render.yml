@@ -1,6 +1,9 @@
-name: Render
+name: render action
+
 on: 
-    pull_request:
+  push:
+    branches:
+      - master
 jobs:
   deploy:
     name: Wait for Deploy
