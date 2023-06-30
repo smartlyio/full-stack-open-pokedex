@@ -6,6 +6,7 @@ const PokemonAbility = ({ abilityName }) => (
     <div className="pokemon-ability-name">
       {abilityName}
     </div>
+    <div>test</div>
   </div>
 )
 
