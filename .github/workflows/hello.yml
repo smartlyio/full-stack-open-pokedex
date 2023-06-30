@@ -5,16 +5,16 @@ on:
     branches:
       - master
 
-#jobs:
-hello_world_job:
-  runs-on: ubuntu-20.04
-  steps:
-    - name: Say hello
-      run: |
-        echo "Hello World!"
-    - name: Now it is
-      run: |
-        date
-    - name: Directory content
-      run: |
-        ls -l
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
