@@ -27,3 +27,7 @@ jobs:
           command: npm run test:e2e #script that runs cypress tests
           start: npm run start-prod #script that runs the server
           wait-on: http://localhost:5000 #doesn't start tests unless this server is up
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
