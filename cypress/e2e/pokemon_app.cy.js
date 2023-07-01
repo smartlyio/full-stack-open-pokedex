@@ -19,3 +19,11 @@ describe('click link', function() {
     cy.contains('chlorophyll')
   })
 })
+
+
+describe('app health check', function() {
+  it('app health check. if fail, no deploy', function() {
+    cy.visit('http://localhost:3000/health')
+    cy.contains('ok')
+  })
+})
