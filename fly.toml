@@ -50,3 +50,4 @@ primary_region = "cdg"
     restart_limit = 0
     timeout = 2000
     tls_skip_verify = false
+    [services.http_checks.headers]
