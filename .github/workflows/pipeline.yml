@@ -22,8 +22,6 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
-      - name: Upgrade Ubuntu apps
-        run: sudo apt upgrade
       - name: E2E tests
         uses: cypress-io/github-action@v2
         with:
