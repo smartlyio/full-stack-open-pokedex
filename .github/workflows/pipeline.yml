@@ -34,3 +34,10 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: pokedex-1234
           heroku_email: hinnawiabdullah@gmail.com
+          # info: https://github.com/marketplace/actions/deploy-to-heroku
+          healthcheck: 'https://pokedex-1234-67d4b42eed78.herokuapp.com/health'
+          checkstring: 'ok'
+          # Make the action wait for 5 sec before performing the health check
+          delay: 5
+          # Rollback on healthcheck failure
+          rollbackonhealthcheckfailed: true
