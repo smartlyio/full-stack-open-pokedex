@@ -28,6 +28,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3001
+      # info: https://fullstackopen.com/en/part11/deployment
+      # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
