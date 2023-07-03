@@ -1,0 +1,7 @@
+During the Devops with docker mooc course, I expanded my CI/CD pipeline for my personal website. The project repository is stored in github, so the pipeline was set up using github actions. I already had linting of the code and automated testing on PR configured, and during the course I automated building of the docker container, pushing it to dockerhub, and then pulling in inside the aws lightsail instance using watchtower.
+
+On the linting and testing side, I used python spesific tools: For linting flake8 (Many other linters exist) and for testing pytest (Other popular frameworks include robot and unittest). As python apps do net need to be built, this was skipped.
+
+Previously I had used a self hosted Gitlab instance to house the repository and CI/CD pipeline. After github actions released, I ecided to move both to there and shut down my gitlab instance due to the hassle of maintenance, due to there being no cost for a small project such as mine, and becuase I had no special needs in the testing / building / deploying side of the project githib actions could not handle.
+
+For a solo developer working on small scale projects, I personally don't see much benefit for running your own git server and CI/CD platform. This introduces too much unnecessary complexity and takes away time from development. There is also the risk of hardware failures, which requires you to think about backing up your server.
