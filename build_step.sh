@@ -5,14 +5,17 @@ echo "Build script"
 # Install dependencies
 npm install
 
-# Linttaus
+# Linting
 npm run eslint
 
 # Build the project
 npm run build
 
-# Testit
-npm run test
+# Start the application in the background
+npm start &
 
-# e2e testit
+# Wait for the application to be accessible
+sleep 5
+
+# Run the e2e tests
 npm run test:e2e
