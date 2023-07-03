@@ -1,0 +1,11 @@
+Developing application with C#
+
+When you are developing with C# and want to keep your code contiuously integrated, you should definitely look towards certain tools that help a lot keeping your code maintained. One of these is Visual Studio's autoformatter. It takes care of basic situations like indentation so you can keep your focus on coding. Often there's also need for linting. SonarLint is really good tool for that. It has wide knowledge about C# so it helps you while following C# guidelines. It also prevents you from going to pitfalls, so using it is very recommended.
+
+Testing is one of the main things when talking about CI development. That's why it's important to pay attention on selection of testing framework. There are few popular options which to choose like MSTest, NUnit, xUnit.NET. MSTest is made by Microsoft so it's well integrated to Visual Studio. That also means wide support for framework. If you need more tools included to framework, you might want to use other frameworks eg. NUnit offers more tools than MSTest but with NUnit you have to consider if it's getting any support in coming years because it's open source project.
+
+Building application on C# is possible by compiling the code and making package. Compiling code can be done internally in C# and packaging could be done with Visual Studio Web Publishing Pipeline.
+
+For setting up CI you will need some platform. Most popular options are Github Actions and Jenkins. If those don't fit for your purpose, you might wanna try eg. Buddy or GoCD. Buddy is neat and fast to configurate. It's also all-arounder and it supports all languages. If you are working on something specific and you need wide range of features, then you should try GoCD. That's because GoCD has numerous plugins which you can use.
+
+The decision about hosting project on cloud or making a self-hosted environment depends about type of project. If project is small and it doesn't have special requirements. It would be good choice to keep project on cloud. If it's expected that project is gonna grow a lot and it needs something specific from environment, then it might be reasonable to think making self-hosted environment for project. Given information indicates that project isn't that big that there's reason to self-host.
