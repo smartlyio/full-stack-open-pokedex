@@ -9,6 +9,7 @@ on:
 
 jobs:
     simple_deployment_pipeline:
+      name: Testing and building
       runs-on: ubuntu-20.04
       steps:
         - uses: actions/checkout@v3
@@ -33,3 +34,15 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000
+
+    deploy:
+      name: Deploy
+      needs: [simple_deployment_pipeline] # Our tests must pass in order to run the deploy job
+      runs-on: ubuntu-latest
+
+      steps: 
+        - name: Deploy to production
+          uses: johnbeynon/render-deploy-action@v0.0.8
+          with:
+            service-id: ${{ secrets.SERVICE_ID }} # Can be found as part of the Deploy Hook
+            api-key: ${{ secrets.RENDER_API_KEY }}
