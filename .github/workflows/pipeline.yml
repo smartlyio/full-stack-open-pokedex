@@ -49,3 +49,4 @@ jobs:
           with:
             service-id: ${{ secrets.MY_RENDER_SERVICE_ID }} # Can be found as part of the Deploy Hook
             api-key: ${{ secrets.MY_RENDER_API_KEY }}
+          if: ${{ github.event_name == 'push' }}
