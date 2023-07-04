@@ -57,7 +57,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          default_bump: patch
+          DEFAULT_BUMP: patch
         if: ${{ github.event_name == 'push' }}
       
       - name: Deploy to production
