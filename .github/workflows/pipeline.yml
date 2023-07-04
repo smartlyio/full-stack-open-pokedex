@@ -5,48 +5,64 @@ on:
     branches:
       - master
   pull_request:
-     branches: [master]
-     types: [opened, synchronize]
-
-# name and trigger not shown anymore...
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
-    simple_deployment_pipeline:
-      name: Testing and building
-      runs-on: ubuntu-20.04
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: '16'
-        - name: Install dependencies 
-          run: npm install  
+  simple_deployment_pipeline:
+    name: Testing and building
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies 
+        run: npm install  
   
-        - name: Check style
-          run: npm run eslint
+      - name: Check style
+        run: npm run eslint
 
-        - name: Build
-          run: npm run build
+      - name: Build
+        run: npm run build
 
-        - name: Test
-          run: npm run test
+      - name: Test
+        run: npm run test
         
-        - name: e2e tests
-          uses: cypress-io/github-action@v5
-          with:
-            command: npm run test:e2e
-            start: npm run start-prod
-            wait-on: http://localhost:5000
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
 
-    deploy:
-      name: Deploy
-      needs: [simple_deployment_pipeline] # Our tests must pass in order to run the deploy job
-      runs-on: ubuntu-latest
-
-      steps: 
-        - name: Deploy to production
-          uses: johnbeynon/render-deploy-action@v0.0.8
-          with:
-            service-id: ${{ secrets.MY_RENDER_SERVICE_ID }} # Can be found as part of the Deploy Hook
-            api-key: ${{ secrets.MY_RENDER_API_KEY }}
-          if: ${{ github.event_name == 'push' }}
+  tag_release:
+    name: Bump version and push tag
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          default_bump: patch
+        if: ${{ github.event_name == 'push' }}
+      
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+        if: ${{ github.event_name == 'push' }}
