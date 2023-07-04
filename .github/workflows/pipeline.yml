@@ -34,6 +34,6 @@ jobs:
       contents: write
     steps:
       - name: Bump version and push tag
-        uses: mathieudutour/github-tag-action@v6.1
+        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
