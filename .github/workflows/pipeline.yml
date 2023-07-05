@@ -21,10 +21,10 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-      - name: build
-        run: npm run build
       - name: test
         run: npm test
+      - name: build
+        run: npm run build
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -34,27 +34,6 @@ jobs:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-      - name: Deploy Success
-        if: ${{ success() }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        with:
-            severity: info
-            details: Deploy Succeeded!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deploy Failure
-        if: ${{ failure() }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        with:
-            severity: error
-            details: Deploy Failed!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deploy Cancelled
-        if: ${{ cancelled() }}
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        with:
-            severity: warn
-            details: Deploy Cancelled!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')  }}
     needs: [simple_deployment_pipeline]
@@ -63,6 +42,24 @@ jobs:
       contents: write
     steps:
       - name: Bump version and push tag
-        uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2
+        uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  discord_message:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Success
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+           severity: info
+           details: Deploy Succeeded!
+           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Deploy Failure
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: error
+            etails: Deploy Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
