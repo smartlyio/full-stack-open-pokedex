@@ -8,6 +8,8 @@ import ErrorMessage from "./ErrorMessage";
 const formatName = (nameWithDash) => nameWithDash.replace("-", " ");
 
 const PokemonPage = ({ previous, next }) => {
+  console.log(previous);
+  //console.log(next);
   const { name } = useParams();
   const {
     data: pokemon,
@@ -34,13 +36,12 @@ const PokemonPage = ({ previous, next }) => {
     (ability) => ability.is_hidden === true
   );
 
-  console.log("hiddenAbility=", hiddenAbility); // eslint-disable-line
   return (
     <>
       <div className="links">
-        {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
-        <Link to="/">Home</Link>
-        {next && <Link to={`/pokemon/${previous.name}`}>Next</Link>}
+        {previous && <a href={`/pokemon/${previous.name}`}>Previous</a>}
+        <a href="/">Home</a>
+        {next && <a href={`/pokemon/${next.name}`}>Next</a>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div
