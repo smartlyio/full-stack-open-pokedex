@@ -37,6 +37,10 @@ jobs:
         uses: mathieudutour/github-tag-action@fcfbdceb3093f6d85a3b194740f8c6cec632f4e2
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+  discord_message:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy Success
         if: ${{ success() }}
         uses: rjstone/discord-webhook-notify@v1
