@@ -3,7 +3,7 @@ name: Url Health Check
 on:
    schedule:
       # * is a special character in YAML so you have to quote this string
-      - cron:  '50 6,18 * * *'
+      - cron:  '59 23 31 12 *'
 
 jobs: 
   url_health_check:
