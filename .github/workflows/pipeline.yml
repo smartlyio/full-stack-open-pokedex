@@ -29,5 +29,9 @@ jobs:
                 wait-on: http://localhost:5005
             - name: Deploy to Render.com
               uses: bankfliptech/deploy-to-render@v1.0.2
+              with:
+                serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+                apiKey: ${{ secrets.RENDER_API_KEY }}
+                deployHookURL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
 
               
