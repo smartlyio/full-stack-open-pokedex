@@ -41,7 +41,7 @@ jobs:
         if: failure()
         with:
             severity: error
-            details: ${{ job.status }}
+            details: Test failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
