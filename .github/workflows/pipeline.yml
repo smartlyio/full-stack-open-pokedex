@@ -27,11 +27,11 @@ jobs:
                 command: npm run test:e2e
                 start: npm run start-prod
                 wait-on: http://localhost:5005
-            - name: Deploy
-              uses: bankfliptech/deploy-to-render@v1
+            - name: Trigger deployment
+              uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
-                deployHookURL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+                multipleDeployment: false #optional, default true
 
               
