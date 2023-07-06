@@ -35,6 +35,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+          
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+            severity: error
+            details: Test Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     name: Bump version and push tag
@@ -71,13 +79,5 @@ jobs:
         if: success()
         with:
             severity: info
-            details: Test Succeeded!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-      - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1.0.4
-        if: failure()
-        with:
-            severity: error
-            details: Test Failed!
+            details: Deployment succeeded!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
