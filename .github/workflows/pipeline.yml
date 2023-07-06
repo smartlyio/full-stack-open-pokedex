@@ -27,11 +27,7 @@ jobs:
                 command: npm run test:e2e
                 start: npm run start-prod
                 wait-on: http://localhost:5005
-            - name: Deploy to Render.com
-              uses: bankfliptech/deploy-to-render@v1.0.2
-              with:
-                serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-                apiKey: ${{ secrets.RENDER_API_KEY }}
-                deployHookURL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+            - name: Trigger deployment
+              run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
               
