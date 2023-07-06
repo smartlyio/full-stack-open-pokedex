@@ -37,22 +37,35 @@ jobs:
         uses: mathieudutour/github-tag-action@v6.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-  discord_message:
-    if: ${{ github.event_name == 'push' }}
+  # discord_message:
+  #   if: ${{ github.event_name == 'push' }}
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Deploy Success
+  #       if: ${{ success() }}
+  #       uses: rjstone/discord-webhook-notify@v1
+  #       with:
+  #         severity: info
+  #         details: Deploy Succeeded!
+  #         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  #     - name: Deploy Failure
+  #       if: ${{ failure() }}
+  #       uses: rjstone/discord-webhook-notify@v1
+  #       with:
+  #         severity: error
+  #         details: Deploy Failed!
+  #         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+  Health_Check:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Success
-        if: ${{ success() }}
-        uses: rjstone/discord-webhook-notify@v1
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
         with:
-          severity: info
-          details: Deploy Succeeded!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Deploy Failure
-        if: ${{ failure() }}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          details: Deploy Failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
+        # Check the following URLs one by one sequentially
+          url: https://hanasiu-pokemon.onrender.com|https://hanasiu-pokemon.onrender.com/pokemon/bulbasaur
+        # Fail this action after this many failed attempts
+          max-attempts: 3 # Optional, defaults to 1
+        # Delay between retries
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+        # Retry all errors, including 404. This option might trigger curl upgrade.
+          retry-all: false # Optional, defaults to "false"
