@@ -1,0 +1,21 @@
+name: Url Health Check
+
+on:
+   schedule:
+      # * is a special character in YAML so you have to quote this string
+      - cron:  '50 6,18 * * *'
+
+jobs: 
+  url_health_check:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://hanasiu-pokemon.onrender.com|http://hanasiu-pokemon.onrender.com
+          # Fail this action after this many failed attempts
+          max-attempts: 3 # Optional, defaults to 1
+          # Delay between retries
+          retry-delay: 5s # Optional, only applicable to max-attempts > 1
+        
