@@ -27,9 +27,13 @@ jobs:
                 command: npm run test:e2e
                 start: npm run start-prod
                 wait-on: http://localhost:5005
+            - name: Render Deploy Action
+              uses: johnbeynon/render-deploy-action@v0.0.8
+              with:
+                  service-id: ${{ secrets.RENDER_SERVICE_ID }}
+                  api-key: ${{ secrets.RENDER_API_KEY }}
               
             - name: Trigger deployment
-              uses: johnbeynon/render-deploy-action@v0.0.8
               run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
               
