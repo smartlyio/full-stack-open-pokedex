@@ -13,6 +13,22 @@ primary_region = "arn"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+  [[http_service.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
+
+  [[http_service.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+    [http_service.http_checks.headers]
 
 [env]
   PORT = "8080"
@@ -30,20 +46,5 @@ primary_region = "arn"
   [build.args]
     NODE_VERSION = "16.20.1"
 
-[[http_service.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
 
-[[http_service.http_checks]]
-  interval = 10000
-  grace_period = "5s"
-  method = "get"
-  path = "/health"
-  protocol = "http"
-  restart_limit = 0
-  timeout = 2000
-  tls_skip_verify = false
-  [http_service.http_checks.headers]
 
