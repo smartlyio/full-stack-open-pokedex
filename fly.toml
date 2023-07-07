@@ -30,13 +30,13 @@ primary_region = "arn"
   [build.args]
     NODE_VERSION = "16.20.1"
 
-[[services.tcp_checks]]
+[[http_service.tcp_checks]]
   grace_period = "1s"
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
 
-[[services.http_checks]]
+[[http_service.http_checks]]
   interval = 10000
   grace_period = "5s"
   method = "get"
