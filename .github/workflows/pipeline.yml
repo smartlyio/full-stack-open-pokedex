@@ -29,14 +29,14 @@ jobs:
                 command: npm run test:e2e
                 start: npm run start-prod
                 wait-on: http://localhost:5005
-            if: ${{ github.event_name == 'push' }} {
+            if: ${{ github.event_name == 'push' }} 
                 - name: Trigger deployment
                     uses: sws2apps/render-deployment@main 
                     with:
                       serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                       apiKey: ${{ secrets.RENDER_API_KEY }}
                       multipleDeployment: false #optional, default true
-            }
+            
            
 
               
