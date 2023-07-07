@@ -13,3 +13,12 @@ describe("Pokedex", function () {
     );
   });
 });
+
+describe("Navigation Test", () => {
+  it("navigate to particular pokemon", () => {
+    cy.visit("http://localhost:5000/pokemon/ivysaur");
+    cy.contains("Chlorophyll");
+    cy.go("back");
+    cy.url().should("eq", "http://localhost:5000/");
+  });
+});
