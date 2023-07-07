@@ -6,35 +6,46 @@
 app = "pokedex-ci-cd"
 primary_region = "arn"
 
-[http_service]
+[env]
+  PORT = "8080"
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
   internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
   processes = ["app"]
-  [[http_service.tcp_checks]]
-    grace_period = "1s"
+    
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [[services.tcp_checks]]
+    grace_period = "30s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
 
-  [[http_service.http_checks]]
+  [[services.http_checks]]
     interval = 10000
-    grace_period = "5s"
+    grace_period = "30s"
     method = "get"
     path = "/health"
     protocol = "http"
     restart_limit = 0
     timeout = 2000
     tls_skip_verify = false
-    [http_service.http_checks.headers]
-
-[env]
-  PORT = "8080"
-
-[experimental]
-  auto_rollback = true
+    [services.http_checks.headers]
 
 [deploy]
   release_command = "npm run build"
