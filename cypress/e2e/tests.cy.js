@@ -14,11 +14,11 @@ describe("Pokedex", function () {
   });
 });
 
-describe("Navigation Test", () => {
-  it("navigate to particular pokemon", () => {
-    cy.visit("http://localhost:5000/pokemon/ivysaur");
-    cy.contains("Chlorophyll");
-    //cy.go("back");
-    //cy.url().should("eq", "http://localhost:5000/");
+describe("Navigation Test", function () {
+  it("navigate to particular pokemon", function () {
+    cy.visit("http://localhost:5000");
+    cy.contains("ivysaur").click();
+    cy.url().should("include", "/ivysaur");
+    cy.contains("chlorophyll").should("exist");
   });
 });
