@@ -31,7 +31,7 @@ jobs:
                 wait-on: http://localhost:5005
             - name: Trigger deployment
               if: ${{ github.event_name == 'push' }}
-              uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
+              uses: sws2apps/render-deployment@main
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
