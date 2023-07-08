@@ -1,0 +1,25 @@
+name: Ping
+
+on:
+  schedule:
+    - cron: '30 12 * * 2'
+
+jobs:
+  ping:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: ${{github.event.repository.homepage}}
+          max-attempts: 3
+          retry-delay: 5s
+      - name: Ping Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        with:
+          severity: error
+          text: ping failed
+          details: ping failed :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

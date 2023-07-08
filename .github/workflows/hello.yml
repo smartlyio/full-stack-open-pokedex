@@ -1,0 +1,31 @@
+name: Hello World!
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  hello_world_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
+  github_context:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
