@@ -35,6 +35,7 @@ jobs:
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Deploy to Heroku
+        if: ${{ github.event_name == 'push' }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
