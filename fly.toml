@@ -1,0 +1,24 @@
+# fly.toml app configuration file generated for abou-pokedex-app on 2023-07-09T18:32:59+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "abou-pokedex-app"
+primary_region = "cdg"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[[services]]
+  protocol = ""
+  internal_port = 3000
+  processes = ["app"]
+
+[[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
