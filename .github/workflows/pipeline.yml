@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -28,6 +30,5 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-
       - name: Deploy to Render
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}
