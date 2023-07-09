@@ -32,8 +32,16 @@ jobs:
           # record: true
           # parallel: true
 
-      - name: Download artifact
-        uses: actions/download-artifact@v3
+      # after the test run completes store videos and any screenshots
+      - uses: actions/upload-artifact@v3
+        # add the line below to store screenshots only on failures
+        # if: failure()
         with:
-          name: e2e-screenshots
-          path: e2e-screenshots
+          name: cypress-screenshots
+          path: cypress/screenshots
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+      - uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
