@@ -10,6 +10,8 @@ on:
 jobs:
     simple_deployment_pipeline:
         runs-on: ubuntu-20.04
+        env:
+          COMMIT_MESSAGE_SKIP: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }}
         steps:
             - uses: actions/checkout@v3
             - uses: actions/setup-node@v3
@@ -30,7 +32,7 @@ jobs:
                 start: npm run start-prod
                 wait-on: http://localhost:5005
             - name: Trigger deployment
-              if: ${{ github.event_name == 'push' }}
+              if: ${{ github.event_name == 'push' }} || $COMMIT_MESSAGE_SKIP
               uses: sws2apps/render-deployment@main
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
@@ -46,7 +48,7 @@ jobs:
               ref: ${{ github.event.pull_request.merge_commit_sha }}
               fetch-depth: '0'
           - name: Bump version and push tag
-            if: ${{ github.event_name == 'push' }}
+            if: ${{ github.event_name == 'push' }} || $COMMIT_MESSAGE_SKIP
             uses: anothrNick/github-tag-action@1.64.0
             env:
               DEFAULT_BRANCH: master
