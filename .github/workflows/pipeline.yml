@@ -26,8 +26,9 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
+          build: npm run build
           start: npm run start-prod
-          # wait-on: http://localhost:4100
+          wait-on: http://localhost:4100
           browser: chrome
           # record: true
           # parallel: true
