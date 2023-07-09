@@ -45,8 +45,8 @@ jobs:
             with:
               ref: ${{ github.event.pull_request.merge_commit_sha }}
               fetch-depth: '0'
-              
           - name: Bump version and push tag
+            if: ${{ github.event_name == 'push' }}
             uses: anothrNick/github-tag-action@1.64.0
             env:
               DEFAULT_BRANCH: master
