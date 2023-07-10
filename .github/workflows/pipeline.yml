@@ -32,7 +32,7 @@ jobs:
             - name: Trigger deployment
               env:
                 COMMIT_MESSAGE_SKIP: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }}
-              if: ${{ github.event_name == 'push' }} && (env.COMMIT_MESSAGE_SKIP)
+              if: ${{ github.event_name == 'push' }} && $COMMIT_MESSAGE_SKIP
               uses: sws2apps/render-deployment@main
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
@@ -56,5 +56,5 @@ jobs:
               WITH_V: true
               PRERELEASE: true
               DEFAULT_BUMP: patch
-              
+
                 
