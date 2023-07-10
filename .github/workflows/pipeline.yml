@@ -30,9 +30,7 @@ jobs:
                 start: npm run start-prod
                 wait-on: http://localhost:5005
             - name: Trigger deployment
-              env:
-                COMMIT_MESSAGE_SKIP: ${{ !contains(toJson(github.event.commits.*.message), '#skip') }}
-              if: ${{ github.event_name == 'push' }} && "$COMMIT_MESSAGE_SKIP"
+              if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip')  }}
               uses: sws2apps/render-deployment@main
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
