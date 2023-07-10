@@ -34,7 +34,6 @@ jobs:
             - name: Trigger deployment
               if: 
                 ${{ github.event_name == 'push' }}
-                $COMMIT_MESSAGE_SKIP
               uses: sws2apps/render-deployment@main
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
