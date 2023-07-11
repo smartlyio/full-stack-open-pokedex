@@ -9,7 +9,8 @@
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "fix-eslint": "eslint './**/*.{js,jsx}' --fix",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "deploy-production": "npm run build & npm run start-prod"
   },
   "repository": {
     "type": "git",
