@@ -7,7 +7,7 @@ describe('Pokedex', function() {
   })
   it('pokemon page can be navigated to', function() {
     cy.visit('http://localhost:5005')
-    cy.get('a').contains('chariard').click()
+    cy.get('a').contains('charizard').click()
     cy.contains('Hidden ability')
     cy.contains('blaze')
   })
