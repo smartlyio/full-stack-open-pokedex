@@ -35,13 +35,7 @@ jobs:
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
-            - name: Test Success
-                uses: rjstone/discord-webhook-notify@v1.0.4
-                if: success()
-                with:
-                    severity: info
-                    details: Test Succeeded!
-                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            
     tag_release:
         needs: [simple_deployment_pipeline]
         runs-on: ubuntu-20.04
