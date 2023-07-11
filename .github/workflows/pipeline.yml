@@ -36,21 +36,21 @@ jobs:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
             - name: Test Success
-                uses: rjstone/discord-webhook-notify@v1
+                uses: rjstone/discord-webhook-notify@v1.0.4
                 if: success()
                 with:
                     severity: info
                     details: Test Succeeded!
                     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: Test Failure
-                uses: rjstone/discord-webhook-notify@v1
+                uses: rjstone/discord-webhook-notify@v1.0.4
                 if: failure()
                 with:
                     severity: error
                     details: Test Failed!
                     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
             - name: Test Cancelled
-                uses: rjstone/discord-webhook-notify@v1
+                uses: rjstone/discord-webhook-notify@v1.0.4
                 if: cancelled()
                 with:
                     severity: warn
