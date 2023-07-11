@@ -55,7 +55,9 @@ jobs:
               WITH_V: true
               PRERELEASE: true
               DEFAULT_BUMP: patch
+
     notify_message:
+        needs: [tag_release]
         runs-on: ubuntu-20.04
         steps:
           - name: Test Success
