@@ -35,7 +35,28 @@ jobs:
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
-            
+            - name: Test Success
+              uses: rjstone/discord-webhook-notify@v1
+              if: success()
+              with:
+                    severity: info
+                    details: Test Succeeded!
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            - name: Test Failure
+              uses: rjstone/discord-webhook-notify@v1
+              if: failure()
+              with:
+                    severity: error
+                    details: Test Failed!
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            - name: Test Cancelled
+              uses: rjstone/discord-webhook-notify@v1
+              if: cancelled()
+              with:
+                    severity: warn
+                    details: Test Cancelled!
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}    
+
     tag_release:
         needs: [simple_deployment_pipeline]
         runs-on: ubuntu-20.04
@@ -55,29 +76,3 @@ jobs:
               WITH_V: true
               PRERELEASE: true
               DEFAULT_BUMP: patch
-
-    notify_message:
-        needs: [tag_release]
-        runs-on: ubuntu-20.04
-        steps:
-          - name: Test Success
-            uses: rjstone/discord-webhook-notify@v1
-            if: success()
-            with:
-                  severity: info
-                  details: Test Succeeded!
-                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          - name: Test Failure
-            uses: rjstone/discord-webhook-notify@v1
-            if: failure()
-            with:
-                  severity: error
-                  details: Test Failed!
-                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          - name: Test Cancelled
-            uses: rjstone/discord-webhook-notify@v1
-            if: cancelled()
-            with:
-                  severity: warn
-                  details: Test Cancelled!
-                  webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}    
