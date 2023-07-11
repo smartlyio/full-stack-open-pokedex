@@ -35,6 +35,24 @@ jobs:
               with:
                 serviceId: ${{ secrets.RENDER_SERVICE_ID }}
                 apiKey: ${{ secrets.RENDER_API_KEY }}
+            - name: Test Info
+                uses: rjstone/discord-webhook-notify@v1
+                with:
+                    severity: info
+                    details: Test succeeded.
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            - name: Test Warn
+                uses: rjstone/discord-webhook-notify@v1
+                with:
+                    severity: warn
+                    details: Test warning.
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+            - name: Test Error
+                uses: rjstone/discord-webhook-notify@v1
+                with:
+                    severity: error
+                    details: Test error.
+                    webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     tag_release:
         needs: [simple_deployment_pipeline]
         runs-on: ubuntu-20.04
@@ -54,27 +72,4 @@ jobs:
               WITH_V: true
               PRERELEASE: true
               DEFAULT_BUMP: patch
-    deploy_message:
-        needs: [tag_release]
-        runs-on: ubuntu-20.04
-        steps:
-        - name: Test Info
-            uses: rjstone/discord-webhook-notify@v1
-            with:
-                severity: info
-                details: Test succeeded.
-                webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        - name: Test Warn
-            uses: rjstone/discord-webhook-notify@v1
-            with:
-                severity: warn
-                details: Test warning.
-                webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        - name: Test Error
-            uses: rjstone/discord-webhook-notify@v1
-            with:
-                severity: error
-                details: Test error.
-                webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-                
+  
