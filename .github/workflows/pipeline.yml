@@ -26,6 +26,7 @@ jobs:
       - name: test
         run: npm run test
       - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
