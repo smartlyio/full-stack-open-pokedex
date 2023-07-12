@@ -1,0 +1,16 @@
+11.1 Warming up  
+
+Some common steps in a CI setup include linting, testing, and building. What are the specific tools for taking care of these steps in the ecosystem of the language you picked?  
+
+"I pick C++ for this exercise.
+linting: Clang-tidy. https://clang.llvm.org/extra/clang-tidy/
+testing: Catch. https://github.com/catchorg/Catch2 
+and building: vcpkg. https://vcpkg.io/en/."
+
+What alternatives are there to set up the CI besides Jenkins and GitHub Actions?  
+
+"CircleCI, Azure Pipelines, GitLab, Team city"
+
+Would this setup be better in a self-hosted or a cloud-based environment? Why? What information would you need to make that decision?
+
+"self-hosted. Let's say it is game project and have `a need for a graphics card to run tests`."
