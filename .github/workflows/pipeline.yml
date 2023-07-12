@@ -1,0 +1,46 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+      
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 # Check out the repository - 
+      - uses: actions/setup-node@v3 # Set up Node.js
+        with:
+          node-version: '16'
+
+      - name: Install dependencies # Install the dependencies 
+        run: npm install
+      - name: lint
+        run: npm run eslint  
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.RENDER_API_KEY}}
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: true
+          DEFAULT_BUMP: patch
+      

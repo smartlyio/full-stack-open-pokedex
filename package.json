@@ -8,7 +8,9 @@
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "fix-eslint": "eslint './**/*.{js,jsx}' --fix",
+    "build": "webpack --mode production",
+    "deploy-production": "npm run build & npm run start-prod"
   },
   "repository": {
     "type": "git",
