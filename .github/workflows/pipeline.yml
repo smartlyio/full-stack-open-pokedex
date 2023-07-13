@@ -34,21 +34,20 @@ jobs:
         if: github.event_name == 'push'
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
-        
   tag_release:
-    if: (github.event_name == 'push' && contains(toJson(github.event.commits.*.message), '#skip'))
+    if: (github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ''), '#skip'))
     needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
     steps:
-    - uses: actions/checkout@v3
-      with:
-        ref: ${{ github.event.pull_request.merge_commit_sha }}
-        fetch-depth: '0'
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.64.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BUMP: patch
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
