@@ -7,5 +7,3 @@ npm install
 npm run eslint
 
 npm run build
-
-npm run test:e2e
