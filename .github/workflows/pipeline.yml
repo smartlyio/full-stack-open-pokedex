@@ -9,49 +9,71 @@ on:
     types: [opened, synchronize]
 
 jobs:
-    deployment_pipeline:
-      runs-on: ubuntu-20.04
-      steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: '16'
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
 
-        - name: Install dependencies
-          run: npm install
-        - name: Lint
-          run: npm run eslint
-        - name: Build
-          run: npm run build
-        - name: e2e tests
-          uses: cypress-io/github-action@v5
-          with:
-            command: npm run test:e2e
-            start: npm run start-prod
-              echo 'server started'
-            wait-on: 'http://localhost:5001'
-        - name: Auto-deploy on render after Testing
-          if: github.event_name == 'push'
-          run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-        - name: commit messages
-          env:
-            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-          run: echo "$COMMIT_MESSAGES"
-
-    tag_release:
-      if: (github.event_name == 'push' && contains(toJson(github.event.commits.*.message), '#skip'))
-      needs: [deployment_pipeline]
-      runs-on: ubuntu-20.04
-      permissions:
-        contents: write
-      steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
-          fetch-depth: '0'
-
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.64.0
+      - name: github context
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages1
+        env:
+          COMMIT_MESSAGES1: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES1"
+      - name: commit messages2
+        env:
+          COMMIT_MESSAGES2: ${{ github.event.commits.*.message }}
+        run: echo "$COMMIT_MESSAGES2"
+
+  deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+            echo 'server started'
+          wait-on: 'http://localhost:5001'
+      - name: Auto-deploy on render after Testing
+        if: github.event_name == 'push'
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+
+  tag_release:
+    if: (github.event_name == 'push' && contains(toJson(github.event.commits.*.message), '#skip'))
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.merge_commit_sha }}
+        fetch-depth: '0'
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.64.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        DEFAULT_BUMP: patch
