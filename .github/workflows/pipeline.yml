@@ -26,8 +26,5 @@ jobs:
             start: npm run start-prod
               echo 'server started'
             wait-on: 'http://localhost:5001'
-    deploy:
-      runs-on: ubuntu-20.04
-      steps:
-      - name: Auto-deploy on render
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key==${{ secrets.RENDER_API_KEY }}
+        - name: Auto-deploy on render after Testing
+          run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
