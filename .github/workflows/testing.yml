@@ -2,8 +2,7 @@ name: Testing stuff
 
 on:
   push:
-    branches:
-      - master
+    
 
 jobs:
   a_test_job:
@@ -22,3 +21,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: commit messagesall
+        env:
+          COMMIT_MESSAGESALL: ${{ join(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGESALL"
