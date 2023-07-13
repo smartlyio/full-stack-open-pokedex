@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-    simple_deployment_pipeline:
+    deployment_pipeline:
       runs-on: ubuntu-20.04
       steps:
         - uses: actions/checkout@v3
@@ -15,9 +15,9 @@ jobs:
             node-version: '16'
         - name: Install dependencies
           run: npm install
-        - name: lint
+        - name: Lint
           run: npm run eslint
-        - name: build
+        - name: Build
           run: npm run build
         - name: e2e tests
           uses: cypress-io/github-action@v5
@@ -26,3 +26,8 @@ jobs:
             start: npm run start-prod
               echo 'server started'
             wait-on: 'http://localhost:5001'
+    deploy:
+      runs-on: ubuntu-20.04
+      steps:
+      - name: Auto-deploy on render
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key==${{ secrets.RENDER_API_KEY }}
