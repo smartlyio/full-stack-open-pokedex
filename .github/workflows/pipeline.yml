@@ -10,7 +10,6 @@ on:
 
 jobs:
   deployment_pipeline:
-    if: contains(join(toJson(github.event.commits.*.message), ''), '#skip')
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
