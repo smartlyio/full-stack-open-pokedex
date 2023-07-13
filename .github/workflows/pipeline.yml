@@ -34,8 +34,8 @@ jobs:
           if: github.event_name == 'push'
           run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ github.event.commits.*.message }}
+          env:
+            COMMIT_MESSAGES: ${{ github.event.commits.*.message }}
           run: echo "$COMMIT_MESSAGES"
 
     tag_release:
@@ -49,7 +49,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
-          
+
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0
         env:
