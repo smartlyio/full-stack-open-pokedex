@@ -6,7 +6,8 @@ describe('Pokedex', function () {
   })
   it('Right Pokemon content when navigate', function () {
     cy.visit('http://localhost:5001')
-    cy.contains('ivysaur')
-    cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
+    cy.contains('charizard').click()
+    cy.contains('blaze')
+    cy.contains('solar power')
   })
 })
