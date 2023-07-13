@@ -35,7 +35,7 @@ jobs:
           run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         - name: commit messages
           env:
-            COMMIT_MESSAGES: ${{ github.event.commits.*.message }}
+            COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           run: echo "$COMMIT_MESSAGES"
 
     tag_release:
