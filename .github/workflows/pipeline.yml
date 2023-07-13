@@ -31,11 +31,11 @@ jobs:
             echo 'server started'
           wait-on: 'http://localhost:5001'
       - name: Auto-deploy on render after Testing
-        if: github.event_name == 'push'
+        if: ${{github.event_name == 'push'}}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
   tag_release:
-    if: (github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ''), '#skip'))
+    if: ${{(github.event_name == 'push' && contains(join(toJson(github.event.commits.*.message), ''), '#skip'))}}
     needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
