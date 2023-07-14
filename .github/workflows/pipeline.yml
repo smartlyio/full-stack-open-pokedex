@@ -64,7 +64,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
           severity: info
-          details: 'Delployment Succeeded to ${{github.event.repository.homepage}}'
+          details: 'Delployment Succeeded to https://fso-cicd.onrender.com'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
