@@ -1,8 +1,9 @@
 name: Health Check
 
 on:
-  push:
-
+  schedule:
+     - cron: '15 19 * * *'
+     
 jobs:
   scheduled_health_check:
     runs-on: ubuntu-latest
@@ -10,7 +11,7 @@ jobs:
         - name: Check the deployed service URL
           uses: jtalk/url-health-check-action@v3
           with:
-            url: https://fso-cicd.onggdfgfdrender.com
+            url: https://fso-cicd.onrender.com
             max-attempts: 3
             retry-delay: 5s
         - name: Discord notification - health check on push suceeded
