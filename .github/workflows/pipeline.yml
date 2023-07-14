@@ -44,7 +44,7 @@ jobs:
         with:
           text: 'Test failed'
           severity: error
-          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.commits[0].author.username }} did not pass the test'
+          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.head_commit.author.username }} did not pass the test'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
