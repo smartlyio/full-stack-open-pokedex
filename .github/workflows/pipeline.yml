@@ -66,30 +66,6 @@ jobs:
           severity: info
           details: 'Delployment Succeeded to https://fso-cicd.onrender.com'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-          
-  scheduled_health_check:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Check the deployed service URL
-          uses: jtalk/url-health-check-action@v3
-          with:
-            url: https://fso-cicd.onrender.com
-            max-attempts: 3
-            retry-delay: 5s
-        - name: Discord notification - health check on push suceeded
-          uses: rjstone/discord-webhook-notify@v1
-          if: ${{ (github.event_name == 'push' && success()) }}
-          with:
-            severity: info
-            details: 'https://fso-cicd.onrender.com is healthy'
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        - name: Discord notification - health check on push failed
-          uses: rjstone/discord-webhook-notify@v1
-          if: ${{ (github.event_name == 'push' && failure()) }}
-          with:
-            severity: error
-            details: 'https://fso-cicd.onrender.com is not healthy'
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
