@@ -1,9 +1,6 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -40,7 +37,7 @@ jobs:
           wait-on: 'http://localhost:5001'
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{failure()}}
+        if: ${{(steps.build.outcome == 'success' && failure())}}
         with:
           text: 'Test failed'
           severity: error
