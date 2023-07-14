@@ -44,7 +44,7 @@ jobs:
         with:
           text: 'Test failed'
           severity: error
-          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.commits[0].author.name }} did not pass the test'
+          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.commits[0].author.username }} did not pass the test'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -63,7 +63,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
           severity: error
-          details: 'Delployment Succeeded https://fso-cicd.onrender.com/'
+          details: 'Delployment Succeeded ${{github.event.repository.homepage}}'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
