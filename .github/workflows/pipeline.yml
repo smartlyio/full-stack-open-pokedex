@@ -24,13 +24,23 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-      - name: Discord notification - build failed
-        if: ${{ failure() }}
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
         with:
-          args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed to build'
+          severity: error
+          details: Test Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}  
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
+        with:
+          username: IAmNotLikeTheOtherBots
+          text: Build Failed! Oops!
+          severity: error
+          description: build
+          details: '{{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed to build.'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -38,13 +48,16 @@ jobs:
           start: npm run start-prod
             echo 'server started'
           wait-on: 'http://localhost:5001'
-      - name: Discord notification - test failed
-        if: ${{ failure() }}
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
         with:
-          args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed the test'
+          username: IAmNotLikeTheOtherBots
+          text: Test Failed! LOL!
+          severity: error
+          description: e2e test
+          details: '{{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed the test.'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
 
   deploy:
       needs: [build_and_test]
@@ -58,12 +71,16 @@ jobs:
           if: ${{github.event_name == 'push'}}
           run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         - name: Discord notification - new deployment
+          uses: rjstone/discord-webhook-notify@v1
           if: ${{ (github.event_name == 'push' && success()) }}
-          env:
-            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
           with:
-            args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} deployed to https://fso-cicd.onrender.com/'
+            username: IAmNotLikeTheOtherBots
+            text: Delployed! YAY!
+            severity: error
+            description: deployment on render.com triggered
+            details: 'The project {{ EVENT_PAYLOAD.repository.full_name }} deployed to https://fso-cicd.onrender.com/'
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }} 
+  
 
   tag_release:
     if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
