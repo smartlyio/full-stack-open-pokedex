@@ -23,13 +23,6 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-      - name: Test Failure
-        uses: rjstone/discord-webhook-notify@v1
-        if: failure()
-        with:
-          severity: error
-          details: Test Failed!
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure()}}
@@ -38,7 +31,7 @@ jobs:
           text: Build Failed! Oops!
           severity: error
           description: build
-          details: 'the commit ${{github.event.commits.*.url}} by ${{github.event.commits.*.committer.username}} failed to build.'
+          details: 'the commit ${{join(github.event.commits.*.url)}} by ${{join(github.event.commits.*.committer.username)}} failed to build.'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: e2e tests
         uses: cypress-io/github-action@v5
@@ -55,7 +48,7 @@ jobs:
           text: Test Failed! LOL!
           severity: error
           description: e2e test
-          details: 'the commit ${{github.event.commits.*.url}} by ${{github.event.commits.*.committer.username}} failed the test.'
+          details: 'the commit ${{join(github.event.commits.*.url)}} by ${{join(github.event.commits.*.committer.username)}} failed the test.'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -77,7 +70,7 @@ jobs:
           text: Delployed! YAY!
           severity: error
           description: deployment on render.com triggered
-          details: 'The project ${{github.repository}} has been deployed to https://fso-cicd.onrender.com/'
+          details: 'The project ${{join(github.repository)}} has been deployed to https://fso-cicd.onrender.com/'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
