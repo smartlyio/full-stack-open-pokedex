@@ -8,7 +8,7 @@ describe('Pokedex', function () {
   })
   it('Right Pokemon content when navigate', function () {
     cy.visit(`http://localhost:${port}`)
-    cy.contains('charizdgdfard').click()
+    cy.contains('charizard').click()
     cy.contains('bla321312ze')
     cy.contains('solar power')
   })
