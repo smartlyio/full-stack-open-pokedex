@@ -12,6 +12,9 @@
     "test:e2e": "cypress run",
     "cypress:open": "cypress open"
   },
+  "commiters":[
+    "kennychowpd"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
@@ -24,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/smartlyio/fullstackopen-cicd/issues"
   },
-  "homepage": "https://github.com/smartlyio/fullstackopen-cicd#readme",
+  "homepage": "https//fso-cicd.onrender.com/",
   "devDependencies": {
     "@babel/core": "^7.9.6",
     "@babel/plugin-transform-runtime": "^7.10.0",
