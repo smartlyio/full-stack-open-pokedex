@@ -8,8 +8,9 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+
 jobs:
-  deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -23,6 +24,13 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
+      - name: Discord notification - build failed
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
+        with:
+          args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed to build'
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -30,13 +38,36 @@ jobs:
           start: npm run start-prod
             echo 'server started'
           wait-on: 'http://localhost:5001'
-      - name: Auto-deploy on render after Testing
-        if: ${{github.event_name == 'push'}}
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Discord notification - test failed
+        if: ${{ failure() }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
+        with:
+          args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed the test'
+
+  deploy:
+      needs: [build_and_test]
+      runs-on: ubuntu-20.04
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: Auto-deploy on render after Testing
+          if: ${{github.event_name == 'push'}}
+          run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+        - name: Discord notification - new deployment
+          if: ${{ (github.event_name == 'push' && success()) }}
+          env:
+            DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+          uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
+          with:
+            args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} deployed to https://https://fso-cicd.onrender.com/'
 
   tag_release:
     if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
-    needs: [deployment_pipeline]
+    needs: [build_and_test, deploy]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -47,7 +78,8 @@ jobs:
           fetch-depth: '0'
 
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.64.0
+      # using hash instead of semantic no. to avoid using a modified version w/ the same semantic no.
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
