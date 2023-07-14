@@ -63,7 +63,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
-          severity: error
+          severity: info
           details: 'Delployment Succeeded to ${{github.event.repository.homepage}}'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
