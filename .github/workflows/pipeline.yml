@@ -27,11 +27,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure()}}
         with:
-          username: IAmNotLikeTheOtherBots
-          text: Build Failed! Oops!
           severity: error
-          description: build
-          details: 'the commit ${{join(github.event.commits.*.url)}} by ${{join(github.event.commits.*.committer.username)}} failed to build.'
+          details: 'Build failed'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: e2e tests
         uses: cypress-io/github-action@v5
@@ -44,11 +41,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure()}}
         with:
-          username: IAmNotLikeTheOtherBots
-          text: Test Failed! LOL!
           severity: error
-          description: e2e test
-          details: 'the commit ${{join(github.event.commits.*.url)}} by ${{join(github.event.commits.*.committer.username)}} failed the test.'
+          details: 'Test succeeded'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -66,11 +60,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
-          username: IAmNotLikeTheOtherBots
-          text: Delployed! YAY!
           severity: error
-          description: deployment on render.com triggered
-          details: 'The project ${{join(github.repository)}} has been deployed to https://fso-cicd.onrender.com/'
+          details: 'Delployment Succeeded'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
