@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  build:
+  build_and_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -31,15 +31,6 @@ jobs:
         uses: "Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9"
         with:
           args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed to build'
-
-  test:
-    needs: [build]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -56,7 +47,7 @@ jobs:
           args: 'commit {{ EVENT_PAYLOAD.head_commit.url }} by {{ EVENT_PAYLOAD.head_commit.author.username }} failed the test'
 
   deploy:
-      needs: [build, test]
+      needs: [build_and_test]
       runs-on: ubuntu-20.04
       steps:
         - uses: actions/checkout@v3
@@ -76,7 +67,7 @@ jobs:
 
   tag_release:
     if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
-    needs: [build, test, deploy]
+    needs: [build_and_test, deploy]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
