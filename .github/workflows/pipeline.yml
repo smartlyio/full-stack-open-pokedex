@@ -61,7 +61,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
           severity: error
-          details: 'Delployment Succeeded ${{github.event.repository.homepage}}'
+          details: 'Delployment Succeeded to ${{github.event.repository.homepage}}'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
