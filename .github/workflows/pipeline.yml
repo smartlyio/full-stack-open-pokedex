@@ -48,8 +48,14 @@ jobs:
           delay: 5
           # Rollback on healthcheck failure
           rollbackonhealthcheckfailed: true
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump (increase) version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
           # the third-party action needs the token for authentication in the repository
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch # semantic versioning: 1.2.3 => {major}.{minor}.{patch}
+          DRY_RUN: true
