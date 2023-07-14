@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  build_and_test:
+  deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -47,15 +47,6 @@ jobs:
           severity: error
           details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.triggering_actor }} did not pass the test'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-
-  deploy:
-    needs: [build_and_test]
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
       - name: Auto-deploy on render after Testing
         if: ${{github.event_name == 'push'}}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
@@ -69,7 +60,7 @@ jobs:
 
   tag_release:
     if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
-    needs: [build_and_test, deploy]
+    needs: [deployment_pipeline]
     runs-on: ubuntu-20.04
     permissions:
       contents: write
