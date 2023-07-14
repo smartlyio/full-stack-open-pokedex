@@ -27,8 +27,9 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure()}}
         with:
+          text: 'Build failed'
           severity: error
-          details: 'Build failed'
+          details: The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.triggering_actor }} cannot be built'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: e2e tests
         uses: cypress-io/github-action@v5
@@ -41,8 +42,9 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure()}}
         with:
+          text: 'Test failed'
           severity: error
-          details: 'Test succeeded'
+          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.event.commits.committer.username }} did not pass the test'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   deploy:
@@ -61,7 +63,7 @@ jobs:
         if: ${{ (github.event_name == 'push' && success()) }}
         with:
           severity: error
-          details: 'Delployment Succeeded'
+          details: 'Delployment Succeeded https://fso-cicd.onrender.com/'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
