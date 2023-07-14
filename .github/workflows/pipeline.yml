@@ -19,6 +19,7 @@ jobs:
       - name: Lint
         run: npm run eslint
       - name: Build
+        id: build
         run: npm run build
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
@@ -29,6 +30,7 @@ jobs:
           details: The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.triggering_actor }} cannot be built'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: e2e tests
+        id: e2etest
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
@@ -37,7 +39,7 @@ jobs:
           wait-on: 'http://localhost:5001'
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{(steps.build.outcome == 'success' && failure())}}
+        if: ${{(steps.build.outcome == 'success' && steps.e2etest.outcome == 'failure')}}
         with:
           text: 'Test failed'
           severity: error
