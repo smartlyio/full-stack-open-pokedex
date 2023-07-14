@@ -10,7 +10,7 @@ jobs:
         - name: Check the deployed service URL
           uses: jtalk/url-health-check-action@v3
           with:
-            url: https://fso-cicd.onrender.com
+            url: https://fso-cicd.onggdfgfdrender.com
             max-attempts: 3
             retry-delay: 5s
         - name: Discord notification - health check on push suceeded
