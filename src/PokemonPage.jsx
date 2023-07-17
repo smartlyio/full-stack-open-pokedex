@@ -28,12 +28,6 @@ const PokemonPage = ({ previous, next }) => {
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
   // eslint-disable-next-line no-console
   console.log('hiddenAbility=', hiddenAbility)
-  // eslint-disable-next-line no-console
-  console.log('Previous: ', previous)
-  // eslint-disable-next-line no-console
-  console.log('Next: ', next)
-  //const previousName = previous ? previous.name : pokemon.name
-  //const nextName = next ? next.name : pokemon.name
   return (
     <>
       <div className="links">
