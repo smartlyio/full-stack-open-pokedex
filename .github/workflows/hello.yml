@@ -13,3 +13,6 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+      - name: Now it is
+        run: |
+          run date [-u|--utc|--universal] [MMDDhhmm[[CC]YY][.ss]]
