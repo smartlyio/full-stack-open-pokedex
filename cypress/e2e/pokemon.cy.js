@@ -1,4 +1,4 @@
-const { cy } = require('cypress')
+
 
 
 describe('Pokedex', function() {
