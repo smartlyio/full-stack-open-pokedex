@@ -32,6 +32,8 @@ jobs:
           wait-on: http://localhost:5000
       - name: Install flyctl
         run: curl -L https://fly.io/install.sh | sh
+      - name: Verify flyctl installation
+        run: flyctl version
       - name: Deploy to Fly.io
         run: flyctl deploy --remote-only
         env:
