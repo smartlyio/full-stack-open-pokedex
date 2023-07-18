@@ -1,9 +1,9 @@
-const dotenv = require('dotenv');
+const dotenv = require('dotenv')
 
 const express = require('express')
 const app = express()
 
-dotenv.config(); 
+dotenv.config()
 
 // Heroku dynamically sets a port
 const PORT = process.env.PORT || 5000
