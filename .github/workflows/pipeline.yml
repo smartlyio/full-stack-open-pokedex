@@ -1,0 +1,78 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run eslint
+      - name: Build
+        id: build
+        run: npm run build
+      - name: Build Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
+        with:
+          text: 'Build failed'
+          severity: error
+          details: The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.triggering_actor }} cannot be built'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+            echo 'server started'
+          wait-on: 'http://localhost:5001'
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{(steps.build.outcome == 'success' && failure())}}
+        with:
+          text: 'Test failed'
+          severity: error
+          details: 'The commit https://github.com/${{ github.repository }}/commit/${{ github.sha }} by ${{ github.triggering_actor }} did not pass the test'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Auto-deploy on render after Testing
+        if: ${{github.event_name == 'push'}}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Discord notification - new deployment
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ (github.event_name == 'push' && success()) }}
+        with:
+          severity: info
+          details: 'Delployment Succeeded to https://fso-cicd.onrender.com'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+  tag_release:
+    if: ${{(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))}}
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+
+      - name: Bump version and push tag
+        # using hash instead of semantic no. to avoid using a modified version w/ the same semantic no.
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
