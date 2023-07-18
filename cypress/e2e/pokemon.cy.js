@@ -12,6 +12,6 @@ describe('Pokedex', function() {
     cy.contains('ivysaur').should('not.exist')
     cy.contains('Next').click()
     cy.contains('kakuna').should('not.exist')
-    cy.contains('beedrill')
+    cy.contains('beedrll')
   })
 })
