@@ -35,6 +35,7 @@ jobs:
       if: ${{ github.event_name == 'push' }}
       needs: [simple_deployment_pipeline]
       steps:
+        - uses: actions/checkout@v3
         - name: Deploy to production
           uses: johnbeynon/render-deploy-action@v0.0.8
           with:
@@ -46,7 +47,7 @@ jobs:
       needs: [build, simple_deployment_pipeline]
       steps:
         - name: Bump version and push tag
-          uses: anothrNick/github-tag-action@1.67.0
+          uses: anothrNick/github-tag-action@1.67.0, actions/checkout@v3
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
