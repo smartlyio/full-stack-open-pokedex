@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+  pull_request:    
+    branches: [master]    
+    types: [opened, synchronize]
 
 jobs:
     simple_deployment_pipeline:
@@ -30,6 +32,7 @@ jobs:
               wait-on: http://localhost:5000
     build:
       runs-on: ubuntu-latest
+      if: ${{ github.event_name == 'push' }}
       needs: [simple_deployment_pipeline]
       steps:
         - name: Deploy to production
