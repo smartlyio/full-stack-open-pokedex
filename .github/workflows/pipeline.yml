@@ -30,6 +30,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Install flyctl
+        run: curl -L https://fly.io/install.sh | sh
       - name: Deploy to Fly.io
         run: flyctl deploy --remote-only
         env:
