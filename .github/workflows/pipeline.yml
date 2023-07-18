@@ -32,6 +32,7 @@ jobs:
               wait-on: http://localhost:5000
     build:
       runs-on: ubuntu-latest
+      if: ${{ github.event_name == 'push' }}
       needs: [simple_deployment_pipeline]
       steps:
         - name: Deploy to production
