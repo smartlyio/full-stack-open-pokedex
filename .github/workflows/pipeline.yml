@@ -43,7 +43,7 @@ jobs:
     tag_release:
       runs-on: ubuntu-20.04
       if: ${{ github.event_name == 'push' }}
-      needs: [simple_deployment_pipeline]
+      needs: [build]
       steps:
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.64.0
@@ -51,4 +51,3 @@ jobs:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
             DRY_RUN: true
-            wait-on: build
