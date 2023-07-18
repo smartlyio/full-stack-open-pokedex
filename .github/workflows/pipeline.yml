@@ -33,10 +33,9 @@ jobs:
       - name: Install flyctl
         run: curl -L https://fly.io/install.sh | sh
       - name: Verify flyctl installation
-        run: /home/runner/.fly/bin/flyctlflyctl version
+        run: flyctl version
       - name: Deploy to Fly.io
-        run: /home/runner/.fly/bin/flyctl deploy --remote-only
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
-          
          
