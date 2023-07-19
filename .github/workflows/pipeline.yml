@@ -10,8 +10,6 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       PORT: 5000
-      FLYCTL_INSTALL: /home/runner/.fly
-      PATH: ${{ env.FLYCTL_INSTALL }}/bin:${{ env.PATH }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -25,6 +23,10 @@ jobs:
         run: npm run build
       - name: Install flyctl
         run: curl -L https://fly.io/install.sh | sh
+        # Set the environment variables directly in this step
+        env:
+          FLYCTL_INSTALL: /home/runner/.fly
+          PATH: ${{ env.FLYCTL_INSTALL }}/bin:${{ env.PATH }}
       - name: Verify flyctl installation
         run: flyctl version
       - name: Deploy to Fly.io
