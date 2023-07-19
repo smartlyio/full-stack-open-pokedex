@@ -26,9 +26,10 @@ primary_region = "arn"
     NODE_VERSION = "16.19.0"
 	
 [[services]]
+  http_checks = []
   internal_port = 8080
-  processes = ["app"]
 
+  processes = ["app"]
   
   
  [[services.tcp_checks]]
