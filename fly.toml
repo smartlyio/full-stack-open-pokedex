@@ -29,7 +29,6 @@ primary_region = "arn"
   internal_port = 8080
   processes = ["app"]
 
-  processes = ["app"]
   
   
  [[services.tcp_checks]]
