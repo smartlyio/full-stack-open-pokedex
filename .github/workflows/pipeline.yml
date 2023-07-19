@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -34,6 +36,7 @@ jobs:
 
   deploy:
     name: Deploy app
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
