@@ -4,13 +4,14 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
 
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     env:
       PORT: 5000
+      FLYCTL_INSTALL: /home/runner/.fly
+      PATH: ${{ env.FLYCTL_INSTALL }}/bin:${{ env.PATH }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -22,22 +23,11 @@ jobs:
         run: npm run eslint
       - name: Build
         run: npm run build
-#      - name: Test
-#        run: npm test
-#      - name: e2e tests
-#        uses: cypress-io/github-action@v5
-#        with:
-#          command: npm run test:e2e
-#          start: npm run start-prod
-#          wait-on: http://localhost:5000
       - name: Install flyctl
-        run: |
-          curl -L https://fly.io/install.sh | sh
-          echo "FLYCTL_INSTALL=/home/runner/.fly" >> $GITHUB_ENV
-          echo "PATH=\$FLYCTL_INSTALL/bin:\$PATH" >> $GITHUB_ENV
+        run: curl -L https://fly.io/install.sh | sh
       - name: Verify flyctl installation
         run: flyctl version
       - name: Deploy to Fly.io
         run: flyctl deploy --remote-only
         env:
-          FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN}}
