@@ -1,8 +1,3 @@
-# fly.toml app configuration file generated for pokedextestproject on 2023-07-18T17:20:48+03:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = "pokedextestproject"
 primary_region = "arn"
 
@@ -14,7 +9,6 @@ primary_region = "arn"
   min_machines_running = 0
   processes = ["app"]
 
-
 [deploy]
   release_command = "npm run build"
 
@@ -24,16 +18,13 @@ primary_region = "arn"
 [build]
   [build.args]
     NODE_VERSION = "16.19.0"
-	
-[[services]]
-  http_checks = []
-  internal_port = 8080
 
+[[services]]
+  internal_port = 8080
   processes = ["app"]
-  
-  
- [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
