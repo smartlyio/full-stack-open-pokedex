@@ -34,7 +34,7 @@ jobs:
           wait-on: http://localhost:3001
       - name: Print commit messages
         run: echo ${{ toJson(github.event.commits.*.message) }}
-      - name: Skip deployment & tagging
+      - name: Skip deployment & tagging?
         run: echo ${{ contains(join(github.event.commits.*.message), '#skip') }}
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
