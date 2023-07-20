@@ -36,7 +36,7 @@ jobs:
       # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Print commit messages
         run: |
-          echo ${{ github.event.commits.*.message }}
+          echo ${{ toJson(github.event.commits.*.message) }}
           echo ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
@@ -65,4 +65,3 @@ jobs:
           # the third-party action needs the token for authentication in the repository
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch # semantic versioning: 1.2.3 => {major}.{minor}.{patch}
-          DRY_RUN: true
