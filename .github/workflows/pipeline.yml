@@ -32,8 +32,6 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3001
-      - name: Print commit messages
-        run: echo ${{ toJson(github.event.commits.*.message) }}
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Deploy to Heroku
