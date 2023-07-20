@@ -12,7 +12,7 @@ on:
 # env variables: https://docs.github.com/en/actions/learn-github-actions/variables
 env:
   COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-  skipDeploymentAndTagging: ${{ contains(join(toJSon(github.event.commits.*.message), ' '), '#skip') }}
+  skipDeploymentAndTagging: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
 
 jobs:
   simple_deployment_pipeline:
