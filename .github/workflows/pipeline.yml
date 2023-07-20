@@ -35,9 +35,9 @@ jobs:
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Print commit messages
-        run: |
-          echo ${{ toJson(github.event.commits.*.message) }}
-          echo ${{ contains(join(github.event.commits.*.message), '#skip') }}
+        run:
+          - echo ${{ toJson(github.event.commits.*.message) }}
+          - echo ${{ contains(join(github.event.commits.*.message), '#skip') }}
       - name: Deploy to Heroku
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.14
