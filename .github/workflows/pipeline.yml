@@ -1,5 +1,5 @@
 name: Deployment pipeline
-
+# ***** Use act to run the workflow locally: https://github.com/nektos/act
 on:
   push:
     branches:
@@ -8,6 +8,11 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
+
+# env variables: https://docs.github.com/en/actions/learn-github-actions/variables
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+  skipDeploymentAndTagRelease: contains(join(toJSon(env.COMMIT_MESSAGES)), '#skip')
 
 jobs:
   simple_deployment_pipeline:
@@ -34,8 +39,10 @@ jobs:
           wait-on: http://localhost:3001
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
+      - name: Print commit messages
+        run: echo "$COMMIT_MESSAGES"
       - name: Deploy to Heroku
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !env.skipDeploymentAndTagRelease }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -49,7 +56,7 @@ jobs:
           # Rollback on healthcheck failure
           rollbackonhealthcheckfailed: true
   tag_release:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !env.skipDeploymentAndTagRelease }}
     # Jobs are executed in parallel, so make sure that tag_release waits simple_deployment_pipeline to to be executed first
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
