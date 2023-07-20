@@ -9,11 +9,6 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
-# env variables: https://docs.github.com/en/actions/learn-github-actions/variables
-env:
-  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-  skipDeploymentAndTagging: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
-
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -40,10 +35,11 @@ jobs:
       # info: https://fullstackopen.com/en/part11/deployment
       # info: https://github.com/AkhileshNS/heroku-deploy
       - name: Print commit messages
-        run: echo "$COMMIT_MESSAGES"
-          echo "$skipDeploymentAndTagging"
+        run: |
+          echo ${{ github.event.commits.*.message }}
+          echo ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
       - name: Deploy to Heroku
-        if: ${{ github.event_name == 'push' && !"$skipDeploymentAndTagging" }}
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
@@ -57,7 +53,7 @@ jobs:
           # Rollback on healthcheck failure
           rollbackonhealthcheckfailed: true
   tag_release:
-    if: ${{ github.event_name == 'push' && !"$skipDeploymentAndTagging" }}
+    if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message)), '#skip') }}
     # Jobs are executed in parallel, so make sure that tag_release waits simple_deployment_pipeline to to be executed first
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
