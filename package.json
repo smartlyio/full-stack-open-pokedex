@@ -5,13 +5,13 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "start-prod": "PORT=5001 node app.js",
+    "start-prod": "PORT=5002 node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "eslintFix": "eslint './**/*.{js,jsx}' --fix",
     "build": "webpack --mode production",
     "cypress:open": "cypress open",
-    "test:e2e": "NODE_ENV=test PORT=5001 node app.js"
+    "test:e2e": "NODE_ENV=test PORT=5002 node app.js"
   },
   "repository": {
     "type": "git",
