@@ -12,6 +12,10 @@ primary_region = "arn"
 [processes]
   app = "node app.js"
 
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.1"
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -19,14 +23,12 @@ primary_region = "arn"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
-
-[[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/health"
-    protocol = "http"
-    restart_limit = 0
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]
+  
+[http_check]
+  interval = 10000  # Check interval in milliseconds (e.g., 10000ms = 10 seconds)
+  timeout = 5000    # Check timeout in milliseconds (e.g., 5000ms = 5 seconds)
+  method = "GET"    # HTTP method to use for the health check (GET, POST, etc.)
+  path = "/"        # The path to check on the server
+  protocol = "http" # The protocol to use (http or https)
+  host = ""         # Optional: specify a custom host header
+  [http_check.headers]
