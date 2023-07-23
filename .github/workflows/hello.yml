@@ -10,5 +10,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: |
-          echo "Hello World!"
+        run: echo "Hello World!"
+      - name: Current date
+        run: date
+      - name: Directory contents
+        run: ls -l
