@@ -2,13 +2,33 @@ name: Hello World!
 
 on:
   push:
+    branches-ignore:
+      - master
+    paths-ignore:
+      - '**'
+  pull_request:
     branches:
-      - "*"
+      - master
 
 jobs:
   hello_world_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check commit message
+        id: check_commit_message
+        run: echo "::set-output name=is_pre_release::$(git log --format=%B -n 1 $GITHUB_SHA | grep -c 'pre-release')"
+      
+      - name: Run on all branches with commit message "pre-release"
+        if: ${{ github.event_name == 'push' && steps.check_commit_message.outputs.is_pre_release == '1' }}
         run: |
-          echo "Hello World!"
+          echo "Running pre-release code on all branches"
+          # Add your build/test commands here for pre-release code
+
+      - name: Run on pull requests to master
+        if: ${{ github.event_name == 'pull_request' && github.base_ref == 'refs/heads/master' }}
+        run: |
+          echo "Running code on pull request to master"
+          # Add your build/test commands here for pull requests to master
