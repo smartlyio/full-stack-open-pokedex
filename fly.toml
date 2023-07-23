@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for fragrant-silence-4491 on 2023-07-23T14:27:43-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "fragrant-silence-4491"
+primary_region = "mia"
+
+[http_service]
+  internal_port = 5000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.0"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+
+  processes = ["app"]
