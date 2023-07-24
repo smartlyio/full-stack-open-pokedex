@@ -16,7 +16,6 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-
       - name: Check style
         run: npm run eslint
       - name: build
@@ -29,8 +28,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: deploy to fly.io
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy to fly.io
+        uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
