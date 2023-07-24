@@ -6,9 +6,8 @@ on:
       - master
 
 jobs:
-  deploy:
-    name: Deploy app
-    runs-on: ubuntu-latest
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -16,6 +15,7 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
+
       - name: Check style
         run: npm run eslint
       - name: build
@@ -28,7 +28,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Deploy to fly.io
-        run: flyctl deploy --remote-only
+
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
