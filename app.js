@@ -12,8 +12,6 @@ app.listen(PORT, () => {
   console.log('server started on port', PORT)
 })
 app.get('/health', (req, res) => {
-  throw 'error...'
-  // eslint-disable-next-line no-unreachable
   res.send('ok')
 })
 
