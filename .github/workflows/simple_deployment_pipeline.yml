@@ -5,8 +5,13 @@ on:
     branches:
       - master
   pull_request:
+<<<<<<< HEAD
     branches: [master]
     types: [opened, synchronize]
+=======
+     branches: [master]
+       types: [opened, synchronize]
+>>>>>>> cd2a287b3a81bc60901a1481385b0c239db0f990
 
 jobs:
   simple_deployment_pipeline:
@@ -35,6 +40,7 @@ jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
