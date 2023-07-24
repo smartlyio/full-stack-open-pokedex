@@ -25,13 +25,7 @@ primary_region = "mia"
     NODE_VERSION = "16.19.0"
 
 [[services]]
-  internal_port = 5000
+  http_checks = []
+  internal_port = 8080
+
   processes = ["app"]
-
-
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
-  port = 5000
