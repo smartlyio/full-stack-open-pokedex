@@ -34,3 +34,4 @@ primary_region = "mia"
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
+  port = 5000
