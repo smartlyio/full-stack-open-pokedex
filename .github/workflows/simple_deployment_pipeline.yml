@@ -6,8 +6,9 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+  deploy:
+    name: Deploy app
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -28,12 +29,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-
-  deploy:
-    name: Deploy app
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+      - name: deploy to fly.io
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
