@@ -29,3 +29,8 @@ primary_region = "mia"
   internal_port = 8080
 
   processes = ["app"]
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
