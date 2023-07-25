@@ -11,7 +11,7 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains( github.event.head_commit.message, '#skip') }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -34,6 +34,7 @@ jobs:
           wait-on: http://localhost:5000
 
   tag_release:
+    if: ${{ github.event_name == 'push' && !contains( github.event.head_commit.message, '#skip') }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
