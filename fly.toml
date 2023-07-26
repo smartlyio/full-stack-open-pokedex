@@ -6,6 +6,14 @@
 app = "ancient-resonance-9419"
 primary_region = "arn"
 
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
 [env]
   PORT = "8080"
   
