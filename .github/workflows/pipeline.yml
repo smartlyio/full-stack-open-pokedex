@@ -28,9 +28,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5001
-      - name: Fly deploy
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          command: flyctl deploy --remote-only
-        env: 
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
+        env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
