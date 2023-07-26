@@ -6,20 +6,8 @@
 app = "ancient-resonance-9419"
 primary_region = "arn"
 
-[http_service]
-  http_checks = []
-  internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
-
 [env]
   PORT = "8080"
-
-[experimental]
-  auto_rollback = true
   
 [deploy]
   release_command = "npm run build"
@@ -30,3 +18,23 @@ primary_region = "arn"
 [build]
   [build.args]
     NODE_VERSION = "16.19.0"
+
+[[services]]
+  internal_port = 8080
+  force_https = true
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  restart_limit = 0
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
