@@ -11,13 +11,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      if: success()
+      - name: deploy app
+        - run: flyctl deploy --remote-only
+          env:
+            FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Test Info
         uses: rjstone/discord-webhook-notify@v1
+        if: success()
         with:
             severity: info
             details: New deployment.
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        - name: Failed deployment
+          uses: rjstone/discord-webhook-notify@v1
+          if: failure()
+          with:
+              severity: error
+              details: Deployment failure.
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

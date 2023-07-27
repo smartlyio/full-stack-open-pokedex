@@ -31,13 +31,7 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:5000
-      - name: Test Error
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          details: Pipeline failed.
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          wait-on: http://localhost:5000}
 
   tag_release:
     if: ${{ github.event_name == 'push' && !contains( github.event.head_commit.message, '#skip') }}
