@@ -14,3 +14,10 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      if: success()
+      - name: Test Info
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+            severity: info
+            details: New deployment.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
