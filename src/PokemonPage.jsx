@@ -36,12 +36,13 @@ const PokemonPage = ({ previous, next }) => {
 
   // eslint-disable-next-line no-console
   console.log('hiddenAbility=', hiddenAbility)
+
   return (
     <>
       <div className="links">
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to="/">Home</Link>
-        {next && <Link to={`/pokemon/${previous.name}`}>Next</Link>}
+        {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
         <div
