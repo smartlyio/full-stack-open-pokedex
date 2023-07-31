@@ -19,3 +19,9 @@ jobs:
      - name: Show date
        run: |
           date
+  show_directory_job:
+    runs-on: ubuntu-20.04
+    steps:
+     - name: Show current directory
+       run: |
+          ls
