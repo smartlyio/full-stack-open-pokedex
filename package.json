@@ -52,6 +52,7 @@
     "axios": "^0.19.2",
     "eslint-plugin-cypress": "^2.13.3",
     "express": "^4.17.1",
+    "express-csp-header": "^5.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0"
