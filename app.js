@@ -7,8 +7,8 @@ app.use(expressCspHeader({
   directives: {
     'default-src': [SELF,'https://pokemon-pfru.onrender.com/','https://pokeapi.co/'],
     'script-src': [SELF, INLINE, 'https://pokemon-pfru.onrender.com/'],
-    'style-src': [SELF, 'https://pokemon-pfru.onrender.com/'],
-    'img-src': ['data:', 'images'],
+    'style-src': [SELF, INLINE, 'https://pokemon-pfru.onrender.com/','https://pokeapi.co'],
+    'img-src': ['data:', 'images', 'https://pokeapi.co'],
     'worker-src': [NONE],
     'block-all-mixed-content': true
   }
