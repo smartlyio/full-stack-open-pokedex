@@ -5,10 +5,10 @@ const { expressCspHeader, INLINE, NONE, SELF } = require('express-csp-header')
 
 app.use(expressCspHeader({
   directives: {
-    'default-src': [SELF],
-    'script-src': [SELF, INLINE, 'somehost.com'],
-    'style-src': [SELF, 'mystyles.net'],
-    'img-src': ['data:', 'images.com'],
+    'default-src': [SELF,'https://pokemon-pfru.onrender.com/','https://pokeapi.co/'],
+    'script-src': [SELF, INLINE, 'https://pokemon-pfru.onrender.com/'],
+    'style-src': [SELF, 'https://pokemon-pfru.onrender.com/'],
+    'img-src': ['data:', 'images'],
     'worker-src': [NONE],
     'block-all-mixed-content': true
   }
