@@ -8,7 +8,7 @@ app.use(expressCspHeader({
     'default-src': [SELF,'https://pokemon-pfru.onrender.com/','https://pokeapi.co/'],
     'script-src': [SELF, INLINE, 'https://pokemon-pfru.onrender.com/'],
     'style-src': [SELF, INLINE, 'https://pokemon-pfru.onrender.com/','https://pokeapi.co'],
-    'img-src': ['data:', 'images', 'https://pokeapi.co'],
+    'img-src': ['data:', 'images', 'https://raw.githubusercontent.com'],
     'worker-src': [NONE],
     'block-all-mixed-content': true
   }
