@@ -27,9 +27,5 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to render
-        uses: sws2apps/render-deployment@main
-        with:
-            serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-            apiKey: ${{ secrets.RENDER_API_KEY }}
-            multipleDeployment: false
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
