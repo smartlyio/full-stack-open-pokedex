@@ -33,7 +33,7 @@ jobs:
 
   deploy_to_production:
     needs: simple_deployment_pipeline
-    if: ${{ success() }}
+    if: ${{ success() && github.event_name == 'push'}}
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deployment
