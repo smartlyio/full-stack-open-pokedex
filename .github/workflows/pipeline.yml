@@ -27,3 +27,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+
+  deploy:
+    name: Deploy to Render
+    needs: simple_deployment_pipeline
+    steps:
+      - name: Trigger Render deployment
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
