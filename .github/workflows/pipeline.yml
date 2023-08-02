@@ -30,6 +30,7 @@ jobs:
 
   deploy:
     name: Deploy to Render
+    runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
     steps:
       - name: Trigger Render deployment
