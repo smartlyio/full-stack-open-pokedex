@@ -4,8 +4,11 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
-  initialize_environment:
+  lint_build_test_deploy:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -27,5 +30,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to render
+        if: ${{ github.event_name == 'push' }}
         run: curl -v https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
 
