@@ -29,7 +29,7 @@ jobs:
       - name: Deploy to render
         uses: sws2apps/render-deployment@main
         with:
-            serviceId: '${{ secrets.RENDER_SERVICE_ID }}'
-            apiKey: '${{ secrets.RENDER_API_KEY }}'
+            serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+            apiKey: ${{ secrets.RENDER_API_KEY }}
             multipleDeployment: false
 
