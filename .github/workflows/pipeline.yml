@@ -45,9 +45,9 @@ jobs:
 
   tag_release:
     name: Add tag
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     runs-on: ubuntu-20.04
-    needs: simple_deployment_pipeline
+    needs: deploy
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
