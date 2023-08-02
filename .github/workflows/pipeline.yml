@@ -42,3 +42,16 @@ jobs:
         with:
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
+
+  tag_release:
+    name: Add tag
+    runs-on: ubuntu-20.04
+    needs: simple_deployment_pipeline
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+    
