@@ -7,7 +7,7 @@ on:
   pull_request:
       branches: [master]
       types: [opened, synchronize]
-      
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -33,6 +33,7 @@ jobs:
 
   deploy:
     name: Deploy to Render
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
     steps:
