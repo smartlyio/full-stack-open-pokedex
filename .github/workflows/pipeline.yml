@@ -26,3 +26,5 @@ jobs:
           command: npm run e2e:test
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: deployment
+        uses: sws2apps/render-deployment@main
