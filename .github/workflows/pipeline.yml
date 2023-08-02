@@ -14,31 +14,22 @@ jobs:
           node-version: '16'
       - name: Install dependencies
         run: npm install
-  lint:
-    runs-on: ubuntu-20.04
-    steps:
-      - run: npm run eslint
-  build:
-    runs-on: ubuntu-20.04
-    steps:
-      - run: npm run build
-  test:
-    runs-on: ubuntu-20.04
-    steps:
-      - run: npm run test
-  e2e_tests:
-    uses: cypress-io/github-action@v5
-    with:
-      command: npm run e2e:test
-      start: npm run start-prod
-      wait-on: http://localhost:5000
-  trigger_deployment:
-    runs-on: ubuntu-20.04
-    needs: [initialize_environment, lint, build, test, e2e_tests]
-    steps:
-      - uses: sws2apps/render-deployment@main
+      - name: Lint
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test
+      - name: End-to-end Tests
+        uses: cypress-io/github-action@v5
         with:
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-          apiKey: ${{ secrets.RENDER_API_KEY }}
-          multipleDeployment: false
+          command: npm run e2e:test
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Deploy to render
+        uses: sws2apps/render-deployment@main
+        with:
+            serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+            apiKey: ${{ secrets.RENDER_API_KEY }}
+            multipleDeployment: false
 
