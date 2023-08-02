@@ -33,7 +33,7 @@ jobs:
 
   deploy:
     name: Deploy to Render
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
     steps:
@@ -45,7 +45,7 @@ jobs:
 
   tag_release:
     name: Add tag
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
+    if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-20.04
     needs: deploy
     steps:
