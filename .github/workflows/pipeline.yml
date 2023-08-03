@@ -32,4 +32,17 @@ jobs:
       - name: Deploy to render
         if: ${{ github.event_name == 'push' }}
         run: curl -v https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+  tag_release:
+    runs-on: ubuntu-20.04
+    needs: [lint_build_test_deploy]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          WITH_V: false
 
