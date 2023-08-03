@@ -30,9 +30,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to render
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request')  && !contains(github.event.head_commit.message, '#skip') }}
         run: curl -v https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
+    if: ${{ (github.event_name == 'push' || github.event_name == 'pull_request')  && !contains(github.event.head_commit.message, '#skip') }}
     runs-on: ubuntu-20.04
     needs: [lint_build_test_deploy]
     steps:
