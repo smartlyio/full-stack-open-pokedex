@@ -19,3 +19,10 @@ jobs:
       - name: Now it is
         run: |
           date 
+  directory_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: directory content
+        run: |
+          ls 
+
