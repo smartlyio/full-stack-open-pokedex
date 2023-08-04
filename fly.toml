@@ -1,0 +1,37 @@
+# fly.toml file generated for holy-dew-9210 on 2023-08-04T12:20:50+01:00
+
+app = "holy-dew-9210"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "lhr"
+[processes]
+  app = "node app.js"
+
+[deploy]
+  release_command = "npm run build"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.1"
+
+[env]
+  PORT = "8080"
+
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443

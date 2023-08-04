@@ -19,6 +19,9 @@
   "keywords": [
     "fullstack-open"
   ],
+  "engines": {
+    "node": "16.20.1"
+  },
   "author": "Smartly.io",
   "license": "ISC",
   "bugs": {
