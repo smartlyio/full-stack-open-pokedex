@@ -8,12 +8,13 @@ app.use(express.static('dist'))
 
 // Health check endpoint
 app.get('/health', (req, res) => {
-  res.send('ok')
+  throw new Error('Not healthy...')
+  // res.send('ok')
 })
 
 // Dummy route to check for a diff in deployed code
 app.get('/version', (req, res) => {
-  res.send('3')
+  res.send('4')
 })
 
 app.listen(PORT, () => {
