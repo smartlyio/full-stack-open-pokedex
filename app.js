@@ -7,14 +7,13 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 // Health check endpoint
-app.get('/health', () => {
-  throw new Error('Not healthy...')
-  // res.send('ok')
+app.get('/health', (req, res) => {
+  res.send('ok')
 })
 
 // Dummy route to check for a diff in deployed code
 app.get('/version', (req, res) => {
-  res.send('4')
+  res.send('5')
 })
 
 app.listen(PORT, () => {
