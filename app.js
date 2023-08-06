@@ -13,7 +13,7 @@ app.get('/health', (req, res) => {
 
 // Dummy route to check for a diff in deployed code
 app.get('/version', (req, res) => {
-  res.send('8')
+  res.send('9')
 })
 
 app.listen(PORT, () => {
