@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5001
 app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
-  res.send('a new version deployed') // change this string to ensure a new version deployed
+  res.send('a new version deployed!') // change this string to ensure a new version deployed
 })
 
 app.listen(PORT, () => {
