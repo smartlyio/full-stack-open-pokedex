@@ -8,7 +8,7 @@
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "test:e2e": "cypress open",
+    "test:e2e": "cypress run",
     "start:test": "start"
   },
   "repository": {
@@ -39,6 +39,7 @@
     "eslint-plugin-cypress": "^2.13.3",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-cypress": "^2.13.3",
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
