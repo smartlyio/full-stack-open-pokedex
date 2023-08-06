@@ -1,16 +1,23 @@
 name: Trigger Render Deployment
+
 on:
   push:
     branches:
       - master
-jobs:
-  master:
-    name: Deploy to Render
+      
+jobs: 
+  deploy:
     runs-on: ubuntu-latest
+    permissions: # Required if github_deployment is set to true.
+      deployments: write
     steps:
-      - name: Trigger deployment
-        uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
-        with:
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-          apiKey: ${{ secrets.RENDER_API_KEY }}
-          multipleDeployment: false #optional, default true
+        - uses: actions/checkout@v3
+        - uses: JorgeLNJunior/render-deploy@v1.4.1
+          with:
+            service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
+            api_key: ${{ secrets.RENDER_API_KEY }} # required
+            clear_cache: false # Clear build cache. Optional
+            wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
+            github_deployment: false # Create a GitHub deployment. Optional
+            deployment_environment: 'production' # GitHub deployment enviroment name. Optional
+            github_token: ${{ secrets.GITHUB_TOKEN }} # Remove if github_deployment is false. Optional
