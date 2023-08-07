@@ -17,10 +17,6 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        with:
-          # Tagging action needs all of the commits so
-          # that it can find the last version number
-          fetch-depth: '0'
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
@@ -48,12 +44,18 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   tag_release:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     needs:
       - simple_deployment_pipeline
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+        with:
+          # Tagging action needs all of the commits so
+          # that it can find the last version number
+          fetch-depth: '0'
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
