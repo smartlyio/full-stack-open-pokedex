@@ -7,8 +7,9 @@
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
-    "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "eslint": "eslint \"./**/*.{js,jsx}\"",
+    "build": "webpack --mode production",
+    "format": "prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -42,7 +43,8 @@
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "prettier": "^3.0.1"
   },
   "dependencies": {
     "axios": "^0.19.2",
