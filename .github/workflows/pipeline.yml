@@ -1,4 +1,4 @@
-name: Development pipeline
+name: Deployment pipeline
 
 on:
   push:
@@ -14,6 +14,8 @@ jobs:
         with:
           node-version: '16'
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install
       - name: Check style
-        run: npm run eslint
+        run: |
+          npm run eslint
