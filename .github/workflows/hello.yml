@@ -4,7 +4,7 @@ on:
     push:
         branches:
             - master
-        # note that your "main" branch might be called main instead of master
+            # note that your "main" branch might be called main instead of master
 
 jobs:
     hello_world_job:
@@ -16,3 +16,6 @@ jobs:
             - name: Now it is
               run: |
                   echo `date`
+            - name: Directory content
+              run: |
+                  ls -l
