@@ -34,6 +34,8 @@ jobs:
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          PATCH_STRING_TOKEN: true
   deploy:
     if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
