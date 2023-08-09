@@ -9,42 +9,55 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
-    if: ${{ github.event_name == 'push' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: lint
-        run: npm run eslint
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5001
-      - name: deploy
-        uses: JorgeLNJunior/render-deploy@v1.4.1
-        with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
-          api_key: ${{ secrets.RENDER_API_KEY }} # required
-          clear_cache: false # Clear build cache. Optional
-          wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
-          github_deployment: false # Create a GitHub deployment. Optional
-          deployment_environment: 'production' # GitHub deployment enviroment name. Optional
-          github_token: false # Remove if github_deployment is false. Optional
-  tag_release:
-    if: ${{ github.event_name == 'push' }}
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.64.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WITH_V: true
-          DEFAULT_BUMP: patch
+    simple_deployment_pipeline:
+        if: ${{ github.event_name == 'push' }}
+        runs-on: ubuntu-20.04
+        permissions: # Required if github_deployment is set to true.
+          deployments: write
+        steps:
+          - uses: actions/checkout@v3
+          - uses: actions/setup-node@v3
+            with:
+              node-version: '16'
+            
+          - name: Install dependencies
+            run: npm install
+            
+          - name: lint
+            run: npm run eslint
+            
+          - name: Check build
+            run: npm run build
+            
+          - name: test
+            run: npm run test
+            
+          - name: e2e tests
+            uses: cypress-io/github-action@v5
+            with:
+              command: npm run test:e2e
+              start: npm run start-prod
+              wait-on: http://localhost:5001
+            
+          - name: deploy
+            uses: JorgeLNJunior/render-deploy@v1.4.1
+            with:
+              service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
+              api_key: ${{ secrets.RENDER_API_KEY }} # required
+              clear_cache: false # Clear build cache. Optional
+              wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
+              github_deployment: false # Create a GitHub deployment. Optional
+              deployment_environment: 'production' # GitHub deployment enviroment name. Optional
+              github_token: false # Remove if github_deployment is false. Optional 
+
+    tag_release:
+      if: ${{ github.event_name == 'push' }}
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Bump version and push tag
+          uses: anothrNick/github-tag-action@1.64.0
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            WITH_V: true
+            DEFAULT_BUMP: patch
