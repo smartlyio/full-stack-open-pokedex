@@ -13,6 +13,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+      - name: action
+        run: echo ${{github.event.action}}
       - name: Install dependencies
         run: |
           npm install
@@ -34,6 +36,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-
-      - name: render
-        run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
+  # render_deploy:
+  #   needs: simple_deployment_pipeline
+  #   runs-on: ubuntu-20.04
+  #   if: github.event.action != 'open'
+  #   steps:
+  #     - name: render
+  #       run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
