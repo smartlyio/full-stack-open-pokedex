@@ -28,12 +28,12 @@ jobs:
 
       # Error in e2e due to error in API get request of images
 
-      # - name: test e2e
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: http://localhost:5000
+      - name: test e2e
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
 
       - name: render
         run: curl https://api.render.com/deploy/${{secrets.RENDER_SERVICE}}?key=${{secrets.RENDER_API_KEY}}
