@@ -36,6 +36,7 @@ jobs:
         run: |
           npm run test
       - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
         run: |
           curl https://api.render.com/deploy/srv-cj7p0ds5kgrc738r435g?key=VGilgtBqWkQ
 
