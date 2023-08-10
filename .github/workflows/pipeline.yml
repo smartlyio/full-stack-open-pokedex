@@ -39,7 +39,11 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: |
           curl https://api.render.com/deploy/srv-cj7p0ds5kgrc738r435g?key=VGilgtBqWkQ
-
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.55.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
 
