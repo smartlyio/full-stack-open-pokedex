@@ -5,7 +5,7 @@
 
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development --openssl-legacy-provider",
+    "start":  "webpack-dev-server --open --mode development --openssl-legacy-provider",
     "start-prod": "webpack --mode production && node app.js",
     "build": "webpack --mode production",
     "test": "jest",
