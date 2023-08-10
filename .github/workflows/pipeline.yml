@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
- # note that your "main" branch might be called main instead of master
+ # note that your "main" branch might be called main instead of mastergd
 
 jobs:
   simple_deployment_pipeline:
