@@ -3,6 +3,9 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
+app = "fs23pokedex"
+primary_region = "ams"
+
 [deploy]
   release_command = "npm run build"
 
@@ -13,8 +16,6 @@
   [build.args]
     NODE_VERSION = "16.19.1"
 
-app = "fs23pokedex"
-primary_region = "ams"
 
 [http_service]
   internal_port = 3000
@@ -23,3 +24,4 @@ primary_region = "ams"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
