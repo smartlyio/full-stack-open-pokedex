@@ -12,6 +12,6 @@ jobs:
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
-          FLY_API_TOKEN: ${{ SECRETS.FLY_API_TOKEN }}
+          FLY_API_TOKEN:  'dbaaf418b2b5a714'
           healthCheck: 'https://fs2023pokedex.fly.dev/'
           rollbackonhealthcheckfailed: true
