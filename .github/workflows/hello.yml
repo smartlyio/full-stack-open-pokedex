@@ -16,3 +16,5 @@ jobs:
         run: date
       - name: Directory Content
         run: ls -l
+      -name: Author
+        run: ls --author
