@@ -45,6 +45,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PATCH_STRING_TOKEN: true
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: new deployement has sdonw
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
 
 
