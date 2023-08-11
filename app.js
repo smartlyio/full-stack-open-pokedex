@@ -3,7 +3,7 @@ const app = express()
 
 // Heroku dynamically sets a port
 // eslint-disable-next-line
-const PORT = process.env.PORT || 5000
+const PORT = 8081 || process.env.PORT
 
 app.use(express.static('dist'))
 
