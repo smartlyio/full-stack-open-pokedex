@@ -1,6 +1,4 @@
 describe('Pokedex', function() {
-
-    
   it('front page can be opened', function() {
     cy.visit('http://localhost:8081')
     cy.contains('ivysaur')
