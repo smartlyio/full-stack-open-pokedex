@@ -2,8 +2,8 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "pokedex-yasd-fso"
-primary_region = "ams"
+app = "pokedex-yasen-fso"
+primary_region = "otp"
 
 [env]
 PORT = "8080"
@@ -21,14 +21,6 @@ app = "node app.js"
 [build.args]
 NODE_VERSION = "16.20.2"
 
-# [http_service]
-# internal_port = 8080
-# force_https = true
-# auto_stop_machines = true
-# auto_start_machines = true
-# min_machines_running = 0
-# processes = ["app"]
-
 [[services]]
 internal_port = 8080
 protocol = "tcp"
@@ -36,6 +28,20 @@ auto_stop_machines = true
 auto_start_machines = true
 min_machines_running = 0
 processes = ["app"]
+
+[services.concurrency]
+hard_limit = 25
+soft_limit = 20
+type = "connections"
+
+[[services.ports]]
+force_https = true
+handlers = ["http"]
+port = 80
+
+[[services.ports]]
+handlers = ["tls", "http"]
+port = 443
 
 [[services.http_checks]]
 interval = 10000
@@ -52,3 +58,11 @@ grace_period = "1s"
 interval = "15s"
 restart_limit = 0
 timeout = "2s"
+
+[[services.http_service]]
+internal_port = 8080
+force_https = true
+auto_stop_machines = true
+auto_start_machines = true
+min_machines_running = 0
+processes = ["app"]
