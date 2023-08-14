@@ -1,11 +1,15 @@
-# fly.toml app configuration file generated for pokedex-yasen-fso on 2023-08-14T09:13:15+03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "pokedex-yasen-fso"
+app = "pokedex-yasd-fso"
 primary_region = "ams"
 
+[env]
+PORT = "8080"
+
+[experimental]
+auto_rollback = true
 
 [deploy]
 release_command = "npm run build"
@@ -18,49 +22,22 @@ app = "node app.js"
 NODE_VERSION = "16.20.2"
 
 # [http_service]
-# internal_port = 3000
+# internal_port = 8080
 # force_https = true
 # auto_stop_machines = true
 # auto_start_machines = true
 # min_machines_running = 0
 # processes = ["app"]
 
-# [tcp_checks]
-# grace_period = "1s"
-# interval = "15s"
-# restart_limit = 0
-# timeout = "2s"
-# processes = ["app"]
-
-
-# [http_checks]
-# interval = 10000
-# grace_period = "5s"
-# method = "get"
-# path = "/health"
-# protocol = "http"
-# timeout = 2000
-# tls_skip_verify = false
-# processes = ["app"]
-
-
-[service]
-internal_port = 3000
-force_https = true
+[[services]]
+internal_port = 8080
+protocol = "tcp"
 auto_stop_machines = true
 auto_start_machines = true
 min_machines_running = 0
+processes = ["app"]
 
-[service.processes]
-app = "node app.js"
-
-[[service.tcp_checks]]
-grace_period = "1s"
-interval = "15s"
-restart_limit = 0
-timeout = "2s"
-
-[[service.http_checks]]
+[[services.http_checks]]
 interval = 10000
 grace_period = "5s"
 method = "get"
@@ -68,3 +45,10 @@ path = "/health"
 protocol = "http"
 timeout = 2000
 tls_skip_verify = false
+[services.http_checks.headers]
+
+[[services.tcp_checks]]
+grace_period = "1s"
+interval = "15s"
+restart_limit = 0
+timeout = "2s"
