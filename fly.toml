@@ -17,22 +17,50 @@ app = "node app.js"
 [build.args]
 NODE_VERSION = "16.20.2"
 
-[http_service]
+# [http_service]
+# internal_port = 3000
+# force_https = true
+# auto_stop_machines = true
+# auto_start_machines = true
+# min_machines_running = 0
+# processes = ["app"]
+
+# [tcp_checks]
+# grace_period = "1s"
+# interval = "15s"
+# restart_limit = 0
+# timeout = "2s"
+# processes = ["app"]
+
+
+# [http_checks]
+# interval = 10000
+# grace_period = "5s"
+# method = "get"
+# path = "/health"
+# protocol = "http"
+# timeout = 2000
+# tls_skip_verify = false
+# processes = ["app"]
+
+
+[service]
 internal_port = 3000
 force_https = true
 auto_stop_machines = true
 auto_start_machines = true
 min_machines_running = 0
-processes = ["app"]
 
-[[services.tcp_checks]]
+[service.processes]
+app = "node app.js"
+
+[[service.tcp_checks]]
 grace_period = "1s"
 interval = "15s"
 restart_limit = 0
 timeout = "2s"
 
-
-[[services.http_checks]]
+[[service.http_checks]]
 interval = 10000
 grace_period = "5s"
 method = "get"
@@ -40,4 +68,3 @@ path = "/health"
 protocol = "http"
 timeout = 2000
 tls_skip_verify = false
-[services.http_checks.headers]
