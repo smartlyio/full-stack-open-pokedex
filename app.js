@@ -10,6 +10,13 @@ app.use(express.static('dist'))
 //   res.send('ok')
 // })
 
+// ! work on below - perhaps use a custome check
+//! perhaps set the header in the check and send the version here
+//! !!!!!!!!!!!1
+app.get('/version', (req, res) => {
+  res.send('14') // change this string to ensure a new version deployed
+})
+
 app.get('/health', (req, res) => {
   throw 'error...'
   // eslint-disable-next-line no-unreachable

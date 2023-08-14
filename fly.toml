@@ -8,8 +8,6 @@ primary_region = "otp"
 [env]
 PORT = "8080"
 
-[experimental]
-auto_rollback = true
 
 [deploy]
 release_command = "npm run build"
@@ -20,6 +18,9 @@ app = "node app.js"
 [build]
 [build.args]
 NODE_VERSION = "16.20.2"
+
+[experimental]
+auto_rollback = true
 
 [[services]]
 internal_port = 8080
