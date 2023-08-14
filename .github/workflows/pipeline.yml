@@ -27,7 +27,7 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:8080
       - name: deploy app
         run: flyctl deploy --remote-only
         env:
