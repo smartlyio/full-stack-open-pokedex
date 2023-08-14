@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 
-// Heroku dynamically sets a port
+// Changed to port 3000 as 5000 is used internally by macOS...
 const PORT = process.env.PORT || 3000
 
 app.use(express.static('dist'))
