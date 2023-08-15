@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for broken-dawn-2911 on 2023-08-15T16:01:26-04:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "broken-dawn-2911"
+primary_region = "iad"
+
+[build]
+
+[deploy]
+  release_command = "npm run build"
+
+[env]
+  PORT = "3001"
+
+[processes]
+  app = "node app.js"
+
+[http_service]
+  internal_port = 3001
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
