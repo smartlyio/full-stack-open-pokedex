@@ -13,7 +13,7 @@ jobs:
         run: |
           echo "Hello World!"
       - name: Today is
-        run : |
+        run: |
           date
       - name: Directory content
         run: |
