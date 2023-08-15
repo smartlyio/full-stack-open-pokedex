@@ -26,5 +26,8 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ' ') }}
           SKIP_CHECK: ${{ contains(env.COMMIT_MESSAGES, '#skip')}}
-        if: ${{!env.SKIP_CHECK}}
-        run: echo "Executing steps"
+        run: |
+          echo "Commit messages: $COMMIT_MESSAGES"
+          echo "Skip check result: $SKIP_CHECK"
+        # if: ${{!env.SKIP_CHECK}}
+        # run: echo "Executing steps"
