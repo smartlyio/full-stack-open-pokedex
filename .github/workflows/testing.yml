@@ -29,4 +29,4 @@ jobs:
           # SKIP_CHECK: ${{ contains(env.COMMIT_MESSAGES, '#skip')}}
           SKIP_CHECK: ${{ contains(env.COMMIT_MESSAGES, '#skip')}}
         #asd if: ${{ !env.SKIP_CHECK }}
-        run: echo the check ${{ !env.SKIP_CHECK }} the message ${{ !env.COMMIT_MESSAGES }}
+        run: echo the check ${{ !env.SKIP_CHECK }} the message ${{ join(!env.COMMIT_MESSAGES, ',') }}
