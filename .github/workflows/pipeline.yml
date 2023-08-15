@@ -25,10 +25,10 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
-      - name: show github context -- testing
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      # - name: show github context -- testing
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
