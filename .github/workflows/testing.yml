@@ -25,8 +25,8 @@ jobs:
       - name: Only runs if message doesn't contain "#skip" -
         env:
           # COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ', ') }}
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message)[0] }}
           # SKIP_CHECK: ${{ contains(env.COMMIT_MESSAGES, '#skip')}}
           SKIP_CHECK: ${{ contains(env.COMMIT_MESSAGES, '#skip')}}
         #asd if: ${{ !env.SKIP_CHECK }}
-        run: echo the check ${{ !env.SKIP_CHECK }} the message ${{ join(env.COMMIT_MESSAGES[0], ',') }}
+        run: echo the check ${{ !env.SKIP_CHECK }} the message ${{ env.COMMIT_MESSAGES }}
