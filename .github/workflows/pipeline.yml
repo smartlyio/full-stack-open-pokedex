@@ -44,6 +44,8 @@ jobs:
           description: Testing custom description
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: show github event -- testing
+        run: ${{github.event}}
       - name: test failture
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
