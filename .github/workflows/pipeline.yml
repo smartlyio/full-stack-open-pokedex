@@ -41,18 +41,19 @@ jobs:
         if: success()
         with:
           severity: info
-          description: Testing custom description
           text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: show github context -- testing
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+      # - name: show github context -- testing
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: echo "$GITHUB_CONTEXT"
       - name: test failture
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
+          text: Build failed
+          description: commit ${{ toJson(github.event.commits.*.url) }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
