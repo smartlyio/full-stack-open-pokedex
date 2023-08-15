@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const PokemonAbility = ({ abilityName }) => (
   <div className="pokemon-ability">
@@ -7,6 +7,6 @@ const PokemonAbility = ({ abilityName }) => (
       {abilityName}
     </div>
   </div>
-)
+);
 
-export default PokemonAbility
+export default PokemonAbility;
