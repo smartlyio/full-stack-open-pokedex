@@ -53,7 +53,7 @@ jobs:
         with:
           severity: error
           text: Build failed
-          description: commit ${{ join(github.event.commits.*.url) }} broke the build :(
+          description: commit ${{ toJson(github.event.commits.*.url[0]) }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
