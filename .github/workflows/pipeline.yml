@@ -41,14 +41,14 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          description: Testing custom description
+          text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test failture
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
