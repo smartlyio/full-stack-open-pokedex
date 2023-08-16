@@ -19,7 +19,7 @@ primary_region = "arn"
 [env]
   PORT = "5001"
 
-[[services]]
+[http_service]
   internal_port = 5001
   force_https = true
   auto_stop_machines = true
