@@ -16,6 +16,5 @@ jobs:
           node-version: "16"
       - name: Install Dependencies
         run: npm install
-      - name: Check Coding Style: 
+      - name: Check Coding Style
         run: npm run eslint
-        
