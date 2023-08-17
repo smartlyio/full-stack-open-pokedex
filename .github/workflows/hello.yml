@@ -10,4 +10,4 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say Hello
-      - run: echo "Hello World"
+      run: echo "Hello World"
