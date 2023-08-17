@@ -5,6 +5,8 @@ on:
     branches:
       - master
       - new-branch
+  schedule:
+    - cron: '30 6 * * *'
 
 jobs:
   do-health-check:
