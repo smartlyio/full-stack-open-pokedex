@@ -29,7 +29,7 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:3000
+          wait-on: http://localhost:8080
       - uses: JorgeLNJunior/render-deploy@v1.4.1
         with:
           service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
