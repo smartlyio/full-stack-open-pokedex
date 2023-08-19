@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request: 
+    branches: [master]
+    types: [opened, syncronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -27,3 +30,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5001
+
+    tag_release: 
+      needs: [simple_deployment_pipeline]
+      runs-on: ubuntu-20.04
+      steps: 
+        - uses: anothrNick/github-tag-action@1.67.0
+        env: 
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
