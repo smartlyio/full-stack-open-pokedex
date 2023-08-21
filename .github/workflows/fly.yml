@@ -1,17 +1,16 @@
-name: Fly Deploy
+name: Trigger Render Deployment
 on:
   push:
     branches:
-      - master
+      - main
 jobs:
-  deploy:
-    name: Deploy app
+  main:
+    name: Deploy to Render
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN:  ${{secrets.FLY_API_TOKEN}}
-          healthCheck: 'https://fs2023pokedex.fly.dev/'
-          rollbackonhealthcheckfailed: true
+      - name: Trigger deployment
+        uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
+        with:
+          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+          apiKey: ${{ secrets.RENDER_API_KEY }}
+          multipleDeployment: false #optional, default true
