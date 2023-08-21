@@ -25,6 +25,7 @@ jobs:
           RELEASE_BRANCHES: master
 
       - name: Test Info
+        if: ${{ success() }}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -37,8 +38,10 @@ jobs:
           details: Test warning.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Error
+        if: ${{ failure() }}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
           details: Test error.
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
