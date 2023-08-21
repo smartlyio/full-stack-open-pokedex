@@ -1,0 +1,20 @@
+name: Periodic health check
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  periodic_health_check:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@0195e0d5f1cf2ebcfdbb05b6c070b61479ebb75a
+        with:
+          url: 'https://fs2023-pokedex.onrender.com.'
+          max-attempts: 3
+          retry-delay: 5s
