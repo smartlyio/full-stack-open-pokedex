@@ -52,12 +52,13 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "webpack": "^4.43.0",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "fly": "^4.5.7",
+    "json-server": "^0.17.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "webpack": "^4.43.0"
   }
 }
