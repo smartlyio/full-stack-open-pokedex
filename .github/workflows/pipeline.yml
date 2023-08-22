@@ -28,7 +28,6 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         env:
-          DEBUG: '@cypress/github-action, cypress:*'
           ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
         with:
           command: npm run test:e2e
