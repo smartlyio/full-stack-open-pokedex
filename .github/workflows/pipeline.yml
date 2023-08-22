@@ -27,8 +27,12 @@ jobs:
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
+        env:
+          DEBUG: '@cypress/github-action, cypress:*'
+          ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://127.0.0.1:5001
           wait-on-timeout: 180
+        
