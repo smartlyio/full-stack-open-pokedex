@@ -12,6 +12,9 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        browser: [electron, chrome, chromium, edge, firefox]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -34,5 +37,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://127.0.0.1:5001
           wait-on-timeout: 180
-          browser: chrome
+          browser: ${{ matrix.browser }}
+
         
