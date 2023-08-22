@@ -1,6 +1,6 @@
 describe('Pokedex', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5001')
+    cy.visit('http://127.0.0.1:5001')
   })
   it('front page can be opened', () => {
     cy.contains('ivysaur')
