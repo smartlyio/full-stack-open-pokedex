@@ -26,6 +26,11 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
+  tag_release: 
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
+    steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
