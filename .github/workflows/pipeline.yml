@@ -32,4 +32,5 @@ jobs:
         with: 
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
+        if: success()
             
