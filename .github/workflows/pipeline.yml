@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -28,9 +31,10 @@ jobs:
             start: npm run start-prod
             wait-on: http://localhost:5000
       - name: Render Deploy Action
+        if: ${{ success() && github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with: 
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
-        if: success()
+        
             
