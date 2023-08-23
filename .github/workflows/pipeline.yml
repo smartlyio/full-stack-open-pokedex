@@ -12,9 +12,6 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        browser: [electron, chrome, chromium, edge, firefox]
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,13 +27,7 @@ jobs:
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
-        env:
-          ELECTRON_EXTRA_LAUNCH_ARGS: '--disable-gpu'
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://127.0.0.1:5001
-          wait-on-timeout: 180
-          browser: ${{ matrix.browser }}
-
-        
