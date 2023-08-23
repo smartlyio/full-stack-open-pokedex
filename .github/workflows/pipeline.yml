@@ -26,13 +26,14 @@ jobs:
         run: npm run build
       - name: Test
         run: npm run test
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: e2e tests
       #   uses: cypress-io/github-action@v5
       #   with:
       #     command: npm run test:e2e
       #     start: npm run start-prod
       #     wait-on: http://127.0.0.1:5001
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.67.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
