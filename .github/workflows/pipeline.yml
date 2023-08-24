@@ -32,15 +32,14 @@ jobs:
         run: npm run test
   tag_release: 
     needs: [simple_deployment_pipeline]
-    if: ${{ (github.event_name == 'push') }}
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ env.IS_SKIP }}
       - name: echo IS_SKIP
         run: echo ${{env.IS_SKIP}} && echo ${{github.event_name}}
       # - name: e2e tests
