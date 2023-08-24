@@ -41,7 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: echo IS_SKIP
-        run: echo ${{env.IS_SKIP}}
+        run: echo ${{env.IS_SKIP}} && echo ${{github.event_name}}
       # - name: e2e tests
       #   uses: cypress-io/github-action@v5
       #   with:
