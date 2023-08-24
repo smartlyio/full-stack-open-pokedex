@@ -16,11 +16,11 @@ env:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-    if: ${{ (github.event_name == 'push') && !(env.IS_SKIP) }}
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-        with:
+        with: 
           node-version: '16'
       - name: Install dependencies
         run: npm install
@@ -33,11 +33,12 @@ jobs:
   tag_release: 
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
-    if: ${{ (github.event_name == 'push') && !(env.IS_SKIP) }}
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
+        if: ${{ (github.event_name == 'push') && !IS_SKIP }}
         uses: anothrNick/github-tag-action@1.67.0
+        run: echo "$IS_SKIP"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       # - name: e2e tests
