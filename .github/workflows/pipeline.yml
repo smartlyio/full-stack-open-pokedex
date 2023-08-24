@@ -40,7 +40,7 @@ jobs:
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ !(env.IS_SKIP) }}
+        if: ${{ env.IS_SKIP }}
       - name: echo IS_SKIP
         run: echo ${{env.IS_SKIP}} && echo ${{github.event_name}}
       # - name: e2e tests
