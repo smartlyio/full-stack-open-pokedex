@@ -35,6 +35,7 @@ jobs:
     needs: QA-checks
     name: Deploy app
     runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
