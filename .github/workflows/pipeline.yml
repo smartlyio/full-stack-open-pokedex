@@ -5,12 +5,12 @@ on:
     branches:
       - main
 jobs:
-  simple_deployment_pipeline:    
+  QA-checks:    
     runs-on: ubuntu-20.04    
     steps:    
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3        
-        with:          
+        with:
           node-version: '16'
       - name: installs dependencies
         run: npm install
@@ -26,10 +26,14 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Deploy app
-        uses: superfly/flyctl-actions/setup-flyctl@master
+
+  deploy:
+    needs: QA-checks
+    name: Deploy app
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        with:
-          command: flyctl deploy --remote-only
-
