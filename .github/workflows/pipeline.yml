@@ -28,7 +28,8 @@ jobs:
           wait-on: http://localhost:5000
       - name: Deploy app
         uses: superfly/flyctl-actions/setup-flyctl@master
-        run: flyctl deploy --remote-only
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        with:
+          command: flyctl deploy --remote-only
+          env:
+            - FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
