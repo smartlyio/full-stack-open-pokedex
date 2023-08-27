@@ -47,6 +47,7 @@ jobs:
     needs: [QA-checks, deploy]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.55.0
         env:
