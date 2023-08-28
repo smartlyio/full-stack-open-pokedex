@@ -61,17 +61,18 @@ jobs:
   discord_notification:
     needs: [simple_deployment_pipeline, tag_release]
     runs-on: ubuntu-20.04
+    if: always()
     steps: 
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
-        if: needs.simple_deployment_pipeline == 'success' && needs.tag_release == 'success'
+        if: needs.simple_deployment_pipeline.result == 'success' && needs.tag_release.result == 'success'
         with:
           severity: info
           details: Build Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
-        if: needs.simple_deployment_pipeline == 'failure' && needs.tag_release == 'failure'
+        if: needs.simple_deployment_pipeline.result == 'failure' && needs.tag_release.result == 'failure'
         with:
           severity: error
           details:  failed ${{ github.job }}
