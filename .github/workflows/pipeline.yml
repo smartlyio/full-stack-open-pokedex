@@ -8,6 +8,9 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message)}}
+  
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -32,11 +35,13 @@ jobs:
             wait-on: http://localhost:5000
       - name: Render Deploy Action
         if: ${{ success() && github.event_name == 'push' }}
-        run: echo "$COMMIT_MESSAGES"
         uses: johnbeynon/render-deploy-action@v0.0.8
         with: 
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
+      - name: echo test
+        if: github.event_name == 'push'
+        run: echo "$COMMIT_MESSAGES"
 
   tag_release:
     needs: [simple_deployment_pipeline]
