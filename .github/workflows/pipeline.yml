@@ -9,7 +9,6 @@ on:
     types: [opened, synchronize]
 
 jobs:
-
   QA-checks:
     runs-on: ubuntu-20.04
     steps:
