@@ -3,7 +3,12 @@ module.exports = {
     "browser": true,
     "es6": true,
     "jest/globals": true,
-    node: true
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "16.13.1" // Replace with the version of React you are using
+    }
   },
   "extends": [
     "eslint:recommended",
