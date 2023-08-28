@@ -19,10 +19,6 @@ jobs:
       - name: directory content
         run: ls -l
 
-  check_commit_message:
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
