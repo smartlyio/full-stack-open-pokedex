@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  COMMIT_MESSAGES: ¢{{ toJson(github.event.commits.*.message)}}
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message)}}
 
 jobs:
   a_test_job:
