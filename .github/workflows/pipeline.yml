@@ -53,7 +53,7 @@ jobs:
           fetch-depth: '0'
       - name: github tag bumb 
         if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip')
-        uses: anothrNick/github-tag-action@1.67.0
+        uses: anothrNick/github-tag-action@5e30aed5cc933b97ad755ac56449579e 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is automatically generated, equivalent to ${{ github.token }}
           DEFAULT_BUMP: patch
