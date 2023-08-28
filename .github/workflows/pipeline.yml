@@ -40,7 +40,7 @@ jobs:
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
       - name: echo test
-        if: github.event_name == 'push' && !contains(env.COMMIT_MESSAGE, '#skip')
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip')
         run: echo "$COMMIT_MESSAGES"
 
   tag_release:
