@@ -34,7 +34,7 @@ jobs:
             start: npm run start-prod
             wait-on: http://localhost:5000
       - name: Render Deploy Action
-        if: ${{ success() && github.event_name == 'push' }}
+        if: ${{ success() && github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip') }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with: 
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
