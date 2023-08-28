@@ -76,7 +76,7 @@ jobs:
         with:
           severity: error
           details:  failed ${{ github.job }}
-        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
         
             
