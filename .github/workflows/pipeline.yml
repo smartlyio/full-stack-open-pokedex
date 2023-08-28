@@ -52,7 +52,7 @@ jobs:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
       - name: github tag bumb 
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip')
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is automatically generated, equivalent to ${{ github.token }}
