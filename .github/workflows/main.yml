@@ -18,6 +18,3 @@ jobs:
           date
       - name: directory content
         run: ls -l
-
-        
-
