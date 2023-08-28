@@ -1,8 +1,8 @@
-name: Deployment pipeline
+name: Health Check Pipeline
 
 on:
   schedule:
-    - cron: '52 14 * * *'
+    - cron: '5 * * * *'
 
 jobs:
   schedule_health_check:
