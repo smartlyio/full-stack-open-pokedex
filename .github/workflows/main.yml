@@ -15,4 +15,6 @@ jobs:
           echo "Hello World!"
       - name: now it is
         run: |
-          date
+          date -d
+      - name: directory content
+        run: ls -l
