@@ -24,7 +24,7 @@ jobs:
 
       - name: Check commit message
         id: check_commit
-        run: echo "Commit message: ${{ github.event.head_commit.message }}"
+        run: echo "${{ github.event.head_commit.message }}"
         
       - name: Skip deployment
         if: contains(steps.check_commit.outputs.check_commit, 'skip')
