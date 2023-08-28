@@ -75,9 +75,7 @@ jobs:
         if: needs.simple_deployment_pipeline == 'failure' && needs.tag_release == 'failure'
         with:
           severity: error
-          details: |
-          Build Failed!
-          Job: ${{ github.job }}
+          details:  failed ${{ github.job }}
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
         
