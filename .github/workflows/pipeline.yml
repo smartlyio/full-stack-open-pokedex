@@ -62,7 +62,6 @@ jobs:
     needs: [simple_deployment_pipeline, tag_release]
     runs-on: ubuntu-20.04
     steps: 
-
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
         if: needs.simple_deployment_pipeline == 'success' && needs.tag_release == 'success'
