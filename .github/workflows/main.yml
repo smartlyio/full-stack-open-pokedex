@@ -18,3 +18,22 @@ jobs:
           date
       - name: directory content
         run: ls -l
+
+  check_commit_message:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Check commit message
+        id: check_commit
+        run: echo "Commit message: ${{ github.event.head_commit.message }}"
+        
+      - name: Skip deployment
+        if: contains(steps.check_commit.outputs.check_commit, 'skip')
+        run: echo "Deployment skipped due to commit message"
+        
+      - name: Deploy
+        if: steps.check_commit.outputs.check_commit != 'skip'
+        run: echo "Deploying..."
