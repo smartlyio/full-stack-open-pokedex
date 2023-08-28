@@ -6,7 +6,6 @@ on:
       - master
 
 jobs:
-
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
@@ -28,6 +27,11 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+jobs:
+  deployment:
+    needs: simple_deployment_pipeline
+    runs-on: ubuntu-latest
+    steps:
       - name: Trigger deployment
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
