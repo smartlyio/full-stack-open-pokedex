@@ -9,6 +9,23 @@ on:
     types: [opened, synchronize]
 
 jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+
   QA-checks:
     runs-on: ubuntu-20.04
     steps:
@@ -35,7 +52,7 @@ jobs:
     needs: QA-checks
     name: Deploy app
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.message, ' '), '#skip') }} 
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -46,6 +63,7 @@ jobs:
   tag_release:
     needs: [QA-checks, deploy]
     runs-on: ubuntu-latest
+    if: ${{ !contains(join(github.event.commits.message, ' '), '#skip') }}
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
