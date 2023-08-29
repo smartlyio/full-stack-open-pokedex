@@ -33,3 +33,4 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits[0].message) }}
         if: ${{ !contains(COMMIT_MESSAGE, '#skip') }}
         run: echo "$COMMIT_MESSAGE"
+
