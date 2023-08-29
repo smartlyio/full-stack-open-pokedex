@@ -53,6 +53,7 @@ jobs:
       if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGE, '#skip') }}
       uses: anothrNick/github-tag-action@1.67.0
 
+
   deployment:
     needs: simple_deployment_pipeline
     runs-on: ubuntu-latest
