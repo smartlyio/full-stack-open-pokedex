@@ -30,7 +30,7 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Build of application failed
+          text: Build of application failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: E2E tests
         uses: cypress-io/github-action@v5
