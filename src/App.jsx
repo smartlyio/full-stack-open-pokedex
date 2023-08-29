@@ -5,7 +5,7 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
-
+lvneobnerobner
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
@@ -20,7 +20,7 @@ const App = () => {
   if (error) {
     return <ErrorMessage error={error} />
   }
-
+<Switch></Switch>
   return (
     <Router>
       <Switch>
