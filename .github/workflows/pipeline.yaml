@@ -26,11 +26,11 @@ jobs:
       - name: build
         run: npm run build
       - name: Build Failure message to discord
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: failure()
-        with:
-        severity: error
-        details: Build of application failed
+          with:
+          severity: error
+          details: Build of application failed
         webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: E2E tests
         uses: cypress-io/github-action@v5
@@ -65,7 +65,7 @@ jobs:
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
           api-key: ${{ secrets.MY_RENDER_API_KEY }}
       - name: Deploy Success
-        uses: rjstone/discord-webhook-notify@v1
+        uses: rjstone/discord-webhook-notify@v1.0.4
         if: success()
         with:
             severity: info
