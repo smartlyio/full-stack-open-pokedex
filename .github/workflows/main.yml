@@ -4,7 +4,9 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   hello_world_job:
@@ -28,5 +30,6 @@ jobs:
         run: echo "$COMMITS"
       - name: commit messages
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES[0]"
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits[0].message) }}
+        run: echo "$COMMIT_MESSAGES"
+
