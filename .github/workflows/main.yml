@@ -32,3 +32,4 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits[0].message) }}
         run: echo "$COMMIT_MESSAGES"
+
