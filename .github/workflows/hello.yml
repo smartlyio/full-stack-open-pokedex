@@ -18,4 +18,4 @@ jobs:
           date
       - name: List files
         run: |
-          ls -a
+          ls -l
