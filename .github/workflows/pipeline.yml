@@ -1,0 +1,34 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+    simple_deployment_pipeline:
+        runs-on: ubuntu-20.04
+        steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: Install dependencies
+          run: npm install
+        - name: Check style
+          run: npm run eslint
+        - name: build
+          run: npm run build
+        - name: test
+          run: npm run test
+        - name: e2e tests
+          uses: cypress-io/github-action@v2
+          with:
+            command: npm run test:e2e
+            start: npm run start-prod
+            wait-on: http://localhost:8081
+
+
+
+  

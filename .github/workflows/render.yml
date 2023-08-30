@@ -1,0 +1,47 @@
+name: Render
+on: [pull_request]
+jobs:
+  deploy:
+    name: Wait for Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Render Deployment
+        if: ${{ github.event_name == 'push' }}
+        uses: bounceapp/render-action@0.6.0
+        with:
+          render-token: ${{ secrets.RENDER_API_KEY }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          service-id: srv-cjhg0qk1ja0c73cepkig
+          retries: 20
+          wait: 16000
+          sleep: 30000
+
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip')}}
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          RELEASE_BRANCHES: master
+
+      - name: Test Info
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test succeeded.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Warn
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: warn
+          details: Test warning.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Error
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Test error.
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
