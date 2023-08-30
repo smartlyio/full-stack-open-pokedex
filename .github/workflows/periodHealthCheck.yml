@@ -6,6 +6,7 @@ on:
 
 jobs:
   periodic_health_check:
+    if: false
     runs-on: ubuntu-18.04
     steps:
       - name: Check the deployed service URL
