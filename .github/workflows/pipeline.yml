@@ -32,13 +32,13 @@ jobs:
       #     wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deployment step
-        if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), 'skip') == false }}
+        if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), '#skip') == false }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
   tag_release:
     needs: [simple_deployment_pipeline]
-    if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), 'skip') == false }}
+    if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), '#skip') == false }}
     runs-on: ubuntu-20.04
     permissions:
       contents: write
