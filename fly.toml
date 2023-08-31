@@ -33,3 +33,6 @@ primary_region = "arn"
   restart_limit = 0
   timeout = "2s"
 
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
