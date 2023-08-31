@@ -18,18 +18,18 @@ jobs:
           node-version: '16'
       - name: Install dependencies 
         run: npm install  
-      # - name: Check style
-      #   run: npm run eslint
+      - name: Check style
+        run: npm run eslint
       - name: build
         run: npm run build
-      # - name: test
-      #   run: npm run test
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: http://localhost:5000
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deployment step
         if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message), '#skip') == false }}
