@@ -1,0 +1,18 @@
+
+module.exports = {
+
+    
+  arrowParens: 'always',
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'all',
+  bracketSpacing: true,
+  jsxBracketSameLine: false,
+  semi: false,
+
+  // Integrate with ESLint
+  eslintIntegration: true,
+
+  // Avoid conflicts between Prettier and ESLint
+  endOfLine: 'auto' 
+};
