@@ -19,6 +19,10 @@ primary_region = "arn"
 [env]
   PORT = "3000" # add this
 
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+
 [http_service]
   internal_port = 3000
   force_https = true
@@ -32,7 +36,3 @@ primary_region = "arn"
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
-
-[[services]]
-  internal_port = 8080
-  processes = ["app"]
