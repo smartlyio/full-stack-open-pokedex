@@ -6,6 +6,12 @@
 app = "old-glitter-7064"
 primary_region = "sin"
 
+[env]
+  PORT = "8080"
+
+[experimental]
+  auto_rollback = true
+
 [deploy]
   release_command = "npm run build"
 
@@ -14,32 +20,60 @@ primary_region = "sin"
 
 [build]
   [build.args]
-    NODE_VERSION = "16.19.1"
-
-    
-[env]
-  PORT = "8080"
-
-[experimental]
-  auto_rollback = true
+    NODE_VERSION = "16.20.2"
 
 [[services]]
-  http_checks = []
   internal_port = 8080
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
   processes = ["app"]
 
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
+[services.concurrency]
+  hard_limit = 25
+  soft_limit = 20
+  type = "connections"
 
-      [[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/"
-    protocol = "http"
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]
+[[services.ports]]
+  force_https = true
+  handlers = ["http"]
+  port = 80
+
+[[services.ports]]
+  handlers = ["tls", "http"]
+  port = 443
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/version"
+  protocol = "http"
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
+
+[[services.http_service]]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
