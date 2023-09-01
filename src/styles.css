@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700');
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html, body {
   height: 100%;
   margin: 0;

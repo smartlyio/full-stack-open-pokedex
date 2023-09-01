@@ -10,6 +10,7 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
+import Nav from './Nav'
 
 const mapResults = ({ results }) =>
   results.map(({ url, name }) => ({
@@ -32,30 +33,35 @@ const App = () => {
   }
 
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          <PokemonList pokemonList={pokemonList} />
-        </Route>
-        <Route
-          path='/pokemon/:name'
-          render={(routeParams) => {
-            const pokemonId = pokemonList.find(
-              ({ name }) => name === routeParams.match.params.name
-            ).id
-            const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
-            const next = pokemonList.find(({ id }) => id === pokemonId + 1)
-            return (
-              <PokemonPage
-                pokemonList={pokemonList}
-                previous={previous}
-                next={next}
-              />
-            )
-          }}
-        />
-      </Switch>
-    </Router>
+    <>
+      <Nav/>
+
+
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            <PokemonList pokemonList={pokemonList} />
+          </Route>
+          <Route
+            path='/pokemon/:name'
+            render={(routeParams) => {
+              const pokemonId = pokemonList.find(
+                ({ name }) => name === routeParams.match.params.name
+              ).id
+              const previous = pokemonList.find(({ id }) => id === pokemonId - 1)
+              const next = pokemonList.find(({ id }) => id === pokemonId + 1)
+              return (
+                <PokemonPage
+                  pokemonList={pokemonList}
+                  previous={previous}
+                  next={next}
+                />
+              )
+            }}
+          />
+        </Switch>
+      </Router>
+    </>
   )
 }
 
