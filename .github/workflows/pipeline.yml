@@ -1,4 +1,4 @@
-## Task 11.9 done done
+## Task 11.9 done
 
 name: Deployment pipeline
 
@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Check style
-        run: npm run eslint
+        run: npm run eslintdone
       - name: Build
         run: npm run build
       - name: Run tests
@@ -29,3 +29,4 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      
