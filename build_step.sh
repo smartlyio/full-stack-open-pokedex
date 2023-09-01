@@ -7,3 +7,5 @@ npm install
 
 echo "Building"
 npm run build
+
+echo "Successfully built"
