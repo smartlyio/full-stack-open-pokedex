@@ -44,26 +44,6 @@ primary_region = "sin"
   handlers = ["tls", "http"]
   port = 443
 
-[[services.http_checks]]
-  interval = 10000
-  grace_period = "5s"
-  method = "get"
-  path = "/health"
-  protocol = "http"
-  timeout = 2000
-  tls_skip_verify = false
-  [services.http_checks.headers]
-
-[[services.http_checks]]
-  interval = 10000
-  grace_period = "5s"
-  method = "get"
-  path = "/version"
-  protocol = "http"
-  timeout = 2000
-  tls_skip_verify = false
-  [services.http_checks.headers]
-
 [[services.tcp_checks]]
   grace_period = "1s"
   interval = "15s"
