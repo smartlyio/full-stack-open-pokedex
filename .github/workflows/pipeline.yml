@@ -34,6 +34,7 @@ jobs:
     name: Deploy to Render
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Trigger deployment
         uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
