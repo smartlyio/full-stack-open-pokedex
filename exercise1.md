@@ -1,14 +1,14 @@
-#Java
+# Java
 
-##Tools
+## Tools
 
-###Linting
+### Linting
 VS Code has java formatting and linting built in. You can specify a formatter profile or use the default settings for linting. 
 
-###Testing
+### Testing
 JUnit is one of the most popular Java unit and integration testing tools. It has IDE support so it can also be run by a VS Code extension.
 
-###Building
+### Building
 One of the most popular tools for building is Apache Maven. Maven manages project dependencies by downloading them from repositories and creating a dependency tree. 
 
 ## CI setup alternatives
