@@ -1,6 +1,6 @@
 module.exports = {
   "env": {
-    "browser": node,
+    "browser": true,
     "es6": true,
     "jest/globals": true
   },
