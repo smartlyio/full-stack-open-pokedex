@@ -22,8 +22,5 @@ jobs:
       - name: Test
         run: npm run test
       - name: Render GitHub Action
-        uses: Bounceapp/render-action@0.7.1
-        with:
-          render-token: ${{ secrets.RENDER_API_KEY }}
-          service-id: srv-${{ secrets.RENDER_SERVICE_ID }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
             
