@@ -44,8 +44,15 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
+      - name: Was there a #skip command?
+        run: |
+          if [[ $SKIP == true ]]; then
+            echo "#Skip found"
+          else
+            echo "#Skip not found"
+          fi
       - name: Update version number
-        if: env.SKIP == 'true'
+        if: env.SKIP != 'true'
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
