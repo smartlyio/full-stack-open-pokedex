@@ -6,6 +6,8 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.json())
 
+/* eslint-disable */
+
 app.get('/health', (_req, res) => {
   throw 'this is an error'
   //res.send('i am in good health')
@@ -14,7 +16,6 @@ app.get('/health', (_req, res) => {
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
-  /* eslint-disable */
   console.log('server started on port 5000')
   /* eslint-disable */
 })
