@@ -46,7 +46,8 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        run: echo "$COMMIT_MESSAGES"
+          JOINED_MESSAGES: join(COMMIT_MESSAGES, ', ')
+        run: echo "$JOINED_MESSAGES"
 
   tag_release:
     name: Bump version and push tag
@@ -63,7 +64,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          
+
   deploy_to_render:
     name: Deploy to Render
     runs-on: ubuntu-20.04
