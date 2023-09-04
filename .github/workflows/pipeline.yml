@@ -39,11 +39,13 @@ jobs:
     steps:
       - name: Set env SKIP
         run: echo "SKIP=$( echo ${{ contains( join(github.event.commits.*.message), '#skip') }} )" >> $GITHUB_ENV
+
       - name: Checkout
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
+
       - name: Was there a skip command?
         run: |
           if [[ $SKIP == true ]]; then
@@ -51,6 +53,7 @@ jobs:
           else
             echo "#Skip not found"
           fi
+          
       - name: Update version number
         if: env.SKIP != 'true'
         uses: anothrNick/github-tag-action@1.67.0
