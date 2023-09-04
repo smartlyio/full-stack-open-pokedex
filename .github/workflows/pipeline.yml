@@ -47,7 +47,9 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           JOINED_MESSAGES: ${{ join(toJson(github.event.commits.*.message), ', ') }}
-        run: echo "$JOINED_MESSAGES"
+        run: 
+          echo "$COMMIT_MESSAGES"
+          echo "$JOINED_MESSAGES"
 
   tag_release:
     name: Bump version and push tag
