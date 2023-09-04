@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { Router } from 'react-router-dom'
@@ -117,7 +118,6 @@ describe('<PokemonPage />', () => {
         </Router>
       )
     })
-
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
     expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/vaporeon')
   })
