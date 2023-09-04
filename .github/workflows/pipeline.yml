@@ -30,6 +30,17 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+  tag_release:
+    name: Bump version and push tag
+    runs-on: ubuntu-20.04
+    needs: simple_deployment_pipeline
+    if: ${{ github.event_name == 'push' }}
+    steps:
+      - name: Update version number
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
   deploy_to_render:
     name: Deploy to Render
     runs-on: ubuntu-20.04
@@ -42,4 +53,3 @@ jobs:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
           multipleDeployment: false #optional, default true
-      
