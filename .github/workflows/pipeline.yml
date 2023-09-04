@@ -32,6 +32,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Build success
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Build failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
     name: Bump version and push tag
@@ -74,4 +81,11 @@ jobs:
         with:
           serviceId: ${{ secrets.RENDER_SERVICE_ID }}
           apiKey: ${{ secrets.RENDER_API_KEY }}
-          multipleDeployment: false #optional, default true
+          multipleDeployment: false #optional, default true    
+      - name: Deployment success
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Deployment Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
