@@ -44,7 +44,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
-      - name: Was there a #skip command?
+      - name: Was there a skip command?
         run: |
           if [[ $SKIP == true ]]; then
             echo "#Skip found"
