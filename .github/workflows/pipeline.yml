@@ -31,35 +31,21 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-  a_test_job:
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v2
-      - name: github context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: commits
-        env:
-          COMMITS: ${{ toJson(github.event.commits) }}
-        run: echo "$COMMITS"
-      - name: commit messages
-        env:
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        run: 
-          echo "$COMMIT_MESSAGES"
-
   tag_release:
     name: Bump version and push tag
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
     if: ${{ github.event_name == 'push' }}
     steps:
-      - uses: actions/checkout@v3
+      - name: Set env SKIP
+        run: echo "SKIP=$( echo ${{ contains( join(github.event.commits.*.message), '#skip') }} )" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.merge_commit_sha }}
           fetch-depth: '0'
       - name: Update version number
+        if: env.SKIP == 'true'
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
