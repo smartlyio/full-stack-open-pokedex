@@ -22,16 +22,7 @@ primary_region = "arn"
 [[services]]
   internal_port = 5000
   process = ["app"]
-
-[[services.http_checks]]
-  interval = 10000
-  grace_period = "5s"
-  method = "get"
-  path = "/health"
-  protocol = "http"
-  timeout = 3000
-  tls_skip_verify = false
-  [services.http_checks.headers]
+  http_checks = []
 
 [http_service]
   internal_port = 5000
