@@ -31,4 +31,4 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           command: flyctl deploy --remote-only
-          env: FY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        env: FY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
