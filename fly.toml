@@ -32,7 +32,7 @@ primary_region = "arn"
 
 [[services.http_checks]]
   interval = 10000
-  grace_period = "60s"
+  grace_period = "5s"
   method = "get"
   path = "/health"
   protocol = "https"
