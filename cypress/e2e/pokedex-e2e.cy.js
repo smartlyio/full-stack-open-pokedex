@@ -1,6 +1,5 @@
 describe('Pokedex', function() {
-  const PORT = process.env.PORT || 5000
-  const MAINSITE = `http://localhost:${PORT}`
+  const MAINSITE = 'http://localhost:5000'
   it('front page can be opened', function() {
     cy.visit(MAINSITE)
     cy.contains('ivysaur')
