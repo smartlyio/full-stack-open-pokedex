@@ -30,3 +30,13 @@ primary_region = "arn"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "https"
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
