@@ -18,6 +18,7 @@ jobs:
       - name: Check style
         run: npm run eslint
       - name: Build
+        run: npm run build
       - name: test
         run: npm run test
       - name: e2e tests
@@ -26,6 +27,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
+      - uses: superfly/flyctl-actions/setup-flyctl@master
   deploy:
     name: Deploy app
     runs-on: ubuntu-20.04
