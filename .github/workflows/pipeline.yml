@@ -11,6 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        uses: superfly/flyctl-actions/setup-flyctl@master
         with:
           node-version: '16'
       - name: Install dependencies
@@ -28,8 +29,6 @@ jobs:
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
       - name: deploy
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        with:
-          command: flyctl deploy --remote-only
+        run: flyctl deploy --remote-only
         env:
           FY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
