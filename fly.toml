@@ -22,7 +22,6 @@ primary_region = "arn"
 [[services]]
   internal_port = 5000
   process = ["app"]
-  http_checks = []
 
 [http_service]
   internal_port = 5000
