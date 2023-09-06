@@ -29,10 +29,17 @@ jobs:
           wait-on: 'http://localhost:5000'
       - uses: superfly/flyctl-actions/setup-flyctl@master
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    permissions: # Required if github_deployment is set to true.
+      deployments: write
     steps:
-      - name: Deploy to production
-        uses: johnbeynon/render-deploy-action@v0.0.8
+      - uses: actions/checkout@v3
+      - uses: JorgeLNJunior/render-deploy@v1.4.1
         with:
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
+          service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
+          api_key: ${{ secrets.RENDER_API_KEY }} # required
+          clear_cache: false # Clear build cache. Optional
+          wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
+          github_deployment: true # Create a GitHub deployment. Optional
+          deployment_environment: 'production' # GitHub deployment enviroment name. Optional
+          github_token: ${{ secrets.GITHUB_TOKEN }} # Remove if github_deployment is false. Optional
