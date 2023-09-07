@@ -15,4 +15,4 @@ jobs:
           date
       - name: Folder contents
         run: |
-          echo ls
+           ls
