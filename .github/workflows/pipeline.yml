@@ -1,0 +1,82 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  COMMIT_MESSAGE: ${{ toJson(github.event.commits.*.message)}}
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Lint
+        run: npm run eslint
+      - name: build
+        run: npm run build
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+            command: npm run test:e2e
+            start: npm run start-prod
+            wait-on: http://localhost:5000
+      - name: Render Deploy Action
+        if: ${{ success() && github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip') }}
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with: 
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
+      - name: echo test
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip')
+        run: echo "$COMMIT_MESSAGES"
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: '0'
+      - name: github tag bumb 
+        if: github.event_name == 'push' && !contains(join(env.COMMIT_MESSAGE, ' '), '#skip')
+        uses: anothrNick/github-tag-action@1.67.0 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # this secret is automatically generated, equivalent to ${{ github.token }}
+          DEFAULT_BUMP: patch
+
+  discord_notification:
+    needs: [simple_deployment_pipeline, tag_release]
+    runs-on: ubuntu-20.04
+    if: always()
+    steps: 
+      - name: Test Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: needs.simple_deployment_pipeline.result == 'success' && needs.tag_release.result == 'success'
+        with:
+          severity: info
+          details: Build Succeeded!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: needs.simple_deployment_pipeline.result == 'failure' && needs.tag_release.result == 'failure'
+        with:
+          severity: error
+          details:  failed ${{ github.job }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+        
+            

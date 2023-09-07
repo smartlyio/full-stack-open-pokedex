@@ -1,0 +1,14 @@
+name: Health Check Pipeline
+
+on:
+  schedule:
+    - cron: '1 * * * *'
+
+jobs:
+  schedule_health_check:
+    runs-on: ubuntu-20.04
+    steps: 
+      - name: htttp get 
+        uses: jtalk/url-health-check-action@v3
+        with: 
+          url: https://full-stack-pokedex-lr8h.onrender.com

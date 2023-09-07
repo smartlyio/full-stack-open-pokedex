@@ -1,0 +1,23 @@
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+env:
+  COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message)}}
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+      - name: github context
+        if: github.event_name == 'push'
+        run: echo "$COMMIT_MESSAGES"
+     
