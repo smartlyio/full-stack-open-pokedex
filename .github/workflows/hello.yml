@@ -1,4 +1,4 @@
-name: Hello World!
+name: Hello World! and heres the date
 
 on:
   push:
@@ -9,8 +9,10 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say hello
+      - name: Say hello and date
         run: |
           echo "Hello World!"
           date
+      - name: Folder contents
+        run: |
           ls
