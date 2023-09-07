@@ -5,4 +5,5 @@ import './styles.css'
 
 // ReactDOM.render(<App />, document.getElementById('app'))
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+const root = ReactDOM.createRoot(document.getElementById('app'))
+root.render(<App />)
