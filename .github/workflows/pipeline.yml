@@ -40,7 +40,7 @@ jobs:
         run: echo "$GITHUB_CONTEXT"
       - name: commits
         env:
-          COMMITS: ${{ contains(toJson(github.event.pull_request.body), "skip") }}
+          COMMITS: ${{ contains(toJson(github.event.pull_request.body), 'skip') }}
         run: echo "$COMMITS"
   deploy:
     runs-on: ubuntu-latest
