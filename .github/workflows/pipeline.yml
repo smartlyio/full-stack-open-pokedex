@@ -30,6 +30,10 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: 'http://localhost:5000'
+  a_test_job:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
       - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -42,10 +46,6 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
-        - name: message
-          env:
-            MESSAGE: ${{ toJson(github.event.head_commit.message) }}
-          run: echo "$MESSAGE"
   deploy:
     runs-on: ubuntu-latest
     steps:
