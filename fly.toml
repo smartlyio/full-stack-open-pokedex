@@ -20,7 +20,7 @@ primary_region = "arn"
   PORT = "8080"
 
 [[services]]
-  internal_port = 8080
+  internal_port = 5000
   processes = ["app"]
 
 [[services.http_checks]]
@@ -33,7 +33,7 @@ primary_region = "arn"
     tls_skip_verify = false
 
 [http_service]
-  internal_port = 8080
+  internal_port = 5000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
