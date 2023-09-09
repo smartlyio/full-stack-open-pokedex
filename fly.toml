@@ -20,7 +20,7 @@ primary_region = "arn"
   PORT = "8080"
 
 [[services]]
-  internal_port = 5000
+  internal_port = 8080
   processes = ["app"]
 
 [[services.http_checks]]
