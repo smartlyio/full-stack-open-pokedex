@@ -30,13 +30,13 @@ primary_region = "arn"
   timeout = "2s"
 
 [[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/health"
-    protocol = "http"
-    timeout = 2000
-    tls_skip_verify = false
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = 2000
+  tls_skip_verify = false
 
 [http_service]
   internal_port = 5000
