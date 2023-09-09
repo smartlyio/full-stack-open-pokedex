@@ -22,6 +22,12 @@ primary_region = "arn"
 [[services]]
   internal_port = 8080
   processes = ["app"]
+  
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
 
 [[services.http_checks]]
     interval = 10000
