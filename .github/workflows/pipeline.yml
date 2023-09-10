@@ -31,7 +31,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       - run: |
           echo "Deploying to Fly.io"
       - uses: superfly/flyctl-actions/setup-flyctl@master
