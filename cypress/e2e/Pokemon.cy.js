@@ -9,7 +9,7 @@ describe('Pokedex', function () {
     )
   })
   it('can navigate to pokemon from main page', function () {
-    cy.contains('charizard').click()
+    cy.contains('charizardd').click()
     cy.contains('blaze')
   })
 })
