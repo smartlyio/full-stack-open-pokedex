@@ -10,7 +10,7 @@ on:
 
 jobs:
 
-  simple_deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -31,7 +31,13 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-        if: ${{ github.event_name == 'push' && github.ref_name == 'master' }}
+
+  deploy:
+    needs: build_and_test
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy to production
         run: flyctl deploy --remote-only
