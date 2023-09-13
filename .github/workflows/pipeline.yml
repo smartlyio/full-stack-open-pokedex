@@ -45,8 +45,9 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
   tag_release:
-    needs: build_and_test
+    needs: deploy
     runs-on: ubuntu-20.04
+    if: github.event_name == 'push'
     steps:
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest versionn
