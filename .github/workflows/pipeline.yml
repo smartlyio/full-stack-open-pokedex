@@ -45,7 +45,7 @@ jobs:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
   tag_release:
-      if: github.event.pull_request.merged == true
+      if: github.event_name == 'push'
       needs: deploy
       runs-on: ubuntu-22.04
       permissions:
@@ -63,3 +63,6 @@ jobs:
           WITH_V: true
           PRERELEASE: true
           DEFAULT_BUMP: patch
+
+          # funky comment
+          
