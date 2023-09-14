@@ -23,7 +23,6 @@ jobs:
       - name: Check test
         run: npm run test
   deploy:
-    if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message),'#skip')}}
     runs-on: ubuntu-latest
     permissions: # Required if github_deployment is set to true.
       deployments: write
