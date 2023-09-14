@@ -5,6 +5,9 @@ const app = express()
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 5000
 
+app.get('/version', (req, res) => {
+  res.send('1234') // change this string to ensure a new version deployed
+})
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
