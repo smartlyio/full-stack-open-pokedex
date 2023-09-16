@@ -45,7 +45,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     needs: simple_deployment_pipeline
     runs-on: ubuntu-20.04
-    name: Version increment
+    name: Increment version
     steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.55.0
