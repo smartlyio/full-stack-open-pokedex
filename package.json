@@ -6,10 +6,13 @@
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
+    "start:test": "NODE_ENV=test node app.js",
     "test": "jest",
+    "test:e2e": "cypress run",
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint": "eslint .",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
@@ -34,6 +37,7 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^13.2.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
