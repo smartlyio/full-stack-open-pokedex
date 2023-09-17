@@ -19,4 +19,4 @@ jobs:
     
       - name: Print current directory content
         run: |
-          ls
+          ls -l
