@@ -1,8 +1,9 @@
 module.exports = {
   "env": {
-    "browser": true,
+    "node": true,
     "es6": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "cypress/globals": true
   },
   "extends": [
     "eslint:recommended",
@@ -16,7 +17,7 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
     "indent": [
@@ -36,6 +37,8 @@ module.exports = {
       "never"
     ],
     "eqeqeq": "error",
+    "no-undef": "warn",
+    "no-unused-vars": "warn",
     "no-trailing-spaces": "error",
     "object-curly-spacing": [
       "error", "always"
@@ -43,7 +46,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": "off",
     "react/prop-types": 0
   }
 }

@@ -1,0 +1,33 @@
+# fly.toml app configuration file generated for fullstack-pokedex-app on 2023-09-18T03:21:42+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "fullstack-pokedex-app"
+primary_region = "ams"
+
+[env]
+    PORT="8080"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.1"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
