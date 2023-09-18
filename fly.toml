@@ -28,6 +28,7 @@ primary_region = "ams"
     NODE_VERSION = "16.19.1"
 
 [[services]]
+  http_checks = []
   internal_port = 8080
   processes = ["app"]
 
