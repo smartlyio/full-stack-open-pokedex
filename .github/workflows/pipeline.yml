@@ -30,7 +30,7 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start:test
-          wait-on: http://localhost:8080
+          wait-on: http://localhost:5000
           working-directory: ./pokedex
       - name: Trigger deployment
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
