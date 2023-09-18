@@ -36,4 +36,4 @@ primary_region = "ams"
     grace_period = "1s"
     interval = "15s"
     restart_limit = 0
-    timeout = "2s"
+    timeout = "5s"
