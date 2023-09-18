@@ -39,8 +39,6 @@ jobs:
     runs-on: ubuntu-20.04
     if: github.event_name == 'push' # 11.15 - only run on push events to the master branch
     steps:
-      - name: Set DRY_RUN variable # 11.15 - dry run
-        run: echo "DRY_RUN=true" >> $GITHUB_ENV
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
