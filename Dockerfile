@@ -4,6 +4,15 @@
 ARG NODE_VERSION=16.19.1
 FROM node:${NODE_VERSION}-slim as base
 
+RUN if [ -x "$(command -v apt-get)" ]; then \
+      apt-get update && apt-get install -y curl; \
+    elif [ -x "$(command -v apk)" ]; then \
+      apk add --no-cache curl; \
+    else \
+      echo "Unsupported package manager"; \
+      exit 1; \
+    fi
+
 LABEL fly_launch_runtime="Node.js"
 
 # Node.js app lives here

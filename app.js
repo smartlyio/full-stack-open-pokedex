@@ -8,14 +8,12 @@ const PORT = process.env.PORT || 5001
 app.use(express.static('dist'))
 
 app.get('/health', (req, res) => { // 11.11 - health check
-  res.send('ok')
+  res.send('ok') // 11.12
   exec('sh ./health_check.sh', (err, stdout, stderr) => {
-    if (err) {
-      console.log(err)
-      return
+    if (err || stderr) {
+      return res.send('1')
     }
     console.log(stdout)
-    console.log(stderr)
   })
 })
 
