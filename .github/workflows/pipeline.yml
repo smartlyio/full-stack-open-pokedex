@@ -33,3 +33,19 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5001
+
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    if: github.event_name == 'push' # 11.15 - only run on push events to the master branch
+    steps:
+      - name: Set DRY_RUN variable # 11.15 - dry run
+        run: echo "DRY_RUN=true" >> $GITHUB_ENV
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          prefix: v
+          release_name: Release
+          default_bump: patch # 11.15 - increments patch number by default
