@@ -28,8 +28,8 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          command: npm run test:e2e
           start: npm run start:test
+          command: npm run test:e2e
           wait-on: http://localhost:5000
           working-directory: ./pokedex
       - name: Trigger deployment
