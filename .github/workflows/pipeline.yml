@@ -45,7 +45,4 @@ jobs:
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          prefix: v
-          release_name: Release
-          default_bump: patch # 11.15 - increments patch number by default
+          DEFAULT_BUMP: patch # 11.15 - increments patch number by default
