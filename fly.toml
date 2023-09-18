@@ -44,6 +44,6 @@ primary_region = "ams"
     method = "get"
     path = "/"
     protocol = "http"
-    timeout = 2000
+    timeout = 20000
     tls_skip_verify = false
     [services.http_checks.headers]
