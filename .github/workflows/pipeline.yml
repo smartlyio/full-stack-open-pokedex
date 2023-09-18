@@ -5,12 +5,15 @@ on:
     branches:
       - master
 
+env:
+  WORKDIR: ./pokedex
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     defaults:
       run:
-        working-directory: ./pokedex
+        working-directory: $WORKDIR
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -28,3 +31,4 @@ jobs:
           command: npm run test:e2e
           start: npm run start:test
           wait-on: http://localhost:8080
+          working-directory: $WORKDIR
