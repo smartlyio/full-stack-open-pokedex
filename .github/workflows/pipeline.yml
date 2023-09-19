@@ -67,21 +67,13 @@ jobs:
 
     steps:
       - name: checkout code
+        if: github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip')
         uses: actions/checkout@v2
-
-      - name: Check Commit Message for #skip
-        run: |
-          if [[ "$(git log --format=%B -n 1 ${{ github.sha }})" == *"#skip"* ]]; then
-            echo "Skipping tag release due to commit message containing #skip."
-            exit 0  # Exit successfully to skip the job
-          fi
-        if: github.event_name == 'push'
   
-
       - name: Bump patch version and push tag
+        if: github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message)), '#skip')
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
-          if: github.event_name == 'push' && steps.Check Commit Message for #skip.outputs.should_run != 'false'
