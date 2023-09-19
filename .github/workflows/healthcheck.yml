@@ -1,0 +1,22 @@
+name: Hello World!
+
+on: 
+  workflow_dispatch:
+  schedule:
+    - cron:  '0 1 * * *'
+
+jobs:
+  render_deployment_healthcheck:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: ${{ vars.HEALTHCHECK_URL }}
+      - name: Healthcheck failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: Healthcheck failed for ${{ vars.HEALTHCHECK_URL }}
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
