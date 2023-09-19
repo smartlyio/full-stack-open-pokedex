@@ -4,7 +4,7 @@ const app = express()
 
 const PORT = process.env.PORT || 5000
 
-// brrrrr
+// brrrrrr
 
 app.use(express.static('dist'))
 
