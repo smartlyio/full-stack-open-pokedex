@@ -4,9 +4,9 @@ on:
   push:
     branches:
       - master
-    paths:
-      - 'pokedex/app.js'
-      - 'pokedex/src/**'
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   deploy:
