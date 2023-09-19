@@ -29,6 +29,7 @@ primary_region = "cdg"
   interval = "15s"
   restart_limit = 0
   timeout = "2s"
+  processes = ["app"]
 
 [[services.http_checks]]
     interval = 10000
@@ -38,3 +39,4 @@ primary_region = "cdg"
     protocol = "http"
     timeout = 2000
     tls_skip_verify = false
+    processes = ["app"]
