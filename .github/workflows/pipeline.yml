@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      # - uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '16'
-      # - name: Install dependencies 
-      #   run: npm install  
-      # - name: Check style
-      #   run: npm run eslint
-      # - name: Build
-      #   run: npm run build
-      # - name: Test
-      #   run: npm test
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #       command: npm run test:e2e
-      #       start: npm run start-prod
-      #       wait-on: 'http://localhost:5000'
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies 
+        run: npm install  
+      - name: Check style
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+            command: npm run test:e2e
+            start: npm run start-prod
+            wait-on: 'http://localhost:5000'
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
         env:
