@@ -54,7 +54,7 @@ jobs:
         if: github.event_name == 'push'
 
   tag_release:
-    needs: simple_deployment_pipeline
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
 
     steps:
