@@ -34,22 +34,36 @@ jobs:
           command: npm run test:e2e
           wait-on: http://localhost:5000
           working-directory: ./pokedex
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: Tests Failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag:
+    if: (github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip'))
     needs: [build]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        if: (github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip'))
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: 'patch'
           WITH_V: false
   deploy:
+    if: (github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip'))
     needs: [build, tag]
     runs-on: ubuntu-20.04
     steps:
       - name: Trigger deployment
-        if: (github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip'))
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Deployment success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            details: Deployment Succeeded!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
