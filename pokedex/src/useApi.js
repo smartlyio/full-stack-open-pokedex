@@ -8,6 +8,7 @@ const useApi = (url, mapResults = (result) => result) => {
 
   useEffect(() => {
     setIsLoading(true)
+
     axios
       .get(url)
       .then(response => setData(mapResults(response.data)))
