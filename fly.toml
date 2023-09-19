@@ -25,9 +25,9 @@ primary_region = "cdg"
   processes = ["app"]
 
 [[services]]
-  process = "app"
+  processes = ["app"]
   internal_port = 5000
-  
+
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
