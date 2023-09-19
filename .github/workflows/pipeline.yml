@@ -47,16 +47,14 @@ jobs:
 
       - name: Setup & Deplot Fly
         uses: superfly/flyctl-actions/setup-flyctl@master
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip')
 
       - name: Deploy to Fly.io
         run: |
-          if [[ ${{ github.event_name }} == 'push' ]]; then
-            if [[ "$(git log --format=%B -n 1 ${{ github.sha }})" != *"#skip"* ]]; then
-              flyctl deploy --remote-only
-            else
-              echo "Skipping deployment due to commit message containing #skip."
-            fi
+          if [[ ${{ github.event_name }} == 'push' && !contains(github.event.head_commit.message, '#skip') ]]; then
+            flyctl deploy --remote-only
+          else
+            echo "Skipping deployment due to commit message containing #skip."
           fi
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
@@ -69,10 +67,19 @@ jobs:
       - name: checkout code
         uses: actions/checkout@v2
 
+      - name: Check Commit Message for #skip
+        run: |
+          if [[ "$(git log --format=%B -n 1 ${{ github.sha }})" == *"#skip"* ]]; then
+            echo "Skipping tag release due to commit message containing #skip."
+            exit 0  # Exit successfully to skip the job
+          fi
+        if: github.event_name == 'push'
+  
+
       - name: Bump patch version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
-        if: github.event_name == 'push' && [[ "$(git log --format=%B -n 1 ${{ github.sha }})" != *"#skip"* ]]
+          if: github.event_name == 'push' && steps.Check Commit Message for #skip.outputs.should_run != 'false'
