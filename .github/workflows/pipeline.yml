@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - master
-      
+
   pull_request:
     branches:
       - master
@@ -75,4 +75,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && [[ "$(git log --format=%B -n 1 ${{ github.sha }})" != *"#skip"* ]]
