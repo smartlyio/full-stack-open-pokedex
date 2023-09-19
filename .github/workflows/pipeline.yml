@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Deployment Pipeline
 
 on:
   push:
@@ -7,33 +7,47 @@ on:
   pull_request:
     branches:
       - master
-    types: [opened, synchronize]
+    types:
+      - opened
+      - synchronize
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - name: Install dependencies 
-        run: npm install  
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Check style
         run: npm run eslint
+
       - name: Build
         run: npm run build
+
       - name: Test
         run: npm test
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
+
+      - name: End-to-End tests
+        uses: cypress-io/github-action@v2
         with:
-            command: npm run test:e2e
-            start: npm run start-prod
-            wait-on: 'http://localhost:5000'
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: 'http://localhost:5000'
+
+      - name: Setup Flyctl
+        uses: superfly/flyctl-actions/setup-flyctl@master
         if: github.event_name == 'push'
-      - run: flyctl deploy --remote-only
+
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
