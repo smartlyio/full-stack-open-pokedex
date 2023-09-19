@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-20.04
     defaults:
       run:
@@ -34,6 +34,21 @@ jobs:
           command: npm run test:e2e
           wait-on: http://localhost:5000
           working-directory: ./pokedex
+  tag:
+    needs: [build]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: 'patch'
+          WITH_V: false
+  deploy:
+    needs: [build, tag]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
