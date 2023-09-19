@@ -23,10 +23,10 @@ module.exports = {
       "error",
         2
       ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
+      "linebreak-style": [
+        "error", 
+        process.env.NODE_ENV === 'prod' ? "unix" : "windows"
+      ],
     "quotes": [
       "error",
       "single"
@@ -43,7 +43,7 @@ module.exports = {
     "arrow-spacing": [
       "error", { "before": true, "after": true }
     ],
-    "no-console": "error",
+    "no-console": "allow",
     "react/prop-types": 0
   }
 }
