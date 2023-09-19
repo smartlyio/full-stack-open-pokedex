@@ -48,10 +48,16 @@ jobs:
         if: github.event_name == 'push'
 
       - name: Deploy to Fly.io
-        run: flyctl deploy --remote-only
+        run: |
+          if [[ ${{ github.event_name }} == 'push' ]]; then
+            if [[ "$(git log --format=%B -n 1 ${{ github.sha }})" != *"#skip"* ]]; then
+              flyctl deploy --remote-only
+            else
+              echo "Skipping deployment due to commit message containing #skip."
+            fi
+          fi
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        if: github.event_name == 'push'
 
   tag_release:
     needs: [simple_deployment_pipeline]
