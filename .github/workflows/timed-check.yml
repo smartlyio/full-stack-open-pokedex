@@ -1,7 +1,4 @@
 on:
-  push:
-    branches:
-      - '*'
   schedule:
     - cron: '*/15 * * * *'
 
