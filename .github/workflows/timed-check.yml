@@ -1,13 +1,11 @@
 on:
   schedule:
-    - cron: '*/15 * * * *'
+    - cron: '* 1 * * *'
 
 jobs:
   test_schedule:
     runs-on: ubuntu-latest
     steps:
-      - name: First step
-        run: echo "Halojaa"
       - name: health check
         uses: jtalk/url-health-check-action@v3
         with:
