@@ -8,7 +8,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "start-prod": "webpack-dev-server --open --port 5000 --mode development",
+    "start-prod": "node app.js",
     "start:test": "NODE_ENV=test node index.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
@@ -46,7 +46,10 @@
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
     "jest": "^25.5.4",
-    "style-loader": "^1.2.1"
+    "style-loader": "^1.2.1",
+    "html-webpack-plugin": "^4.3.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -54,9 +57,6 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "html-webpack-plugin": "^4.3.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack": "^4.43.0"
   }
 }
