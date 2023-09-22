@@ -14,7 +14,7 @@ primary_region = "arn"
 
 [build]
   [build.args]
-    [NODE_VERSION] = "16.20.2"
+    NODE_VERSION = "16.20.2"
 
 [[services]]
   [http_checks] = []
