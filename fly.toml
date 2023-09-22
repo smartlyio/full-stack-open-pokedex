@@ -35,5 +35,4 @@ primary_region = "arn"
   protocol = "http"
   timeout = 2000
   restart_limit = 3
-  [[services.http_checks.headers]]
 
