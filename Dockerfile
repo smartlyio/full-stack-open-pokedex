@@ -17,7 +17,7 @@ ENV NODE_ENV="production"
 FROM base as build
 
 # Install packages needed to build node modules
-# RUN apt-get update -qq && \
+ RUN apt-get update -qq
 #    apt-get install -y build-essential pkg-config python-is-python3
 
 # Install node modules
