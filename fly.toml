@@ -17,6 +17,6 @@ primary_region = "arn"
     NODE_VERSION = "16.20.2"
 
 [[services]]
-  [http_checks] = []
+  http_checks = []
   internal_port = 8080
   processes = ["app"]
