@@ -1,0 +1,9 @@
+[deploy]
+  release_command = "npm run build"
+
+[process]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.2"
