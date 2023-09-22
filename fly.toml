@@ -7,9 +7,16 @@ app = "fullstackpokedex"
 primary_region = "arn"
 
 [build]
+  [build.args]
+    [NODE_VERSION] = "16.20.2
 
 [deploy]
   release_command = "npm run build"
 
 [processes]
   app = "node app.js"
+
+[[services]]
+  [http_checks] = []
+  internal_port = 8080
+  processes = ["app"]
