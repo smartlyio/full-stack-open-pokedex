@@ -8,6 +8,7 @@ primary_region = "arn"
 
 [deploy]
   release_command = "npm run build"
+  strategy = "immediate"
 
 [processes]
   app = "node app.js"
