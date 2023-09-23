@@ -12,7 +12,7 @@
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint \"./**/*.{js,jsx}\"",
-    "build": "webpack -- --mode production",
+    "build": "webpack --mode production",
     "cypress:open": "cypress open",
     "test:e2e": "cypress run -- --record --spec 'cypress/e2e/my-spec.cy.js'"
   },
