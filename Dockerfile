@@ -33,7 +33,7 @@ COPY --link . .
 RUN npm run build
 
 # Remove development dependencies
-RUN npm prune --omit=dev
+RUN npm prune --production
 
 
 # Final stage for app image
@@ -44,4 +44,4 @@ COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 5000
-CMD [ "npm", "run", "start-prod" ]
+CMD [ "node", "app.js" ]
