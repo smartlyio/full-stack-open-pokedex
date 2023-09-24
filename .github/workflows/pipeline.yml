@@ -22,4 +22,4 @@ jobs:
         with:
           start: npm run start-prod
           command: npm run test:e2e
-          wait-on: 0.0.0.0:5001
+          wait-on: [::1]:5001
