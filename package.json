@@ -10,7 +10,8 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "lint-fix": "npm run eslint -- --fix",
     "build": "webpack --mode production",
-    "cypress:open": "cypress open"
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run cypress/e2e/test.cy.js"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,7 @@
     "css-loader": "^3.5.3",
     "cypress": "^13.2.0",
     "eslint": "^6.8.0",
+    "eslint-plugin-cypress": "^2.15.1",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
     "html-loader": "^1.1.0",
