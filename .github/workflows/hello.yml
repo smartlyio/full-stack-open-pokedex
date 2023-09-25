@@ -1,4 +1,4 @@
-name: hello_world_job
+name: Hello world!
 run-name: ${{ github.actor }} is saying "Hello World!"
 on: [push]
 jobs:
