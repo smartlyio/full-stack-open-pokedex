@@ -8,6 +8,8 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    permissions:
+      deployments: write
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -17,7 +19,16 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     command: npm run test:e2e
+      - uses: JorgeLNJunior/render-deploy@v1.4.1
+        with:
+          service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
+          api_key: ${{ secrets.RENDER_API_KEY }} # required
+          # clear_cache: false # Clear build cache. Optional
+          # wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
+          # github_deployment: false # Create a GitHub deployment. Optional
+          deployment_environment: "production" # GitHub deployment enviroment name. Optional
+          # github_token: ${{ secrets.GITHUB_TOKEN }} # Remove if github_deployment is false. Optional
+          # - name: e2e tests
+          #   uses: cypress-io/github-action@v5
+          #   with:
+          #     command: npm run test:e2e
