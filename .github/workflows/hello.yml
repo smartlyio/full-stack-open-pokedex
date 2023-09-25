@@ -2,7 +2,16 @@ name: hello_world_job
 run-name: ${{ github.actor }} is saying "Hello World!"
 on: [push]
 jobs:
-  print:
+  Say hello:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Hello World!"
+  Current time:
+    runs-on: ubuntu-latest
+    steps:
+      - run: date
+  Current directory:
+      runs-on: ubuntu-latest
+      steps:
+        - run: ls -lah
+    
