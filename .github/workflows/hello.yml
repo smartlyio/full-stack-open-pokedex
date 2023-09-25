@@ -1,6 +1,6 @@
 name: hello_world_job
 run-name: ${{ github.actor }} is saying "Hello World!"
-# on: [push]
+on: [push]
 jobs:
   Say_hello:
     runs-on: ubuntu-latest
