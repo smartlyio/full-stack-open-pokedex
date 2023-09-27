@@ -23,7 +23,7 @@ primary_region = "lax"
 
 [[services]]
   protocol = ""
-  internal_port = 8080
+  internal_port = 8000
   processes = ["app"]
 
   [[services.tcp_checks]]
