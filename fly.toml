@@ -31,3 +31,5 @@ primary_region = "lax"
 # also modified the http_service internal_port to 8000 so it matches what we have configured in app
 
 # https://community.fly.io/t/how-to-only-have-one-machine-running-at-once/13914/2
+
+# custom health checks do not work in fly.io
