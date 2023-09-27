@@ -26,12 +26,6 @@ primary_region = "lax"
   internal_port = 8000
   processes = ["app"]
 
-  [[services.tcp_checks]]
-    grace_period = "1s"
-    interval = "15s"
-    restart_limit = 0
-    timeout = "2s"
-
 
 # removed release_command = "npm run build" from [deploy] so that fly.io only creates one machine instead of two
 # also modified the http_service internal_port to 8000 so it matches what we have configured in app
