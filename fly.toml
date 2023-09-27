@@ -1,0 +1,32 @@
+# fly.toml app configuration file generated for shy-wood-4799 on 2023-09-26T19:10:42-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "shy-wood-4799"
+primary_region = "lax"
+
+[build]
+
+[deploy]
+
+[processes]
+  app = "node app.js"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services]]
+  protocol = ""
+  internal_port = 8080
+  processes = ["app"]
+
+# removed release_command = "npm run build" from [deploy] so that fly.io only creates one machine instead of two
+# also modified the http_service internal_port to 8000 so it matches what we have configured in app
+
+# https://community.fly.io/t/how-to-only-have-one-machine-running-at-once/13914/2
