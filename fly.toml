@@ -32,16 +32,6 @@ primary_region = "lax"
     restart_limit = 0
     timeout = "2s"
 
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/health"
-    protocol = "http"
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]
-
 
 # removed release_command = "npm run build" from [deploy] so that fly.io only creates one machine instead of two
 # also modified the http_service internal_port to 8000 so it matches what we have configured in app
