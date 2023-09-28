@@ -25,3 +25,11 @@ jobs:
           
           - name: test 
             run: npm test
+          
+          - name: deploy 
+            uses: Bounceapp/render-action@0.7.1
+            with:
+              render-token: ${{ secrets.RENDER_TOKEN }}
+              service-id: srv-ckaqq2mgtj9c73a04rv
+            
+            
