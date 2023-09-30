@@ -1,0 +1,28 @@
+# fly.toml app configuration file generated for blue-darkness-9331 on 2023-09-30T13:45:54+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "blue-darkness-9331"
+primary_region = "arn"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.0"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[env]
+  PORT = "3000"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
