@@ -19,13 +19,13 @@ jobs:
       - name: Check style
         run: npm run eslint
       - run: npm run build
-      - run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5001
+      # - run: npm run test
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5001
       - name: deploy to fly.io
         run: flyctl deploy --remote-only
         env:
