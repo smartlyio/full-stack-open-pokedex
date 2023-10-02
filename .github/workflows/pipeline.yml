@@ -31,6 +31,6 @@ jobs:
             with:
               github-token: ${{ secrets.GIT_TOKEN }}
               render-token: ${{ secrets.RENDER_TOKEN }}
-              service-id: srv-ckaqq2mgtj9c73a04rv
+              service-id: srv-ckaqq2mgtj9c73a04rv0
             
             
