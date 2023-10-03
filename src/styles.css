@@ -9,7 +9,7 @@ body {
   display: flex;
   flex-direction: column;
   font-family: "Open Sans";
-  font-size: 18px;
+  font-size: 20px;
 }
 
 body > div {
