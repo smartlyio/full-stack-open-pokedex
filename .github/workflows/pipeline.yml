@@ -17,7 +17,6 @@ jobs:
           - uses: actions/setup-node@v3
             with:
               node-version: '16'
-          - run: git init
           
           - name: install dependencies
             run: npm install
@@ -40,6 +39,8 @@ jobs:
               service-id: srv-ckaqq2mgtj9c73a04rv0
    tag_release:
      runs-on: ubuntu-latest
+     permissions:
+      contents: write
      needs: [simple_deployment_pipeline]
 
      steps: 
