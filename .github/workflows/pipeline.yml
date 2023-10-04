@@ -37,5 +37,14 @@ jobs:
               github-token: ${{ secrets.GIT_TOKEN }}
               render-token: ${{ secrets.RENDER_TOKEN }}
               service-id: srv-ckaqq2mgtj9c73a04rv0
-            
+   tag_release:
+     runs-on: ubuntu-latest
+     needs: [simple_deployment_pipeline]
+
+     steps: 
+       - name: Bump version and push tag 
+         uses: anothrNick/github-tag-action@1.64.0 # Don't use @master or @v1 unless you're happy to test the latest version
+         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          DEFAULT_BUMP: patch   
             
