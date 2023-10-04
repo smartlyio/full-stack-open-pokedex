@@ -45,6 +45,7 @@ jobs:
        - name: Bump version and push tag 
          uses: anothrNick/github-tag-action@1.64.0
          env:
+          DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
           DEFAULT_BUMP: patch   
             
