@@ -44,11 +44,9 @@ jobs:
      needs: [simple_deployment_pipeline]
 
      steps: 
-       - name: commit messages
-         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-         run: echo "$COMMIT_MESSAGES"
+
        - name: Bump version and push tag 
+         if: ${{ ! contains(join(toJson(github.event.commits.*.message), ' '), '#skip')  }}
          uses: anothrNick/github-tag-action@1.55.0
          env:
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
