@@ -58,7 +58,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
-          severity: informational
+          severity: info
           details: Build Succeeded and a new version is deployed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
