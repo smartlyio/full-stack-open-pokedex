@@ -31,5 +31,16 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to Render
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        with:
+          BUMP: patch
+          DRY_RUN: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
