@@ -46,9 +46,8 @@ jobs:
      steps: 
        - name: Bump version and push tag 
          if: ${{ ! contains(join(toJson(github.event.commits.*.message), ' '), '#skip')  }}
-         uses: anothrNick/github-tag-action@1.55.0
-         env:
-          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
-          DEFAULT_BUMP: patch
+         uses: mathieudutour/github-tag-action@v6.1
+         with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
 
             
