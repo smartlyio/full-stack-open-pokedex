@@ -42,7 +42,6 @@ jobs:
      permissions:
       contents: write
      needs: [simple_deployment_pipeline]
-
      steps: 
        - name: Bump version and push tag 
          if: ${{ ! contains(join(toJson(github.event.commits.*.message), ' '), '#skip')  }}
