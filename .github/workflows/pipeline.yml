@@ -33,3 +33,36 @@ jobs:
       - name: Deploy to Render
         if: github.event_name == 'push'
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        with:
+          BUMP: patch
+          DRY_RUN: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  notify_success:
+    needs: tag_release
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          status: success
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: 'New Version Deployed!'
+          description: 'A new version has been successfully deployed.'
+  notify_failure:
+    if: failure()
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          status: failure
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: 'Build Failed'
+          description: 'The build failed. Please check the GitHub Actions logs for more details.'
