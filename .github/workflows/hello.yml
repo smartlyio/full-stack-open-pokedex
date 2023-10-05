@@ -13,3 +13,7 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+      - name: Date Now
+        run: date
+      - name: Directory Content
+        run: ls -l
