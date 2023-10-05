@@ -31,7 +31,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to Render
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')
         run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
   tag_release:
     needs: [simple_deployment_pipeline]
