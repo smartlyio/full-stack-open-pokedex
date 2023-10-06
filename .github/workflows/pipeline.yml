@@ -28,6 +28,7 @@ jobs:
           wait-on: http://localhost:5000
   main:
     name: Deploy to Render
+    needs: simple_deployment_pipeline
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deployment
