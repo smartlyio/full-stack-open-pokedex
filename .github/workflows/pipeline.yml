@@ -49,7 +49,8 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          text: 'New Version Deployed! A new version has been successfully deployed.'
+          text: 'New Version Deployed to https://full-stack-open-pokedex-omvu.onrender.com/! A new version has been successfully deployed.'
+          severity: informational
   notify_failure:
     if: failure()
     runs-on: ubuntu-20.04
@@ -58,4 +59,10 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1.0.4
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          text: 'Build Failed. The build failed. Please check the GitHub Actions logs for more details.'
+          text: |
+            Build Failed. The build failed. 
+            Commit by: ${{ github.actor }}
+            Repo: ${{ github.repository }}
+            Commit: ${{ github.sha }}
+            Please check the GitHub Actions logs for more details.
+          severity: error
