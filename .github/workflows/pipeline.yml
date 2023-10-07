@@ -29,10 +29,10 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
   main:
+    if: ${{ github.event_name == 'push' }}
     name: Deploy to Render
     needs: simple_deployment_pipeline
     runs-on: ubuntu-latest
     steps:
       - name: Trigger deployment
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-        if: ${{ github.event_name == 'push' }}
