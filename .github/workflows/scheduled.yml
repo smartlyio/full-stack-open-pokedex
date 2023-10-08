@@ -1,0 +1,18 @@
+name: HealthCheck
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  health_check:
+    name: health_check
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@fc2fe2a9ca9c9734d992431b749b79350d771fbb
+        with:
+          url: https://pokedex-yewk.onrender.com
+          max-attempts: 3
+          retry-delay: 5s
