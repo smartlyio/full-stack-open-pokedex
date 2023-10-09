@@ -1,0 +1,68 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies
+        run: npm install
+      - name: Check style
+        run: npm run eslint
+      - name: Build
+        run: npm run build
+      - name: Run tests
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+      - name: Deploy to Render
+        if: github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')
+        run: curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  notify_success:
+    needs: tag_release
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify Success
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          text: 'New Version Deployed to https://full-stack-open-pokedex-omvu.onrender.com/! A new version has been successfully deployed.'
+          severity: informational
+  notify_failure:
+    if: failure()
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Discord Webhook Notify Failure
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          text: |
+            Build Failed. The build failed. 
+            Commit by: ${{ github.actor }}
+            Repo: ${{ github.repository }}
+            Commit: ${{ github.sha }}
+            Please check the GitHub Actions logs for more details.
+          severity: error

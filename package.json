@@ -7,8 +7,11 @@
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
-    "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "eslint": "eslint \"./**/*.{js,jsx}\"",
+    "eslint:fix": "eslint \"./**/*.{js,jsx}\" --fix",
+    "build": "webpack --mode production",
+    "cypress:open": "cypress open",
+    "test:e2e": "cypress run"
   },
   "repository": {
     "type": "git",
@@ -33,6 +36,7 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^13.1.0",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
@@ -41,7 +45,7 @@
     "jest": "^25.5.4",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
