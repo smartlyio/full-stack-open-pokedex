@@ -6,9 +6,12 @@
   "scripts": {
     "start": "NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
+		"dev": "vite --host",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+		"cypress:open": "cypress open",
+		"test:2e2": "NODE_ENV=test node app.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +36,7 @@
     "babel-jest": "^25.5.1",
     "babel-loader": "^8.1.0",
     "css-loader": "^3.5.3",
+    "cypress": "^13.3.1",
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.11.0",
     "eslint-plugin-react": "^7.19.0",
