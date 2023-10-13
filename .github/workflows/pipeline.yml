@@ -5,12 +5,13 @@ on:
     branches:
       - master
 
-env:
-  PORT: 5001
 
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    env:
+      PORT: 5001
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -31,4 +32,4 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:${PORT}
+          wait-on: 'http://localhost:${{env.PORT}}'
