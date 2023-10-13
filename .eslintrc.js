@@ -7,6 +7,7 @@ module.exports = {
   globals: {
     process: "readonly",
   },
+  overrides: [{ files: ["./src/**/*.js"] }],
   extends: ["eslint:recommended", "plugin:react/recommended"],
   parserOptions: {
     ecmaFeatures: {

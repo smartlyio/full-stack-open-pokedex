@@ -1,3 +1,6 @@
 webpack.config.js
 node_modules/
 dist/
+cypress
+cypress.config.js
+server
