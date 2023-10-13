@@ -10,7 +10,7 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     env:
-      PORT: 5001
+      PORT: 5009
 
     steps:
       - uses: actions/checkout@v3
