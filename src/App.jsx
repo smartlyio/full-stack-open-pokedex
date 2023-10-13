@@ -36,7 +36,12 @@ const App = () => {
             ).id;
 
             const previous = pokemonList.find(({ id }) => id === pokemonId - 1);
-            const next = pokemonList.find(({ id }) => id === pokemonId + 1);
+
+            const next = pokemonList.find(({ id }) => {
+              const nextPokemon = pokemonId + 1;
+              return id === nextPokemon;
+            });
+
             return (
               <PokemonPage
                 pokemonList={pokemonList}
