@@ -8,7 +8,7 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-20.04
+    runs-on: windows-latest
     steps:
       - name: Say hello
         run: |
@@ -17,4 +17,4 @@ jobs:
         run: |
             date
       - name: Directory content
-        run: ls -l
+        run: dir
