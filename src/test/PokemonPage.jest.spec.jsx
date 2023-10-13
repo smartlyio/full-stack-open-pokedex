@@ -5,7 +5,7 @@ import { createMemoryHistory } from "history";
 import axiosMock from "axios";
 import { act } from "react-dom/test-utils";
 import "@testing-library/jest-dom/extend-expect";
-import PokemonPage from "../src/PokemonPage";
+import PokemonDetails from "../PokemonDetails";
 
 jest.mock("axios");
 
@@ -73,7 +73,7 @@ const pokemonList = {
 
 const history = createMemoryHistory();
 
-describe("<PokemonPage />", () => {
+describe("<PokemonDetails />", () => {
   beforeEach(() => {
     history.push("/pokemon/eevee");
   });
@@ -84,7 +84,7 @@ describe("<PokemonPage />", () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage />
+          <PokemonDetails />
         </Router>
       );
     });
@@ -99,7 +99,7 @@ describe("<PokemonPage />", () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage />
+          <PokemonDetails />
         </Router>
       );
     });
@@ -113,7 +113,7 @@ describe("<PokemonPage />", () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage previous={previous} next={next} />
+          <PokemonDetails previous={previous} next={next} />
         </Router>
       );
     });
@@ -124,7 +124,7 @@ describe("<PokemonPage />", () => {
     );
     expect(screen.getByText("Next")).toHaveAttribute(
       "href",
-      "/pokemon/vaporeon"
+      "/pokemon/ditto"
     );
   });
 
@@ -134,7 +134,7 @@ describe("<PokemonPage />", () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage />
+          <PokemonDetails />
         </Router>
       );
     });

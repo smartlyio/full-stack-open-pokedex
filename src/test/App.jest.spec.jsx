@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import axiosMock from "axios";
 import { act } from "react-dom/test-utils";
 import "@testing-library/jest-dom/extend-expect";
-import App from "../src/App";
+import App from "../App";
 
 jest.mock("axios");
 

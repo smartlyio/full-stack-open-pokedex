@@ -4,7 +4,7 @@ import { PokemonAbility, LoadingSpinner, ErrorMessage } from "./components";
 import { formatName } from "./utils";
 import { useApi } from "./hooks";
 
-const PokemonPage = ({ previous, next }) => {
+const PokemonDetails = ({ previous, next }) => {
   const { name } = useParams();
 
   const {
@@ -87,4 +87,4 @@ const PokemonPage = ({ previous, next }) => {
   );
 };
 
-export default PokemonPage;
+export default PokemonDetails;
