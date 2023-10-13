@@ -19,11 +19,11 @@ jobs:
     steps:
       - name: Date
         run: |
-          echo date
+          date
 
   current_directory:
     runs-on: ubuntu-20.04
     steps:
       - name: Current directory
         run: |
-          echo ls -l
+          ls -l
