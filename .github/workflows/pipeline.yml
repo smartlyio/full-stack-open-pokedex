@@ -26,7 +26,11 @@ jobs:
       - name: Test
         run: npm run test
       - name: Debug
-        run : echo "PORT is ${PORT}"
+
+        run : |
+          echo "PORT is ${PORT}"
+          netstat -ntpl
+          ps aux | grep node
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
