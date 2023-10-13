@@ -11,7 +11,7 @@
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
     "cypress:open": "cypress open",
-    "test:e2e": "NODE_ENV=test node app.js"
+    "test:e2e": "cypress open"
   },
   "repository": {
     "type": "git",
