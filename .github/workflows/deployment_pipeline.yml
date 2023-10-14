@@ -61,6 +61,17 @@ jobs:
         run: yarn install
       - name: build
         run: yarn run build
+  tag_release:
+    needs: build
+    name:  Release tag
+    runs-on: ubuntu-latest
+    environment:
+      name: deploy
+    steps:
+     - name: Bump version and push tag
+       uses: anothrNick/github-tag-action@1.55.0
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
     needs: build
     name: Deploy app
