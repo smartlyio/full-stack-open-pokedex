@@ -4,7 +4,7 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "engines": {
-    "node": "16.19.1"
+    "node": "16.20.2"
   },
   "scripts": {
     "dev": "webpack-dev-server --open --mode development",
