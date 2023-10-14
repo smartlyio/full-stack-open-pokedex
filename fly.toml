@@ -26,3 +26,6 @@ primary_region = "cdg"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+  
+[[services]]
+  http_checks = []

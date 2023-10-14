@@ -60,13 +60,23 @@ jobs:
       - name: build
         run: yarn run build
   deploy:
+    needs: build
     name: Deploy app
     runs-on: ubuntu-latest
-    environment: 
+    environment:
       name: deploy
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: build
+        run: yarn run build
+      - name: Deploy the application
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
