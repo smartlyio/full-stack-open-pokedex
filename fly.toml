@@ -1,16 +1,5 @@
-# fly.toml app configuration file generated for full-stack-open-ci-cd-pokedex on 2023-10-14T14:27:54+03:00
-#
-# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
-#
-
 app = "full-stack-open-ci-cd-pokedex"
 primary_region = "cdg"
-
-[deploy]
-  release_command = "yarn run build"
-
-[processes]
-  app = "node ./server/app.js"
 
 [build]
   [build.args]
@@ -19,13 +8,10 @@ primary_region = "cdg"
 [env]
   PORT = "1097"
 
-[http_service]
-  internal_port = 1097
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
-  
+[processes]
+  app = "node ./server/app.js"
+
 [[services]]
   http_checks = []
+  internal_port = 1097
+  processes = ["app"]

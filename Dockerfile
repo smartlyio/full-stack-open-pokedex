@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Adjust NODE_VERSION as desired
-ARG NODE_VERSION=18.14.1
+ARG NODE_VERSION=16.19.1
 FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Node.js"
@@ -17,9 +17,9 @@ ENV NODE_ENV="production"
 FROM base as build
 
 # Install packages needed to build node modules
-RUN apt-get update -qq && \
-    apt-get install -y build-essential pkg-config python-is-python3
-
+RUN apt-get update 
+RUN apt-get install -y python
+RUN apt-get install -y build-essential pkg-config
 # Install node modules
 COPY --link package.json yarn.lock ./
 RUN yarn install --frozen-lockfile --production=false
@@ -41,5 +41,5 @@ FROM base
 COPY --from=build /app /app
 
 # Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
+EXPOSE 1097
 CMD [ "node", "src/index.js" ]
