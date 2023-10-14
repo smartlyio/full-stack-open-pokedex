@@ -1,10 +1,10 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import { PokemonAbility, LoadingSpinner, ErrorMessage } from "./components";
-import { formatName } from "./utils";
-import { useApi } from "./hooks";
+import { PokemonAbility, LoadingSpinner, ErrorMessage } from "../../components";
+import { formatName } from "../../utils";
+import { useApi } from "../../hooks";
 
-const PokemonDetails = ({ previous, next }) => {
+export const PokemonDetails = ({ previous, next }) => {
   const { name } = useParams();
 
   const {
@@ -87,4 +87,3 @@ const PokemonDetails = ({ previous, next }) => {
   );
 };
 
-export default PokemonDetails;

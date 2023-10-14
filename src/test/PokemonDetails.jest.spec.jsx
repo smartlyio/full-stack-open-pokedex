@@ -5,7 +5,7 @@ import { createMemoryHistory } from "history";
 import axiosMock from "axios";
 import { act } from "react-dom/test-utils";
 import "@testing-library/jest-dom/extend-expect";
-import PokemonDetails from "../PokemonDetails";
+import PokemonDetails from "../features/PokemonDetails/PokemonDetails";
 
 jest.mock("axios");
 

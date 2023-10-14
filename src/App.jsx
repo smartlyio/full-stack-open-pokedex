@@ -4,7 +4,7 @@ import { ErrorMessage, LoadingSpinner } from "./components";
 import { PokemonList } from "./Pokemon";
 import { mapResults } from "./utils";
 import { useApi } from "./hooks";
-import PokemonPage from "./PokemonDetails";
+import { PokemonDetails } from "./features";
 
 const App = () => {
   const {
@@ -36,14 +36,10 @@ const App = () => {
             ).id;
 
             const previous = pokemonList.find(({ id }) => id === pokemonId - 1);
-
-            const next = pokemonList.find(({ id }) => {
-              const nextPokemon = pokemonId + 1;
-              return id === nextPokemon;
-            });
+            const next = pokemonList.find(({ id }) => id === pokemonId + 1);
 
             return (
-              <PokemonPage
+              <PokemonDetails
                 pokemonList={pokemonList}
                 previous={previous}
                 next={next}

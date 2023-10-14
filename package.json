@@ -4,7 +4,7 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "dev": "webpack-dev-server --open --mode development",
     "start-prod": "node ./server/app.js",
     "test": "jest",
     "test:e2e": "cypress open",
