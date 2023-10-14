@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  deployment_pipeline:
+  install:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -15,15 +15,43 @@ jobs:
           node-version: "16"
       - name: Intall dependencies
         run: yarn install
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
       - name: lint
         run: yarn run lint
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
       - name: test
         run: yarn run test
-      - name: build
-        run: yarn run build
+  e2e_test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
           start: yarn run start-prod
           wait-on: http://localhost:1097
           command: yarn run cy:run
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: build
+        run: yarn run build
