@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  install:
+  lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -15,14 +15,6 @@ jobs:
           node-version: "16.19.1"
       - name: Install dependencies
         run: yarn install
-  lint:
-    needs: install
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16.19.1"
       - name: lint
         run: yarn run lint
   test:
@@ -33,6 +25,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
       - name: test
         run: yarn run test
   e2e_test:
@@ -43,6 +37,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
@@ -57,5 +53,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
       - name: build
         run: yarn run build
