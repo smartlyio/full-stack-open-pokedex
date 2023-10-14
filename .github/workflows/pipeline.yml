@@ -39,6 +39,8 @@ jobs:
           node-version: "16.19.1"
       - name: Install dependencies
         run: yarn install
+      - name: build
+        run: yarn run build
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
