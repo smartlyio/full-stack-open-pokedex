@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "16.19.1"
       - name: Intall dependencies
         run: yarn install
   lint:
@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: "16.19.1"
       - name: lint
         run: yarn run lint
   test:
