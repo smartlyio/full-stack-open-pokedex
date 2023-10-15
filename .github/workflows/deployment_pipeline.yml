@@ -66,19 +66,6 @@ jobs:
       - name: build
         run: yarn run build
 
-  tag_release:
-    needs: build
-    name: Release tag
-    runs-on: ubuntu-latest
-    environment:
-      name: deploy
-    if: github.ref == 'refs/heads/master'
-    steps:
-      - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   deploy:
     needs: build
     name: Deploy app
@@ -101,28 +88,20 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-
-  notify_success:
-    needs: deploy
-    name: Notify success
-    runs-on: ubuntu-latest
-    if: success()
-    steps:
-      - name: Discord Webhook Notify - Success
-        uses: rjstone/discord-webhook-notify@v1.0.4
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.55.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Notify success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
           details: "New version deployed successfully!"
           severity: info
-
-  notify_error:
-    needs: deploy
-    name: Notify error
-    runs-on: ubuntu-latest
-    if: failure()
-    steps:
-      - name: Discord Webhook Notify - Error
-        uses: rjstone/discord-webhook-notify@v1.0.4
+      - name: Notify failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
         with:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
           details: "Build failed. Check the commit that caused the error."
