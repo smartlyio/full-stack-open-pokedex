@@ -8,10 +8,10 @@ primary_region = "gru"
 processes = []
 
 [env]
-  PORT = "8080"
+  PORT = "5000"
 
 [[services]]
-  internal_port = 8080
+  internal_port = 5000
   processes = ["app"]
   protocol = "tcp"
   [services.concurrency]
