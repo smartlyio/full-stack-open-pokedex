@@ -70,6 +70,8 @@ jobs:
     needs: build
     name: Deploy app
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     environment:
       name: deploy
     if: github.ref == 'refs/heads/master'
@@ -89,9 +91,11 @@ jobs:
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
+        uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          PRERELEASE: true
       - name: Notify success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
@@ -106,3 +110,4 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
           details: "Build failed. Check the commit that caused the error."
           severity: warn
+    
