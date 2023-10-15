@@ -33,7 +33,6 @@ const PokemonPage = ({ previous, next }) => {
       <div className="links">
         {previous && <Link to={`/pokemon/${previous.name}`}>Previous</Link>}
         <Link to="/">Home</Link>
-        {/* here`s the code error */}
         {next && <Link to={`/pokemon/${next.name}`}>Next</Link>}
       </div>
       <div className={`pokemon-page pokemon-type-${type.name}`}>
