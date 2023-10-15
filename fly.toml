@@ -1,0 +1,39 @@
+# fly.toml file generated for autumn-flower-9884 on 2023-10-14T17:21:22-03:00
+
+app = "autumn-flower-9884"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "gru"
+processes = []
+
+[env]
+  PORT = "8080"
+
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  protocol = "tcp"
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+    
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.1"
