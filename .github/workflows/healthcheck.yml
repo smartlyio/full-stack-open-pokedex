@@ -1,0 +1,14 @@
+name: Health check
+
+on:
+  schedule:
+    - cron: "0 7 * * *"
+
+jobs:
+  health_check_ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the deployed service URL
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://full-stack-open-ci-cd-pokedex.fly.dev/health

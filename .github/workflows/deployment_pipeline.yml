@@ -1,0 +1,113 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  lint:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: lint
+        run: yarn run lint
+
+  test:
+    needs: lint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: test
+        run: yarn run test
+
+  e2e_test:
+    needs: test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: build
+        run: yarn run build
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          start: yarn run start-prod
+          wait-on: http://localhost:1097
+          command: yarn run cy:run
+
+  build:
+    needs: e2e_test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: build
+        run: yarn run build
+
+  deploy:
+    needs: build
+    name: Deploy app
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    environment:
+      name: deploy
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16.19.1"
+      - name: Install dependencies
+        run: yarn install
+      - name: build
+        run: yarn run build
+      - name: Deploy the application
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@1.64.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
+          PRERELEASE: true
+      - name: Notify success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          details: "New version deployed successfully!"
+          severity: info
+      - name: Notify failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          details: "Build failed. Check the commit that caused the error."
+          severity: warn
+    

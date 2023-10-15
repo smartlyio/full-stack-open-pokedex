@@ -1,0 +1,17 @@
+app = "full-stack-open-ci-cd-pokedex"
+primary_region = "cdg"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.1"
+
+[env]
+  PORT = "1097"
+
+[processes]
+  app = "node ./server/app.js"
+
+[[services]]
+  http_checks = []
+  internal_port = 1097
+  processes = ["app"]
