@@ -17,24 +17,12 @@ jobs:
         - uses: actions/setup-node@v3
           with:
             node-version: '16'
-    install_dependencies:
-      runs-on: ubuntu-20.04
-      steps:
         - name: Install dependencies
           run: npm install
-    check_lint:
-      runs-on: ubuntu-20.04
-      steps:
         - name: Check style
           run: npm run eslint
-    buid:
-      runs-on: ubuntu-20.04
-      steps:
         - name: build
           run: npm run build
-    run_tests:
-      runs-on: ubuntu-20.04
-      steps:
         - name: tests
           run: npm run test
         - name: e2e tests
@@ -43,7 +31,9 @@ jobs:
             command: npm run test:e2e
             start: npm run start-prod
             wait-on: http://localhost:5000
+
     versioning:
+      name: bump version
       runs-on: ubuntu-20.04
       if: ${{ github.event_name == 'push' }}
       steps:
@@ -52,6 +42,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
+            
     deploy:
       name: Deploy app
       runs-on: ubuntu-20.04
