@@ -33,11 +33,13 @@ jobs:
             wait-on: http://localhost:5000
 
     versioning:
-      needs: [simple_deployment_pipeline]
-      name: bump version
-      runs-on: ubuntu-20.04
+      needs: [simple_deployment_pipeline]      
+      runs-on: ubuntu-22.04        
       if: ${{ github.event_name == 'push' }}
       steps:
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: '0'      
         - name: Bump version and push tag
           uses: anothrNick/github-tag-action@1.67.0
           env:
@@ -45,6 +47,7 @@ jobs:
             DEFAULT_BUMP: patch
 
     deploy:
+      needs: [simple_deployment_pipeline]
       name: Deploy app
       runs-on: ubuntu-20.04
       if: ${{ github.event_name == 'push' }}
