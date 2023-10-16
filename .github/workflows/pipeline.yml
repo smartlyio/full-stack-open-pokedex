@@ -33,6 +33,7 @@ jobs:
             wait-on: http://localhost:5000
 
     versioning:
+      needs: [simple_deployment_pipeline]
       name: bump version
       runs-on: ubuntu-20.04
       if: ${{ github.event_name == 'push' }}
@@ -42,7 +43,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             DEFAULT_BUMP: patch
-            
+
     deploy:
       name: Deploy app
       runs-on: ubuntu-20.04
