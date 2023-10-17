@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for broken-butterfly-6163 on 2023-10-16T16:23:00+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "broken-butterfly-6163"
+primary_region = "otp"
+
+[deploy]
+	release_command= "npm run build"
+
+[processes]
+	app="node app.js"
+
+[build]
+	[build.args]
+		NODE_VERSION= "18.16.0"
+
+[http_service]
+  internal_port = 5000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
