@@ -1,10 +1,15 @@
-app = "Pokedex"
+# fly.toml app configuration file generated for pokedex-fullstackopen-danggro on 2023-10-18T20:03:25+07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "pokedex-fullstackopen-danggro"
 primary_region = "sin"
 
 [build]
   [build.args]
-    NODE_VERSION = "16.19.1"
-
+    NODE_VERSION = "16.19.0"
+    
 [deploy]
   release_command = "npm run build"
 
