@@ -10,11 +10,12 @@ primary_region = "sin"
   [build.args]
     NODE_VERSION = "16.19.0"
     
+[processes]
+  app = "node app.js"
+  
 [deploy]
   release_command = "npm run build"
 
-[processes]
-  app = "node app.js"
 
 [http_service]
   http_checks = []
