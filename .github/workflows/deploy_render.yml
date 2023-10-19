@@ -13,7 +13,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-20.04
-    if: ${{ github.event_name == 'push' }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -43,6 +42,7 @@ jobs:
     name: Deploy
     needs: [test]
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
       - name: Deploy to production
         env:
