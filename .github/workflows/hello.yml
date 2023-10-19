@@ -16,7 +16,7 @@ jobs:
           RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
           echo "Hello World!"
-          echo -n "${{ env.RENDER_SERVICE_ID }}" >> foo
+          echo -n "${{ env.RENDER_SERVICE_ID }}" >> foo && cut -c1-1 foo
 
       - name: Now it is
         run: |
