@@ -42,7 +42,5 @@ primary_region = "otp"
 	[services.http_checks.headers]
 
 [[services.script_checks]]
-    interval = 10000
-    timeout = 1000
-    command = "./health_check.sh"
-    restart_limit = 0
+	health_check = "/app/health_check.sh"
+  health_check_interval = "10s" 
