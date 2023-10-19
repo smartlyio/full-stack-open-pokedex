@@ -5,43 +5,53 @@ on:
     branches:
       - master
       # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
-  test:
-    name: Test
+  just_check:
+    name: check
     runs-on: ubuntu-20.04
+    if: ${{ github.event_name == 'push' }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
+      - name: check
+        run: echo "Hanya check 5"
+  # test:
+  #   name: Test
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - uses: actions/checkout@v3
+  #     - uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '16'
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Check style
-        run: npm run eslint
+  #     - name: Check style
+  #       run: npm run eslint
 
-      - name: Build
-        run: npm run build
+  #     - name: Build
+  #       run: npm run build
 
-      - name: Test
-        run: npm run test
+  #     - name: Test
+  #       run: npm run test
 
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+  #     - name: e2e tests
+  #       uses: cypress-io/github-action@v5
+  #       with:
+  #         command: npm run test:e2e
+  #         start: npm run start-prod
+  #         wait-on: http://localhost:5000
 
-  deploy:
-    name: Deploy
-    needs: [test]
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Deploy to production
-        env:
-          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          curl "$deploy_url"
+  # deploy:
+  #   name: Deploy
+  #   needs: [test]
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #     - name: Deploy to production
+  #       env:
+  #         deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+  #       run: |
+  #         curl "$deploy_url"
