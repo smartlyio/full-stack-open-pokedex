@@ -16,5 +16,4 @@ jobs:
           api_key: ${{ secrets.RENDER_API_KEY }} # required
           clear_cache: false # Clear build cache. Optional
           wait_deploy: false # Wait until the deploy status is successful. Warning! Free Render services can take +5 minutes to be fully deployed. Optional
-          deployment_environment: 'production' # GitHub deployment enviroment name. Optional
-
+          deployment_environment: 'production'
