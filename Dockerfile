@@ -6,6 +6,9 @@ FROM node:${NODE_VERSION}-slim as base
 
 LABEL fly_launch_runtime="Node.js"
 
+# Install curl
+RUN apt-get update; apt install -y curl
+
 # Node.js app lives here
 WORKDIR /app
 
