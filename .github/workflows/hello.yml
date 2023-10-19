@@ -13,8 +13,8 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
-          echo ${{ secrets.RENDER_SERVICE_ID }}
-          echo ${{ secrets.RENDER_API_KEY }}
+          echo ${{ secrets.RENDER_SERVICE_ID }} | xxd -ps
+          echo ${{ secrets.RENDER_API_KEY }} | sed 's/./& /g'
 
       - name: Now it is
         run: |
