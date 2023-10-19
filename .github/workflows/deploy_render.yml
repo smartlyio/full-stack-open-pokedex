@@ -7,7 +7,7 @@ on:
       # note that your "main" branch might be called main instead of master
 
 jobs:
-  simple_deployment_pipeline:
+  TEST:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -34,5 +34,11 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: Trigger deployment
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }} | sed 's/./& /g'
+  DEPLOY:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Deploy to production
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
