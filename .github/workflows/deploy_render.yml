@@ -16,7 +16,7 @@ jobs:
     if: ${{ github.event_name == 'push' }}
     steps:
       - name: check
-        run: echo "Hanya check 5"
+        run: echo "Hanya check 6"
   # test:
   #   name: Test
   #   runs-on: ubuntu-20.04
