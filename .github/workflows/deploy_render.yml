@@ -35,4 +35,4 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Trigger deployment
-        run: curl https://api.render.com/deploy/srv-cko9o4gujous73blqpig?key=M-MYT_kmXg0
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
