@@ -18,8 +18,6 @@ jobs:
       - run: npm run eslint
       - run: npm run build
       - run: npm run test
-      - name: Checkout
-        uses: actions/checkout@v4
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -27,5 +25,5 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Trigger deployment
-        run: ${{ secrets.RENDER_DEPLOY_HOOK_URL}}
+        run: curl ${{secrets.RENDER_DEPLOY_HOOK_URL}}
           
