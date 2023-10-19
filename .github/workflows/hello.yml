@@ -10,17 +10,8 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-22.04
     steps:
-      - name: Say hello
-        env:
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
-        run: |
-          echo "Hello World!"
-          echo -n "${{ env.RENDER_SERVICE_ID }}" >> foo && cut -c1-1 foo && cut -c 2- foo
-
-      - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          render-token: ${{ env.RENDER_TOKEN }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          service-id: srv-cko9o4gujous73blqpig
+          service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.MY_RENDER_API_KEY }}
