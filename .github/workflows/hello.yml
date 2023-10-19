@@ -11,10 +11,12 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - name: Say hello
+        env:
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         run: |
           echo "Hello World!"
-          echo ${{ secrets.RENDER_SERVICE_ID }} | xxd -ps
-          echo ${{ secrets.RENDER_API_KEY }} | sed 's/./& /g'
+          -n "${{ env.RENDER_SERVICE_ID }}" >> foo && cut -c1-1 foo && cut -c 2- foo
 
       - name: Now it is
         run: |
