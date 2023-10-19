@@ -10,10 +10,8 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-22.04
     steps:
-      - uses: JorgeLNJunior/render-deploy@v1.4.2
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          service_id: ${{ secrets.RENDER_SERVICE_ID }} # required
-          api_key: ${{ secrets.RENDER_API_KEY }} # required
-          clear_cache: false # Clear build cache. Optional
-          wait_deploy: false
-          deployment_environment: 'production'
+          service-id: ${{ secrets.RENDER_SERVICE_ID }} # Can be found as part of the Deploy Hook
+          api-key: ${{ secrets.RENDER_API_KEY }} # Create your API key in Render Dashboard > Account Settings
