@@ -19,14 +19,8 @@ jobs:
           echo -n "${{ env.RENDER_SERVICE_ID }}" >> foo && cut -c1-1 foo && cut -c 2- foo
 
       - name: Wait for Render Deployment
-        env:
-          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
-          RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
         uses: bounceapp/render-action@0.6.0
         with:
-          render-token: ${{ env.RENDER_API_KEY }}
+          render-token: ${{ env.RENDER_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           service-id: srv-cko9o4gujous73blqpig
-          retries: 20
-          wait: 16000
-          sleep: 30000
