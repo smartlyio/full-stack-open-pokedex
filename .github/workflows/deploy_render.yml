@@ -30,15 +30,15 @@ jobs:
       - name: Build
         run: npm run build
 
-      # - name: Test Custom
-      #   uses: rjstone/discord-webhook-notify@v1
-      #   if: ${{failure()}}
-      #   with:
-      #       severity: info
-      #       description: commit
-      #       details: ${{}}
-      #       text: Build failed
-      #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Custom
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
+        with:
+          severity: info
+          description: commit
+          details: '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}}'
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test
         run: npm run test

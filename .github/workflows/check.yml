@@ -18,4 +18,4 @@ jobs:
       - name: github
         if: ${{ failure()}}
         run: |
-          echo "${{ github.event.repository.url}}/commit/${{github.sha}}"
+          echo '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
