@@ -12,11 +12,10 @@ jobs:
       - name: Failing step
         id: demo
         run: exit 1
-      - name: The demo step has failed
+      - name: commit
         if: ${{ failure()}}
-        run: echo "fail"
-      - name: end
+        run: echo ${{ toJson(github.event.commits) }}
+      - name: github
         if: ${{ failure()}}
         run: |
-          echo ${{ toJson(github.event) }}
-          echo ${{ toJson(github.event.commits.*.url) }}
+          echo ${{ toJson(github) }}
