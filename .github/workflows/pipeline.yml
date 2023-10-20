@@ -21,9 +21,8 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+          build: npm run build
+          start: npm start
       - name: Trigger deployment
         run: curl ${{secrets.RENDER_DEPLOY_HOOK_URL}}
           
