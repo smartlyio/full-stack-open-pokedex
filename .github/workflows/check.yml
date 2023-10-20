@@ -27,14 +27,14 @@ jobs:
           GITHUB: ${{toJson(github)}}
         run: echo '${{ env.GITHUB }}'
       - name: commit
-        if: ${{ failure()}}
+        if: ${{ failure() && github.event_name == 'pull_request'}}
         env:
-          GITHUB: ${{github.event.pull_request._links.html}}
-        run: echo '${{ env.GITHUB }}/commits/${{github.event.after}}'
+          PR_URL: ${{github.event.pull_request._links.html}}
+        run: echo '${{ env.PR_URL }}/commits/${{github.event.after}}'
       - name: github 2
-        if: ${{ failure()}}
+        if: ${{ failure() && github.event_name == 'push'}}
         run: |
-          echo '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
+          echo '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
 
   job_2:
     needs: [a_test_job]
