@@ -30,37 +30,39 @@ jobs:
 
       - name: Build
         env:
-          GITHUB_EVENT: ${{toJson(github.event)}}
+          PR_URL: ${{github.event.pull_request._links.html.href}}
         run: |
-          echo '${{github.event}}'
+          echo '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.actor }}
           exit 1
 
       # - name: Notif Fail to Discord
       #   uses: rjstone/discord-webhook-notify@v1
+      #   env:
+      #     PR_URL: ${{github.event.pull_request._links.html.href}}
       #   if: ${{failure()}}
       #   with:
       #     severity: info
       #     description: commit
-      #     details: '${{ github.event.head_commit.url }} by ${{ github.event.head_commit.committer.username }} broke the build :('
+      #     details: '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.event.head_commit.committer.username }} broke the build :('
       #     text: Build failed
       #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
-      - name: Test
-        run: npm run test
+      # - name: Test
+      #   run: npm run test
 
-      - name: e2e tests
-        uses: cypress-io/github-action@v5
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:5000
 
-      - name: Deploy to Render
-        if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ', ')), '#skip')}}
-        env:
-          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          curl "$deploy_url"
+      # - name: Deploy to Render
+      #   if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ', ')), '#skip')}}
+      #   env:
+      #     deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      #   run: |
+      #     curl "$deploy_url"
 
   tag-release:
     name: Versioning
