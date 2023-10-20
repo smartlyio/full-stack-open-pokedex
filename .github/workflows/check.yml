@@ -39,10 +39,10 @@ jobs:
         run: echo "sda"
       - name: Notif Success to Discord
         uses: rjstone/discord-webhook-notify@v1
-        if: ${{success()}}
+        if: ${{success() && github.event_name == 'push'}}
         with:
           severity: info
-          description: ''
+          description: ' '
           details: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
           text: A new version of Pokedex doployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
