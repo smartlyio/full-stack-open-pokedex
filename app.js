@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
-  res.send('protection 1')
+  res.send('check failure 16')
   // res.send('in branch feature')
 })
 
