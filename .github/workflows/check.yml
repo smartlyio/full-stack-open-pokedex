@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Failing step
         id: demo
-        run: exit 1
+        run: echo "wew"
       - name: Notif Fail to Discord
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure() && github.event_name == 'push'}}
