@@ -25,7 +25,7 @@ jobs:
         if: ${{ failure()}}
         env:
           GITHUB: ${{github.event.pull_request._links.html.href}}
-        run: echo '${{ env.GITHUB }}/${{github.event.after}}'
+        run: echo '${{ env.GITHUB }}/commits/${{github.event.after}}'
       - name: github
         if: ${{ failure()}}
         run: |
