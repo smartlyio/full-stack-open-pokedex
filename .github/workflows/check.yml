@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Failing step
         id: demo
-        run: exit 1
+        run: echo "222"
       - name: commit
         if: ${{ failure()}}
         run: echo ${{ github.event.repository.homepage }}
