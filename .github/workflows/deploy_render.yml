@@ -30,6 +30,7 @@ jobs:
       - name: Build
         run: |
           npm run build
+          echo ${{github.event}}
           exit 1
 
       - name: Notif Fail to Discord
@@ -38,7 +39,7 @@ jobs:
         with:
           severity: info
           description: commit
-          details: '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
+          details: '${{ github.event.head_commit.url }} by ${{ github.event.head_commit.committer.username }} broke the build :('
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
