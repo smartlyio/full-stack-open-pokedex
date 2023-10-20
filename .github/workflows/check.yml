@@ -18,4 +18,4 @@ jobs:
       - name: github
         if: ${{ failure()}}
         run: |
-          echo ${{ toJson(github.commits_url) }}
+          echo ${{ github.repository.commits_url}}
