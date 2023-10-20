@@ -24,14 +24,14 @@ jobs:
       - name: github
         if: ${{ failure()}}
         env:
-          GITHUB: ${{github}}
+          GITHUB: ${{toJson(github)}}
         run: echo '${{ env.GITHUB }}'
       - name: commit
         if: ${{ failure()}}
         env:
-          GITHUB: ${{github.event.pull_request._links}}
+          GITHUB: ${{github.event.pull_request._links.html}}
         run: echo '${{ env.GITHUB }}/commits/${{github.event.after}}'
-      - name: github
+      - name: github 2
         if: ${{ failure()}}
         run: |
           echo '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
