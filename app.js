@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
-  res.send('pass versioning 10')
+  res.send('pass versioning 11')
   // res.send('in branch feature')
 })
 
