@@ -19,3 +19,13 @@ jobs:
         if: ${{ failure()}}
         run: |
           echo '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
+
+  job_2:
+    needs: [a_test_job]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: check
+        run: echo "sda"
+      - name: check 2
+        if: ${{success()}}
+        run: echo "success"

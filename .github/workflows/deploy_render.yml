@@ -36,7 +36,7 @@ jobs:
         with:
           severity: info
           description: commit
-          details: '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}}'
+          details: '${{ github.event.head_commit.url}} by ${{ github.event.head_commit.committer.username}} broke the build :('
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
@@ -72,3 +72,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: false
+      - name: Test Custom
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{success()}}
+        with:
+          severity: info
+          details: 'to ${{github.event.repository.homepage}} by ${{ github.event.head_commit.committer.username}}'
+          text: A new version of Pokedex doployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
