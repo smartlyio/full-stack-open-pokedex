@@ -13,5 +13,5 @@ jobs:
         id: demo
         run: exit 1
       - name: The demo step has failed
-        if: ${{ failure()}}
+        if: ${{ success()}}
         run: echo "fail"
