@@ -14,8 +14,8 @@ jobs:
         run: exit 1
       - name: commit
         if: ${{ failure()}}
-        run: echo ${{ toJson(github.event.commits) }}
+        run: echo ${{ join(github.event.commits.*.url, ', ') }}
       - name: github
         if: ${{ failure()}}
         run: |
-          echo ${{ toJson(github) }}
+          echo ${{ toJson(github.commits_url) }}
