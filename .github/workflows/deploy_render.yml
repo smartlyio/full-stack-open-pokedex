@@ -26,22 +26,25 @@ jobs:
 
       - name: Check style
         run: npm run eslint
+        # npm run build
 
       - name: Build
+        env:
+          GITHUB_EVENT: ${{toJson(github.event)}}
         run: |
-          # npm run build
-          echo ${{github.event}}
+          echo '${{github.event}}'
+          echo '${{env.GITHUB_EVENT}}'
           exit 1
 
-      - name: Notif Fail to Discord
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{failure()}}
-        with:
-          severity: info
-          description: commit
-          details: '${{ github.event.head_commit.url }} by ${{ github.event.head_commit.committer.username }} broke the build :('
-          text: Build failed
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      # - name: Notif Fail to Discord
+      #   uses: rjstone/discord-webhook-notify@v1
+      #   if: ${{failure()}}
+      #   with:
+      #     severity: info
+      #     description: commit
+      #     details: '${{ github.event.head_commit.url }} by ${{ github.event.head_commit.committer.username }} broke the build :('
+      #     text: Build failed
+      #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test
         run: npm run test
