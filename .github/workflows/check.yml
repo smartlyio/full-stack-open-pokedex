@@ -23,7 +23,9 @@ jobs:
         run: exit 1
       - name: commit
         if: ${{ failure()}}
-        run: echo ${{ github }}
+        env:
+          GITHUB: ${{toJson(github)}}
+        run: echo ${{ env.GITHUB }}
       - name: github
         if: ${{ failure()}}
         run: |
