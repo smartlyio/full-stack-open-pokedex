@@ -21,6 +21,11 @@ jobs:
       - name: Failing step
         id: demo
         run: exit 1
+      - name: github
+        if: ${{ failure()}}
+        env:
+          GITHUB: ${{github}}
+        run: echo '${{ env.GITHUB }}'
       - name: commit
         if: ${{ failure()}}
         env:

@@ -30,22 +30,22 @@ jobs:
 
       - name: Build
         env:
-          PR_URL: ${{github.event.pull_request._links.html.href}}
+          GITHUB_EVENT: ${{toJson(github.event)}}
         run: |
-          echo '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.actor }}
+          echo '${{github.event}}'
           exit 1
 
-      # - name: Notif Fail to Discord
-      #   uses: rjstone/discord-webhook-notify@v1
-      #   env:
-      #     PR_URL: ${{github.event.pull_request._links.html.href}}
-      #   if: ${{failure()}}
-      #   with:
-      #     severity: info
-      #     description: commit
-      #     details: '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.event.head_commit.committer.username }} broke the build :('
-      #     text: Build failed
-      #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Notif Fail to Discord
+        uses: rjstone/discord-webhook-notify@v1
+        env:
+          PR_URL: ${{github.event.pull_request._links.html.href}}
+        if: ${{failure()}}
+        with:
+          severity: info
+          description: commit
+          details: '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.event.head_commit.committer.username }} broke the build :('
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       # - name: Test
       #   run: npm run test
