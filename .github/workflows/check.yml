@@ -42,7 +42,6 @@ jobs:
         if: ${{success() && github.event_name == 'push'}}
         with:
           severity: info
-          description: ' '
-          details: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
-          text: A new version of Pokedex doployed
+          description: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
+          text: A new version of Pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
