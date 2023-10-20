@@ -18,4 +18,4 @@ jobs:
       - name: github
         if: ${{ failure()}}
         run: |
-          echo ${{ github.repository.commits_url}}
+          echo ${{ github.event.repository.commits_url}}
