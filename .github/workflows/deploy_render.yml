@@ -26,24 +26,19 @@ jobs:
 
       - name: Check style
         run: npm run eslint
-        # npm run build
 
       - name: Build
-        env:
-          GITHUB_EVENT: ${{toJson(github.event)}}
         run: |
-          echo '${{github.event}}'
+          # npm run build
           exit 1
 
       - name: Notif Fail to Discord
         uses: rjstone/discord-webhook-notify@v1
-        env:
-          PR_URL: ${{github.event.pull_request._links.html.href}}
-        if: ${{failure()}}
+        if: ${{failure() && github.event_name == 'push'}}
         with:
           severity: info
           description: commit
-          details: '${{ env.PR_URL }}/commits/${{github.event.after}} by ${{ github.event.head_commit.committer.username }} broke the build :('
+          details: '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
           text: Build failed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
@@ -84,9 +79,7 @@ jobs:
         if: ${{success()}}
         with:
           severity: info
-          username: Bot
-          avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
           description: ''
-          details: 'to ${{github.event.repository.homepage}} by ${{ github.event.head_commit.committer.username}}'
+          details: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
           text: A new version of Pokedex doployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

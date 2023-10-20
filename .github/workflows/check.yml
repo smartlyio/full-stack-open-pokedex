@@ -21,20 +21,15 @@ jobs:
       - name: Failing step
         id: demo
         run: exit 1
-      - name: github
-        if: ${{ failure()}}
-        env:
-          GITHUB: ${{toJson(github)}}
-        run: echo '${{ env.GITHUB }}'
-      - name: commit
-        if: ${{ failure() && github.event_name == 'pull_request'}}
-        env:
-          PR_URL: ${{github.event.pull_request._links.html}}
-        run: echo '${{ env.PR_URL }}/commits/${{github.event.after}}'
-      - name: github 2
-        if: ${{ failure() && github.event_name == 'push'}}
-        run: |
-          echo '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
+      - name: Notif Fail to Discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure() && github.event_name == 'push'}}
+        with:
+          severity: info
+          description: commit
+          details: '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   job_2:
     needs: [a_test_job]
@@ -42,6 +37,12 @@ jobs:
     steps:
       - name: check
         run: echo "sda"
-      - name: check 2
+      - name: Notif Success to Discord
+        uses: rjstone/discord-webhook-notify@v1
         if: ${{success()}}
-        run: echo "success"
+        with:
+          severity: info
+          description: ''
+          details: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
+          text: A new version of Pokedex doployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
