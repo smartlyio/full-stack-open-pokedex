@@ -3,7 +3,7 @@ name: Testing stuff
 on:
   push:
     branches:
-      - feature-2
+      - master
 
 jobs:
   a_test_job:
@@ -21,4 +21,5 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          if: contain(${{env.COMMIT_MESSAGES}}, '#skip')
         run: echo "$COMMIT_MESSAGES"
