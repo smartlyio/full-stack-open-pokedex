@@ -33,7 +33,6 @@ jobs:
           GITHUB_EVENT: ${{toJson(github.event)}}
         run: |
           echo '${{github.event}}'
-          echo '${{env.GITHUB_EVENT}}'
           exit 1
 
       # - name: Notif Fail to Discord

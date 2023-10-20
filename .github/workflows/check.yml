@@ -3,7 +3,16 @@ name: Testing stuff
 on:
   push:
     branches:
-      - feature-2
+      - master
+      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+# on:
+#   push:
+#     branches:
+#       - feature-2
 
 jobs:
   a_test_job:
@@ -14,7 +23,7 @@ jobs:
         run: exit 1
       - name: commit
         if: ${{ failure()}}
-        run: echo ${{ github.event.repository.homepage }}
+        run: echo ${{ github }}
       - name: github
         if: ${{ failure()}}
         run: |
