@@ -17,3 +17,7 @@ jobs:
         run: npm install
       - name: Run code linter
         run: npm run eslint
+      - name: Build source code
+        run: npm run build
+      - name: Run Tests
+        run: npm test
