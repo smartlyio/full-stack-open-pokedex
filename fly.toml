@@ -1,0 +1,25 @@
+# fly.toml app configuration file generated for little-sea-8101 on 2023-10-21T16:49:08+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+app = "little-sea-8101"
+primary_region = "waw"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.0"
+
+[http_service]
+  internal_port = 5000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+  http_checks = []
