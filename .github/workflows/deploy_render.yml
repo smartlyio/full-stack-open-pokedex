@@ -32,7 +32,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         if: ${{failure() && github.event_name == 'push'}}
         with:
-          severity: info
+          severity: error
           description: commit
           details: '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
           text: Build failed

@@ -21,3 +21,13 @@ jobs:
           max-attempts: 3 # Optional, defaults to 1
           # Delay between retries
           retry-delay: 10s # Optional, only applicable to max-attempts > 1
+
+      - name: Notif Fail to Discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure()}}
+        with:
+          severity: error
+          description: error connect to
+          details: '${{github.event.repository.homepage}}'
+          text: Peiodic Health Check
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
