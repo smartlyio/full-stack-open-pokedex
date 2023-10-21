@@ -13,11 +13,17 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
+      - name: install dependencies
         run: npm install
-      - name: Lint
+      - name: lint
         run: npm run eslint
-      - name: Build
+      - name: build
         run: npm run build
-      - name: Test
+      - name: test components
         run: npm test
+      - name: run cypress e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
