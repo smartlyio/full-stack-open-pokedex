@@ -4,36 +4,62 @@
 #
 
 app = "blue-darkness-9331"
-primary_region = "arn"
-
-[build]
-  [build.args]
-    NODE_VERSION = "16.20.0"
-
-[deploy]
-  release_command = "npm run build"
-
-[processes]
-  app = "node app.js"
+kill_signal = "SIGINT"
+kill_timeout = 5
+# processes = []
 
 [env]
   PORT = "5001"
 
-[http_service]
-  internal_port = 5001
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
+[experimental]
+  auto_rollback = true
 
 [[services]]
   internal_port = 5001
   processes = ["app"]
+    
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = true
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
 
   [[services.tcp_checks]]
     grace_period = "30s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "30s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    restart_limit = 0
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
+
+  # [[services.script_checks]]
+  #   command       = "/app/another_health_check.sh"
+  #   args          = []
+  #   grace_period  = "1s"
+  #   interval      = "5s"
+  #   restart_limit = 0
+  #   timeout       = "1s"  
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
 
