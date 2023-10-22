@@ -11,7 +11,7 @@ jobs:
         uses: jtalk/url-health-check-action@v3
         with:
           # Check the following URLs one by one sequentially
-          url: https://pokedex-danggroo.onrender.com/
+          url: https://pokedex-danggro.onrender.com/
           # Follow redirects, or just report success on 3xx status codes
           follow-redirect: false # Optional, defaults to "false"
           # Fail this action after this many failed attempts
@@ -26,5 +26,5 @@ jobs:
           severity: error
           description: error connect to
           details: '${{github.event.repository.homepage}}'
-          text: Peiodic Health Check
+          text: Periodic Health Check
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
