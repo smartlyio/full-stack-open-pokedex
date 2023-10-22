@@ -43,8 +43,9 @@ jobs:
     runs-on: ubuntu-20.04
     needs: [simple_deployment_pipeline]
     steps:
+      - uses: actions/checkout@v4
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
+        uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
