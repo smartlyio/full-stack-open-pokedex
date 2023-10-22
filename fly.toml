@@ -32,7 +32,7 @@ primary_region = "arn"
   processes = ["app"]
 
   [[services.tcp_checks]]
-    grace_period = "15s"
+    grace_period = "30s"
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
