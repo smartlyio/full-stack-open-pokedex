@@ -17,10 +17,10 @@ primary_region = "arn"
   app = "node app.js"
 
 [env]
-  PORT = "3000"
+  PORT = "5001"
 
 [http_service]
-  internal_port = 3000
+  internal_port = 5001
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -28,11 +28,12 @@ primary_region = "arn"
   processes = ["app"]
 
 [[services]]
-  internal_port = 3000
+  internal_port = 5001
   processes = ["app"]
 
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
+  [[services.tcp_checks]]
+    grace_period = "15s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
+
