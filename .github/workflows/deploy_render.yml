@@ -1,0 +1,79 @@
+name: Deployment to Render
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    name: Build & Deploy
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Check style
+        run: npm run eslint
+
+      - name: Build
+        run: npm run build
+
+      - name: Notif Fail to Discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{failure() && github.event_name == 'push'}}
+        with:
+          severity: error
+          description: commit
+          details: '${{ github.event.head_commit.url}} by ${{ github.actor}} broke the build :('
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Test
+        run: npm run test
+
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+
+      - name: Deploy to Render
+        if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ', ')), '#skip')}}
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: curl "$deploy_url"
+
+  tag-release:
+    name: Versioning
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    if: ${{ github.event_name == 'push' && !contains(toJson(join(github.event.commits.*.message, ', ')), '#skip')}}
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@a2c70ae13a881faf2b4953baaa9e49731997ab36
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: false
+      - name: Notif Success to Discord
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{success() && github.event_name == 'push'}}
+        with:
+          severity: info
+          description: 'to ${{github.event.repository.homepage}} by ${{ github.actor}}'
+          text: A new version of Pokedex deployed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
