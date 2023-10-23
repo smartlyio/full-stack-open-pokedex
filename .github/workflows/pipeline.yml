@@ -28,5 +28,6 @@ jobs:
           build: npm run build
           start: npm start
       - name: Trigger deployment
+        if: ${{ github.event_name == 'push' }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK_URL}}
           
