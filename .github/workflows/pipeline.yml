@@ -30,14 +30,31 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - if: ${{ github.event_name == 'push' }}
-        name: setup flyctl
+      - name: setup flyctl
+        if: ${{ github.event_name == 'push' }}
         uses: superfly/flyctl-actions/setup-flyctl@master
-      - if: ${{ github.event_name == 'push' }}
-        name: deploy to fly.io
+      - name: deploy to fly.io
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+      - name: Notify SUCCESS (Discord)
+        if: ${{ github.event_name == 'push' && success() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: info
+          text: 'A new version of Pokedex deployed'
+          description: 'to ${{ github.event.repository.homepage }} by ${{ github.actor }}'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Notify FAILURE (Discord)
+        if: ${{ github.event_name == 'push' && failure() }}
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        with:
+          severity: error
+          text: 'Deployment failed'
+          description: 'commit ${{ github.event.head_commit.url }} by ${{ github.actor }} broke the build :('
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(toJson(github.event.commits.*.message), '#skip') }}
     runs-on: ubuntu-20.04
