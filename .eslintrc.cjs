@@ -19,7 +19,7 @@ module.exports = {
   },
   "settings": { "react": { "version": '16.13.1' } },
   "plugins": [
-    "react", "jest"
+    "react", "jest", "cypress"
   ],
   "rules": {
     "indent": [
