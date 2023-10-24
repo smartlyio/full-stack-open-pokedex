@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies 
         run: npm install  
       - run: npm run eslint
-      - run: npm run build
+      - run: npm run buildd
       - run: npm run test
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -38,7 +38,7 @@ jobs:
           description: to https://full-stack-open-pokedex-jjn4.onrender.com/ by enzoacostab
           text: A new version of pokedex deployed
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Success
+      - name: Error
         if: ${{ failure() }}
         uses: rjstone/discord-webhook-notify@v1
         with:
