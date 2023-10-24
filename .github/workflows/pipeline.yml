@@ -20,7 +20,7 @@ jobs:
       - name: Install dependencies 
         run: npm install  
       - run: npm run eslint
-      - run: npm run buildd
+      - run: npm run build
       - run: npm run test
       - name: Cypress run
         uses: cypress-io/github-action@v6

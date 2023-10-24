@@ -1,0 +1,13 @@
+on: 
+  schedule:
+    - cron: 10 21 * * *
+
+jobs:
+  health-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check URL health
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://full-stack-open-pokedex-jjn4.onrender.com/
+
