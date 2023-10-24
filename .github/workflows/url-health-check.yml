@@ -1,6 +1,9 @@
+name: Url health check
+
 on: 
-  schedule:
-    - cron: 10 21 * * *
+  push:
+    branches:
+      - master
 
 jobs:
   health-check:

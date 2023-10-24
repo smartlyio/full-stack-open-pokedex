@@ -1,0 +1,27 @@
+name: Discord notification
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  discord_notification:
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Success
+      if: ${{ success() }}
+      uses: rjstone/discord-webhook-notify@v1
+      with:
+        severity: info
+        description: to https://full-stack-open-pokedex-jjn4.onrender.com/ by enzoacostab
+        text: A new version of pokedex deployed
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    - name: Error
+      if: ${{ failure() }}
+      uses: rjstone/discord-webhook-notify@v1
+      with:
+        severity: error
+        description: commit ${{github.event.head_commit.url}} by enzoacostab broke the build
+        text: Build failed
+        webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
