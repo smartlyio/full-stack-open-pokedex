@@ -33,10 +33,8 @@ RUN npm run build
 # Remove development dependencies
 RUN npm prune --omit=dev
 
-
 # Final stage for app image
-FROM base# Install curl
-RUN apt-get update; apt install -y curl
+FROM base
 
 # Install curl
 RUN apt-get update; apt install -y curl
