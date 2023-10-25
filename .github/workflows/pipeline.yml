@@ -5,6 +5,9 @@ on:
     branches:
       - master
       # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -30,7 +33,7 @@ jobs:
           wait-on: http://localhost:3000
       - name: Deploy
         # Only run this step if the branch is main
-        if: github.ref == 'refs/heads/master'
+        if: ${{ github.ref == 'refs/heads/master' }} && ${{ github.event_name == 'push' }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
