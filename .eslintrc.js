@@ -3,7 +3,6 @@ module.exports = {
         browser: true,
         es6: true,
         "jest/globals": true,
-        PORT: 5000,
     },
     extends: ["eslint:recommended", "plugin:react/recommended"],
     parserOptions: {
