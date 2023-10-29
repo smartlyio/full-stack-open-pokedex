@@ -17,7 +17,34 @@ jobs:
               run: npm install
             - name: Check style        
               run: npm run lint
-            # - name: e2e tests
+    deployment:
+        name: Deploy to Render
+        runs-on: ubuntu-20.04
+        steps:
+          - name: Trigger deployment
+            uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
+            with:
+              serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+              apiKey: ${{ secrets.RENDER_API_KEY }}
+              multipleDeployment: false #optional, default true
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+              # - name: e2e tests
             #   uses: cypress-io/github-action@v5
             #   with:
             #     command: npm run test:e2e
