@@ -26,3 +26,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           wait-on-timeout: 120
+
+      - name: Show listening addresses and ports
+        run: ss -tln    
