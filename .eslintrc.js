@@ -9,6 +9,13 @@ module.exports = {
     "eslint:recommended",
     "plugin:react/recommended"
   ],
+  
+  "settings": {
+    "react": {
+      "version": "detect" // автоматическое определение версии React
+    }
+  },
+  
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
