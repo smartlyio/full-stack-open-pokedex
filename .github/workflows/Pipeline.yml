@@ -20,8 +20,8 @@ jobs:
         run: npm run eslint
 
       - name: e2e tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: http://localhost:5000
+          wait-on: 'npx wait-on --timeout 60000 http://localhost:5000'
