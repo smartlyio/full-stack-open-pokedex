@@ -9,8 +9,8 @@ describe('Pokedex', function() {
 
 describe('Pokedex', function() {
   it('can navigate from the main page to a specific Pokemon page', function() {
-    cy.visit('http://localhost:5000');
-    cy.contains('ivysaur').click(); // Нажать на ссылку ivysaur
-    cy.contains('chlorophyll'); // Проверить наличие текста 'chlorophyll' на странице покемона
-  });
-});
+    cy.visit('http://localhost:5000')
+    cy.contains('ivysaur').click() // Нажать на ссылку ivysaur
+    cy.contains('chlorophyll') // Проверить наличие текста 'chlorophyll' на странице покемона
+  })
+})
