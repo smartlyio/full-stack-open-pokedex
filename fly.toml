@@ -27,10 +27,6 @@ primary_region = "sin"
   min_machines_running = 0
   processes = ["app"]
 
-[[services]]
-  internal_port = 3000
-  processes = ["app"]
-
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
@@ -41,7 +37,7 @@ primary_region = "sin"
     interval = 10000
     grace_period = "5s"
     method = "get"
-    path = "/"
+    path = "/health"
     protocol = "http"
     timeout = 2000
     tls_skip_verify = false
