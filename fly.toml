@@ -22,6 +22,7 @@ primary_region = "sin"
 [http_service]
   internal_port = 8080
   force_https = true
+  processes = ["app"]
 
 [[services]]
   internal_port = 8080
