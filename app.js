@@ -9,4 +9,3 @@ app.use(express.static('dist'))
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`)
 })
-

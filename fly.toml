@@ -25,7 +25,7 @@ primary_region = "lhr"
   processes = ["app"]
   
 [[services]]
- 
+  http_checks = []
  
 [[services.tcp_checks]]
   grace_period = "1s"
