@@ -19,15 +19,16 @@ primary_region = "sin"
 [env]
   PORT = "3000"
 
-[http_service]
+[[services]]
   internal_port = 3000
-  force_https = true
+  processes = ["app"]
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  processes = ["app"]
 
-[[services]]
+  [[services.ports]]
+    force_https = true
+    
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
