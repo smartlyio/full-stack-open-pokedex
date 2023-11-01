@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for falling-fog-1867 on 2023-11-01T08:21:25+03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "falling-fog-1867"
+primary_region = "lhr"
+
+[deploy]
+ release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.2"
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
