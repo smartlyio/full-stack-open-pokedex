@@ -27,6 +27,9 @@ primary_region = "sin"
   min_machines_running = 0
   processes = ["app"]
 
+[[services]]
+  internal_port = 8080
+  
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
