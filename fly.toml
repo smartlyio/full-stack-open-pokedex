@@ -17,19 +17,18 @@ primary_region = "sin"
     NODE_VERSION = "16.19.0"
 
 [env]
-  PORT = "3000"
+  PORT = "8080"
 
 [http_service]
-  internal_port = 3000
   force_https = true
+
+[[services]]
+  internal_port = 8080
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
 
-[[services]]
-  internal_port = 8080
-  
   [[services.tcp_checks]]
     grace_period = "1s"
     interval = "15s"
