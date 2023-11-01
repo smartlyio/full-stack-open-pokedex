@@ -19,12 +19,10 @@ jobs:
       - name: Check style
         run: npm run eslint
 
-      - name: Check if the server is running
-        run: |
-          status_code=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:5000)
-          if [ "$status_code" -eq 200 ]; then
-            echo "Server is running successfully."
-          else
-            echo "Server is not running, or returned a non-200 status code."
-            exit 1  # Fail the workflow
-          fi   
+      - name: e2e tests
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+          
