@@ -33,6 +33,7 @@ primary_region = "lhr"
     timeout = 2000
     tls_skip_verify = false
     [services.http_checks.headers]
-    
+
  [[services.http_checks.processes]]
-  app = "node app.js"   
+  service = "http_checks"
+  process = "app"  
