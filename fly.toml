@@ -32,8 +32,5 @@ primary_region = "lhr"
     protocol = "http"
     timeout = 2000
     tls_skip_verify = false
-    [services.http_checks.headers]
+    
 
- [[services.http_checks.processes]]
-  service = "http_checks"
-  process = "app"  
