@@ -4,6 +4,10 @@ const app = express()
 // Порт задается переменной окружения PORT, если она установлена, или 5000 по умолчанию
 const PORT = process.env.PORT || 8080
 
+app.get('/health', (req, res) => {
+  res.status(200).send('ok');
+});
+
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
