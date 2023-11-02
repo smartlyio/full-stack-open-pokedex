@@ -24,11 +24,14 @@ primary_region = "lhr"
   min_machines_running = 0
   processes = ["app"]
   
-[[services]]
-  http_checks = []
+
  
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/"
+    protocol = "http"
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
