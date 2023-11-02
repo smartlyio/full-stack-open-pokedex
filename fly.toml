@@ -20,7 +20,7 @@ primary_region = "lhr"
   internal_port = 8080
   processes = ["app"]
   protocol = "tcp"
-  script_checks = []
+ 
 
   [[services.http_checks]]
     interval = 10000
