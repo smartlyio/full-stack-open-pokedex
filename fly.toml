@@ -19,7 +19,7 @@ primary_region = "lhr"
 [[services]]
   internal_port = 8080
   processes = ["app"]
-  protocol = "tcp"
+ 
  
 
   [[services.http_checks]]
