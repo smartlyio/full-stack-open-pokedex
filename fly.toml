@@ -17,24 +17,10 @@ primary_region = "lhr"
     NODE_VERSION = "16.20.2"
 
 [[services]]
+  http_checks = []
   internal_port = 8080
   processes = ["app"]
  
  
 
-  [[services.http_checks]]
-    interval = 10000
-    grace_period = "5s"
-    method = "get"
-    path = "/"
-    protocol = "http"
-    timeout = 2000
-    tls_skip_verify = false
-    [services.http_checks.headers]
-    
-  [[services.script_checks]]
-    command       = "/app/health_check.sh"
-    grace_period  = "2s"
-    interval      = "5s"
-    restart_limit = 0
-    timeout       = "1s"
+
