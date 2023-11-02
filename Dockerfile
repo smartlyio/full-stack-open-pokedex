@@ -12,9 +12,11 @@ WORKDIR /app
 # Set production environment
 ENV NODE_ENV="production"
 
+RUN apt-get update; apt install -y curl
 
 # Throw-away build stage to reduce size of final image
 FROM base as build
+
 
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
