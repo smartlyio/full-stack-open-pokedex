@@ -16,14 +16,12 @@ primary_region = "lhr"
   [build.args]
     NODE_VERSION = "16.20.2"
 
-[http_service]
+ [[services]]
   internal_port = 8080
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
   processes = ["app"]
-  
+  protocol = "tcp"
+  script_checks = []
+
  [[services.http_checks]]
     interval = 10000
     grace_period = "5s"
@@ -32,6 +30,6 @@ primary_region = "lhr"
     protocol = "http"
     timeout = 2000
     tls_skip_verify = false
-    processes = ["app"]
+    [services.http_checks.headers]
     
 
