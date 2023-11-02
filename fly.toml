@@ -32,5 +32,6 @@ primary_region = "lhr"
     protocol = "http"
     timeout = 2000
     tls_skip_verify = false
+    processes = ["app"]
     
 
