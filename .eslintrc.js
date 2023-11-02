@@ -1,7 +1,13 @@
 module.exports = {
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	},
 	'env': {
 		'browser': true,
-		'es6': true
+		'es6': true,
+		'jest': true
 	},
 	'extends': [
 		'eslint:recommended',
