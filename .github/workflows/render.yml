@@ -1,19 +1,17 @@
-name: Render
+name: My Deploy
+
 on:
-    push:
-      branches:
-        - master       
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 jobs:
-  deploy:
-    name: Wait for Deploy
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for Render Deployment
-        uses: bounceapp/render-action@0.6.0
+      - name: Deploy to production
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.NGITHUB_TOKEN }}
           service-id: srv-${{ secrets.RENDER_SERVICE_ID }}
-          retries: 20
-          wait: 16000
-          sleep: 30000
+          api-key: ${{ secrets.RENDER_TOKEN }}
