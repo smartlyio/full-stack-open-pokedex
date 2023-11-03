@@ -8,5 +8,5 @@ npm install
 # Сборка приложения
 npm run build
 
-# Запуск приложения
-PORT=8080 npm run build && node app.js
+# Установка порта и запуск приложения
+PORT=8080 node app.js
