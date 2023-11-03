@@ -4,7 +4,7 @@
 # Этот скрипт должен выполнить HTTP-запрос к эндпоинту '/health' и проверить, что он возвращает 'ok'
 
 # Используем curl для выполнения HTTP-запроса к '/health' и сохраните результат
-response=$(curl -s http://silent-hill-4231.fly.dev:8080/health)  
+response=$(curl -s https://wispy-bird-6249.fly.dev:8080/health)  
 
 # Проверяем, что ответ содержит строку 'ok'
 if [ "$response" = "ok" ]; then
