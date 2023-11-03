@@ -32,6 +32,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
