@@ -9,4 +9,4 @@ npm install
 npm run build
 
 # Установка порта и запуск приложения
-PORT=8080 node app.js
+PORT=8080 npm run start-prod
