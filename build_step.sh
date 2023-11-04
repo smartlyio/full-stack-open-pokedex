@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "Build script"
+echo "Build script 23"
