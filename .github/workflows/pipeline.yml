@@ -23,21 +23,21 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      # - name: test
-      #   run: npm run test
-      # - name: e2e tests
-      #   uses: cypress-io/github-action@v6
-      #   with:
-      #     command: npm run test:e2e
-      #     start: npm run start-prod
-      #     wait-on: http://localhost:3000
-      # - name: Deploy
-      #   # Only run this step if the branch is main
-      #   if: ${{ github.ref == 'refs/heads/master' }} && ${{ github.event_name == 'push' }}
-      #   env:
-      #     deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-      #   run: |
-      #     curl "$deploy_url"
+      - name: test
+        run: npm run test
+      - name: e2e tests
+        uses: cypress-io/github-action@v6
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:3000
+      - name: Deploy
+        # Only run this step if the branch is main
+        if: ${{ github.ref == 'refs/heads/master' }} && ${{ github.event_name == 'push' }}
+        env:
+          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          curl "$deploy_url"
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -50,4 +50,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DRY_RUN: true
+          # DRY_RUN: true
