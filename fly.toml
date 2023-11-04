@@ -22,5 +22,10 @@ primary_region = "jnb"
   auto_stop_machines = true
   auto_start_machines = true
   min_machines_running = 0
-  http_checks = []
   processes = ["app"]
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
