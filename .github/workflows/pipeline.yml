@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-
+        with:
+          fetch-depth: '0'
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -46,8 +47,9 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           DRY_RUN: true
+          DEFAULT_BRANCH: master
         
 
