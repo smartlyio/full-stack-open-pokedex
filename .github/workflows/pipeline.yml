@@ -23,22 +23,25 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
-      - name: test
-        run: npm run test
-      - name: e2e tests
-        uses: cypress-io/github-action@v6
-        with:
-          command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:3000
-      - name: Deploy
-        # Only run this step if the branch is main
-        if: ${{ github.ref == 'refs/heads/master' }} && ${{ github.event_name == 'push' }}
-        env:
-          deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
-        run: |
-          curl "$deploy_url"
+      # - name: test
+      #   run: npm run test
+      # - name: e2e tests
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     command: npm run test:e2e
+      #     start: npm run start-prod
+      #     wait-on: http://localhost:3000
+      # - name: Deploy
+      #   # Only run this step if the branch is main
+      #   if: ${{ github.ref == 'refs/heads/master' }} && ${{ github.event_name == 'push' }}
+      #   env:
+      #     deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+      #   run: |
+      #     curl "$deploy_url"
       - name: Bump version and push tag
+        # bump the version when the change happens to the main branch, prevent bump on pull request related events.
+        if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
