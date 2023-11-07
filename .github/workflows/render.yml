@@ -6,12 +6,12 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: srv-${{ secrets.RENDER_SERVICE_ID }}
