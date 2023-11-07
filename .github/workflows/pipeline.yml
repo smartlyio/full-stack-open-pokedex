@@ -28,9 +28,5 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-  main:
-    name: Deploy to Render
-    runs-on: ubuntu-latest
-    steps:
-      - name: Trigger deployment
+      - name: Trigger render.com deployment
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
