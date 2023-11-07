@@ -16,3 +16,4 @@ jobs:
         with:
           service-id: srv-${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_TOKEN }}
+          WITH_V: false
