@@ -9,4 +9,8 @@ describe('Pokedex', function() {
     cy.contains('ivysaur').click()
     cy.contains('chlorophyll')
   })
+  it('/health returns ok', function() {
+    cy.visit('http://localhost:5000/health')
+    cy.contains('ok')
+  })
 })
