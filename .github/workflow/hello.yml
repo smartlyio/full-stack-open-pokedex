@@ -1,0 +1,14 @@
+name: say_hello
+
+on:
+  push:
+    branch:
+      - master
+
+job:
+  Hello_world_with_github_actions:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: say_hello
+        run: |
+          echo "Hello World, this is tringered from say hello actions"
