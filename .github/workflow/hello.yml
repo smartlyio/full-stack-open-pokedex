@@ -1,14 +1,15 @@
-name: say_hello
+name: Hello World!
 
 on:
   push:
-    branch:
+    branches:
       - master
+      # note that your "main" branch might be called main instead of master
 
-job:
-  Hello_world_with_github_actions:
+jobs:
+  hello_world_job:
     runs-on: ubuntu-20.04
     steps:
-      - name: say_hello
+      - name: Say hello
         run: |
-          echo "Hello World, this is tringered from say hello actions"
+          echo "Hello World!"
