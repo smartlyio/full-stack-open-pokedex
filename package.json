@@ -10,6 +10,9 @@
     "eslint": "eslint \"./**/*.{js,jsx}\" --fix",
     "build": "webpack --mode production"
   },
+  "jest": {
+    "testEnvironment": "jsdom"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/smartlyio/fullstackopen-cicd.git"
