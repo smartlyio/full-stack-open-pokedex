@@ -32,3 +32,6 @@ Github secrets (for pipeline action file) are set in repository > settings > sec
 
 NOTE: Render.com documentation just suggests pasting the whole webhook url as a github secret rather than `https://api.render.com/deploy/srv-${{ secrets.DEPLOY_HOOK }}` etc. so I have followed their example
 
+### Checking deploy only runs on pushing / merging (PR) to master
+
+Adding comments here and commiting to pr-example branch to confirm that the deployment step does not run
