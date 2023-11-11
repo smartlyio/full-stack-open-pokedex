@@ -22,9 +22,8 @@ jobs:
       - name: Build and test
         run: npm run build && npm test
 
-      - name: e2e tests
-        uses: cypress-io/github-action@v4
-        with:
-            command: npx cypress run
-            start: npm run start-prod
-            wait-on: http://localhost:5000
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - name: Deploy app
+        run: flyctl deploy --remote-only
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
