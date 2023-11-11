@@ -26,4 +26,6 @@ jobs:
         with:
           start: npm run start-prod
           wait-on: http://localhost:5000
+      - name: Deploy to render
+        run: curl https://api.render.com/deploy/srv-${{ secrets.POKEDEX_SERVICE_ID }}?key=${{ secrets.POKEDEX_API_KEY }}
 
