@@ -24,7 +24,10 @@ Also needed to set `no-console: 'off'` in eslintrc to get rid of the console war
 
 ## Deployment with render.com
 
-A webook is used to trigger a render deployment - Render dashboard includes the webhook address (used as ID) and an API key,
+A webook is used to trigger a render deployment - Render dashboard includes the webhook address (used as ID) and an API key, `https://api.render.com/deploy/srv-${{ secrets.ID }}?key=${{ secrets.API_KEY }}`
 these are input as secrets in the Render dashboard for the pokedex project, and are also required by github, so that github actions can ping the webhook address:
 
 Github secrets (for pipeline action file) are set in repository > settings > secrets & variables > actions
+
+NOTE: unsure if ?key=API_Key is actually needed in the url or not: Render.com documentation just suggests pasting the whole webhook url as a github secret rather than `https://api.render.com/deploy/srv-${{ secrets.ID }}` etc.
+
