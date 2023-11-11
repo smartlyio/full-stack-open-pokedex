@@ -11,8 +11,8 @@ app.get('/version', (req, res) => {
 })
 
 app.get('/health', (req, res) => {
-  // simulate broken deployment
-  throw 'error...healthcheck'
+  // simulate broken deployment: this test passed, now commenting it out
+  // throw 'error...healthcheck'
   // eslint-disable-next-line no-unreachable
   res.send('ok')
 })

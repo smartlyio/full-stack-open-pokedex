@@ -25,9 +25,10 @@ Also needed to set `no-console: 'off'` in eslintrc to get rid of the console war
 ## Deployment with render.com
 
 A webook is used to trigger a render deployment - Render dashboard includes the webhook address (used as ID) and an API key, `https://api.render.com/deploy/srv-${{ secrets.ID }}?key=${{ secrets.API_KEY }}`
-these are input as secrets in the Render dashboard for the pokedex project, and are also required by github, so that github actions can ping the webhook address:
+Full stack open exercise documentation suggests an API key needs to be generated from settings, but this appears to now be incorrect as the webhook url listed on the Render settings includes a key in the url,
+so it appears the these secrets do not need to be stored in the Render Secrets, only in the Github Secrets (so that the webhook request can be made)
 
 Github secrets (for pipeline action file) are set in repository > settings > secrets & variables > actions
 
-NOTE: unsure if ?key=API_Key is actually needed in the url or not: Render.com documentation just suggests pasting the whole webhook url as a github secret rather than `https://api.render.com/deploy/srv-${{ secrets.ID }}` etc.
+NOTE: Render.com documentation just suggests pasting the whole webhook url as a github secret rather than `https://api.render.com/deploy/srv-${{ secrets.DEPLOY_HOOK }}` etc. so I have followed their example
 
