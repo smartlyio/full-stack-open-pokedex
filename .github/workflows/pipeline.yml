@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -28,3 +31,4 @@ jobs:
           wait-on: http://localhost:5000
       - name: Deploy to render
         run: curl ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+
