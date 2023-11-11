@@ -34,4 +34,6 @@ NOTE: Render.com documentation just suggests pasting the whole webhook url as a 
 
 ### Checking deploy only runs on pushing / merging (PR) to master
 
-Adding comments here and commiting to pr-example branch to confirm that the deployment step does not run
+Adding comments here and commiting to pr-example branch to confirm that the deployment step does not run: `if: ${{ github.event_name == 'push' }}` - this ensures the deploy step is only run on the merging.
+Currently there is no action showing so this may be set up correctly now.
+
