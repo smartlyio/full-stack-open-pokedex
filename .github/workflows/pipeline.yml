@@ -25,6 +25,7 @@ jobs:
       - name: Build and test
         run: npm run build && npm test
 
+        if: ${{ github.event_name == 'push' }}
       - uses: superfly/flyctl-actions/setup-flyctl@master
       - name: Deploy app
         if: ${{ github.event_name == 'push' }}
