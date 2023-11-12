@@ -26,4 +26,6 @@ jobs:
         with:
           start: npm run start-prod
           browser: chrome
+      - name: Say hello
+        run: echo  "Hello, everybody!"
 
