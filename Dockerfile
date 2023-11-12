@@ -4,6 +4,9 @@
 ARG NODE_VERSION=16.20.2
 FROM node:${NODE_VERSION}-slim AS base
 
+# Install curl
+RUN apt-get update; apt install -y curl
+
 LABEL fly_launch_runtime="Node.js"
 
 # Node.js app lives here
@@ -11,9 +14,6 @@ WORKDIR /app
 
 # Set production environment
 ENV NODE_ENV="production"
-
-# Install curl
-RUN apt-get update; apt install -y curl
 
 # Throw-away build stage to reduce size of final image
 FROM base AS build
