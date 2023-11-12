@@ -43,7 +43,7 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - name: "Print commit message"
-        if: ${{ !contains(github.event.head_commit.message, '#skip') }}
+        if: ${{ contains(github.event.head_commit.message, '#skip') }}
         env: 
           COMMIT_MESSAGE: ${{github.event.head_commit.message}}
         run: echo $COMMIT_MESSAGE contained keyword '#skip' -- skipping tagging
