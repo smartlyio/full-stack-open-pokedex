@@ -7,4 +7,3 @@ npm install
 npm test
 npm run eslint
 npm run build
-npm run start-prod
