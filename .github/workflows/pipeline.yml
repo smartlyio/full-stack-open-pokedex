@@ -7,7 +7,7 @@ on:
   # PR trigger
   pull_request:
     branches: [master]
-    types: [opened, synchronize]
+    types: [opened, synchronize] # this means, that the workflow will run when a PR into the master branch is opened or updated.
 
 jobs:
   simple_deployment_pipeline:
@@ -61,4 +61,4 @@ jobs:
           # the third-party action needs the token for authentication in the repository
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch # semantic versioning: 1.2.3 => {major}.{minor}.{patch}
-          DRY_RUN: false
+          DRY_RUN: false # true will make the action output the next version number without creating or tagging the release.
