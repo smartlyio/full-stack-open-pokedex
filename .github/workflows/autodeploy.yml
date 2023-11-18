@@ -5,11 +5,12 @@ on:
     branches:
       - master
   pull_request:
-  branches: [master]
-  types: [opened, synchronize]
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   build:
+    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Deploy to production
