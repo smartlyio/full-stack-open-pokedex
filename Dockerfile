@@ -40,6 +40,6 @@ FROM base
 # Copy built application
 COPY --from=build /app /app
 
-# Start the server by default, this can be overwritten at runtime
+# Start the server by default, this can be overwritten at runtime, server port set at several places
 EXPOSE 5001
 CMD [ "npm", "run", "start" ]
