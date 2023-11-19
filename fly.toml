@@ -16,14 +16,6 @@ primary_region = "arn"
   [build.args]
     NODE_VERSION = "16.20.1"
 
-[http_service]
-  internal_port = 5001
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  processes = ["app"]
-
 [[services]]
   internal_port = 5001
   protocol = "tcp"
@@ -32,6 +24,13 @@ primary_region = "arn"
   min_machines_running = 0
   processes = ["app"]
 
+  [http_service]
+    internal_port = 5001
+    force_https = true
+    auto_stop_machines = true
+    auto_start_machines = true
+    min_machines_running = 0
+    processes = ["app"]
 
   [tcp_checks]
     grace_period = "1s"
