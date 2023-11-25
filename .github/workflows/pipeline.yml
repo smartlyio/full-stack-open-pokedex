@@ -32,13 +32,9 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
 
-      - name: Render GitHub Action
-        uses: Bounceapp/render-action@0.7.1
-        with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          github-token: ${{ secrets.DEPLOY_GITHUB_TOKEN }}
-          service-id: srv-${{ secrets.RENDER_SERVICE_ID }}
-          retries: 20
-          wait: 16000
-          sleep: 30000
-            
+      main:
+      name: Deploy to Render
+      runs-on: ubuntu-latest
+      steps:
+        - name: Trigger deployment
+          run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_TOKEN }}
