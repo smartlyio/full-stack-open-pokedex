@@ -36,7 +36,7 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Deploy
-        if: github.ref == 'refs/heads/master'
+        if: ${{ github.event_name == 'push' }}
         env:
           deploy_url: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
         run: |
