@@ -7,6 +7,7 @@ app = "full-stack-open-pokedex-sd"
 primary_region = "arn"
 
 [deploy]
+  strategy = "bluegreen"
   release_command = "npm run build"
 
 [processes]
@@ -16,15 +17,42 @@ primary_region = "arn"
   [build.args]
     NODE_VERSION = "16.20.2"
 
-[http_service]
+[[services]]
   internal_port = 3000
-  force_https = true
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
   processes = ["app"]
+  protocol = "tcp"
+  script_checks = []
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
 
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 1024
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
+
+[[services.http_checks]]
+  interval = 10000
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
