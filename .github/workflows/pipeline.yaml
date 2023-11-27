@@ -60,7 +60,7 @@ jobs:
   notify:
     runs-on: ubuntu-20.04
     needs: [simple_deployment_pipeline, deploy, tag_release]
-    if: always() && !contains(join(github.event.commits.*.message, ', '), '#skip')
+    if: always() && !contains(join(github.event.commits.*.message, ', '), '#skip') && github.event_name == 'push'
     steps:
       - name: Notify on Success
         if: success()
