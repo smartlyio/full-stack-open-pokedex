@@ -9,7 +9,7 @@ import PokemonList from './PokemonList'
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
-  id: parseInt(url.match(/\/(\d+)\//)[1])
+  id: parseInt(url.match(/\/(\d+)\//)[1], 10)
 })))
 
 const App = () => {
