@@ -30,20 +30,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:3000
-
-  tag_release:
-    needs: [simple_deployment_pipeline]
-    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
-    runs-on: ubuntu-20.04
-    name: Bump version and push tag
-    steps:
-      - uses: actions/checkout@v3
-      - uses: anothrNick/github-tag-action@1.67.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-
+          
   deploy:
+    needs: [simple_deployment_pipeline]
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
     runs-on: ubuntu-20.04
     name: Deploy app
@@ -53,3 +42,37 @@ jobs:
       - run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+  tag_release:
+    needs: [deploy]
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
+    runs-on: ubuntu-20.04
+    name: Bump version and push tag
+    steps:
+      - uses: actions/checkout@v3
+      - uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+  
+  notify:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Notify on Success
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          details: Test Succeeded!
+          text: New version of PokeDex deployed with tag ${{ github.ref_name }}
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Notify on Failure
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          details: Commit ${{ github.event.head_commit.url }} broke the build :(
+          text: Build failed
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
