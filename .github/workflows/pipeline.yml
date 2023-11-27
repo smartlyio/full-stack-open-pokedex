@@ -1,4 +1,4 @@
-name: Lint, Build and Test
+name: Lint, Build, Test, and E2E Test
 
 on: [push, pull_request]
 
@@ -25,3 +25,10 @@ jobs:
 
     - name: Run Tests
       run: npm test
+
+    - name: Run E2E Tests
+      uses: cypress-io/github-action@v5
+      with:
+        command: npm run test:e2e
+        start: npm start
+        wait-on: http://localhost:3000
