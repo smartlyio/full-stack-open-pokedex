@@ -57,9 +57,10 @@ jobs:
   
   notify:
     runs-on: ubuntu-20.04
+    needs: [deploy]
     steps:
       - name: Notify on Success
-        if: ${{ success() }}
+        if: always() && success()
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -68,7 +69,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Notify on Failure
-        if: ${{ failure() }}
+        if: always() && failure()
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
