@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - '*'
   pull_request:
     branches: [master]
     types: [opened, synchronize]
@@ -57,9 +59,10 @@ jobs:
   
   notify:
     runs-on: ubuntu-20.04
+    needs: [simple_deployment_pipeline, deploy, tag_release]
     steps:
       - name: Notify on Success
-        if: ${{ success() }}
+        if: ${{ always() && success() && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -68,7 +71,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Notify on Failure
-        if: ${{ failure() }}
+        if: ${{ always() && success() && !contains(join(github.event.commits.*.message, ', '), '#skip') }}
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
