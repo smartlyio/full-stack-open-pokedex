@@ -10,10 +10,21 @@ on:
       types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
-    name: Deploy to Render
+build:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger deployment
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+    - uses: actions/checkout@v2
+    - name: Run build
+      run: echo "Building the project..."
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: ${{ github.event_name == 'push' }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Deploy to Render
+      run: echo "Deploying the project..."
+    - name: Trigger deployment
+      run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
       
