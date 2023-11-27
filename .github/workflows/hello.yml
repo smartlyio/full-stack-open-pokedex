@@ -1,4 +1,4 @@
-name: Hello World
+name: Hello World with Date and Directory Contents
 
 on: [push]
 
@@ -7,5 +7,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
     - name: Output Hello World
       run: echo "Hello World!"
+
+    - name: Print Date
+      run: date
+
+    - name: List Directory Contents in Long Format
+      run: ls -l
