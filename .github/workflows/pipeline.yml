@@ -1,16 +1,27 @@
-name: Simple Deployment Pipeline
+name: Lint, Build and Test
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-20.04
+  build_and_test:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-      - name: Install dependencies 
-        run: npm install
-      - name: Check style
-        run: npm run eslint
+    - uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Lint
+      run: npm run lint
+
+    - name: Build
+      run: npm run build
+
+    - name: Run Tests
+      run: npm test
