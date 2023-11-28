@@ -32,8 +32,9 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      
-      - uses: ttskch/render-deploy@v1.0.0
+      - name: Deploy to Render
+        if: success() # Only deploy if all previous steps pas
+        uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           api-key: ${{ secrets.RENDER_API_KEY }}
-          service-id: ${{ secrets.RENDERER_SERVICE_ID }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
