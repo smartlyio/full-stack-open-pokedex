@@ -1,0 +1,24 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04 #used virtual environment
+
+    steps:
+      - uses: actions/checkout@v3 #checkout code frmon the repository
+
+      - uses: actions/setup-node@v3
+        with: #setup nodejs to use
+          node-version: "16"
+
+      - name: Install dependencies #install application dependencies
+        run: npm install
+
+      - name: Check style
+        run: npm run eslint
