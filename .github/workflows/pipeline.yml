@@ -34,6 +34,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Deploy to Fly.io
-      run: flyctl deploy --full-stack-open-pokedex-henry --token ${{ secrets.FLY_API_TOKEN }}
+      run: flyctl deploy --app full-stack-open-pokedex-henry --token ${{ secrets.FLY_API_TOKEN }}
       env:
         FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
