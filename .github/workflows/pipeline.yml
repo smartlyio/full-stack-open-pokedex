@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
+ 
 
 jobs:
   simple_deployment_pipeline:
@@ -32,6 +32,8 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Deploy to Render
-        if: success() # Only deploy if all previous steps pass
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDERER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      
+      - uses: ttskch/render-deploy@v1.0.0
+        with:
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          service-id: ${{ secrets.RENDERER_SERVICE_ID }}
