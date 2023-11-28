@@ -1,0 +1,31 @@
+# fly.toml app configuration file generated for cicd on 2023-11-29T07:53:36+11:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "cicd"
+primary_region = "syd"
+
+[build]
+  PORT = "3000" # add this
+  [build.args]
+    NODE_VERSION = "16.19.1"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
