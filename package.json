@@ -54,9 +54,7 @@
     "react-router-dom": "^5.2.0",
     "webpack": "^4.43.0"
   },
-    "engines": { 
-      "node": "14.17.6" 
-    
+  "engines": {
+    "node": "16.19.0"
   }
-  
 }

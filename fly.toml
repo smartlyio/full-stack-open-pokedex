@@ -8,7 +8,7 @@ primary_region = "arn"
 
 [build]
     [build.args]
-        NODE_VERSION = "14.17.6"
+        NODE_VERSION = "16.19.0"
 
 [deploy]
   release_command = "npm run build"
