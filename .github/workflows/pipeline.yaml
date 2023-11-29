@@ -68,11 +68,11 @@ jobs:
         with:
           severity: info
           details: Test Succeeded!
-          text: New version of PokeDex deployed with tag ${{ github.ref_name }}
+          text: New version of PokeDex deployed with tag ${{ github.event.release.tag_name }}
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Notify on Failure
-        if: failure()
+        if: cancelled() || failure()
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
