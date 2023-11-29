@@ -63,7 +63,7 @@ jobs:
     if: always() && !contains(join(github.event.commits.*.message, ', '), '#skip') && github.event_name == 'push'
     steps:
       - name: Notify on Success
-        if: success()
+        if: needs.*.result == 'success'
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
@@ -72,7 +72,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Notify on Failure
-        if: cancelled() || failure()
+        if: needs.*.result == 'failure'
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: error
