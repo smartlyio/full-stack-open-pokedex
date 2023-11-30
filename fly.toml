@@ -10,12 +10,12 @@ primary_region = "syd"
 
 [[services]]
   [services.http_checks]
-  interval = 60000   # Time in milliseconds between checks
-  grace_period = "1s"  # Initial period before starting checks
-  method = "get"     # HTTP method, typically "get"
-  path = "/health"   # The path of your health check endpoint
-  timeout = 5000     # Time in milliseconds to wait for a response
-  protocol = "http"  # or "https" if your service is behind SSL
+    interval = 60000   # Time in milliseconds between checks
+    grace_period = "1s"  # Initial period before starting checks
+    method = "get"     # HTTP method, typically "get"
+    path = "/health"   # The path of your health check endpoint
+    timeout = 5000     # Time in milliseconds to wait for a response
+    protocol = "http"  # or "https" if your service is behind SSL
 
 [http_service]
   internal_port = 3000
