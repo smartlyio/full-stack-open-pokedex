@@ -1,18 +1,12 @@
-# fly.toml app configuration file generated for cicd on 2023-11-30T18:06:53+11:00
+# fly.toml app configuration file generated for fullstackopen-ci-cd on 2023-11-30T18:22:59+11:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "cicd"
+app = "fullstackopen-ci-cd"
 primary_region = "syd"
 
 [build]
-
-[deploy]
-  release_command = "npm run build"
-
-[processes]
-  app = "node app.js"
 
 [http_service]
   internal_port = 3000
@@ -22,13 +16,7 @@ primary_region = "syd"
   min_machines_running = 0
   processes = ["app"]
 
-[[services]]
-  protocol = ""
-  internal_port = 8080
-  processes = ["app"]
-
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 1024
-  processes = ["app"]
