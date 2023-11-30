@@ -6,8 +6,9 @@ const PORT = process.env.PORT || 3000
 
 app.use(express.static('dist'))
 
-app.get('/health', (req, res) => {
-  res.status(500).send('Error')
+// eslint-disable-next-line
+app.get('/health', (req, res) => { 
+  throw 'error'
 })
 
 app.listen(PORT, () => {
