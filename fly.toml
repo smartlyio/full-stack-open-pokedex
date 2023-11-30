@@ -32,3 +32,12 @@ primary_region = "arn"
   cpus = 1
   memory_mb = 1024
   processes = ["app"]
+
+
+[[services.http_checks]]
+interval = 10000  # Time in milliseconds between checks
+timeout = 2000    # Time in milliseconds to wait for a response
+method = "get"
+path = "/health"
+protocol = "http"
+tls_skip_verify = false 
