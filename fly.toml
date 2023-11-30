@@ -17,7 +17,7 @@ primary_region = "arn"
   PORT = "8080"
 
 [processes]
-  app = "node app.js"
+  app = "full-stack-open-pokedex-henry"
 
 [http_service]
   internal_port = 8080
