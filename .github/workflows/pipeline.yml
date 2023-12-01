@@ -50,7 +50,7 @@
         - name: Notify Deployment Success
           uses: rjstone/discord-webhook-notify@v1
           
-          if: ${{ github.event_name == 'push' }}  && success()
+          if:  success()
           with:
             severity: info
             details: success "New version deployed successfully!"
@@ -58,16 +58,10 @@
     
         - name: Notify Deployment Failure and Show Commit Info
           uses: rjstone/discord-webhook-notify@v1 
-          if: ${{ github.event_name == 'push' }}  && failure()
+          if: failure()
          
           with:
             severity: error
             details: error "Build failed! Check commit info for details."
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-        - name: Test Cancelled
-          uses: rjstone/discord-webhook-notify@v1
-          if: ${{ github.event_name == 'push' }}  &&  cancelled()
-          with:
-              severity: warn
-              details: Test Cancelled!
-              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+       
