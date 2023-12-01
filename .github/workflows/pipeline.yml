@@ -50,7 +50,7 @@
         - name: Notify Deployment Success
           uses: rjstone/discord-webhook-notify@v1
           
-          if:  success()
+          if: github.event_name == 'push' &&  success()
           with:
             severity: info
             text: A new version of pokedex deployed.
