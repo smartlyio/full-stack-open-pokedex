@@ -43,7 +43,7 @@
         - name: Bump version and push tag
           if: ${{ github.event_name == 'push' }}   
            
-          uses: anothrNick/github-tag-action@1.64.0 
+          uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
            
