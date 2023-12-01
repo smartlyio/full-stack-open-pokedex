@@ -14,3 +14,17 @@ jobs:
         uses: jtalk/url-health-check-action@v3
         with:
           url: 'https://full-stack-open-pokedex-7vtq.onrender.com'
+      - name: Health Check Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: info
+            text: A new health check succeded.
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Health Check Failure and Show Commit Info
+        uses: rjstone/discord-webhook-notify@v1 
+        if: failure()
+        with:
+            severity: error
+            text: Health check failed!
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
