@@ -46,4 +46,27 @@
           uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-           
+        - name: Notify Deployment Success
+          uses: rjstone/discord-webhook-notify@v1
+          if: success()
+          
+          with:
+            severity: info
+            details: success "New version deployed successfully!"
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+    
+        - name: Notify Deployment Failure and Show Commit Info
+          uses: rjstone/discord-webhook-notify@v1 
+          if: failure()
+         
+          with:
+            severity: error
+            details: error "Build failed! Check commit info for details."
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+        - name: Test Cancelled
+          uses: rjstone/discord-webhook-notify@v1
+          if: cancelled()
+          with:
+              severity: warn
+              details: Test Cancelled!
+              webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
