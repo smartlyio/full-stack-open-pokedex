@@ -2,7 +2,7 @@ name: Periodic Health Check
 
 on:
   schedule:
-    - cron: '10 0 * * *' # Schedule the workflow to run every 24 hours
+    - cron: '0 * * * *' # Schedule the workflow to run every 24 hours
 
 jobs:
   health_check:
@@ -14,3 +14,6 @@ jobs:
         uses: jtalk/url-health-check-action@v3
         with:
           url: 'https://full-stack-open-pokedex-7vtq.onrender.com'
+          follow-redirect: false
+          max-attempts: 3
+          retry-delay: 5s
