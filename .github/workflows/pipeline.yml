@@ -16,5 +16,9 @@ jobs:
               run: npm install
             - name: Check code formatting # this is a step that checks the code formatting.
               run: npm run eslint
+            - name: Tests # this is a step that runs the tests.
+              run: npm run test
+            - name: Build # this is a step that builds the project.
+              run: npm run build
 
 
