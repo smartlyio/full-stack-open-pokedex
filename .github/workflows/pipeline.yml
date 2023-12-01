@@ -1,0 +1,20 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+jobs: 
+    simple_deployment_pipeline:
+        runs-on: ubuntu-20.04 # the type of machine to run the job on. What do is run the job on a ubuntu machine.
+        steps: 
+            - uses : actions/checkout@v3  # this is a github action that checks out the code from the repo. This makes the code available to the job.
+            - uses : actions/setup-node@v3 # this is a github action that sets up node on the machine. This makes node available to the job.
+              with: 
+                  node-version: '16' # this is the version of node to install on the machine.
+            - name: Install dependencies # this is a step that installs the dependencies of the project.
+              run: npm install
+            - name: Check code formatting # this is a step that checks the code formatting.
+              run: npm run eslint
+
+
