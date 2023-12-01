@@ -53,7 +53,7 @@
           if:  success()
           with:
             severity: info
-            details: success "New version deployed successfully!"
+            text: A new version of pokedex deployed.
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
     
         - name: Notify Deployment Failure and Show Commit Info
@@ -62,6 +62,6 @@
          
           with:
             severity: error
-            details: error "Build failed! Check commit info for details."
+            text: Build failed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
        
