@@ -37,7 +37,9 @@
       runs-on: ubuntu-20.04
       permissions:
         contents: write 
-      steps:      
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v2   
         - name: Bump version and push tag
           if: ${{ github.event_name == 'push' }}   
            
