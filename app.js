@@ -8,7 +8,8 @@ app.use(express.static('dist'))
 
 // eslint-disable-next-line
 app.get('/health', (req, res) => { 
-  res.status(500).send('error')
+  // eslint-disable-next-line
+  console.log('testing a pr')
 })
 
 app.listen(PORT, () => {
