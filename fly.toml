@@ -8,9 +8,18 @@ primary_region = "syd"
 
 [build]  
 
+[experimental]
+  auto_rollback = true
+
 [[services]]
   internal_port = 8080
   processes = ["app"]
+
+  [[services.tcp_checks]]
+    grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
 
   [[services.http_checks]]
     interval = 60000
@@ -34,8 +43,3 @@ primary_region = "syd"
   cpus = 1
   memory_mb = 1024
 
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
