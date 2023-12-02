@@ -1,14 +1,15 @@
-name: Hello World Workflow
+name: Hello World!
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
-  hello_job:
-    runs-on: ubuntu-latest
-
+  hello_world_job:
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-
-      - name: Say Hello
-        run: echo "Hello World!"
+      - name: Say hello
+        run: |
+          echo "Hello World!"
