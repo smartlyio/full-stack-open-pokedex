@@ -1,1 +1,14 @@
-Run echo "Hello World!"
+name: Hello World Workflow
+
+on: [push]
+
+jobs:
+  hello_job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Say Hello
+        run: echo "Hello World!"
