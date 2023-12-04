@@ -20,7 +20,7 @@ jobs:
           date
       - name: Directory content
         run: |
-          ls -l
+          # ls -l
       - name: Test Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
