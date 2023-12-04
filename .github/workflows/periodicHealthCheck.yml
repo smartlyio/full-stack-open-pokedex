@@ -16,7 +16,7 @@ jobs:
         uses: jtalk/url-health-check-action@v3
         with:
           # Check the following URLs one by one sequentially
-          url: https://github.com/GiangTruongG/full-stack-open-pokedexxx
+          url: https://github.com/GiangTruongG/full-stack-open-pokedex
           # Follow redirects, or just report success on 3xx status codes
           follow-redirect: false # Optional, defaults to "false"
           # Fail this action after this many failed attempts
@@ -32,12 +32,12 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          details: Periodic Check Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          details: Periodic Check Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
