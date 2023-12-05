@@ -5,7 +5,7 @@ on:
     branches:
       - master
 
-Jobs:
+jobs:
   lint_my_code:
     runs-on: ubuntu-20.04
     steps:
