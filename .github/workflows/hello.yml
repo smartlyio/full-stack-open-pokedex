@@ -12,12 +12,12 @@ jobs:
     steps:
       - name: Say hello
         run: echo Hello world
-  print current date:
+  print_current_date:
     runs-on: ubuntu-20.04
     steps:
       - name: print current date
         run: echo $(date)
-  print directory contents:
+  print_directory_contents:
     runs-on: ubuntu-20.04
     steps:
       - name: print directory content
