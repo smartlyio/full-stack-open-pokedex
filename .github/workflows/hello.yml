@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: print directory content
-        run: ls ./../../
+        run: ls ./../
 # jobs:
 #   list_directory_job:
 #     runs-on: ubuntu-20.04
