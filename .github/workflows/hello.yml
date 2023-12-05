@@ -11,4 +11,6 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: echo "change echo message"
+        run: echo ${date}
+      # - name: print_date
+      #     run: echo "Hello World!"
