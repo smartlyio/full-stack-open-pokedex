@@ -11,6 +11,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-        run: echo $(date)
-      # - name: print_date
-      #     run: echo "Hello World!"
+        run: echo $(date) && ls -l
+# jobs:
+#   list_directory_job:
+#     runs-on: ubuntu-20.04
+#     steps:
+#       - name: List directory
+#         run: ls -l
+# - name: print_date
+#     run: echo "Hello World!"
