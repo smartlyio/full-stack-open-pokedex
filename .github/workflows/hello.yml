@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: print current date
-        run: echo $(date)
+        run: date
   print_directory_contents:
     runs-on: ubuntu-20.04
     steps:
       - name: print directory content
-        run: echo $(pwd) && ls 
+        run: ls -l
 # jobs:
 #   list_directory_job:
 #     runs-on: ubuntu-20.04
