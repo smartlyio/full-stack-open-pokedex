@@ -1,0 +1,20 @@
+name: end_to_end_test_with_cypress
+
+on:
+  push:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run_end_to_end_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: install_dependencies
+        run: npm i
+      # - name: Cypress run
+      - uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
