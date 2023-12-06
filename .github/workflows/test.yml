@@ -23,4 +23,4 @@ jobs:
         with:
           command: npm run test:e2e
           start: npm run start-prod
-          wait-on: https://localhost:5000
+          wait-on: https://www.google.com/
