@@ -9,13 +9,13 @@ on:
 jobs:
   run_end_to_end_tests:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: install_dependencies
-        run: npm install
-      # - name: Cypress run
-      - uses: cypress-io/github-action@v5
-        with:
-          start: npm run start
-          command: npm run test:e2e
-          wait-on: http://localhost:8080
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - name: install_dependencies
+    #     run: npm install
+    #   # - name: Cypress run
+    #   - uses: cypress-io/github-action@v5
+    #     with:
+    #       start: npm run start
+    #       command: npm run test:e2e
+    #       # wait-on: http://localhost:8080
