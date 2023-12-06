@@ -37,5 +37,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          default_bump: patch
+          INITIAL_VERSION: '1.0.0'
       
