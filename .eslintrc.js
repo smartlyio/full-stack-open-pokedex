@@ -25,8 +25,8 @@ module.exports = {
     "no-trailing-spaces": "error",
     "object-curly-spacing": ["error", "always"],
     "arrow-spacing": ["error", { before: true, after: true }],
-      "react/prop-types": "off",
-    "react/no-deprecated": 0
+    "react/prop-types": "off",
+    "react/no-deprecated": 0,
     // quotes: ["off"],
   },
 };
