@@ -12,9 +12,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: install_dependencies
-        run: npm i
+        run: npm install
       # - name: Cypress run
-      - uses: cypress-io/github-action@v6
+      - uses: cypress-io/github-action@v5
         with:
-          build: npm run build
-          start: npm start
+          start: npm run start
+          command: npm run test:e2e
+          wait-on: http://localhost:5000
