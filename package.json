@@ -1,5 +1,9 @@
 {
     "name": "fullstackopen-cicd",
+    "jest": {
+        "verbose": true,
+        "testEnvironment": "jsdom"
+    },
     "version": "1.0.0",
     "description": "Full Stack Open",
     "main": "src/index.js",
