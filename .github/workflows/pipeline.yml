@@ -33,9 +33,24 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - name: Check for "skip" in commit message
+        run: |
+          SKIP_VERSION_BUMP=false
+          for commit_message in $(echo "${{ toJson(github.event.commits.*.message) }}" | jq -r '.[]'); do
+            if [[ $commit_message == *"#skip"* ]]; then
+              SKIP_VERSION_BUMP=true
+              break
+            fi
+          done
+
+          if [ "$SKIP_VERSION_BUMP" == "true" ]; then
+            echo "Skipping version bump due to #skip in commit message."
+            exit 0
+          fi
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DEFAULT_BRANCH: master      
+          DEFAULT_BRANCH: master
+        if: "!contains(join(${{ toJson(github.event.commits.*.message) }}), '#skip')"
