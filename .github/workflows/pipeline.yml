@@ -38,7 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DEFAULT_BRANCH: master
-
-          #need to find a way to increment patch (0.0.X) when bumping version!!!
-      
+          DEFAULT_BRANCH: master      
