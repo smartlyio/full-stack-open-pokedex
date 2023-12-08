@@ -33,18 +33,10 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - name: Check for "skip" in commit message
+      - name: Check commit message for skip
         run: |
-          SKIP_VERSION_BUMP=false
-          for commit_message in $(echo "${{ toJson(github.event.commits.*.message) }}" | jq -r '.[]'); do
-            if [[ $commit_message == *"#skip"* ]]; then
-              SKIP_VERSION_BUMP=true
-              break
-            fi
-          done
-
-          if [ "$SKIP_VERSION_BUMP" == "true" ]; then
-            echo "Skipping version bump due to #skip in commit message."
+          if [[ $(git log --format=%B -n 1 $GITHUB_SHA) == *"#skip"* ]]; then
+            echo "Skipping tag release due to commit message containing #skip."
             exit 0
           fi
       - name: Bump version and push tag
@@ -52,5 +44,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          DEFAULT_BRANCH: master
-        if: "!contains(join(${{ toJson(github.event.commits.*.message) }}), '#skip')"
+          DEFAULT_BRANCH: master  
