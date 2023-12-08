@@ -29,14 +29,14 @@ jobs:
           wait-on: http://localhost:5000
       
   tag_release:
-  needs: [simple_deployment_pipeline]
-  runs-on: ubuntu-20.04
-  steps:
-    - uses: actions/checkout@v3
-    - name: Bump version and push tag
-      if: "!contains(git log --format=%B -n 1 $GITHUB_SHA, '#skip')"
-      uses: anothrNick/github-tag-action@1.67.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        DEFAULT_BUMP: patch
-        DEFAULT_BRANCH: master
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Bump version and push tag
+        if: "!contains(git log --format=%B -n 1 $GITHUB_SHA, '#skip')"
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          DEFAULT_BRANCH: master
