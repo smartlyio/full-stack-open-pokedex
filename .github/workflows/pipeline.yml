@@ -5,12 +5,13 @@ on:
     branches:
       - master
 
-env: 
-  NODE_OPTIONS:--openssl-legacy-provider
+
 
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    env: 
+      NODE_OPTIONS:
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -20,9 +21,12 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-      - name: Check NODE_OPTIONS env
-        run: printenv NODE_OPTIONS
+      - name: Set Node Options
+        id: node_options
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> "$GITHUB_OUTPUT"
       - name: Build for prod
+        env:
+          NODE_OPTIONS: ${{steps.node_options.outputs.NODE_OPTIONS}}
         run: npm run build
       - name: Test prod
         run: npm test
