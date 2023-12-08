@@ -19,7 +19,7 @@ jobs:
       - name: Check style
         run: npm run eslint
       - name: Setting env variable ot fix error
-        run: export NODE_OPTIONS="--openssl-legacy-provider"
+        run: NODE_OPTIONS="--openssl-legacy-provider"
       - name: Check NODE_OPTIONS env
         run: printenv NODE_OPTIONS
       - name: Build for prod
