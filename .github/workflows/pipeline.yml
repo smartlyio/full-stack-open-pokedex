@@ -21,7 +21,7 @@ jobs:
       - name: Setting env variable ot fix error
         run: export NODE_OPTIONS=--openssl-legacy-provider
       - name: Check NODE_OPTIONS env
-        run: printenv NODE_OPTIONS
+        run: printenv
       - name: Build for prod
         run: npm run build
       - name: Test prod
