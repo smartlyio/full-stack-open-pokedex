@@ -19,9 +19,9 @@ jobs:
       - name: Check style
         run: npm run eslint
       - name: Setting env variable ot fix error
-        run: NODE_OPTIONS="--openssl-legacy-provider"
+        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
       - name: Check NODE_OPTIONS env
-        run: printenv HOME
+        run: printenv NODE_OPTIONS
       - name: Build for prod
         run: npm run build
       - name: Test prod
