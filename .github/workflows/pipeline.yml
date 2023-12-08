@@ -38,4 +38,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           DEFAULT_BUMP: patch
+
+          #need to find a way to increment patch (0.0.X) when bumping version!!!
       
