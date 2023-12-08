@@ -5,6 +5,7 @@ on:
     branches:
       - master
 
+env: NODE_OPTIONS=--openssl-legacy-provider
 
 jobs:
   simple_deployment_pipeline:
@@ -18,8 +19,6 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
-      - name: Setting env variable ot fix error
-        run: echo "NODE_OPTIONS=--openssl-legacy-provider" >> $GITHUB_ENV
       - name: Check NODE_OPTIONS env
         run: printenv NODE_OPTIONS
       - name: Build for prod
