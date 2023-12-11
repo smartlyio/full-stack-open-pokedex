@@ -1,0 +1,33 @@
+# fly.toml app configuration file generated for billowing-violet-6872-rough-shadow-4997-snowy-brook-627 on 2023-12-10T16:13:50+01:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "billowing-violet-6872-rough-shadow-4997-snowy-brook-627"
+primary_region = "ams"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+
+[build]
+  [build.args]
+    NODE_VERSION = "20.10.0"
+
+[[services]]
+  http_checks = []
+  internal_port = 5000
+  processes = ["app"]
+
+[[services.ports]]
+  force_https = true
+  handlers = ["http"]
+  port = 80
+
+[[services.ports]]
+  handlers = ["tls", "http"]
+  port = 443
+
