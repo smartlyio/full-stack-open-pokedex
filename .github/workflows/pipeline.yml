@@ -31,6 +31,7 @@ jobs:
       - name: Test prod
         run: npm test
       - name: Automatic deployment to fly.io
+        if: ${{github.event_name == "push"}}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
