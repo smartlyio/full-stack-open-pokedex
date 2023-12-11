@@ -30,8 +30,8 @@ jobs:
         run: npm run build
       - name: Test prod
         run: npm test
+        if: ${{github.event_name == push}}
       - name: Automatic deployment to fly.io
-        if: ${{github.event_name == "push"}}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
