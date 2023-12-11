@@ -7,7 +7,7 @@ app = "billowing-violet-6872-rough-shadow-4997-snowy-brook-627"
 primary_region = "ams"
 
 [deploy]
-  strategy = "bluegreen"
+  strategy = "canary"
   release_command = "npm run build"
 
 [processes]
