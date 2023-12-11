@@ -11,6 +11,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
+    if: ${{github.event_name == 'push'}}
     steps:
       - uses: actions/checkout@v3
       - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -30,7 +31,6 @@ jobs:
         run: npm run build
       - name: Test prod
         run: npm test
-        if: ${{github.event_name == push}}
       - name: Automatic deployment to fly.io
         run: flyctl deploy --remote-only
         env:
