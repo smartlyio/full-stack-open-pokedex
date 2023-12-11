@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
       - uses: actions/setup-node@v3
         with:
           node-version: "20"
@@ -27,7 +28,6 @@ jobs:
       - name: Test prod
         run: npm test
       - name: Automatic deployment to fly.io
-      - uses: superfly/flyctl-actions/setup-flyctl@master
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
