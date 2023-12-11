@@ -1,0 +1,16 @@
+CI/CD
+
+In this hypothetical situation my language of choice is Python. For Python linting could be done
+with pylint. The basic pylint setup has pretty good basic checks for code quality and it is easy to get started with.
+Testing could be done with Pytest which can be used for unittesting. Also Robot framework could be used to test
+user story level requirements. For build creation PyBuild would be an easy to implement solution or much used
+Poetry which is used in Helsinki Uni courses using Python. 
+
+Setting up a CI pipeline would be possible also with AWS, Azure or other services. I think this is even possible without a dedicated CI
+software instance. For example basic web site running in Render can have multiple commands executed before the build becomes
+active in production and Render can fetch the latest commit from the correct repository. So I guess basically 
+almost any hosting service can have a CI pipeline with some tinkering. 
+
+I think a small team making a relatively small application can go either way, but the easyness of cloud based 
+environments might be a benefit here. If the application gets bigger it might benefit from self hosted services 
+where the resources available would not be a bottleneck for development.
