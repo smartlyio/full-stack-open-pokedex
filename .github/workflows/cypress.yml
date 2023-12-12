@@ -13,4 +13,5 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           build: npm run start
-          start: npm test:e2e
+          start: npm run test:e2e
+          browser: chrome
