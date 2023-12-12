@@ -1,6 +1,12 @@
 name: cypress_test
 
-on: [push]
+on:
+  push:
+    branches:
+      - feature_branch
+  pull_request:
+    branches:
+      - master
 
 jobs:
   cypress-e2e-test:
