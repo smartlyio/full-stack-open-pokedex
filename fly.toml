@@ -16,8 +16,6 @@ primary_region = "arn"
   [build.args]
     NODE_VERSION = "16.20.1"
 
-
-
 [[services]]
   internal_port = 5001
   protocol = "tcp"
