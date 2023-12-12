@@ -12,6 +12,16 @@ jobs:
       - name: Run-Cypress-tests
         uses: cypress-io/github-action@v6
         with:
-          build: npm run start
-          start: npm run test:e2e
-          browser: chrome
+            start: npm run start
+            command: npm run test:e2e
+
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - name: install_dependencies
+    #     run: npm install
+    #   # - name: Cypress run
+    #   - uses: cypress-io/github-action@v5
+    #     with:
+    #       start: npm run start
+    #       command: npm run test:e2e
+    #       # wait-on: http://localhost:8080
