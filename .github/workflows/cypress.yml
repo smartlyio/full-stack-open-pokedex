@@ -6,7 +6,7 @@ on:
       - feature_branch
   pull_request:
     branches:
-      - master
+      - feature_branch
 
 jobs:
   cypress-e2e-test:
