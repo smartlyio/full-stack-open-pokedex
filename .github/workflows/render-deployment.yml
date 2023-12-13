@@ -1,16 +1,16 @@
-name: Trigger Render Deployment
+name: Render Deploy
+
 on:
   push:
-    branches:
-      - master
+  pull_request:
+
 jobs:
-  master:
-    name: Deploy to Render
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger deployment
-        uses: sws2apps/render-deployment@main #consider using pin for dependabot auto update
+      - uses: ttskch/render-deploy@v1.0.0
         with:
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
-          apiKey: ${{ secrets.RENDER_API_KEY }}
-          multipleDeployment: false #optional, default true
+          api-key: ${{ secrets.RENDER_API_KEY }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+          interval: 20 # optional
+          timeout: 300 # optional
