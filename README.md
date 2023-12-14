@@ -1,15 +1,25 @@
-# Full Stack open CI/CD
+# Part 11. Continuous Integration / Continuous Delivery systems (CI/CD)
 
-This repository is used for the CI/CD module of the Full stack open course
+In this part, I will gain an understanding of why I should use a CI/CD system, what can one do, and how to get started with GitHub Actions which is available to all GitHub users by default.
 
-Fork the repository to complete course exercises
+## a. Introduction to CI/CD
 
-## Commands
+- [Exercise 11.1.]()
 
-Start by running `npm install` inside the project folder
+## b. Getting started with GitHub Actions
 
-`npm start` to run the webpack dev server
-`npm test` to run tests
-`npm run eslint` to run eslint
-`npm run build` to make a production build
-`npm run start-prod` to run your production build
+- [Exercise 11.2.]() | [Exercise 11.3.]() | [Exercise 11.4.]() | [Exercise 11.5.]() | [Exercise 11.6.]() | [Exercise 11.7.]() | [Exercise 11.8.]() | [Exercise 11.9.]()
+
+## c. Deployment
+
+## Heroku
+
+- [Exercise 11.10.]() | [Exercise 11.11.]() | [Exercise 11.12.]()
+
+## d. Keeping green
+
+- [Exercise 11.13.]() | [Exercise 11.14.]() | [Exercise 11.15.]() | [Exercise 11.16.]() | [Exercise 11.17.]()
+
+## e. Expanding Further
+
+- [Exercise 11.18.]() | [Exercise 11.19.]() | [Exercise 11.20.]() | [Exercise 11.21.]()
