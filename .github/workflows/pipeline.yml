@@ -34,6 +34,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'full-stack-open-pokedex1'
           heroku_email: 'patchamama.go@gmail.com'
-          checkstring: 'ok'
-          delay: 2
-          rollbackonhealthcheckfailed: true
+          healthcheck: 'http://localhost:5000/health'
