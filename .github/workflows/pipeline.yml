@@ -27,7 +27,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Render Deploy Action
-        if: ${{ github.event_name == 'push' }} && !contains(join(${{ toJson(github.event.commits.*.message) }}, ', '), '#skip')
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ', '), '#skip')}}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.MY_RENDER_SERVICE_ID }}
@@ -59,7 +59,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Github Tag Bump
-        if: ${{ github.event_name == 'push' }} && !contains(join(${{ toJson(github.event.commits.*.message) }}, ', '), '#skip')
+        if: ${{ github.event_name == 'push' && !contains(join(toJson(github.event.commits.*.message), ', '), '#skip')
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
