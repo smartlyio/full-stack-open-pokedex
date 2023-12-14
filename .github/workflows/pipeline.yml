@@ -29,9 +29,12 @@ jobs:
           wait-on: http://localhost:5000
       - name: heroku deploy
         if: ${{ github.event_name == 'push' }}
-        uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
+        uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: 'full-stack-open-pokedex1'
           heroku_email: 'patchamama.go@gmail.com'
-          healthcheck: 'http://localhost:5000/health'
+          healthcheck: 'https://full-stack-open-pokedex1-e6d399c2a65d.herokuapp.com/health'
+          checkstring: 'ok'
+          delay: 2
+          rollbackonhealthcheckfailed: true
