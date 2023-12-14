@@ -32,7 +32,7 @@ jobs:
         uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'full-stack-open-pokedex'
+          heroku_app_name: 'full-stack-open-pokedex1'
           heroku_email: 'patchamama.go@gmail.com'
           checkstring: 'ok'
           delay: 2
