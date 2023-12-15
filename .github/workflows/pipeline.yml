@@ -37,4 +37,5 @@ jobs:
           wait-on: http://localhost:5000
 
       - name: Deploy to production
+        if: ${{ github.event_name == 'push' }}
         run: curl ${{ secrets.RENDER_DEPLOY }}
