@@ -41,6 +41,7 @@ jobs:
           checkstring: 'ok'
           delay: 2
           rollbackonhealthcheckfailed: true
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
