@@ -1,0 +1,21 @@
+name:
+  Periodic health check
+
+  #schedule:
+  # * is a special character in YAML so you have to quote this string
+  #- cron:  '*/2 * * * *'
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: url-health-check
+        uses: jtalk/url-health-check-action@v3
+        with:
+          # Check the following URLs one by one sequentially
+          url: https://full-stack-open-pokedex1-e6d399c2a65d.herokuapp.com/
