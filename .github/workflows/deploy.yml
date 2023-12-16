@@ -22,4 +22,5 @@ jobs:
       - name: Check e2e test
         uses: cypress-io/github-action@v5
         with:
+          build: npm run build
           start: npm run start-prod
