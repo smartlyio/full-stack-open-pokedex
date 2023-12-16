@@ -40,6 +40,21 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip')}}
         run: curl ${{ secrets.RENDER_DEPLOY }}
 
+      - name: Notify if new version is committed
+      - uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+          severity: info
+          details: New Build Successfully Deployed!
+          webhookUrl: ${{ secrets.WEBHOOK }}
+      - name: Notify if new version failed
+      - uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with: 
+          severity: error
+          details: Deployment failed!
+          webhookUrl: ${{ secrets.WEBHOOK }}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
