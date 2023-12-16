@@ -19,11 +19,7 @@ jobs:
         run: npm run eslint
       - name: Check test
         run: npm run test
-      - name: Cwd
-        run: |
-          pwd && ls -l
       - name: Check e2e test
         uses: cypress-io/github-action@v5
         with:
           start: npm run start-prod
-          command: npm run test:e2e
