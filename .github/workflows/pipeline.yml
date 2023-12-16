@@ -11,8 +11,7 @@ jobs:
         - uses: actions/checkout@v3
         - uses: actions/setup-node@v3
           with: 
-            node-verison: "16"
-        - run: npm ci
+            node-verison: "16x"
         - name: install dependencies
           run: npm install
         - name: lint
