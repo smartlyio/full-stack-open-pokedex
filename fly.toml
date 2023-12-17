@@ -16,7 +16,7 @@ primary_region = "arn"
 [processes]
   app = "node app.js"
 
-[http_service]
+[[services]]
   internal_port = 5000
   force_https = true
   auto_stop_machines = true
