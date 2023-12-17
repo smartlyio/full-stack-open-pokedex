@@ -29,3 +29,13 @@ primary_region = "arn"
   cpu_kind = "shared"
   cpus = 1
   memory_mb = 1024
+
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    timeout = 2000
+    tls_skip_verify = false
+    [services.http_checks.headers]
