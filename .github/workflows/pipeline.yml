@@ -32,10 +32,11 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to heroku
+        if: ${{github.event_name == 'push'}}
         uses: akhileshns/heroku-deploy@v3.12.14
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "full-stack-open-pokedex-ariful" #Must be unique in Heroku
+          heroku_app_name: "full-stack-open-pokedex-ariful"
           heroku_email: "ariful6@yahoo.com"
           healthcheck: "https://full-stack-open-pokedex-ariful-694d15d9d278.herokuapp.com/health"
           checkstring: "ok"
