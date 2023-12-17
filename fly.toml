@@ -30,7 +30,7 @@ primary_region = "arn"
   cpus = 1
   memory_mb = 1024
 
-  [[services.http_checks]]
+[[services.http_checks]]
     interval = 10000
     grace_period = "5s"
     method = "get"
