@@ -32,3 +32,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "full-stack-open-pokedex-ariful" #Must be unique in Heroku
           heroku_email: "ariful6@yahoo.com"
+          healthcheck: "https://full-stack-open-pokedex-ariful.herokuapp.com/health"
