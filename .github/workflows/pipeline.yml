@@ -48,6 +48,11 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+  tag_realease:
+    if: ${{github.event_name == 'push' && !contains(join(toJson(github.event.commits.message)), 'skip')}}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.64.0
         env:
