@@ -48,6 +48,30 @@ jobs:
           checkstring: "ok"
           rollbackonhealthcheckfailed: true
 
+      - name: Deployment Success
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ success() }}
+        env:
+          LAST_COMMIT_AUTHOR: ${{toJson(github.event.head_commit.author.username)}}
+        with:
+          severity: Informational
+          description: A new version of Pokedex deployed
+          details: to https://full-stack-open-pokedex-ariful-694d15d9d278.herokuapp.com/ by ${{fromJson(env.LAST_COMMIT_AUTHOR)}}
+
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
+      - name: Build Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: ${{ failure() }}
+        env:
+          LAST_COMMIT_URL: ${{toJson(github.event.head_commit.url)}}
+          LAST_COMMIT_AUTHOR: ${{toJson(github.event.head_commit.author.username)}}
+        with:
+          severity: error
+          description: build failed
+          details: commit ${{fromJson(env.LAST_COMMIT_URL)}} by ${{fromJson(env.LAST_COMMIT_AUTHOR)}} broke the build :(
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_realease:
     if: ${{github.event_name == 'push' && !contains(join(toJson(github.event.commits.message)), 'skip')}}
     needs: [simple_deployment_pipeline]
@@ -55,7 +79,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.64.0
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           WITH_V: true
