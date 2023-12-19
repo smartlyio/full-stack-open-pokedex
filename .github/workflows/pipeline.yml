@@ -54,7 +54,7 @@ jobs:
         env:
           LAST_COMMIT_AUTHOR: ${{toJson(github.event.head_commit.author.username)}}
         with:
-          severity: Informational
+          severity: info
           description: A new version of Pokedex deployed
           details: to https://full-stack-open-pokedex-ariful-694d15d9d278.herokuapp.com/ by ${{fromJson(env.LAST_COMMIT_AUTHOR)}}
 
