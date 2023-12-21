@@ -29,12 +29,12 @@ primary_region = "iad"
   processes = ["app"]
   [[services.http_checks]]
     interval = 10000
-    grace_period = "40s"
+    grace_period = "5s"
     method = "get"
     path = "/health"
     protocol = "http"
     timeout = 2000
-    tls_skip_verify = true
+    tls_skip_verify = false
 
 [[vm]]
   cpu_kind = "shared"
