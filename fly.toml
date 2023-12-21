@@ -17,9 +17,24 @@ primary_region = "iad"
     NODE_VERSION = "16.20.2"
 
 [[services]]
-  http_checks = []
   internal_port = 8080
   processes = ["app"]
+
+[[services.tcp_checks]]
+  grace_period = "1s"
+  interval = "15s"
+  restart_limit = 0
+  timeout = "2s"
+
+[[services.http_checks]]
+  interval = 86400
+  grace_period = "5s"
+  method = "get"
+  path = "/health"
+  protocol = "http"
+  timeout = 2000
+  tls_skip_verify = false
+  [services.http_checks.headers]
 
 [http_service]
   internal_port = 8080
@@ -28,6 +43,7 @@ primary_region = "iad"
   auto_start_machines = true
   min_machines_running = 0
   processes = ["app"]
+
 
 [[vm]]
   cpu_kind = "shared"
