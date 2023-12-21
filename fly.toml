@@ -16,26 +16,6 @@ primary_region = "iad"
   [build.args]
     NODE_VERSION = "16.20.2"
 
-[[services]]
-  internal_port = 8080
-  processes = ["app"]
-
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
-
-[[services.http_checks]]
-  interval = 10000
-  grace_period = "5s"
-  method = "get"
-  path = "/health"
-  protocol = "http"
-  timeout = 2000
-  tls_skip_verify = false
-  [services.http_checks.headers]
-
 [http_service]
   internal_port = 8080
   force_https = true
@@ -44,6 +24,17 @@ primary_region = "iad"
   min_machines_running = 0
   processes = ["app"]
 
+[[services]]
+  internal_port = 8080
+  processes = ["app"]
+  [[services.http_checks]]
+    interval = 10000
+    grace_period = "40s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    timeout = 2000
+    tls_skip_verify = true
 
 [[vm]]
   cpu_kind = "shared"
