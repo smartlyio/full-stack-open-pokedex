@@ -47,7 +47,7 @@
     "html-webpack-plugin": "^4.3.0",
     "jest": "^25.5.4",
     "style-loader": "^1.2.1",
-    "webpack-cli": "^3.3.11",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
