@@ -1,0 +1,9 @@
+name: Render
+on: [pull_request]:
+jobs:
+  deploy:
+    name: Wait for Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
