@@ -22,3 +22,11 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: commit messages joined
+        env:
+          COMMIT_MESSAGES_JOINED: ${{ join(github.event.commits.*.message, ' ') }}
+        run: echo "$COMMIT_MESSAGES_JOINED"
+      - name: commit messages contain #skip
+        env:
+          COMMIT_MESSAGES_CONTAIN_SKIP: ${{ contains(join(github.event.commits.*.message, ' '), '#skip') }}
+        run: echo "$COMMIT_MESSAGES_CONTAIN_SKIP"
