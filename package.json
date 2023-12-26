@@ -9,7 +9,7 @@
     "test": "jest",
     "eslint": "eslint .",
     "build": "webpack --mode production",
-    "test:e2e": "if %CI%==true (cypress run) else (cypress open)"
+    "test:e2e": "test \"$CI\" = \"true\" && cypress run || cypress open"
   },
   "repository": {
     "type": "git",
