@@ -14,7 +14,7 @@ describe('Navigation', () => {
 
     cy.contains('ivysaur').click()
 
-    // Validate that the page has loaded successfully
+    // Validate that the page has loaded successfully.
     cy.url().should('include', '/pokemon/ivysaur')
     cy.get('.pokemon-abilities').should('contain', 'chlorophyll')
   })
