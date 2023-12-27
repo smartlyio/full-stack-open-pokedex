@@ -18,4 +18,4 @@ describe('Navigation', () => {
     cy.url().should('include', '/pokemon/ivysaur')
     cy.get('.pokemon-abilities').should('contain', 'chlorophyll')
   })
-});
+})
