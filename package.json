@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "Full Stack Open",
   "main": "src/index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "start-prod": "node app.js",
+    "start-prod": "npm run build && node app.mjs",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production"
@@ -25,6 +26,7 @@
   "homepage": "https://github.com/smartlyio/fullstackopen-cicd#readme",
   "devDependencies": {
     "@babel/core": "^7.9.6",
+    "@babel/eslint-parser": "^7.23.3",
     "@babel/plugin-transform-runtime": "^7.10.0",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-react": "^7.9.4",
