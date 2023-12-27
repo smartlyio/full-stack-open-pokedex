@@ -13,3 +13,7 @@ app.listen(PORT, () => {
 app.get('/version', (req, res) => {
   res.send('1') // change this string when deploying new ver
 })
+
+app.get('/health', (req, res) => {
+  res.send('gucci')
+})
