@@ -28,3 +28,6 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           command: npm run test:e2e
+      - name: Deploy to Render
+        uses: JorgeLNJunior/render-deploy@v1.4.3
+      
