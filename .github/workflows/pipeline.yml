@@ -1,0 +1,8 @@
+name: Deployment Pipeline
+
+on:
+    push: 
+        branches: 
+            - master
+
+jobs:
