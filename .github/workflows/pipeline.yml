@@ -38,10 +38,8 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
-      - name: Initialize Git Repository
-        run: |
-          git init
-          git remote add origin https://github.com/mabackma/full-stack-open-pokedex
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
