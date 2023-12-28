@@ -40,9 +40,7 @@ jobs:
     steps:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
-        uses: anothrNick/github-tag-action@1.55.0
+        uses: anothrNick/github-tag-action@1.64.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          release_branches: 'master'
-          source: '.'
