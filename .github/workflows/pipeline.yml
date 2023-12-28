@@ -33,9 +33,13 @@ jobs:
           wait-on: http://localhost:5000
           command: npm run test:e2e
 
+      - name: Set COMMIT_MESSAGES
+        id: set_commit_messages
+        run: echo "::set-output name=COMMIT_MESSAGES::$(echo ${{ toJson(github.event.commits.*.message) }})"
+
       - name: Trigger deployment
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ steps.set_commit_messages.outputs.COMMIT_MESSAGES }}
         if: ${{ github.event_name == 'push' && !contains(COMMIT_MESSAGES, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
 
@@ -46,9 +50,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Set COMMIT_MESSAGES
+        id: set_commit_messages
+        run: echo "::set-output name=COMMIT_MESSAGES::$(echo ${{ toJson(github.event.commits.*.message) }})"
+
       - name: Bump version and push tag
         env:
-          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+          COMMIT_MESSAGES: ${{ steps.set_commit_messages.outputs.COMMIT_MESSAGES }}
         if: ${{ github.event_name == 'push' && !contains(COMMIT_MESSAGES, '#skip') }}
         uses: anothrNick/github-tag-action@1.64.0
         env:
