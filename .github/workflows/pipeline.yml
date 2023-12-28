@@ -38,8 +38,6 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         if: ${{ github.event_name == 'push' && !contains(COMMIT_MESSAGES, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
-        else:
-        run: echo "do not deploy this!"
 
   tag_release:
     needs: [simple_deployment_pipeline]
