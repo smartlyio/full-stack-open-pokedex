@@ -5,6 +5,7 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
+import HealthCheck from './HealthCheck'
 
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
@@ -33,6 +34,9 @@ const App = () => {
           const next = pokemonList.find(({ id }) => id === pokemonId + 1)
           return <PokemonPage pokemonList={pokemonList} previous={previous} next={next} />
         }} />
+        <Route path="/health">
+          <HealthCheck/>
+        </Route>
       </Switch>
     </Router>
   )
