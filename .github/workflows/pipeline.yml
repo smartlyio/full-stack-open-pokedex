@@ -33,15 +33,13 @@ jobs:
           wait-on: http://localhost:5000
           command: npm run test:e2e
 
-      - name: commit messages
+      - name: Trigger deployment
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-        if: contains(COMMIT_MESSAGES, '#skip')
-        run: echo "do not deploy this!"
-
-      - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(COMMIT_MESSAGES, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
+        else:
+        run: echo "do not deploy this!"
 
   tag_release:
     needs: [simple_deployment_pipeline]
