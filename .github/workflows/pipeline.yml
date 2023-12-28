@@ -47,4 +47,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
 
-          # Tested bumping version from merging to master
+          # Tested bumping version from merging to master.
+          # Don't bump if pull request message includes #skip
