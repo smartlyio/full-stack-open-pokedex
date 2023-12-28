@@ -46,5 +46,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          TAG_PREFIX: 'v'
           BASE_TAG: '1.0.0'
