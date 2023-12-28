@@ -45,3 +45,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           release_branches: 'master'
+          source: '.'
