@@ -34,7 +34,7 @@ const App = () => {
           const next = pokemonList.find(({ id }) => id === pokemonId + 1)
           return <PokemonPage pokemonList={pokemonList} previous={previous} next={next} />
         }} />
-        <Route path="/health">
+        <Route exact path="/health">
           <HealthCheck/>
         </Route>
       </Switch>
