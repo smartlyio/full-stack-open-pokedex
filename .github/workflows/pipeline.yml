@@ -7,7 +7,6 @@ on:
   pull_request:
     branches: [master]
     types: [opened, synchronize]
-      # note that your "main" branch might be called main instead of master
 
 jobs:
   simple_deployment_pipeline:
@@ -17,12 +16,14 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+
       - name: Install dependencies
         run: npm install
       - name: Check style
         run: npm run eslint
       - name: Build app
         run: npm run build
+
       - name: Run tests
         run: npm run test
       - name: e2e tests
@@ -31,15 +32,31 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           command: npm run test:e2e
+
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: github context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+      - name: commit messages
+        env:
+          COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
+        run: echo "$COMMIT_MESSAGES"
+
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' }}
         uses: anothrNick/github-tag-action@1.64.0
