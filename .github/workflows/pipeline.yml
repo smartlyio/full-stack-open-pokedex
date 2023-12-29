@@ -21,8 +21,16 @@ jobs:
         run: npm install
       - name: Check style
         run: npm run eslint
+        
       - name: Build app
         run: npm run build
+      - name: Build Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Build Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Run tests
         run: npm run test
@@ -32,26 +40,32 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
           command: npm run test:e2e
+      - name: Test Failure
+        uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+          severity: error
+          details: Tests Failed!
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Trigger deployment
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
-      
-      - name: Test Success
+      - name: Deployment Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
           severity: info
           details: Deployment Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Failure
+      - name: Deployment Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
           details: Deployment Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Cancelled
+      - name: Deployment Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
         with:
@@ -72,22 +86,21 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-
-      - name: Test Success
+      - name: Version bump Success
         uses: rjstone/discord-webhook-notify@v1
         if: success()
         with:
           severity: info
           details: Bumping version Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Failure
+      - name: Version bump Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
           details: Bumping version Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Test Cancelled
+      - name: Version bump Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
         with:
