@@ -52,7 +52,6 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Trigger deployment
-        if: always()
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
       - name: Deployment Success
