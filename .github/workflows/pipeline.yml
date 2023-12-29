@@ -95,5 +95,5 @@ jobs:
           details: Bumping version Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
-          # Tested bumping version from merging to master
+          # Tested bumping version from merging to master.
           # Don't bump if pull request message includes #skip
