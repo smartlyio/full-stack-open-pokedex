@@ -18,11 +18,13 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
+        if: always()
         run: npm install
       - name: Check style
         run: npm run eslint
-        
+
       - name: Build app
+        if: always()
         run: npm run build
       - name: Build Failure
         uses: rjstone/discord-webhook-notify@v1
@@ -33,6 +35,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Run tests
+        if: always()
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v6
@@ -49,6 +52,7 @@ jobs:
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Trigger deployment
+        if: always()
         if: ${{ github.event_name == 'push' && !contains(github.event.head_commit.message, '#skip') }}
         run: curl ${{secrets.RENDER_DEPLOY_HOOK}}
       - name: Deployment Success
