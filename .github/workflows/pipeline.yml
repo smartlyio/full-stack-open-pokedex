@@ -51,7 +51,7 @@ jobs:
           severity: error
           details: |
             Deployment Failed! 
-            commit ${{ github.event_name }} by ${{ github.actor }} broke the build :(
+            commit ${{ github.event.repository.html_url }}/commit/${{ github.sha }} by ${{ github.actor }} broke the build :(
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Deployment Cancelled
         uses: rjstone/discord-webhook-notify@v1
