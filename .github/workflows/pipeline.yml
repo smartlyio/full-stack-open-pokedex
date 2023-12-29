@@ -42,21 +42,21 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          details: Deployment Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          details: Deployment Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
         with:
           severity: warn
-          details: Test Cancelled!
+          details: Deployment Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
   tag_release:
@@ -78,21 +78,21 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          details: Bumping version Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Failure
         uses: rjstone/discord-webhook-notify@v1
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          details: Bumping version Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Test Cancelled
         uses: rjstone/discord-webhook-notify@v1
         if: cancelled()
         with:
           severity: warn
-          details: Test Cancelled!
+          details: Bumping version Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
           # Tested bumping version from merging to master
