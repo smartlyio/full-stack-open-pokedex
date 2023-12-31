@@ -4,6 +4,9 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "type": "commonjs",
+  "engines": {
+    "node": ">=16.0.0 <=16.20.2"
+  },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "npm run build && node app.mjs",
