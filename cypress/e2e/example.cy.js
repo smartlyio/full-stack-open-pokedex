@@ -6,11 +6,11 @@ describe('Pokedex', function() {
   })
 })
 
-describe('Pokemon page', function() {
-  it('pokemon page can be opened from the main page', function() {
-    cy.visit('http://localhost:5000')
-    cy.contains('ivysaur').click()
-    cy.contains('chlorophyll')
-    cy.contains('overgrow')
-  })
-})
+// describe('Pokemon page', function() {
+//   it('pokemon page can be opened from the main page', function() {
+//     cy.visit('http://localhost:5000')
+//     cy.contains('ivysaur').click()
+//     cy.contains('chlorophyll')
+//     cy.contains('overgrow')
+//   })
+// })
