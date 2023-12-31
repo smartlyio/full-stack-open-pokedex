@@ -20,6 +20,10 @@ app.get('/', (req, res) => {
   res.sendFile('index.html', { root: 'dist' })
 })
 
+app.get('/health-check', (req, res) => {
+  res.status(200).json({ status: 'ok' })
+})
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist', 'index.html'))
 })
