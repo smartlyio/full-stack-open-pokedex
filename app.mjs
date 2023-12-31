@@ -21,6 +21,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/health-check', (req, res) => {
+  throw new Error('Health check failed')
+  // eslint-disable-next-line no-unreachable
+  console.log('Health check passed')
   res.status(200).json({ status: 'ok' })
 })
 
