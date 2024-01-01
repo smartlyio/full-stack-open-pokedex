@@ -5,4 +5,17 @@ on:
         branches: 
             - master
 
-jobs:
+jobs: 
+    Simple-Deployment-Pipeline : 
+        runs-on : ubuntu-20.04
+        steps : 
+            - uses: actions/checkout@v3
+            - uses: actions/setup-node@v3
+              with: 
+                node-version: "16"
+            - name: Install dependencies
+              run: npm install
+            - name: Check Style
+              run: npm run eslint
+
+        
