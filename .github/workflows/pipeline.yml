@@ -32,8 +32,5 @@ jobs:
     runs-on: ubuntu-20.04
     needs: simple_deployment_pipeline
     steps:
-      - name: Wait for Render deployment
-        uses: bounceapp/render-action@0.6.0
-        with:
-          render-token: ${{ secrets.RENDER_TOKEN }}
-          service-id: ${{ secrets.RENDER_SERVICE_ID }}
+      - name: Trigger deployment
+        run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_TOKEN }}
