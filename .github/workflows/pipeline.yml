@@ -35,5 +35,5 @@ jobs:
       - name: Wait for Render deployment
         uses: bounceapp/render-action@0.8.0
         with:
-          token: ${{ secrets.RENDER_TOKEN }}
-          serviceId: ${{ secrets.RENDER_SERVICE_ID }}
+          render-token: ${{ secrets.RENDER_TOKEN }}
+          service-id: ${{ secrets.RENDER_SERVICE_ID }}
