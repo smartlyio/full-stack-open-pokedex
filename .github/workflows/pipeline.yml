@@ -33,7 +33,7 @@ jobs:
     needs: simple_deployment_pipeline
     steps:
       - name: Wait for Render deployment
-        uses: bounceapp/render-action@0.8.0
+        uses: bounceapp/render-action@0.6.0
         with:
           render-token: ${{ secrets.RENDER_TOKEN }}
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
