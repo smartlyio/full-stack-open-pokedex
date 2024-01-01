@@ -15,4 +15,4 @@ jobs:
       - name: Print date
         run: date
       - name: List dir
-        run: ls
+        run: ls -l
