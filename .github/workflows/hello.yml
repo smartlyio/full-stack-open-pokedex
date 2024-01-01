@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: Say hello
-      - run: echo "Hello World!"
-      - run: date
-      - run: ls
+        run: echo "Hello World!"
+      - name: Print date
+        run: date
+      - name: List dir
+        run: ls
