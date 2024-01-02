@@ -45,7 +45,7 @@ jobs:
       - name: commit messages
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message,';') }}
-        run: echo "$COMMIT_MESSAGES"
+        run: echo ${{ contains(env.COMMIT_MESSAGES, '#skip') }}
       - name: Trigger render deployment
         if: ${{ github.event_name == 'push' && ! contains(env.COMMIT_MESSAGES, '#skip') }}
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_TOKEN }}
