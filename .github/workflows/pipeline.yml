@@ -47,7 +47,7 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(join(github.event.commits.*.message,';')) }}
         run: echo "$COMMIT_MESSAGES"
       - name: Trigger render deployment
-        if: ${{ github.event_name == 'push' || ! contains(env.COMMIT_MESSAGES, '#skip') }}
+        if: ${{ github.event_name == 'push' && ! contains(env.COMMIT_MESSAGES, '#skip') }}
         run: curl https://api.render.com/deploy/${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_TOKEN }}
       - name: Bumb version and push tag
         if: ${{ github.event_name == 'push' || ! contains(env.COMMIT_MESSAGES, '#skip') }}
