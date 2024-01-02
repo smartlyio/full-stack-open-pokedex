@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -27,6 +30,7 @@ jobs:
           command: npm run test:e2e
           start: npm run start:test
           wait-on: http://localhost:5000
+  if: ${{ github.event_name == 'push' }}
   deploy_to_render:
     name: Wait for deployment
     runs-on: ubuntu-20.04
