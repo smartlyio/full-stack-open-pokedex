@@ -1,0 +1,17 @@
+name: Hello World!
+
+on:
+    push: 
+        branches: 
+            - master
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Hello World!
+              run: echo "Hello World!"
+            - name: Date
+              run: date
+            - name: Files
+              run: ls -l

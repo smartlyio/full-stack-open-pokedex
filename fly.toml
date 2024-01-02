@@ -1,0 +1,56 @@
+# fly.toml app configuration file generated for full-stack-open-pokedex-cicd on 2024-01-01T17:38:36-05:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "full-stack-open-pokedex-cicd"
+primary_region = "iad"
+
+[experimental]
+  auto_rollback = true
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.20.2"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 8080
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+  [[services.tcp_checks]]
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "1s"
+
+  [[services.http_checks]]
+    interval = "10s"
+    timeout = "2s"
+    grace_period = "5s"
+    method = "get"
+    path = "/health"
+    protocol = "http"
+    tls_skip_verify = false
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
+  processes = ["app"]
