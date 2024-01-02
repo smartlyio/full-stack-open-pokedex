@@ -1,9 +1,12 @@
 name: Deployment pipeline
 
 on:
-  push:
-    branches:
+  push: # runs on every push to master
+    branches: 
       - master
+  pull_request: 
+      branches: [master]
+      types: [opened, synchronize] # he workflow will run when a PR into the main branch is opened or updated.
 jobs: 
     simple_deployment_pipeline:
         runs-on: ubuntu-20.04 # the type of machine to run the job on. What do is run the job on a ubuntu machine.
@@ -28,6 +31,7 @@ jobs:
                 start: npm run start-prod
                 wait-on: http://localhost:8080
             - name: Deploy
+              if: ${{ github.event_name == 'push' }}
               run: flyctl deploy --remote-only
               env: 
                 FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
