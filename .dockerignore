@@ -1,0 +1,7 @@
+dist/
+node_modules/
+/.idea/.idea.full-stack-open-pokedex.dir/.idea/.gitignore
+/.idea/.idea.full-stack-open-pokedex.dir/.idea/aws.xml
+/.idea/.idea.full-stack-open-pokedex.dir/.idea/encodings.xml
+/.idea/.idea.full-stack-open-pokedex.dir/.idea/indexLayout.xml
+/.idea/.idea.full-stack-open-pokedex.dir/.idea/vcs.xml
