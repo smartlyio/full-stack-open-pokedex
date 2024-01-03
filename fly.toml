@@ -17,6 +17,7 @@ NODE_VERSION = "16.20.2"
 PORT = "3000"
 
 [[services]]
+    processes = ["app"]
     internal_port = 3000
     protocol = "tcp"
     
