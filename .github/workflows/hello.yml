@@ -9,3 +9,13 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - run: echo "Hello, world!"
+
+    date_job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: date
+
+    dir_content_job:
+        runs-on: ubuntu-latest
+        steps:
+            - run: ls -l
