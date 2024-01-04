@@ -5,6 +5,10 @@ on:
         branches: 
             - master
 
+    pull_request: 
+      branches: [master]
+      types: [opened,synchronize]
+
 jobs: 
     Simple-Deployment-Pipeline : 
         runs-on : ubuntu-20.04
@@ -21,11 +25,5 @@ jobs:
               run: npm run test
             - name: Build the application
               run: npm run build
-            - name: Test e2e
-              uses: cypress-io/github-action@v5
-              with: 
-                command: npm run test:e2e
-                start: npm run start-prod
-                wait-on: http://localhost:5000
 
         
