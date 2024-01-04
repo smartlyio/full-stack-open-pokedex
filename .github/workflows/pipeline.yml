@@ -35,6 +35,7 @@ jobs:
           wait-on: http://localhost:4000
     
   deploy:
+    if: ${{ github.event_name == 'push' }}
     name: Deploy to Fly
     needs: setup_and_test
     runs-on: ubuntu-20.04
