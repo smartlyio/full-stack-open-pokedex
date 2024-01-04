@@ -17,7 +17,7 @@ primary_region = "ams"
     NODE_VERSION = "16.20.2"
 
 [http_service]
-  internal_port = 3000
+  internal_port = 5000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -30,7 +30,7 @@ primary_region = "ams"
   memory_mb = 1024
 
 [[services]]
-  internal_port = 3000
+  internal_port = 5000
   processes = ["app"]
   auto_stop_machines = true
   auto_start_machines = true
