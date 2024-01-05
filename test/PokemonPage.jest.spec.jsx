@@ -84,7 +84,7 @@ describe('<PokemonPage />', () => {
     await act(async () => {
       render(
         <Router history={history}>
-          <PokemonPage />
+          <PokemonPage/>
         </Router>
       )
     })
