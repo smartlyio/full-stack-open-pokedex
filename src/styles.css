@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700');
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,700");
 
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
 }
@@ -44,7 +45,7 @@ footer {
 .list-item {
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #eee;
+  background-color: #000;
   margin: 10px;
   height: 150px;
   width: 150px;
@@ -97,7 +98,7 @@ footer {
 }
 
 .pokemon-info {
-  background-color: rgba(255, 255, 255, 0.65);
+  background-color: #fff;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
