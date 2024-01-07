@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - master
-      # note that your "main" branch might be called main instead of master
-  pull_request: 
+ pull_request:
     branches: [master]
     types: [opened, synchronize]
-
+    
 jobs:
   simple_deployment:
     runs-on: ubuntu-20.04
