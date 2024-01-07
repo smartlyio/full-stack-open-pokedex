@@ -37,11 +37,13 @@ jobs:
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
       - name: Discord failed build message
         uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        env:
+          COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
         if: failure()
         with:
             severity: error
             text: Build failed
-            description: 'Commit ${{github.repositoryUrl}}/commit/${{github.sha}} by ${{ github.actor }} broke the build :('
+            description: 'Commit ${{env.COMMIT_URL}} by ${{ github.actor }} broke the build :('
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         
   tag_release:
@@ -58,9 +60,11 @@ jobs:
           DEFAULT_BUMP: patch
       - name: Discord version message
         uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        env:
+          COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
         if: success()
         with:
             severity: info
             text: A new version of Pokedex was deployed
-            description: The commit was ${{ github.sha }}
+            description: The commit was ${{env.COMMIT_URL}} by ${{github.actor}}
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
