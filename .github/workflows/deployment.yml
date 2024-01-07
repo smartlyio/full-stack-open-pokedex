@@ -35,6 +35,16 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
+      - name: Discord failed build message
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        env:
+          COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
+        if: failure()
+        with:
+            severity: error
+            text: Build failed
+            description: 'Commit ${{env.COMMIT_URL}} by ${{ github.actor }} broke the build :('
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         
   tag_release:
     needs: [simple_deployment_pipeline]
@@ -48,3 +58,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
+      - name: Discord version message
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        env:
+          COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
+        if: success()
+        with:
+            severity: info
+            text: A new version of Pokedex was deployed
+            description: The commit was ${{env.COMMIT_URL}} by ${{github.actor}}
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
