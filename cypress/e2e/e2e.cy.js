@@ -5,5 +5,7 @@ describe('Pokedex', function() {
     cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
     cy.contains('charmander').click()
     cy.contains('charmander')
+    cy.contains('Home').click()
+    cy.contains('raichu')
   })
 })
