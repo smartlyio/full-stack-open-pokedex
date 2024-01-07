@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependences
+      - name: Install dependencies
         run: npm install
       - name: Check style
         run: npm run eslint
