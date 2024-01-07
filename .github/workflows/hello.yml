@@ -1,0 +1,16 @@
+name: hello world!
+
+on:
+    push:
+        branches:
+            - master
+
+
+
+jobs:
+    hello_world_job:
+        runs-on: Ubuntu-18.04.5
+        steps:
+            - name: say hello
+              run: |
+                echo "Hello World!"
