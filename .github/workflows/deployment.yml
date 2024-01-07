@@ -41,7 +41,7 @@ jobs:
         with:
             severity: error
             text: Build failed
-            description: 'Commit ${{ github.sha }} by ${{ github.actor }} broke the build :('
+            description: 'Commit ${{github.repositoryUrl}}/commit/${{github.sha}} by ${{ github.actor }} broke the build :('
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
         
   tag_release:
