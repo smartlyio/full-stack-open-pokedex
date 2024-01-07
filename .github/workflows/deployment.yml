@@ -48,3 +48,19 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
+      - name: Discord version message
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: success()
+        with:
+            severity: info
+            text: A new version of Pokedex was deployed
+            description: The commit was ${{ github.sha }}
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Discord failed build message
+        uses: rjstone/discord-webhook-notify@89b0bf43c2c8514f70d0dcba4a706b904e8a3112
+        if: failure()
+        with:
+            severity: error
+            text: Build failed
+            description: 'Commit ${{ github.sha }} by ${{ github.actor }} broke the build :('
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
