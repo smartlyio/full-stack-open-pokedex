@@ -1,0 +1,37 @@
+name: Health Check
+
+on:
+  push:
+    branches:
+      - master
+  schedule:
+    - cron: '0/3 * * * *'
+
+jobs:
+  perform_health_check:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Perform health check
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: https://pokedex-cicd-8648.onrender.com
+          max-attempts: 3
+          retry-delay: 15s
+      - name: Send failure notification
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: 'Health check failed. App is down!'
+          description: "Something ain't right at: https://pokedex-cicd-8648.onrender.com"
+          color: '#FF0000'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Send success notification
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          text: Health check succeeded. The app is doing good!
+          description: 'The app is live at: https://pokedex-cicd-8648.onrender.com'
+          color: '#008000'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
