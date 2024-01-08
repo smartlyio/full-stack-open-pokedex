@@ -43,3 +43,26 @@ jobs:
       - name: Bump version and push tag
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         uses: anothrNick/github-tag-action@1.64.0
+  send_notification:
+    needs: [tag_release]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Send success notification
+        if: ${{ success() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: info
+          text: Pipeline succcess. A new version was commited by ${{ github.actor }}
+          descrption: 'The new deploy is live: https://pokedex-cicd-8648.onrender.com'
+          color: '#008000'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Send failure notification
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: 'Pipeline failed. ${{ github.actor }} commited some stupid code here: ${{ env.COMMIT_URL }}'
+          descrption: 'nothing '
+          color: '#008000'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
