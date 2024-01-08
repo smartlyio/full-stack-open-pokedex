@@ -47,7 +47,7 @@ jobs:
     needs: [tag_release]
     runs-on: ubuntu-20.04
     env:
-      COMMIT_URL: https://github.com/ViksyAsenov/pokedex-cicd/commit/${{ GITHUB_SHA }}
+      COMMIT_URL: 'https://github.com/ViksyAsenov/pokedex-cicd/commit/${{ GITHUB_SHA }}'
     steps:
       - uses: actions/checkout@v3
       - name: Send success notification
