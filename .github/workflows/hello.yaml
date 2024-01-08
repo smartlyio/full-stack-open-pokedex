@@ -9,6 +9,19 @@ jobs:
   hello_world_job:
     runs-on: ubuntu-latest
     steps:
-      - name: say hello
+      - name: Say hello
         run: |
           echo "Hello World"
+
+  get_date_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Now it is
+        run: |
+          echo date
+  get_directory_content:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Directory content
+        run: |
+          run ls -l
