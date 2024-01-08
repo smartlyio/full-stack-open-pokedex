@@ -1,11 +1,8 @@
 name: hello world!
-
 on:
     push:
         branches:
             - '*'
-
-
 jobs:
     hello_world_job:
         runs-on: Ubuntu-18.04.5
