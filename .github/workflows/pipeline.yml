@@ -26,4 +26,4 @@ jobs:
         run: npm run test
       - name: console log
         if: ${{ github.event_name == 'push' }}
-        run: console.log('this should only run on push')
+        run: echo 'this should only run on push'
