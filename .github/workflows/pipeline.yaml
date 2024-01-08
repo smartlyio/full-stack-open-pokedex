@@ -65,7 +65,7 @@ jobs:
         uses: rjstone/discord-webhook-notify@v1
         with:
           severity: info
-          text: Pipeline succcess. A new version was commited by ${{ github.actor }}
+          text: Pipeline succeeded. A new version was commited by ${{ github.actor }}
           description: 'The new deploy is live: https://pokedex-cicd-8648.onrender.com and this is the commit: ${{ env.COMMIT_URL }}'
           color: '#008000'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
