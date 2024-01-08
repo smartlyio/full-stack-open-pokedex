@@ -1,4 +1,4 @@
-name: Hello World!
+name: hello_world_job
 
 on:
   push:
@@ -13,3 +13,9 @@ jobs:
       - name: Say hello
         run: |
           echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
