@@ -8,6 +8,9 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
+  
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
@@ -33,6 +36,15 @@ jobs:
       - name: Deploy to production
         if: ${{ github.event_name == 'push' }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+      - name: Send failure notification
+        if: ${{ failure() }}
+        uses: rjstone/discord-webhook-notify@v1
+        with:
+          severity: error
+          text: 'Pipeline failed. ${{ github.actor }} commited some stupid code here: ${{ env.COMMIT_URL }}'
+          description: 'nothing has been changed to the master branch'
+          color: '#FF0000'
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
@@ -46,8 +58,6 @@ jobs:
   send_notification:
     needs: [tag_release]
     runs-on: ubuntu-20.04
-    env:
-      COMMIT_URL: ${{github.server_url}}/${{github.repository}}/commit/${{github.sha}}
     steps:
       - uses: actions/checkout@v3
       - name: Send success notification
@@ -58,13 +68,4 @@ jobs:
           text: Pipeline succcess. A new version was commited by ${{ github.actor }}
           description: 'The new deploy is live: https://pokedex-cicd-8648.onrender.com and this is the commit: ${{ env.COMMIT_URL }}'
           color: '#008000'
-          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
-      - name: Send failure notification
-        if: ${{ failure() }}
-        uses: rjstone/discord-webhook-notify@v1
-        with:
-          severity: error
-          text: 'Pipeline failed. ${{ github.actor }} commited some stupid code here: ${{ env.COMMIT_URL }}'
-          description: 'nothing has been changed to the master branch'
-          color: '#FF0000'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
