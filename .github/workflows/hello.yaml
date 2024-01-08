@@ -24,4 +24,4 @@ jobs:
     steps:
       - name: Directory content
         run: |
-          run ls -l
+          ls -l
