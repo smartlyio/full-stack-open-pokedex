@@ -11,7 +11,7 @@ app.get('/version', (_req, res) => {
 
 // eslint-disable-next-line no-unused-vars
 app.get('/health', (req, res) => {
-  throw Error('Something went wrong...')
+  res.send('ok')
 })
 
 app.listen(PORT, () => {
