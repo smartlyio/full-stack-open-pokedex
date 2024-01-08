@@ -46,6 +46,8 @@ jobs:
   send_notification:
     needs: [tag_release]
     runs-on: ubuntu-20.04
+    env:
+      COMMIT_URL: https://github.com/ViksyAsenov/pokedex-cicd/commit/${{ GITHUB_SHA }}
     steps:
       - uses: actions/checkout@v3
       - name: Send success notification
@@ -54,7 +56,7 @@ jobs:
         with:
           severity: info
           text: Pipeline succcess. A new version was commited by ${{ github.actor }}
-          descrption: 'The new deploy is live: https://pokedex-cicd-8648.onrender.com'
+          description: 'The new deploy is live: https://pokedex-cicd-8648.onrender.com and this is the commit: ${{ env.COMMIT_URL }}'
           color: '#008000'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Send failure notification
@@ -63,6 +65,6 @@ jobs:
         with:
           severity: error
           text: 'Pipeline failed. ${{ github.actor }} commited some stupid code here: ${{ env.COMMIT_URL }}'
-          descrption: 'nothing '
-          color: '#008000'
+          description: 'nothing has been changed to the master branch'
+          color: '#FF0000'
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
