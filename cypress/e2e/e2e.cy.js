@@ -6,6 +6,6 @@ describe('Pokedex', function() {
     cy.contains('charmander').click()
     cy.contains('charmander')
     cy.contains('Home').click()
-    cy.contains('raichu')
+    cy.contains('nidorina')
   })
 })
