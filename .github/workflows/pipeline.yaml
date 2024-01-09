@@ -38,7 +38,7 @@ jobs:
         run: |
             
 
-            if curl -sSf ${APP_URL}/dummy/health | grep -q 'internal error'; then
+            if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
                 echo "Health Check failed.deployment aborted"
                 exit 1
             else 
