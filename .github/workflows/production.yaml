@@ -29,14 +29,4 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Render Deploy Action
-        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
-  deploy_test:
-    env:
-      api_key: ${{ secrets.RENDER_API_KEY }}
-      service_id: ${{ secrets.RENDER_SERVICE_ID }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: log env
-        run: echo "keys ${{ env.api_key}} ${{ env.service_id }}"
-      - name: Render Deploy Action
-        run: curl https://api.render.com/deploy/srv-${{ env.service_id }}?key=${{ env.api_key }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.MY_RENDER_SERVICE_ID }}?key=${{ secrets.MY_RENDER_API_KEY }}
