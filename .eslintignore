@@ -2,3 +2,5 @@ webpack.config.js
 cypress.config.js
 node_modules/
 cypress/
+package-lock.json
+package.json
