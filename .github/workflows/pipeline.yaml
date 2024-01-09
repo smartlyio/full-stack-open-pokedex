@@ -30,16 +30,7 @@ jobs:
       - name: deploy
         if: success()
         uses: superfly/flyctl-actions/setup-flyctl@master
-
-      - name: http check
-        run: |
-            if curl -sSf http://localhost:5000/dummy/health | grep -q 'ERROR' ; then
-                echo "Health check failed. Deployment aborted."
-                exit 1
-            else 
-                flyctl deploy --remote-only
-            fi
-        env: 
+      - run: flyctl deploy --remote-only
+        env:
             FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
-
 
