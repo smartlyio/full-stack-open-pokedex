@@ -18,7 +18,7 @@ primary_region = "arn"
     NODE_VERSION = "16.19.0"
 
 [http_service]
-  internal_port = 3000
+  internal_port = 5000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
