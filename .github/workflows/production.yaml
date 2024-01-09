@@ -30,3 +30,8 @@ jobs:
           wait-on: http://localhost:5000
       - name: Render Deploy Action
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+  deploy_test:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Render Deploy Action
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
