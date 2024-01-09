@@ -7,4 +7,10 @@ describe('Pokedex', function () {
       'Pokémon and Pokémon character names are trademarks of Nintendo.',
     )
   })
+
+  it('navigate to page of one of the pokemons', function () {
+    cy.visit('http://localhost:5000')
+    cy.contains('weedle').click()
+    cy.contains('run away')
+  })
 })
