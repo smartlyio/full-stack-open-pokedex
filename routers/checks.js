@@ -1,7 +1,6 @@
-const express = require('express')
-const router = express.Router()
+const router = require('express').Router()
 
-router('/health', (request, response) => {
+router.get('/health', (request, response) => {
   response.send('OK')
 })
 
