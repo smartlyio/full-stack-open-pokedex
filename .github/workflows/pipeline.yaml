@@ -34,3 +34,15 @@ jobs:
         env:
             FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
 
+      - name: monitor deployment
+        run: |
+            APP_URL = "https://fso-cicd-pokedex.fly.dev"
+
+            if curl -sSf ${APP_URL}/dummy/health | grep -q 'internal error'; then
+                echo "Health Check failed.deployment aborted"
+                exit 1
+            else 
+                echo "Deployment successful."
+            fi
+        env:
+            FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
