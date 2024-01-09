@@ -1,0 +1,37 @@
+# fly.toml app configuration file generated for full-stack-open-pokedex-miahro on 2024-01-09T10:29:19+02:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "full-stack-open-pokedex-miahro"
+primary_region = "arn"
+
+[deploy]
+  release_command = "npm run build"
+
+[processes]
+  app = "node app.js"
+
+
+[build]
+  [build.args]
+    NODE_VERSION = "16.19.0"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  processes = ["app"]
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
+
+[[services]]
+  http_checks = []
+  internal_port = 8080
+  processes = ["app"]
+
