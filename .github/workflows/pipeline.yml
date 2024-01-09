@@ -1,4 +1,4 @@
-name: Deployment papeline
+name: Trigger pipeline
 
 on:
   push:
