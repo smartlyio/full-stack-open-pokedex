@@ -27,7 +27,7 @@ primary_region = "cdg"
 
 [[services.http_checks]]
     interval = 10000
-    grace_period = "500s"
+    grace_period = "4s"
     method = "get"
     path = "/dummy/health"
     protocol = "http"

@@ -3,7 +3,8 @@ on:
   push:
     branches:
       - master
-      - rollback-state
+
+permissions: read-all
 
 jobs:
   deployment_pipeline:
@@ -40,7 +41,10 @@ jobs:
         if: success()
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
-
+      - name: verify content of repo
+        run: |
+            git branch -a
+            git log --oneline
       - name: monitor deployment
         run: |
 
