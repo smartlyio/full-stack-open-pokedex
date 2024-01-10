@@ -42,7 +42,6 @@ jobs:
 
       - name: monitor deployment
         run: |
-            
 
             if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
                 echo "Health Check failed.deployment aborted"
@@ -50,4 +49,10 @@ jobs:
             else 
                 echo "Deployment successful."
             fi
-
+      - name: rollback 
+        if: failure()
+        uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: |
+            git checkout rollback-state
+            flyctl deploy --remote-only
+        
