@@ -1,4 +1,4 @@
-name: Trigger testing pipeline
+name: Trigger deployment pipeline
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]  
 
 jobs:
-  testing_pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 # Checkout the project source from Git
@@ -30,3 +30,6 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000 # Before execute command, wait for start ecommand
+      - name: Deploying to Render
+        if: ${{ github.event_name == 'push' }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
