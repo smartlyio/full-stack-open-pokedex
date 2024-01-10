@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static('dist'))
 app.get('/health', (req, res) => {
-  res.send('ok merge only tag testin')
+  res.send('ok merge only tag testing')
 })
 
 app.listen(PORT, () => {
