@@ -27,7 +27,7 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
       - name: contains commit message
         env:
-          CONTAINS_SKIP: ${{ contains('#skip', join(github.event.commits.*.message)) }}
+          CONTAINS_SKIP: ${{ contains( join(github.event.commits.*.message), '#skip' ) }}
         run: echo "$CONTAINS_SKIP"
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
