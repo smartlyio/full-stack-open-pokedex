@@ -45,10 +45,10 @@ module.exports = {
     ],
     "no-console": "off",
     "react/prop-types": 0,
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
     }
   }
 }
