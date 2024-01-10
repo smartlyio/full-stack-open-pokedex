@@ -41,7 +41,7 @@ jobs:
       - name: Print skip contains message
         run: echo "$SKIP_BOOL"
         env:
-          SKIP_BOOL: ${{ contains( join(github.event.commits.*.message), '#skip' ) != 'true' }}
+          SKIP_BOOL: ${{ contains( join(github.event.commits.*.message), '#skip' ) != true }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.55.0
         if: ${{ github.event_name == 'push' }} && ${{ contains( join(github.event.commits.*.message), '#skip' ) != 'true' }}
