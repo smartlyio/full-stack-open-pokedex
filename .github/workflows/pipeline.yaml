@@ -1,4 +1,4 @@
-name: Pipeline
+name: pipeline
 on: 
   push:
     branches:
@@ -41,6 +41,7 @@ jobs:
         if: success()
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
+
       - name: verify content of repo
         run: |
             git branch -a
@@ -49,9 +50,10 @@ jobs:
         run: |
 
             if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
-                echo "Health Check failed.rolling back ..."
-                git checkout rollback-state
-                flyctl deploy --remote-only
+                echo "Health Check failed.Triggering rolling back wf ..."
+                curl -X POST -u ${{secrets.GITHUB_TOKEN}} -H "Accept: application/vnd.github.v3+json" \
+                  https://api.github.com/repos/${{github.repository}}/actions/workflows/deployrollback.yaml/dispatches \
+                  -d '{"ref": "rollback-state"}'
             else 
                 echo "Deployment successful."
             fi
