@@ -1,12 +1,15 @@
-name: Trigger pipeline
+name: Trigger testing pipeline
 
 on:
   push:
     branches:
       - master
+  pull_request:    
+    branches: [master]    
+    types: [opened, synchronize]  
 
 jobs:
-  simple_deployment_pipeline:
+  testing_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 # Checkout the project source from Git
@@ -22,7 +25,7 @@ jobs:
       - name: Run tests
         run: npm run test
       - name: Run E2E tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v5 # Use Cypress.io Github Action
         with:
           command: npm run test:e2e
           start: npm run start-prod
