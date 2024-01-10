@@ -31,15 +31,31 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Render Deploy Action
+        id: deploy
         if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message), '#skip' ) != true }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.MY_RENDER_SERVICE_ID }}?key=${{ secrets.MY_RENDER_API_KEY }}
+      - name: The job succeeded
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: ${{ success() && steps.deploy.conclusion == 'success' }}
+        with:
+          severity: info
+          details: Deployed successfully
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Job Failed
+        uses: rjstone/discord-webhook-notify@v1.0.4
+        if: failure()
+        with:
+          severity: error
+          details: Commit ${{ github.event.commits.url }} by ${{ github.event.commits.committer }}broke something
+          webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+
   tag_releases:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@1.55.0
+        uses: anothrNick/github-tag-action@8c8163ef62cf9c4677c8e800f36270af27930f42
         if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message), '#skip' ) != true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
