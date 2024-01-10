@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - rollback-state
 
 jobs:
   deployment_pipeline:
@@ -44,8 +45,9 @@ jobs:
         run: |
 
             if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
-                echo "Health Check failed.deployment aborted"
-                exit 1
+                echo "Health Check failed.rolling back ..."
+                git checkout rollback-state
+                flyctl deploy --remote-only
             else 
                 echo "Deployment successful."
             fi
