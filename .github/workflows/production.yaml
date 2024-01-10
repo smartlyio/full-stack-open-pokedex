@@ -38,9 +38,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
+      - name: Print skip contains message
+        run: echo "$SKIP_BOOL" "$SKIP_BOOL2"
+        env:
+          SKIP_BOOL: ${{ true && contains( join(github.event.commits.*.message), '#skip' ) != true }}
+          SKIP_BOOL2: ${{ true }} && ${{ contains( join(github.event.commits.*.message), '#skip' ) != true }}
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.55.0
-        if: ${{ github.event_name == 'push' }} && ${{ contains( join(github.event.commits.*.message), '#skip' ) != true }}
+        if: ${{ github.event_name == 'push' && contains( join(github.event.commits.*.message), '#skip' ) != true }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
