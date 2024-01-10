@@ -7,19 +7,27 @@ on:
 jobs:
   deployment_pipeline:
     runs-on: ubuntu-20.04
+    env: 
+        APP_URL: https://fso-cicd-pokedex.fly.dev
+        FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
+          
       - name: install dependencies
         run: npm install
+
       - name: style the code
         run: npm run eslint
+
       - name: building
         run: npm run build
+
       - name: testing
         run: npm test
+      
       - name: e2e
         uses: cypress-io/github-action@v5
         with:
@@ -31,8 +39,6 @@ jobs:
         if: success()
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
-        env:
-            FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
 
       - name: monitor deployment
         run: |
@@ -44,6 +50,4 @@ jobs:
             else 
                 echo "Deployment successful."
             fi
-        env:
-            APP_URL: https://fso-cicd-pokedex.fly.dev
-            FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
+
