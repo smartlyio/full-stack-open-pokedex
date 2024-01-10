@@ -44,9 +44,7 @@ jobs:
         run: |
 
             if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
-                echo "Health Check failed.rollback is under process..."
-                git checkout rollback-state
-                flyctl deploy --remote-only
+                echo "Health Check failed.deployment aborted"
                 exit 1
             else 
                 echo "Deployment successful."
