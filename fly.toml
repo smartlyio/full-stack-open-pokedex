@@ -34,3 +34,8 @@ primary_region = "cdg"
     timeout = 2000
     tls_skip_verify = false
     [services.http_checks.headers]
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true  # optional
