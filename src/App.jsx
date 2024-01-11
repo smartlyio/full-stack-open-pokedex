@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <Router>
+      <h1>Change to be skipped</h1>
       <Switch>
         <Route exact path="/">
           <PokemonList pokemonList={pokemonList} />
@@ -33,8 +34,8 @@ const App = () => {
           const next = pokemonList.find(({ id }) => id === pokemonId + 1)
           return <PokemonPage pokemonList={pokemonList} previous={previous} next={next} />
         }} />
+        <Route path="*" render={() => <div>Page not found</div>} />
       </Switch>
-      <Route path="*" render={() => <div>Page not found</div>} />
     </Router>
   )
 }
