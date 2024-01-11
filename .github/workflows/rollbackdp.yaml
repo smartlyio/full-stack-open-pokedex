@@ -31,7 +31,9 @@ jobs:
             
             - name: install dependencies
               run: npm install
-
+            
+            - name: delay
+              run: sleep 30
             - name: deploy
               uses: superfly/flyctl-actions/setup-flyctl@master
             - run: flyctl deploy --remote-only
