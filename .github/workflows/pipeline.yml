@@ -36,13 +36,13 @@ jobs:
       - name: Deploy to production
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ' ') }}
-        if: ${{ github.event_name == 'push' && contains(env.COMMIT_MESSAGES, '#skip') }}
+        if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
         uses: johnbeynon/render-deploy-action@v0.0.8
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
   tag_release:
-    if: ${{ github.event_name == 'push' && contains(join(github.event.commits.*.message, ' '), '#skip') }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     needs: simple_deployment_pipeline
     runs-on: ubuntu-20.04
     steps:
