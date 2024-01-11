@@ -6,4 +6,12 @@ describe("Pokedex", function () {
          "Pokémon and Pokémon character names are trademarks of Nintendo."
       )
    })
+
+   it("Can navigate to a pokemon page", function () {
+      cy.visit("http://localhost:5000")
+      cy.contains("venusaur").click()
+      cy.contains("venusaur")
+      cy.contains("speed")
+      cy.contains("overgrow")
+   })
 })
