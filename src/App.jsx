@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <Router>
-      <h1>Change to be skipped</h1>
+      <h1>Change to be skipped, AGAIN</h1>
       <Switch>
         <Route exact path="/">
           <PokemonList pokemonList={pokemonList} />
