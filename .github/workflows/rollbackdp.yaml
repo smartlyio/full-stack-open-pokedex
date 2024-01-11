@@ -1,5 +1,11 @@
 name: rollback deployment
 
+# if fly's health check works as expected , we dont need this workflow 
+# as it stucks in the deployment in CI stage until timeout 
+# in case health check does not work as expected, and with faulty endpoint deployment gets done
+# the monitor deployment in pipeline will send a get request to dummy endpoint 
+# then if the responds is anything but HTTP 200 it exits with status code 1 
+# which triggers this workflow to run
 # this workflow results in error - in case of execution having the unhealthy endpoint - 
 # but it update the app to the working state (e.g. check the /dummy/health enfpoint )
 
