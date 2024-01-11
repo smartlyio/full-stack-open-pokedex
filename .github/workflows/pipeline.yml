@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]  
 
 jobs:
-  deployment_pipeline:
+  deployment_pipeline: # Job naming
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 # Checkout the project source from Git
@@ -31,15 +31,15 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000 # Before execute command, wait for start ecommand
       - name: Deploying to Render
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} # Conditional step
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
   tag_release:
-    needs: [deployment_pipeline]
+    needs: [deployment_pipeline] # Dependency on job completition
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 # Checkout the project source from Git
       - name: Bump version and push tag
-        if: ${{ github.event_name == 'push' }}
+        if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }} # Conditional step
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
