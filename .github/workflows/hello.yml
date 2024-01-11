@@ -15,4 +15,4 @@ jobs:
            run: |
               echo "Hello world!"
               date
-              ls
+              ls -l
