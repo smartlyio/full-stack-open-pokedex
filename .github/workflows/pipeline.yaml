@@ -42,10 +42,6 @@ jobs:
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
 
-      - name: verify content of repo
-        run: |
-            git branch -a
-            git log --oneline
       - name: monitor deployment
         run: |
 
