@@ -7,7 +7,7 @@ name: rollback deployment
 # then if the responds is anything but HTTP 200 it exits with status code 1 
 # which triggers this workflow to run
 # this workflow results in error - in case of execution having the unhealthy endpoint - 
-# but it update the app to the working state (e.g. check the /dummy/health enfpoint )
+# but it update the app to the working state (e.g. check the /dummy/health enfpoint)
 
 on:
     workflow_run:
