@@ -45,7 +45,7 @@ jobs:
         if: success()
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: |
-            if [[ "${{github.event_name}}" == "push"]]; then 
+            if [[ "${{github.event_name}}" = "push"]]; then 
                 flyctl deploy --remote-only
             else 
                 echo "Skipping deployment"
