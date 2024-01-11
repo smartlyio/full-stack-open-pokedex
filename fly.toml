@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for fso-cicd-pokedex on 2024-01-11T05:45:27+03:30
+# fly.toml app configuration file generated for fso-cicd-pokedex on 2024-01-09T18:47:34+03:30
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -9,7 +9,7 @@ primary_region = "cdg"
 [build]
 
 [env]
-  PORT = "3000"
+    PORT="3000"
 
 [http_service]
   internal_port = 3000
@@ -19,20 +19,18 @@ primary_region = "cdg"
   min_machines_running = 0
   processes = ["app"]
 
-
-
 [[services.tcp_checks]]
-    interval = "15s"
-    timeout = "2s"
     grace_period = "1s"
+    interval = "15s"
+    restart_limit = 0
+    timeout = "2s"
 
 [[services.http_checks]]
-    interval = "10s"
-    timeout = "2s"
+    interval = 10000
     grace_period = "4s"
     method = "get"
     path = "/dummy/health"
     protocol = "http"
+    timeout = 2000
     tls_skip_verify = false
-
-
+    [services.http_checks.headers]
