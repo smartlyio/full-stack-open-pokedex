@@ -1,12 +1,15 @@
-name: Trigger pipeline
+name: Trigger deployment pipeline
 
 on:
   push:
     branches:
       - master
+  pull_request:    
+    branches: [master]    
+    types: [opened, synchronize]  
 
 jobs:
-  simple_deployment_pipeline:
+  deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3 # Checkout the project source from Git
@@ -22,8 +25,22 @@ jobs:
       - name: Run tests
         run: npm run test
       - name: Run E2E tests
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v5 # Use Cypress.io Github Action
         with:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000 # Before execute command, wait for start ecommand
+      - name: Deploying to Render
+        if: ${{ github.event_name == 'push' }}
+        run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
+  tag_release:
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3 # Checkout the project source from Git
+      - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' }}
+        uses: anothrNick/github-tag-action@1.67.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
