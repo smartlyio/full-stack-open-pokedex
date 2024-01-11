@@ -42,7 +42,7 @@ jobs:
             wait-on: http://localhost:5000 
 
       - name: deploy
-        if: success()
+        if: success() && github.event_name == 'push'
         uses: superfly/flyctl-actions/setup-flyctl@master
       - run: flyctl deploy --remote-only
 

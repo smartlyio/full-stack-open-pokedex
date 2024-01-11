@@ -21,7 +21,7 @@ primary_region = "cdg"
 
 
 
-[[services.ports]]
+  [[services.ports]]
     handlers = ["http"]
     port = 80
     force_https = true  # optional
