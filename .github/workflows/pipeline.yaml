@@ -50,8 +50,10 @@ jobs:
         run: |
 
             if [ "$(curl -sS -o /dev/null -w '%{http_code}' "${APP_URL}/dummy/health")" != "200" ]; then
-                echo "Health Check failed. Deployment will rollback to latest working version"
-                exit 1
+                echo "Health Check failed.Triggering rolling back ... might take a few minutes"
+                curl -X POST -u ${{secrets.GITHUB_TOKEN}} -H "Accept: application/vnd.github.v3+json" \
+                  https://api.github.com/repos/${{github.repository}}/actions/workflows/rollbackdp.yaml/dispatches \
+                  -d '{"ref": "rollback-state"}'
             else 
                 echo "Deployment successful."
             fi

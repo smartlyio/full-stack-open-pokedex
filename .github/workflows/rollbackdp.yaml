@@ -1,0 +1,41 @@
+name: rollback deployment
+
+# somehow the fly.io health check and rollback system needs to be triggered to work
+# and revert to latest working version
+# in this case , i have a branch named - rollback-state - containing the code of working version
+# when i want to deploy it though this workflow fly.io automatically fails the problematic version 
+# and revert to latest working version
+# and avoid this workflow to success cause it does not allow to deploy 
+# log => Waiting for d89124eb026668 [app] to become healthy: 0/2 
+# log => ✖ Machine d89124eb026668 [app] update failed: timeout reached waiting for health checks to pass for machine d89124eb026668
+# and in case of fly.io fais the health check, this workflow will deploy the working version. 
+
+on:
+    workflow_run:
+        workflows: ["pipeline"]
+        types:
+            - completed
+
+jobs:
+    deployment:
+        runs-on: ubuntu-20.04
+
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                ref: rollback-state
+                fetch-depth: 0
+            - uses: actions/setup-node@v3
+              with:
+                node-version: '16'
+            
+            - name: install dependencies
+              run: npm install
+
+            - name: deploy
+              uses: superfly/flyctl-actions/setup-flyctl@master
+            - run: flyctl deploy --remote-only
+              env:
+                FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
+
+
