@@ -57,15 +57,15 @@ jobs:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
               WITH_V: true
               DEFAULT_BUMP: patch
-   testing:
-      runs-on: ubuntu-20.04
-      steps:
-         - uses: actions/checkout@v3
-         - name: commits joined
-           env:
-              COMMITS: ${{toJson(join(github.event.commits.*.message))}}
-           run: echo ${{join(github.event.commits.*.message)}}
-         - name: contains not
-           run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
-         - name: contains
-           run: echo ${{contains(join(github.event.commits.*.message) , '#skip') }}
+#   testing:
+#      runs-on: ubuntu-20.04
+#      steps:
+#         - uses: actions/checkout@v3
+#         - name: commits joined
+#           env:
+#              COMMITS: ${{toJson(join(github.event.commits.*.message))}}
+#           run: echo ${{join(github.event.commits.*.message)}}
+#         - name: contains not
+#           run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
+#         - name: contains
+#           run: echo ${{contains(join(github.event.commits.*.message) , '#skip') }}
