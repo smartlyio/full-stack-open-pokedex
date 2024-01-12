@@ -19,7 +19,7 @@ primary_region = "sin"
   interval = "10s"
   method = "GET"
   timeout = "2s"
-  path = "/heath"
+  path = "/health"
 
 [[vm]]
   cpu_kind = "shared"
