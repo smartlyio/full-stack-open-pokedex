@@ -39,7 +39,7 @@ jobs:
          - name: Deploy to render.com
            # From Render documentation: deploy only if branch is master
            # Context access is not invalid because we do this only when pushing
-           if: github.ref == 'refs/heads/master' && !contains(join(github.event.*.message), '#skip')
+           if: github.ref == 'refs/heads/master' && !contains(join(github.event.commits.*.message) , ${{'#skip' }})
            env:
               deploy_url: ${{secrets.RENDER_DEPLOY_HOOK_URL}}
            run: curl "$deploy_url"
@@ -60,4 +60,4 @@ jobs:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
               WITH_V: true
               DEFAULT_BUMP: patch
-           if: github.ref == 'refs/heads/master' && !contains(join(github.event.*.message) , ${{'#skip' }})
+           if: github.ref == 'refs/heads/master' && !contains(join(github.event.commits.*.message) , ${{'#skip' }})
