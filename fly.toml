@@ -29,6 +29,17 @@ primary_region = "sin"
   [build.args]
     NODE_VERSION = "16.20.2"
 
+[[services]]
+  internal_port = 5000
+  protocol = "tcp"
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[services.ports]]
+  handlers = ["http"]
+  port = 5000
+
 [[services.http_checks]]
     interval = 10000
     grace_period = "5s"
