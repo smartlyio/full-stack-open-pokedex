@@ -6,9 +6,8 @@ const PORT = process.env.PORT || 5000
 
 app.use(express.static("dist"))
 
-app.get("/health", (_req, _res) => {
-   throw new Error("It's not working")
-   // res.send("ok")
+app.get("/health", (_req, res) => {
+   res.send("ok")
 })
 
 app.listen(PORT, () => {
