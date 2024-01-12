@@ -30,6 +30,7 @@ primary_region = "sin"
     NODE_VERSION = "16.20.2"
 
 [[services]]
+  processes = "app"
   internal_port = 5000
   protocol = "tcp"
   auto_stop_machines = true
