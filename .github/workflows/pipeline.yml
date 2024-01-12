@@ -70,3 +70,5 @@ jobs:
            run: echo ${{join(github.event.commits.*.message)}}
          - name: contains not
            run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
+         - name: contains
+           run: echo ${{contains(join(github.event.commits.*.message) , '#skip') }}
