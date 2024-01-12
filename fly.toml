@@ -7,7 +7,7 @@ app = "full-stack-open-pokedex-yg"
 primary_region = "sin"
 
 [http_service]
-  internal_port = 8080
+  internal_port = 5000
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
@@ -38,7 +38,7 @@ primary_region = "sin"
 
 [[services]]
   processes = ["app"]
-  internal_port = 8080
+  internal_port = 5000
   protocol = "tcp"
   auto_stop_machines = true
   auto_start_machines = true
