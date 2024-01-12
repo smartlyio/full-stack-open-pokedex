@@ -5,6 +5,9 @@ on:
     branches:
       - master
       # note that your "main" branch might be called main instead of master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -30,6 +33,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: deploy to fly.io
+        if: ${{ github.event_name == 'push' }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
