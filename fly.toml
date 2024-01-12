@@ -38,7 +38,7 @@ primary_region = "sin"
 
 [[services]]
   processes = ["app"]
-  internal_port = 5000
+  internal_port = 8080
   protocol = "tcp"
   auto_stop_machines = true
   auto_start_machines = true
