@@ -61,4 +61,4 @@ jobs:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
               WITH_V: true
               DEFAULT_BUMP: patch
-           if: github.event_name == 'push' && contains(join(github.event.*.message), '#skip')
+           if: github.event_name == 'push' && !contains(join(github.event.*.message), '#skip')
