@@ -68,5 +68,5 @@ jobs:
            env:
               COMMITS: ${{toJson(join(github.event.commits.*.message))}}
            run: echo ${{join(github.event.commits.*.message)}}
-         - name: !contains
+         - name: contains not
            run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
