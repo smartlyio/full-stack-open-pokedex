@@ -27,3 +27,8 @@ jobs:
               command: npm run test:e2e
               start: npm run start-prod
               wait-on: http://localhost:5000
+         - name: Deploy to render.com
+           if: github.ref == 'refs/heads/master'
+           env:
+              deploy_url: ${{secrets.RENDER_DEPLOY_HOOK_URL}}
+           run: curl "$deploy_url"
