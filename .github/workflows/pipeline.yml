@@ -68,4 +68,4 @@ jobs:
          - name: commits joined
            env:
               COMMITS: ${{toJson(join(github.event.commits.*.message))}}
-           run: echo "$COMMITS"
+           run: echo ${{toJson(join(github.event.commits.*.message))}}
