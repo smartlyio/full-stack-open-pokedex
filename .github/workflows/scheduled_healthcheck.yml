@@ -1,0 +1,12 @@
+name: Scheduled health check
+
+on:
+   schedule:
+      - cron: "00 8 * * *"
+
+jobs:
+   health_check:
+      runs-on: ubuntu-20.04
+      steps:
+         - name: Check health url
+           run: curl "https://pokedex-e7ho.onrender.com/health"

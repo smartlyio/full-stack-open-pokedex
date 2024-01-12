@@ -62,8 +62,6 @@ jobs:
       steps:
          - uses: actions/checkout@v3
          - name: commits joined
-           env:
-              COMMITS: ${{toJson(join(github.event.commits.*.message))}}
            run: echo ${{join(github.event.commits.*.message)}}
          - name: contains not
            run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
