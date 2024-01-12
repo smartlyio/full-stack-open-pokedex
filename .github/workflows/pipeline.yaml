@@ -11,13 +11,17 @@ on:
 permissions: read-all
 
 jobs:
+    
   deployment_pipeline:
+    name: deployment_pipeline
     runs-on: ubuntu-20.04
     env: 
         APP_URL: https://fso-cicd-pokedex.fly.dev
         FLY_API_TOKEN: ${{secrets.FLY_API_TOKEN}}
     steps:
       - uses: actions/checkout@v3
+        with:
+            ref: ${{github.sha}}
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
@@ -63,3 +67,22 @@ jobs:
             else 
                 echo "Deployment successful."
             fi
+
+
+  tag_release:
+    name: tag_release
+    needs: [deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+        - name: preparing action
+          if: ${{github.event_name == 'push'}}
+          uses: anothrNick/github-tag-action@1.67.0
+          env:
+            GITHUB_SECRET: ${{secrets.GITHUB_TOKEN}}
+            DEFAULT_BUMP: patch
+            WITH_V: true
+
+        
+          
+
+    
