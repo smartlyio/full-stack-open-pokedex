@@ -20,7 +20,6 @@ primary_region = "cdg"
   processes = ["app"]
 
 
-
   [[services.ports]]
     handlers = ["http"]
     port = 80
