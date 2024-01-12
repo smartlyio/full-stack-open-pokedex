@@ -38,12 +38,13 @@ jobs:
 
          - name: Deploy to render.com
            # From Render documentation: deploy only if branch is master
-           if: github.ref == 'refs/heads/master' || !contains(join(github.event.commits.*.message) , ${{'#skip' }})
+           if: github.ref == 'refs/heads/master' && !(contains(join(github.event.commits.*.message) , '#skip'))
            env:
               deploy_url: ${{secrets.RENDER_DEPLOY_HOOK_URL}}
            run: curl "$deploy_url"
 
    versioning:
+      if: ${{!contains(join(github.event.commits.*.message) , '#skip') }}
       needs: simple_deployment_pipeline
       runs-on: ubuntu-20.04
       permissions:
@@ -59,8 +60,6 @@ jobs:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
               WITH_V: true
               DEFAULT_BUMP: patch
-      if: ${{!contains(join(github.event.commits.*.message) , '#skip') }}
-
    testing:
       runs-on: ubuntu-20.04
       steps:
@@ -68,4 +67,6 @@ jobs:
          - name: commits joined
            env:
               COMMITS: ${{toJson(join(github.event.commits.*.message))}}
-           run: echo ${{toJson(join(github.event.commits.*.message))}}
+           run: echo ${{join(github.event.commits.*.message)}}
+         - name: !contains
+           run: echo ${{!contains(join(github.event.commits.*.message) , '#skip') }}
