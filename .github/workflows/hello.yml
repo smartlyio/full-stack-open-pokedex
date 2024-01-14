@@ -4,15 +4,14 @@ on:
     branches:
       - main
 jobs:
-  hello_world_job:
+  simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - name: Say Hello
-        run: |
-          echo "Hello Word!"
-      - name: print date
-        run: |
-          date
-      - name: print ls
-        run: |
-          ls -l
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - name: Install dependencies 
+        run: npm install  
+      - name: Check style
+        run: npm run eslint
