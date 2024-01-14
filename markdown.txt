@@ -1,0 +1,78 @@
+part - 0 -> https://fullstackopen.com/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6
+
+0.4 -> page with a pic 
+
+https://mermaid.live/edit#pako:eNqVkkFPwzAMhf-KlfPW3nPYCQQSbBd2Qr2YxG2trUlInA407b-T0TGEJjTIIbKen51P0dsr4y0prRK9ZnKGbhi7iEPjoJyAUdhwQCfwEv0uUbxsFHE86lPnZJsvFpOu4e52Db1ISLquk2TLlCqTqp62id2Gq5ZresMhbAlDqJ0XStMqNMIjCp1fOIpTPS_7Ty9puF8vH8F6kwdyMrksXQz_hvd3tE0esQqu-x_dw4-pa2AwX8D540iu0bU4svGuKtdVKihYcMa6mFyVj4fIXS_g229fwI5gx9IDQmADnCCSsxTJqpkaKA7ItuRnf9zSKOlpoEbpUlqMm0Y17lB8mMU_vTujtMRMM5WDLZCnrCnd4jYVlSyLj8spkJ-5nKkSsWfvvzyHD4pP8Ic
+
+code -> 
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/kuva.png
+    activate server
+    server-->>browser: Kuva.png
+    deactivate server
+
+    browser -> server: Get https://studies.cs.helsinki.fi/favicon.ico
+    activate server
+    server --> browser: favicon.ico
+    Note right of browser: page with a pic is rendered
+    
+0.5 -> user creates a new note on the page https://studies.cs.helsinki.fi/exampleapp/notes
+
+https://mermaid.live/edit#pako:eNq1kzFPwzAQhf_KyXOb7B46gWCgLHRCWQ770pg2trEvLajqf-dC2iCoUOnQDJF1997zp5Nvp0ywpLTK9NaRN3TjcJmwrTzIFzGxMy6iZ3hJYZspnTakuOnrQ-cgm85mQ13D3e0CGuaYdVlm7qyjXJhcNLTOzq9cUbuS3rGNa8IYyxxxCELDboNMY35fHM5TST_co0EMcL-YP4ANpmvJ86C0dBLwF-D_4Vp0Xtr5MsKfrquAyRCK13zx4EbPVaAscn9D8Jdx_bKdQ4PpDManRnyOr8aNM8EX8juLBcIFI9eJ8zGIK7llwxDqb13EJcHWcQMI0RlwGRJ5S4msmqiWkrwHKxu361MqxQ21VCktR4tpVanK70WHHYenD2-U5tTRRHVR5nLcTqVrXGepknUc0nxY4a9NnihZyucQjpr9J4-aXN0
+
+code ->
+
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
+    activate server
+    server-->>browser: spa HTML document
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: main.css
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/spa.js
+    activate server
+    server-->>browser: spa.js
+    deactivate server
+
+    browser->>server: https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: data.json
+    deactivate server
+
+    browser -> server: Get https://studies.cs.helsinki.fi/favicon.ico
+    activate server
+    server --> browser: favicon.ico
+    Note right of browser: page with a pic is rendered
+
+0.6 -> Create a diagram depicting the situation where the user goes to the single-page app version of the notes app at https://studies.cs.helsinki.fi/exampleapp/spa.
+
+https://mermaid.live/edit#pako:eNp9kbFOAzEMhl_Fykx7wJihE4gJljKhkyqT-Hqhd0lInCuo6rvjU9pKqFIzWJH9-_eX-KBMsKS0yvRdyBt6crhNOLYe5ERM7IyL6Bk-U9hnStcFSU7nfI1vgQmS2_YMoTs3aigSgTxTyoDgaQ9ehLXlJFqsVtVOw8vzO_TMMeumyVyso7w0ednTkJ3fuWXnGvrBMQ6EMTbitpndNjniTYg61pJgC_vkEL5y8NC5gU70aNhNyPTvYfW-EL6L05qRS4bH-wdYrMAkkh5b1ZauTG5C0TTD9OjtIF-UyNv5j7inC666UyOlEZ2VXR1ms1ZJfaRWablaTLtWtf4oOiwc1r_eKM2p0J0q0QrIaa9KdzhkyZJ1HNJrXb6pE2SdHyGcNcc_26-7Tw
+
+Code ->
+sequenceDiagram
+    participant browser
+    participant server
+    
+    Note right of browser: user enters a new note
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note right of browser: new node sent via json file 
+    activate server
+    server-->>browser: Status 201 -> created
+    deactivate server
+
+    Note right of browser: event handler renders the new node
