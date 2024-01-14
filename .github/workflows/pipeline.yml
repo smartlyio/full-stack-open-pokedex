@@ -35,13 +35,13 @@ jobs:
          #  env:
          #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
          - name: Deploy to render.com
-           # From Render documentation: deploy only if branch is master
-           if: ${{!contains(join(github.event.commits.*.message) , '#skip') }}
+           if: fromJSON(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))
            env:
               deploy_url: ${{secrets.RENDER_DEPLOY_HOOK_URL}}
            run: curl "$deploy_url"
+
    versioning:
-      if: ${{!contains(join(github.event.commits.*.message) , '#skip') }}
+      if: fromJSON(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))
       needs: simple_deployment_pipeline
       runs-on: ubuntu-20.04
       permissions:
@@ -57,6 +57,27 @@ jobs:
               GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
               WITH_V: true
               DEFAULT_BUMP: patch
+
+   discord_success_message:
+      if: success()
+      runs-on: ubuntu-20.04
+      needs: [simple_deployment_pipeline, versioning]
+      steps:
+         - uses: sarisia/actions-status-discord@9904e3130b8905d5b973df25623f17672dcb3466
+           with:
+              webhook: ${{secrets.DISCORD_WEBHOOK}}
+              nodetail: true
+
+   discord_failure_message:
+      if: failure()
+      runs-on: ubuntu-20.04
+      needs: [simple_deployment_pipeline, versioning]
+      steps:
+         - uses: sarisia/actions-status-discord@9904e3130b8905d5b973df25623f17672dcb3466
+           with:
+              webhook: ${{secrets.DISCORD_WEBHOOK}}
+              title: "Build failed. Reason: ${{github.sha}}"
+              nodetail: true
 #   testing:
 #      runs-on: ubuntu-20.04
 #      steps:
