@@ -30,10 +30,7 @@ jobs:
               command: npm run test:e2e
               start: npm run start-prod
               wait-on: http://localhost:5000
-         #- name: Bump version and push tag
-         #  uses: anothrNick/github-tag-action@1.67.0
-         #  env:
-         #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
          - name: Deploy to render.com
            if: fromJSON(github.event_name == 'push' && !contains(join(github.event.commits.*.message), '#skip'))
            env:
