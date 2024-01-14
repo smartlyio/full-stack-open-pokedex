@@ -10,3 +10,9 @@ jobs:
       - name: Say Hello
         run: |
           echo "Hello Word!"
+      - name: print date
+        run: |
+          date
+      - name: print ls
+        run: |
+          ls -l
