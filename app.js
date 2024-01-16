@@ -9,7 +9,7 @@ app.use(express.static('dist'))
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
   const host = res.req.rawHeaders[1]
-  if (host !== 'localhost:000') throw 'error...  '
+  if (host !== 'localhost:8080') throw 'error...  '
   res.send('ok')
 })
 app.listen(PORT, () => {
