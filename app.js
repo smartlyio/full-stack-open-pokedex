@@ -8,9 +8,8 @@ app.use(express.static('dist'))
 
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
-  console.log(`Port number ${PORT}`)
-
-  if (PORT !== 8080) throw 'error...  '
+  // eslint-disable-next-line eqeqeq
+  if (PORT != 5000) throw 'error...  '
   res.send('ok')
 })
 app.listen(PORT, () => {
