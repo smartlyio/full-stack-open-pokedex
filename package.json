@@ -4,13 +4,12 @@
   "description": "Full Stack Open",
   "main": "src/index.js",
   "scripts": {
-    "dev": "vite --host",
     "start": "webpack-dev-server --open --mode development",
     "start-prod": "node app.js",
     "test": "jest",
     "eslint": "eslint './**/*.{js,jsx}'",
     "build": "webpack --mode production",
-    "cypress:open": "cypress open",
+    "test:e2e": "cypress open",
     "start:test": "NODE_ENV=test node app.js"
   },
   "repository": {
@@ -51,6 +50,7 @@
   },
   "dependencies": {
     "axios": "^1.6.5",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "metrohash": "^2.8.0",
     "react": "^16.13.1",
