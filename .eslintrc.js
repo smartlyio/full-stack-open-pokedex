@@ -15,7 +15,6 @@ module.exports = {
   },
   plugins: ['react', 'jest'],
   rules: {
-    'no-console': 0,
     indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
@@ -24,7 +23,7 @@ module.exports = {
     'no-trailing-spaces': 'error',
     'object-curly-spacing': ['error', 'always'],
     'arrow-spacing': ['error', { before: true, after: true }],
-    'no-console': 'error',
+    'no-console': 'off',
     'react/prop-types': 0,
   },
 }
