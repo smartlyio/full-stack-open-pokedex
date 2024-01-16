@@ -8,6 +8,8 @@ primary_region = "mia"
 
 [deploy]
   release_command = "npm run build"
+  strategy = "canary"
+
 
 [processes]
   app = "node app.js"
@@ -27,11 +29,21 @@ PORT = "8080"
   min_machines_running = 0
   processes = ["app"]
 
+[[http_service.checks]]
+  grace_period = "10s"
+  interval = "30s"
+  method = "GET"
+  timeout = "5s"
+  path = "/health"
+
+
+
 [[services]]
   http_checks = []
   internal_port = 8080
   processes = ["app"]
-   [[services.ports]]
+
+[[services.ports]]
     handlers = ["http"]
     port = 80
 
