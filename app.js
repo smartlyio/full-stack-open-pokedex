@@ -8,6 +8,10 @@ app.get('/version', (_req, res) => {
   res.send('3')
 })
 
+app.get('/health', (req, res) => {
+  res.send('ok')
+})
+
 app.use(express.static('dist'))
 
 app.listen(PORT, () => {
