@@ -5,18 +5,18 @@ const app = express()
 const PORT = process.env.PORT || 5000
 
 app.get('/version', (_req, res) => {
-  res.send('4')
+  res.send('5')
+})
+
+app.get('/health', (req, res) => {
+  res.send('ok')
 })
 
 // app.get('/health', (req, res) => {
+//   // eslint-disable-next-line no-constant-condition
+//   if (true) throw ('error...  ')
 //   res.send('ok')
 // })
-
-app.get('/health', (req, res) => {
-  // eslint-disable-next-line no-constant-condition
-  if (true) throw ('error...  ')
-  res.send('ok')
-})
 
 app.use(express.static('dist'))
 
