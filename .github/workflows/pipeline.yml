@@ -34,6 +34,7 @@ jobs:
           start: npm run start-prod
           wait-on: http://localhost:5000
       - name: Deploy to production
+        id: deploy
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message, ' ') }}
         if: ${{ github.event_name == 'push' && !contains(env.COMMIT_MESSAGES, '#skip') }}
@@ -41,6 +42,20 @@ jobs:
         with:
           service-id: ${{ secrets.RENDER_SERVICE_ID }}
           api-key: ${{ secrets.RENDER_API_KEY }}
+      - name: Test Failure
+        uses: BubbleProd/discord-webhook-notify@v2
+        if: failure()
+        with:
+            severity: error
+            details: Pipeline failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      - name: Test Failure at Deploy
+        uses: BubbleProd/discord-webhook-notify@v2
+        if: ${{ steps.deploy.conclusion == 'failure' }}
+        with:
+            severity: error
+            details: ${{ steps.deploy.outputs.message }}
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag_release:
     if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
     needs: simple_deployment_pipeline
@@ -53,4 +68,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
+      - name: Test success
+        uses: BubbleProd/discord-webhook-notify@v2
+        if: success()
+        with:
+            severity: success
+            details: Pipeline success
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       
