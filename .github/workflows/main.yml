@@ -33,3 +33,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
+      - uses: rjstone/discord-webhook-notify@v1
+        if: success()
+        with:
+            severity: informational
+            details: new version deployed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}

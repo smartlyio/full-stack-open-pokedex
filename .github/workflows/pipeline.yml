@@ -20,6 +20,12 @@ jobs:
         run: npm run eslint
       - name: build
         run: npm run build
+      - uses: rjstone/discord-webhook-notify@v1
+        if: failure()
+        with:
+            severity: error
+            details: build failed
+            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test
       - name: e2e tests
