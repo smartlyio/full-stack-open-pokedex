@@ -24,7 +24,7 @@ jobs:
         if: failure()
         with:
             severity: error
-            details: build failed
+            details: Build failed at Pulkitxm/full-stack-open-pokedex deployed.
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: test
         run: npm run test

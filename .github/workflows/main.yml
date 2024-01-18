@@ -37,5 +37,5 @@ jobs:
         if: success()
         with:
             severity: informational
-            details: new version deployed
+            details:  A new version of Pulkitxm/full-stack-open-pokedex deployed.
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
