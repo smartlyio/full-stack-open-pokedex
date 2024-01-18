@@ -33,9 +33,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WITH_V: true
           DEFAULT_BUMP: patch
-      - uses: rjstone/discord-webhook-notify@v1
-        if: success()
-        with:
-            severity: informational
-            details:  A new version of Pulkitxm/full-stack-open-pokedex deployed.
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+      # - uses: rjstone/discord-webhook-notify@v1
+      #   if: success()
+      #   with:
+      #       severity: informational
+      #       details:  A new version of Pulkitxm/full-stack-open-pokedex deployed.
+      #       webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
