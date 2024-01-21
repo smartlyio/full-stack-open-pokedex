@@ -15,8 +15,9 @@ primary_region = "lax"
   min_machines_running = 0
   processes = ["app"]
 
-[deploy]
-  strategy = "bluegreen"
+# Can't use bluegreen deployment strategy because a payment method is required
+# [deploy]
+#   strategy = "bluegreen"
 
 [[vm]]
   cpu_kind = "shared"
