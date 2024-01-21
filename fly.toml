@@ -15,6 +15,9 @@ primary_region = "lax"
   min_machines_running = 0
   processes = ["app"]
 
+[deploy]
+  strategy = "bluegreen"
+
 [[vm]]
   cpu_kind = "shared"
   cpus = 1
