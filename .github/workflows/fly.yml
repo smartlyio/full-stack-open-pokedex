@@ -18,6 +18,7 @@ jobs:
         run: npm install
       - name: Build frontend
         run: npm run build
-      - run: flyctl deploy --remote-only
+      - name: Deploy to Fly.io
+        run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
