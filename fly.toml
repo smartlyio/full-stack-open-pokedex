@@ -16,8 +16,8 @@ primary_region = "lax"
   processes = ["app"]
 
 # Can't use bluegreen deployment strategy because a payment method is required
-# [deploy]
-#   strategy = "bluegreen"
+[deploy]
+  strategy = "canary"
 
 [[vm]]
   cpu_kind = "shared"
