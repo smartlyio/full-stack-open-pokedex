@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: "30 0 * * *"
+    - cron: "0 0 * * *"
 jobs:
   Perodic_health_check:
     runs-on: ubuntu-20.04
