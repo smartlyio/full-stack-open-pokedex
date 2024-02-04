@@ -11,6 +11,6 @@ app.listen(PORT, () => {
 })
 
 app.get('/health', (req, res) => {
-  if (res[0] !== 'x') throw('error...  ')
+  // if (res[0] !== 'x') throw('error...  ')
   res.send('ok')
 })
