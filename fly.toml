@@ -6,16 +6,15 @@
 app = "fso-pokedex-4235"
 primary_region = "ams"
 
+[env]
+  PORT = "5000" # add this where PORT matches the internal_port below
+
 [deploy]
   release_command = "npm run build"
   strategy = "bluegreen"
 
 [processes]
   app = "node app.js"
-
-[build]
-  [build.args]
-    NODE_VERSION = "16.20.2"
 
 [http_service]
   internal_port = 5000
@@ -30,23 +29,5 @@ primary_region = "ams"
   interval = "30s"
   method = "GET"
   timeout = "5s"
-  path = "/health"
+  path = "/health/"
   
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 1024
-
-[[services]]
-  internal_port = 5000
-  processes = ["app"]
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
-  force_https = true
-
-[[services.tcp_checks]]
-  grace_period = "1s"
-  interval = "15s"
-  restart_limit = 0
-  timeout = "2s"
