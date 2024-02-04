@@ -8,6 +8,7 @@ primary_region = "ams"
 
 [deploy]
   release_command = "npm run build"
+  strategy = "bluegreen"
 
 [processes]
   app = "node app.js"
