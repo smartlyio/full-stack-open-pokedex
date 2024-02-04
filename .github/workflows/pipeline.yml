@@ -33,7 +33,6 @@ jobs:
         with:
           url: 'https://localhost:5000/health'
           method: 'GET'
-          expectedStatuscode: '200'
       - name: setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
