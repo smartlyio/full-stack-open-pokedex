@@ -29,5 +29,5 @@ primary_region = "ams"
   interval = "30s"
   method = "GET"
   timeout = "5s"
-  path = "/health/"
+  path = "/health"
   

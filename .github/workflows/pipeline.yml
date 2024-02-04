@@ -34,8 +34,3 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - name: Send HTTP request
-        uses: fjogeleit/http-request-action@v1.8.0
-        with:
-          url: 'https://localhost:5000/health'
-          method: 'GET'
