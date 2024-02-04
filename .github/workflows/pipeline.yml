@@ -28,11 +28,6 @@ jobs:
           command: npm run test:e2e
           start: npm run start-prod
           wait-on: http://localhost:5000
-      - name: Send HTTP request
-        uses: fjogeleit/http-request-action@v1.8.0
-        with:
-          url: 'https://localhost:5000/health'
-          method: 'GET'
       - name: setup flyctl
         uses: superfly/flyctl-actions/setup-flyctl@master
       - name: deploy
