@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types';
 
 const PokemonList = ({ pokemonList }) => {
   return (
@@ -16,5 +17,9 @@ const PokemonList = ({ pokemonList }) => {
     </div>
   )
 }
+
+PokemonList.propTypes = {
+  pokemonList: PropTypes.array.isRequired,
+};
 
 export default PokemonList

@@ -1,0 +1,50 @@
+name: Pokedex
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Code Linting (with Fix)
+        run: npm run eslint -- --fix
+
+      - name: Build
+        run: npm run build
+
+      - name: Run Tests
+        run: npm test
+
+  tag_release:
+    if: ${{ github.event_name == 'push' && (!contains(toJSON(github.event.head_commit.message), '#skip')) }}
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Bump version and push tag
+        uses: anothrNick/github-tag-action@f7a8973e934fdd1f4fb3483d0a04d8c589df9d65
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEFAULT_BUMP: patch
+          WITH_V: true
+          
