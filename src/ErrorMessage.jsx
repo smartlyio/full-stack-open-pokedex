@@ -6,7 +6,7 @@ const ErrorMessage = ({ error }) => (
 )
 
 ErrorMessage.propTypes = {
-  error: PropTypes.string.isRequired,
+  error: PropTypes.object.isRequired,
 };
 
 export default ErrorMessage;
