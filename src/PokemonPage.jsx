@@ -6,11 +6,6 @@ import PokemonAbility from './PokemonAbility'
 import ErrorMessage from './ErrorMessage'
 import PropTypes from 'prop-types';
 
-PokemonPage.propTypes = {
-  previous: PropTypes.object,
-  next: PropTypes.object,
-};
-
 const formatName = (nameWithDash) => nameWithDash.replace('-', ' ')
 
 const PokemonPage = ({ previous, next }) => {
@@ -66,4 +61,9 @@ const PokemonPage = ({ previous, next }) => {
   )
 }
 
-export default PokemonPage
+PokemonPage.propTypes = {
+  previous: PropTypes.object,
+  next: PropTypes.object,
+};
+
+export default PokemonPage;
