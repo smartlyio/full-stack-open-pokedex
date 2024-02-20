@@ -48,8 +48,8 @@
     "axios": "^1.6.7",
     "express": "^4.17.1",
     "prop-types": "^15.8.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0"
   }
 }
