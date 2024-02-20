@@ -39,6 +39,7 @@
     "html-loader": "^1.1.0",
     "html-webpack-plugin": "^4.3.0",
     "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "style-loader": "^1.2.1",
     "webpack": "^5.90.3",
     "webpack-cli": "^4.0.0",
