@@ -1,0 +1,36 @@
+[1mdiff --git a/.github/workflows/pipeline.yml b/.github/workflows/pipeline.yml[m
+[1mindex ada505a..2b259f2 100644[m
+[1m--- a/.github/workflows/pipeline.yml[m
+[1m+++ b/.github/workflows/pipeline.yml[m
+[36m@@ -13,4 +13,6 @@[m [mjobs:[m
+               with:[m
+                   node-version: '16'[m
+             - name: install dependencies[m
+[31m-              run: npm install[m
+\ No newline at end of file[m
+[32m+[m[32m              run: npm install[m
+[32m+[m[32m            - name: Code linting (with fix)[m
+[32m+[m[32m              run: npm run eslint -- --fix[m
+\ No newline at end of file[m
+[1mdiff --git a/app.js b/app.js[m
+[1mindex cfc7e75..6dc30f0 100644[m
+[1m--- a/app.js[m
+[1m+++ b/app.js[m
+[36m@@ -1,11 +1,11 @@[m
+[31m-const express = require("express");[m
+[31m-const app = express();[m
+[32m+[m[32mconst express = require('express')[m
+[32m+[m[32mconst app = express()[m
+ [m
+ // Heroku dynamically sets a port[m
+[31m-const PORT = process.env.PORT || 5000;[m
+[32m+[m[32mconst PORT = process.env.PORT || 5000[m
+ [m
+[31m-app.use(express.static("dist"));[m
+[32m+[m[32mapp.use(express.static('dist'))[m
+ [m
+ app.listen(PORT, () => {[m
+[31m-  console.log("server started on port 5000");[m
+[31m-});[m
+[32m+[m[32m  console.log('server started on port 5000')[m
+[32m+[m[32m})[m
