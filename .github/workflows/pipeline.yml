@@ -38,7 +38,7 @@ jobs:
       - name: Commits
         env:
           COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        if: ${{ github.event_name == 'push' && contains('#skip', join(github.event.commits.*.message)) }}
+        if: ${{ github.event_name == 'push' }}
         run: echo "$COMMIT_MESSAGES"
       - name: Bump version and push tag
         env:
