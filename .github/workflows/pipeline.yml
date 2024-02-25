@@ -41,8 +41,8 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         run: echo "$COMMIT_MESSAGES"
       - name: Bump version and push tag
+        if: ${{ github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-        if: ${{ github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
         uses: anothrNick/github-tag-action@1.67.0
