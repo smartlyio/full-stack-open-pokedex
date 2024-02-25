@@ -35,11 +35,14 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: anothrNick/github-tag-action@1.67.0
+      - name: Commits
+        env:
+          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
+        if: ${{ github.event_name == 'push' && contains('#skip', join(github.event.commits.*.message)) }}
+        run: echo "$COMMIT_MESSAGES"
       - name: Bump version and push tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
-          COMMIT_MESSAGES: ${{ join(github.event.commits.*.message) }}
-        if: ${{ github.event_name == 'push' && contains('#skip', join(github.event.commits.*.message)) }}
-        run: echo "$COMMIT_MESSAGES"
+        if: ${{ github.event_name == 'push' && !contains('#skip', join(github.event.commits.*.message)) }}
+        uses: anothrNick/github-tag-action@1.67.0
