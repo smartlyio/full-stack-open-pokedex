@@ -367,39 +367,13 @@ Before moving to next exercise, fix your deployment and ensure that the applicat
 **Solution:**
 Configured and tested as instructed.
 
-## Exercise 11.12. Custom health check
-**Task:**
-Besides TCP and HTTP based health checks, Fly.io allows to use very flexible shell script based health checks. The feature is still undocumented but e.g. this shows you how to use it.
+# Restarted work on this course
+> I did not notice any major changes in the content of the course from the version 
+> when I completed exercises 11.1 - 11.9.
+> For this reason, I picked up from where I finished.
+> 
+> However, there have been changes in Fly.io and their free tier. 
+> For this reason, I will redo that part to ensure it still works.
 
-Create a file health_check.sh with the following content:
+## Redo Exercise 11.10 Deploying your application to Fly.io
 
-#!/bin/bash
-
-echo "Hello from shell script"
-
-exit 1 # exit status 1 means that the script "fails"
-Give it execution permissions (Google or see e.g. this to find out how) and ensure that you can run it from the command line:
-
-$ ./health_check.sh
-Hello from shell script
-Define a health check to your app that runs the script in the file health_check.sh. Ensure that this health check and deployment fails. After that, change the script as follows:
-
-#!/bin/bash
-
-echo "Hello from shell script"
-
-exit 0  # exit status 0 means that the script "succeeds"
-Ensure now that the deployment works. Note that to get the path to the script file right, it may be beneficial to log in to your virtual machine console to see where the files reside. Logging in is done with the command
-
-flyctl ssh console -t YOUR_AUTH_TOKEN
-Now when you know that the script based health check works, it is time to define the real health check.
-
-Write a script ensuring the health check endpoint (that is, the GET request to '/health') not only works, but also returns the correct string 'ok'.
-
-You propably should use curl in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
-
-It is strongly advisable to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and when things do not work as indended, it is also a very good idea to log in to the virtual machine (with flyctl ssh console) and check that the script works when ran manually there.
-
-Note that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
-
-Our script based health check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an arbitrarily compiled and many sided health check to your app, should you need one.
