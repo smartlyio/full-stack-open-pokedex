@@ -59,5 +59,5 @@ const PokemonPage = ({ previous, next }) => {
     </>
   )
 }
-/* test */
+/* test commit*/
 export default PokemonPage
