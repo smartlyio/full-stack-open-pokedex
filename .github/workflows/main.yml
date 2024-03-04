@@ -1,4 +1,4 @@
-name: Deployment pipeline
+name: Pokedex
 on:
   push:
     branches:
@@ -8,17 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: '16'
       - name: Install Dependencies
         run: npm install
       - name: Code Linting (with Fix)
         run: npm run eslint -- --fix
-      # This step attempts to automatically fix fixable linting errors
-
+      - name: Build
+        run: npm run build
+      - name: Run Tests
+        run: npm test
       - name: Build
         run: npm run build
       # Add this step to build your code
