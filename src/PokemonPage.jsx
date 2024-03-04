@@ -26,10 +26,6 @@ const PokemonPage = ({ previous, next }) => {
   const normalAbility = pokemon.abilities.find((ability) => !ability.is_hidden)
   const hiddenAbility = pokemon.abilities.find((ability) => ability.is_hidden === true)
 
-  if (process.env.NODE_ENV === 'development') {
-    console.log('hiddenAbility=', hiddenAbility);
-  }
-  
   return (
     <>
       <div className="links">

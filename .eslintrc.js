@@ -1,6 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
+    "node": true,
     "es6": true,
     "jest/globals": true
   },
@@ -16,13 +17,19 @@ module.exports = {
     "sourceType": "module"
   },
   "plugins": [
-    "react", "jest"
+    "react",
+    "jest" // Corrected the placement of the comma
   ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "rules": {
     "indent": [
       "error",
-        2
-      ],
+      2
+    ],
     "linebreak-style": [
       "error",
       "unix"
@@ -46,4 +53,5 @@ module.exports = {
     "no-console": "error",
     "react/prop-types": 0
   }
-}
+};
+
