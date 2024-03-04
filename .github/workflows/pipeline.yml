@@ -19,3 +19,6 @@ jobs:
 
       - name: Code Linting (with Fix)
         run: npm run eslint -- --fix
+        
+      - name: 
+        run: npm run build
