@@ -7,7 +7,7 @@
         "start": "webpack-dev-server --open --mode development",
         "start-prod": "node app.js",
         "test": "jest",
-        "eslint": "eslint './**/*.{js,jsx}'",
+        "eslint": "eslint './*/.{js,jsx}'",
         "build": "webpack --mode production"
     },
     "repository": {
@@ -33,9 +33,9 @@
         "babel-jest": "^25.5.1",
         "babel-loader": "^8.1.0",
         "css-loader": "^3.5.3",
-        "eslint": "^6.8.0",
+        "eslint": "^7.32.0",
         "eslint-plugin-jest": "^23.11.0",
-        "eslint-plugin-react": "^7.19.0",
+        "eslint-plugin-react": "^7.34.0",
         "html-loader": "^1.1.0",
         "html-webpack-plugin": "^4.3.0",
         "jest": "^25.5.4",
