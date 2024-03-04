@@ -8,7 +8,7 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
-
+    
     steps:
       - name: Einrichten von Linting-, Test- und Build-Schritten
         run: echo "Einrichten von Linting-, Test- und Build-Schritten"
@@ -17,10 +17,10 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '16'
 
       - name: Abhängigkeiten installieren
         run: npm install
 
-      - name: Code Linting
-        run: npm run eslint
+      - name: Code Linting (with Fix)
+        run: npm run eslint -- --fix
