@@ -13,3 +13,5 @@ jobs:
           node-version: '16'
       - name: Abhängigkeiten installieren
         run: npm install
+            - name: Code Linting (with Fix)
+        run: npm run eslint -- --fix
