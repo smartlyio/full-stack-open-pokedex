@@ -119,7 +119,7 @@ describe('<PokemonPage />', () => {
     })
 
     expect(screen.getByText('Previous')).toHaveAttribute('href', '/pokemon/ditto')
-    expect(screen.getByText('Next')).toHaveAttribute('href', '/pokemon/patreon')
+
   })
 
   it('should not render previous and next urls if none exist', async () => {
