@@ -52,25 +52,3 @@
         "react-router-dom": "^5.2.0"
     }
 }
-name: Pokedex
-on:
-    push:
-
-    1 Einrichten von Linting - , Test - und Build - Schritten 2
-
-branches:
-    -master
-jobs:
-    simple_deployment_pipeline:
-    runs - on: ubuntu - 20.04
-steps:
-    -uses: actions / checkout @v3 -
-    uses: actions / setup - node @v3
-with:
-    node - version: '16' -
-    name: Abhängigkeiten installieren
-run: npm install
-
-    -
-    name: Code Linting(with Fix)
-run: npm run eslint-- --fix
