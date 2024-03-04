@@ -1,3 +1,7 @@
+import React from 'react';
+import { createRoot } from 'react-dom';
+import App from './App.';
+
 // Server.js
 const express = require("express");
 const app = express();
@@ -8,9 +12,7 @@ app.listen(PORT, () => {
 });
 
 // Client.jsx
-import React from 'react';
-import { createRoot } from 'react-dom';
-import App from './App';
+
 
 const root = createRoot(document.getElementById('root'));
 root.render( < App / > );
