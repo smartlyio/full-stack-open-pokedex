@@ -7,9 +7,16 @@ jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Abhängigkeiten installieren
+
+      - name: Install Dependencies
         run: npm install
+
+      - name: Code Linting (with Fix)
+        run: npm run eslint -- --fix
