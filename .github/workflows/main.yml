@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      master
+      - master
 
 jobs:
   build:
@@ -11,31 +11,25 @@ jobs:
 
     steps:
     
-name: Checkout repository
-    uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    
-name: Set up Node.js
-    uses: actions/setup-node@v2
-    with:
-      node-version: 16.20.2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.20.2
 
-    
-name: Install dependencies
-    run: npm install
+      - name: Install dependencies
+        run: npm install
 
-    
-name: Run tests
-    run: npm test
+      - name: Run tests
+        run: npm test
 
-    
-name: Linting check
-    run: npx eslint src
+      - name: Linting check
+        run: npx eslint src
 
-    
-name: Build production version
-    run: npm run build
+      - name: Build production version
+        run: npm run build
 
-    
-name: Start production version
-    run: npm run start-prod
+      - name: Start production version
+        run: npm run start-prod
