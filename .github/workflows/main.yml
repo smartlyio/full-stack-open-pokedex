@@ -10,27 +10,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: 16.20.2
 
-    - name: Install Dependencies
+    - name: Install dependencies
       run: npm install
 
-    - name: Run Tests
+    - name: Run tests
       run: npm test
 
-    - name: Code Quality Check
+    - name: Linting check
       run: npx eslint src
 
-    - name: Build Production Version
+    - name: Build production version
       run: npm run build
 
-    - name: Deploy to Production
-      run: |
-        echo "Deployment to production..."
-        # Hier wird der Bereitstellungsschritt eingefügt
+    - name: Start production version
+      run: npm run start-prod
