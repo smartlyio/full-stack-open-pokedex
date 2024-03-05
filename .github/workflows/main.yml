@@ -1,40 +1,56 @@
+# Name des Workflows
 name: CI/CD Pipeline
 
 on:
   push:
     branches: [ main ] 
   pull_request:
-    branches: [ main ]
-    types: [opened, synchronize]
+    branches: [ main ] 
+    types: [opened, synchronize] 
 
 jobs:
+  # Erster Job: Build und Test
   build-and-test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # Checkt den Code aus für den Workflow
+      
+      # Richtet Node.js ein
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '16' 
+
+      # Installiert Abhängigkeiten
       - name: Install Dependencies
         run: npm install
-      - name: Run Tests
-        run: npm test
+        
       - name: Lint
         run: npx eslint src
+        
+      # Baut das Projekt
       - name: Build
         run: npm run build
+        
+      # Führt Tests aus
+      - name: Run Tests
+        run: npm test
   
-  versioning:
+  # Zweiter Job: Versionierung und Tagging
+  tag_release:
+
     needs: build-and-test
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.ref == 'refs/heads/main'
+
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2 # Checkt den Code aus
+      
+      # Erhöht die Version und pusht einen Tag
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DEFAULT_BUMP: patch
-          WITH_V: true
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Verwendet das GitHub Token für Berechtigungen
+          DEFAULT_BUMP: patch # Standardmäßig wird die Patch-Version erhöht
+          WITH_V: true # Fügt 'v' vor der Versionsnummer hinzu
