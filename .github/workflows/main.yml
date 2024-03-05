@@ -5,8 +5,7 @@ on:
     branches:
       - Jimmy
   pull_request:
-    branches: 
-      - master
+    branches: [master]
     types: [opened, synchronize]
 
 jobs:
