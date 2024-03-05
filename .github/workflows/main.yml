@@ -2,7 +2,10 @@ name: Pokedex
 on:
   push:
     branches:
-      - master
+      - Konstantin
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
