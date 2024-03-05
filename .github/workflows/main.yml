@@ -1,4 +1,5 @@
 name: Pokedex
+
 on:
   push:
     branches:
@@ -8,6 +9,7 @@ on:
     branches: [master]
     types: [opened, synchronize]
 jobs:
+
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
     steps:
@@ -29,4 +31,3 @@ jobs:
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # Add this step to build your code
