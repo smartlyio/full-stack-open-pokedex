@@ -27,8 +27,9 @@ jobs:
       - name: Run Tests
         run: npm test
 
-  tag_release:  # Neuer Job für das Taggen und Erhöhen der Version
-    needs: [simple_deployment_pipeline]  # Dieser Job wird erst ausgeführt, nachdem der vorherige Job abgeschlossen wurde
+  tag_release:
+    if: ${{ !contains(github.event.head_commit.message, '#skip') }}
+    needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
