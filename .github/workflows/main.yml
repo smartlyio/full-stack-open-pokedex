@@ -27,6 +27,13 @@ jobs:
         run: npm run build
       - name: Run Tests
         run: npm test
+        
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
