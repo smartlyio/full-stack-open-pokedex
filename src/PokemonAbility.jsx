@@ -9,4 +9,5 @@ const PokemonAbility = ({ abilityName }) => (
   </div>
 )
 //test kommentar
+//test kommentar
 export default PokemonAbility
