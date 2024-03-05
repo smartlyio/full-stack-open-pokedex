@@ -5,11 +5,8 @@ on:
     branches:
       - master
   pull_request:
-    branches: 
-      - master
-    types: 
-      - opened
-      - synchronize
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
@@ -29,6 +26,13 @@ jobs:
         run: npm run build
       - name: Run Tests
         run: npm test
+
+  tag_release:  # Neuer Job für das Taggen und Erhöhen der Version
+    needs: [simple_deployment_pipeline]  # Dieser Job wird erst ausgeführt, nachdem der vorherige Job abgeschlossen wurde
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
