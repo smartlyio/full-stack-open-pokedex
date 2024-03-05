@@ -35,6 +35,9 @@ jobs:
      runs-on: ubuntu-latest
 
      steps:
+       - name: Checkout code
+         uses: actions/checkout@v2
+         
        - name: Bump version und push tag
          uses: anothrNick/github-tag-action@1.67.0
          env: 
