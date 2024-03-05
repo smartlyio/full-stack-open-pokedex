@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  versioning:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
