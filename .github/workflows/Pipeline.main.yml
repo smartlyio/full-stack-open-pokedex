@@ -32,7 +32,7 @@ jobs:
         run: npm test
 
   tag_release:
-    if: ${{ github.event_name == 'push' && (!contains(toJSON(github.event.head_commit.message), '#skip')) }}
+    if: ${{ (!contains(toJSON(github.event.head_commit.message), '#skip')) }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
       
