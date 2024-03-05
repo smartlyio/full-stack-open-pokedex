@@ -37,6 +37,7 @@ jobs:
 
 
   tag_release:
+    if: "!contains(toJSON(github.event.head_commit.message), '3 Versionierung 7')"
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
 
