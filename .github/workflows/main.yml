@@ -3,10 +3,10 @@ name: Pokedex Deployment Pipeline
 on:
   push:
     branches:
-      - main
+      - Jimmy
   pull_request:
     branches: 
-      - main
+      - master
     types: [opened, synchronize]
 
 jobs:
