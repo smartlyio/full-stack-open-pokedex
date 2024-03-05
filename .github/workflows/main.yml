@@ -21,6 +21,5 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Code Linting (with Fix)
-        run: npm run eslint -- --fix
-        # This step attempts to automatically fix fixable linting errors
+      - name: Lint
+        run: npx eslint src
