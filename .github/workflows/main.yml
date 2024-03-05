@@ -1,33 +1,29 @@
-name: Pokedex Deployment Pipeline
+name: Pokedex
 
 on:
   push:
     branches:
       - Jimmy
-  pull_request:
+      - master
+  pull-request:
     branches: [master]
     types: [opened, synchronize]
 
 jobs:
-  deployment_pipeline:
+  simple_deployment_pipeline:
     runs-on: ubuntu-latest
-    
     steps:
-      - name: Checkout Repository
+      - name: Checkout code
         uses: actions/checkout@v2
-      
-      - name: Setup Node.js
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16'
-      
       - name: Install Dependencies
         run: npm install
-      
-      - name: Code Linting and Fix
+      - name: Code Linting (with Fix)
         run: npm run eslint -- --fix
-      
-      - name: Build Project
+      - name: Build
         run: npm run build
-      
       - name: Run Tests
+        run: npm test
