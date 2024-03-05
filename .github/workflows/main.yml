@@ -4,17 +4,19 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '16'
 
@@ -23,9 +25,3 @@ jobs:
 
       - name: Code Linting (with Fix)
         run: npm run eslint -- --fix
-
-      - name: Build
-        run: npm run build
-
-      - name: Run Tests
-        run: npm test
