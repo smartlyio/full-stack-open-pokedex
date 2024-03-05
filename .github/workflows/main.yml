@@ -3,11 +3,13 @@ name: Pokedex
 on:
   push:
     branches:
-      - Jimmy
       - master
   pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+    branches: 
+      - master
+    types: 
+      - opened
+      - synchronize
 
 jobs:
   simple_deployment_pipeline:
@@ -30,4 +32,4 @@ jobs:
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
