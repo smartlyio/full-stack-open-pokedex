@@ -8,9 +8,6 @@ pull_request:
 branches: [master]
 types: [opened, synchronize]
 jobs:
-
-3 Versionierung 3
-
 simple_deployment_pipeline:
 runs-on: ubuntu-latest
 steps:
