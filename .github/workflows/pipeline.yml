@@ -34,14 +34,16 @@ jobs:
         run: npm test
 
   tag_release:
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.event_name == 'push' && (!contains(toJSON(github.event.head_commit.message), '#skip')) }}
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
+           
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+     
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@f7a8973e934fdd1f4fb3483d0a04d8c589df9d65
+        uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
