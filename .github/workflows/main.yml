@@ -4,13 +4,12 @@ on:
   push:
     branches: [ main ] 
   pull_request:
-    branches: [ main ]
+    branches: [ main ] 
     types: [opened, synchronize]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
-
+    runs-on: ubuntu-latest 
     steps:
       - uses: actions/checkout@v2
       - name: Setup Node.js
@@ -19,17 +18,22 @@ jobs:
           node-version: '16'
       - name: Install Dependencies
         run: npm install
-      - name: Run Tests
-        run: npm test
       - name: Lint
         run: npx eslint src
       - name: Build
         run: npm run build
+      - name: Run Tests
+        run: npm test
+
+  tag_release:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && !contains(toJSON(github.event.head_commit.message), '#skip') }}
+    steps:
+      - uses: actions/checkout@v2
       - name: Bump version and push tag
-        if: github.ref == 'refs/heads/main' && github.event_name == 'pull_request'
-        uses: anothrNick/github-tag-action@1.67.0
+        uses: anothrNick/github-tag-action@f7a8973e934fdd1f4fb3483d0a04d8c589df9d65
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           DEFAULT_BUMP: patch
           WITH_V: true
- 
