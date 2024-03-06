@@ -42,9 +42,9 @@ jobs:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
     steps:
-      - name: Code auschecken
+      - name: Checkout code
         uses: actions/checkout@v2
-      - name: Versionsnummer erhöhen und zusätzlichen Tag erstellen
+      - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.67.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
