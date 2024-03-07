@@ -26,19 +26,8 @@ jobs:
       - name: Run Tests
         run: npm test
 
-  tag_release:
-    if: contains(github.event.head_commit.message, '#skip') == false
-    needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Increase version and create tag
-        uses: anothrNick/github-tag-action@1.67.0
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  additional_tag_release:
+  tag_release:
     if: github.event_name == 'push' && contains(github.event.head_commit.message, '#skip') == false
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
