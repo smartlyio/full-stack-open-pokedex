@@ -3,7 +3,7 @@ ame: Pokedex
 on:
   push:
     branches:
-      - Konstantin
+      - Jimmy
       - master
   pull_request:
     branches: [master]
