@@ -17,7 +17,7 @@ const PokemonPage = ({ previous, next }) => {
   if (error) {
     return <ErrorMessage error={error} />
   }
-
+// test
   const { type } = pokemon.types.find((type) => type.slot === 1)
   const stats = pokemon.stats.map((stat) => ({
     name: formatName(stat.stat.name),
