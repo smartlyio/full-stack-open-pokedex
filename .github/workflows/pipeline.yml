@@ -18,8 +18,8 @@ jobs:
         with: 
           node-version: '16'
 
-      - name: Abheängigkeiten installieren
-        run: npm install
+      #- name: Abheängigkeiten installieren
+      #  run: npm install
 
       - name: Code Linting (with Fix)
         run: npm run eslint -- --fix
