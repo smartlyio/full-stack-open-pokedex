@@ -1,4 +1,4 @@
-ame: Pokedex
+name: Pokedex
 
 on:
   push:
