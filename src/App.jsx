@@ -5,13 +5,13 @@ import LoadingSpinner from './LoadingSpinner'
 import ErrorMessage from './ErrorMessage'
 import PokemonPage from './PokemonPage'
 import PokemonList from './PokemonList'
-
+// test kommentar
 const mapResults = (({ results }) => results.map(({ url, name }) => ({
   url,
   name,
   id: parseInt(url.match(/\/(\d+)\//)[1])
 })))
-
+//test kommentar
 const App = () => {
   const { data: pokemonList, error, isLoading } = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults)
   if (isLoading) {
@@ -20,7 +20,7 @@ const App = () => {
   if (error) {
     return <ErrorMessage error={error} />
   }
-
+//test kommentar
   return (
     <Router>
       <Switch>

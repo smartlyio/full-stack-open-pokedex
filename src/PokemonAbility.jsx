@@ -1,5 +1,5 @@
 import React from 'react'
-
+//test kommentar
 const PokemonAbility = ({ abilityName }) => (
   <div className="pokemon-ability">
     <div className="pokemon-ability-type">Hidden ability</div>
@@ -8,5 +8,6 @@ const PokemonAbility = ({ abilityName }) => (
     </div>
   </div>
 )
-
+//test kommentar
+//test kommentar
 export default PokemonAbility
