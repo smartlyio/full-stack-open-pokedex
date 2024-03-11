@@ -31,7 +31,7 @@ jobs:
       #     start: npm run start-prod
       #     wait-on: http://localhost:5001
       - name: deploy to fly.io
-        if: ${{ github.event_name == 'pull_request' && github.event.pull_request.merged == true}}
+        if: ${{ github.event.pull_request.merged }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
