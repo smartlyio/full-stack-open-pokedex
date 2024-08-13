@@ -1,9 +1,12 @@
 name: Deployment pipeline
 
 on:
-  workflow_dispatch:
+  push:
     branches:
       - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
 
 jobs:
   simple_deployment_pipeline:
